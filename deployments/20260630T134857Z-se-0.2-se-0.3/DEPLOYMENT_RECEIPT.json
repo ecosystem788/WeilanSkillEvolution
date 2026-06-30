@@ -1,0 +1,47 @@
+{
+  "schema_version": "weilan_skill_monitored_deployment_v0.1",
+  "deployment_id": "20260630T134857Z-se-0.2-se-0.3",
+  "deployed_at_utc": "2026-06-30T13:48:57Z",
+  "status": "deployed_monitored_not_se0.6_adopted",
+  "authorization": {
+    "kind": "explicit_user_authorization",
+    "source": "conversation:019f10cb-254f-78a1-859f-dd32c82a1ce9#019f18c7-fd21-7fd3-b54d-0efea937dfc0"
+  },
+  "source": {
+    "commit": "c11a2c0",
+    "proposal": "proposals/se-0.2-se-0.3-completion/proposal.json",
+    "candidate_path": "proposals/se-0.2-se-0.3-completion/candidate/solve-with-weilan",
+    "candidate_tree_sha256": "ac420fa67b468222d936fb876479323321f863585f36d2dfe305bd4caaaad7b1"
+  },
+  "deployment": {
+    "path": "D:\\CodexData\\skills\\solve-with-weilan",
+    "live_tree_sha256": "ac420fa67b468222d936fb876479323321f863585f36d2dfe305bd4caaaad7b1",
+    "skill_validation": "passed",
+    "projection_rebuild": "passed",
+    "cold_start_activation": "ACTIVE",
+    "episodic_search": "passed",
+    "stage_acceptance_tests": [
+      "test_episode_memory.py",
+      "test_semantic_integrity.py"
+    ]
+  },
+  "rollback": {
+    "path": "D:\\WeilanSkillEvolution\\deployments\\20260630T134857Z-se-0.2-se-0.3\\rollback\\solve-with-weilan",
+    "tree_sha256": "4c43372b1a8d914613f56a5621b4ea640134e234f0580571ce3ae66cf9e7ccd9",
+    "frozen_manifest": "baseline/MEMORY_RUNTIME_0.7_MANIFEST.json",
+    "manifest_failures": 0,
+    "restore_target": "D:\\CodexData\\skills\\solve-with-weilan"
+  },
+  "policy_boundary": {
+    "fixed_evaluation_set_available": false,
+    "full_se0.6_adoption_claimed": false,
+    "basis": "explicit user-authorized monitored release after stage acceptance and all existing regression suites",
+    "rollback_triggers": [
+      "skill discovery failure",
+      "activation leakage or cold-start regression",
+      "source or workspace isolation regression",
+      "material L0/L1 overhead regression",
+      "live artifact mismatch"
+    ]
+  }
+}

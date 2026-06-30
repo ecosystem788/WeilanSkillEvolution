@@ -4,3 +4,4 @@ __pycache__/
 *.tmp
 *.lock
 .codex/
+deployments/*/rollback/
