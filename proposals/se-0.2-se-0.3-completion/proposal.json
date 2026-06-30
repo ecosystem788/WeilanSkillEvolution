@@ -1,0 +1,24 @@
+{
+  "schema_version": "weilan_skill_proposal_draft_v0.1",
+  "proposal_id": "se-0.2-se-0.3-completion",
+  "status": "candidate_complete_not_adopted",
+  "base_commit": "d688092",
+  "base_runtime_manifest": "baseline/MEMORY_RUNTIME_0.7_MANIFEST.json",
+  "candidate_path": "proposals/se-0.2-se-0.3-completion/candidate/solve-with-weilan",
+  "authorized_scope": [
+    "SE-0.2 episodic recall and deterministic projection rebuild",
+    "SE-0.3 semantic-memory integrity and bounded lifecycle"
+  ],
+  "prohibited_changes": [
+    "deployed Skill",
+    "frozen baseline",
+    "ROADMAP.md",
+    "ARCHITECTURE.md",
+    "EVALUATION_POLICY.md",
+    "SE-0.4 or later behavior"
+  ],
+  "deployment_authorized": false,
+  "candidate_file_count": 29,
+  "candidate_aggregate_sha256": "ac420fa67b468222d936fb876479323321f863585f36d2dfe305bd4caaaad7b1",
+  "receipt": "ACCEPTANCE_RECEIPT.md"
+}
