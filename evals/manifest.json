@@ -1,0 +1,8 @@
+{
+  "schema_version": "weilan_skill_eval_manifest_v0.1",
+  "suite_id": "not-established",
+  "status": "awaiting_explicit_case_approval",
+  "frozen": false,
+  "cases": [],
+  "note": "An empty manifest is not evaluation evidence and cannot authorize adoption."
+}

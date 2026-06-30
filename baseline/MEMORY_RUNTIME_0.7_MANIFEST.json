@@ -1,0 +1,148 @@
+{
+    "schema_version":  "weilan_frozen_runtime_manifest_v0.1",
+    "runtime_name":  "WeiLan Memory Runtime",
+    "runtime_version":  "0.7",
+    "source_path":  "D:\\CodexData\\skills\\solve-with-weilan",
+    "snapshot_path":  "packages/solve-with-weilan",
+    "frozen_at_utc":  "2026-06-30T09:48:05Z",
+    "file_count":  27,
+    "total_bytes":  560980,
+    "aggregate_sha256":  "89e5f32fa626efda074d9d01fb8714989a8f07fa416437465694c66f850eda1a",
+    "files":  [
+                  {
+                      "path":  "agents/openai.yaml",
+                      "size":  267,
+                      "sha256":  "6d9b6b89e843ca5cc5e0bd43be237b9ee03f671efc254bdffe9c3fc5fc76bcc2"
+                  },
+                  {
+                      "path":  "references/constitution.md",
+                      "size":  3662,
+                      "sha256":  "bc38de5d18c6e003915268aebbe69b1e7930953cbe44adecc9c16fcd8f63602b"
+                  },
+                  {
+                      "path":  "references/event-schema.md",
+                      "size":  5078,
+                      "sha256":  "b036b0f57f7f07df9cbbf819a0f26de07c18b48b1260542e2cc3958b0d3b2593"
+                  },
+                  {
+                      "path":  "references/governance-system.md",
+                      "size":  8043,
+                      "sha256":  "f19f631e27398ec888c00ac434ebca628e422d7c5b22605639446ea4137088ca"
+                  },
+                  {
+                      "path":  "references/memory-system.md",
+                      "size":  19035,
+                      "sha256":  "aea8073537212bab3d0397eeaa160e9d4c88e5c1bfba1bc353c8fe660139e1a7"
+                  },
+                  {
+                      "path":  "references/metabolism-system.md",
+                      "size":  5450,
+                      "sha256":  "dabf769800d23f580f51a946ff328738f67f1c0161edfb8acc57d48b0c8df95e"
+                  },
+                  {
+                      "path":  "references/runner-empty-manifest.json",
+                      "size":  89,
+                      "sha256":  "28f962793e9e6959cbdae9dcc6df70dd9261935f3b6f418c88ad08c9fe84aae5"
+                  },
+                  {
+                      "path":  "references/runner-system.md",
+                      "size":  7585,
+                      "sha256":  "67e482a39080fb56fe4f964a370ae0a8f18286c0836c75197f814d18e7ea6a1a"
+                  },
+                  {
+                      "path":  "references/transaction-system.md",
+                      "size":  7846,
+                      "sha256":  "a466c1100131a98b12e7082f6065937e3dcaae5c6728dfa860e56910cb1635bb"
+                  },
+                  {
+                      "path":  "references/transition-planner-system.md",
+                      "size":  6433,
+                      "sha256":  "bd9a17b0922535729f47c8781502e363c0859c8f37212bcad26093e4d18349c7"
+                  },
+                  {
+                      "path":  "scripts/governance.py",
+                      "size":  20798,
+                      "sha256":  "5e20d809a71cb228aafb357cc96b8741dbfc26116059c19ba66fe00adf4b731b"
+                  },
+                  {
+                      "path":  "scripts/metabolism.py",
+                      "size":  13660,
+                      "sha256":  "86a2c440fcd5e5044c8d27085dbe6e34682f6a737603f9e4315769df12ebd3e7"
+                  },
+                  {
+                      "path":  "scripts/runner.py",
+                      "size":  32954,
+                      "sha256":  "233b550f34aff391007380b5314cdc658cbe3913d37fa4fd2e7287aa8b862f7d"
+                  },
+                  {
+                      "path":  "scripts/test_conversation_evidence.py",
+                      "size":  13876,
+                      "sha256":  "e4625d35c11d0caa355f6b4ff21b2d51928aad6074f129f27a04f0d9741d6b74"
+                  },
+                  {
+                      "path":  "scripts/test_evidence_lifecycle.py",
+                      "size":  16664,
+                      "sha256":  "c81bf4dfcd90e70c938490a4e0764cb43833057681ab386fa97fcae3edcf0cd7"
+                  },
+                  {
+                      "path":  "scripts/test_frame_lineage.py",
+                      "size":  10573,
+                      "sha256":  "0aeab56421f6f9334e355bd30100c9b69680e99660cd8f7749dd306476ef632c"
+                  },
+                  {
+                      "path":  "scripts/test_governance.py",
+                      "size":  31942,
+                      "sha256":  "9cb642d9b753a5b1dbbfe1c7f2d761bb68911a1790de83d032b1987c916eb287"
+                  },
+                  {
+                      "path":  "scripts/test_memory.py",
+                      "size":  5897,
+                      "sha256":  "3bd254ae63a72bc5dd64f7292c4b3ad97538242c9e2f432bdc4317209cb02269"
+                  },
+                  {
+                      "path":  "scripts/test_metabolism.py",
+                      "size":  13751,
+                      "sha256":  "b1c7245a127e2e9cf16b4ffed2a39c7faddce79a9e0be136658087ce36be87b3"
+                  },
+                  {
+                      "path":  "scripts/test_runner.py",
+                      "size":  22025,
+                      "sha256":  "94a292989ac3fa60a24ffc4378917ec158774e82710c53dd29cf4f661008d087"
+                  },
+                  {
+                      "path":  "scripts/test_semantic_memory.py",
+                      "size":  10144,
+                      "sha256":  "c3894da432a9ffd2edd177db3947140286071a3ad3140fae0f5fa1de15c47dd4"
+                  },
+                  {
+                      "path":  "scripts/test_transaction.py",
+                      "size":  28999,
+                      "sha256":  "9e96c0cd04538dfb940a0cb86a5763e42ef85b7f084a8ebbd1478e421bdcda6d"
+                  },
+                  {
+                      "path":  "scripts/test_transition_planner.py",
+                      "size":  20511,
+                      "sha256":  "5716b94d756c7464a6b6ad77ac5f084ce9bbffebe8077ec5b798e1264fc88174"
+                  },
+                  {
+                      "path":  "scripts/transaction.py",
+                      "size":  30965,
+                      "sha256":  "b6d289cfc77c8aa61891dc472c5be2e3ba7479f4b9344971042261bb5d9a0ab7"
+                  },
+                  {
+                      "path":  "scripts/transition_planner.py",
+                      "size":  14928,
+                      "sha256":  "3315d4b3be52d9962142922d519a9a4aa96653d60c2490909d899ca632a506a7"
+                  },
+                  {
+                      "path":  "scripts/weilan_trace.py",
+                      "size":  196300,
+                      "sha256":  "f038446114b44f1fc6817d0014993bfaf50d7fc4c4e75b9ab65e4ac337d265f4"
+                  },
+                  {
+                      "path":  "SKILL.md",
+                      "size":  13505,
+                      "sha256":  "bd650d82a14c91cfda1fcd206264bc70497874d5caf826835e60f4f18e94571f"
+                  }
+              ]
+}
