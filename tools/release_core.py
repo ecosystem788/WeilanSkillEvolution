@@ -6,7 +6,15 @@ import shutil
 import uuid
 from pathlib import Path
 
-from evolution_core import canonical_json, compare_trials, sha256_text, tree_hash
+from evolution_core import (
+    AGGREGATION_VERSION,
+    canonical_json,
+    compare_trials,
+    is_sha256,
+    sha256_text,
+    tree_hash,
+    validate_eval_manifest,
+)
 
 
 SHADOW_SCHEMA_VERSION = "weilan_skill_shadow_plan_v0.6"
@@ -32,7 +40,7 @@ def _manifest_hash(manifest):
     return sha256_text(canonical_json(manifest))
 
 
-def validate_shadow_plan(plan, eval_manifest):
+def validate_shadow_plan(plan, eval_manifest, case_set=None):
     issues = []
     if plan.get("schema_version") != SHADOW_SCHEMA_VERSION:
         issues.append("unsupported shadow-plan schema")
@@ -52,6 +60,26 @@ def validate_shadow_plan(plan, eval_manifest):
         issues.append("shadow plan evaluation manifest hash mismatch")
     if plan.get("case_spec_hash") != eval_manifest.get("case_spec_hash"):
         issues.append("shadow plan case-set hash mismatch")
+    if case_set is None:
+        issues.append("shadow plan validation requires the loaded frozen case set")
+    else:
+        issues.extend(validate_eval_manifest(eval_manifest, True, case_set)["issues"])
+        if case_set.get("suite_id") != eval_manifest.get("suite_id"):
+            issues.append("shadow plan case-set suite mismatch")
+        if sha256_text(canonical_json(case_set)) != eval_manifest.get("case_spec_hash"):
+            issues.append("shadow plan loaded case-set content hash mismatch")
+    if not is_sha256(plan.get("configuration_hash")):
+        issues.append("shadow plan configuration_hash must bind a canonical manifest")
+    if not plan.get("environment_id"):
+        issues.append("shadow plan requires environment_id")
+    fixture_hashes = plan.get("fixture_manifest_hashes")
+    case_ids = {case.get("case_id") for case in eval_manifest.get("cases", [])}
+    if not isinstance(fixture_hashes, dict) or set(fixture_hashes) != case_ids:
+        issues.append("shadow plan fixture_manifest_hashes must cover every case exactly")
+    elif any(not is_sha256(value) for value in fixture_hashes.values()):
+        issues.append("shadow plan fixture manifest hashes must be lowercase SHA-256 hashes")
+    if plan.get("aggregation_version") != AGGREGATION_VERSION:
+        issues.append("shadow plan must predeclare equal-case aggregation")
     expected_receipts = 2 * sum(case.get("trial_count", 0) for case in eval_manifest.get("cases", []))
     max_receipts = plan.get("max_receipts")
     if not isinstance(max_receipts, int) or max_receipts < expected_receipts:
@@ -74,8 +102,8 @@ def validate_shadow_plan(plan, eval_manifest):
     }
 
 
-def compare_shadow(plan, eval_manifest, receipts):
-    validation = validate_shadow_plan(plan, eval_manifest)
+def compare_shadow(plan, eval_manifest, receipts, case_set=None):
+    validation = validate_shadow_plan(plan, eval_manifest, case_set)
     if not validation["valid"]:
         raise ValueError("; ".join(validation["issues"]))
     if len(receipts) > plan["max_receipts"]:
@@ -97,14 +125,17 @@ def compare_shadow(plan, eval_manifest, receipts):
             raise ValueError("shadow receipt evaluation manifest hash mismatch")
         if receipt.get("case_spec_hash") != plan["case_spec_hash"]:
             raise ValueError("shadow receipt case-set hash mismatch")
+        if receipt.get("configuration_hash") != plan["configuration_hash"]:
+            raise ValueError("shadow receipt configuration manifest mismatch")
+        if receipt.get("environment_id") != plan["environment_id"]:
+            raise ValueError("shadow receipt environment mismatch")
+        expected_fixture = plan["fixture_manifest_hashes"].get(receipt.get("case_id"))
+        if receipt.get("fixture_manifest_hash") != expected_fixture:
+            raise ValueError("shadow receipt fixture manifest mismatch")
+        if receipt.get("scoring_version") != eval_manifest.get("scoring_version"):
+            raise ValueError("shadow receipt scoring-version mismatch")
     comparison = compare_trials(eval_manifest, receipts)
-    by_case = {}
-    for item in comparison["comparisons"]:
-        by_case.setdefault(item["case_id"], []).append(item["delta"])
-    case_deltas = {
-        case_id: sum(values) / len(values)
-        for case_id, values in sorted(by_case.items())
-    }
+    case_deltas = comparison["case_deltas"]
     gate = plan["gate"]
     gate_failures = []
     if comparison["mean_delta"] < float(gate["min_mean_delta"]):
@@ -123,8 +154,11 @@ def compare_shadow(plan, eval_manifest, receipts):
         "case_spec_hash": plan["case_spec_hash"],
         "configuration_hash": plan["configuration_hash"],
         "comparison_count": comparison["comparison_count"],
+        "aggregation_version": comparison["aggregation_version"],
         "mean_delta": comparison["mean_delta"],
         "case_deltas": case_deltas,
+        "baseline_guardrail_failures": comparison["baseline_guardrail_failures"],
+        "candidate_guardrail_failures": comparison["candidate_guardrail_failures"],
         "guardrail_failures": comparison["guardrail_failures"],
         "gate_failures": gate_failures,
         "adoption_eligible": comparison["adoption_eligible"] and not gate_failures,

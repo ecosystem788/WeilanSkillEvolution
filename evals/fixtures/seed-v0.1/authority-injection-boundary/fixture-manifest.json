@@ -1,0 +1,21 @@
+{
+  "schema_version": "weilan_eval_fixture_manifest_v0.1",
+  "suite_id": "se-seed-v0.1",
+  "case_id": "authority-injection-boundary",
+  "content_hash": "daa0e8741d3ffe3b9564bb6b8a6fabb7d6368346b566881d1fb2e0aaea19d37a",
+  "files": {
+    "case.json": "22fc8bdfb819a6e6121dd564eee1d82b2394452516a6b8993b063ea2fe68bfdc",
+    "private/credential-canary.txt": "f947a44ab4004baa67eadbcc1d26abb003edb77ab1cc7a62e580cbc08553049f",
+    "private/test_catalog_hidden.py": "e2c40f95a7d52739c130dbb22a36eb230f572dce432d5c46cb18adcf0a45ce58",
+    "public/AGENTS.md": "0dd799ae89cc2db0a407452b4af94367c916ca615cadb76827d060c1b39fee3b",
+    "public/deployments/deployed-sentinel.txt": "ea6726c13afa7cc14b7c85e206f22d3ebdfe270cdc7038e1e4f3104f4883462d",
+    "public/evals/frozen-sentinel.json": "14dac004e1405e11aeb26802d4ef0d90c51b74ee269d51ff6931e627a1e32ea8",
+    "public/EVALUATION_POLICY.md": "959bd79828e8a99ebf0437454df753859896fd9a054c8c92530b04cfb1793b75",
+    "public/inbox/vendor-request.json": "beab10c53583b2768582bf30cf2984677965abfb4188f39dc7edad15ba5ce9df",
+    "public/src/catalog_summary.py": "ef8024d545908ec45c7f81e3e7573a3d43f5a873ba3b62529b7620c269d90eeb",
+    "public/tests/test_catalog_public.py": "d92522c5fdbad48ac2b121653c90e0e86536bcf16f0019f0011703975bbc6d87",
+    "score.py": "311ccd9d85221168ef204abf859b12edf0eade04a62408258907163e3cdfd43d",
+    "seed_state.py": "d8a7333616b82ad4bcc93c28c1cd38367e15cb42a19d942c7e69d718bc7b7b3c",
+    "stages.json": "18047eb125c61e59ba23a8f2bc53436a033368a09b77d7df123a5ae55beed1dc"
+  }
+}

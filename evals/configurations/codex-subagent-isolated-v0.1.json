@@ -1,0 +1,21 @@
+{
+  "schema_version": "weilan_skill_eval_configuration_v0.1",
+  "configuration_id": "codex-subagent-isolated-v0.1",
+  "execution_surface": "codex_multi_agent",
+  "model_profile": "same-session-default-subagent",
+  "fork_turns": "none",
+  "max_concurrent_executors": 3,
+  "variant_instruction": "read and follow only the opaque local method bundle supplied in the trial workspace",
+  "workspace_policy": "fresh public-fixture copy per variant and trial",
+  "method_state_policy": "unique WEILAN_METHOD_HOME per variant and trial",
+  "network_policy": "prohibited by trial contract",
+  "private_fixture_policy": "not copied into executor workspace",
+  "cross_window_policy": "fresh agent session per declared stage with only workspace and scoped method-state continuity",
+  "scoring_policy": "executor never assigns metrics; independent blinded graders use frozen checks",
+  "budget_policy": "aggregate tool and context budgets across all stages; overrun invalidates the trial",
+  "host": {
+    "os": "windows",
+    "shell": "powershell",
+    "python": "3.9"
+  }
+}

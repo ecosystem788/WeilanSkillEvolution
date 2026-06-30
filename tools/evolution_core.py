@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import math
 import os
 import shutil
 import uuid
@@ -12,6 +13,7 @@ PROPOSAL_SCHEMA_VERSION = "weilan_skill_change_proposal_v0.5"
 EVAL_SCHEMA_VERSION = "weilan_skill_eval_manifest_v0.5"
 TRIAL_SCHEMA_VERSION = "weilan_skill_trial_receipt_v0.5"
 METHOD_IMPACT_SCHEMA_VERSION = "weilan_method_impact_v0.5"
+AGGREGATION_VERSION = "equal-case-mean-v0.1"
 
 FORBIDDEN_CANDIDATE_PATHS = (
     "ROADMAP.md",
@@ -33,6 +35,14 @@ def canonical_json(value):
 
 def sha256_text(value):
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def is_sha256(value):
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value)
+    )
 
 
 def file_sha256(path):
@@ -206,6 +216,12 @@ def validate_eval_manifest(manifest, require_approved=True, case_set=None):
             issues.append(f"case lacks budget or metrics: {case.get('case_id')}")
         elif abs(sum(float(weight) for weight in case["metrics"].values()) - 1.0) > 1e-9:
             issues.append(f"metric weights must sum to one: {case.get('case_id')}")
+        budget = case.get("budget", {})
+        if not isinstance(budget, dict) or any(
+            isinstance(value, bool) or not isinstance(value, int) or value < 0
+            for value in budget.values()
+        ):
+            issues.append(f"case budget values must be non-negative integers: {case.get('case_id')}")
     if case_set is not None:
         case_validation = validate_case_set(case_set)
         issues.extend(case_validation["issues"])
@@ -219,11 +235,73 @@ def validate_eval_manifest(manifest, require_approved=True, case_set=None):
     return {"valid": not issues, "issues": issues, "case_count": len(cases)}
 
 
+def _validate_trial_receipt(receipt, case, manifest_hash, case_spec_hash):
+    identity = f"{receipt.get('case_id')}/{receipt.get('variant')}/{receipt.get('trial')}"
+    issues = []
+    if receipt.get("evaluation_manifest_hash") != manifest_hash:
+        issues.append(f"{identity}: evaluation manifest hash mismatch")
+    if receipt.get("case_spec_hash") != case_spec_hash:
+        issues.append(f"{identity}: case-set hash mismatch")
+    for field in ("fixture_manifest_hash", "configuration_hash", "raw_output_hash"):
+        if not is_sha256(receipt.get(field)):
+            issues.append(f"{identity}: {field} must be a lowercase SHA-256 hash")
+    if not receipt.get("environment_id"):
+        issues.append(f"{identity}: environment_id is required")
+    if receipt.get("scoring_version") is None:
+        issues.append(f"{identity}: scoring_version is required")
+    if receipt.get("termination_status") not in {
+        "completed",
+        "budget_exhausted",
+        "blocked",
+        "failed",
+    }:
+        issues.append(f"{identity}: invalid termination_status")
+    if not receipt.get("grader_id"):
+        issues.append(f"{identity}: grader_id is required")
+    provenance = receipt.get("grader_provenance")
+    if not isinstance(provenance, dict):
+        issues.append(f"{identity}: grader_provenance is required")
+    else:
+        if not provenance.get("authority_source"):
+            issues.append(f"{identity}: grader provenance authority_source is required")
+        for field in ("evaluator_artifact_hash", "evidence_hash"):
+            if not is_sha256(provenance.get(field)):
+                issues.append(f"{identity}: grader provenance {field} must be a lowercase SHA-256 hash")
+    metrics = receipt.get("metrics")
+    expected_metrics = set(case["metrics"])
+    if not isinstance(metrics, dict) or set(metrics) != expected_metrics:
+        issues.append(f"{identity}: metrics must exactly match the declared metric set")
+    else:
+        for name, value in metrics.items():
+            if (
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not math.isfinite(value)
+                or not 0 <= value <= 1
+            ):
+                issues.append(f"{identity}: metric {name} must be finite and within [0,1]")
+    failures = receipt.get("guardrail_failures")
+    if not isinstance(failures, list) or any(not isinstance(item, str) or not item for item in failures):
+        issues.append(f"{identity}: guardrail_failures must be a list of non-empty strings")
+    usage = receipt.get("actual_usage")
+    budget = case["budget"]
+    if not isinstance(usage, dict) or set(usage) != set(budget):
+        issues.append(f"{identity}: actual_usage must exactly match declared budget dimensions")
+    else:
+        for name, value in usage.items():
+            if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                issues.append(f"{identity}: actual_usage.{name} must be a non-negative integer")
+            elif value > budget[name]:
+                issues.append(f"{identity}: actual_usage.{name} exceeds declared budget")
+    return issues
+
+
 def compare_trials(manifest, receipts):
     validation = validate_eval_manifest(manifest, require_approved=True)
     if not validation["valid"]:
         raise ValueError("; ".join(validation["issues"]))
     cases = {case["case_id"]: case for case in manifest["cases"]}
+    manifest_hash = sha256_text(canonical_json(manifest))
     grouped = {}
     issues = []
     for receipt in receipts:
@@ -236,6 +314,21 @@ def compare_trials(manifest, receipts):
         if case_id not in cases or variant not in {"baseline", "candidate"} or not isinstance(trial, int):
             issues.append("invalid trial identity")
             continue
+        if trial < 1 or trial > cases[case_id]["trial_count"]:
+            issues.append(f"invalid trial identity: {case_id}/{variant}/{trial}")
+            continue
+        identity = (case_id, variant, trial)
+        if identity in grouped:
+            issues.append(f"duplicate trial identity: {case_id}/{variant}/{trial}")
+            continue
+        issues.extend(
+            _validate_trial_receipt(
+                receipt,
+                cases[case_id],
+                manifest_hash,
+                manifest["case_spec_hash"],
+            )
+        )
         impact_issues = [
             issue
             for record in receipt.get("method_impacts", [])
@@ -243,19 +336,25 @@ def compare_trials(manifest, receipts):
         ]
         if impact_issues:
             issues.extend(f"{case_id}/{variant}/{trial}: {item}" for item in impact_issues)
-        key = (case_id, trial)
-        grouped.setdefault(key, {})[variant] = receipt
+        grouped[identity] = receipt
     comparisons = []
     for case_id, case in cases.items():
         for trial in range(1, case["trial_count"] + 1):
-            pair = grouped.get((case_id, trial), {})
-            if set(pair) != {"baseline", "candidate"}:
+            baseline = grouped.get((case_id, "baseline", trial))
+            candidate = grouped.get((case_id, "candidate", trial))
+            if baseline is None or candidate is None:
                 issues.append(f"missing equivalent pair: {case_id}/{trial}")
                 continue
-            baseline = pair["baseline"]
-            candidate = pair["candidate"]
             if baseline.get("configuration_hash") != candidate.get("configuration_hash"):
                 issues.append(f"configuration mismatch: {case_id}/{trial}")
+            if baseline.get("fixture_manifest_hash") != candidate.get("fixture_manifest_hash"):
+                issues.append(f"fixture mismatch: {case_id}/{trial}")
+            if baseline.get("environment_id") != candidate.get("environment_id"):
+                issues.append(f"environment mismatch: {case_id}/{trial}")
+            if baseline.get("scoring_version") != candidate.get("scoring_version"):
+                issues.append(f"scoring mismatch: {case_id}/{trial}")
+            if candidate.get("scoring_version") != manifest["scoring_version"]:
+                issues.append(f"undeclared scoring version: {case_id}/{trial}")
             if baseline.get("budget") != candidate.get("budget") or candidate.get("budget") != case["budget"]:
                 issues.append(f"budget mismatch: {case_id}/{trial}")
             metrics = case["metrics"]
@@ -274,24 +373,41 @@ def compare_trials(manifest, receipts):
                     "baseline_score": baseline_score,
                     "candidate_score": candidate_score,
                     "delta": candidate_score - baseline_score,
+                    "baseline_guardrail_failures": baseline.get("guardrail_failures", []),
                     "candidate_guardrail_failures": candidate.get("guardrail_failures", []),
                     "method_impact_count": len(candidate.get("method_impacts", [])),
                 }
             )
     if issues:
         raise ValueError("; ".join(issues))
-    deltas = [item["delta"] for item in comparisons]
-    guardrail_failures = [
+    by_case = {}
+    for item in comparisons:
+        by_case.setdefault(item["case_id"], []).append(item["delta"])
+    case_deltas = {
+        case_id: sum(values) / len(values)
+        for case_id, values in sorted(by_case.items())
+    }
+    baseline_guardrail_failures = [
+        failure
+        for item in comparisons
+        for failure in item["baseline_guardrail_failures"]
+    ]
+    candidate_guardrail_failures = [
         failure
         for item in comparisons
         for failure in item["candidate_guardrail_failures"]
     ]
+    mean_delta = sum(case_deltas.values()) / len(case_deltas) if case_deltas else 0.0
     return {
-        "manifest_hash": sha256_text(canonical_json(manifest)),
+        "manifest_hash": manifest_hash,
         "comparison_count": len(comparisons),
-        "mean_delta": sum(deltas) / len(deltas) if deltas else 0.0,
-        "guardrail_failures": guardrail_failures,
-        "adoption_eligible": bool(comparisons) and not guardrail_failures and sum(deltas) >= 0,
+        "aggregation_version": AGGREGATION_VERSION,
+        "case_deltas": case_deltas,
+        "mean_delta": mean_delta,
+        "baseline_guardrail_failures": baseline_guardrail_failures,
+        "candidate_guardrail_failures": candidate_guardrail_failures,
+        "guardrail_failures": candidate_guardrail_failures,
+        "adoption_eligible": bool(comparisons) and not candidate_guardrail_failures and mean_delta >= 0,
         "comparisons": comparisons,
         "authority": "evaluation_evidence_only_never_deploys_or_adopts",
     }

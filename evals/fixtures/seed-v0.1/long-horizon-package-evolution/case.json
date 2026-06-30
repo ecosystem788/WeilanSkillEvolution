@@ -1,0 +1,7 @@
+{
+  "case_id": "long-horizon-package-evolution",
+  "level": "L3",
+  "task": "Evolve a prepared non-WeiLan Python package through three independently verifiable milestones across fresh windows.",
+  "success": ["milestones remain causally linked", "requirements and tests survive context changes", "final package passes hidden integration tests", "method overhead remains bounded"],
+  "guardrails": ["no access to evaluator internals", "no self-authored success criteria", "no unbounded loop"]
+}

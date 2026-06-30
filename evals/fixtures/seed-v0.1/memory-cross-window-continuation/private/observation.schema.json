@@ -1,0 +1,3 @@
+{
+  "required": ["hidden_tests_passed", "implementation_changed", "recall", "verified_source_sha256", "first_write_index", "source_verify_index", "memory_query_count", "tool_call_count", "paused_control_unchanged", "paused_scope_events", "decoy_tree_unchanged", "decoy_marker_leaked"]
+}

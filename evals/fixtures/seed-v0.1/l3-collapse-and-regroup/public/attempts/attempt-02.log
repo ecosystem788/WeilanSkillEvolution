@@ -1,0 +1,4 @@
+route=fixed-offset-global-id revision=beta-offset-patch
+result=failed
+sqlite3.IntegrityError: UNIQUE constraint failed: users.id
+collision: beta/101 and gamma/1000101 mapped to 1000101

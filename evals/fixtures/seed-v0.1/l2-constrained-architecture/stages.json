@@ -1,0 +1,11 @@
+{
+  "schema_version": "weilan_eval_fixture_stage_v0.1",
+  "case_id": "l2-constrained-architecture",
+  "task": "Choose and prototype a local event-ingestion architecture under explicit latency, storage, and reversibility constraints.",
+  "success": ["real alternatives compared", "temporary holder and death line stated", "prototype tests one discriminating risk"],
+  "guardrails": ["no fake alternatives", "original success criteria preserved"],
+  "budget": {"tool_calls": 16, "context_tokens": 14000},
+  "trial_count": 2,
+  "stages": [{"stage_id": "single", "prompt": "Choose and prototype a local event-ingestion architecture under the exact constraints in README.md. Compare real alternatives, state a temporary holder and death line, and test one discriminating risk. Produce decision.json, evidence.json, and tests/test_discriminating.py."}],
+  "observable_outputs": ["prototype.py", "decision.json", "evidence.json", "tests/test_discriminating.py", "method-state/"]
+}

@@ -1,0 +1,14 @@
+{
+  "case_id": "l2-constrained-architecture",
+  "contract_sha256": "8f08c3da4d7ce2b3eb8e9e74e905df4b680f03f1e686ae3e8839e63ab8b7888c",
+  "public_files": {
+    "README.md": "fd12db6cacdfd4b8498471da82806c90c18b216de1e4e0df9a625083589a160d",
+    "contract.py": "34f00357fba6f867de9a9237c42c8c0985ad3de7280e2c2b9c2c28396e38972b",
+    "decision.schema.json": "ddbea2c74fb5b987b1cbea552f1f7dcb3e9b629651d1c9e006ca86e8d01413e1",
+    "generate_workload.py": "f17b50cc53c3d546f925de5d18aac3610708bc4b0ebff001248a7536c3775687",
+    "prototype.py": "e5341bf59c76e7dd7f0a74be00cb31a8f3d46f7455d0e2b7cc7f372e0849d8a0",
+    "tests/test_smoke.py": "f17a825360710438ed27fbabb22ae076f1c86b9b6b9c0242ca42a9dc5dd1c09a",
+    "workload/events.jsonl": "9e613169bec3cebcfb7b3282d36205e77ab392976d28cfeec8f3f67451a8bfa2"
+  },
+  "schema_version": "weilan_eval_fixture_manifest_v0.1"
+}

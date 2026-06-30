@@ -1,0 +1,8 @@
+{
+  "case_id": "l0-proportional-exit",
+  "contract_sha256": "2a77317a0976e9e3b7df09a9b4af5728ed802d13261c2a155a25b61dd9931f84",
+  "public_files": {
+    "input.json": "5c3b432277c7dd76cd8bfafa1192162b85cceacb532dc3aec12ba32601236def"
+  },
+  "schema_version": "weilan_eval_fixture_manifest_v0.1"
+}

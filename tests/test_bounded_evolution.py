@@ -78,6 +78,21 @@ def main():
             "budget": {"tool_calls": 2, "context_tokens": 500},
             "metrics": {"outcome": 1.0},
         }
+        case_set = {
+            "schema_version": "weilan_skill_eval_case_set_v0.1",
+            "suite_id": "fixture-v0.1",
+            "status": "approved_frozen",
+            "frozen": True,
+            "approval_source": "authority:fixture",
+            "cases": [{
+                "case_id": "fixture-case",
+                "task": "evaluate fixture",
+                "success": ["scored"],
+                "guardrails": ["authority preserved"],
+            }],
+        }
+        case_set_hash = sha256_text(canonical_json(case_set))
+        write_json(root / "case-set.json", case_set)
         eval_manifest = {
             "schema_version": EVAL_SCHEMA_VERSION,
             "suite_id": "fixture-v0.1",
@@ -86,7 +101,7 @@ def main():
             "approval_source": "authority:fixture",
             "scoring_version": "fixture-v0.1",
             "case_spec": "evals/cases/fixture.json",
-            "case_spec_hash": "d" * 64,
+            "case_spec_hash": case_set_hash,
             "cases": [case],
         }
         write_json(root / "eval-manifest.json", eval_manifest)
@@ -96,7 +111,10 @@ def main():
             "shadow_id": "fixture-shadow",
             "baseline_artifact_hash": baseline_hash,
             "candidate_artifact_hash": candidate_hash,
-            "configuration_hash": "fixed-config",
+            "configuration_hash": "1" * 64,
+            "environment_id": "fixture-environment",
+            "fixture_manifest_hashes": {"fixture-case": "2" * 64},
+            "aggregation_version": "equal-case-mean-v0.1",
             "evaluation_manifest_hash": eval_hash,
             "case_spec_hash": eval_manifest["case_spec_hash"],
             "max_receipts": 2,
@@ -107,10 +125,22 @@ def main():
             "schema_version": TRIAL_SCHEMA_VERSION,
             "case_id": "fixture-case",
             "trial": 1,
-            "configuration_hash": "fixed-config",
+            "configuration_hash": shadow_plan["configuration_hash"],
             "evaluation_manifest_hash": eval_hash,
             "case_spec_hash": eval_manifest["case_spec_hash"],
+            "fixture_manifest_hash": shadow_plan["fixture_manifest_hashes"]["fixture-case"],
+            "environment_id": shadow_plan["environment_id"],
+            "scoring_version": eval_manifest["scoring_version"],
             "budget": case["budget"],
+            "actual_usage": {"tool_calls": 1, "context_tokens": 100},
+            "termination_status": "completed",
+            "raw_output_hash": "3" * 64,
+            "grader_id": "external-grader",
+            "grader_provenance": {
+                "authority_source": "authority:fixture-grader",
+                "evaluator_artifact_hash": "4" * 64,
+                "evidence_hash": "5" * 64,
+            },
             "guardrail_failures": [],
             "method_impacts": [],
         }
@@ -119,7 +149,7 @@ def main():
             {**common, "variant": "candidate", "artifact_hash": candidate_hash, "metrics": {"outcome": 0.8}},
         ]
         write_jsonl(root / "trial-receipts.jsonl", receipts)
-        shadow_result = compare_shadow(shadow_plan, eval_manifest, receipts)
+        shadow_result = compare_shadow(shadow_plan, eval_manifest, receipts, case_set=case_set)
         authority = root / "authority"
         decision = {
             "schema_version": DECISION_SCHEMA_VERSION,
@@ -153,7 +183,7 @@ def main():
             "steps": [
                 {"step_id": "proposal", "kind": "proposal_validate", "inputs": {"proposal": "proposal.json"}},
                 {"step_id": "freeze", "kind": "candidate_freeze", "inputs": {"source": "candidate", "artifact_root": "artifacts"}},
-                {"step_id": "shadow", "kind": "shadow_compare", "inputs": {"plan": "shadow-plan.json", "evaluation_manifest": "eval-manifest.json", "receipts": "trial-receipts.jsonl", "output": "shadow-result.json"}},
+                {"step_id": "shadow", "kind": "shadow_compare", "inputs": {"plan": "shadow-plan.json", "evaluation_manifest": "eval-manifest.json", "case_set": "case-set.json", "receipts": "trial-receipts.jsonl", "output": "shadow-result.json"}},
                 {"step_id": "decision", "kind": "decision_validate", "inputs": {"decision": "authority/decision.json", "shadow_result_step": "shadow"}},
                 {"step_id": "deploy", "kind": "deploy", "inputs": {"candidate": str(Path(frozen["path"]).relative_to(root)), "target": "deployed", "receipt_root": "deployment-receipts", "decision_step": "decision", "shadow_result_step": "shadow"}},
                 {"step_id": "canary", "kind": "canary", "inputs": {"deployment_step": "deploy", "observations": "canary.json"}},

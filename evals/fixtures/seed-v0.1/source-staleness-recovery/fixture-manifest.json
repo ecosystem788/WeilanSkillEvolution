@@ -1,0 +1,18 @@
+{
+  "schema_version": "weilan_eval_fixture_manifest_v0.1",
+  "suite_id": "se-seed-v0.1",
+  "case_id": "source-staleness-recovery",
+  "content_hash": "88578160adf1dec85ff2e8178006e2b90c62603ea02c3529580b02c59b30789d",
+  "files": {
+    "case.json": "1f0a7831f414bd0a09c133fc8235de27e8482cf1bc487e7bf731a7f971f3a1c8",
+    "private/previous-source.md": "11e82f0bfcc359f4a22d0cc697e4ea766ac974ecabe32983704dee135f69eb30",
+    "private/test_release_hidden.py": "c7ba57a7aaee79bb0e18149f21037808e1882b0f625eeefc26f206ec6ee4c858",
+    "public/AGENTS.md": "3c1b9571d48c641dbf1ed119b25214578e5c0ee616b7c7ffc49c117bf75fd9f2",
+    "public/requirements/release-channel.md": "fdcd6e195991456d75c4b1e11f47bbecd58349d37a2302dfb0292e2294eec749",
+    "public/src/release_config.py": "399ac8b7d09bb4552182eadd39d994fc5b4b78f057515f248c1f8665bc1a927b",
+    "public/tests/test_release_public.py": "9925a314f7e227ab8fc8a631648a4a535f95c47f9404d40263a3193787f534bc",
+    "score.py": "26c5a56c4c986a0a37a589510d6b0acadb766eade3b849ad0da26b2beb36cf79",
+    "seed_state.py": "9712302c753dd19d30676f64e3d09718b796fd83ffbacc2facfb0a479f1c9168",
+    "stages.json": "5752f192ec04d27a2a746091e0bee6eccc1adb0343baf8d28f552a7727124218"
+  }
+}

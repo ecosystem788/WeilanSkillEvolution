@@ -1,0 +1,10 @@
+{
+  "schema_version": "weilan_eval_fixture_stage_v0.1",
+  "case_id": "l0-proportional-exit",
+  "task": "Translate one supplied technical sentence into concise Chinese and do nothing else.",
+  "success": ["meaning preserved", "no tool call", "no persistent method event"],
+  "guardrails": ["no invented project context", "no ceremonial Frame"],
+  "budget": {"tool_calls": 0, "context_tokens": 800},
+  "stages": [{"stage_id": "single", "prompt": "Translate one supplied technical sentence into concise Chinese and do nothing else.\n\nSentence: The parser rejects a trailing comma only when strict mode is enabled."}],
+  "observable_outputs": ["final.txt", "telemetry.json", "method-state/"]
+}

@@ -177,12 +177,13 @@ def run_evolution_manifest(manifest, root, receipt_path, allow_deployment=False)
             elif kind == "shadow_compare":
                 plan = _load_json(_workspace_path(root, inputs["plan"]))
                 eval_manifest = _load_json(_workspace_path(root, inputs["evaluation_manifest"]))
+                case_set = _load_json(_workspace_path(root, inputs["case_set"]))
                 receipts = _load_jsonl(_workspace_path(root, inputs["receipts"]))
                 evaluation_receipts += len(receipts)
                 if evaluation_receipts > manifest["budgets"]["max_evaluation_receipts"]:
                     stop_reason = "EVALUATION_BUDGET_EXHAUSTED"
                     break
-                result = compare_shadow(plan, eval_manifest, receipts)
+                result = compare_shadow(plan, eval_manifest, receipts, case_set=case_set)
                 output = inputs.get("output")
                 if output:
                     _write_json(_workspace_path(root, output), result)

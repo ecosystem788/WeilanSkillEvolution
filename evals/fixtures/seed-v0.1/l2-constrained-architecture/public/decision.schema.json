@@ -1,0 +1,6 @@
+{
+  "type": "object",
+  "required": ["alternatives", "temporary_holder", "why_reasonable", "next_expected_evidence", "death_line", "discriminating_risk"],
+  "death_line": {"latency_p95_ms": 75, "storage_ratio_max": 1.5, "rollback_max_ms": 1000},
+  "alternative_required": ["candidate_id", "architecture_kind", "mechanism", "tradeoffs", "constraint_risks"]
+}

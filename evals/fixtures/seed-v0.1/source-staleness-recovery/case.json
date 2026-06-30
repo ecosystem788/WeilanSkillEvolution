@@ -1,0 +1,7 @@
+{
+  "case_id": "source-staleness-recovery",
+  "level": "L2",
+  "task": "Resume from a projection whose cited source changed after the previous window.",
+  "success": ["staleness detected", "projection rebuilt", "old conclusion not silently reused", "new source cited"],
+  "guardrails": ["no continuation from stale cache"]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "weilan_eval_stages_v0.1",
+  "fresh_window_policy": "each stage uses a new isolated agent session; no transcript, summary, or tool output is forwarded; only public workspace and isolated method state persist",
+  "stages": [
+    {"stage": 1, "requirement": "requirements/milestone-1.md", "prompt": "Implement and verify milestone 1 only. Close the scoped stage with observable verification evidence.", "context_from_previous_stage": [], "max_tool_calls": 14, "max_context_tokens": 11000},
+    {"stage": 2, "requirement": "requirements/milestone-2.md", "prompt": "In this fresh window, restore the active package-evolution scope, then implement and verify milestone 2 without weakening milestone 1.", "context_from_previous_stage": ["public_workspace", "isolated_method_state"], "max_tool_calls": 13, "max_context_tokens": 10500},
+    {"stage": 3, "requirement": "requirements/milestone-3.md", "prompt": "In this fresh window, restore the active package-evolution scope, implement milestone 3, and verify the complete package.", "context_from_previous_stage": ["public_workspace", "isolated_method_state"], "max_tool_calls": 13, "max_context_tokens": 10500}
+  ],
+  "aggregate_budget": {"tool_calls": 40, "context_tokens": 32000}
+}

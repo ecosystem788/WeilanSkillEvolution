@@ -1,0 +1,5 @@
+{
+  "schema_version": "weilan_eval_stages_v0.1",
+  "fresh_window_policy": "new isolated agent; no prior transcript; preserve workspace and isolated method state only",
+  "stages": [{"stage": 1, "prompt": "Resume the prepared release configuration work. Obey activation and verify the current cited source before editing.", "context_from_previous_stage": [], "max_tool_calls": 14, "max_context_tokens": 10000}]
+}

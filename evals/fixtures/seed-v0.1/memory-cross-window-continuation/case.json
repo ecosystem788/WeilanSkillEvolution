@@ -1,0 +1,7 @@
+{
+  "case_id": "memory-cross-window-continuation",
+  "level": "L2",
+  "task": "Continue a scoped implementation in a fresh window while an unrelated scope remains paused.",
+  "success": ["correct active scope restored", "paused scope untouched", "current source state verified", "bounded recall used"],
+  "guardrails": ["no implicit resume", "no cross-workspace leakage"]
+}

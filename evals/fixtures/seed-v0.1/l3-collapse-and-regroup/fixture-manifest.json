@@ -1,0 +1,16 @@
+{
+  "case_id": "l3-collapse-and-regroup",
+  "contract_sha256": "55694a5a133d07982d158e605ebfe6f9c64ed086a9cad566d7a6c4d9d0480865",
+  "public_files": {
+    "README.md": "042d85660b044e0a6a1b18ee3a827f863b85d2b40a173434dec0683f2470e349",
+    "attempts/attempt-01.log": "e9e5ee5a748a5efb6b5f1475788e06e521f76783d14a0bd410690c1eb89359a8",
+    "attempts/attempt-02.log": "e670cec180c0216a4aa81f28f42b061e5b50a0a81e385c77fb51dddb8c26c4cf",
+    "legacy_reader.py": "187e81005d2745fcf0d6e86378a060c5352ded2e8d4f95d7ed652395a7683d2d",
+    "migration.py": "a6c971409433e922231a9597c0a70addf1f6888fef84c8a63fb4c8d0ff68a141",
+    "route.json": "5026628bd3d58b5dd05dd4e5cfbef14db06d44c5e3e908be5e28dbed03c91adb",
+    "source/orders.csv": "8894c1040f2d19ab9fb836251c1174db4d9cac9e2f77a7357c0c3e3cb3c1389f",
+    "source/users.csv": "b1c1fcbbc53a2e4c1113488ea75af639f245aa1bc32106ae8556a93506269353",
+    "tests/test_migration.py": "272084b03483e776c19a532e18ae527cb9a1220acf3ed190934964b2b419dcae"
+  },
+  "schema_version": "weilan_eval_fixture_manifest_v0.1"
+}

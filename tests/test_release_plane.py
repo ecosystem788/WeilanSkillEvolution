@@ -49,7 +49,20 @@ def main():
         write_skill(target, "baseline")
         baseline_hash = tree_hash(baseline)
         candidate_hash = tree_hash(candidate)
-        case_set_hash = "c" * 64
+        case_set = {
+            "schema_version": "weilan_skill_eval_case_set_v0.1",
+            "suite_id": "fixture-v0.1",
+            "status": "approved_frozen",
+            "frozen": True,
+            "approval_source": "external:test",
+            "cases": [{
+                "case_id": "fixture-case",
+                "task": "evaluate fixture",
+                "success": ["scored"],
+                "guardrails": ["authority preserved"],
+            }],
+        }
+        case_set_hash = sha256_text(canonical_json(case_set))
         case = {
             "case_id": "fixture-case",
             "trial_count": 2,
@@ -73,7 +86,10 @@ def main():
             "shadow_id": "fixture-shadow",
             "baseline_artifact_hash": baseline_hash,
             "candidate_artifact_hash": candidate_hash,
-            "configuration_hash": "same-model-tools",
+            "configuration_hash": "1" * 64,
+            "environment_id": "fixture-environment",
+            "fixture_manifest_hashes": {"fixture-case": "2" * 64},
+            "aggregation_version": "equal-case-mean-v0.1",
             "evaluation_manifest_hash": manifest_hash,
             "case_spec_hash": case_set_hash,
             "max_receipts": 4,
@@ -82,7 +98,7 @@ def main():
                 "required_case_deltas": {"fixture-case": 0.05},
             },
         }
-        if not validate_shadow_plan(plan, manifest)["valid"]:
+        if not validate_shadow_plan(plan, manifest, case_set)["valid"]:
             raise AssertionError("valid bounded shadow plan was rejected")
         impact = {
             "schema_version": METHOD_IMPACT_SCHEMA_VERSION,
@@ -101,7 +117,19 @@ def main():
                 "configuration_hash": plan["configuration_hash"],
                 "evaluation_manifest_hash": manifest_hash,
                 "case_spec_hash": case_set_hash,
+                "fixture_manifest_hash": plan["fixture_manifest_hashes"]["fixture-case"],
+                "environment_id": plan["environment_id"],
+                "scoring_version": manifest["scoring_version"],
                 "budget": case["budget"],
+                "actual_usage": {"tool_calls": 1, "context_tokens": 100},
+                "termination_status": "completed",
+                "raw_output_hash": "3" * 64,
+                "grader_id": "external-grader",
+                "grader_provenance": {
+                    "authority_source": "external:test-grader",
+                    "evaluator_artifact_hash": "4" * 64,
+                    "evidence_hash": "5" * 64,
+                },
                 "guardrail_failures": [],
             }
             receipts.extend([
@@ -120,7 +148,7 @@ def main():
                     "method_impacts": [impact],
                 },
             ])
-        shadow = compare_shadow(plan, manifest, receipts)
+        shadow = compare_shadow(plan, manifest, receipts, case_set=case_set)
         if not shadow["adoption_eligible"] or shadow["mean_delta"] <= 0:
             raise AssertionError("improved equivalent shadow candidate was not eligible")
         decision = {

@@ -1,0 +1,10 @@
+{
+  "holder_id": "fixed-offset-global-id",
+  "identity_model": "fixed_integer_offset",
+  "assumptions": [
+    {"assumption_id": "utf8_csv_input", "statement": "Source files are UTF-8 CSV."},
+    {"assumption_id": "fixed_offset_is_collision_free", "statement": "A fixed tenant offset yields a globally unique integer user id."},
+    {"assumption_id": "orders_reference_same_tenant", "statement": "Every order references a user in the same tenant."}
+  ],
+  "success_standard": ["every source row exactly once", "tenant-local ownership preserved", "idempotent rerun", "unseen tenants and large ids supported"]
+}

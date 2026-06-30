@@ -1,0 +1,14 @@
+{
+  "schema_version": "weilan_eval_stages_v0.1",
+  "fresh_window_policy": "new isolated agent; no transcript or summary; preserve only public workspace and isolated method state",
+  "stages": [
+    {
+      "stage": 1,
+      "prompt": "Continue the prepared scoped implementation and verify it. Write no evaluator-owned files.",
+      "context_from_previous_stage": [],
+      "max_tool_calls": 18,
+      "max_context_tokens": 16000
+    }
+  ],
+  "required_observation": "private/observation.schema.json"
+}

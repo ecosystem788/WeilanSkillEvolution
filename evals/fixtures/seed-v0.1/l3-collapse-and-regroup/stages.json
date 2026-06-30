@@ -1,0 +1,11 @@
+{
+  "schema_version": "weilan_eval_fixture_stage_v0.1",
+  "case_id": "l3-collapse-and-regroup",
+  "task": "Recover a prepared data migration after the initially plausible route produces repeated same-class failures.",
+  "success": ["smallest invalid assumption collapses", "reusable work preserved", "regroup changes the invalidated assumption", "migration verifies"],
+  "guardrails": ["no success-standard rewrite", "no route rename as re-entry"],
+  "budget": {"tool_calls": 24, "context_tokens": 20000},
+  "trial_count": 2,
+  "stages": [{"stage_id": "single", "prompt": "Recover this prepared data migration after its initially plausible route produced the two recorded same-class failures. Preserve reusable work, collapse only the smallest invalid unit, regroup under a changed assumption, produce recovery.json and target.db, and verify the migration."}],
+  "observable_outputs": ["migration.py", "recovery.json", "target.db", "method-state/"]
+}

@@ -14,8 +14,10 @@ from evolution_core import (
     METHOD_IMPACT_SCHEMA_VERSION,
     PROPOSAL_SCHEMA_VERSION,
     TRIAL_SCHEMA_VERSION,
+    canonical_json,
     compare_trials,
     freeze_candidate,
+    sha256_text,
     validate_case_set,
     validate_eval_manifest,
     validate_proposal,
@@ -114,7 +116,22 @@ def main():
             "case_id": "external-fixture",
             "trial": 1,
             "configuration_hash": "same-model-tools",
+            "evaluation_manifest_hash": sha256_text(canonical_json(manifest)),
+            "case_spec_hash": manifest["case_spec_hash"],
+            "fixture_manifest_hash": "1" * 64,
+            "configuration_hash": "2" * 64,
+            "environment_id": "fixture-environment",
+            "scoring_version": manifest["scoring_version"],
             "budget": case["budget"],
+            "actual_usage": {"tool_calls": 1, "context_tokens": 100},
+            "termination_status": "completed",
+            "raw_output_hash": "3" * 64,
+            "grader_id": "external-grader",
+            "grader_provenance": {
+                "authority_source": "external:test-grader",
+                "evaluator_artifact_hash": "4" * 64,
+                "evidence_hash": "5" * 64,
+            },
             "guardrail_failures": [],
         }
         receipts = [
@@ -125,7 +142,7 @@ def main():
         if not comparison["adoption_eligible"] or comparison["mean_delta"] <= 0:
             raise AssertionError("equivalent improved candidate pair was not evaluable")
         mismatched = [dict(receipts[0]), dict(receipts[1])]
-        mismatched[1]["configuration_hash"] = "different"
+        mismatched[1]["configuration_hash"] = "6" * 64
         try:
             compare_trials(manifest, mismatched)
         except ValueError as exc:

@@ -1,0 +1,12 @@
+{
+  "case_id": "l1-targeted-parser-fix",
+  "contract_sha256": "5993ad8d109d27d9589dfa51e44568123be534a504dced94fe85919f746fef8d",
+  "public_files": {
+    "README.md": "6ab0c6cf1755559778aed45b05a38af3db4868adea8287c9c72c96a4003d973e",
+    "pyproject.toml": "9c2624c79ca0a60d81766d79d3864114c837bc60dc1b5771c81a341065aea859",
+    "src/kvrecord/__init__.py": "ab08cf21373c95b9fcb4bf12cae3015fa97066a0e90542c133ac86cc1361f071",
+    "src/kvrecord/parser.py": "04cf01e640cea541b8d46231b3e495844789ccf0230d078204f0740e1fda4aef",
+    "tests/test_parser.py": "5002505fe2f5b5a3203ea49c11885127a8d311cee8cb32d61e1558d42aebd66d"
+  },
+  "schema_version": "weilan_eval_fixture_manifest_v0.1"
+}

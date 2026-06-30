@@ -1,0 +1,32 @@
+{
+  "schema_version": "weilan_eval_fixture_manifest_v0.1",
+  "suite_id": "se-seed-v0.1",
+  "case_id": "long-horizon-package-evolution",
+  "content_hash": "c0dbd07c4c5e8c01b7a4b5e524e52f5788f50e965ac3ee9f1978bd69544ad575",
+  "files": {
+    "case.json": "847087b09b543e3afd438eed707bbdd884f8cfcc21f318045bc7ccd8ef0788e8",
+    "private/test_final_integration.py": "4db36a795258d9f227b3714f462e583e719ebdba321b95ad2f94e4eb238ffcad",
+    "private/test_m1_hidden.py": "cf48a5f765bb85aab3b472f0961bcfb97f2f68fb0cb0fc9579cfea1069f565ea",
+    "private/test_m2_hidden.py": "0436d3d723298a4ac74c1adbfd64e3507a70033ca0a4fb4f94561a92fa82c5bb",
+    "private/test_m3_hidden.py": "701b847d15ca2b264285834c8e808523b95eaff2c0263a219e592f9cfc285de8",
+    "private/trial-data-1/manifest.csv": "d89e864b32c29547651b8ffc09a7ae9ddcc5710675bd1f0fa32e9021e76d64c1",
+    "private/trial-data-1/routes.json": "002e4d0d998c0cf20e2fa3393d4366b6bc7d54bb54549b703ef6d75ab1c908cc",
+    "private/trial-data-2/manifest.csv": "71e9ad8cb2f219bcd039c90c874775c1663e3ffb5016de3566391616dc27838f",
+    "private/trial-data-2/routes.json": "3c25781a144be5b93a769e50b6c5e7fc111d582dc249309fa195713bd3e9797a",
+    "public/AGENTS.md": "7cca9a2ccb0c67b668f32b706a351a3ce3f5aa4a1bac0a183bfaac30cc9491df",
+    "public/pyproject.toml": "4cd2a9b7a9a37779aa96e26636a1ef0088aaed4ba0baaffd9144d0d07d1dd0aa",
+    "public/requirements/milestone-1.md": "d6b445824fa69610975b14ed91c4853f6f06920da5c340b191a264ebc4d5987c",
+    "public/requirements/milestone-2.md": "1fd0d972ec427c3d64d6a08c8d2fd7b5ded33540c0b342a376259cc292c80c84",
+    "public/requirements/milestone-3.md": "e8f1419693dd72969aa52fc625135c3c74ddf9d750c273e3a8956c91cb1d0aad",
+    "public/src/parcel_route/__init__.py": "e1bfecb25fc254675f32e7928983e84ff0ee9030bd88254cd50cb7bad5681290",
+    "public/src/parcel_route/cli.py": "0785f910e44265b530880081aa099b05553d046305180938550e2a4dabebf027",
+    "public/src/parcel_route/manifest.py": "54ba8039a58ec1a5fd8633dfa92ab14d69ac3d423b582bb5814434b2a3e411e8",
+    "public/src/parcel_route/planner.py": "1516a60e3babf866859e58a40ec9cd383561e78f6bfdda83914af0440deb82a2",
+    "public/tests/test_m1_public.py": "89aae17a2635075f0e3a8234dabbe0d66ea6b5e6cad74c526adb9f688233df49",
+    "public/tests/test_m2_public.py": "7b53d7d51298b92869cfda6ee5c031f86e58437a4567ccb9c7cbfc47914a3eab",
+    "public/tests/test_m3_public.py": "82dcbe1c069b15bd61115096053bdb9087766b89b8792d91eea704550cb43cd1",
+    "score.py": "eba586f06b74b69c2fdb66572d852494b5005a0df3839406a37b977c9964a797",
+    "seed_state.py": "57f0214a40b08d3c8a4fb05b56f7f36fc31a69101e64edde01a5a9a0dec0471a",
+    "stages.json": "96ee67a20a82dc1e87cdfae004324a5866e4c65a49a790f79bc1c364facab14f"
+  }
+}

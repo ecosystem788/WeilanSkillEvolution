@@ -1,0 +1,4 @@
+order_id,tenant_id,user_legacy_id,amount_cents
+1,alpha,101,1200
+2,beta,101,2500
+3,gamma,1000101,3300

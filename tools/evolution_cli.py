@@ -61,7 +61,11 @@ def command_eval_compare(args):
 
 
 def command_shadow_validate(args):
-    result = validate_shadow_plan(load_json(args.plan), load_json(args.manifest))
+    result = validate_shadow_plan(
+        load_json(args.plan),
+        load_json(args.manifest),
+        load_json(args.case_set),
+    )
     print(json.dumps(result, indent=2))
     return 0 if result["valid"] else 2
 
@@ -71,6 +75,7 @@ def command_shadow_compare(args):
         load_json(args.plan),
         load_json(args.manifest),
         load_jsonl(args.receipts),
+        case_set=load_json(args.case_set),
     )
     if args.output:
         Path(args.output).write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
@@ -151,11 +156,13 @@ def build_parser():
     shadow_validate = commands.add_parser("shadow-validate")
     shadow_validate.add_argument("--plan", required=True)
     shadow_validate.add_argument("--manifest", required=True)
+    shadow_validate.add_argument("--case-set", required=True)
     shadow_validate.set_defaults(func=command_shadow_validate)
 
     shadow_compare = commands.add_parser("shadow-compare")
     shadow_compare.add_argument("--plan", required=True)
     shadow_compare.add_argument("--manifest", required=True)
+    shadow_compare.add_argument("--case-set", required=True)
     shadow_compare.add_argument("--receipts", required=True)
     shadow_compare.add_argument("--output")
     shadow_compare.set_defaults(func=command_shadow_compare)

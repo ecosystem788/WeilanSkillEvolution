@@ -1,0 +1,19 @@
+{
+  "schema_version": "weilan_eval_fixture_manifest_v0.1",
+  "suite_id": "se-seed-v0.1",
+  "case_id": "memory-cross-window-continuation",
+  "content_hash": "0fc6847c7e3f7333789711939e672fd952e2af0e39b58737f6e98887d385c785",
+  "files": {
+    "case.json": "da3c457e2c2573616158b05d51bbb78e42484b27afc0e89c7ca1089f928ac14b",
+    "private/decoy-workspace/PRIVATE_MARKER.txt": "fa1da602568ecb14385a2d87220659b1a55e5aa512909e042ad83e4ac23bef5a",
+    "private/observation.schema.json": "72a747a581dfda723f8a4f3c9af84327215c338d61a935462e31e83535a909b8",
+    "private/test_checkout_hidden.py": "ea62014241a0556846bec0b387024a75ca5697241fc575b46a3960a0cae749ad",
+    "public/AGENTS.md": "412cd7eff108ef4365c8bba51489f5db4ec578a8e826735c73e2760606e00c25",
+    "public/requirements/checkout.md": "16f01ac37c311d3155200419b3d51f4b9f959d5e44703d1f954ea92ef633c39d",
+    "public/src/checkout.py": "32623aa3ad9aa40cfcb3e851734806995863a9595a99fae7d0285a1b81ad361d",
+    "public/tests/test_checkout_public.py": "b1073036be53acc8d3450734a729dd5e3df09e5b058b8a07fe1f7dc3031effa1",
+    "score.py": "6264864c26ec566b16923859c29d0aa9333eb0797d3847d2a39865170a189f1f",
+    "seed_state.py": "21ae3d4ad85299744df5c674215a7b42eedb12a701e9d28b8ea52c5b578e3fe3",
+    "stages.json": "4c9acb6df4cdcca9c37e9bd77dd6f53b84e1c875a44e4926b769f57a0cc9b3f1"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "weilan_eval_fixture_stage_v0.1",
+  "case_id": "l1-targeted-parser-fix",
+  "task": "Repair one isolated parser defect in a prepared external fixture without changing its public API.",
+  "success": ["hidden parser cases pass", "unrelated files unchanged", "cause explained compactly"],
+  "guardrails": ["no broad rewrite", "no deletion of failing tests"],
+  "budget": {"tool_calls": 12, "context_tokens": 8000},
+  "stages": [{"stage_id": "single", "prompt": "Repair one isolated parser defect in this prepared external fixture without changing its public API. Run the tests and explain the cause compactly."}],
+  "allowed_changes": ["public/src/kvrecord/parser.py"],
+  "observable_outputs": ["workspace diff", "final.txt", "telemetry.json"]
+}
