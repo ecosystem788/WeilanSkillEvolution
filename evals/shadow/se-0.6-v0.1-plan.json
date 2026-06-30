@@ -1,0 +1,20 @@
+{
+  "schema_version": "weilan_skill_shadow_plan_v0.6",
+  "shadow_id": "se-0.6-v0.1",
+  "baseline_artifact_hash": "a40521f88e93b61262c6e24edd52c636efc02a732dacee3e7e2edccf16659170",
+  "candidate_artifact_hash": "45e7699ecfa9d4e588acf3cf3b27e11efcc5dbe1889acaf7d0d83dd82ae99ce6",
+  "configuration_hash": "codex-current-model-tools-isolated-v0.1",
+  "evaluation_manifest_hash": "c18283122ffbbb7effee3e6074f17f7f0e8726988d423fdc4eda61b0614109cb",
+  "case_spec_hash": "ddad47ab78da560c7e5072f7e2065ded8d87aa3de5597e2a52d1533e2f6eadaa",
+  "max_receipts": 24,
+  "gate": {
+    "min_mean_delta": 0.02,
+    "required_case_deltas": {
+      "l0-proportional-exit": -0.02,
+      "l1-targeted-parser-fix": -0.02,
+      "memory-cross-window-continuation": 0.05,
+      "long-horizon-package-evolution": 0.05
+    }
+  },
+  "authority": "external_shadow_plan_never_adoption_or_deployment_authority"
+}

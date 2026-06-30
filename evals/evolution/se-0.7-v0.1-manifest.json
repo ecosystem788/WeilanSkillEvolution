@@ -1,0 +1,85 @@
+{
+  "schema_version": "weilan_skill_evolution_manifest_v0.7",
+  "run_id": "se-0.7-v0.1",
+  "max_steps": 8,
+  "budgets": {
+    "max_proposals": 1,
+    "max_candidate_generations": 1,
+    "max_shadow_comparisons": 1,
+    "max_evaluation_receipts": 24,
+    "max_deployments": 1
+  },
+  "authority_roots": [
+    "decisions"
+  ],
+  "steps": [
+    {
+      "step_id": "proposal",
+      "kind": "proposal_validate",
+      "inputs": {
+        "proposal": "proposals/se-0.4-se-0.7-program/SE-0.6-SE-0.7_CHANGE_PROPOSAL.json"
+      }
+    },
+    {
+      "step_id": "freeze",
+      "kind": "candidate_freeze",
+      "inputs": {
+        "source": "proposals/se-0.4-se-0.7-program/candidate/solve-with-weilan",
+        "artifact_root": "artifacts"
+      }
+    },
+    {
+      "step_id": "shadow",
+      "kind": "shadow_compare",
+      "inputs": {
+        "plan": "evals/shadow/se-0.6-v0.1-plan.json",
+        "evaluation_manifest": "evals/manifest.json",
+        "receipts": "evals/runs/se-0.6-v0.1/trials.jsonl",
+        "output": "evals/runs/se-0.6-v0.1/shadow-result.json"
+      }
+    },
+    {
+      "step_id": "decision",
+      "kind": "decision_validate",
+      "inputs": {
+        "decision": "decisions/se-0.6-v0.1-adoption.json",
+        "shadow_result_step": "shadow"
+      }
+    },
+    {
+      "step_id": "deploy",
+      "kind": "deploy",
+      "inputs": {
+        "candidate": "artifacts/45e7699ecfa9d4e588acf3cf3b27e11efcc5dbe1889acaf7d0d83dd82ae99ce6/solve-with-weilan",
+        "target": "D:\\CodexData\\skills\\solve-with-weilan",
+        "receipt_root": "deployments",
+        "decision_step": "decision",
+        "shadow_result_step": "shadow"
+      }
+    },
+    {
+      "step_id": "canary",
+      "kind": "canary",
+      "inputs": {
+        "deployment_step": "deploy",
+        "observations": "evals/runs/se-0.6-v0.1/canary-observations.json"
+      }
+    },
+    {
+      "step_id": "rollback",
+      "kind": "rollback",
+      "inputs": {
+        "deployment_step": "deploy",
+        "receipt_root": "deployments",
+        "authority_file": "decisions/se-0.6-v0.1-rollback.json",
+        "authority_source": "decisions/se-0.6-v0.1-rollback.json"
+      }
+    },
+    {
+      "step_id": "complete",
+      "kind": "complete",
+      "inputs": {}
+    }
+  ],
+  "authority": "finite_foreground_manifest_never_self_authorizes_evaluation_adoption_or_deployment"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "se-0.6-se-0.7-external-release-and-bounded-runner",
+  "rationale": "Teach the candidate only how to invoke the external shadow, adoption, release, rollback, and finite evolution authorities without moving those authorities into the candidate Skill.",
+  "base_artifact_hash": "74e3e4911c7f1cb397bcfb433ea4d2e08624483a3d6086a61ec408974448868a",
+  "candidate_artifact_hash": "45e7699ecfa9d4e588acf3cf3b27e11efcc5dbe1889acaf7d0d83dd82ae99ce6",
+  "changed_paths": [
+    "proposals/se-0.4-se-0.7-program/candidate/solve-with-weilan/references/evolution-system.md"
+  ],
+  "budgets": {
+    "max_changed_files": 1,
+    "max_candidate_generations": 1,
+    "max_evaluation_trials": 24,
+    "max_deployments": 1
+  },
+  "target_metrics": [
+    "shadow_equivalence",
+    "external_adoption_authority",
+    "rollback_integrity",
+    "bounded_evolution"
+  ],
+  "rollback_triggers": [
+    "verification regression",
+    "activation leakage",
+    "evaluation mismatch",
+    "material L0 or L1 overhead regression"
+  ],
+  "candidate_authority": "proposal_and_instruction_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}

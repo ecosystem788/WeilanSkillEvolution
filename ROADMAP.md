@@ -76,7 +76,9 @@ Acceptance:
 
 ## SE-0.4 — Goals, prospective memory, and causal frame cycles
 
-Status: `not_started`
+Status: `complete`
+
+Evidence: `proposals/se-0.4-se-0.7-program/SE-0.4_ACCEPTANCE_RECEIPT.md` and fourteen passing candidate regression suites.
 
 Scope:
 
@@ -119,7 +121,9 @@ Acceptance:
 
 ## SE-0.6 — Shadow competition, adoption, and rollback
 
-Status: `not_started`
+Status: `audit_required`
+
+Evidence: `proposals/se-0.4-se-0.7-program/SE-0.6_GATE_RECEIPT.md`, `evals/shadow/se-0.6-v0.1-plan.json`, and `tests/test_release_plane.py`. The real approved-suite shadow receipts do not yet exist.
 
 Scope:
 
@@ -139,7 +143,9 @@ Acceptance:
 
 ## SE-0.7 — Bounded self-evolution
 
-Status: `not_started`
+Status: `audit_required`
+
+Evidence: `proposals/se-0.4-se-0.7-program/SE-0.7_GATE_RECEIPT.md`, `evals/evolution/se-0.7-v0.1-manifest.json`, and `tests/test_bounded_evolution.py`. Real repeated held-out evolution evidence does not yet exist.
 
 Scope:
 

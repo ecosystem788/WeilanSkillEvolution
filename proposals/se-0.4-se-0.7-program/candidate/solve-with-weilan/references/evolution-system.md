@@ -51,3 +51,29 @@ This trace distinguishes useful Meta-reasoning（元推理） from ritual compli
 ## Authority boundary
 
 Evaluation output is evidence only. `adoption_eligible` means the external gate may consider an adoption; it never changes the installed Skill. A candidate cannot approve its own cases, compare unequal trials, deploy itself, or remove its rollback predecessor.
+
+## Shadow competition and release
+
+SE-0.6 remains in the external Release Plane. An approved shadow plan binds the baseline and candidate artifact hashes, frozen evaluation-manifest and case-set hashes, configuration, receipt budget, and predeclared gate. The candidate may produce trial output but cannot validate the pair, choose adoption, or deploy.
+
+An adoption decision must cite an independent authority source and the exact shadow-result hash. Deployment requires a separate explicit command, preserves a content-addressed predecessor, verifies the installed tree, and writes a deterministic receipt. Canary observations may fire only predeclared rollback triggers. Evidence that rollback is required never authorizes rollback by itself; an external authority source is still required.
+
+```powershell
+python tools/evolution_cli.py shadow-validate --plan "<plan.json>" --manifest evals/manifest.json
+python tools/evolution_cli.py decision-validate --decision "<decision.json>" --shadow-result "<result.json>"
+```
+
+Never pass `--confirm-deployment`, `--confirm-rollback`, or `--allow-deployment` without an explicit current authorization covering the exact artifact and target.
+
+## One finite evolution manifest
+
+SE-0.7 may execute only a caller-supplied, finite foreground manifest through the external tool. The manifest fixes step, proposal, candidate-generation, evaluation-receipt, shadow-comparison, and deployment budgets. Decision and rollback files must come from declared external authority roots.
+
+The runner stops on invalid proposals, exhausted budgets, unequal or regressing evaluation, missing authority, rejected adoption, deployment gating, invalid canary evidence, conflicts, or a required rollback. It writes one replayable receipt and exits. It never schedules itself, polls, waits, generates evaluation authority, treats candidate output as approval, or starts a background Agent.
+
+```powershell
+python tools/evolution_cli.py evolution-validate --manifest "<run.json>"
+python tools/evolution_cli.py evolution-run --manifest "<run.json>" --root "<workspace>" --receipt "<receipt.json>"
+```
+
+An admissible manifest is not deployment authority. Without the explicit deployment flag and a valid external adoption decision, the runner must stop before changing the installed Skill.
