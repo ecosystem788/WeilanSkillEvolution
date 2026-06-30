@@ -37,6 +37,8 @@ For Memory 0.6 governance work, read [references/governance-system.md](reference
 
 For SE-0.4 future intentions, read [references/prospective-system.md](references/prospective-system.md). Register bounded causal conditions, append only explicit user/tool/environment/authorized-clock observations, and derive at most one read-only cycle plan. Never let an observation transition a goal automatically or create a timer, scheduler, heartbeat, wakeup, or background loop.
 
+For Skill Evolution work in a workspace with external roadmap, evaluation policy, and `tools/evolution_cli.py`, read [references/evolution-system.md](references/evolution-system.md). Keep proposal construction, content-addressed candidate freezing, evaluation, adoption, deployment, and rollback in that external authority plane. Never let the candidate approve its own cases, compare unequal trials, adopt itself, or treat Method Impact Trace as hidden reasoning.
+
 ## Choose proportional depth
 
 - **L0 — micro frame:** One obvious, low-risk step. Confirm the requested outcome and answer directly. Do not persist events.

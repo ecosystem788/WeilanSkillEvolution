@@ -5,3 +5,4 @@ __pycache__/
 *.lock
 .codex/
 deployments/*/rollback/
+artifacts/candidates/

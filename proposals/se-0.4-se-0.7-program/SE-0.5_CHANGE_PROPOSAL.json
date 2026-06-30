@@ -1,0 +1,36 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "se-0.4-se-0.7-program-foundation",
+  "rationale": "Preserve the deployed CLI while extracting shared runtime primitives and adding bounded prospective memory plus external evolution-plane instructions.",
+  "base_artifact_hash": "a40521f88e93b61262c6e24edd52c636efc02a732dacee3e7e2edccf16659170",
+  "candidate_artifact_hash": "74e3e4911c7f1cb397bcfb433ea4d2e08624483a3d6086a61ec408974448868a",
+  "changed_paths": [
+    "SKILL.md",
+    "references/evolution-system.md",
+    "references/memory-system.md",
+    "references/prospective-system.md",
+    "scripts/prospective.py",
+    "scripts/runtime_core.py",
+    "scripts/test_prospective.py",
+    "scripts/test_runtime_boundary.py",
+    "scripts/weilan_trace.py"
+  ],
+  "budgets": {
+    "max_changed_files": 12,
+    "max_candidate_generations": 1,
+    "max_evaluation_trials": 22
+  },
+  "target_metrics": [
+    "prospective_goal_lifecycle",
+    "causal_event_boundary",
+    "cross_window_continuity",
+    "method_impact_overhead"
+  ],
+  "rollback_triggers": [
+    "legacy CLI command loss",
+    "activation or workspace isolation regression",
+    "clock event bypasses explicit scope authority",
+    "material L0 or L1 overhead regression"
+  ],
+  "candidate_authority": "proposal_only_never_evaluation_adoption_or_deployment"
+}
