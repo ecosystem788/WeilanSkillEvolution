@@ -1,7 +1,7 @@
 {
   "schema_version": "weilan_skill_program_proposal_v0.1",
   "proposal_id": "se-0.4-se-0.7-program",
-  "status": "se_0_5_external_case_approval_required",
+  "status": "se_0_5_accepted_se_0_6_in_progress",
   "base_commit": "bde820e",
   "base_deployment_receipt": "deployments/20260630T134857Z-se-0.2-se-0.3/DEPLOYMENT_RECEIPT.json",
   "candidate_path": "proposals/se-0.4-se-0.7-program/candidate/solve-with-weilan",

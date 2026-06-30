@@ -154,7 +154,28 @@ def validate_method_impact(record):
     return issues
 
 
-def validate_eval_manifest(manifest, require_approved=True):
+def validate_case_set(case_set):
+    issues = []
+    if case_set.get("schema_version") != "weilan_skill_eval_case_set_v0.1":
+        issues.append("unsupported evaluation case-set schema")
+    if case_set.get("status") != "approved_frozen" or not case_set.get("frozen"):
+        issues.append("evaluation case set is not explicitly approved and frozen")
+    if not case_set.get("approval_source"):
+        issues.append("evaluation case set lacks external approval source")
+    cases = case_set.get("cases")
+    if not isinstance(cases, list) or not cases:
+        issues.append("evaluation case set has no cases")
+        cases = []
+    case_ids = [case.get("case_id") for case in cases if isinstance(case, dict)]
+    if len(case_ids) != len(cases) or len(case_ids) != len(set(case_ids)) or any(not item for item in case_ids):
+        issues.append("case-set ids must be present and unique")
+    for case in cases:
+        if not case.get("task") or not case.get("success") or not case.get("guardrails"):
+            issues.append(f"case lacks task, success, or guardrails: {case.get('case_id')}")
+    return {"valid": not issues, "issues": issues, "case_count": len(cases)}
+
+
+def validate_eval_manifest(manifest, require_approved=True, case_set=None):
     issues = []
     if manifest.get("schema_version") != EVAL_SCHEMA_VERSION:
         issues.append("unsupported evaluation manifest schema")
@@ -162,6 +183,15 @@ def validate_eval_manifest(manifest, require_approved=True):
         manifest.get("status") != "approved" or not manifest.get("frozen")
     ):
         issues.append("evaluation manifest is not explicitly approved and frozen")
+    if require_approved and not manifest.get("approval_source"):
+        issues.append("evaluation manifest lacks external approval source")
+    if not manifest.get("scoring_version"):
+        issues.append("evaluation manifest lacks scoring version")
+    if not manifest.get("case_spec"):
+        issues.append("evaluation manifest lacks case_spec")
+    case_spec_hash = manifest.get("case_spec_hash")
+    if not isinstance(case_spec_hash, str) or len(case_spec_hash) != 64:
+        issues.append("evaluation manifest lacks a valid case_spec_hash")
     cases = manifest.get("cases")
     if not isinstance(cases, list) or not cases:
         issues.append("evaluation manifest has no cases")
@@ -174,6 +204,18 @@ def validate_eval_manifest(manifest, require_approved=True):
             issues.append(f"invalid trial_count for {case.get('case_id')}")
         if not case.get("budget") or not case.get("metrics"):
             issues.append(f"case lacks budget or metrics: {case.get('case_id')}")
+        elif abs(sum(float(weight) for weight in case["metrics"].values()) - 1.0) > 1e-9:
+            issues.append(f"metric weights must sum to one: {case.get('case_id')}")
+    if case_set is not None:
+        case_validation = validate_case_set(case_set)
+        issues.extend(case_validation["issues"])
+        if case_set.get("suite_id") != manifest.get("suite_id"):
+            issues.append("manifest and case-set suite ids differ")
+        case_set_ids = [case.get("case_id") for case in case_set.get("cases", [])]
+        if case_set_ids != case_ids:
+            issues.append("manifest and case-set case order differs")
+        if sha256_text(canonical_json(case_set)) != case_spec_hash:
+            issues.append("evaluation case set does not match frozen hash")
     return {"valid": not issues, "issues": issues, "case_count": len(cases)}
 
 

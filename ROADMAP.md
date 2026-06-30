@@ -96,7 +96,9 @@ Acceptance:
 
 ## SE-0.5 — Skill proposals and a fixed evaluation set
 
-Status: `not_started`
+Status: `complete`
+
+Evidence: `proposals/se-0.4-se-0.7-program/SE-0.5_GATE_RECEIPT.md`, approved suite `se-seed-v0.1`, and `tests/test_evolution_plane.py`.
 
 Scope:
 

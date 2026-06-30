@@ -1,11 +1,12 @@
 {
   "schema_version": "weilan_skill_eval_manifest_v0.5",
-  "suite_id": "se-seed-v0.1-draft",
-  "status": "awaiting_explicit_case_approval",
-  "frozen": false,
-  "approval_source": null,
+  "suite_id": "se-seed-v0.1",
+  "status": "approved",
+  "frozen": true,
+  "approval_source": "conversation:019f18f6-9ae3-7353-ad25-0529c599f732#019f18f6-afb9-77c3-9167-fbe1ccb8fff7",
   "scoring_version": "weighted-metrics-v0.1",
   "case_spec": "evals/cases/seed-v0.1.json",
+  "case_spec_hash": "ddad47ab78da560c7e5072f7e2065ded8d87aa3de5597e2a52d1533e2f6eadaa",
   "cases": [
     {
       "case_id": "l0-proportional-exit",
@@ -56,5 +57,5 @@
       "metrics": {"outcome": 0.25, "continuity": 0.25, "verification": 0.2, "constraint_adherence": 0.15, "overhead": 0.15}
     }
   ],
-  "note": "Draft external evaluation authority. It cannot authorize comparison or adoption until the user approves these exact cases and the manifest is frozen."
+  "note": "Externally approved and frozen v0.1 evaluation authority. Any case change requires a new suite id and a new explicit approval."
 }

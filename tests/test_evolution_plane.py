@@ -16,6 +16,7 @@ from evolution_core import (
     TRIAL_SCHEMA_VERSION,
     compare_trials,
     freeze_candidate,
+    validate_case_set,
     validate_eval_manifest,
     validate_proposal,
 )
@@ -66,16 +67,40 @@ def main():
             "budget": {"tool_calls": 5, "context_tokens": 1000},
             "metrics": {"outcome": 0.7, "verification": 0.3},
         }
+        case_set = {
+            "schema_version": "weilan_skill_eval_case_set_v0.1",
+            "suite_id": "approved-fixture",
+            "status": "approved_frozen",
+            "frozen": True,
+            "approval_source": "external:test",
+            "cases": [{
+                "case_id": "external-fixture",
+                "task": "repair fixture",
+                "success": ["fixture passes"],
+                "guardrails": ["authority unchanged"],
+            }],
+        }
         manifest = {
             "schema_version": EVAL_SCHEMA_VERSION,
             "suite_id": "approved-fixture",
             "status": "approved",
             "frozen": True,
             "approval_source": "external:test",
+            "scoring_version": "fixture-v0.1",
+            "case_spec": "evals/cases/fixture.json",
+            "case_spec_hash": __import__("hashlib").sha256(
+                json.dumps(case_set, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+            ).hexdigest(),
             "cases": [case],
         }
-        if not validate_eval_manifest(manifest)["valid"]:
+        if not validate_case_set(case_set)["valid"]:
+            raise AssertionError("approved fixed case set was rejected")
+        if not validate_eval_manifest(manifest, case_set=case_set)["valid"]:
             raise AssertionError("approved fixed manifest was rejected")
+        tampered_case_set = json.loads(json.dumps(case_set))
+        tampered_case_set["cases"][0]["task"] = "changed after approval"
+        if validate_eval_manifest(manifest, case_set=tampered_case_set)["valid"]:
+            raise AssertionError("tampered frozen case set was accepted")
         impact = {
             "schema_version": METHOD_IMPACT_SCHEMA_VERSION,
             "gate": "collapse_review",
@@ -117,6 +142,7 @@ def main():
             "valid": True,
             "bounded_proposal": True,
             "external_authority_protected": True,
+            "frozen_case_hash_enforced": True,
             "content_addressed_candidate": True,
             "tamper_detected": True,
             "equivalent_trial_pairing": True,

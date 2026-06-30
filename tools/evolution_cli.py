@@ -31,7 +31,17 @@ def command_candidate_freeze(args):
 
 
 def command_eval_validate(args):
-    result = validate_eval_manifest(load_json(args.manifest), require_approved=not args.allow_draft)
+    manifest_path = Path(args.manifest).resolve()
+    manifest = load_json(manifest_path)
+    case_set = None
+    if manifest.get("case_spec"):
+        case_path = manifest_path.parent.parent / manifest["case_spec"]
+        case_set = load_json(case_path)
+    result = validate_eval_manifest(
+        manifest,
+        require_approved=not args.allow_draft,
+        case_set=case_set,
+    )
     print(json.dumps(result, indent=2))
     return 0 if result["valid"] else 2
 

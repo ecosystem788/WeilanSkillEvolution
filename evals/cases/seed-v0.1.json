@@ -1,7 +1,9 @@
 {
   "schema_version": "weilan_skill_eval_case_set_v0.1",
-  "suite_id": "se-seed-v0.1-draft",
-  "status": "draft_external_to_candidate",
+  "suite_id": "se-seed-v0.1",
+  "status": "approved_frozen",
+  "frozen": true,
+  "approval_source": "conversation:019f18f6-9ae3-7353-ad25-0529c599f732#019f18f6-afb9-77c3-9167-fbe1ccb8fff7",
   "cases": [
     {
       "case_id": "l0-proportional-exit",

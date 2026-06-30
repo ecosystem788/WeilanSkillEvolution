@@ -1,6 +1,6 @@
 # SE-0.5 external approval gate receipt
 
-Status: `mechanism_passed_cases_draft_not_approved`
+Status: `accepted`
 
 ## Completed mechanism
 
@@ -12,7 +12,7 @@ Status: `mechanism_passed_cases_draft_not_approved`
 - The current candidate was frozen at `74e3e4911c7f1cb397bcfb433ea4d2e08624483a3d6086a61ec408974448868a`.
 - `tests/test_evolution_plane.py` passed.
 
-## Draft external case set
+## Approved external case set
 
 `evals/manifest.json` and `evals/cases/seed-v0.1.json` define eight cases:
 
@@ -27,8 +27,8 @@ Status: `mechanism_passed_cases_draft_not_approved`
 
 The draft contains `12` baseline trials and `12` candidate trials when fully executed.
 
-## Required external decision
+## External decision
 
-The case set remains `awaiting_explicit_case_approval` and `frozen: false`. It cannot be used as adoption evidence until the user approves these exact case definitions. The candidate cannot clear this gate.
+The user explicitly approved these exact eight case definitions in `conversation:019f18f6-9ae3-7353-ad25-0529c599f732#019f18f6-afb9-77c3-9167-fbe1ccb8fff7`.
 
-SE-0.6 implementation may not claim valid shadow comparison or adoption until this gate is cleared.
+The case set and manifest are frozen under suite `se-seed-v0.1`; the manifest binds the canonical case-set hash. Any case change requires a new suite id and explicit external approval. This clears the SE-0.5 authority gate but does not itself provide shadow results or authorize adoption.
