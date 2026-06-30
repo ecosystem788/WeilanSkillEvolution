@@ -1,0 +1,25 @@
+{
+  "schema_version": "weilan_skill_program_proposal_v0.1",
+  "proposal_id": "se-0.4-se-0.7-program",
+  "status": "se_0_4_candidate_accepted_se_0_5_in_progress",
+  "base_commit": "bde820e",
+  "base_deployment_receipt": "deployments/20260630T134857Z-se-0.2-se-0.3/DEPLOYMENT_RECEIPT.json",
+  "candidate_path": "proposals/se-0.4-se-0.7-program/candidate/solve-with-weilan",
+  "authorized_scope": [
+    "compatibility-preserving runtime boundary",
+    "SE-0.4 goals, prospective memory, and causal event adapters",
+    "SE-0.5 Skill proposals, fixed evaluation, and Method Impact Trace",
+    "SE-0.6 shadow competition, adoption, canary, and rollback",
+    "SE-0.7 bounded self-evolution and anti-self-certification"
+  ],
+  "authority_gates": [
+    "external evaluation cases remain outside the candidate",
+    "candidate cannot adopt or deploy itself",
+    "formal evaluation-set approval remains external",
+    "formal adoption and deployment remain explicit user decisions"
+  ],
+  "deployment_authorized": false,
+  "stage_receipts": [
+    "SE-0.4_ACCEPTANCE_RECEIPT.md"
+  ]
+}
