@@ -36,7 +36,9 @@ Acceptance:
 
 ## SE-0.2 — Episodic recall, scope, and current projection
 
-Status: `audit_required`
+Status: `complete`
+
+Evidence: `proposals/se-0.2-se-0.3-completion/ACCEPTANCE_RECEIPT.md` and `deployments/20260630T134857Z-se-0.2-se-0.3/DEPLOYMENT_RECEIPT.json`.
 
 Scope:
 
@@ -54,7 +56,9 @@ Acceptance:
 
 ## SE-0.3 — Consolidation and semantic memory
 
-Status: `audit_required`
+Status: `complete`
+
+Evidence: `proposals/se-0.2-se-0.3-completion/ACCEPTANCE_RECEIPT.md` and `deployments/20260630T134857Z-se-0.2-se-0.3/DEPLOYMENT_RECEIPT.json`.
 
 Scope:
 
@@ -81,6 +85,8 @@ Scope:
 - optional clock adapter that injects an event only when an authorized condition becomes true;
 - no synthetic empty Frames, daemon consciousness, or unbounded background loop.
 
+Program prerequisite: split memory, control, execution, and evolution responsibilities behind the existing CLI before expanding behavior. The refactor must be compatibility-only and pass the full frozen regression set; it is not itself evidence of improved intelligence.
+
 Acceptance:
 
 - future intentions can be registered, recalled, satisfied, superseded, or collapsed;
@@ -97,14 +103,17 @@ Scope:
 - bounded Skill-change proposals with explicit rationale and changed files;
 - immutable candidate artifacts;
 - a fixed, external, versioned real-task evaluation set;
-- evaluation metrics for outcome quality, verification, collapse behavior, memory behavior, overhead, and constraint adherence.
+- evaluation metrics for outcome quality, verification, collapse behavior, memory behavior, overhead, and constraint adherence;
+- Method Impact Trace records which method gate fired, whether it changed the intended action, which observable failure it avoided or exposed, and the added tool, time, and context cost;
+- external real-task cases ensure self-referential Skill development is not the only evaluation evidence.
 
 Acceptance:
 
 - a candidate cannot edit roadmap, policy, baseline, or evaluation cases;
 - baseline and candidate receive equivalent tasks, tools, budgets, and scoring;
 - proposal generation and evaluation are separate authorities;
-- a candidate can fail without changing the deployed Skill.
+- a candidate can fail without changing the deployed Skill;
+- method impact can be distinguished from ritual compliance and measured against its overhead.
 
 ## SE-0.6 — Shadow competition, adoption, and rollback
 
@@ -115,14 +124,16 @@ Scope:
 - run old and new Skill versions in isolated shadow conditions;
 - compare repeated results and guardrail regressions;
 - explicit adopt, reject, and rollback decisions;
-- content-addressed artifacts and deterministic deployment receipts.
+- content-addressed artifacts and deterministic deployment receipts;
+- monitored canary execution with predeclared rollback triggers after an authorized adoption.
 
 Acceptance:
 
 - the deployed baseline remains unchanged during shadow evaluation;
 - adoption requires the fixed gate in `EVALUATION_POLICY.md`;
 - rollback restores the prior verified artifact and discovery path;
-- every adoption or rollback is attributable, reversible, and independently verifiable.
+- every adoption or rollback is attributable, reversible, and independently verifiable;
+- canary failure restores the exact prior discovery artifact without relying on the candidate being rolled back.
 
 ## SE-0.7 — Bounded self-evolution
 
@@ -132,7 +143,8 @@ Scope:
 
 - close the finite loop from evidence to proposal, evaluation, shadow comparison, adoption decision, and monitored result;
 - cap proposals, generations, changed files, evaluation cost, and deployment authority;
-- preserve human and external-policy authority over roadmap, evaluation, and deployment.
+- preserve human and external-policy authority over roadmap, evaluation, and deployment;
+- prohibit self-certification: candidate-generated evidence cannot be the sole basis for changing its own evaluation, adoption, or deployment authority.
 
 Acceptance:
 
@@ -144,4 +156,4 @@ Acceptance:
 
 ## Immediate next stage
 
-Perform an SE-0.2 and SE-0.3 capability audit against the frozen Memory Runtime. Do not implement SE-0.4 or later until the audit establishes which components are reusable and which gaps remain.
+Use the deployed SE-0.2/SE-0.3 release during one bounded long-horizon program, then implement SE-0.4 through SE-0.7 sequentially behind stage acceptance gates. Before SE-0.4 behavior expands, establish a compatibility-preserving runtime boundary so new capabilities do not continue accumulating in the monolithic CLI. SE-0.5 must add external real-task cases, method-impact and overhead evidence, and independent evaluation authority; self-referential Skill work alone cannot establish improvement.
