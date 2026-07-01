@@ -13,6 +13,8 @@
   "cross_window_policy": "fresh agent session per declared stage with only workspace and scoped method-state continuity",
   "scoring_policy": "executor never assigns metrics; independent blinded graders use frozen checks",
   "budget_policy": "aggregate tool and context budgets across all stages; overrun invalidates the trial",
+  "task_tool_accounting": "count each post-bootstrap tool call; exclude only reads confined to the supplied method-bundle",
+  "task_context_accounting": "ceil(character_count/4) over the frozen task and stage prompt, non-bootstrap task tool input/output, and final output; system, developer, and mandatory method-bundle bootstrap context are excluded",
   "host": {
     "os": "windows",
     "shell": "powershell",
