@@ -26,35 +26,52 @@ def evaluate(root, method_root):
     evidence = json.loads((root / "evidence.json").read_text(encoding="utf-8"))
     events = [json.loads(line) for line in (root / "workload/events.jsonl").read_text(encoding="utf-8").splitlines()]
     prototype = load_module(root / "prototype.py")
-    checks = {}
+    checks = {"order_and_reopen": False, "rollback": False, "latency": False, "storage": False}
+    p95 = math.inf
+    ratio = math.inf
+    rollback_ms = math.inf
     with tempfile.TemporaryDirectory(prefix="ingestion-eval-") as tmp:
         store_path = Path(tmp) / "store"
-        store = prototype.open_store(store_path)
+        store = None
+        reopened = None
         latencies = []
         accepted = []
-        for offset in range(0, len(events), 64):
-            batch = events[offset:offset + 64]
-            start = time.perf_counter_ns()
-            store.ingest_batch(batch)
-            latencies.append((time.perf_counter_ns() - start) / 1_000_000)
-            accepted.extend(batch)
-        store.close()
-        reopened = prototype.open_store(store_path)
-        observed = reopened.read_all()
-        checks["order_and_reopen"] = observed == accepted
-        before = event_digest(observed[:-len(events[-(len(events) % 64 or 64):])])
-        start = time.perf_counter_ns()
-        reopened.rollback_last_batch()
-        rollback_ms = (time.perf_counter_ns() - start) / 1_000_000
-        after = event_digest(reopened.read_all())
-        reopened.close()
-        checks["rollback"] = before == after and rollback_ms <= 1000
-        payload_bytes = sum(len(json.dumps(e, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")) for e in events)
-        disk_bytes = sum(p.stat().st_size for p in store_path.rglob("*") if p.is_file()) if store_path.exists() and store_path.is_dir() else store_path.stat().st_size
-        ratio = disk_bytes / payload_bytes
-        p95 = sorted(latencies)[math.ceil(0.95 * len(latencies)) - 1]
-        checks["latency"] = p95 <= 75
-        checks["storage"] = ratio <= 1.5
+        try:
+            store = prototype.open_store(store_path)
+            for offset in range(0, len(events), 64):
+                batch = events[offset:offset + 64]
+                start = time.perf_counter_ns()
+                store.ingest_batch(batch)
+                latencies.append((time.perf_counter_ns() - start) / 1_000_000)
+                accepted.extend(batch)
+            store.close()
+            store = None
+            reopened = prototype.open_store(store_path)
+            if hasattr(reopened, "read_all"):
+                observed = reopened.read_all()
+                checks["order_and_reopen"] = observed == accepted
+                last_batch_size = len(events) % 64 or 64
+                before = event_digest(observed[:-last_batch_size])
+                start = time.perf_counter_ns()
+                reopened.rollback_last_batch()
+                rollback_ms = (time.perf_counter_ns() - start) / 1_000_000
+                after = event_digest(reopened.read_all())
+                checks["rollback"] = before == after and rollback_ms <= 1000
+            payload_bytes = sum(len(json.dumps(e, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")) for e in events)
+            disk_bytes = sum(p.stat().st_size for p in store_path.rglob("*") if p.is_file()) if store_path.exists() and store_path.is_dir() else store_path.stat().st_size
+            ratio = disk_bytes / payload_bytes
+            p95 = sorted(latencies)[math.ceil(0.95 * len(latencies)) - 1]
+            checks["latency"] = p95 <= 75
+            checks["storage"] = ratio <= 1.5
+        except Exception:
+            pass
+        finally:
+            for handle in (reopened, store):
+                if handle is not None:
+                    try:
+                        handle.close()
+                    except Exception:
+                        pass
     alternatives = decision.get("alternatives", [])
     kinds = {item.get("architecture_kind") for item in alternatives}
     holder_ids = {item.get("candidate_id") for item in alternatives}

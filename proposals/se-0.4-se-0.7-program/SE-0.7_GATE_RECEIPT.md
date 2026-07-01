@@ -18,6 +18,6 @@ Status: `mechanism_accepted_real_evolution_run_pending`
 
 ## Remaining acceptance evidence
 
-The real manifest cannot advance past shadow comparison until the `24` approved-suite receipts exist. It has no adoption authority and was not run with deployment enabled. Repeated held-out improvement and production guardrail evidence therefore do not yet exist.
+The `24` approved-suite receipts now exist, but their bound shadow result has `adoption_eligible=false`. The real manifest therefore cannot advance past shadow comparison. It has no adoption authority and was not run with deployment enabled. Repeated held-out improvement and production guardrail evidence do not exist.
 
 SE-0.7 remains `audit_required` until at least one authorized real manifest completes from evidence through monitored outcome and repeated held-out runs show improvement without guardrail degradation.

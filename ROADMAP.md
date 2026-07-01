@@ -123,7 +123,7 @@ Acceptance:
 
 Status: `audit_required`
 
-Evidence: `proposals/se-0.4-se-0.7-program/SE-0.6_GATE_RECEIPT.md`, `evals/shadow/se-0.6-v0.1-plan.json`, and `tests/test_release_plane.py`. The real approved-suite shadow receipts do not yet exist.
+Evidence: `proposals/se-0.4-se-0.7-program/SE-0.6_GATE_RECEIPT.md`, `evals/shadow/se-0.6-v0.1-plan.json`, `evals/runs/se-0.6-v0.1/trials.jsonl`, `evals/runs/se-0.6-v0.1/shadow-result.json`, and `tests/test_release_plane.py`. The approved-suite shadow run completed, but the candidate failed the fixed external gate and is not adoption-eligible.
 
 Scope:
 
@@ -145,7 +145,7 @@ Acceptance:
 
 Status: `audit_required`
 
-Evidence: `proposals/se-0.4-se-0.7-program/SE-0.7_GATE_RECEIPT.md`, `evals/evolution/se-0.7-v0.1-manifest.json`, and `tests/test_bounded_evolution.py`. Real repeated held-out evolution evidence does not yet exist.
+Evidence: `proposals/se-0.4-se-0.7-program/SE-0.7_GATE_RECEIPT.md`, `evals/evolution/se-0.7-v0.1-manifest.json`, and `tests/test_bounded_evolution.py`. The first real shadow input now exists but failed its gate; no authorized real evolution run or repeated held-out improvement evidence exists.
 
 Scope:
 
@@ -164,4 +164,4 @@ Acceptance:
 
 ## Immediate next stage
 
-Use the deployed SE-0.2/SE-0.3 release during one bounded long-horizon program, then implement SE-0.4 through SE-0.7 sequentially behind stage acceptance gates. Before SE-0.4 behavior expands, establish a compatibility-preserving runtime boundary so new capabilities do not continue accumulating in the monolithic CLI. SE-0.5 must add external real-task cases, method-impact and overhead evidence, and independent evaluation authority; self-referential Skill work alone cannot establish improvement.
+Keep the deployed baseline unchanged. Diagnose the failed `se-0.6-v0.1` cases, create a separately authorized successor proposal, and rerun the same approved suite before any adoption decision. SE-0.7 cannot advance from the current candidate because its bound shadow result is not adoption-eligible.

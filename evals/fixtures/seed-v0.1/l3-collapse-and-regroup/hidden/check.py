@@ -17,12 +17,16 @@ def run_migration(root, source, target):
 
 
 def verify_database(db_path, users, orders):
-    with sqlite3.connect(db_path) as db:
-        actual_users = set(db.execute("SELECT tenant_id, legacy_id, name FROM users"))
-        actual_orders = set(db.execute("SELECT order_id, tenant_id, user_legacy_id, amount_cents FROM orders"))
+    try:
+        with sqlite3.connect(db_path) as db:
+            actual_users = set(db.execute("SELECT tenant_id, legacy_id, name FROM users"))
+            actual_orders = set(db.execute("SELECT order_id, tenant_id, user_legacy_id, amount_cents FROM orders"))
+    except (sqlite3.Error, OSError):
+        return False, False, False
     expected_users = {(row[0], int(row[1]), row[2]) for row in users}
     expected_orders = {(int(row[0]), row[1], int(row[2]), int(row[3])) for row in orders}
-    ownership = all((tenant, legacy, next(name for t, i, name in expected_users if t == tenant and i == legacy)) in expected_users for _, tenant, legacy, _ in expected_orders)
+    expected_identities = {(tenant, legacy) for tenant, legacy, _ in expected_users}
+    ownership = all((tenant, legacy) in expected_identities for _, tenant, legacy, _ in expected_orders)
     return actual_users == expected_users, actual_orders == expected_orders, ownership
 
 

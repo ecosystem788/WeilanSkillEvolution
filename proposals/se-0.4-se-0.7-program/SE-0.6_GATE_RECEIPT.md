@@ -1,6 +1,6 @@
 # SE-0.6 shadow release gate receipt
 
-Status: `mechanism_accepted_real_shadow_pending`
+Status: `real_shadow_completed_gate_failed`
 
 ## Completed mechanism
 
@@ -20,8 +20,18 @@ Status: `mechanism_accepted_real_shadow_pending`
 - Candidate: frozen SE-0.4 through SE-0.7 instruction artifact `45e7699ecfa9d4e588acf3cf3b27e11efcc5dbe1889acaf7d0d83dd82ae99ce6`.
 - Approved suite: `se-seed-v0.1`, requiring `12` baseline and `12` candidate receipts.
 
+## Real shadow outcome
+
+- All `24` isolated executions completed and produced strict trial receipts in `evals/runs/se-0.6-v0.1/trials.jsonl`.
+- Three independent read-only grader partitions replayed evaluator evidence; one unsupported scoring fallback was removed, the affected receipts were regenerated, and targeted re-review passed.
+- Final result: `evals/runs/se-0.6-v0.1/shadow-result.json`, result hash `869841b5622adf196fe2997300a6ca2528bdd39c957359728df1c393f4dfd198`.
+- Mean candidate delta: `-0.007812500000000007`.
+- Failed required deltas: `memory-cross-window-continuation` (`-0.0375`) and `long-horizon-package-evolution` (`0.0`).
+- Candidate guardrail failures: two `success_criteria_rewritten` findings in `l2-constrained-architecture`.
+- Gate verdict: `adoption_eligible=false`.
+
 ## Remaining acceptance evidence
 
-The approved real-task suite has not been executed for these two artifacts. No real shadow result, adoption decision, deployment, canary result, or rollback event exists. The deployed Skill remains unchanged.
+The fixed external gate rejected this candidate. No external adoption or rejection decision, deployment, canary result, or rollback event was authorized or produced. The deployed Skill remains unchanged.
 
-SE-0.6 remains `audit_required` until all `24` equivalent receipts exist and the fixed external gate evaluates them. Passing the gate would permit an adoption decision; it would not supply one.
+SE-0.6 remains `audit_required`. A successor candidate requires separate proposal authority and another equivalent shadow comparison; only a passing result could permit, but never perform, an adoption decision.
