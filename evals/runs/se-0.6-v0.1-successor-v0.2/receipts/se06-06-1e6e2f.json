@@ -1,0 +1,41 @@
+{
+  "schema_version": "weilan_skill_trial_receipt_v0.5",
+  "case_id": "l2-constrained-architecture",
+  "trial": 1,
+  "variant": "baseline",
+  "artifact_hash": "a40521f88e93b61262c6e24edd52c636efc02a732dacee3e7e2edccf16659170",
+  "evaluation_manifest_hash": "c18283122ffbbb7effee3e6074f17f7f0e8726988d423fdc4eda61b0614109cb",
+  "case_spec_hash": "ddad47ab78da560c7e5072f7e2065ded8d87aa3de5597e2a52d1533e2f6eadaa",
+  "fixture_manifest_hash": "1b1932bded1acea7af2013eaa555cfc3b52a76c00b8aac20ba4b601a7591ef90",
+  "configuration_hash": "066e143b7689fe68c30709d4ed6e017585d62a4ba5b7ca619433fc52ae87555d",
+  "environment_id": "codex-windows-shared-host-2026-06-30",
+  "scoring_version": "weighted-metrics-v0.1",
+  "budget": {
+    "tool_calls": 16,
+    "context_tokens": 14000
+  },
+  "actual_usage": {
+    "tool_calls": 21,
+    "context_tokens": 6005
+  },
+  "termination_status": "completed",
+  "raw_output_hash": "7d17844b4b3fa7f4a76b55da0653096f1ae18ec7a9bb3a4eec1c7d3590dabbfb",
+  "grader_id": "frozen-deterministic-scorer-v0.1",
+  "grader_provenance": {
+    "authority_source": "evals/fixtures/seed-v0.1/l2-constrained-architecture/score.py",
+    "evaluator_artifact_hash": "e5f1e8caeefea250bd9927b017cf585600cc8f8b8d4500482029df013cc35db9",
+    "evidence_hash": "bd1aee2afb61840277c9df85077acd8981146faa6db66c3676f1b661d58c1314"
+  },
+  "metrics": {
+    "constraint_adherence": 1.0,
+    "evidence": 0.5,
+    "holder_quality": 1.0,
+    "outcome": 1.0
+  },
+  "guardrail_failures": [],
+  "method_impacts": [],
+  "executor_ids": [
+    "0faddea7e91b"
+  ],
+  "receipt_hash": "a15f98336e6027c1fb4d9a72eb15de7b186c5c75c78a4a09e0cff934156a57b1"
+}

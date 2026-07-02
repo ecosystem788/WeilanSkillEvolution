@@ -19,6 +19,7 @@ from evolution_core import (
     sha256_text,
 )
 from release_core import SHADOW_SCHEMA_VERSION, compare_shadow, validate_shadow_plan
+from score_multi_agent_eval import execution_method_impacts
 
 
 def expect_rejected(call, text):
@@ -85,6 +86,7 @@ def main():
         "evaluation_manifest_hash": manifest_hash,
         "case_spec_hash": case_hash,
         "fixture_manifest_hashes": {"repeated": "d" * 64, "single": "e" * 64},
+        "evaluator_artifact_hashes": {"repeated": "1" * 64, "single": "1" * 64},
         "aggregation_version": AGGREGATION_VERSION,
         "max_receipts": 6,
         "gate": {"min_mean_delta": 0.0, "required_case_deltas": {}},
@@ -143,6 +145,18 @@ def main():
     if result["candidate_guardrail_failures"]:
         raise AssertionError("candidate guardrail evidence changed unexpectedly")
 
+    impact = {
+        "schema_version": "weilan_method_impact_v0.5",
+        "gate": "collapse_gate",
+        "changed_action": True,
+        "observable_effect": "avoided route rename",
+        "source": "fixture:telemetry",
+        "cost": {"tool_calls": 1, "elapsed_ms": 2, "context_tokens": 3},
+    }
+    registry_entry = {"method_impacts": [], "stages": [{"method_impacts": [impact]}, {"method_impacts": []}]}
+    if execution_method_impacts(registry_entry) != [impact]:
+        raise AssertionError("method impact telemetry was not preserved from stage registry")
+
     duplicate = receipts + [copy.deepcopy(receipts[0])]
     expect_rejected(lambda: compare_trials(manifest, duplicate), "duplicate trial identity")
 
@@ -169,6 +183,12 @@ def main():
         lambda: compare_shadow(plan, manifest, receipts),
         "requires the loaded frozen case set",
     )
+    tampered_grader = copy.deepcopy(receipts)
+    tampered_grader[0]["grader_provenance"]["evaluator_artifact_hash"] = "9" * 64
+    expect_rejected(
+        lambda: compare_shadow(plan, manifest, tampered_grader, case_set=case_set),
+        "evaluator artifact mismatch",
+    )
 
     print(json.dumps({
         "valid": True,
@@ -177,6 +197,7 @@ def main():
         "provenance_required": True,
         "budget_usage_enforced": True,
         "case_set_content_bound": True,
+        "evaluator_artifact_bound": True,
         "guardrails_symmetric": True,
         "equal_case_aggregation": True,
     }, indent=2))

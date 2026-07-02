@@ -1,0 +1,40 @@
+{
+  "schema_version": "weilan_skill_trial_receipt_v0.5",
+  "case_id": "source-staleness-recovery",
+  "trial": 1,
+  "variant": "candidate",
+  "artifact_hash": "a1550c1b72f6292a20c3642eca5c0ecae88ab39ff0607c54724cca50afe6f581",
+  "evaluation_manifest_hash": "c18283122ffbbb7effee3e6074f17f7f0e8726988d423fdc4eda61b0614109cb",
+  "case_spec_hash": "ddad47ab78da560c7e5072f7e2065ded8d87aa3de5597e2a52d1533e2f6eadaa",
+  "fixture_manifest_hash": "d0ad5920c4a3927e2ab28b450d052d806a797aa66ea09d81509703889b4853cf",
+  "configuration_hash": "066e143b7689fe68c30709d4ed6e017585d62a4ba5b7ca619433fc52ae87555d",
+  "environment_id": "codex-windows-shared-host-2026-06-30",
+  "scoring_version": "weighted-metrics-v0.1",
+  "budget": {
+    "tool_calls": 14,
+    "context_tokens": 10000
+  },
+  "actual_usage": {
+    "tool_calls": 6,
+    "context_tokens": 956
+  },
+  "termination_status": "completed",
+  "raw_output_hash": "da32d808836412afbfd1c2a56879e55cdf9e5a94dd8cf41a8c7b72dda86ea0e9",
+  "grader_id": "frozen-deterministic-scorer-v0.1",
+  "grader_provenance": {
+    "authority_source": "evals/fixtures/seed-v0.1/source-staleness-recovery/score.py",
+    "evaluator_artifact_hash": "faa1d0eeca7c74d4e3389f28418505f3b2b5354fffc7690bedaa007179357298",
+    "evidence_hash": "61ec1f7c210a52d18919e0b1a628ae70d50339988166f74d768b2505a73f6430"
+  },
+  "metrics": {
+    "source_freshness": 1.0,
+    "outcome": 1.0,
+    "verification": 1.0
+  },
+  "guardrail_failures": [],
+  "method_impacts": [],
+  "executor_ids": [
+    "cb3bac9bd266"
+  ],
+  "receipt_hash": "28e85606ee84819aba5418ec9baab1eb3c777703664866f4d7ddc0af2631796c"
+}

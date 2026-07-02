@@ -1,0 +1,10 @@
+{
+  "schema_version": "weilan_skill_canary_result_v0.6",
+  "deployment_id": "dec8809e1d6b5dfc05c746e9",
+  "valid": true,
+  "issues": [],
+  "fired_triggers": [],
+  "rollback_required": false,
+  "authority": "canary_evidence_never_self_authorizes_rollback",
+  "result_hash": "fd6a6c542675638be00956f672714bfc7fe625c2cfd89a866ac4c9ad29199bba"
+}

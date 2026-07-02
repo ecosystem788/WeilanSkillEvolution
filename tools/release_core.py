@@ -22,6 +22,8 @@ DECISION_SCHEMA_VERSION = "weilan_skill_adoption_decision_v0.6"
 DEPLOYMENT_SCHEMA_VERSION = "weilan_skill_deployment_receipt_v0.6"
 ROLLBACK_SCHEMA_VERSION = "weilan_skill_rollback_receipt_v0.6"
 CANARY_SCHEMA_VERSION = "weilan_skill_canary_result_v0.6"
+SCORE_CEILING = 1.0
+SCORE_EPSILON = 1e-9
 
 
 def _read_json(path):
@@ -78,6 +80,11 @@ def validate_shadow_plan(plan, eval_manifest, case_set=None):
         issues.append("shadow plan fixture_manifest_hashes must cover every case exactly")
     elif any(not is_sha256(value) for value in fixture_hashes.values()):
         issues.append("shadow plan fixture manifest hashes must be lowercase SHA-256 hashes")
+    evaluator_hashes = plan.get("evaluator_artifact_hashes")
+    if not isinstance(evaluator_hashes, dict) or set(evaluator_hashes) != case_ids:
+        issues.append("shadow plan evaluator_artifact_hashes must cover every case exactly")
+    elif any(not is_sha256(value) for value in evaluator_hashes.values()):
+        issues.append("shadow plan evaluator artifact hashes must be lowercase SHA-256 hashes")
     if plan.get("aggregation_version") != AGGREGATION_VERSION:
         issues.append("shadow plan must predeclare equal-case aggregation")
     expected_receipts = 2 * sum(case.get("trial_count", 0) for case in eval_manifest.get("cases", []))
@@ -132,17 +139,45 @@ def compare_shadow(plan, eval_manifest, receipts, case_set=None):
         expected_fixture = plan["fixture_manifest_hashes"].get(receipt.get("case_id"))
         if receipt.get("fixture_manifest_hash") != expected_fixture:
             raise ValueError("shadow receipt fixture manifest mismatch")
+        provenance = receipt.get("grader_provenance", {})
+        expected_evaluator = plan["evaluator_artifact_hashes"].get(receipt.get("case_id"))
+        if provenance.get("evaluator_artifact_hash") != expected_evaluator:
+            raise ValueError("shadow receipt evaluator artifact mismatch")
         if receipt.get("scoring_version") != eval_manifest.get("scoring_version"):
             raise ValueError("shadow receipt scoring-version mismatch")
     comparison = compare_trials(eval_manifest, receipts)
     case_deltas = comparison["case_deltas"]
     gate = plan["gate"]
     gate_failures = []
+    saturated_required_case_guardrails = []
     if comparison["mean_delta"] < float(gate["min_mean_delta"]):
         gate_failures.append("mean delta below external gate")
     for case_id, minimum in gate.get("required_case_deltas", {}).items():
-        if case_deltas.get(case_id, float("-inf")) < float(minimum):
+        minimum = float(minimum)
+        case_comparisons = [
+            item for item in comparison["comparisons"]
+            if item["case_id"] == case_id
+        ]
+        baseline_saturated = (
+            minimum > 0
+            and case_comparisons
+            and all(item["baseline_score"] >= SCORE_CEILING - SCORE_EPSILON for item in case_comparisons)
+        )
+        if baseline_saturated:
+            if any(
+                item["candidate_score"] + SCORE_EPSILON < item["baseline_score"]
+                or item["candidate_guardrail_failures"]
+                for item in case_comparisons
+            ):
+                gate_failures.append(f"saturated required case regressed: {case_id}")
+            else:
+                saturated_required_case_guardrails.append(case_id)
+            continue
+        if case_deltas.get(case_id, float("-inf")) < minimum:
             gate_failures.append(f"required case delta missed: {case_id}")
+    for case_id, delta in case_deltas.items():
+        if case_id not in gate.get("required_case_deltas", {}) and delta < -SCORE_EPSILON:
+            gate_failures.append(f"unacceptable fixed-case regression: {case_id}")
     if comparison["guardrail_failures"]:
         gate_failures.append("candidate guardrail failure")
     body = {
@@ -153,6 +188,8 @@ def compare_shadow(plan, eval_manifest, receipts, case_set=None):
         "evaluation_manifest_hash": plan["evaluation_manifest_hash"],
         "case_spec_hash": plan["case_spec_hash"],
         "configuration_hash": plan["configuration_hash"],
+        "fixture_manifest_hashes": plan["fixture_manifest_hashes"],
+        "evaluator_artifact_hashes": plan["evaluator_artifact_hashes"],
         "comparison_count": comparison["comparison_count"],
         "aggregation_version": comparison["aggregation_version"],
         "mean_delta": comparison["mean_delta"],
@@ -161,6 +198,7 @@ def compare_shadow(plan, eval_manifest, receipts, case_set=None):
         "candidate_guardrail_failures": comparison["candidate_guardrail_failures"],
         "guardrail_failures": comparison["guardrail_failures"],
         "gate_failures": gate_failures,
+        "saturated_required_case_guardrails": saturated_required_case_guardrails,
         "adoption_eligible": comparison["adoption_eligible"] and not gate_failures,
         "comparisons": comparison["comparisons"],
         "authority": "shadow_evidence_only_never_adopts_or_deploys",

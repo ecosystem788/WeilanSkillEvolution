@@ -1,0 +1,41 @@
+{
+  "schema_version": "weilan_skill_trial_receipt_v0.5",
+  "case_id": "memory-cross-window-continuation",
+  "trial": 1,
+  "variant": "candidate",
+  "artifact_hash": "e1fd08f2cf980e99b5f7147be6abce9cde123f1797601b4daa0ba30b6b66675a",
+  "evaluation_manifest_hash": "c18283122ffbbb7effee3e6074f17f7f0e8726988d423fdc4eda61b0614109cb",
+  "case_spec_hash": "ddad47ab78da560c7e5072f7e2065ded8d87aa3de5597e2a52d1533e2f6eadaa",
+  "fixture_manifest_hash": "b0ac686d9a96b658cca91a89160e3b9566803fb7ee026c6fa661520e6e4e6f9f",
+  "configuration_hash": "066e143b7689fe68c30709d4ed6e017585d62a4ba5b7ca619433fc52ae87555d",
+  "environment_id": "codex-windows-shared-host-2026-06-30",
+  "scoring_version": "weighted-metrics-v0.1",
+  "budget": {
+    "tool_calls": 18,
+    "context_tokens": 16000
+  },
+  "actual_usage": {
+    "tool_calls": 11,
+    "context_tokens": 1306
+  },
+  "termination_status": "completed",
+  "raw_output_hash": "4bbf473517afd14414b4737813cc7a2779368a54705aece51bfa965ede3dab98",
+  "grader_id": "frozen-deterministic-scorer-v0.1",
+  "grader_provenance": {
+    "authority_source": "evals/fixtures/seed-v0.1/memory-cross-window-continuation/score.py",
+    "evaluator_artifact_hash": "2bc83705ddd69ed57041042bcfb4ec05d45dad9f2eed98178ca14a38240af261",
+    "evidence_hash": "9ba171a6faf97a7f28a69ae621eba91e45c21329d07c99995ced11e03c1a79f0"
+  },
+  "metrics": {
+    "outcome": 1.0,
+    "recall_precision": 1.0,
+    "scope_isolation": 1.0,
+    "overhead": 1.0
+  },
+  "guardrail_failures": [],
+  "method_impacts": [],
+  "executor_ids": [
+    "10cceca2142f"
+  ],
+  "receipt_hash": "35a95275def77899384f750789f735275ab51490dac69666ac0abd2679f352f1"
+}

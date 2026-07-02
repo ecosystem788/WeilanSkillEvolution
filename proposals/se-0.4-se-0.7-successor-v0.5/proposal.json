@@ -1,0 +1,33 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "se-0.4-se-0.7-successor-v0.5",
+  "rationale": "Tighten successor v0.4 after candidate-only rerun evidence showed functional gains but repeated hard-budget failures. The patch converts advisory budget guidance into concrete call-shape constraints: batched source reads, batched trace commands, one strong verification, exact parcel-route-evolution scope for parcel route milestones, and per-stage death lines for optional exploration.",
+  "base_artifact_hash": "e1fd08f2cf980e99b5f7147be6abce9cde123f1797601b4daa0ba30b6b66675a",
+  "candidate_artifact_hash": "40fad7acd65abb499419143bd35f6ab829873200c68311a582fc89fcb20e153d",
+  "changed_paths": [
+    "proposals/se-0.4-se-0.7-successor-v0.5/candidate/solve-with-weilan/SKILL.md",
+    "proposals/se-0.4-se-0.7-successor-v0.5/candidate/solve-with-weilan/references/memory-system.md"
+  ],
+  "budgets": {
+    "max_changed_files": 2,
+    "max_candidate_generations": 1,
+    "max_evaluation_trials": 24,
+    "max_deployments": 1
+  },
+  "target_metrics": [
+    "zero_candidate_guardrail_failures",
+    "valid_shadow_comparison",
+    "memory_cross_window_delta_at_least_0.05",
+    "long_horizon_delta_at_least_0.05",
+    "mean_delta_at_least_0.02",
+    "no_candidate_budget_regression"
+  ],
+  "rollback_triggers": [
+    "candidate guardrail failure",
+    "approved shadow gate failure",
+    "budget regression",
+    "activation leakage",
+    "lineage continuity regression"
+  ],
+  "candidate_authority": "proposal_and_instruction_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}

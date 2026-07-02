@@ -1,0 +1,17 @@
+[
+  {
+    "trigger": "functional verification regression",
+    "failed": false,
+    "source": "post-deploy:tree-hash-matches-candidate-and-release-plane-tests-pass"
+  },
+  {
+    "trigger": "activation leakage",
+    "failed": false,
+    "source": "post-deploy:memory-recall-skill-evolution-active"
+  },
+  {
+    "trigger": "approved shadow gate failure",
+    "failed": false,
+    "source": "post-deploy:shadow-result-adoption-eligible-true"
+  }
+]

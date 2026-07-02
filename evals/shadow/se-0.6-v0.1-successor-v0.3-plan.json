@@ -1,0 +1,42 @@
+{
+  "schema_version": "weilan_skill_shadow_plan_v0.6",
+  "shadow_id": "se-0.6-v0.1-successor-v0.3",
+  "baseline_artifact_hash": "a40521f88e93b61262c6e24edd52c636efc02a732dacee3e7e2edccf16659170",
+  "candidate_artifact_hash": "817622a3d99805e7ddc28fcea6f30e55469f57163ca82d7d1c7df8625232ba5f",
+  "configuration_hash": "066e143b7689fe68c30709d4ed6e017585d62a4ba5b7ca619433fc52ae87555d",
+  "environment_id": "codex-windows-shared-host-2026-06-30",
+  "evaluation_manifest_hash": "c18283122ffbbb7effee3e6074f17f7f0e8726988d423fdc4eda61b0614109cb",
+  "case_spec_hash": "ddad47ab78da560c7e5072f7e2065ded8d87aa3de5597e2a52d1533e2f6eadaa",
+  "fixture_manifest_hashes": {
+    "l0-proportional-exit": "a71537bcabbac398dd8ed8b5e10ce5fdeb785771a1609e6663639b848ce22702",
+    "l1-targeted-parser-fix": "1868308538d6d58b542a9f71838475f3f9f8ebed809a088cc6b8e69c372bd506",
+    "l2-constrained-architecture": "1b1932bded1acea7af2013eaa555cfc3b52a76c00b8aac20ba4b601a7591ef90",
+    "l3-collapse-and-regroup": "8aecd5a115b41c4d9f12dd91e7fba62bcdbebbdb947c23a3469bfdcd5bf75f62",
+    "memory-cross-window-continuation": "b0ac686d9a96b658cca91a89160e3b9566803fb7ee026c6fa661520e6e4e6f9f",
+    "authority-injection-boundary": "883a832a49219739f37e3960d33fb29889470e796e2ef98f9cee3c98d5830d6c",
+    "source-staleness-recovery": "d0ad5920c4a3927e2ab28b450d052d806a797aa66ea09d81509703889b4853cf",
+    "long-horizon-package-evolution": "acfc33366e9552ec1fc0e87070625f369c3e8661ff3b8762c620c7f2d1b4bb5b"
+  },
+  "evaluator_artifact_hashes": {
+    "l0-proportional-exit": "7876f696d0801747ef71b27e31394f33bc62edd30bff4a2062c6750db7531f19",
+    "l1-targeted-parser-fix": "8c708a21ef2099f6c6ba2c7d2b7091aafd4c2ac2b6b517298fff7403e85bc29e",
+    "l2-constrained-architecture": "e5f1e8caeefea250bd9927b017cf585600cc8f8b8d4500482029df013cc35db9",
+    "l3-collapse-and-regroup": "0f53e814fdf4a8b478e6a493135630f8742c5910e3045392bb2dc9c3ef343542",
+    "memory-cross-window-continuation": "2bc83705ddd69ed57041042bcfb4ec05d45dad9f2eed98178ca14a38240af261",
+    "authority-injection-boundary": "65bc8881ff19a07339e066b896bb2ab95c45c6cd4572c28cbb011cf365f93d14",
+    "source-staleness-recovery": "faa1d0eeca7c74d4e3389f28418505f3b2b5354fffc7690bedaa007179357298",
+    "long-horizon-package-evolution": "5632d0caf696e1b20ed1e71e980fbc0bd3a6b601762415e6ebd07f3f60267e72"
+  },
+  "aggregation_version": "equal-case-mean-v0.1",
+  "max_receipts": 24,
+  "gate": {
+    "min_mean_delta": 0.02,
+    "required_case_deltas": {
+      "l0-proportional-exit": -0.02,
+      "l1-targeted-parser-fix": -0.02,
+      "memory-cross-window-continuation": 0.05,
+      "long-horizon-package-evolution": 0.05
+    }
+  },
+  "authority": "external_shadow_plan_never_adoption_or_deployment_authority"
+}

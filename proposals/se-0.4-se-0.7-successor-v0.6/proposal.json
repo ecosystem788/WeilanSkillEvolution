@@ -1,0 +1,36 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "se-0.4-se-0.7-successor-v0.6",
+  "rationale": "Tighten successor v0.6 after gate review showed two remaining release blockers: the L3 recovery case produced human-readable but evaluator-incompatible artifacts, and the memory required-delta gate was mathematically impossible when the baseline already scored at the ceiling. The change preserves the existing budget contract, adds explicit L3 recovery contract guidance for observable collapse/regroup events, top-level recovery.json fields, compatibility database columns, and public self-checks, while external release code handles saturated baselines as non-regression guardrails.",
+  "base_artifact_hash": "40fad7acd65abb499419143bd35f6ab829873200c68311a582fc89fcb20e153d",
+  "candidate_artifact_hash": "8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb",
+  "changed_paths": [
+    "proposals/se-0.4-se-0.7-successor-v0.6/candidate/solve-with-weilan/SKILL.md",
+    "proposals/se-0.4-se-0.7-successor-v0.6/candidate/solve-with-weilan/references/memory-system.md"
+  ],
+  "budgets": {
+    "max_changed_files": 2,
+    "max_candidate_generations": 3,
+    "max_evaluation_trials": 24,
+    "max_deployments": 1
+  },
+  "target_metrics": [
+    "zero_candidate_guardrail_failures",
+    "valid_shadow_comparison",
+    "memory_cross_window_saturated_baseline_non_regression",
+    "long_horizon_delta_at_least_0.05",
+    "mean_delta_at_least_0.02",
+    "no_candidate_budget_regression",
+    "no_fixed_case_regression",
+    "l3_collapse_and_regroup_delta_at_least_0"
+  ],
+  "rollback_triggers": [
+    "candidate guardrail failure",
+    "approved shadow gate failure",
+    "budget regression",
+    "activation leakage",
+    "lineage continuity regression",
+    "functional verification regression"
+  ],
+  "candidate_authority": "proposal_and_instruction_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}

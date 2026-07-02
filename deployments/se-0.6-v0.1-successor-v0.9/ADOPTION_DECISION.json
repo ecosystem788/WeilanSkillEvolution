@@ -1,0 +1,17 @@
+{
+  "schema_version": "weilan_skill_adoption_decision_v0.6",
+  "decision": "adopt",
+  "authority_source": "conversation:2026-07-02-user-authorized-deploy-if-clean-and-confirmed-run-full-shadow",
+  "shadow_result_hash": "52afe1faf3803e756860c7390f136c5d244a3bd81ff4d90cfe1b3b3629e9ca15",
+  "baseline_artifact_hash": "a40521f88e93b61262c6e24edd52c636efc02a732dacee3e7e2edccf16659170",
+  "candidate_artifact_hash": "8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb",
+  "deployment_target": "D:\\CodexData\\skills\\solve-with-weilan",
+  "rollback_triggers": [
+    "candidate guardrail failure",
+    "approved shadow gate failure",
+    "budget regression",
+    "activation leakage",
+    "lineage continuity regression",
+    "functional verification regression"
+  ]
+}

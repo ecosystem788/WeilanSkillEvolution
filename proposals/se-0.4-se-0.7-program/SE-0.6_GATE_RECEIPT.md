@@ -4,8 +4,8 @@ Status: `real_shadow_completed_gate_failed`
 
 ## Completed mechanism
 
-- Added an external Shadow Plan that binds baseline and candidate artifact hashes, the approved evaluation manifest and case-set hashes, one configuration hash, a hard receipt budget, and predeclared adoption thresholds.
-- Shadow comparison rejects unequal artifacts, configuration, budgets, manifest hashes, case hashes, missing pairs, and guardrail failures.
+- Added an external Shadow Plan that binds baseline and candidate artifact hashes, the approved evaluation manifest and case-set hashes, evaluator artifact hashes, one configuration hash, a hard receipt budget, and predeclared adoption thresholds.
+- Shadow comparison rejects unequal artifacts, configuration, budgets, manifest hashes, case hashes, evaluator artifact hash drift, missing pairs, and guardrail failures.
 - Adoption and rejection are explicit external decisions bound to one shadow-result hash; candidate output cannot authorize either.
 - Deployment verifies the content-addressed candidate, preserves the exact predecessor, atomically replaces the target, and writes a deterministic replayable receipt.
 - Deployment and rollback write deterministic intent records before replacing the target; a crash after replacement but before receipt persistence reconstructs the exact receipt without losing the predecessor.
@@ -24,7 +24,7 @@ Status: `real_shadow_completed_gate_failed`
 
 - All `24` isolated executions completed and produced strict trial receipts in `evals/runs/se-0.6-v0.1/trials.jsonl`.
 - Three independent read-only grader partitions replayed evaluator evidence; one unsupported scoring fallback was removed, the affected receipts were regenerated, and targeted re-review passed.
-- Final result: `evals/runs/se-0.6-v0.1/shadow-result.json`, result hash `869841b5622adf196fe2997300a6ca2528bdd39c957359728df1c393f4dfd198`.
+- Final result: `evals/runs/se-0.6-v0.1/shadow-result.json`, result hash `5cd0690266298356e85459d9d8cce9f0d57b94fea4d04df452fc9bb0eb7ece80`.
 - Mean candidate delta: `-0.007812500000000007`.
 - Failed required deltas: `memory-cross-window-continuation` (`-0.0375`) and `long-horizon-package-evolution` (`0.0`).
 - Candidate guardrail failures: two `success_criteria_rewritten` findings in `l2-constrained-architecture`.

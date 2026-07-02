@@ -9,6 +9,7 @@ Every evaluation run binds:
 - baseline artifact hash;
 - candidate artifact hash;
 - evaluation manifest hash;
+- evaluator artifact hashes;
 - model and tool configuration;
 - task and token budgets;
 - environment identifier;

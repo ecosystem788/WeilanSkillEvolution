@@ -1,0 +1,44 @@
+{
+  "schema_version": "weilan_skill_trial_receipt_v0.5",
+  "case_id": "long-horizon-package-evolution",
+  "trial": 2,
+  "variant": "candidate",
+  "artifact_hash": "e1fd08f2cf980e99b5f7147be6abce9cde123f1797601b4daa0ba30b6b66675a",
+  "evaluation_manifest_hash": "c18283122ffbbb7effee3e6074f17f7f0e8726988d423fdc4eda61b0614109cb",
+  "case_spec_hash": "ddad47ab78da560c7e5072f7e2065ded8d87aa3de5597e2a52d1533e2f6eadaa",
+  "fixture_manifest_hash": "acfc33366e9552ec1fc0e87070625f369c3e8661ff3b8762c620c7f2d1b4bb5b",
+  "configuration_hash": "066e143b7689fe68c30709d4ed6e017585d62a4ba5b7ca619433fc52ae87555d",
+  "environment_id": "codex-windows-shared-host-2026-06-30",
+  "scoring_version": "weighted-metrics-v0.1",
+  "budget": {
+    "tool_calls": 40,
+    "context_tokens": 32000
+  },
+  "actual_usage": {
+    "tool_calls": 44,
+    "context_tokens": 5728
+  },
+  "termination_status": "completed",
+  "raw_output_hash": "fe226bb7b022c1f53c47507aff5d7d1eb67c6c927e96c118142809e15821274d",
+  "grader_id": "frozen-deterministic-scorer-v0.1",
+  "grader_provenance": {
+    "authority_source": "evals/fixtures/seed-v0.1/long-horizon-package-evolution/score.py",
+    "evaluator_artifact_hash": "5632d0caf696e1b20ed1e71e980fbc0bd3a6b601762415e6ebd07f3f60267e72",
+    "evidence_hash": "cb41f0101dc00e5b4b8cb3b4d769ca9acdb707dd480bab6af48c657590f4c682"
+  },
+  "metrics": {
+    "outcome": 1.0,
+    "continuity": 1.0,
+    "verification": 1.0,
+    "constraint_adherence": 1.0,
+    "overhead": 0.0
+  },
+  "guardrail_failures": [],
+  "method_impacts": [],
+  "executor_ids": [
+    "cea5b808684b",
+    "95ca36541075",
+    "e132288fcbb1"
+  ],
+  "receipt_hash": "af9627a54ae0f5788bd2a4eede08e02823f6cce15f58a92161d563e750804f18"
+}

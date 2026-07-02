@@ -105,6 +105,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--project", required=True)
     parser.add_argument("--run-root", required=True)
+    parser.add_argument("--shadow-plan")
+    parser.add_argument("--baseline-hash")
+    parser.add_argument("--candidate-hash")
     parser.add_argument("--seed", type=int, default=20260630)
     args = parser.parse_args()
     project = Path(args.project).resolve()
@@ -114,6 +117,10 @@ def main():
     run_root.mkdir(parents=True)
     manifest = load_json(project / "evals" / "manifest.json")
     case_set = load_json(project / "evals" / "cases" / "seed-v0.1.json")
+    plan_path = Path(args.shadow_plan).resolve() if args.shadow_plan else project / "evals" / "shadow" / "se-0.6-v0.1-plan.json"
+    plan = load_json(plan_path)
+    baseline_hash = args.baseline_hash or plan.get("baseline_artifact_hash") or BASELINE_HASH
+    candidate_hash = args.candidate_hash or plan.get("candidate_artifact_hash") or CANDIDATE_HASH
     cases = {item["case_id"]: item for item in case_set["cases"]}
     eval_cases = {item["case_id"]: item for item in manifest["cases"]}
     rng = random.Random(args.seed)
@@ -129,7 +136,7 @@ def main():
             pair_id = f"{case_id}-t{trial}"
             for order, variant in enumerate(variants, 1):
                 sequence += 1
-                artifact_hash = BASELINE_HASH if variant == "baseline" else CANDIDATE_HASH
+                artifact_hash = baseline_hash if variant == "baseline" else candidate_hash
                 execution_id = f"se06-{sequence:02d}-{rng.randrange(16**6):06x}"
                 trial_root = run_root / "trials" / execution_id
                 workspace = trial_root / "public"
@@ -166,7 +173,8 @@ def main():
     write_json(run_root / "controller" / "schedule.json", {
         "schema_version": "weilan_multi_agent_eval_schedule_v0.1",
         "seed": args.seed,
-        "manifest_hash": load_json(project / "evals" / "shadow" / "se-0.6-v0.1-plan.json")["evaluation_manifest_hash"],
+        "shadow_id": plan.get("shadow_id"),
+        "manifest_hash": plan["evaluation_manifest_hash"],
         "execution_count": len(schedule),
         "executions": schedule,
     })

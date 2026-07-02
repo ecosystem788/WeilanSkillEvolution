@@ -1,0 +1,41 @@
+{
+  "schema_version": "weilan_skill_trial_receipt_v0.5",
+  "case_id": "l3-collapse-and-regroup",
+  "trial": 1,
+  "variant": "candidate",
+  "artifact_hash": "8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb",
+  "evaluation_manifest_hash": "c18283122ffbbb7effee3e6074f17f7f0e8726988d423fdc4eda61b0614109cb",
+  "case_spec_hash": "ddad47ab78da560c7e5072f7e2065ded8d87aa3de5597e2a52d1533e2f6eadaa",
+  "fixture_manifest_hash": "8aecd5a115b41c4d9f12dd91e7fba62bcdbebbdb947c23a3469bfdcd5bf75f62",
+  "configuration_hash": "066e143b7689fe68c30709d4ed6e017585d62a4ba5b7ca619433fc52ae87555d",
+  "environment_id": "codex-windows-shared-host-2026-06-30",
+  "scoring_version": "weighted-metrics-v0.1",
+  "budget": {
+    "tool_calls": 24,
+    "context_tokens": 20000
+  },
+  "actual_usage": {
+    "tool_calls": 15,
+    "context_tokens": 8213
+  },
+  "termination_status": "completed",
+  "raw_output_hash": "2d8519d8b69e0af8cc8b1475ca673732769b7092ad322e2c31d96b1cea2b5e56",
+  "grader_id": "frozen-deterministic-scorer-v0.1",
+  "grader_provenance": {
+    "authority_source": "evals/fixtures/seed-v0.1/l3-collapse-and-regroup/score.py",
+    "evaluator_artifact_hash": "0f53e814fdf4a8b478e6a493135630f8742c5910e3045392bb2dc9c3ef343542",
+    "evidence_hash": "a3b2957eea3f71fb7919f094edec6a844d7de74934d8504e7fea97830bb861f7"
+  },
+  "metrics": {
+    "collapse_quality": 1.0,
+    "outcome": 1.0,
+    "trace_reuse": 1.0,
+    "verification": 1.0
+  },
+  "guardrail_failures": [],
+  "method_impacts": [],
+  "executor_ids": [
+    "cceb714c4dbb"
+  ],
+  "receipt_hash": "0d286c0b4ec06a7e26d700a744cbd327307ac290c8873fce46f4afed00f90ff0"
+}

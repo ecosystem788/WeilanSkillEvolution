@@ -17,6 +17,16 @@
     "source-staleness-recovery": "d0ad5920c4a3927e2ab28b450d052d806a797aa66ea09d81509703889b4853cf",
     "long-horizon-package-evolution": "acfc33366e9552ec1fc0e87070625f369c3e8661ff3b8762c620c7f2d1b4bb5b"
   },
+  "evaluator_artifact_hashes": {
+    "l0-proportional-exit": "7876f696d0801747ef71b27e31394f33bc62edd30bff4a2062c6750db7531f19",
+    "l1-targeted-parser-fix": "8c708a21ef2099f6c6ba2c7d2b7091aafd4c2ac2b6b517298fff7403e85bc29e",
+    "l2-constrained-architecture": "e5f1e8caeefea250bd9927b017cf585600cc8f8b8d4500482029df013cc35db9",
+    "l3-collapse-and-regroup": "0f53e814fdf4a8b478e6a493135630f8742c5910e3045392bb2dc9c3ef343542",
+    "memory-cross-window-continuation": "2bc83705ddd69ed57041042bcfb4ec05d45dad9f2eed98178ca14a38240af261",
+    "authority-injection-boundary": "65bc8881ff19a07339e066b896bb2ab95c45c6cd4572c28cbb011cf365f93d14",
+    "source-staleness-recovery": "faa1d0eeca7c74d4e3389f28418505f3b2b5354fffc7690bedaa007179357298",
+    "long-horizon-package-evolution": "5632d0caf696e1b20ed1e71e980fbc0bd3a6b601762415e6ebd07f3f60267e72"
+  },
   "aggregation_version": "equal-case-mean-v0.1",
   "max_receipts": 24,
   "gate": {

@@ -1,5 +1,6 @@
 """Score the prepared blind SE trials with frozen evaluator-owned checks."""
 
+import argparse
 import hashlib
 import json
 import os
@@ -8,7 +9,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from evolution_core import canonical_json, sha256_text
+from evolution_core import canonical_json, sha256_text, validate_method_impact
 
 
 def load(path):
@@ -225,20 +226,46 @@ def score_long(fixture, execution, registry_entry, tool_calls):
     return json.loads(result.stdout), {"observation": observation, "hidden": hidden, "public": {"passed": public.returncode == 0, "stdout": public.stdout[-2000:], "stderr": public.stderr[-2000:]}}
 
 
+def execution_method_impacts(registry_entry):
+    impacts = []
+    impacts.extend(registry_entry.get("method_impacts", []))
+    for stage in registry_entry.get("stages", []):
+        impacts.extend(stage.get("method_impacts", []))
+    issues = [
+        issue
+        for record in impacts
+        for issue in validate_method_impact(record)
+    ]
+    if issues:
+        raise ValueError("invalid method impact telemetry: " + "; ".join(issues))
+    return impacts
+
+
 def main():
-    project = Path(sys.argv[1]).resolve()
-    run_root = Path(sys.argv[2]).resolve()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("project")
+    parser.add_argument("run_root")
+    parser.add_argument("--shadow-plan")
+    parser.add_argument("--run-id")
+    parser.add_argument("--variants", choices=["all", "baseline", "candidate"], default="all")
+    args = parser.parse_args()
+    project = Path(args.project).resolve()
+    run_root = Path(args.run_root).resolve()
     schedule = load(run_root / "controller" / "schedule.json")
     registry = load(run_root / "controller" / "reported-executions.json")["executions"]
     manifest = load(project / "evals" / "manifest.json")
-    plan = load(project / "evals" / "shadow" / "se-0.6-v0.1-plan.json")
+    plan_path = Path(args.shadow_plan).resolve() if args.shadow_plan else project / "evals" / "shadow" / "se-0.6-v0.1-plan.json"
+    plan = load(plan_path)
     manifest_cases = {item["case_id"]: item for item in manifest["cases"]}
     receipts = []
     draft_dir = run_root / "draft-grades"
-    receipt_dir = project / "evals" / "runs" / "se-0.6-v0.1" / "receipts"
+    run_id = args.run_id or plan["shadow_id"]
+    receipt_dir = project / "evals" / "runs" / run_id / "receipts"
     draft_dir.mkdir(parents=True, exist_ok=True)
     receipt_dir.mkdir(parents=True, exist_ok=True)
     for execution in schedule["executions"]:
+        if args.variants != "all" and execution["variant"] != args.variants:
+            continue
         eid = execution["execution_id"]
         case_id = execution["case_id"]
         fixture = project / "evals" / "fixtures" / "seed-v0.1" / case_id
@@ -247,6 +274,7 @@ def main():
         final = "\n\n".join(stage["final"] for stage in registry_entry["stages"])
         tool_calls = sum(stage["task_tool_calls"] for stage in registry_entry["stages"])
         memory_queries = sum(stage["memory_query_count"] for stage in registry_entry["stages"])
+        method_impacts = execution_method_impacts(registry_entry)
         (trial_root / "final.txt").write_text(final, encoding="utf-8")
         changed_size = sum(path.stat().st_size for path in Path(execution["workspace"]).rglob("*") if path.is_file() and path.stat().st_size < 200_000)
         prompt_size = sum(path.stat().st_size for path in (trial_root / "controller").glob("prompt-stage-*.txt"))
@@ -291,14 +319,14 @@ def main():
             },
             "metrics": result["metrics"],
             "guardrail_failures": result["guardrail_failures"],
-            "method_impacts": [],
+            "method_impacts": method_impacts,
             "executor_ids": [stage["agent_id"] for stage in registry_entry["stages"]],
         }
         receipt["receipt_hash"] = sha256_text(canonical_json(receipt))
         (draft_dir / f"{eid}.json").write_text(json.dumps(evidence_body, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         (receipt_dir / f"{eid}.json").write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         receipts.append(receipt)
-    combined = project / "evals" / "runs" / "se-0.6-v0.1" / "trials.jsonl"
+    combined = project / "evals" / "runs" / run_id / "trials.jsonl"
     combined.parent.mkdir(parents=True, exist_ok=True)
     combined.write_text("".join(json.dumps(item, ensure_ascii=False, sort_keys=True) + "\n" for item in receipts), encoding="utf-8")
     print(json.dumps({"scored": len(receipts), "combined": str(combined)}, indent=2))

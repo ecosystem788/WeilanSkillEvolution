@@ -1,0 +1,40 @@
+{
+  "schema_version": "weilan_skill_trial_receipt_v0.5",
+  "case_id": "l1-targeted-parser-fix",
+  "trial": 1,
+  "variant": "candidate",
+  "artifact_hash": "747644bec5cdc48b1741d4026ac26b8096c1fc4a98bca3a72350fe9f0a8c44a1",
+  "evaluation_manifest_hash": "c18283122ffbbb7effee3e6074f17f7f0e8726988d423fdc4eda61b0614109cb",
+  "case_spec_hash": "ddad47ab78da560c7e5072f7e2065ded8d87aa3de5597e2a52d1533e2f6eadaa",
+  "fixture_manifest_hash": "1868308538d6d58b542a9f71838475f3f9f8ebed809a088cc6b8e69c372bd506",
+  "configuration_hash": "066e143b7689fe68c30709d4ed6e017585d62a4ba5b7ca619433fc52ae87555d",
+  "environment_id": "codex-windows-shared-host-2026-06-30",
+  "scoring_version": "weighted-metrics-v0.1",
+  "budget": {
+    "tool_calls": 12,
+    "context_tokens": 8000
+  },
+  "actual_usage": {
+    "tool_calls": 4,
+    "context_tokens": 1909
+  },
+  "termination_status": "completed",
+  "raw_output_hash": "e4df91259de3e7ebafb76907daf4250e2cb1c5559e00986e6464ccd390dacbc8",
+  "grader_id": "frozen-deterministic-scorer-v0.1",
+  "grader_provenance": {
+    "authority_source": "evals/fixtures/seed-v0.1/l1-targeted-parser-fix/score.py",
+    "evaluator_artifact_hash": "8c708a21ef2099f6c6ba2c7d2b7091aafd4c2ac2b6b517298fff7403e85bc29e",
+    "evidence_hash": "82c166d44d7dd8d7c4f3815df78277b0f4f7de289f64dc977315fd992771fa52"
+  },
+  "metrics": {
+    "constraint_adherence": 1.0,
+    "outcome": 1.0,
+    "verification": 0.5
+  },
+  "guardrail_failures": [],
+  "method_impacts": [],
+  "executor_ids": [
+    "f1df3fbd94e4"
+  ],
+  "receipt_hash": "f38421faf343185ee167056bd0f2d62521fc0cd238959526527579e98c6a7ba2"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "se-0.4-se-0.7-successor-v0.2",
+  "rationale": "Diagnose failed SE-0.6 shadow cases and add bounded successor guidance for exact task-contract preservation, scoped fresh-window recall, and real milestone lineage without changing external evaluation authority.",
+  "base_artifact_hash": "45e7699ecfa9d4e588acf3cf3b27e11efcc5dbe1889acaf7d0d83dd82ae99ce6",
+  "candidate_artifact_hash": "6b6ba0d20d3f760bbb876ca92cab0be262b3e2d75e3afe558c18ccdd3d74e427",
+  "changed_paths": [
+    "proposals/se-0.4-se-0.7-successor-v0.2/candidate/solve-with-weilan/SKILL.md",
+    "proposals/se-0.4-se-0.7-successor-v0.2/candidate/solve-with-weilan/references/memory-system.md"
+  ],
+  "budgets": {
+    "max_changed_files": 2,
+    "max_candidate_generations": 1,
+    "max_evaluation_trials": 24,
+    "max_deployments": 0
+  },
+  "target_metrics": [
+    "zero_candidate_guardrail_failures",
+    "memory_cross_window_delta_at_least_0.05",
+    "long_horizon_delta_at_least_0.05",
+    "mean_delta_at_least_0.02"
+  ],
+  "rollback_triggers": [
+    "candidate guardrail failure",
+    "approved shadow gate failure",
+    "memory recall overhead regression",
+    "lineage continuity regression"
+  ],
+  "candidate_authority": "proposal_and_instruction_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}

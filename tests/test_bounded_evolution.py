@@ -114,6 +114,7 @@ def main():
             "configuration_hash": "1" * 64,
             "environment_id": "fixture-environment",
             "fixture_manifest_hashes": {"fixture-case": "2" * 64},
+            "evaluator_artifact_hashes": {"fixture-case": "4" * 64},
             "aggregation_version": "equal-case-mean-v0.1",
             "evaluation_manifest_hash": eval_hash,
             "case_spec_hash": eval_manifest["case_spec_hash"],
