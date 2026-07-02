@@ -81,55 +81,210 @@ python "D:\CodexData\skills\solve-with-weilan\scripts\weilan_trace.py" memory-re
 
 ## 以后发给 Codex 的自检提示词
 
-下面这段可以直接复制给 Codex，用来检查 `solve-with-weilan` 的相关模块和功能是否正常发挥作用：
+下面这些提示词可以直接复制给 Codex。可以整组发送，也可以只发送某个模块。默认规则是：先自检、先报告，不要把自检变成修复或部署。
 
 ```text
-请用 $solve-with-weilan 对当前工作区做一次功能自检。除非我另行授权，不要修改业务文件、不要部署、不要回滚、不要推送 GitHub、不要修改 frozen evaluator（冻结评测器）或 frozen evaluation set（冻结评测集）。
-
-目标：
-检查 solve-with-weilan 的关键模块是否能正常发挥作用，并给出一份简短 receipt（回执）。
-
-范围：
-1. activation / memory recall（激活与记忆召回）
-   - 运行：
-     python "D:\CodexData\skills\solve-with-weilan\scripts\weilan_trace.py" memory-recall --workspace "<cwd>"
-   - 报告 activation.state，并按 ACTIVE / PAUSED / CONFIRM_REQUIRED / STALE / NO_CONTEXT 的规则处理。
-
-2. Skill file（技能文件）与脚本可用性
-   - 检查 D:\CodexData\skills\solve-with-weilan\SKILL.md 是否存在。
-   - 检查 D:\CodexData\skills\solve-with-weilan\scripts\weilan_trace.py 是否可运行。
-   - 只做只读检查，不改 deployed skill（已部署技能）。
-
-3. Frame / Trace（框架与轨迹）
-   - 如果当前任务达到 L2/L3，检查 lineage-show 或已有 Frame 头部是否可读。
-   - 不要为了形式强行创建 L2/L3 Frame。
-   - 如果确实需要创建临时自检 Frame，必须说明原因、scope、parent、成功标准，并在结束前关闭和审计。
-
-4. Persistence Audit（持久化审计）
-   - 对任何本次新开的 L2/L3 Frame，运行 persistence-audit 或说明为什么本次不需要持久化。
-   - 不记录隐藏思维链，只记录外部可验证事件。
-
-5. Collapse / regroup（坍缩与重组）
-   - 检查 SKILL.md 中 L3 contract（契约）是否仍要求固定事件顺序：
-     holder_warned -> holder_probation_started -> discriminating_test_executed -> minimal_unit_collapsed -> trace_emitted -> candidates_regrouped
-   - 检查 recovery.json contract（恢复文件契约）字段是否仍存在说明：
-     collapse_scope, invalidated_assumption_id, new_identity_model, failure_evidence, reusable_artifacts, once_reasonable, forbidden_assumption, reentry_condition, new_holder_id
-
-6. Metabolic modules（代谢模块）
-   - 只读检查 0.7a / 0.7b / 0.7c / 0.7d 的入口说明是否存在。
-   - 明确确认它们不能启动后台循环、定时器、守护进程或自我递归执行。
-
-7. Skill Evolution local status（本地技能演化状态）
-   - 如果当前工作区是 D:\WeilanSkillEvolution，检查 LOCAL_STATUS.md、最新 deployment receipt、canary result 和 adoption decision 是否存在。
-   - 报告当前是否只是 local-only（仅本地）状态，不要尝试 GitHub 操作。
-
-输出格式：
-- 先给结论：OK / WARN / BLOCKED。
-- 然后列 5 到 10 条检查项，每条包含：模块、结果、证据路径或命令。
-- 最后列出没有做的检查和原因。
+【总控提示词】
+请用 $solve-with-weilan 对当前工作区做一次模块化功能自检。
 
 约束：
-- 自检优先使用只读命令和临时测试。
-- 不要把自检变成修复任务；发现问题后先报告，等待我授权再修改。
-- 不要为了满足流程制造候选、Frame 或坍缩事件。
+- 除非我另行授权，不要修改业务文件。
+- 不要部署、不要回滚、不要推送 GitHub。
+- 不要修改 frozen evaluator（冻结评测器）或 frozen evaluation set（冻结评测集）。
+- 不要启动后台 runner（运行器）、scheduler（调度器）、timer（定时器）、heartbeat（心跳）或 daemon（守护进程）。
+- 不要为了满足流程制造候选、Frame（框架）或 collapse（坍缩）事件。
+- 发现问题后先报告，等待我授权再修。
+
+输出：
+- 先给总结论：OK / WARN / BLOCKED。
+- 然后按模块列出检查结果。
+- 每个模块写：结论、检查项、证据路径或命令、未做事项及原因。
+```
+
+### 模块 1：Activation / Memory Recall（激活与记忆召回）
+
+```text
+请只检查 activation / memory recall（激活与记忆召回）模块。
+
+检查项：
+1. 运行：
+   python "D:\CodexData\skills\solve-with-weilan\scripts\weilan_trace.py" memory-recall --workspace "<cwd>"
+2. 报告 activation.state。
+3. 说明当前状态应该如何处理：
+   - ACTIVE：可以继续，但要先核对当前任务相关来源。
+   - PAUSED：只报告暂停状态，不擅自继续。
+   - CONFIRM_REQUIRED：需要用户明确方向。
+   - STALE：先重建或刷新相关投影。
+   - NO_CONTEXT：从干净状态开始。
+4. 不要修改 memory-control（记忆控制），除非我明确要求暂停、恢复、停止或重定向 scope（范围）。
+
+输出：
+- 模块结论：OK / WARN / BLOCKED。
+- activation.state。
+- 证据命令和关键输出。
+```
+
+### 模块 2：Skill File / Script（技能文件与脚本）
+
+```text
+请只检查 Skill file / script（技能文件与脚本）模块。
+
+检查项：
+1. 检查 D:\CodexData\skills\solve-with-weilan\SKILL.md 是否存在。
+2. 检查 D:\CodexData\skills\solve-with-weilan\scripts\weilan_trace.py 是否存在并可运行。
+3. 检查 SKILL.md 是否包含 L0/L1/L2/L3 深度规则。
+4. 检查 SKILL.md 是否包含 memory-recall、memory-control、persistence-audit 等入口说明。
+
+约束：
+- 只读检查。
+- 不要修改 deployed skill（已部署技能）。
+
+输出：
+- 模块结论：OK / WARN / BLOCKED。
+- 每个文件或入口的检查结果。
+- 证据路径或命令。
+```
+
+### 模块 3：Frame / Trace（框架与轨迹）
+
+```text
+请只检查 Frame / Trace（框架与轨迹）模块。
+
+检查项：
+1. 如果当前任务是 L0/L1，说明为什么不需要创建 Frame。
+2. 如果当前任务达到 L2/L3，检查 lineage-show 或已有 Frame head（头部）是否可读。
+3. 检查是否存在可继续的 parent Frame（父框架）或需要 clean start（干净开始）。
+4. 确认不会记录隐藏思维链，只记录外部可验证事件。
+
+约束：
+- 不要为了形式强行创建 L2/L3 Frame。
+- 如果确实需要创建临时自检 Frame，必须先说明原因、scope、parent、成功标准和关闭方式。
+
+输出：
+- 模块结论：OK / WARN / BLOCKED。
+- 当前深度判断：L0 / L1 / L2 / L3。
+- lineage 或 Frame 证据。
+```
+
+### 模块 4：Persistence Audit（持久化审计）
+
+```text
+请只检查 Persistence Audit（持久化审计）模块。
+
+检查项：
+1. 检查 persistence-audit 和 persistence-audit-show 是否在脚本入口中可用。
+2. 如果本轮没有新开 L2/L3 Frame，说明为什么不需要审计。
+3. 如果本轮新开了 L2/L3 Frame，检查是否有 promoted evidence（已提升证据）或明确 non-persistence reason（不持久化理由）。
+4. 确认 active recall（活跃召回）不会使用撤回、过期、替代、休眠或退役证据。
+
+输出：
+- 模块结论：OK / WARN / BLOCKED。
+- 审计是否需要执行。
+- 证据路径或命令。
+```
+
+### 模块 5：Collapse / Regroup（坍缩与重组）
+
+```text
+请只检查 Collapse / Regroup（坍缩与重组）模块。
+
+检查项：
+1. 检查 SKILL.md 中是否仍要求 L3 lifecycle（生命周期）事件顺序：
+   holder_warned -> holder_probation_started -> discriminating_test_executed -> minimal_unit_collapsed -> trace_emitted -> candidates_regrouped
+2. 检查 recovery.json contract（恢复文件契约）字段是否仍存在说明：
+   collapse_scope, invalidated_assumption_id, new_identity_model, failure_evidence, reusable_artifacts, once_reasonable, forbidden_assumption, reentry_condition, new_holder_id
+3. 确认 collapse（坍缩）不是因为“失败一次”或“路线变强”，而是因为 holder（临时路线）失去治理能力。
+4. 确认 regroup（重组）必须基于改变后的假设，而不是旧路线改名。
+
+约束：
+- 只检查契约和说明，不制造 collapse 事件。
+
+输出：
+- 模块结论：OK / WARN / BLOCKED。
+- 事件顺序检查结果。
+- recovery.json 字段契约检查结果。
+```
+
+### 模块 6：Metabolic Modules（代谢模块）
+
+```text
+请只检查 Metabolic modules（代谢模块）。
+
+检查项：
+1. 检查 0.7a metabolic proposal（代谢提案）入口说明是否存在。
+2. 检查 0.7b transaction（事务）入口说明是否存在。
+3. 检查 0.7c transition materialization（转移物化）入口说明是否存在。
+4. 检查 0.7d finite runner（有限运行器）入口说明是否存在。
+5. 明确确认这些模块不能启动后台循环、定时器、守护进程或自我递归执行。
+
+约束：
+- 只读检查。
+- 不执行 metabolic transaction（代谢事务）或 runner（运行器）。
+
+输出：
+- 模块结论：OK / WARN / BLOCKED。
+- 0.7a / 0.7b / 0.7c / 0.7d 分项结果。
+- 证据路径或命令。
+```
+
+### 模块 7：Skill Evolution Local Status（本地技能演化状态）
+
+```text
+请只检查 Skill Evolution local status（本地技能演化状态）。
+
+适用条件：
+- 当前工作区是 D:\WeilanSkillEvolution 时执行。
+
+检查项：
+1. 检查 LOCAL_STATUS.md 是否存在。
+2. 检查最新 deployment receipt（部署回执）是否存在。
+3. 检查 adoption decision（采用决策）是否存在。
+4. 检查 canary result（金丝雀结果）是否存在。
+5. 报告当前是否是 local-only（仅本地）状态。
+
+约束：
+- 不要尝试 GitHub 操作。
+- 不要创建 release、PR、tag 或 remote push。
+- 不要把 local-only 状态说成已经开源或远端发布。
+
+输出：
+- 模块结论：OK / WARN / BLOCKED。
+- 当前本地部署状态。
+- 证据路径。
+```
+
+### 汇总输出格式
+
+```text
+请按这个格式输出自检结果：
+
+总结果：OK / WARN / BLOCKED
+
+模块结果：
+1. Activation / Memory Recall（激活与记忆召回）：OK / WARN / BLOCKED
+   证据：
+   未做：
+2. Skill File / Script（技能文件与脚本）：OK / WARN / BLOCKED
+   证据：
+   未做：
+3. Frame / Trace（框架与轨迹）：OK / WARN / BLOCKED
+   证据：
+   未做：
+4. Persistence Audit（持久化审计）：OK / WARN / BLOCKED
+   证据：
+   未做：
+5. Collapse / Regroup（坍缩与重组）：OK / WARN / BLOCKED
+   证据：
+   未做：
+6. Metabolic Modules（代谢模块）：OK / WARN / BLOCKED
+   证据：
+   未做：
+7. Skill Evolution Local Status（本地技能演化状态）：OK / WARN / BLOCKED
+   证据：
+   未做：
+
+结论：
+- 能否继续正常使用 solve-with-weilan：
+- 是否需要用户授权修复：
+- 最小下一步建议：
 ```
