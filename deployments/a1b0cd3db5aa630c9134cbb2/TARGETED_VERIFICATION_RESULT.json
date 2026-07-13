@@ -1,0 +1,26 @@
+{
+  "schema_version": "weilan_targeted_verification_result_v0.1",
+  "record_type": "TARGETED_VERIFICATION_RESULT",
+  "created_at": "2026-07-07T01:31:10+00:00",
+  "proposal_id": "barrel-fix-v1-ledger-durability",
+  "spec_path": "D:\\WeilanSkillEvolution\\staging\\barrel-fix-v1\\BARREL_FIX_SPEC.md",
+  "base_artifact_hash": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+  "candidate_artifact_hash": "a1b0cd3db5aa630c9134cbb2cd5e25bbaf7e5105645b89a809a052d5ed15962d",
+  "file_hashes": {
+    "spec": "ceb40b65b31970b3cbd11d077bd6f07a51857d7283548775490b6dd94032a741",
+    "references/memory-system.md": "d6bce163dcd3e5c291d7a1f87d321e4eb31e882aa677e1a318a90f0b13e2c10d",
+    "references/transaction-system.md": "de85112af7c35d6c14d47c12703895f19c81cbe40898f7c3709f40eacb8a4fed",
+    "scripts/runner.py": "237b77425adeb052d80891a18732cb41068882eec6729916255f30a30e4ce0a9",
+    "scripts/test_ledger_durability.py": "935b101c308f7e946bd1245d54026f7fc541436a535b4ce4475f9592452ea064",
+    "scripts/transaction.py": "baf6c84173cdd43fbb360a3ce6a19d5b3636560f3bdd6b60b6c2d6dbe50906ec",
+    "scripts/weilan_trace.py": "7628dcacb4e3d108ccb9286b385b1335555c02d4b7fb10b25ffdd03737feb8d0"
+  },
+  "verification_commands": [
+    "python -m pytest staging/barrel-fix-v1/solve-with-weilan/scripts/test_ledger_durability.py -q  # 11 passed",
+    "python -X utf8 <each of the 16 pre-existing test scripts>  # all PASS (fullsuite.log)",
+    "python -X utf8 scratchpad/smoke.py  # CLI lifecycle + live torn-tail: SMOKE-OK",
+    "codex probes: terminated invalid UTF-8 -> hard error; duplicate fragment text -> hard error"
+  ],
+  "result": "PASS",
+  "review": "Codex review round 1: two P1 findings fixed and regression-locked; see BARREL_FIX_SPEC.md"
+}

@@ -1,0 +1,356 @@
+{
+  "schema_version": "fusion_dogfood_v03_harness_v0.1",
+  "surface": "qwen_openai_compatible_telemetry",
+  "runner_id": "qwen-openai-compatible-v0.1",
+  "environment_ids": [
+    "qwen-api:qwen3.7-plus-2026-05-26"
+  ],
+  "model_snapshot": "qwen3.7-plus-2026-05-26",
+  "arm": "method-baseline",
+  "tool_call_count": 10,
+  "executed_tool_call_count": 10,
+  "tool_call_names": [
+    "run_command",
+    "read_file",
+    "run_command",
+    "read_file",
+    "read_file",
+    "run_command",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file"
+  ],
+  "tool_event_summaries": [
+    {
+      "index": 0,
+      "name": "run_command",
+      "arguments": {
+        "args": [
+          "list",
+          "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\fixtures"
+        ]
+      },
+      "ok": false,
+      "runtime": "pinned_weilan_trace",
+      "runtime_args": [
+        "list",
+        "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\fixtures"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "822f2883b71c65c3b45e497d4aae84207c1ce4c30f53b2c152c3fe3bdac17cbc"
+    },
+    {
+      "index": 1,
+      "name": "read_file",
+      "arguments": {
+        "path": "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\fixtures\\case-flow\\public\\case-brief.md"
+      },
+      "ok": false,
+      "error": "[Errno 2] No such file or directory: 'D:\\\\WeilanSkillEvolution\\\\v03runs\\\\cross-conflict-redesign-v2\\\\fixtures\\\\case-flow\\\\public\\\\case-brief.md'"
+    },
+    {
+      "index": 2,
+      "name": "run_command",
+      "arguments": {
+        "args": [
+          "show",
+          "--method-home",
+          "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\trials\\cross-v2-method-baseline-1\\mh"
+        ]
+      },
+      "ok": false,
+      "runtime": "pinned_weilan_trace",
+      "runtime_args": [
+        "show",
+        "--method-home",
+        "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\trials\\cross-v2-method-baseline-1\\mh"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "9164a11407d28c9dcc1cf988623d66dbc2baebaca2631452696ad515748ce8e6"
+    },
+    {
+      "index": 3,
+      "name": "read_file",
+      "arguments": {
+        "path": "case-flow/public/case-brief.md"
+      },
+      "ok": false,
+      "error": "[Errno 2] No such file or directory: 'D:\\\\WeilanSkillEvolution\\\\v03runs\\\\cross-conflict-redesign-v2\\\\fixtures\\\\case-flow\\\\public\\\\case-brief.md'"
+    },
+    {
+      "index": 4,
+      "name": "read_file",
+      "arguments": {
+        "path": "case-brief.md"
+      },
+      "ok": false,
+      "error": "[Errno 2] No such file or directory: 'D:\\\\WeilanSkillEvolution\\\\v03runs\\\\cross-conflict-redesign-v2\\\\fixtures\\\\case-brief.md'"
+    },
+    {
+      "index": 5,
+      "name": "run_command",
+      "arguments": {
+        "args": [
+          "open",
+          "--method-home",
+          "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\trials\\cross-v2-method-baseline-1\\mh",
+          "--frame-id",
+          "cross-v2-method-baseline-1-ep1"
+        ]
+      },
+      "ok": false,
+      "runtime": "pinned_weilan_trace",
+      "runtime_args": [
+        "open",
+        "--method-home",
+        "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\trials\\cross-v2-method-baseline-1\\mh",
+        "--frame-id",
+        "cross-v2-method-baseline-1-ep1"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e5e84526f52d8318415425c4b2b5742e9512678db4a1dedb2ae198954f1d3353"
+    },
+    {
+      "index": 6,
+      "name": "read_file",
+      "arguments": {
+        "path": "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\fixtures\\case-flow\\public\\case-brief.json"
+      },
+      "ok": false,
+      "error": "[Errno 2] No such file or directory: 'D:\\\\WeilanSkillEvolution\\\\v03runs\\\\cross-conflict-redesign-v2\\\\fixtures\\\\case-flow\\\\public\\\\case-brief.json'"
+    },
+    {
+      "index": 7,
+      "name": "read_file",
+      "arguments": {
+        "path": "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\fixtures\\case-brief.md"
+      },
+      "ok": false,
+      "error": "[Errno 2] No such file or directory: 'D:\\\\WeilanSkillEvolution\\\\v03runs\\\\cross-conflict-redesign-v2\\\\fixtures\\\\case-brief.md'"
+    },
+    {
+      "index": 8,
+      "name": "read_file",
+      "arguments": {
+        "path": "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\fixtures\\public\\case-brief.md"
+      },
+      "ok": false,
+      "error": "[Errno 2] No such file or directory: 'D:\\\\WeilanSkillEvolution\\\\v03runs\\\\cross-conflict-redesign-v2\\\\fixtures\\\\public\\\\case-brief.md'"
+    },
+    {
+      "index": 9,
+      "name": "read_file",
+      "arguments": {
+        "path": "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\fixtures\\fusion-v03-cross-window-recall-gap-redesign-conflict-v2\\case-brief.md"
+      },
+      "ok": false,
+      "error": "[Errno 2] No such file or directory: 'D:\\\\WeilanSkillEvolution\\\\v03runs\\\\cross-conflict-redesign-v2\\\\fixtures\\\\fusion-v03-cross-window-recall-gap-redesign-conflict-v2\\\\case-brief.md'"
+    }
+  ],
+  "context_token_count": 4673,
+  "context_token_rule": "peak_single_response_total_tokens",
+  "billable_total_tokens": 32929,
+  "prompt_token_count": 29958,
+  "completion_token_count": 2971,
+  "ordered_event_stream": true,
+  "arm_purity_observables": {
+    "method_runtime_operation_count": 12,
+    "method_runtime_hits": [
+      {
+        "marker": "solve-with-weilan",
+        "source": "message:0"
+      },
+      {
+        "marker": "lineage-show",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-consolidate",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-disposition",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-recall",
+        "source": "message:2"
+      },
+      {
+        "marker": "weilan_trace.py",
+        "source": "message:2"
+      },
+      {
+        "marker": "weilan_trace.py",
+        "source": "message:6"
+      },
+      {
+        "marker": "weilan_trace.py",
+        "source": "message:12"
+      },
+      {
+        "marker": "solve-with-weilan",
+        "source": "message:22"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:0"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:2"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:5"
+      }
+    ],
+    "workspace_method_bootstrap_count": 0,
+    "workspace_method_bootstrap_hits": [],
+    "append_only_forbidden_operation_count": 5,
+    "append_only_forbidden_hits": [
+      {
+        "marker": "run_command",
+        "source": "tool_event:0"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:2"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:5"
+      },
+      {
+        "marker": "memory-consolidate",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-disposition",
+        "source": "message:2"
+      }
+    ]
+  },
+  "actual_usage": {
+    "tool_calls": 10,
+    "executed_tool_calls": 10,
+    "context_tokens": 4673,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 32929,
+    "prompt_tokens": 29958,
+    "completion_tokens": 2971,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 10,
+      "effective_context_tokens": 4673
+    }
+  },
+  "final_text": "{\n  \"case_id\": \"fusion-v03-cross-window-recall-gap-redesign-conflict-v2\",\n  \"episode_receipts\": [],\n  \"actual_usage\": null,\n  \"method_state_snapshot_hashes\": null,\n  \"ledger_observables\": null,\n  \"guardrail_results\": null,\n  \"method_impact_trace\": \"superseded/collapsed with trace\",\n  \"recalled_rule_id\": \"rule-v1\",\n  \"recalled_procedure_id\": \"successor-update-procedure\",\n  \"superseded_rule_id\": \"rule-v1\",\n  \"active_rule_id\": \"successor-rule\",\n  \"decision\": null\n}",
+  "hidden_artifacts_read": false,
+  "arm_purity": {
+    "schema_version": "fusion_dogfood_v03_harness_v0.1",
+    "suite_id": "fusion-dogfood-v0.3",
+    "arm": "method-baseline",
+    "valid": true,
+    "issues": [],
+    "observables": {
+      "method_runtime_operation_count": 12,
+      "method_runtime_hits": [
+        {
+          "marker": "solve-with-weilan",
+          "source": "message:0"
+        },
+        {
+          "marker": "lineage-show",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-consolidate",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-disposition",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-recall",
+          "source": "message:2"
+        },
+        {
+          "marker": "weilan_trace.py",
+          "source": "message:2"
+        },
+        {
+          "marker": "weilan_trace.py",
+          "source": "message:6"
+        },
+        {
+          "marker": "weilan_trace.py",
+          "source": "message:12"
+        },
+        {
+          "marker": "solve-with-weilan",
+          "source": "message:22"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:0"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:2"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:5"
+        }
+      ],
+      "workspace_method_bootstrap_count": 0,
+      "workspace_method_bootstrap_hits": [],
+      "append_only_forbidden_operation_count": 5,
+      "append_only_forbidden_hits": [
+        {
+          "marker": "run_command",
+          "source": "tool_event:0"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:2"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:5"
+        },
+        {
+          "marker": "memory-consolidate",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-disposition",
+          "source": "message:2"
+        }
+      ]
+    },
+    "hidden_artifacts_read": false
+  },
+  "telemetry_hash": "96119146d96809bd225b8f75a17f4c65ce55d43669e4308008b0b26c37611d2e",
+  "receipt_output": "v03runs\\qwen-live-20260706\\diagnostic-method-baseline-force10-t12-c6500-r18\\receipt.json",
+  "receipt_output_hash": "aaffeb4315a99d01d0105f81230c83c4c115246483f7f5228c05d04003a5cd0e",
+  "valid": true
+}

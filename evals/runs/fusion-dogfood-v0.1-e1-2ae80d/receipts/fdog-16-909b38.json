@@ -1,0 +1,55 @@
+{
+  "schema_version": "weilan_skill_trial_receipt_v0.5",
+  "case_id": "fusion-exp15-merge-error-attribution",
+  "trial": 2,
+  "variant": "baseline",
+  "artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "evaluation_manifest_hash": "f6289701f183ac768da0420e064b1f751bb8caabf3b2f6e82938a7c6868494aa",
+  "case_spec_hash": "355465c562cea211108095267d3dc659d0e6f72f59d7615eff2b3653b57c68d1",
+  "fixture_manifest_hash": "40c19ab3a0e56e52acf117d7600e305b6076066acdd1e6a6b7d2f93279de9bf2",
+  "configuration_hash": "05f86a57691404db1cf1b0effe80aa1ca54fd7e317b1501569218d5aea393663",
+  "environment_id": "codex-windows-shared-host-2026-07-04-fusion-dogfood-e1",
+  "scoring_version": "fusion-dogfood-weighted-v0.1",
+  "budget": {
+    "tool_calls": 18,
+    "context_tokens": 18000
+  },
+  "actual_usage": {
+    "tool_calls": 0,
+    "context_tokens": 1413
+  },
+  "termination_status": "completed",
+  "raw_output_hash": "1d580c43b516c4c25d6fb5a438905e8cb3ef46d63a3562738bfc44aaa6b0a593",
+  "grader_id": "fusion-dogfood-deterministic-rubric-v0.1",
+  "grader_provenance": {
+    "authority_source": "evals/hidden/fusion-dogfood-v0.1/evaluator-rubric.json",
+    "evaluator_artifact_hash": "cc77fbed07d1745b91e4de16bf3c7844b784210caa317182757221d2eba7bf00",
+    "evidence_hash": "708c9ee66e298f4df85f27c5aa801ab9addd59f3eb9b0c884fcda8762c3f3b62"
+  },
+  "metrics": {
+    "collapse_quality": 1.0,
+    "error_attribution_quality": 1.0,
+    "authority_boundary": 1.0,
+    "trace_reuse": 1.0,
+    "overhead": 1.0
+  },
+  "guardrail_failures": [],
+  "method_impacts": [
+    {
+      "schema_version": "weilan_method_impact_v0.5",
+      "gate": "activation_gate",
+      "changed_action": true,
+      "observable_effect": "The isolated trial workspace returned NO_CONTEXT.",
+      "source": "trial final receipt",
+      "cost": {
+        "tool_calls": 0,
+        "elapsed_ms": 0,
+        "context_tokens": 0
+      }
+    }
+  ],
+  "executor_ids": [
+    "fdog-16-909b38"
+  ],
+  "receipt_hash": "5ef6837bd09600dd1e8ef407f22e44d6c4e8787be1c379b3cc3c6bf3686f646e"
+}

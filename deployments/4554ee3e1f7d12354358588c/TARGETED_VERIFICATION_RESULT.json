@@ -1,0 +1,23 @@
+{
+  "schema_version": "weilan_targeted_verification_result_v0.1",
+  "proposal_id": "barrel-fix-v4-memory-slow-loop",
+  "created_at": "2026-07-07T07:44:31+00:00",
+  "workspace": "D:\\WeilanSkillEvolution",
+  "spec_path": "D:\\WeilanSkillEvolution\\staging\\barrel-fix-v4\\BARREL_FIX_V4_SPEC.md",
+  "diff_path": "D:\\WeilanSkillEvolution\\staging\\barrel-fix-v4\\barrel-fix-v4-vs-v3.diff",
+  "base_tree_hash": "bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85",
+  "candidate_tree_hash": "4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f",
+  "verification_summary": [
+    "Second Codex review: test_slow_loop.py 14/14 PASS after P1 repairs.",
+    "Second Codex review: full 20 test_*.py scripts PASS sequentially in 237.5s.",
+    "P1 probes verified semantic budget ledger fail-closed on forged identity and torn-tail balance corruption.",
+    "Candidate hash rechecked after cache cleanup: 4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f."
+  ],
+  "verification_commands": [
+    "python -m pytest tests/test_slow_loop.py",
+    "sequential full-suite runner over 20 tests/test_*.py scripts",
+    "targeted semantic budget corruption probes",
+    "python -m py_compile scripts/weilan_trace.py"
+  ],
+  "result": "pass"
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "fusion_dogfood_execution_config_v0.2",
+  "config_id": "fusion-dogfood-v0.2-isolated-draft",
+  "status": "draft_unfrozen",
+  "suite_id": "fusion-dogfood-v0.2",
+  "candidate_visible_root_template": "evals/fixtures/fusion-dogfood-v0.2/{case_id}/public",
+  "hidden_evaluator_root": "evals/hidden/fusion-dogfood-v0.2",
+  "isolation": {
+    "baseline_candidate_inputs": "equivalent copied fixture snapshots only",
+    "weilan_method_home": "fresh isolated per trial unless a case explicitly seeds a copied method-state fixture",
+    "live_source_reads": "forbidden unless explicitly copied into the public fixture",
+    "hidden_material_access": "evaluator only",
+    "calibration_material_access": "quarantined and not candidate-visible",
+    "network_or_external_api": "forbidden unless a future approved shadow plan explicitly allows it"
+  },
+  "runner_boundary": "finite foreground manifest only; no daemon, heartbeat, wakeup, polling loop, self-scheduled continuation, adoption, or deployment"
+}

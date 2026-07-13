@@ -1,0 +1,46 @@
+{
+  "schema_version": "fusion_dogfood_fixture_manifest_v0.2",
+  "suite_id": "fusion-dogfood-v0.2",
+  "case_id": "fusion-authority-existing-authorization",
+  "status": "draft_unfrozen",
+  "candidate_visible_root": "evals/fixtures/fusion-dogfood-v0.2/fusion-authority-existing-authorization/public",
+  "copied_at_utc": "2026-07-04T15:32:32.997453+00:00",
+  "source_snapshot_root": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-authority-existing-authorization",
+  "snapshot_discipline": "fixtures populate from pinned snapshots; deleting a snapshot is a deliberate re-slice and must be recorded in the R9 redesign ledger",
+  "candidate_visible": [
+    {
+      "source_path": "D:\\WeilanSkillEvolution\\proposals\\se-0.7-fusion-successor-v0.1\\SPEC_FREEZE_RECEIPT.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-authority-existing-authorization/public/skill-evolution-workspace/proposals/se-0.7-fusion-successor-v0.1/SPEC_FREEZE_RECEIPT.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-authority-existing-authorization/public/skill-evolution-workspace/proposals/se-0.7-fusion-successor-v0.1/SPEC_FREEZE_RECEIPT.json",
+      "sha256": "c1c5fac02e06abec46ced3549787825fdc34d5b3d225d73b8d6a7c6d91a26147",
+      "bytes": 1281
+    },
+    {
+      "source_path": "D:\\WeilanSkillEvolution\\proposals\\se-0.7-fusion-successor-v0.1\\E1_CORRECTIONS_AND_SEED_REPLAY_SPEC.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-authority-existing-authorization/public/skill-evolution-workspace/proposals/se-0.7-fusion-successor-v0.1/E1_CORRECTIONS_AND_SEED_REPLAY_SPEC.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-authority-existing-authorization/public/skill-evolution-workspace/proposals/se-0.7-fusion-successor-v0.1/E1_CORRECTIONS_AND_SEED_REPLAY_SPEC.md",
+      "sha256": "39a31eeee35dd5c30bb96f7e0f2facac2e574ccb63dd9a53477dea5c66af9490",
+      "bytes": 7922
+    },
+    {
+      "source_path": "D:\\WeilanSkillEvolution\\evals\\runs\\fusion-dogfood-v0.1-e1-2ae80d\\e1-preregistered-result.corrected.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-authority-existing-authorization/public/skill-evolution-workspace/evals/runs/fusion-dogfood-v0.1-e1-2ae80d/e1-preregistered-result.corrected.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-authority-existing-authorization/public/skill-evolution-workspace/evals/runs/fusion-dogfood-v0.1-e1-2ae80d/e1-preregistered-result.corrected.json",
+      "sha256": "156e7f8e626eedfa5ef1aabf2cac84f5f5cef288157ddaac36764b9855aa4ac8",
+      "bytes": 2825
+    },
+    {
+      "source_path": "D:\\WeilanSkillEvolution\\evals\\runs\\se-seed-v0.1-guardrail-2ae80d\\guardrail-result.rebound.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-authority-existing-authorization/public/skill-evolution-workspace/evals/runs/se-seed-v0.1-guardrail-2ae80d/guardrail-result.rebound.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-authority-existing-authorization/public/skill-evolution-workspace/evals/runs/se-seed-v0.1-guardrail-2ae80d/guardrail-result.rebound.json",
+      "redacted_fields": [
+        "interpretation",
+        "interpretation.diagnostic_summary"
+      ],
+      "sha256": "eab43b9099fbce5a757a3018dc6d6114cf4c146718d5135cc1df907a5ea42df1",
+      "bytes": 8445
+    }
+  ],
+  "directory_references": "forbidden",
+  "calibration_material": "not included"
+}

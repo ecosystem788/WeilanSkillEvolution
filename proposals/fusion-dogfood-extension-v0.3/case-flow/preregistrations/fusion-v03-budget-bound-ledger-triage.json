@@ -1,0 +1,20 @@
+{
+  "schema_version": "fusion_dogfood_v03_case_flow_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "case_id": "fusion-v03-budget-bound-ledger-triage",
+  "record_type": "preregistration",
+  "created_at_utc": "2026-07-05T08:23:53.555991+00:00",
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "public_prompt_firewall": true,
+  "winnable_in_principle": true,
+  "winnable_walkthrough_hash": "7adb2374ca99950c940fd6fd19b27733b319cd7296672ea39ce5613cf0d7add6",
+  "borderline_owner_decision_range": [
+    0.8,
+    0.85
+  ],
+  "budget_binding_required": ">=90_percent_or_truncated",
+  "calibration_trial_count": 2,
+  "ceiling_reject_at_or_above": 0.95,
+  "expected_method_baseline_mean_lt": 0.8,
+  "hidden_artifacts_read": false
+}

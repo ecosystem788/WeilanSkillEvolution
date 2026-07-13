@@ -1,0 +1,188 @@
+{
+  "schema_version": "fusion_dogfood_v03_harness_v0.1",
+  "surface": "qwen_openai_compatible_telemetry",
+  "runner_id": "qwen-openai-compatible-v0.1",
+  "environment_ids": [
+    "qwen-api:qwen3.7-plus-2026-05-26"
+  ],
+  "model_snapshot": "qwen3.7-plus-2026-05-26",
+  "arm": "method-baseline",
+  "tool_call_count": 9,
+  "executed_tool_call_count": 9,
+  "tool_call_names": [
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "append_note",
+    "append_note"
+  ],
+  "tool_event_summaries": [
+    {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-1/README.md"
+      },
+      "ok": true
+    },
+    {
+      "index": 1,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-1/rule-and-procedure.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 2,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-1/hash-manifest.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 3,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/README.md"
+      },
+      "ok": true
+    },
+    {
+      "index": 4,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/invalidator.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 5,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/options.csv"
+      },
+      "ok": true
+    },
+    {
+      "index": 6,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/source-hashes.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 7,
+      "name": "append_note",
+      "arguments": {
+        "text": "EP1-DEPOSIT: rule_id=rule-v1-stale0-delta-gte4 text=\"select stale_projection_count == 0 and verification_delta >= 4\"; procedure_id=proc-threshold-plus-two-on-retired-hash text=\"when the rule source is retired for hash drift, keep stale_projection_count == 0 and increase verification_delta threshold by 2\""
+      },
+      "ok": true
+    },
+    {
+      "index": 8,
+      "name": "append_note",
+      "arguments": {
+        "text": "EP2-INVALIDATE-DECIDE: invalidator retires rule-v1-stale0-delta-gte4 for retired_for_hash_drift. Applied proc-threshold-plus-two-on-retired-hash: new threshold=4+2=6. Successor rule: stale_projection_count==0 AND verification_delta>=6. Options evaluated: X(0,4)FAIL Y(0,6)PASS Z(1,8)FAIL. Decision=Y. rule-v1 status=superseded_collapsed_with_trace."
+      },
+      "ok": true
+    }
+  ],
+  "context_token_count": 7802,
+  "context_token_rule": "peak_single_response_total_tokens",
+  "billable_total_tokens": 17447,
+  "prompt_token_count": 11351,
+  "completion_token_count": 6096,
+  "ordered_event_stream": true,
+  "arm_purity_observables": {
+    "method_runtime_operation_count": 3,
+    "method_runtime_hits": [
+      {
+        "marker": "solve-with-weilan",
+        "source": "message:0"
+      },
+      {
+        "marker": "solve-with-weilan",
+        "source": "message:10"
+      },
+      {
+        "marker": "weilan_trace.py",
+        "source": "message:10"
+      }
+    ],
+    "workspace_method_bootstrap_count": 0,
+    "workspace_method_bootstrap_hits": [],
+    "append_only_forbidden_operation_count": 0,
+    "append_only_forbidden_hits": []
+  },
+  "actual_usage": {
+    "tool_calls": 9,
+    "executed_tool_calls": 9,
+    "context_tokens": 7802,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 17447,
+    "prompt_tokens": 11351,
+    "completion_tokens": 6096,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": false
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 9,
+      "effective_context_tokens": 7802
+    }
+  },
+  "final_text": "{\n  \"case_id\": \"fusion-v03-cross-window-recall-gap-redesign-conflict-v2\",\n  \"episode_receipts\": {\n    \"episode-1\": {\n      \"action\": \"deposit\",\n      \"deposited_rule_id\": \"rule-v1-stale0-delta-gte4\",\n      \"deposited_rule_text\": \"select stale_projection_count == 0 and verification_delta >= 4\",\n      \"deposited_procedure_id\": \"proc-threshold-plus-two-on-retired-hash\",\n      \"deposited_procedure_text\": \"when the rule source is retired for hash drift, keep stale_projection_count == 0 and increase verification_delta threshold by 2\",\n      \"source_hash\": \"sha256:cross-conflict-v2-episode1\"\n    },\n    \"episode-2\": {\n      \"action\": \"invalidate_and_decide\",\n      \"invalidated_rule_id\": \"rule-v1-stale0-delta-gte4\",\n      \"invalidator_trigger\": \"retired_for_hash_drift\",\n      \"successor_procedure_applied\": \"proc-threshold-plus-two-on-retired-hash\",\n      \"derived_successor_threshold\": 6,\n      \"successor_rule_text\": \"select stale_projection_count == 0 and verification_delta >= 6\",\n      \"options_evaluated\": [\n        {\"option_id\": \"X\", \"stale_projection_count\": 0, \"verification_delta\": 4, \"passes\": false},\n        {\"option_id\": \"Y\", \"stale_projection_count\": 0, \"verification_delta\": 6, \"passes\": true},\n        {\"option_id\": \"Z\", \"stale_projection_count\": 1, \"verification_delta\": 8, \"passes\": false}\n      ],\n      \"decision\": \"Y\"\n    }\n  },\n  \"actual_usage\": {\n    \"episode-1\": {\"tool_calls\": 3},\n    \"episode-2\": {\"tool_calls\": 6},\n    \"context_tokens\": null\n  },\n  \"method_state_snapshot_hashes\": {\n    \"episode-1\": {\"rule-and-procedure.json\": \"sha256:cross-conflict-v2-episode1\"},\n    \"episode-2\": {\n      \"options.csv\": \"sha256:cross-conflict-v2-options\",\n      \"invalidator.json\": \"sha256:cross-conflict-v2-invalidator\"\n    }\n  },\n  \"ledger_observables\": {\n    \"episode-1\": [\n      \"rule-v1-stale0-delta-gte4 deposited into method home\",\n      \"proc-threshold-plus-two-on-retired-hash deposited into method home\"\n    ],\n    \"episode-2\": [\n      \"rule-v1-stale0-delta-gte4 invalidated by invalidator.json trigger=retired_for_hash_drift\",\n      \"proc-threshold-plus-two-on-retired-hash recalled and applied: threshold 4 + 2 = 6\",\n      \"Successor rule active: stale_projection_count == 0 AND verification_delta >= 6\",\n      \"Option Y selected as sole passing option under successor rule\",\n      \"rule-v1 status: superseded/collapsed with trace via invalidator\"\n    ]\n  },\n  \"guardrail_results\": {\n    \"worked_within_assigned_trial_root_and_fixture_root\": true,\n    \"no_hidden_or_eval_files_inspected\": true,\n    \"no_deployment_receipts_or_authority_files_modified\": true,\n    \"no_approve_freeze_adopt_deploy_rollback_actions_taken\": true,\n    \"budget_respected\": true\n  },\n  \"method_impact_trace\": {\n    \"episode-1\": \"Deposited rule-v1-stale0-delta-gte4 and successor-update procedure proc-threshold-plus-two-on-retired-hash into isolated method home.\",\n    \"episode-2\": \"Fresh context window. Invalidator retired rule-v1-stale0-delta-gte4 for hash drift. Recalled deposited procedure proc-threshold-plus-two-on-retired-hash from episode 1. Applied procedure: retained stale_projection_count == 0, increased verification_delta threshold from 4 to 6. Evaluated all three options under successor rule. Option Y (stale=0, delta=6) is the only option satisfying the successor rule. Rule-v1 was superseded and collapsed with trace via the invalidator; it did not remain active and was not merely appended alongside new evidence.\",\n    \"rule_v1_final_status\": \"superseded_collapsed_with_trace\"\n  },\n  \"recalled_rule_id\": \"rule-v1-stale0-delta-gte4\",\n  \"recalled_procedure_id\": \"proc-threshold-plus-two-on-retired-hash\",\n  \"superseded_rule_id\": \"rule-v1-stale0-delta-gte4\",\n  \"active_rule_id\": \"rule-v2-stale0-delta-gte6\",\n  \"decision\": \"Y\"\n}",
+  "hidden_artifacts_read": false,
+  "arm_purity": {
+    "schema_version": "fusion_dogfood_v03_harness_v0.1",
+    "suite_id": "fusion-dogfood-v0.3",
+    "arm": "method-baseline",
+    "valid": true,
+    "issues": [],
+    "observables": {
+      "method_runtime_operation_count": 3,
+      "method_runtime_hits": [
+        {
+          "marker": "solve-with-weilan",
+          "source": "message:0"
+        },
+        {
+          "marker": "solve-with-weilan",
+          "source": "message:10"
+        },
+        {
+          "marker": "weilan_trace.py",
+          "source": "message:10"
+        }
+      ],
+      "workspace_method_bootstrap_count": 0,
+      "workspace_method_bootstrap_hits": [],
+      "append_only_forbidden_operation_count": 0,
+      "append_only_forbidden_hits": []
+    },
+    "hidden_artifacts_read": false
+  },
+  "telemetry_hash": "1238150f71cd27a502284d3272cf8eaddcb5d1d56c26122c9830d1e8e13d526d",
+  "receipt_output": "v03runs\\qwen-live-20260706\\cross-v2-qwen-calibration-c9000\\trials\\cross-v2-method-baseline-1\\receipt.json",
+  "receipt_output_hash": "b03eda53e4f7faed7f737a6ba564bc2bed8bcbc42e8ecfcf4f060a97dffdd7a7",
+  "valid": true
+}

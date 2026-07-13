@@ -1,0 +1,77 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": {
+    "episode_1": {
+      "status": "deposited",
+      "rule_id": "rule-v1-stale0-delta-gte4",
+      "procedure_id": "proc-threshold-plus-two-on-retired-hash"
+    },
+    "episode_2": {
+      "status": "invalidated_and_successor_applied",
+      "invalidated_rule_id": "rule-v1-stale0-delta-gte4",
+      "successor_rule_text": "select stale_projection_count == 0 and verification_delta >= 6"
+    }
+  },
+  "actual_usage": {
+    "tool_calls": 10,
+    "executed_tool_calls": 10,
+    "context_tokens": 5817,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 24971,
+    "prompt_tokens": 20166,
+    "completion_tokens": 4805,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 10,
+      "effective_context_tokens": 5817
+    }
+  },
+  "method_state_snapshot_hashes": {
+    "episode-1/rule-and-procedure.json": null,
+    "episode-2/invalidator.json": "sha256:cross-conflict-v2-invalidator",
+    "episode-2/options.csv": "sha256:cross-conflict-v2-options"
+  },
+  "ledger_observables": {
+    "rule_v1_status": "superseded/collapsed with trace",
+    "successor_threshold": 6
+  },
+  "guardrail_results": {
+    "within_tool_budget": true,
+    "no_hidden_files_accessed": true,
+    "no_deployment_modifications": true
+  },
+  "method_impact_trace": [
+    "episode-1: deposited rule-v1-stale0-delta-gte4 and proc-threshold-plus-two-on-retired-hash",
+    "episode-2: invalidator.json triggered retirement of rule-v1-stale0-delta-gte4",
+    "episode-2: applied successor procedure to increase verification_delta threshold by 2 (4 -> 6)",
+    "episode-2: evaluated options X(0,4), Y(0,6), Z(1,8) against successor rule",
+    "episode-2: selected option Y"
+  ],
+  "recalled_rule_id": "rule-v1-stale0-delta-gte4",
+  "recalled_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+  "superseded_rule_id": "rule-v1-stale0-delta-gte4",
+  "active_rule_id": "successor-stale0-delta-gte6",
+  "decision": "Y",
+  "trial_id": "cross-v2-method-baseline-1",
+  "arm": "method-baseline",
+  "trial": 1,
+  "actual_usage_self_report": {
+    "tool_calls": 5,
+    "context_tokens": null
+  }
+}

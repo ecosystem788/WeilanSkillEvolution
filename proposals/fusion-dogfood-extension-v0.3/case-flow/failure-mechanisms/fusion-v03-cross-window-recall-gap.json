@@ -1,0 +1,11 @@
+{
+  "schema_version": "fusion_dogfood_v03_case_flow_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "case_id": "fusion-v03-cross-window-recall-gap",
+  "record_type": "failure_mechanism",
+  "created_at_utc": "2026-07-05T08:23:53.555991+00:00",
+  "append_only_failure": "append-only retrieval surfaces a stale or overly broad note but cannot prove the active rule lineage or exclude superseded variants",
+  "method_baseline_expected_failure": "deployed baseline may recall something, but calibration is expected to expose weak verification of the recovered state under budget pressure",
+  "no_method_failure": "fresh context sees only Episode 2 fixture material and lacks the omitted rule",
+  "hidden_artifacts_read": false
+}

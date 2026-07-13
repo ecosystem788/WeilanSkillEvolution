@@ -1,0 +1,75 @@
+{
+  "schema_version": "fusion_dogfood_v03_short_rerun_result_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "source_case_id": "fusion-v03-stale-holder-collapse",
+  "purpose": "method arm rerun after short-root path fix",
+  "trial_count": 2,
+  "method_baseline_mean": 0.78,
+  "r3_passed": true,
+  "path_issue_present": false,
+  "trials": [
+    {
+      "trial_id": "short-stale-method-1",
+      "weighted_score": 0.78,
+      "path_issue": false,
+      "collapse": true,
+      "trace": true,
+      "actual_usage": {
+        "tool_calls": 17,
+        "context_tokens": 514300,
+        "last_response_context_tokens": 52748,
+        "token_count_events": 12,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 17,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 6,
+          "effective_context_tokens": 5200
+        }
+      },
+      "telemetry_receipt_hash": "74dbe71c62d2121423b54d17af0d307bc812c6294daee0cb4604aa1d31dd8173"
+    },
+    {
+      "trial_id": "short-stale-method-2",
+      "weighted_score": 0.78,
+      "path_issue": false,
+      "collapse": true,
+      "trace": true,
+      "actual_usage": {
+        "tool_calls": 13,
+        "context_tokens": 328320,
+        "last_response_context_tokens": 53022,
+        "token_count_events": 8,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 19,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 6,
+          "effective_context_tokens": 5200
+        }
+      },
+      "telemetry_receipt_hash": "3baf6322f5a165850573797f421acbe7d01f6e288db4cedeed96c077e049a5bc"
+    }
+  ],
+  "verdict": "keep_confirmed",
+  "hidden_artifacts_read": false,
+  "result_hash": "03d789cf1603f8bbe3a422871541480614478291a3135c3187cdaa9f342a78f0"
+}

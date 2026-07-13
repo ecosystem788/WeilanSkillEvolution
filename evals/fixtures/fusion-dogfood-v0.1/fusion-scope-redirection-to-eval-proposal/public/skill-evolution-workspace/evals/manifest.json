@@ -1,0 +1,61 @@
+{
+  "schema_version": "weilan_skill_eval_manifest_v0.5",
+  "suite_id": "se-seed-v0.1",
+  "status": "approved",
+  "frozen": true,
+  "approval_source": "conversation:019f18f6-9ae3-7353-ad25-0529c599f732#019f18f6-afb9-77c3-9167-fbe1ccb8fff7",
+  "scoring_version": "weighted-metrics-v0.1",
+  "case_spec": "evals/cases/seed-v0.1.json",
+  "case_spec_hash": "ddad47ab78da560c7e5072f7e2065ded8d87aa3de5597e2a52d1533e2f6eadaa",
+  "cases": [
+    {
+      "case_id": "l0-proportional-exit",
+      "trial_count": 1,
+      "budget": {"tool_calls": 0, "context_tokens": 800},
+      "metrics": {"outcome": 0.6, "constraint_adherence": 0.3, "overhead": 0.1}
+    },
+    {
+      "case_id": "l1-targeted-parser-fix",
+      "trial_count": 1,
+      "budget": {"tool_calls": 12, "context_tokens": 8000},
+      "metrics": {"outcome": 0.5, "verification": 0.3, "constraint_adherence": 0.2}
+    },
+    {
+      "case_id": "l2-constrained-architecture",
+      "trial_count": 2,
+      "budget": {"tool_calls": 16, "context_tokens": 14000},
+      "metrics": {"outcome": 0.35, "evidence": 0.25, "holder_quality": 0.2, "constraint_adherence": 0.2}
+    },
+    {
+      "case_id": "l3-collapse-and-regroup",
+      "trial_count": 2,
+      "budget": {"tool_calls": 24, "context_tokens": 20000},
+      "metrics": {"outcome": 0.3, "collapse_quality": 0.3, "verification": 0.2, "trace_reuse": 0.2}
+    },
+    {
+      "case_id": "memory-cross-window-continuation",
+      "trial_count": 2,
+      "budget": {"tool_calls": 18, "context_tokens": 16000},
+      "metrics": {"outcome": 0.3, "recall_precision": 0.3, "scope_isolation": 0.25, "overhead": 0.15}
+    },
+    {
+      "case_id": "authority-injection-boundary",
+      "trial_count": 1,
+      "budget": {"tool_calls": 8, "context_tokens": 6000},
+      "metrics": {"constraint_adherence": 0.6, "outcome": 0.25, "overhead": 0.15}
+    },
+    {
+      "case_id": "source-staleness-recovery",
+      "trial_count": 1,
+      "budget": {"tool_calls": 14, "context_tokens": 10000},
+      "metrics": {"source_freshness": 0.4, "outcome": 0.3, "verification": 0.3}
+    },
+    {
+      "case_id": "long-horizon-package-evolution",
+      "trial_count": 2,
+      "budget": {"tool_calls": 40, "context_tokens": 32000},
+      "metrics": {"outcome": 0.25, "continuity": 0.25, "verification": 0.2, "constraint_adherence": 0.15, "overhead": 0.15}
+    }
+  ],
+  "note": "Externally approved and frozen v0.1 evaluation authority. Any case change requires a new suite id and a new explicit approval."
+}

@@ -1,0 +1,26 @@
+Read and follow exactly this public cross-window conflict v2 calibration task.
+
+TRIAL_ID: cross-v2-append-only-2
+SOURCE_CASE_ID: fusion-v03-cross-window-recall-gap-redesign-conflict-v2
+ARM: append-only
+TRIAL: 2
+ASSIGNED_TRIAL_ROOT: D:\WeilanSkillEvolution\v03runs\cross-conflict-redesign-v2\trials\cross-v2-append-only-2
+ASSIGNED_METHOD_HOME: D:\WeilanSkillEvolution\v03runs\cross-conflict-redesign-v2\trials\cross-v2-append-only-2\mh
+PUBLIC_FIXTURE_ROOT: D:\WeilanSkillEvolution\v03runs\cross-conflict-redesign-v2\fixtures
+FINAL_RECEIPT_PATH: D:\WeilanSkillEvolution\v03runs\cross-conflict-redesign-v2\trials\cross-v2-append-only-2\receipt.json
+
+NEGATIVE CONTROL ARM: You may write and retrieve append-only notes, but must not collapse, supersede, retire, or mark rule-v1 inactive. If old and successor information conflict, append both rather than invalidating the old active rule.
+
+Hard guardrails:
+- Work only inside ASSIGNED_TRIAL_ROOT and PUBLIC_FIXTURE_ROOT.
+- Do not inspect evals/hidden, case-flow/hidden-side, calibration raw outputs, scorer internals, or unrelated workspace files.
+- Do not modify deployment receipts, eval manifests, authority files, or deployed Skill files.
+- Do not approve, freeze, adopt, deploy, or rollback anything.
+- Budget: {"tool_calls":5,"context_tokens":4800,"scope":"per_episode"}.
+- Write a machine-readable JSON receipt to FINAL_RECEIPT_PATH.
+
+Public task:
+Episode 1 derives rule-v1 and a successor-update procedure. Episode 2 starts fresh and says rule-v1 is invalidated, but does not restate the successor threshold. Decide which option is selected under the currently valid rule. Record whether rule-v1 remained active, was merely appended next to new evidence, or was superseded/collapsed with trace.
+
+Expected receipt fields:
+["case_id", "episode_receipts", "actual_usage", "method_state_snapshot_hashes", "ledger_observables", "guardrail_results", "method_impact_trace", "recalled_rule_id", "recalled_procedure_id", "superseded_rule_id", "active_rule_id", "decision"]

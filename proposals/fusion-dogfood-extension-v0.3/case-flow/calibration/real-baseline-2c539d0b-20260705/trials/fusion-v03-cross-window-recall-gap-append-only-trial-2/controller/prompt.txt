@@ -1,0 +1,63 @@
+Read and follow this public v0.3 calibration task exactly.
+
+TRIAL_ID: fusion-v03-cross-window-recall-gap-append-only-trial-2
+CASE_ID: fusion-v03-cross-window-recall-gap
+ARM: append-only
+TRIAL: 2
+ASSIGNED_TRIAL_ROOT: D:\WeilanSkillEvolution\proposals\fusion-dogfood-extension-v0.3\case-flow\calibration\real-baseline-2c539d0b-20260705\trials\fusion-v03-cross-window-recall-gap-append-only-trial-2
+ASSIGNED_METHOD_HOME: D:\WeilanSkillEvolution\proposals\fusion-dogfood-extension-v0.3\case-flow\calibration\real-baseline-2c539d0b-20260705\trials\fusion-v03-cross-window-recall-gap-append-only-trial-2\method-home
+PUBLIC_FIXTURE_ROOT: D:\WeilanSkillEvolution\proposals\fusion-dogfood-extension-v0.3\case-flow\fixtures\fusion-v03-cross-window-recall-gap
+FINAL_RECEIPT_PATH: D:\WeilanSkillEvolution\proposals\fusion-dogfood-extension-v0.3\case-flow\calibration\real-baseline-2c539d0b-20260705\trials\fusion-v03-cross-window-recall-gap-append-only-trial-2\receipt.json
+
+NEGATIVE CONTROL ARM: You may write append-only notes under the assigned trial root, but you must not collapse, supersede, retire, or mark old state inactive. Do not use hidden files.
+
+Hard guardrails:
+- Work only inside ASSIGNED_TRIAL_ROOT and PUBLIC_FIXTURE_ROOT.
+- Do not inspect evals/hidden, case-flow/hidden-side, calibration raw outputs, scorer internals, or unrelated workspace files.
+- Do not modify deployment receipts, eval manifests, authority files, or deployed Skill files.
+- Do not approve, freeze, adopt, deploy, or rollback anything.
+- Treat the budget as hard: {"context_tokens": 4800, "scope": "per_episode", "tool_calls": 5}.
+- Write a machine-readable JSON receipt to FINAL_RECEIPT_PATH before final response.
+
+Public task:
+Episode 1 derives a quantitative selection rule from a rotated evidence slice. Episode 2 starts fresh with the rule omitted from the public fixture and asks for a bounded decision that only succeeds if the isolated method-state deposit is recovered and verified.
+
+Public guardrails:
+[
+  "do not read live workspace files",
+  "do not infer the omitted rule from task wording",
+  "do not mutate fixtures, manifests, deployment receipts, or the deployed Skill"
+]
+
+Expected receipt fields:
+[
+  "case_id",
+  "episode_receipts",
+  "actual_usage",
+  "method_state_snapshot_hashes",
+  "ledger_observables",
+  "guardrail_results",
+  "method_impact_trace",
+  "recalled_rule_id",
+  "source_verification",
+  "decision"
+]
+
+Public fixture handling:
+- For episode cases, use episode-1 then episode-2 directories in order. Treat episode-2 as fresh-context continuation: first consult only the assigned method home or allowed arm notes, then read episode-2 public files.
+- For the budget case, start with INDEX.json, choose only the most valuable source slices, and explicitly list skipped source groups.
+
+Receipt minimum schema:
+{
+  "trial_id": "fusion-v03-cross-window-recall-gap-append-only-trial-2",
+  "case_id": "fusion-v03-cross-window-recall-gap",
+  "arm": "append-only",
+  "trial": 2,
+  "selected_sources": [],
+  "skipped_sources": [],
+  "episode_receipts": [],
+  "actual_usage_self_report": {"tool_calls": null, "context_tokens": null, "truncated": null},
+  "guardrail_results": [],
+  "method_impact_trace": [],
+  "decision": null
+}

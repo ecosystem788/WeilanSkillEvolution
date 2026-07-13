@@ -1,0 +1,117 @@
+{
+  "schema_version": "fusion_dogfood_v03_calibration_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "calibration_not_evidence",
+  "calibration_mode": "deterministic_harness_dry_run_not_model_trial",
+  "case_id": "fusion-v03-stale-holder-collapse",
+  "arm": "no-method",
+  "trial": 2,
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "weighted_score": 0.22,
+  "episode_receipts": [
+    {
+      "episode_id": "episode-1",
+      "pre_snapshot": {
+        "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-dry-run-work-sq791yih\\fusion-v03-stale-holder-collapse\\no-method\\trial-2\\method-home",
+        "files": [],
+        "tree_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "post_snapshot": {
+        "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-dry-run-work-sq791yih\\fusion-v03-stale-holder-collapse\\no-method\\trial-2\\method-home",
+        "files": [
+          {
+            "path": "ledger/events.jsonl",
+            "sha256": "6293d329d1bbdbf5356434b65516bd96318208a62c43eedc523892a54d261fc1",
+            "size": 528
+          }
+        ],
+        "tree_hash": "352ed2b2e361079acae09e4193cd3ccf3f055785e573ecb64c61847be4183735"
+      },
+      "actual_usage": {
+        "tool_calls": 1,
+        "context_tokens": 600,
+        "wall_clock_ms": 0,
+        "truncated": false,
+        "truncation_reason": null,
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        }
+      },
+      "termination_status": "completed"
+    },
+    {
+      "episode_id": "episode-2",
+      "pre_snapshot": {
+        "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-dry-run-work-sq791yih\\fusion-v03-stale-holder-collapse\\no-method\\trial-2\\method-home",
+        "files": [
+          {
+            "path": "ledger/events.jsonl",
+            "sha256": "6293d329d1bbdbf5356434b65516bd96318208a62c43eedc523892a54d261fc1",
+            "size": 528
+          }
+        ],
+        "tree_hash": "352ed2b2e361079acae09e4193cd3ccf3f055785e573ecb64c61847be4183735"
+      },
+      "post_snapshot": {
+        "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-dry-run-work-sq791yih\\fusion-v03-stale-holder-collapse\\no-method\\trial-2\\method-home",
+        "files": [
+          {
+            "path": "ledger/events.jsonl",
+            "sha256": "6293d329d1bbdbf5356434b65516bd96318208a62c43eedc523892a54d261fc1",
+            "size": 528
+          }
+        ],
+        "tree_hash": "352ed2b2e361079acae09e4193cd3ccf3f055785e573ecb64c61847be4183735"
+      },
+      "actual_usage": {
+        "tool_calls": 2,
+        "context_tokens": 900,
+        "wall_clock_ms": 0,
+        "truncated": false,
+        "truncation_reason": null,
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        }
+      },
+      "termination_status": "completed"
+    }
+  ],
+  "actual_usage": {
+    "tool_calls": 2,
+    "context_tokens": 900,
+    "wall_clock_ms": 0,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    }
+  },
+  "ledger_grade": {
+    "passed": false,
+    "collapse_event_id": null,
+    "trace_event_id": null,
+    "stale_conclusion_excluded_from_active_recall": false
+  },
+  "method_state_snapshot": {
+    "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-dry-run-work-sq791yih\\fusion-v03-stale-holder-collapse\\no-method\\trial-2\\method-home",
+    "files": [
+      {
+        "path": "ledger/events.jsonl",
+        "sha256": "6293d329d1bbdbf5356434b65516bd96318208a62c43eedc523892a54d261fc1",
+        "size": 528
+      }
+    ],
+    "tree_hash": "352ed2b2e361079acae09e4193cd3ccf3f055785e573ecb64c61847be4183735"
+  },
+  "hidden_artifacts_read": false,
+  "receipt_hash": "2ef7849cea52d06ae4ea5db935c946fd1be715fec43eec9acb49cbd8ff91a344"
+}

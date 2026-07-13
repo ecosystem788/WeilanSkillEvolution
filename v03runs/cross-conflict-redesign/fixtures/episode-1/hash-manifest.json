@@ -1,0 +1,5 @@
+{
+  "old-slice.csv": "sha256:cross-conflict-old-v1",
+  "rule_id": "rule-v1-stale0-delta-gte4",
+  "rule_text": "select stale_projection_count == 0 and verification_delta >= 4"
+}

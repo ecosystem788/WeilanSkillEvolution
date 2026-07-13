@@ -1,0 +1,75 @@
+{
+  "schema_version": "weilan_targeted_content_addressed_adoption_bundle_v0.1",
+  "decision": "adopt",
+  "proposal_id": "method-state-atomic-replace-retry-v0.1",
+  "adoption_scope": "authority_plane_only_deployment_requires_separate_receipt",
+  "authority_source": "conversation:2026-07-10-owner-authorized-adopt-and-deploy-method-state-atomic-retry",
+  "adoption_plan": {
+    "path": "proposals/method-state-atomic-replace-retry-v0.1/ADOPTION_PLAN.md",
+    "sha256": "ac756ab1f5be70527329f64e9486dd63cf1d2f6a4a64eb9c4ef9cce5701a0458"
+  },
+  "proposal": {
+    "path": "proposals/method-state-atomic-replace-retry-v0.1/proposal.json",
+    "sha256": "92f29f6739ef61350ab0e2ceb02fa391885815b8b01503bcd5a583c3aa9b47a5",
+    "valid": true
+  },
+  "candidate_verification": {
+    "path": "proposals/method-state-atomic-replace-retry-v0.1/CANDIDATE_FREEZE_RECEIPT.md",
+    "sha256": "c1c47370379e8a28fcbf4cc3be7c5c70acc7af72326222023b82ad934d902db6",
+    "focused_tests": "3 passed",
+    "full_regression": "60 passed"
+  },
+  "candidate": {
+    "source_path": "proposals/method-state-atomic-replace-retry-v0.1/candidate/solve-with-weilan",
+    "artifact_path": "proposals/method-state-atomic-replace-retry-v0.1/artifacts/fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1/solve-with-weilan",
+    "base_artifact_hash": "847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74",
+    "artifact_hash": "fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1"
+  },
+  "bundle": {
+    "rule": "runtime retry implementation and its deployed drift-guard test are adopted together",
+    "components": [
+      {
+        "component": "runtime",
+        "path": "scripts/runtime_core.py",
+        "sha256": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68",
+        "behavior": "write_event_file_atomic uses replace_with_retry"
+      },
+      {
+        "component": "drift_guard_test",
+        "path": "scripts/test_event_atomic_replace_retry.py",
+        "sha256": "e3fa2ba4c0991a2e0ef59e3754453d84e01b17c853702edf5f9e617e37dfdb13",
+        "required_cases": [
+          "transient PermissionError retries to a complete frame",
+          "retry exhaustion preserves the existing frame and reports an error",
+          "concurrent writes remain complete while the frames directory is scanned"
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "drift_guard": "proposals/method-state-atomic-replace-retry-v0.1/adoption/DRIFT_GUARD.ps1",
+    "drift_guard_sha256": "dc87b35f54ebacf65da2cad208ce19963bdd91ce8dd6a67119b0f7373988c88a",
+    "result": {
+      "valid": true,
+      "proposal_valid": true,
+      "freeze_created": false,
+      "changed_path_count": 2,
+      "target_mutated": false
+    }
+  },
+  "deployment_boundary": {
+    "deployment_authorized_by_current_source": true,
+    "deployment_target": "D:\\CodexData\\skills\\solve-with-weilan",
+    "target_tree_hash_before": "847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74",
+    "separate_reversible_deployment_receipt_required": true
+  },
+  "evaluation_boundary": {
+    "channel": "targeted_supporting_runtime_change",
+    "full_shadow_completed_for_this_candidate": false,
+    "required_future_action": "include this targeted deployment in the next full-suite shadow"
+  },
+  "rollback": {
+    "type": "adoption_record_reversal_before_deployment",
+    "deployment_rollback_requires_verified_predecessor": true
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": "weilan_skill_reshadow_gate_result_v0.1",
+  "status": "reshadow_failed_no_adoption",
+  "created_at": "2026-07-05T12:45:00+09:00",
+  "shadow_id": "method-state-write-path-prevention-v0.1-fusion-dogfood-v0.1-reshadow-cbfe4af9",
+  "run_root": "D:\\WeilanSkillEvolution\\proposals\\method-state-lineage-poison-metabolism\\shadow\\runs\\mwp-reshadow-cbfe4af9-20260705",
+  "plan_path": "D:\\WeilanSkillEvolution\\proposals\\method-state-lineage-poison-metabolism\\shadow\\method-state-write-path-prevention-v0.1-reshadow-bound-plan.json",
+  "plan_sha256": "a0959738cc77730b101e7fb2a266d62918d42deec7f266396de1e1162554f0ba",
+  "schedule_sha256": "fb9cfcf0f707be5c8c9ec9e07bbf2f355735965dcecaac627d0709201a1386b1",
+  "scorer_result_path": "D:\\WeilanSkillEvolution\\proposals\\method-state-lineage-poison-metabolism\\shadow\\runs\\mwp-reshadow-cbfe4af9-20260705\\shadow-result.frozen-scorer.json",
+  "scorer_result_sha256": "635f5c5958a8e54fa51de13995336908e62d4d7e4a6f06f2215d9d56599d5d96",
+  "baseline_artifact_hash": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+  "candidate_artifact_hash": "203b8c1f37ad54abf9e3cdc011ea122a5f8961b26cfd1dea8138549bb997b32c",
+  "frozen_scorer_sha256": "428f64899d1c153b37d6f1e33d8df51da8323d094d876884c30698f76c21bf59",
+  "rubric_sha256": "e8f59038ae21881f462c125b70879a096800267c5cd7bd33c01c2441d8f1c743",
+  "hidden_checks_sha256": "a11a7dc8457b67ce74882d621b4ea128b164be2b9a2619306bd0d0a731ff2d3c",
+  "execution_count": 24,
+  "baseline_count": 12,
+  "candidate_count": 12,
+  "missing_final_outputs": [],
+  "empty_final_outputs": [],
+  "mean_delta": -0.110937,
+  "gate": {
+    "min_mean_delta": 0.0,
+    "no_fixed_case_negative_regression": true,
+    "no_candidate_guardrail_failures": true
+  },
+  "gate_failures": [
+    "mean_delta_below_zero",
+    "fixed_case_negative_regression:fusion-p2-instrument-noise-recovery:-0.179167",
+    "fixed_case_negative_regression:fusion-s0-env-probe-attribution:-0.458333",
+    "fixed_case_negative_regression:fusion-scope-redirection-to-eval-proposal:-0.533333"
+  ],
+  "case_summary": {
+    "fusion-exp15-merge-error-attribution": {
+      "baseline_mean": 0.708333,
+      "candidate_mean": 0.966666,
+      "delta": 0.258333
+    },
+    "fusion-hidden-evidence-boundary": {
+      "baseline_mean": 0.7625,
+      "candidate_mean": 0.7625,
+      "delta": 0.0
+    },
+    "fusion-memory-scope-recovery": {
+      "baseline_mean": 0.916667,
+      "candidate_mean": 0.916667,
+      "delta": 0.0
+    },
+    "fusion-p2-instrument-noise-recovery": {
+      "baseline_mean": 1.0,
+      "candidate_mean": 0.820833,
+      "delta": -0.179167
+    },
+    "fusion-s0-env-probe-attribution": {
+      "baseline_mean": 1.0,
+      "candidate_mean": 0.541667,
+      "delta": -0.458333
+    },
+    "fusion-s0-spec-review-boundary": {
+      "baseline_mean": 0.9,
+      "candidate_mean": 0.925,
+      "delta": 0.025
+    },
+    "fusion-s0-static-scan-evidence": {
+      "baseline_mean": 0.883333,
+      "candidate_mean": 0.883333,
+      "delta": 0.0
+    },
+    "fusion-scope-redirection-to-eval-proposal": {
+      "baseline_mean": 0.95,
+      "candidate_mean": 0.416667,
+      "delta": -0.533333
+    }
+  },
+  "scorer_metadata_note": "The frozen scorer output still contains diagnostic_only=true and the old gate_effect string from its original diagnostic-rescore use. This wrapper records the gate result for the fresh owner-authorized reshadow run without modifying the frozen scorer.",
+  "adoption_eligible": false,
+  "authority": "shadow_evidence_only_no_adoption_no_deployment"
+}

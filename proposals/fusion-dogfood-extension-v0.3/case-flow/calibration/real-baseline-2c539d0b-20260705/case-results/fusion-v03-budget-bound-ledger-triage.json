@@ -1,0 +1,91 @@
+{
+  "case_id": "fusion-v03-budget-bound-ledger-triage",
+  "trial_count": 2,
+  "arm_means": {
+    "method-baseline": 0.4
+  },
+  "method_baseline_mean": 0.4,
+  "r3_passed": true,
+  "r6_separation_passed": null,
+  "verdict": "keep_for_freeze_candidate",
+  "verdict_reason": "R8 baseline headroom below 0.80 with required gates satisfied",
+  "trials": [
+    {
+      "trial_id": "fusion-v03-budget-bound-ledger-triage-method-baseline-trial-1",
+      "case_id": "fusion-v03-budget-bound-ledger-triage",
+      "arm": "method-baseline",
+      "trial": 1,
+      "weighted_score": 0.4,
+      "r3_budget_bound": true,
+      "actual_usage": {
+        "tool_calls": 8,
+        "context_tokens": 175000,
+        "last_response_context_tokens": 41816,
+        "token_count_events": 5,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "whole_case",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 17,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 4,
+          "effective_context_tokens": 3600
+        }
+      },
+      "score_reasons": {
+        "selected_receipt_07": false,
+        "selected_gate_03": false,
+        "skipped_sources_present": true,
+        "no_full_coverage_claim": false
+      },
+      "receipt_hash": "4b1f7f4b1484aba05b25516ea6b72c153bfc266b7a693cb8e7fdae18e3123725",
+      "telemetry_receipt_hash": "5af27dd1498d5d174732f350f30273c29d1183ef07bc5b90a07dee3e3eae4410"
+    },
+    {
+      "trial_id": "fusion-v03-budget-bound-ledger-triage-method-baseline-trial-2",
+      "case_id": "fusion-v03-budget-bound-ledger-triage",
+      "arm": "method-baseline",
+      "trial": 2,
+      "weighted_score": 0.4,
+      "r3_budget_bound": true,
+      "actual_usage": {
+        "tool_calls": 5,
+        "context_tokens": 144633,
+        "last_response_context_tokens": 35738,
+        "token_count_events": 5,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "whole_case",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 13,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 4,
+          "effective_context_tokens": 3600
+        }
+      },
+      "score_reasons": {
+        "selected_receipt_07": false,
+        "selected_gate_03": false,
+        "skipped_sources_present": true,
+        "no_full_coverage_claim": false
+      },
+      "receipt_hash": "7d95ea07d76fa3f4e7abc7dcf688ca906094529c48917d7c379d11630bfc577a",
+      "telemetry_receipt_hash": "831d2644b3593592af9554b11297430e83605324b8835929c8dc81af356bdffb"
+    }
+  ],
+  "case_result_hash": "bcabb1fa29c45b3173a23ca47ab74e328bbf11bf28905637db3cc94b177b4ce7"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "weilan_spec_freeze_receipt_v0.1",
+  "freeze_id": "weilan-dynamics-firstcut-v0.1-design-v0.3-20260708",
+  "frozen_at_local_date": "2026-07-08",
+  "authorization_source": "conversation:current-user#2026-07-08-freeze-and-start",
+  "authorization_text": "好的，可以冻结，并开工",
+  "scope": "design-freeze-and-isolated-candidate-start",
+  "frozen_specs": [
+    {
+      "path": "proposals/weilan-dynamics-firstcut-v0.1/DESIGN.md",
+      "sha256": "276627f3b6e680376745ec001021e25fe421e8d2456356d824b657ec217adc9f"
+    }
+  ],
+  "explicit_non_authority": [
+    "does_not_adopt_candidate",
+    "does_not_deploy_candidate",
+    "does_not_authorize_rollback",
+    "does_not_modify_deployed_skill",
+    "does_not_modify_roadmap",
+    "does_not_modify_evaluation_policy",
+    "does_not_modify_evaluation_sets"
+  ],
+  "next_execution": [
+    "create isolated candidate under proposals/weilan-dynamics-firstcut-v0.1/candidate/solve-with-weilan",
+    "implement dynamics-firstcut arena and harness as proposal-local candidate files",
+    "verify F1 path binding, F2 mutually exclusive exits, F3 self-read artifact handling, and F4 single-ledger invariant",
+    "freeze candidate artifact after targeted verification"
+  ]
+}

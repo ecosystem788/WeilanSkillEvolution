@@ -1,0 +1,145 @@
+{
+  "trial_id": "fusion-v03-cross-window-recall-gap-no-method-trial-1",
+  "case_id": "fusion-v03-cross-window-recall-gap",
+  "arm": "no-method",
+  "trial": 1,
+  "selected_sources": [
+    "PUBLIC_FIXTURE_ROOT/episode-1/README.md",
+    "PUBLIC_FIXTURE_ROOT/episode-1/hash-manifest.json",
+    "PUBLIC_FIXTURE_ROOT/episode-1/rotated-evidence-slice.csv",
+    "PUBLIC_FIXTURE_ROOT/episode-2/README.md",
+    "PUBLIC_FIXTURE_ROOT/episode-2/source-hashes.json",
+    "PUBLIC_FIXTURE_ROOT/episode-2/options.csv"
+  ],
+  "skipped_sources": [
+    "evals/hidden",
+    "case-flow/hidden-side",
+    "calibration raw outputs",
+    "scorer internals",
+    "unrelated workspace files"
+  ],
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "source_files": [
+        "episode-1/README.md",
+        "episode-1/hash-manifest.json",
+        "episode-1/rotated-evidence-slice.csv"
+      ],
+      "source_verification": {
+        "rotated-evidence-slice.csv": "sha256:public-rotated-slice-v1"
+      },
+      "derived_rule": {
+        "rule_id": "rule-public-rotated-slice-v1-stale0-delta-gte4",
+        "rule_text": "select when stale_projection_count == 0 and verification_delta >= 4",
+        "threshold_pair": {
+          "stale_projection_count": 0,
+          "verification_delta_min": 4
+        },
+        "supporting_rows": [
+          {
+            "source_id": "B",
+            "stale_projection_count": 0,
+            "verification_delta": 4,
+            "decision": "select"
+          }
+        ],
+        "counterexample_rows": [
+          {
+            "source_id": "A",
+            "stale_projection_count": 2,
+            "verification_delta": 5,
+            "decision": "hold"
+          },
+          {
+            "source_id": "C",
+            "stale_projection_count": 0,
+            "verification_delta": 1,
+            "decision": "hold"
+          },
+          {
+            "source_id": "D",
+            "stale_projection_count": 1,
+            "verification_delta": 6,
+            "decision": "hold"
+          }
+        ]
+      },
+      "method_state_deposit": {
+        "attempted": false,
+        "reason": "negative control arm forbids solve-with-weilan, weilan_trace, method-state, memory recall, collapse, trace, or persistent ledger"
+      }
+    },
+    {
+      "episode": 2,
+      "source_files": [
+        "episode-2/README.md",
+        "episode-2/source-hashes.json",
+        "episode-2/options.csv"
+      ],
+      "source_verification": {
+        "options.csv": "sha256:public-options-v1",
+        "episode_1_source_hash_to_verify": "sha256:public-rotated-slice-v1",
+        "episode_1_rule_deposit_verified": false
+      },
+      "fresh_context_continuation": true,
+      "recalled_rule_id": null,
+      "decision": {
+        "status": "no_decision",
+        "selectable_option_id": null,
+        "reason": "episode 2 omits the rule and the no-method arm has no allowed method-state deposit to recover; carrying episode-1 derivation into episode 2 would violate the fresh-context continuation constraint"
+      }
+    }
+  ],
+  "actual_usage": {
+    "tool_calls": 5,
+    "context_tokens": null,
+    "truncated": false
+  },
+  "actual_usage_self_report": {
+    "tool_calls": 5,
+    "context_tokens": null,
+    "truncated": false
+  },
+  "method_state_snapshot_hashes": [],
+  "ledger_observables": [],
+  "guardrail_results": [
+    {
+      "guardrail": "do not read live workspace files",
+      "status": "pass",
+      "notes": "Only the assigned controller prompt, assigned trial root listing, public fixture files, and required bootstrap instructions were read."
+    },
+    {
+      "guardrail": "do not infer the omitted rule from task wording",
+      "status": "pass",
+      "notes": "Episode 2 decision did not use the episode-1 rule because no method-state recovery was available in the no-method arm."
+    },
+    {
+      "guardrail": "do not mutate fixtures, manifests, deployment receipts, or the deployed Skill",
+      "status": "pass",
+      "notes": "Only FINAL_RECEIPT_PATH was written."
+    }
+  ],
+  "method_impact_trace": [
+    {
+      "observable": "method_state_recovery",
+      "status": "absent",
+      "impact": "Episode 2 could not verify or apply the omitted rule under the no-method negative-control constraints."
+    }
+  ],
+  "recalled_rule_id": null,
+  "source_verification": {
+    "episode_1": {
+      "rotated-evidence-slice.csv": "sha256:public-rotated-slice-v1"
+    },
+    "episode_2": {
+      "options.csv": "sha256:public-options-v1",
+      "episode_1_source_hash_to_verify": "sha256:public-rotated-slice-v1"
+    }
+  },
+  "decision": {
+    "status": "no_decision",
+    "selectable_option_id": null,
+    "reason": "No recalled rule id was available from an allowed isolated method-state deposit in the no-method arm."
+  }
+}

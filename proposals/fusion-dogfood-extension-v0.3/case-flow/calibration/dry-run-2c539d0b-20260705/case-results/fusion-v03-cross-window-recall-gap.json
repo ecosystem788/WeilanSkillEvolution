@@ -1,0 +1,31 @@
+{
+  "schema_version": "fusion_dogfood_v03_calibration_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "calibration_not_evidence",
+  "calibration_mode": "deterministic_harness_dry_run_not_model_trial",
+  "case_id": "fusion-v03-cross-window-recall-gap",
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "trial_count": 2,
+  "weighted_baseline_mean": 0.725,
+  "status": "dry_run_pipeline_passed",
+  "separation": {
+    "arm_means": {
+      "no-method": 0.15,
+      "append-only": 0.48,
+      "method-baseline": 0.725
+    },
+    "ordering_passed": true,
+    "required": "no-method < append-only < method-baseline"
+  },
+  "budget_binding": null,
+  "receipt_hashes": [
+    "bfae4049f75ff5e9f7da1a77f52121c21a8261827c18e0ecf65f763522a6d716",
+    "2c8bafc93944c86174716013b179644eceb7e4985387e9a29ffadf584db913cc",
+    "8c6ff292e29b5bd48e3b233d15dba3e5eff11a7e459f0ec219423976a6b4a1d0",
+    "d4139df47489af5ea7a96b310187154f783548b41d542c89d3109b78e52a0f43",
+    "2e7a2427ab4ee078f071606dce44ee1c28d28ffe675de350eb00916d4492cb9f",
+    "6df25da9cead7a6a3f8fe939a707caab9355f554de60ed901340dd9b05b865ed"
+  ],
+  "hidden_artifacts_read": false,
+  "calibration_receipt_hash": "c5414cc8e95573df80e98ea26f435addc20cd455f9406bb02a831cf482c1bcaa"
+}

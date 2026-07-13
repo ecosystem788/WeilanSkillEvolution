@@ -1,0 +1,3 @@
+source_id,rule_version,stale_projection_count,verification_delta,decision
+A,v1,0,4,select
+B,v1,0,2,hold

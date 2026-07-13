@@ -1,0 +1,60 @@
+{
+  "schema_version": "fusion_dogfood_v03_cross_redesign_manifest_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "trial_count": 6,
+  "trials": [
+    {
+      "trial_id": "cross-conflict-no-method-1",
+      "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict",
+      "arm": "no-method",
+      "trial": 1,
+      "prompt": "v03runs/cross-conflict-redesign/trials/cross-conflict-no-method-1/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign/trials/cross-conflict-no-method-1/receipt.json"
+    },
+    {
+      "trial_id": "cross-conflict-no-method-2",
+      "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict",
+      "arm": "no-method",
+      "trial": 2,
+      "prompt": "v03runs/cross-conflict-redesign/trials/cross-conflict-no-method-2/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign/trials/cross-conflict-no-method-2/receipt.json"
+    },
+    {
+      "trial_id": "cross-conflict-append-only-1",
+      "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict",
+      "arm": "append-only",
+      "trial": 1,
+      "prompt": "v03runs/cross-conflict-redesign/trials/cross-conflict-append-only-1/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign/trials/cross-conflict-append-only-1/receipt.json"
+    },
+    {
+      "trial_id": "cross-conflict-append-only-2",
+      "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict",
+      "arm": "append-only",
+      "trial": 2,
+      "prompt": "v03runs/cross-conflict-redesign/trials/cross-conflict-append-only-2/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign/trials/cross-conflict-append-only-2/receipt.json"
+    },
+    {
+      "trial_id": "cross-conflict-method-baseline-1",
+      "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict",
+      "arm": "method-baseline",
+      "trial": 1,
+      "prompt": "v03runs/cross-conflict-redesign/trials/cross-conflict-method-baseline-1/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign/trials/cross-conflict-method-baseline-1/receipt.json"
+    },
+    {
+      "trial_id": "cross-conflict-method-baseline-2",
+      "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict",
+      "arm": "method-baseline",
+      "trial": 2,
+      "prompt": "v03runs/cross-conflict-redesign/trials/cross-conflict-method-baseline-2/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign/trials/cross-conflict-method-baseline-2/receipt.json"
+    }
+  ],
+  "hidden_ground_truth": {
+    "valid_rule_id": "rule-v2-stale0-delta-gte6",
+    "correct_decision": "Y"
+  },
+  "hidden_artifacts_read_by_candidates": false
+}

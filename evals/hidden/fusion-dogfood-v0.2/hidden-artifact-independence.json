@@ -1,0 +1,32 @@
+{
+  "schema_version": "fusion_dogfood_hidden_artifact_independence_v0.2",
+  "suite_id": "fusion-dogfood-v0.2",
+  "status": "draft_unfrozen",
+  "author": "Codex hidden-artifact engineering context",
+  "review_boundary": "Claude may spot-check public case specs and process discipline only; Claude must not approve hidden rubric substance under R5.",
+  "candidate_firewall": "This context read/wrote hidden artifacts and must not author or edit successor v0.2 candidate artifacts evaluated on this suite.",
+  "negative_confirmations": [
+    "No candidate private outputs were used to write hidden checks or rubric content.",
+    "No run-local scorer patches were used as hidden rubric substance.",
+    "No calibration transcripts or score breakdowns were used; calibration remains pending.",
+    "Only public source artifacts and aggregate replay/audit findings available in project files were used."
+  ],
+  "file_hashes": {
+    "hidden_checks": {
+      "path": "evals/hidden/fusion-dogfood-v0.2/hidden-checks.json",
+      "sha256": "df9e9753a93e3b4fc5b399665500cf1d0e4215e09347b9aa48d64a64a2e2b97a"
+    },
+    "evaluator_rubric": {
+      "path": "evals/hidden/fusion-dogfood-v0.2/evaluator-rubric.json",
+      "sha256": "8f2157e683293d70fb2a1964b7acc3881414dbedd92c2b381dd0ceccfaab4319"
+    },
+    "redaction_policy": {
+      "path": "evals/hidden/fusion-dogfood-v0.2/redaction-policy.md",
+      "sha256": "244cfd3389ee74ef6de5c55cb5903f44b5c72b11951c4837a6db1c1fc93a0e73"
+    },
+    "source_hashes": {
+      "path": "evals/hidden/fusion-dogfood-v0.2/source-hashes.json",
+      "sha256": "dac79bf5406689d5e09115622928496a0554fb87b0e8c612fad50bce8e680351"
+    }
+  }
+}

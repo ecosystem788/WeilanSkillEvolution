@@ -1,0 +1,32 @@
+{
+  "schema_version": "weilan_spec_freeze_receipt_v0.1",
+  "freeze_id": "se-0.7-e1-replay-and-fusion-dogfood-v0.2-requirements-20260704",
+  "frozen_at_local_date": "2026-07-04",
+  "authorization_source": "conversation:current-user#2026-07-04-can-freeze-then-start",
+  "authorization_text": "可以冻结。然后开工",
+  "scope": "execution-spec-freeze-only",
+  "frozen_specs": [
+    {
+      "path": "proposals/se-0.7-fusion-successor-v0.1/E1_CORRECTIONS_AND_SEED_REPLAY_SPEC.md",
+      "sha256": "39a31eeee35dd5c30bb96f7e0f2facac2e574ccb63dd9a53477dea5c66af9490"
+    },
+    {
+      "path": "proposals/fusion-dogfood-extension-v0.2/EXTENSION_REQUIREMENTS.md",
+      "sha256": "00d67b5202f261214f19992c12a70d45f70370ff8ccc0243b99b508fec2c77b4"
+    }
+  ],
+  "explicit_non_authority": [
+    "does_not_freeze_fusion_dogfood_v0.2_manifest",
+    "does_not_approve_hidden_artifacts",
+    "does_not_adopt_candidate",
+    "does_not_deploy_candidate",
+    "does_not_authorize_rollback",
+    "does_not_modify_deployed_skill"
+  ],
+  "next_execution": [
+    "E1_CORRECTIONS_AND_SEED_REPLAY_SPEC Part A",
+    "E1_CORRECTIONS_AND_SEED_REPLAY_SPEC Part B",
+    "E1_CORRECTIONS_AND_SEED_REPLAY_SPEC Part C",
+    "fusion-dogfood-v0.2 extension engineering after replay controller preflight"
+  ]
+}

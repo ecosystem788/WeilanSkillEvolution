@@ -1,0 +1,69 @@
+{
+  "schema_version": "weilan_targeted_verification_result_v0.1",
+  "record_type": "TARGETED_VERIFICATION_RESULT",
+  "created_at": "2026-07-05T11:20:00+09:00",
+  "proposal_id": "weilan-trace-utf8-output-targeted-runtime",
+  "spec_path": "D:\\WeilanSkillEvolution\\proposals\\weilan-trace-utf8-output\\FIX_SPEC.md",
+  "base_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "candidate_artifact_hash": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+  "file_hashes": {
+    "fix_spec": "efd68bd6549bb1b2031bab85f969437ed037ac357c029d3765294f81d91ed723",
+    "scripts/weilan_trace.py": "2dbb77a3c0d3772b1dd5fb60e00574a444a5f3ad435bd58e52d045ee58431231",
+    "scripts/test_utf8_output.py": "f51c27f111589eb12874034972bca032be8596339db2a65bdf6c67aa1bae0ec8"
+  },
+  "verification_commands": [
+    "python -m pytest proposals\\weilan-trace-utf8-output\\candidate\\solve-with-weilan\\scripts\\test_utf8_output.py -q",
+    "python -m py_compile proposals\\weilan-trace-utf8-output\\candidate\\solve-with-weilan\\scripts\\weilan_trace.py",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_utf8_output.py",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_memory.py --temp-parent D:\\WeilanSkillEvolution\\.tmp-runtime-tests-utf8",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_frame_repair.py",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_runtime_boundary.py --temp-parent D:\\WeilanSkillEvolution\\.tmp-runtime-tests-utf8",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_frame_lineage.py --temp-parent D:\\WeilanSkillEvolution\\.tmp-runtime-tests-utf8",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_conversation_evidence.py --temp-parent D:\\WeilanSkillEvolution\\.tmp-runtime-tests-utf8",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_episode_memory.py --temp-parent D:\\WeilanSkillEvolution\\.tmp-runtime-tests-utf8",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_prospective.py --temp-parent D:\\WeilanSkillEvolution\\.tmp-runtime-tests-utf8",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_semantic_integrity.py --temp-parent D:\\WeilanSkillEvolution\\.tmp-runtime-tests-utf8",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_semantic_memory.py --temp-parent D:\\WeilanSkillEvolution\\.tmp-runtime-tests-utf8",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_evidence_lifecycle.py --temp-parent D:\\WeilanSkillEvolution\\.tmp-runtime-tests-utf8",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_metabolism.py",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_runner.py",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_governance.py --temp-parent D:\\WeilanSkillEvolution\\.tmp-runtime-tests-utf8",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_transaction.py",
+    "python -X utf8 D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_transition_planner.py",
+    "python D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py memory-recall --workspace D:\\weilan-llm-fusion --scope fusion-program"
+  ],
+  "verification_results": [
+    {"test": "test_utf8_output.py candidate pytest", "status": "passed"},
+    {"test": "candidate py_compile", "status": "passed"},
+    {"test": "test_utf8_output.py live", "status": "passed"},
+    {"test": "test_memory.py", "status": "passed", "valid": true},
+    {"test": "test_frame_repair.py", "status": "passed", "valid": true},
+    {"test": "test_runtime_boundary.py", "status": "passed", "valid": true},
+    {"test": "test_frame_lineage.py", "status": "passed", "valid": true},
+    {"test": "test_conversation_evidence.py", "status": "passed", "valid": true},
+    {"test": "test_episode_memory.py", "status": "passed", "valid": true},
+    {"test": "test_prospective.py", "status": "passed", "valid": true},
+    {"test": "test_semantic_integrity.py", "status": "passed", "valid": true},
+    {"test": "test_semantic_memory.py", "status": "passed", "valid": true},
+    {"test": "test_evidence_lifecycle.py", "status": "passed", "valid": true},
+    {"test": "test_metabolism.py", "status": "passed", "valid": true},
+    {"test": "test_runner.py", "status": "passed", "valid": true},
+    {"test": "test_governance.py", "status": "passed", "valid": true},
+    {"test": "test_transaction.py", "status": "passed", "valid": true},
+    {"test": "test_transition_planner.py", "status": "passed", "valid": true},
+    {
+      "test": "live memory-recall without PYTHONIOENCODING",
+      "status": "passed",
+      "activation_state": "ACTIVE",
+      "scope": "fusion-program",
+      "decision_count": 8
+    }
+  ],
+  "deployment_hash_check": {
+    "candidate_tree_hash": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+    "live_tree_hash": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+    "rollback_tree_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f"
+  },
+  "passed": true,
+  "authority": "targeted_verification_evidence_not_full_shadow_result"
+}

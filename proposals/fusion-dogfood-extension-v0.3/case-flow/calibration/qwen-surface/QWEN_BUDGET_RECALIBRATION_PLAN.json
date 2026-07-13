@@ -1,0 +1,31 @@
+{
+  "schema_version": "fusion_dogfood_v03_qwen_budget_recalibration_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "qwen_budget_recalibration_plan",
+  "status": "required_before_real_qwen_trials",
+  "rationale": "The existing v0.3 per-episode budgets were calibrated on Codex Desktop rollout traces where raw context usage included large executor overhead and scoring windows cut to 3600-5200 tokens. The Qwen/OpenAI-compatible surface exposes direct per-response chat API usage. Because each chat response re-sends prior history, R3 context budget uses peak single-response usage.total_tokens as the context-size proxy; cumulative billable_total_tokens is recorded separately. The old numeric budgets are not transferable without remeasurement under this rule.",
+  "required_sequence": [
+    "Pin QWEN_MODEL_SNAPSHOT to an exact dated/snapshot id.",
+    "Run one non-scored telemetry probe per arm to measure direct prompt, tool, and response usage.",
+    "Reset per-case budgets on the Qwen surface before calibration.",
+    "Revalidate every winnable-in-principle walkthrough on the Qwen surface, especially the budget-bound triage path.",
+    "Only after winnability and R3 budget binding pass, run the authorized calibration trials."
+  ],
+  "budget_policy": {
+    "setup_overhead_counted": false,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens_recorded_but_not_used_as_context_budget": true,
+    "model_prompt_and_completion_tokens_counted": "counted through peak single-response total_tokens for context budget; cumulative prompt/completion sums are recorded separately",
+    "local_tool_calls_counted": true,
+    "local_tool_result_tokens_counted_when_sent_back_to_model": true,
+    "method_state_or_note_operations_counted": true,
+    "live_truncation": "Stop issuing further model/tool work once accumulated usage exceeds a budget dimension."
+  },
+  "case_specific_notes": {
+    "fusion-v03-budget-bound-ledger-triage": "Must rerun winnability walkthrough on Qwen because the four-call Codex path may have different token economics on direct API.",
+    "fusion-v03-cross-window-recall-gap-v2": "Budget should be set after measuring two-episode prompt and note/tool overhead on the pinned snapshot.",
+    "fusion-v03-stale-holder-collapse": "Old Codex negative-control grandfathering does not substitute for Qwen-surface arm purity; any Qwen freeze claim requires Qwen telemetry or explicit owner grandfathering."
+  },
+  "hidden_artifacts_read": false,
+  "plan_hash": "7579efb4663858741a3ce4ca273e20e8b28d94fbdc03e14e88022a4bf08d9590"
+}

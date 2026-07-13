@@ -1,0 +1,18 @@
+{
+  "schema_version": "fusion_dogfood_v03_qwen_runner_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "qwen_surface_self_test",
+  "valid": true,
+  "checks": {
+    "budget_probe_truncated": true,
+    "budget_probe_reason": "context_tokens",
+    "no_method_arm_purity_valid": true,
+    "read_file_tool_executed": true
+  },
+  "runner_id": "qwen-openai-compatible-v0.1",
+  "model_snapshot_for_test": "qwen-test-snapshot-20260706",
+  "live_api_called": false,
+  "api_key_read": false,
+  "hidden_artifacts_read": false,
+  "receipt_hash": "0199fbf5d06c53b8a8ac3c3db7e905ea951814e25949c16ac072dceb213d08d9"
+}

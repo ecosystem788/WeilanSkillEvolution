@@ -1,0 +1,9 @@
+﻿{
+    "rule_id":  "rule-sha256-public-rotated-slice-v1-stale_projection_count_eq_0-verification_delta_gte_4",
+    "source_hash":  "sha256:public-rotated-slice-v1",
+    "thresholds":  {
+                       "stale_projection_count_eq":  0,
+                       "verification_delta_gte":  4
+                   },
+    "selected_episode_1_source_id":  "B"
+}

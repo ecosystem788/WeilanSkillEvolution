@@ -1,0 +1,25 @@
+{
+  "groups": [
+    {
+      "group": "deployment-receipts",
+      "files": 8,
+      "reason_to_sample": "hash binding and rollback ancestry"
+    },
+    {
+      "group": "status-summaries",
+      "files": 8,
+      "reason_to_sample": "high-level but non-authoritative"
+    },
+    {
+      "group": "guardrail-results",
+      "files": 8,
+      "reason_to_sample": "budget and rubric gate outcomes"
+    },
+    {
+      "group": "chat-notes",
+      "files": 6,
+      "reason_to_sample": "possibly stale discussion context"
+    }
+  ],
+  "budget_hint": "reading all 30 files exceeds the case budget"
+}

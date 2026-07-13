@@ -1,0 +1,75 @@
+{
+  "schema_version": "weilan_targeted_content_addressed_adoption_bundle_v0.1",
+  "decision": "adopt",
+  "proposal_id": "lower-the-floor-tooth-v0.1",
+  "adoption_scope": "authority_plane_only_no_deployment",
+  "authority_source": "conversation:2026-07-08-user-authorized-adoption-stage-command-plus-drift-guard-bundle",
+  "adoption_plan": {
+    "path": "proposals/lower-the-floor-tooth-v0.1/ADOPTION_PLAN.md",
+    "sha256": "30bc01d389a94f9df99a8288541085ec96736d1a9deabb1a0775be664298d5c6"
+  },
+  "spec": {
+    "path": "proposals/lower-the-floor-tooth-v0.1/SPEC.md",
+    "version": "FROZEN v0.1a",
+    "sha256": "9a82b1fda0d4c8ba7ccbaa70be7fd11e3519c5c73633683c9311ffd5911601e2"
+  },
+  "implementation_receipt": {
+    "path": "proposals/lower-the-floor-tooth-v0.1/IMPLEMENTATION_RECEIPT.md",
+    "sha256": "e042b9a2ae829f7f462a20535fd0c61d631fc207bfe83668c467872136f0ea3f"
+  },
+  "candidate": {
+    "source_path": "proposals/lower-the-floor-tooth-v0.1/candidate/solve-with-weilan",
+    "artifact_path": "proposals/lower-the-floor-tooth-v0.1/artifacts/9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9/solve-with-weilan",
+    "artifact_hash": "9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9"
+  },
+  "bundle": {
+    "rule": "memory-note command and drift-guard test are adopted together; either missing component invalidates adoption",
+    "components": [
+      {
+        "component": "command",
+        "name": "memory-note",
+        "path": "scripts/weilan_trace.py",
+        "sha256": "1ea27f9f0cccfa1d8271140449773d355756696c47d2eaea2c067ad56b3576bd",
+        "evidence": [
+          "def command_memory_note",
+          "def command_memory_note_fenced",
+          "subparsers.add_parser(\"memory-note\")"
+        ]
+      },
+      {
+        "component": "drift_guard_test",
+        "name": "test_memory_note.py",
+        "path": "scripts/test_memory_note.py",
+        "sha256": "4a66e83d871af2f49c80ab9df6970f03710a350fea9b850fa3fee498dbd89c62",
+        "required_assertions": [
+          "reject_equivalence_full == true",
+          "retry_no_duplicate == true",
+          "manual_equivalence == true",
+          "rejects_are_atomic == true"
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "environment": {
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "drift_guard_script": "proposals/lower-the-floor-tooth-v0.1/adoption/DRIFT_GUARD.ps1",
+    "commands": [
+      "python tools/evolution_cli.py candidate-freeze --source proposals/lower-the-floor-tooth-v0.1/candidate/solve-with-weilan --artifact-root proposals/lower-the-floor-tooth-v0.1/artifacts",
+      "python -c \"from pathlib import Path; [compile(Path(p).read_text(encoding='utf-8'), p, 'exec') for p in ['proposals/lower-the-floor-tooth-v0.1/artifacts/9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9/solve-with-weilan/scripts/weilan_trace.py', 'proposals/lower-the-floor-tooth-v0.1/artifacts/9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9/solve-with-weilan/scripts/test_memory_note.py']]\"",
+      "python proposals/lower-the-floor-tooth-v0.1/artifacts/9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9/solve-with-weilan/scripts/test_memory_note.py --temp-parent D:\\WeilanSkillEvolution\\staging",
+      "powershell -ExecutionPolicy Bypass -File proposals/lower-the-floor-tooth-v0.1/adoption/DRIFT_GUARD.ps1"
+    ]
+  },
+  "deployment_boundary": {
+    "deployment_authorized": false,
+    "deployment_target": "D:\\CodexData\\skills\\solve-with-weilan",
+    "observed_target_hash_before_adoption_verification": "e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32",
+    "rule": "this adoption record is not deployment authority"
+  },
+  "rollback": {
+    "type": "adoption_record_reversal_only",
+    "instructions": "Do not mutate the frozen artifact. To reverse this adoption before deployment, mark this bundle superseded/rejected in the authority plane and keep historical evidence."
+  }
+}

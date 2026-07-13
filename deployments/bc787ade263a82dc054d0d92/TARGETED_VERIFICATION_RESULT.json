@@ -1,0 +1,32 @@
+{
+  "schema_version": "weilan_targeted_verification_result_v0.1",
+  "record_type": "TARGETED_VERIFICATION_RESULT",
+  "created_at": "2026-07-07T06:14:17+00:00",
+  "proposal_id": "barrel-fix-v3-depollution-robustness",
+  "spec_path": "D:\\WeilanSkillEvolution\\staging\\barrel-fix-v3\\BARREL_FIX_V3_SPEC.md",
+  "diff_path": "D:\\WeilanSkillEvolution\\staging\\barrel-fix-v3\\barrel-fix-v3.diff",
+  "base_artifact_hash": "cf8553304505c33eea63f3febb310542d392fcb27657c7bd40581876c38da847",
+  "candidate_artifact_hash": "bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85",
+  "file_hashes": {
+    "spec": "ff8b16dbfb33c62f9826833bda37d28dcaf07f00eccff7b9f83c8ab1773ccbbf",
+    "diff": "e115102bdb4ad5ff729f44a0aff97718760d5f6c4c78c240888c2c4eea5bed4b",
+    "SKILL.md": "72cf4265d4f6a32909ed1f0965f267a09e017508657fc6ddaf2f034ec4520644",
+    "references/memory-system.md": "074d68ea6709e9b8de1e0fe4f8d4e74a0e4da2c69b0de02cbf521675dc7741bb",
+    "scripts/runner.py": "08e0cd360c1e6ccbe503a31822b7596c25ed69f24bce7b11bfe11e091b32faa2",
+    "scripts/runtime_core.py": "08fcbc089302b613101913ff2f0a3ca669e79b51748d089d833cc0454b4f70a1",
+    "scripts/test_v3_robustness.py": "4411888cf5e54e0e9d685502c78c3e970475a50730addcc91ccb251a8680fcb2",
+    "scripts/transaction.py": "5dfb4e3d5588bf116bdee86aefd3f9c65cc71067048b5f6af41b30c27ec8628b",
+    "scripts/weilan_trace.py": "a131d7d4e94a77426014a38ff13717b6a8189f279f100b2465a3c74eb49883ad"
+  },
+  "verification_commands": [
+    "python -m py_compile staging/barrel-fix-v3/solve-with-weilan/scripts/{weilan_trace.py,runner.py,transaction.py,runtime_core.py}  # PASS",
+    "rg toxic fixture tokens in SKILL.md and memory-system.md  # only legitimate STALE state references remain",
+    "python staging/barrel-fix-v3/solve-with-weilan/scripts/test_v3_robustness.py  # 8 passed",
+    "python -X utf8 <each of 19 test_*.py scripts>  # all PASS, 278.5s",
+    "tree_hash candidate/deployed baseline verification before deployment  # PASS",
+    "barrel-fix-v3.diff regenerated as self-contained unified diff including test_v3_robustness.py"
+  ],
+  "result": "PASS",
+  "review": "Codex review found no deployment-blocking defect. write_event_file_atomic still uses bare os.replace only for new file paths; existing-file JSON view replacement is covered by retry. Generated test caches were removed before hashing and deployment.",
+  "authority": "targeted_verification_evidence_not_full_shadow_result"
+}

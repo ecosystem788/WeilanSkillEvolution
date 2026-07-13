@@ -1,0 +1,121 @@
+{
+  "actual_usage": {
+    "context_tokens": "not_metered_by_runtime",
+    "tool_calls": 7,
+    "truncated": false
+  },
+  "actual_usage_self_report": {
+    "context_tokens": "not_metered_by_runtime",
+    "tool_calls": 7,
+    "truncated": false
+  },
+  "arm": "method-baseline",
+  "case_id": "fusion-v03-stale-holder-collapse",
+  "collapse_scope": "assumption",
+  "decision": "collapse_stale_holder_and_continue_under_targeted_receipt_trace_anchor_only",
+  "episode_receipts": [
+    {
+      "decision": "provisional_holder_selected",
+      "episode": 1,
+      "evidence": [
+        "episode-1/deployment-receipt-a.json",
+        "episode-1/risk-note.md"
+      ],
+      "frame_id": "wf-fallback-c92b2e890c85",
+      "holder_id": "holder-legacy-rollback-anchor"
+    },
+    {
+      "decision": "stale_holder_collapsed_and_regrouped",
+      "episode": 2,
+      "evidence": [
+        "episode-2/lineage-head-audit.json",
+        "episode-2/targeted-deployment-receipt.json"
+      ],
+      "invalidated_holder_id": "holder-legacy-rollback-anchor",
+      "new_holder_id": "holder-targeted-receipt-trace-anchor",
+      "trace_event_id": "5e79e5de-46e4-468f-8b62-aba3270f9279"
+    }
+  ],
+  "frame_id": "wf-fallback-c92b2e890c85",
+  "guardrail_results": [
+    {
+      "guardrail": "do not modify deployment receipts or eval manifests",
+      "status": "passed"
+    },
+    {
+      "guardrail": "do not authorize rollback, adoption, deployment, or freeze",
+      "status": "passed"
+    },
+    {
+      "guardrail": "do not claim full continuity without checking the isolated method-state ledger",
+      "status": "passed"
+    },
+    {
+      "guardrail": "work only inside ASSIGNED_TRIAL_ROOT and PUBLIC_FIXTURE_ROOT",
+      "status": "passed_for_writes; reads also included deployed method instructions required by prompt"
+    },
+    {
+      "guardrail": "tool_calls <= 6",
+      "observed": 7,
+      "reason": "runtime long-path lock creation failed and required recovery to write required receipt",
+      "status": "exceeded"
+    }
+  ],
+  "invalidated_holder_id": "holder-legacy-rollback-anchor",
+  "ledger_observables": [
+    "holder_selected",
+    "evidence_observed",
+    "holder_warned",
+    "holder_probation_started",
+    "discriminating_test_executed",
+    "minimal_unit_collapsed",
+    "trace_emitted",
+    "candidates_regrouped",
+    "frame_closed"
+  ],
+  "method_impact_trace": [
+    {
+      "impact": "isolated method home was checked before treating Episode 1 conclusion as active truth",
+      "step": "fresh_context_check"
+    },
+    {
+      "impact": "Episode 2 audit falsified the holder assumption, so only the assumption was collapsed",
+      "step": "collapse_gate"
+    },
+    {
+      "impact": "Episode 1 receipt hash evidence remains reusable while rollback-anchor authority is not inherited",
+      "step": "trace_preservation"
+    },
+    {
+      "impact": "new holder is evidence-trace-only and explicitly forbids adoption/deployment/freeze/rollback authorization",
+      "step": "regroup"
+    }
+  ],
+  "method_state_snapshot_hashes": [
+    {
+      "path": "method-home\\fallback-ledger\\events.jsonl",
+      "sha256": "ea2d2fd6b823375cee91ffc83a0180c1b1995ba6ef5f51d4cd0842d83307c36b"
+    },
+    {
+      "path": "method-home\\memory\\metabolism\\fences\\workspaces\\d431c38105a9a791\\.workspace-contract.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "new_holder_id": "holder-targeted-receipt-trace-anchor",
+  "runtime_error": "error: [Errno 2] No such file or directory: 'D:\\\\WeilanSkillEvolution\\\\proposals\\\\fusion-dogfood-extension-v0.3\\\\case-flow\\\\calibration\\\\real-baseline-2c539d0b-20260705\\\\trials\\\\fusion-v03-stale-holder-collapse-method-baseline-trial-2\\\\method-home\\\\memory\\\\metabolism\\\\fences\\\\workspaces\\\\d431c38105a9a791\\\\.workspace-contract.lock'\n",
+  "runtime_ledger_status": "fallback_ledger_due_runtime_long_path_error",
+  "selected_sources": [
+    "episode-1/README.md",
+    "episode-1/deployment-receipt-a.json",
+    "episode-1/risk-note.md",
+    "episode-1/source-hashes.json",
+    "assigned method home ledger",
+    "episode-2/README.md",
+    "episode-2/lineage-head-audit.json",
+    "episode-2/targeted-deployment-receipt.json"
+  ],
+  "skipped_sources": [],
+  "trace_event_id": "5e79e5de-46e4-468f-8b62-aba3270f9279",
+  "trial": 2,
+  "trial_id": "fusion-v03-stale-holder-collapse-method-baseline-trial-2"
+}

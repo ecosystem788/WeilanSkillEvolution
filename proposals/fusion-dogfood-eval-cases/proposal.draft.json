@@ -1,0 +1,113 @@
+{
+  "schema_version": "weilan_external_eval_suite_proposal_draft_v0.1",
+  "proposal_id": "fusion-dogfood-eval-cases",
+  "status": "prepared_not_approved_fixture_snapshots_ready",
+  "suite_id_proposed": "fusion-dogfood-v0.1",
+  "suite_status": "prepared_not_approved",
+  "rationale": "Convert real D:\\weilan-llm-fusion operating history into external dogfood evaluation evidence for Solve with WeiLan Skill Evolution, covering spec review, P3/S0 static scan, environment probing, error attribution, authority boundaries, memory recovery, and scope redirection.",
+  "source_workspace": "D:\\weilan-llm-fusion",
+  "target_workspace": "D:\\WeilanSkillEvolution",
+  "draft_case_spec": "proposals/fusion-dogfood-eval-cases/cases/fusion-dogfood-v0.1-draft.cases.json",
+  "authority_boundary": {
+    "candidate_may": [
+      "read public prompts and public fixtures",
+      "produce receipts",
+      "propose changes in an isolated proposal directory"
+    ],
+    "candidate_must_not": [
+      "modify evaluation policy",
+      "modify frozen cases",
+      "modify baseline artifacts",
+      "approve an evaluation suite",
+      "make adoption decisions",
+      "deploy or rollback a Skill",
+      "treat evaluation output as automatic adoption"
+    ],
+    "this_proposal_does_not": [
+      "modify D:\\CodexData\\skills\\solve-with-weilan",
+      "modify D:\\WeilanSkillEvolution\\evals\\manifest.json",
+      "run shadow evaluation",
+      "approve the proposed suite",
+      "deploy anything"
+    ]
+  },
+  "runner_boundary": {
+    "se_0_7_runner": "foreground_only_finite_manifest",
+    "allowed": "execute only caller-supplied finite manifests under hard event and step bounds",
+    "forbidden": [
+      "background collector",
+      "daemon",
+      "polling loop",
+      "heartbeat",
+      "wakeup",
+      "self-scheduled continuation",
+      "unsupplied event generation"
+    ]
+  },
+  "case_ids": [
+    "fusion-s0-spec-review-boundary",
+    "fusion-s0-static-scan-evidence",
+    "fusion-s0-env-probe-attribution",
+    "fusion-p2-instrument-noise-recovery",
+    "fusion-exp15-merge-error-attribution",
+    "fusion-hidden-evidence-boundary",
+    "fusion-memory-scope-recovery",
+    "fusion-scope-redirection-to-eval-proposal"
+  ],
+  "target_metrics": [
+    "outcome_quality",
+    "source_traceability",
+    "constraint_adherence",
+    "error_attribution_quality",
+    "boundary_preservation",
+    "memory_recovery_precision",
+    "scope_redirection_discipline",
+    "overhead_control"
+  ],
+  "hidden_answer_policy": {
+    "public_prompts_must_not_include": [
+      "private arm maps",
+      "option maps",
+      "answer keys",
+      "raw hidden answers",
+      "API keys",
+      "evaluator expected outputs"
+    ],
+    "evaluator_only_examples": [
+      "D:\\weilan-llm-fusion\\artifacts\\exp2_arm_map_private.json",
+      "D:\\weilan-llm-fusion\\artifacts\\exp2f_option_map_private.json",
+      "selected score reports and answer logs when used for hidden checks"
+    ]
+  },
+  "approval_required_before_use": [
+    "external authority approves suite id and case definitions",
+    "public case spec hash is fixed",
+    "fixture source hashes and evaluator artifact hashes are fixed",
+    "manifest binds case-set hash and evaluator versions",
+    "baseline and candidate artifacts are fixed",
+    "model/tool configuration and budgets are fixed",
+    "trial counts are fixed"
+  ],
+  "created_as_of": "2026-07-03",
+  "public_case_spec": "evals/cases/fusion-dogfood-v0.1.json",
+  "fixture_root": "evals/fixtures/fusion-dogfood-v0.1/",
+  "hidden_artifacts": [
+    "evals/hidden/fusion-dogfood-v0.1/hidden-checks.json",
+    "evals/hidden/fusion-dogfood-v0.1/evaluator-rubric.json",
+    "evals/hidden/fusion-dogfood-v0.1/source-hashes.json",
+    "evals/hidden/fusion-dogfood-v0.1/redaction-policy.md"
+  ],
+  "engineering_receipt": {
+    "status": "B1_B2_pre_freeze_artifacts_prepared_not_approved",
+    "fixture_policy": "candidate-visible fixture_sources are copied snapshots under evals/fixtures/fusion-dogfood-v0.1; live absolute source reads and directory references are forbidden",
+    "case8_isolation": "public fixture uses explicit selected files only and excludes proposals/fusion-dogfood-eval-cases",
+    "case7_isolation": "public fixture includes copied method-state snapshot intended for isolated WEILAN_METHOD_HOME",
+    "forbidden_until_owner_approval": [
+      "modify evals/manifest.json",
+      "run baseline/candidate",
+      "run shadow",
+      "adopt",
+      "deploy"
+    ]
+  }
+}

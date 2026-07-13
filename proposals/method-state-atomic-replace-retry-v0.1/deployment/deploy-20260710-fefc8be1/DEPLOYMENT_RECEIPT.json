@@ -1,0 +1,81 @@
+{
+  "schema_version": "weilan_targeted_deployment_receipt_v0.1",
+  "deployment_id": "deploy-20260710-fefc8be1",
+  "proposal_id": "method-state-atomic-replace-retry-v0.1",
+  "recorded_at": "2026-07-11T00:13:33.1552257+09:00",
+  "valid": true,
+  "authority_source": "conversation:2026-07-10-owner-authorized-adopt-and-deploy-method-state-atomic-retry",
+  "deployment_frame_id": "wf-20260710-145158-2856a7",
+  "deployment_target": "D:\\CodexData\\skills\\solve-with-weilan",
+  "deployment_intent": {
+    "path": "proposals/method-state-atomic-replace-retry-v0.1/deployment/deploy-20260710-fefc8be1/DEPLOYMENT_INTENT.json",
+    "sha256": "fc32febddaa286021969b973f4dfdbd8d336f57de32fd755ae44dce95ed02467"
+  },
+  "adoption_receipt": {
+    "path": "proposals/method-state-atomic-replace-retry-v0.1/adoption/ADOPTION_RECEIPT.json",
+    "sha256": "ce6a9072dc505930353f073419fc807b18a818e20c60ea10e990081e9572f258"
+  },
+  "candidate": {
+    "artifact_path": "proposals/method-state-atomic-replace-retry-v0.1/artifacts/fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1/solve-with-weilan",
+    "artifact_hash": "fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1"
+  },
+  "rollback": {
+    "artifact_path": "proposals/method-state-atomic-replace-retry-v0.1/deployment/deploy-20260710-fefc8be1/rollback/847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74/solve-with-weilan",
+    "artifact_hash": "847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74",
+    "reversible": true
+  },
+  "deployment": {
+    "method": "targeted_atomic_file_overlay",
+    "changed_paths": [
+      "scripts/runtime_core.py",
+      "scripts/test_event_atomic_replace_retry.py"
+    ],
+    "before_artifact_hash": "847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74",
+    "after_artifact_hash": "fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1",
+    "cache_removed": "scripts/__pycache__",
+    "notes": [
+      "The first File.Replace call used an invalid null backup path and failed before target mutation.",
+      "The two generated deployment temp files were removed and the target was reverified at the base hash.",
+      "The retry used a real backup path and atomically installed both adopted files.",
+      "No wake script or authority file was modified."
+    ]
+  },
+  "verification": {
+    "environment": {
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "target_tree_hash": "fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1",
+    "target_matches_candidate": true,
+    "focused_test": {
+      "command": "python -m pytest scripts/test_event_atomic_replace_retry.py -q",
+      "result": "3 passed",
+      "duration_seconds": 1.21
+    },
+    "full_script_suite": {
+      "command": "python -m pytest scripts -q",
+      "result": "60 passed",
+      "duration_seconds": 27.04
+    },
+    "real_method_state_canary": {
+      "frame_id": "wf-20260710-151032-e43498",
+      "path": "D:\\CodexData\\home\\method-state\\frames\\2026-07-10\\wf-20260710-151032-e43498.jsonl",
+      "valid": true,
+      "closed": true,
+      "event_count": 3,
+      "orphan_temp_shards": 0
+    }
+  },
+  "wake_state": {
+    "pre_deployment": "PAUSED sentinel preexisted and both wake locks were absent",
+    "final_audit": "PAUSED sentinel absent and both wake locks absent",
+    "deployment_action": "The deployment did not remove PAUSED or edit wake scripts; the state changed externally during finalization."
+  },
+  "rollback_triggers": [
+    "target tree hash does not match the adopted candidate",
+    "focused retry test failure on deployment target",
+    "full deployment-target script regression failure",
+    "real method-state canary frame cannot open and close",
+    "partial or invalid frame event file is observed"
+  ],
+  "residual_obligation": "Include this targeted supporting-runtime change in the next full-suite shadow evaluation."
+}

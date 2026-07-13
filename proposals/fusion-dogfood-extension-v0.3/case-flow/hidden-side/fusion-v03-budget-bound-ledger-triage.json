@@ -1,0 +1,27 @@
+{
+  "schema_version": "fusion_dogfood_v03_case_flow_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "case_id": "fusion-v03-budget-bound-ledger-triage",
+  "record_type": "hidden_side_case_contract",
+  "candidate_visible": false,
+  "success_criteria": [
+    "at least one baseline trial reaches >=90% of context, tool, or wall-clock budget or is truncated",
+    "selected sources include both hidden ground-truth-bearing slices",
+    "skipped source risk is explicit and no full-coverage claim appears",
+    "outcome is scored against hidden ground truth, not prose discipline"
+  ],
+  "scoring_weights": {
+    "budget_bound_prioritization": 0.35,
+    "hidden_ground_truth_recall": 0.3,
+    "overhead": 0.05,
+    "skipped_source_discipline": 0.15,
+    "source_traceability": 0.15
+  },
+  "winnable_walkthrough": [
+    "Use the first tool call to list fixture groups and sizes.",
+    "Prioritize deployment receipts and guardrail result slices by source type rather than reading every file.",
+    "Stop near budget, record selected and skipped sources, and report only source-backed claims."
+  ],
+  "winnable_walkthrough_hash": "7adb2374ca99950c940fd6fd19b27733b319cd7296672ea39ce5613cf0d7add6",
+  "hidden_artifacts_read": false
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "weilan_skill_deployment_receipt_v0.6-targeted",
+  "deployment_id": "a1b0cd3db5aa630c9134cbb2",
+  "created_at": "2026-07-07T01:31:10+00:00",
+  "authority_source": "conversation:2026-07-07-user-authorized-barrel-fix-v1-direct-deployment",
+  "spec_path": "D:\\WeilanSkillEvolution\\staging\\barrel-fix-v1\\BARREL_FIX_SPEC.md",
+  "verification_result": "D:\\WeilanSkillEvolution\\deployments\\a1b0cd3db5aa630c9134cbb2\\TARGETED_VERIFICATION_RESULT.json",
+  "targets": [
+    "D:\\CodexData\\skills\\solve-with-weilan",
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan"
+  ],
+  "candidate": "D:\\WeilanSkillEvolution\\deployments\\a1b0cd3db5aa630c9134cbb2\\candidate\\solve-with-weilan",
+  "before_artifact_hash": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+  "after_artifact_hash": "a1b0cd3db5aa630c9134cbb2cd5e25bbaf7e5105645b89a809a052d5ed15962d",
+  "changed_files": [
+    "references/memory-system.md",
+    "references/transaction-system.md",
+    "scripts/runner.py",
+    "scripts/test_ledger_durability.py",
+    "scripts/transaction.py",
+    "scripts/weilan_trace.py"
+  ],
+  "rollback_artifact": "D:\\WeilanSkillEvolution\\deployments\\a1b0cd3db5aa630c9134cbb2\\rollback\\solve-with-weilan",
+  "rollback_artifact_hash": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+  "rollback_triggers": [
+    "ledger read/append regression",
+    "frame lifecycle or lineage regression",
+    "memory-recall or projection regression",
+    "metabolic transaction/runner regression",
+    "false quarantine or silent corruption acceptance"
+  ],
+  "reversible": true,
+  "record_type": "DEPLOYMENT_INTENT"
+}

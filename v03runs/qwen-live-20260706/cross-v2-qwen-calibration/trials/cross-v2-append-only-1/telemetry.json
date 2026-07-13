@@ -1,0 +1,144 @@
+{
+  "schema_version": "fusion_dogfood_v03_harness_v0.1",
+  "surface": "qwen_openai_compatible_telemetry",
+  "runner_id": "qwen-openai-compatible-v0.1",
+  "environment_ids": [
+    "qwen-api:qwen3.7-plus-2026-05-26"
+  ],
+  "model_snapshot": "qwen3.7-plus-2026-05-26",
+  "arm": "append-only",
+  "tool_call_count": 7,
+  "executed_tool_call_count": 7,
+  "tool_call_names": [
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file"
+  ],
+  "tool_event_summaries": [
+    {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-1/README.md"
+      },
+      "ok": true
+    },
+    {
+      "index": 1,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-1/rule-and-procedure.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 2,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/README.md"
+      },
+      "ok": true
+    },
+    {
+      "index": 3,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/invalidator.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 4,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/options.csv"
+      },
+      "ok": true
+    },
+    {
+      "index": 5,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/source-hashes.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 6,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-1/hash-manifest.json"
+      },
+      "ok": true
+    }
+  ],
+  "context_token_count": 7611,
+  "context_token_rule": "peak_single_response_total_tokens",
+  "billable_total_tokens": 13056,
+  "prompt_token_count": 7005,
+  "completion_token_count": 6051,
+  "ordered_event_stream": true,
+  "arm_purity_observables": {
+    "method_runtime_operation_count": 0,
+    "method_runtime_hits": [],
+    "workspace_method_bootstrap_count": 0,
+    "workspace_method_bootstrap_hits": [],
+    "append_only_forbidden_operation_count": 0,
+    "append_only_forbidden_hits": []
+  },
+  "actual_usage": {
+    "tool_calls": 7,
+    "executed_tool_calls": 7,
+    "context_tokens": 7611,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 13056,
+    "prompt_tokens": 7005,
+    "completion_tokens": 6051,
+    "truncated": true,
+    "truncation_reason": "context_tokens",
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": false
+    },
+    "scoring_time_truncation": {
+      "truncated": true,
+      "truncation_reason": "context_tokens",
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 7,
+      "effective_context_tokens": 6500
+    }
+  },
+  "final_text": "",
+  "hidden_artifacts_read": false,
+  "arm_purity": {
+    "schema_version": "fusion_dogfood_v03_harness_v0.1",
+    "suite_id": "fusion-dogfood-v0.3",
+    "arm": "append-only",
+    "valid": true,
+    "issues": [],
+    "observables": {
+      "method_runtime_operation_count": 0,
+      "method_runtime_hits": [],
+      "workspace_method_bootstrap_count": 0,
+      "workspace_method_bootstrap_hits": [],
+      "append_only_forbidden_operation_count": 0,
+      "append_only_forbidden_hits": []
+    },
+    "hidden_artifacts_read": false
+  },
+  "telemetry_hash": "0f19969bda16b0dde22df24dba43b9141cc9e01d2382f940e9925929065058d9",
+  "receipt_output": "v03runs\\qwen-live-20260706\\cross-v2-qwen-calibration\\trials\\cross-v2-append-only-1\\receipt.json",
+  "receipt_output_hash": "96ffd18f7591905d44deb7d53aa38d73755c37617a9fc6d7fe1a58f839a5f42f",
+  "valid": false
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "fusion_dogfood_fixture_manifest_v0.1",
+  "suite_id": "fusion-dogfood-v0.1",
+  "case_id": "fusion-memory-scope-recovery",
+  "status": "candidate_visible_snapshot_not_approved",
+  "files": {
+    "public/fusion-workspace/PROJECT_CONTROL.json": "974c4de8cea4c4c8baa2b1e372aad377244b403b577aa94370ecc3dc416a57be",
+    "public/fusion-workspace/README.md": "69a9896f84e7d4a6fd9fbec53fb3bcc49dab7cce9b7a9789c79796ef56787fda",
+    "public/fusion-workspace/ROADMAP.md": "a3e4e970f9d2a85218d8b64977340b7dc0306dca9b28e06496b380d34234183a",
+    "public/fusion-workspace/AGENTS.md": "c0c4d77ddb83d822d31c854894b2ab88fd0268dc31521a2c72b4fb14ee37a311",
+    "public/method-state-snapshot/memory/control/workspaces/c87abeba95f998da/2026-07-04.jsonl": "ea154fb48fa284fc63737cf86dace60f86a90b63c59ebc32efe2d3da09c1fb3a",
+    "public/method-state-snapshot/memory/projections/workspaces/c87abeba95f998da/fb5920559987.json": "277a62f8ce39ac1802a50b646dc3b0086b97ebf075f2af2cbd949987c3b07538",
+    "public/method-state-snapshot/memory/indexes/workspaces/c87abeba95f998da/fb5920559987.json": "da02c3cf210cf85813775bb116a784faede9273361235e4fd199a9431c3ae8c6",
+    "public/method-state-snapshot/memory/episode-indexes/workspaces/c87abeba95f998da/fb5920559987.json": "1cc575921481130ba993df3f9e382bff590fca70476df17f905973ab004f1372",
+    "public/method-state-snapshot/memory/lineage/heads/c87abeba95f998da/fb5920559987.json": "ddb5fd59c1146070a547050ea1b1fddee490f1307947e11be0847801a435f875",
+    "public/method-state-snapshot/memory/lineage/workspaces/c87abeba95f998da/fb5920559987/2026-07-04.jsonl": "de1664c57da843090ba9d854bd60994c7c573c88e623c5eca6c3f17c2aabb92f",
+    "public/method-state-snapshot/memory/semantic/workspaces/c87abeba95f998da/fb5920559987/2026-07-03.jsonl": "450f5a4e5307ef3a44952b023bcfd7f72be25bee8f4677b3df86c291b41deef7"
+  },
+  "content_hash": "9e62dba15841c9a0c3db37649d11ebb19a84154f0faf07876e555520fe9b8308"
+}

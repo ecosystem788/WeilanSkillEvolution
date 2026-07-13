@@ -1,0 +1,15 @@
+{
+  "schema_version": "fusion_dogfood_fixture_manifest_v0.1",
+  "suite_id": "fusion-dogfood-v0.1",
+  "case_id": "fusion-p2-instrument-noise-recovery",
+  "status": "candidate_visible_snapshot_not_approved",
+  "files": {
+    "public/fusion-workspace/specs/EXP-2-behavioral-readout.md": "e6f4d67436f6eeb78b793b5763ffab8448069c27b17e46a8d15420d4fd3f158a",
+    "public/fusion-workspace/specs/EXP-2f-final-forced-choice.md": "00b786ba2469aff87cd3be6a93eb794916b68e9e15fa0f80b1aac3caafa49626",
+    "public/fusion-workspace/artifacts/exp2_receipt.md": "0beaff056677572f5c02c4b66f10607726697c8649574fcc9fee66166d8442d5",
+    "public/fusion-workspace/artifacts/exp2_score_report.json": "60df6e016dbe1653448b3eb486f3bd08d04f65c0a46d61a6d33f882a96332be9",
+    "public/fusion-workspace/artifacts/exp2f_receipt.md": "422211a8485f7b51117264c66129606167055cb6cb9f10d372465951be91c27f",
+    "public/fusion-workspace/artifacts/exp2f_score_report.json": "8219c5cd738a830802b8442589374bf168c6a100a8173b91622944a728035185"
+  },
+  "content_hash": "8018cfe73087b9af1f31fa0937215337ff6aef10a6cb70998349de59bd3e1a88"
+}

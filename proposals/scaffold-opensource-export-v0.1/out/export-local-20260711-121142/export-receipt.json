@@ -1,0 +1,114 @@
+{
+    "receipt_version":  "export-receipt-v1",
+    "built_at_utc":  "2026-07-11T12:26:19Z",
+    "template_hash":  "sha256:3de5830c9ac3c1ecf6ee6b4507e6d854e6c85bb0f0b5269c9b50119d4404b2c0",
+    "built_tree_hash":  "sha256:71abbbf03a92fc785117d2d4820a74ce3f62f58f3ee5bcb98ecfd035bc6b9a60",
+    "scan_ruleset_hash":  "sha256:efd2dd495ff81cf49a2e275acf0e8f0d6bfbf05e279961400d769d1b08bced27",
+    "scan_result":  {
+                        "hits":  0,
+                        "clean":  true,
+                        "scanned_tree_hash":  "sha256:71abbbf03a92fc785117d2d4820a74ce3f62f58f3ee5bcb98ecfd035bc6b9a60"
+                    },
+    "file_hashes":  [
+                        {
+                            "path":  "bounded_scheduler.py",
+                            "sha256":  "sha256:7496f14e9ef90d4b9d306879e0d8b7e4d3f602907a00cf323dae53b660dacf85"
+                        },
+                        {
+                            "path":  "CHARTER.md",
+                            "sha256":  "sha256:959935ebe420de93e28c3f955f6b5b6d290e7b563b32d87642133a11c75607d4"
+                        },
+                        {
+                            "path":  "observe.py",
+                            "sha256":  "sha256:ca51bd4bf33cf69efd91e768eab0fb61bb1cf83af2953d6fb5acbec4d26eecb5"
+                        },
+                        {
+                            "path":  "proposals\\wake-brief-trail-layer-v0.1\\deployment\\deploy-20260711-183052\\rollback\\impl\\wake_brief.py",
+                            "sha256":  "sha256:8573caf60f63d48bf87c1b1d51bbf9196516877752f621135c43a0ed6a2028fd"
+                        },
+                        {
+                            "path":  "proposals\\wake-brief-trail-layer-v0.1\\deployment\\deploy-20260711-183052\\rollback\\installed\\wake_brief.py",
+                            "sha256":  "sha256:8573caf60f63d48bf87c1b1d51bbf9196516877752f621135c43a0ed6a2028fd"
+                        },
+                        {
+                            "path":  "proposals\\wake-brief-trail-layer-v0.1\\DESIGN.md",
+                            "sha256":  "sha256:92bc16491cd89b2400b7ed5be2e3447505e33157f1d529284699d7b4f355840f"
+                        },
+                        {
+                            "path":  "README.md",
+                            "sha256":  "sha256:fbdee6471a04e4f6b0d0a403605f9d093fde1da8315e3f97f3f34a0347bf55c0"
+                        },
+                        {
+                            "path":  "run_wake_cron.ps1",
+                            "sha256":  "sha256:31aa06f7a26dcd3b947394f37bf8c994efb3d3a5e236e3c1a299ba308ee0f196"
+                        },
+                        {
+                            "path":  "run_wake_cron_hidden.vbs",
+                            "sha256":  "sha256:cbe72606c39962d6c62350b4d20c68e72e73fb49d002911d611a64fdbef81b45"
+                        },
+                        {
+                            "path":  "test_bounded_scheduler.py",
+                            "sha256":  "sha256:86a94470dfa28544388cefb9cb5813758a82ee68f7a6caed777ca517b0aaf3ab"
+                        },
+                        {
+                            "path":  "test_site_fingerprint.py",
+                            "sha256":  "sha256:b7cfe62eaf0aae524a0bf865f14f843101344da6fc102c746f49d2ae3ae145df"
+                        },
+                        {
+                            "path":  "test_wake_brief.py",
+                            "sha256":  "sha256:68b53aa8e3251861296355a48f64c1b640ccb4a6eb2532229a268a47b084aec0"
+                        },
+                        {
+                            "path":  "test_window.py",
+                            "sha256":  "sha256:4582a15611cd5fc9b799828cbaf7ad945f6cafb0100e14d4aaa4d67fd73bb67a"
+                        },
+                        {
+                            "path":  "theory\\无我.md",
+                            "sha256":  "sha256:2e7fdec858d9230d7c2ed24a1b1abd0badfcd62644d18968de90ac29b686a558"
+                        },
+                        {
+                            "path":  "theory\\元寂的进一步讨论.txt",
+                            "sha256":  "sha256:cdfbe179e31fec37b8fec79cf0766d88d4e71ef382186b0f56c67e5b3c7a1775"
+                        },
+                        {
+                            "path":  "theory\\元寂计划.md",
+                            "sha256":  "sha256:c143c10c627f55950449f7d576aa3cd3b9b9e5af3d60cf837d017174d3c31827"
+                        },
+                        {
+                            "path":  "wake.py",
+                            "sha256":  "sha256:0d26ce24d7855a3e5f1e5a82e28d923b2cadb44493fca56572370c64131f419b"
+                        },
+                        {
+                            "path":  "wake_agent.ps1",
+                            "sha256":  "sha256:668c4d92be2f179aca0c95fa52e0cd9e02bced2390d408aa1806d6176499c3d0"
+                        },
+                        {
+                            "path":  "wake_brief.py",
+                            "sha256":  "sha256:4acd4658308fbe40f30242c30b4d09e0f9fd6431d4dcf0f8146b337dafa1a1a1"
+                        },
+                        {
+                            "path":  "wake_codex.ps1",
+                            "sha256":  "sha256:6256c2f47f7e6b9917bfa443afa2949141ccdf1050105468d061d7de30b495cb"
+                        },
+                        {
+                            "path":  "wake_prompt.md",
+                            "sha256":  "sha256:b159dc14b6f1c2728662d52a7430aa1d24badc074c3c087307798051e0341480"
+                        },
+                        {
+                            "path":  "wake_prompt_codex.md",
+                            "sha256":  "sha256:a8cbf2f090bbde66436ca19a3a88e22f25c6cccaaf9881ef04b4134b74583f9a"
+                        },
+                        {
+                            "path":  "window.py",
+                            "sha256":  "sha256:47cb453951493053144c603343b1b58702989be51adc2cdbbfd906a95831afd4"
+                        }
+                    ],
+    "test_result":  {
+                        "passed":  40,
+                        "total":  40,
+                        "green":  true
+                    },
+    "target_remote":  "https://github.com/ecosystem788/solve-with-weilan/tree/main/examples/bounded-autonomy-scaffold",
+    "visibility":  "public",
+    "rollback":  "Before push: delete this local export output directory. After push: git revert the commit adding examples/bounded-autonomy-scaffold/; if repository placement changes, follow observer direction."
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": "fusion_dogfood_v03_harness_v0.1",
+  "surface": "qwen_openai_compatible_telemetry",
+  "runner_id": "qwen-openai-compatible-v0.1",
+  "environment_ids": [
+    "qwen-api:qwen3.7-plus-2026-05-26"
+  ],
+  "model_snapshot": "qwen3.7-plus-2026-05-26",
+  "arm": "no-method",
+  "tool_call_count": 7,
+  "executed_tool_call_count": 7,
+  "tool_call_names": [
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file"
+  ],
+  "tool_event_summaries": [
+    {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-1/README.md"
+      },
+      "ok": true
+    },
+    {
+      "index": 1,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-1/rule-and-procedure.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 2,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/README.md"
+      },
+      "ok": true
+    },
+    {
+      "index": 3,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/invalidator.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 4,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/options.csv"
+      },
+      "ok": true
+    },
+    {
+      "index": 5,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-1/hash-manifest.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 6,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/source-hashes.json"
+      },
+      "ok": true
+    }
+  ],
+  "context_token_count": 7476,
+  "context_token_rule": "peak_single_response_total_tokens",
+  "billable_total_tokens": 14481,
+  "prompt_token_count": 8425,
+  "completion_token_count": 6056,
+  "ordered_event_stream": true,
+  "arm_purity_observables": {
+    "method_runtime_operation_count": 0,
+    "method_runtime_hits": [],
+    "workspace_method_bootstrap_count": 0,
+    "workspace_method_bootstrap_hits": [],
+    "append_only_forbidden_operation_count": 0,
+    "append_only_forbidden_hits": []
+  },
+  "actual_usage": {
+    "tool_calls": 7,
+    "executed_tool_calls": 7,
+    "context_tokens": 7476,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 14481,
+    "prompt_tokens": 8425,
+    "completion_tokens": 6056,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": false
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 7,
+      "effective_context_tokens": 7476
+    }
+  },
+  "final_text": "Based on my analysis of the public fixture files:\n\n**Episode 1 established:**\n- Rule: `rule-v1-stale0-delta-gte4` (stale_projection_count == 0 AND verification_delta >= 4)\n- Successor procedure: `proc-threshold-plus-two-on-retired-hash` (keep stale==0, increase delta threshold by 2)\n\n**Episode 2 (fresh context):**\n- Invalidates rule-v1 due to `retired_for_hash_drift`\n- Instructs to apply the deposited successor-update procedure\n- Does not restate the threshold\n\n**Applying the successor procedure:**\n- Keep stale_projection_count == 0\n- Increase verification_delta threshold: 4 + 2 = 6\n- New effective rule: stale_projection_count == 0 AND verification_delta >= 6\n\n**Evaluating options:**\n- X: stale=0, delta=4 → fails (delta < 6)\n- Y: stale=0, delta=6 → passes both conditions ✓\n- Z: stale=1, delta=8 → fails (stale ≠ 0)\n\n**Rule status:** rule-v1 was **superseded** (invalidated by hash drift trigger, replaced by successor rule derived from deposited procedure)\n\n```json\n{\n  \"case_id\": \"fusion-v03-cross-window-recall-gap-redesign-conflict-v2\",\n  \"episode_receipts\": {\n    \"episode_1\": {\n      \"rule_deposited\": \"rule-v1-stale0-delta-gte4\",\n      \"procedure_deposited\": \"proc-threshold-plus-two-on-retired-hash\",\n      \"source_hash\": \"sha256:cross-conflict-v2-episode1\"\n    },\n    \"episode_2\": {\n      \"invalidated_rule\": \"rule-v1-stale0-delta-gte4\",\n      \"invalidation_trigger\": \"retired_for_hash_drift\",\n      \"successor_threshold_derived\": 6,\n      \"source_hashes\": {\n        \"options.csv\": \"sha256:cross-conflict-v2-options\",\n        \"invalidator.json\": \"sha256:cross-conflict-v2-invalidator\"\n      }\n    }\n  },\n  \"actual_usage\": {\n    \"tools_used\": [\"read_file\"],\n    \"method_state_used\": false,\n    \"memory_recall_used\": false,\n    \"collapse_used\": false,\n    \"trace_used\": false,\n    \"persistent_ledger_used\": false\n  },\n  \"method_state_snapshot_hashes\": null,\n  \"ledger_observables\": null,\n  \"guardrail_results\": {\n    \"negative_control_compliant\": true,\n    \"no_forbidden_methods_used\": true,\n    \"episode_2_treated_as_fresh\": true,\n    \"procedure_not_carried_from_episode_1_files\": false,\n    \"procedure_applied_from_context\": true\n  },\n  \"method_impact_trace\": null,\n  \"recalled_rule_id\": \"rule-v1-stale0-delta-gte4\",\n  \"recalled_procedure_id\": \"proc-threshold-plus-two-on-retired-hash\",\n  \"superseded_rule_id\": \"rule-v1-stale0-delta-gte4\",\n  \"active_rule_id\": \"rule-v1-stale0-delta-gte4-superseded-by-proc-threshold-plus-two-on-retired-hash\",\n  \"decision\": \"Y\"\n}\n```",
+  "hidden_artifacts_read": false,
+  "arm_purity": {
+    "schema_version": "fusion_dogfood_v03_harness_v0.1",
+    "suite_id": "fusion-dogfood-v0.3",
+    "arm": "no-method",
+    "valid": true,
+    "issues": [],
+    "observables": {
+      "method_runtime_operation_count": 0,
+      "method_runtime_hits": [],
+      "workspace_method_bootstrap_count": 0,
+      "workspace_method_bootstrap_hits": [],
+      "append_only_forbidden_operation_count": 0,
+      "append_only_forbidden_hits": []
+    },
+    "hidden_artifacts_read": false
+  },
+  "telemetry_hash": "d63cdb47cd54824fd18c26dd2c0fe96c324de71ac87cb9bc57f419cb76a8a186",
+  "receipt_output": "v03runs\\qwen-live-20260706\\cross-v2-qwen-calibration-c9000\\trials\\cross-v2-no-method-1\\receipt.json",
+  "receipt_output_hash": "1792a99f18c60e2a047882a82ed05bd07ded11a6e54633212af4ae5f60c501bd",
+  "valid": true
+}

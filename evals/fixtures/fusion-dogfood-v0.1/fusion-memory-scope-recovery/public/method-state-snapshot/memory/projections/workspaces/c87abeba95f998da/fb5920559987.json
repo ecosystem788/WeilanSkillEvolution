@@ -1,0 +1,50 @@
+{
+  "authority": "derived_projection_verify_against_current_sources",
+  "control_heads": {
+    "scope": "e24ebf5c-dd87-412d-9374-11a6cc23a29a",
+    "workspace": null
+  },
+  "decisions": [],
+  "focus": "CORPUS-V2 工单冻结前评审 4 项(强控硬门/main-legacy 消费分层/宿主约束机械修复/八项 hash 链)全采纳修订完毕;候选补至 27(负控 9);待 Codex 执行",
+  "generated_at_utc": "2026-07-04T06:31:02+00:00",
+  "next_action": "Codex 执行 specs/TICKET-CORPUS-V2.md(修订版):measure→build→report,exit=corpus_v2_frozen_ready 后 Claude 复核带检查→项目方冻结;随后决策下一实验(S1 预算行为版 vs M1 隔离)",
+  "open_questions": [],
+  "projection_id": "11b24c2f-4ae2-4f4a-bf4d-2852fe1b3b15",
+  "schema_version": "weilan_workspace_projection_v0.2",
+  "scope": "fusion-program",
+  "scope_key": "fb5920559987",
+  "source_snapshots": [
+    {
+      "exists": true,
+      "kind": "file",
+      "path": "D:\\weilan-llm-fusion\\specs\\TICKET-CORPUS-V2.md",
+      "ref": "specs/TICKET-CORPUS-V2.md",
+      "sha256": "b1065aec6f6672b08d4c38c31eb1c5ade2f22ce76f008f857988022ecb683c5c",
+      "size": 8222
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "path": "D:\\weilan-llm-fusion\\corpus\\candidates_v2_claude.json",
+      "ref": "corpus/candidates_v2_claude.json",
+      "sha256": "208ed8448bb9133eef0c2b1900511698d1bed295013f9b38d9d2fb3ba891018a",
+      "size": 6485
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "path": "D:\\weilan-llm-fusion\\PROJECT_CONTROL.json",
+      "ref": "PROJECT_CONTROL.json",
+      "sha256": "c8d8d09a3160e690c7941ffc6d683c07b95409669d2e55bc95d0675117174a5e",
+      "size": 45437
+    }
+  ],
+  "sources": [
+    "specs/TICKET-CORPUS-V2.md",
+    "corpus/candidates_v2_claude.json",
+    "PROJECT_CONTROL.json"
+  ],
+  "status": "active",
+  "workspace": "D:\\weilan-llm-fusion",
+  "workspace_key": "c87abeba95f998da"
+}

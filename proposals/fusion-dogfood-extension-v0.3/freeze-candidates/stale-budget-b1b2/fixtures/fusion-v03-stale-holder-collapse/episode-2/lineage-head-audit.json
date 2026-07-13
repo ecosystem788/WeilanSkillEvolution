@@ -1,0 +1,6 @@
+{
+  "audit_id": "lineage-head-audit-20260705",
+  "invalidates_holder_claim": "legacy deployment baseline is the current rollback anchor",
+  "finding": "holder_selected event was missing required frame field in the live lineage head",
+  "required_action": "supersede or collapse the holder and preserve trace to the reusable receipt evidence"
+}

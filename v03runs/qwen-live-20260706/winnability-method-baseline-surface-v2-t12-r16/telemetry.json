@@ -1,0 +1,348 @@
+{
+  "schema_version": "fusion_dogfood_v03_harness_v0.1",
+  "surface": "qwen_openai_compatible_telemetry",
+  "runner_id": "qwen-openai-compatible-v0.1",
+  "environment_ids": [
+    "qwen-api:qwen3.7-plus-2026-05-26"
+  ],
+  "model_snapshot": "qwen3.7-plus-2026-05-26",
+  "arm": "method-baseline",
+  "tool_call_count": 6,
+  "executed_tool_call_count": 6,
+  "tool_call_names": [
+    "run_command",
+    "run_command",
+    "run_command",
+    "read_file",
+    "run_command",
+    "run_command"
+  ],
+  "context_token_count": 4902,
+  "context_token_rule": "peak_single_response_total_tokens",
+  "billable_total_tokens": 23178,
+  "prompt_token_count": 22360,
+  "completion_token_count": 818,
+  "ordered_event_stream": true,
+  "arm_purity_observables": {
+    "method_runtime_operation_count": 22,
+    "method_runtime_hits": [
+      {
+        "marker": "solve-with-weilan",
+        "source": "message:0"
+      },
+      {
+        "marker": "lineage-show",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-consolidate",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-disposition",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-recall",
+        "source": "message:2"
+      },
+      {
+        "marker": "weilan_trace.py",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-recall",
+        "source": "message:3"
+      },
+      {
+        "marker": "memory-consolidate",
+        "source": "message:4"
+      },
+      {
+        "marker": "memory-disposition",
+        "source": "message:4"
+      },
+      {
+        "marker": "memory-recall",
+        "source": "message:4"
+      },
+      {
+        "marker": "weilan_trace.py",
+        "source": "message:6"
+      },
+      {
+        "marker": "weilan_trace.py",
+        "source": "message:10"
+      },
+      {
+        "marker": "lineage-show",
+        "source": "message:12"
+      },
+      {
+        "marker": "memory-consolidate",
+        "source": "message:12"
+      },
+      {
+        "marker": "memory-disposition",
+        "source": "message:12"
+      },
+      {
+        "marker": "memory-recall",
+        "source": "message:12"
+      },
+      {
+        "marker": "weilan_trace.py",
+        "source": "message:12"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:0"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:1"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:2"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:4"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:5"
+      }
+    ],
+    "workspace_method_bootstrap_count": 0,
+    "workspace_method_bootstrap_hits": [],
+    "append_only_forbidden_operation_count": 11,
+    "append_only_forbidden_hits": [
+      {
+        "marker": "run_command",
+        "source": "tool_event:0"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:1"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:2"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:4"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:5"
+      },
+      {
+        "marker": "memory-consolidate",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-disposition",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-consolidate",
+        "source": "message:4"
+      },
+      {
+        "marker": "memory-disposition",
+        "source": "message:4"
+      },
+      {
+        "marker": "memory-consolidate",
+        "source": "message:12"
+      },
+      {
+        "marker": "memory-disposition",
+        "source": "message:12"
+      }
+    ]
+  },
+  "actual_usage": {
+    "tool_calls": 6,
+    "executed_tool_calls": 6,
+    "context_tokens": 4902,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 23178,
+    "prompt_tokens": 22360,
+    "completion_tokens": 818,
+    "truncated": true,
+    "truncation_reason": "context_tokens",
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "scoring_time_truncation": {
+      "truncated": true,
+      "truncation_reason": "context_tokens",
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 6,
+      "effective_context_tokens": 4800
+    }
+  },
+  "final_text": "",
+  "hidden_artifacts_read": false,
+  "arm_purity": {
+    "schema_version": "fusion_dogfood_v03_harness_v0.1",
+    "suite_id": "fusion-dogfood-v0.3",
+    "arm": "method-baseline",
+    "valid": true,
+    "issues": [],
+    "observables": {
+      "method_runtime_operation_count": 22,
+      "method_runtime_hits": [
+        {
+          "marker": "solve-with-weilan",
+          "source": "message:0"
+        },
+        {
+          "marker": "lineage-show",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-consolidate",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-disposition",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-recall",
+          "source": "message:2"
+        },
+        {
+          "marker": "weilan_trace.py",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-recall",
+          "source": "message:3"
+        },
+        {
+          "marker": "memory-consolidate",
+          "source": "message:4"
+        },
+        {
+          "marker": "memory-disposition",
+          "source": "message:4"
+        },
+        {
+          "marker": "memory-recall",
+          "source": "message:4"
+        },
+        {
+          "marker": "weilan_trace.py",
+          "source": "message:6"
+        },
+        {
+          "marker": "weilan_trace.py",
+          "source": "message:10"
+        },
+        {
+          "marker": "lineage-show",
+          "source": "message:12"
+        },
+        {
+          "marker": "memory-consolidate",
+          "source": "message:12"
+        },
+        {
+          "marker": "memory-disposition",
+          "source": "message:12"
+        },
+        {
+          "marker": "memory-recall",
+          "source": "message:12"
+        },
+        {
+          "marker": "weilan_trace.py",
+          "source": "message:12"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:0"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:1"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:2"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:4"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:5"
+        }
+      ],
+      "workspace_method_bootstrap_count": 0,
+      "workspace_method_bootstrap_hits": [],
+      "append_only_forbidden_operation_count": 11,
+      "append_only_forbidden_hits": [
+        {
+          "marker": "run_command",
+          "source": "tool_event:0"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:1"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:2"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:4"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:5"
+        },
+        {
+          "marker": "memory-consolidate",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-disposition",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-consolidate",
+          "source": "message:4"
+        },
+        {
+          "marker": "memory-disposition",
+          "source": "message:4"
+        },
+        {
+          "marker": "memory-consolidate",
+          "source": "message:12"
+        },
+        {
+          "marker": "memory-disposition",
+          "source": "message:12"
+        }
+      ]
+    },
+    "hidden_artifacts_read": false
+  },
+  "telemetry_hash": "0ba8e3371f519580403c2e11cb7043c2cb18706bcf01e814bdaae0f900d32042",
+  "receipt_output": "v03runs\\qwen-live-20260706\\winnability-method-baseline-surface-v2-t12-r16\\receipt.json",
+  "receipt_output_hash": "96ffd18f7591905d44deb7d53aa38d73755c37617a9fc6d7fe1a58f839a5f42f",
+  "valid": false
+}

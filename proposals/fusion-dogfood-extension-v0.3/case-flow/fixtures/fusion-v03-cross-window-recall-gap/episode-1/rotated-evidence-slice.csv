@@ -1,0 +1,5 @@
+source_id,stale_projection_count,verification_delta,decision
+A,2,5,hold
+B,0,4,select
+C,0,1,hold
+D,1,6,hold

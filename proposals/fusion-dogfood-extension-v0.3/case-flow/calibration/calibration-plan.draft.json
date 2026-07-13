@@ -1,0 +1,75 @@
+{
+  "schema_version": "fusion_dogfood_calibration_plan_v0.3",
+  "suite_id": "fusion-dogfood-v0.3",
+  "status": "completed_real_baseline_calibration",
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "dry_run_aggregate": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/dry-run-2c539d0b-20260705/aggregate.json",
+  "max_trials_per_case": 2,
+  "cases": [
+    {
+      "case_id": "fusion-v03-stale-holder-collapse",
+      "role": "load_bearing_episode_case",
+      "real_trial_status": "completed",
+      "dry_run_status": "dry_run_pipeline_passed",
+      "dry_run_weighted_baseline_mean": 0.68,
+      "dry_run_calibration_receipt_hash": "f39bcce09c92b79a58b656cc546235d6a6ba32d33038b9c760d559a66f0d46e6",
+      "real_method_baseline_mean": 0.73,
+      "r3_passed": true,
+      "r6_separation_passed": true,
+      "verdict": "keep_for_freeze_candidate",
+      "verdict_reason": "R8 baseline headroom below 0.80 with required gates satisfied"
+    },
+    {
+      "case_id": "fusion-v03-cross-window-recall-gap",
+      "role": "load_bearing_episode_case",
+      "real_trial_status": "completed",
+      "dry_run_status": "dry_run_pipeline_passed",
+      "dry_run_weighted_baseline_mean": 0.725,
+      "dry_run_calibration_receipt_hash": "c5414cc8e95573df80e98ea26f435addc20cd455f9406bb02a831cf482c1bcaa",
+      "real_method_baseline_mean": 0.66,
+      "r3_passed": true,
+      "r6_separation_passed": false,
+      "verdict": "redesign",
+      "verdict_reason": "R6 negative-control separation failed"
+    },
+    {
+      "case_id": "fusion-v03-budget-bound-ledger-triage",
+      "role": "headroom_case",
+      "real_trial_status": "completed",
+      "dry_run_status": "dry_run_pipeline_passed",
+      "dry_run_weighted_baseline_mean": 0.745,
+      "dry_run_calibration_receipt_hash": "7cbc4f7521a1ba57570c4ecfc57c4196fb432e93b69f73fd6fc6802b7ff4ee1e",
+      "real_method_baseline_mean": 0.4,
+      "r3_passed": true,
+      "r6_separation_passed": null,
+      "verdict": "keep_for_freeze_candidate",
+      "verdict_reason": "R8 baseline headroom below 0.80 with required gates satisfied"
+    }
+  ],
+  "quarantine": "Calibration transcripts, raw outputs, and score breakdowns are not copied into public fixtures or candidate prompts.",
+  "telemetry_surface": {
+    "status": "validated",
+    "selected_surface": "codex_rollout_jsonl_family",
+    "environment_id": "codex-rollout-jsonl-v0.142.5",
+    "validation_hash": "3cfb2771625a90d53d8ffba6931ea0c9b225aeba8e626ccd7cc5f6d08c139a46",
+    "validation_record": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/telemetry-surface/codex-desktop-subagent-rollout.json",
+    "enforcement": {
+      "live_truncation_supported": false,
+      "scoring_time_truncation_supported": true,
+      "truncation_status_source": "computed_by_runner_from_budget_and_ordered_rollout_events"
+    },
+    "same_surface_requirement": "All arms must use the same Codex rollout JSONL telemetry family, CLI version, budget accounting, and scoring-time truncation semantics; arm-specific home contents are part of the arm configuration and must be content-addressed."
+    ,
+    "arm_isolation_clarification": {
+      "r3_same_execution_surface_meaning": "Execution surface consistency means the same CLI family, CLI version, telemetry JSONL schema, budget accounting, and scoring-time truncation semantics. It does not require identical home contents across arms.",
+      "home_contents_are_arm_configuration": {
+        "no-method": "clean home with no AGENTS.md/CLAUDE.md bootstrap, no solve-with-weilan skill, and no method-state runtime",
+        "append-only": "frozen append-only control home with retrieval available and consolidation/supersession/collapse disabled",
+        "method-baseline": "full method home/runtime as the deployed baseline configuration"
+      },
+      "content_addressing": "Each arm home composition and runner script must be content-addressed in the trial receipt; a no-method trial with method bootstrap or method-runtime operations is invalid under R6 arm purity.",
+      "clean_no_method_probe": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/arm-purity/CODEX_EXEC_CLEAN_NO_METHOD_PROBE.json"
+    }
+  },
+  "real_calibration_aggregate": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/real-baseline-2c539d0b-20260705/REAL_CALIBRATION_AGGREGATE.json"
+}

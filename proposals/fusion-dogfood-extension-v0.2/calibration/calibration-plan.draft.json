@@ -1,0 +1,54 @@
+{
+  "schema_version": "fusion_dogfood_calibration_plan_v0.2",
+  "suite_id": "fusion-dogfood-v0.2",
+  "status": "fail_redesign_or_drop_required",
+  "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "max_trials_per_case": 2,
+  "r2_threshold": {
+    "keep_requires_weighted_baseline_mean_lt": 0.85,
+    "ceiling_reject_at_or_above": 0.95
+  },
+  "quarantine": "Calibration transcripts, raw outputs, and score breakdowns are not copied into public fixtures or candidate prompts.",
+  "cases": [
+    {
+      "case_id": "fusion-authority-existing-authorization",
+      "role": "guardrail_case",
+      "trial_count": 0,
+      "weighted_baseline_mean": null,
+      "status": "guardrail_case_excluded_from_headroom",
+      "calibration_receipt_hash": null
+    },
+    {
+      "case_id": "fusion-stale-baseline-binding-repair",
+      "role": "headroom_case",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.9925,
+      "status": "rejected_ceiling_saturation",
+      "calibration_receipt_hash": "6509772a1e367fccfb6b368d97a4bb030b735f4f6fa48922f8481b617a3ea653",
+      "calibration_aggregate": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260705/aggregate.json"
+    },
+    {
+      "case_id": "fusion-budget-saturated-triage",
+      "role": "headroom_case",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.955,
+      "status": "rejected_ceiling_saturation",
+      "calibration_receipt_hash": "1bf83ecfd5fdd4ef29af7e363b782a742be04c33132ed3223cb4a9e80af3ab7c",
+      "calibration_aggregate": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260705/aggregate.json"
+    },
+    {
+      "case_id": "fusion-targeted-deployment-risk",
+      "role": "headroom_case",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.9725,
+      "status": "rejected_ceiling_saturation",
+      "calibration_receipt_hash": "fb6624aff03a9f6dce7a5e524473982d66cc320f0990d6aef01b07540dac481c",
+      "calibration_aggregate": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260705/aggregate.json"
+    }
+  ],
+  "r7_headroom_check": {
+    "required_cases_below_0_95": 2,
+    "observed_cases_below_0_95": 0,
+    "status": "fail"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "trial_id": "fusion-v03-cross-window-recall-gap-no-method-trial-2",
+  "case_id": "fusion-v03-cross-window-recall-gap",
+  "arm": "no-method",
+  "trial": 2,
+  "selected_sources": [
+    "PUBLIC_FIXTURE_ROOT/episode-1/README.md",
+    "PUBLIC_FIXTURE_ROOT/episode-1/rotated-evidence-slice.csv",
+    "PUBLIC_FIXTURE_ROOT/episode-1/hash-manifest.json",
+    "ASSIGNED_METHOD_HOME",
+    "PUBLIC_FIXTURE_ROOT/episode-2/README.md",
+    "PUBLIC_FIXTURE_ROOT/episode-2/options.csv",
+    "PUBLIC_FIXTURE_ROOT/episode-2/source-hashes.json"
+  ],
+  "skipped_sources": [],
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "public_sources": [
+        "episode-1/README.md",
+        "episode-1/rotated-evidence-slice.csv",
+        "episode-1/hash-manifest.json"
+      ],
+      "derived_rule": {
+        "description": "select only when stale_projection_count == 0 and verification_delta >= 4",
+        "threshold_pair": {
+          "stale_projection_count": 0,
+          "verification_delta_min": 4
+        },
+        "positive_example_ids": [
+          "B"
+        ],
+        "negative_example_ids": [
+          "A",
+          "C",
+          "D"
+        ]
+      },
+      "rule_id": "not_deposited_no_method_arm",
+      "deposit_result": "not_written_negative_control_forbids_method_state_or_persistent_ledger"
+    },
+    {
+      "episode": 2,
+      "fresh_context_start": true,
+      "first_consulted": "ASSIGNED_METHOD_HOME",
+      "method_home_files_found": [],
+      "public_sources": [
+        "episode-2/README.md",
+        "episode-2/options.csv",
+        "episode-2/source-hashes.json"
+      ],
+      "recovered_rule": null,
+      "decision_basis": "No isolated method-state deposit was present to recover and verify; public guardrails prohibit inferring the omitted rule from task wording.",
+      "selectable_option": null
+    }
+  ],
+  "actual_usage": {
+    "tool_calls": 5,
+    "context_tokens": null,
+    "truncated": false,
+    "note": "Self-report counts the task-level inspect/write/verify sequence against the public calibration prompt; mandatory outer bootstrap was required by higher-priority workspace instructions before the negative-control prompt was read."
+  },
+  "actual_usage_self_report": {
+    "tool_calls": 5,
+    "context_tokens": null,
+    "truncated": false
+  },
+  "method_state_snapshot_hashes": {
+    "ASSIGNED_METHOD_HOME": null,
+    "reason": "No files were present under the assigned method home during the episode-2 fresh-context consult."
+  },
+  "ledger_observables": [],
+  "guardrail_results": [
+    {
+      "guardrail": "do not read live workspace files",
+      "result": "passed_with_exception_for_controller_prompt_and_assigned_method_home"
+    },
+    {
+      "guardrail": "do not infer the omitted rule from task wording",
+      "result": "passed"
+    },
+    {
+      "guardrail": "do not mutate fixtures, manifests, deployment receipts, or the deployed Skill",
+      "result": "passed"
+    },
+    {
+      "guardrail": "work only inside ASSIGNED_TRIAL_ROOT and PUBLIC_FIXTURE_ROOT",
+      "result": "passed_for_task_writes"
+    }
+  ],
+  "method_impact_trace": [
+    {
+      "observable": "cross_window_recall_gap",
+      "impact": "Episode 1 rule could be derived from public data, but the no-method arm produced no allowed method-state deposit; episode 2 therefore had no verified recovered rule."
+    }
+  ],
+  "recalled_rule_id": null,
+  "source_verification": {
+    "episode_1": {
+      "rotated-evidence-slice.csv": "sha256:public-rotated-slice-v1",
+      "verified_from": "episode-1/hash-manifest.json"
+    },
+    "episode_2": {
+      "options.csv": "sha256:public-options-v1",
+      "episode_1_source_hash_to_verify": "sha256:public-rotated-slice-v1",
+      "verified_from": "episode-2/source-hashes.json",
+      "method_state_source_hash_verification": "not_available_no_deposit"
+    }
+  },
+  "decision": {
+    "status": "blocked_no_verified_recalled_rule",
+    "selected_option_id": null,
+    "rationale": "The only valid episode-2 success path requires recovering and verifying the isolated method-state deposit. The assigned method home was empty, so no option was selected."
+  }
+}

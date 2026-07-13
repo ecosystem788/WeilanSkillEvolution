@@ -1,0 +1,15 @@
+{
+  "authorized_by_user_text": "?????v5 ???????",
+  "candidate_tree_hash": "2e3db4f5519f95f7d468442864336ca72b6b58851c3f6dea62018df872791b47",
+  "created_at": "2026-07-07T10:33:34+00:00",
+  "deployment_id": "2e3db4f5519f95f7d468",
+  "previous_tree_hash": "4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f",
+  "proposal_id": "barrel-fix-v5-collapse-gate-liveness",
+  "record_type": "DEPLOYMENT_INTENT",
+  "rollback_plan": "replace installed targets with D:\\WeilanSkillEvolution\\deployments\\2e3db4f5519f95f7d468\\rollback\\solve-with-weilan",
+  "schema_version": "weilan_deployment_intent_v0.1",
+  "targets": [
+    "D:\\CodexData\\skills\\solve-with-weilan",
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan"
+  ]
+}

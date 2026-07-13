@@ -1,0 +1,36 @@
+{
+  "schema_version": "weilan_skill_deployment_receipt_v0.6-targeted",
+  "deployment_id": "bc787ade263a82dc054d0d92",
+  "created_at": "2026-07-07T06:14:17+00:00",
+  "authority_source": "conversation:2026-07-07-user-authorized-barrel-fix-v3-review-then-deploy",
+  "spec_path": "D:\\WeilanSkillEvolution\\staging\\barrel-fix-v3\\BARREL_FIX_V3_SPEC.md",
+  "verification_result": "D:\\WeilanSkillEvolution\\deployments\\bc787ade263a82dc054d0d92\\TARGETED_VERIFICATION_RESULT.json",
+  "targets": [
+    "D:\\CodexData\\skills\\solve-with-weilan",
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan"
+  ],
+  "candidate": "D:\\WeilanSkillEvolution\\deployments\\bc787ade263a82dc054d0d92\\candidate\\solve-with-weilan",
+  "before_artifact_hash": "cf8553304505c33eea63f3febb310542d392fcb27657c7bd40581876c38da847",
+  "after_artifact_hash": "bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85",
+  "changed_files": [
+    "SKILL.md",
+    "references/memory-system.md",
+    "scripts/runner.py",
+    "scripts/runtime_core.py",
+    "scripts/test_v3_robustness.py",
+    "scripts/transaction.py",
+    "scripts/weilan_trace.py"
+  ],
+  "rollback_artifact": "D:\\WeilanSkillEvolution\\deployments\\bc787ade263a82dc054d0d92\\rollback\\solve-with-weilan",
+  "rollback_artifact_hash": "cf8553304505c33eea63f3febb310542d392fcb27657c7bd40581876c38da847",
+  "rollback_triggers": [
+    "SKILL.md activation or trace instruction regression",
+    "archive-plan false eligibility or blocked-frame regression",
+    "runner conflict/control-stop misclassification",
+    "Windows lock timeout or derived-view replace regression",
+    "conversation evidence source resolution regression",
+    "memory-recall or projection freshness regression"
+  ],
+  "reversible": true,
+  "record_type": "DEPLOYMENT_INTENT"
+}

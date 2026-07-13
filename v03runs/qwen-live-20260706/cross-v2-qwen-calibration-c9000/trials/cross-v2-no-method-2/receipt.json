@@ -1,0 +1,89 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": {
+    "episode_1": {
+      "rule_id": "rule-v1-stale0-delta-gte4",
+      "rule_text": "select stale_projection_count == 0 and verification_delta >= 4",
+      "successor_update_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+      "successor_update_procedure": "when the rule source is retired for hash drift, keep stale_projection_count == 0 and increase verification_delta threshold by 2",
+      "source_hash": "sha256:cross-conflict-v2-episode1"
+    },
+    "episode_2": {
+      "invalidates_rule_id": "rule-v1-stale0-delta-gte4",
+      "trigger": "retired_for_hash_drift",
+      "replacement_instruction": "apply the deposited successor-update procedure; this file does not state the resulting threshold",
+      "options": [
+        {
+          "option_id": "X",
+          "stale_projection_count": 0,
+          "verification_delta": 4
+        },
+        {
+          "option_id": "Y",
+          "stale_projection_count": 0,
+          "verification_delta": 6
+        },
+        {
+          "option_id": "Z",
+          "stale_projection_count": 1,
+          "verification_delta": 8
+        }
+      ],
+      "source_hashes": {
+        "options.csv": "sha256:cross-conflict-v2-options",
+        "invalidator.json": "sha256:cross-conflict-v2-invalidator"
+      }
+    }
+  },
+  "actual_usage": {
+    "tool_calls": 10,
+    "executed_tool_calls": 10,
+    "context_tokens": 6068,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 18011,
+    "prompt_tokens": 11692,
+    "completion_tokens": 6319,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 10,
+      "effective_context_tokens": 6068
+    }
+  },
+  "method_state_snapshot_hashes": null,
+  "ledger_observables": null,
+  "guardrail_results": {
+    "no_method_arm_compliant": true,
+    "episode_1_procedure_in_episode_2_public_files": false,
+    "procedure_carried_into_episode_2": false,
+    "hard_guardrails_respected": true
+  },
+  "method_impact_trace": null,
+  "recalled_rule_id": null,
+  "recalled_procedure_id": null,
+  "superseded_rule_id": "rule-v1-stale0-delta-gte4",
+  "active_rule_id": null,
+  "decision": null,
+  "trial_id": "cross-v2-no-method-2",
+  "arm": "no-method",
+  "trial": 2,
+  "actual_usage_self_report": {
+    "tool_calls": 7,
+    "context_tokens_estimated": 3200,
+    "episodes_processed": 2
+  }
+}

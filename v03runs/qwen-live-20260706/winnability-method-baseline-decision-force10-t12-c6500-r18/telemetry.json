@@ -1,0 +1,181 @@
+{
+  "schema_version": "fusion_dogfood_v03_harness_v0.1",
+  "surface": "qwen_openai_compatible_telemetry",
+  "runner_id": "qwen-openai-compatible-v0.1",
+  "environment_ids": [
+    "qwen-api:qwen3.7-plus-2026-05-26"
+  ],
+  "model_snapshot": "qwen3.7-plus-2026-05-26",
+  "arm": "method-baseline",
+  "tool_call_count": 10,
+  "executed_tool_call_count": 10,
+  "tool_call_names": [
+    "run_command",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file"
+  ],
+  "context_token_count": 3876,
+  "context_token_rule": "peak_single_response_total_tokens",
+  "billable_total_tokens": 29367,
+  "prompt_token_count": 26869,
+  "completion_token_count": 2498,
+  "ordered_event_stream": true,
+  "arm_purity_observables": {
+    "method_runtime_operation_count": 8,
+    "method_runtime_hits": [
+      {
+        "marker": "solve-with-weilan",
+        "source": "message:0"
+      },
+      {
+        "marker": "lineage-show",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-consolidate",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-disposition",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-recall",
+        "source": "message:2"
+      },
+      {
+        "marker": "weilan_trace.py",
+        "source": "message:2"
+      },
+      {
+        "marker": "solve-with-weilan",
+        "source": "message:22"
+      },
+      {
+        "marker": "run_command",
+        "source": "tool_event:0"
+      }
+    ],
+    "workspace_method_bootstrap_count": 0,
+    "workspace_method_bootstrap_hits": [],
+    "append_only_forbidden_operation_count": 3,
+    "append_only_forbidden_hits": [
+      {
+        "marker": "run_command",
+        "source": "tool_event:0"
+      },
+      {
+        "marker": "memory-consolidate",
+        "source": "message:2"
+      },
+      {
+        "marker": "memory-disposition",
+        "source": "message:2"
+      }
+    ]
+  },
+  "actual_usage": {
+    "tool_calls": 10,
+    "executed_tool_calls": 10,
+    "context_tokens": 3876,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 29367,
+    "prompt_tokens": 26869,
+    "completion_tokens": 2498,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 10,
+      "effective_context_tokens": 3876
+    }
+  },
+  "final_text": "{\n  \"case_id\": \"fusion-v03-cross-window-recall-gap-redesign-conflict-v2\",\n  \"episode_receipts\": [],\n  \"actual_usage\": null,\n  \"method_state_snapshot_hashes\": {},\n  \"ledger_observables\": {},\n  \"guardrail_results\": {},\n  \"method_impact_trace\": \"superseded/collapsed with trace\",\n  \"recalled_rule_id\": \"rule-v1\",\n  \"recalled_procedure_id\": \"successor-update\",\n  \"superseded_rule_id\": \"rule-v1\",\n  \"active_rule_id\": null,\n  \"decision\": null\n}",
+  "hidden_artifacts_read": false,
+  "arm_purity": {
+    "schema_version": "fusion_dogfood_v03_harness_v0.1",
+    "suite_id": "fusion-dogfood-v0.3",
+    "arm": "method-baseline",
+    "valid": true,
+    "issues": [],
+    "observables": {
+      "method_runtime_operation_count": 8,
+      "method_runtime_hits": [
+        {
+          "marker": "solve-with-weilan",
+          "source": "message:0"
+        },
+        {
+          "marker": "lineage-show",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-consolidate",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-disposition",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-recall",
+          "source": "message:2"
+        },
+        {
+          "marker": "weilan_trace.py",
+          "source": "message:2"
+        },
+        {
+          "marker": "solve-with-weilan",
+          "source": "message:22"
+        },
+        {
+          "marker": "run_command",
+          "source": "tool_event:0"
+        }
+      ],
+      "workspace_method_bootstrap_count": 0,
+      "workspace_method_bootstrap_hits": [],
+      "append_only_forbidden_operation_count": 3,
+      "append_only_forbidden_hits": [
+        {
+          "marker": "run_command",
+          "source": "tool_event:0"
+        },
+        {
+          "marker": "memory-consolidate",
+          "source": "message:2"
+        },
+        {
+          "marker": "memory-disposition",
+          "source": "message:2"
+        }
+      ]
+    },
+    "hidden_artifacts_read": false
+  },
+  "telemetry_hash": "dd22c232a8034f6154eea3b47fca0e7241cdb12a424a002539773abd182c7b27",
+  "receipt_output": "v03runs\\qwen-live-20260706\\winnability-method-baseline-decision-force10-t12-c6500-r18\\receipt.json",
+  "receipt_output_hash": "f319aa66a891db471022041b3e45c504403cee62ccbd86a30633a399780c51d8",
+  "valid": true
+}

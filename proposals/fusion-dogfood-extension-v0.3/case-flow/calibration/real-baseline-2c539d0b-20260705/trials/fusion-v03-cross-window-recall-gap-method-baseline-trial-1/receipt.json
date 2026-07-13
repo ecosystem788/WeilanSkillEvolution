@@ -1,0 +1,178 @@
+﻿{
+    "trial_id":  "fusion-v03-cross-window-recall-gap-method-baseline-trial-1",
+    "case_id":  "fusion-v03-cross-window-recall-gap",
+    "arm":  "method-baseline",
+    "trial":  1,
+    "selected_sources":  [
+                             "episode-1/hash-manifest.json",
+                             "episode-1/rotated-evidence-slice.csv",
+                             "episode-2/source-hashes.json",
+                             "episode-2/options.csv"
+                         ],
+    "skipped_sources":  [
+
+                        ],
+    "episode_receipts":  [
+                             {
+                                 "episode":  1,
+                                 "source_files":  [
+                                                      "episode-1/hash-manifest.json",
+                                                      "episode-1/rotated-evidence-slice.csv"
+                                                  ],
+                                 "source_verification":  {
+                                                             "rotated-evidence-slice.csv":  "sha256:public-rotated-slice-v1"
+                                                         },
+                                 "derived_rule":  {
+                                                      "rule_id":  "0482fc9349720265718bcd6b2259af888f13e6dc73ae6a5e4142d1661ad5c2fe",
+                                                      "source_hash":  "sha256:public-rotated-slice-v1",
+                                                      "predicate":  "select when stale_projection_count == 0 and verification_delta \u003e= 4",
+                                                      "threshold_pair":  {
+                                                                             "stale_projection_count":  0,
+                                                                             "verification_delta_min":  4
+                                                                         }
+                                                  },
+                                 "deposited_to_method_state":  true,
+                                 "frame_id":  "wf-20260705-085421-7111ab"
+                             },
+                             {
+                                 "episode":  2,
+                                 "fresh_context_order":  [
+                                                             "assigned_method_home_ledger_recall",
+                                                             "episode-2/source-hashes.json",
+                                                             "episode-2/options.csv"
+                                                         ],
+                                 "recovered_from_method_state":  true,
+                                 "verified_against_episode_2_hash":  true,
+                                 "source_verification":  {
+                                                             "options.csv":  "sha256:public-options-v1",
+                                                             "episode_1_source_hash_to_verify":  "sha256:public-rotated-slice-v1"
+                                                         },
+                                 "option_results":  [
+                                                        {
+                                                            "option_id":  "X",
+                                                            "selectable":  false,
+                                                            "reason":  "verification_delta 3 is below recovered minimum 4"
+                                                        },
+                                                        {
+                                                            "option_id":  "Y",
+                                                            "selectable":  false,
+                                                            "reason":  "stale_projection_count 1 is not 0"
+                                                        },
+                                                        {
+                                                            "option_id":  "Z",
+                                                            "selectable":  true,
+                                                            "reason":  "stale_projection_count 0 and verification_delta 5 meets recovered rule"
+                                                        }
+                                                    ],
+                                 "decision":  "Z"
+                             }
+                         ],
+    "actual_usage":  {
+                         "tool_calls":  12,
+                         "context_tokens":  "under 4800 self-reported",
+                         "truncated":  false,
+                         "budget_exceeded":  true
+                     },
+    "actual_usage_self_report":  {
+                                     "tool_calls":  12,
+                                     "context_tokens":  "under 4800 self-reported",
+                                     "truncated":  false,
+                                     "budget_exceeded":  true
+                                 },
+    "method_state_snapshot_hashes":  {
+                                         "frames\\2026-07-05\\wf-20260705-085147-66482d.jsonl":  "sha256:8b24baa59069202b4496610b8f223b6b332275e79bcd7500da31e7a3abb6b89f",
+                                         "frames\\2026-07-05\\wf-20260705-085421-7111ab.jsonl":  "sha256:2d9fb5294c1fe8142443428bccf491d4a511bc80ff55ba5f65ae3427277ff51d",
+                                         "memory\\audits\\persistence\\3e3771ae49cba165\\91ab8cedd721\\2026-07-05.jsonl":  "sha256:fff7f64c832d5d723dc6bdf9cdac1751bf68213f88bdac0e4b5854ab1e779dba",
+                                         "memory\\lineage\\heads\\3e3771ae49cba165\\4021485a3ecc.json":  "sha256:3d16646f74927178beb9523e166eb22030945816f7077615fc649ad4e65662a5",
+                                         "memory\\lineage\\heads\\3e3771ae49cba165\\91ab8cedd721.json":  "sha256:da76be83abd0669cff55a9b5c9ad6248a613dac00d5353924f26a18f9eac16a5",
+                                         "memory\\lineage\\workspaces\\3e3771ae49cba165\\4021485a3ecc\\.lineage.lock":  "sha256:6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+                                         "memory\\lineage\\workspaces\\3e3771ae49cba165\\4021485a3ecc\\2026-07-05.jsonl":  "sha256:b2faff6da97ae8524786915b5f5d38dea6c2f3a5eb6614551368a8cc05bfd8a8",
+                                         "memory\\lineage\\workspaces\\3e3771ae49cba165\\91ab8cedd721\\.lineage.lock":  "sha256:6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+                                         "memory\\lineage\\workspaces\\3e3771ae49cba165\\91ab8cedd721\\2026-07-05.jsonl":  "sha256:612f0903583b26c3afdf0d616bcf381bfc1538a33679675e888cf869aaf7b15d",
+                                         "memory\\metabolism\\fences\\workspaces\\3e3771ae49cba165\\.workspace-contract.lock":  "sha256:6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+                                         "memory\\metabolism\\fences\\workspaces\\3e3771ae49cba165\\scopes\\4021485a3ecc\\.scope-contract.lock":  "sha256:6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+                                         "memory\\metabolism\\fences\\workspaces\\3e3771ae49cba165\\scopes\\91ab8cedd721\\.scope-contract.lock":  "sha256:6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+                                     },
+    "ledger_observables":  [
+                               {
+                                   "frame_id":  "wf-20260705-085421-7111ab",
+                                   "event":  "candidate_admitted",
+                                   "observable":  "ledger-recovered-threshold-rule admitted"
+                               },
+                               {
+                                   "frame_id":  "wf-20260705-085421-7111ab",
+                                   "event":  "holder_selected",
+                                   "observable":  "rule_id and predicate deposited with death_line"
+                               },
+                               {
+                                   "frame_id":  "wf-20260705-085421-7111ab",
+                                   "event":  "evidence_observed",
+                                   "observable":  "episode-2 recovered rule verified against public hash"
+                               },
+                               {
+                                   "frame_id":  "wf-20260705-085421-7111ab",
+                                   "event":  "persistence-audit",
+                                   "observable":  "round_end audit recorded"
+                               },
+                               {
+                                   "frame_id":  "wf-20260705-085421-7111ab",
+                                   "event":  "close",
+                                   "observable":  "frame closed success"
+                               }
+                           ],
+    "guardrail_results":  [
+                              {
+                                  "guardrail":  "work only inside ASSIGNED_TRIAL_ROOT and PUBLIC_FIXTURE_ROOT",
+                                  "result":  "pass"
+                              },
+                              {
+                                  "guardrail":  "do not read live workspace files",
+                                  "result":  "pass"
+                              },
+                              {
+                                  "guardrail":  "do not infer omitted rule from task wording",
+                                  "result":  "pass",
+                                  "evidence":  "episode-2 decision used recovered rule_id 0482fc9349720265718bcd6b2259af888f13e6dc73ae6a5e4142d1661ad5c2fe"
+                              },
+                              {
+                                  "guardrail":  "do not mutate fixtures, manifests, deployment receipts, or deployed Skill",
+                                  "result":  "pass"
+                              },
+                              {
+                                  "guardrail":  "tool_calls \u003c= 5",
+                                  "result":  "fail",
+                                  "evidence":  "trace CLI path-length and event-schema correction required extra calls"
+                              }
+                          ],
+    "method_impact_trace":  [
+                                {
+                                    "gate":  "isolated WEILAN_METHOD_HOME ledger",
+                                    "changed_intended_action":  true,
+                                    "observable_effect":  "episode-2 decision used rule recovered from assigned method-state ledger",
+                                    "source_evidence":  [
+                                                            "frame:wf-20260705-085421-7111ab"
+                                                        ],
+                                    "added_tool_calls":  1,
+                                    "elapsed_ms":  null,
+                                    "context_tokens":  null
+                                },
+                                {
+                                    "gate":  "trace validator",
+                                    "changed_intended_action":  true,
+                                    "observable_effect":  "rejected invalid L1/thin-holder/root-reuse attempts before valid L2 ledger receipt",
+                                    "source_evidence":  [
+                                                            "method_state_snapshot_hashes"
+                                                        ],
+                                    "added_tool_calls":  4,
+                                    "elapsed_ms":  null,
+                                    "context_tokens":  null
+                                }
+                            ],
+    "recalled_rule_id":  "0482fc9349720265718bcd6b2259af888f13e6dc73ae6a5e4142d1661ad5c2fe",
+    "source_verification":  {
+                                "episode-1/rotated-evidence-slice.csv":  "sha256:public-rotated-slice-v1",
+                                "episode-2/options.csv":  "sha256:public-options-v1",
+                                "recovered_episode_1_hash":  "sha256:public-rotated-slice-v1"
+                            },
+    "decision":  "Z"
+}

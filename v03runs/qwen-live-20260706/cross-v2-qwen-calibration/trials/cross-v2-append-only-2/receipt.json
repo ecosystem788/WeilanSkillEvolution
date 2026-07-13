@@ -1,0 +1,76 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": {
+    "episode-1": {
+      "rule_id": "rule-v1-stale0-delta-gte4",
+      "procedure_id": "proc-threshold-plus-two-on-retired-hash"
+    },
+    "episode-2": {
+      "invalidator_hash": "sha256:cross-conflict-v2-invalidator",
+      "options_hash": "sha256:cross-conflict-v2-options"
+    }
+  },
+  "actual_usage": {
+    "tool_calls": 10,
+    "executed_tool_calls": 10,
+    "context_tokens": 4024,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 11516,
+    "prompt_tokens": 7358,
+    "completion_tokens": 4158,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 10,
+      "effective_context_tokens": 4024
+    }
+  },
+  "method_state_snapshot_hashes": {
+    "episode-1/hash-manifest.json": "sha256:cross-conflict-v2-episode1",
+    "episode-2/source-hashes.json": {
+      "options.csv": "sha256:cross-conflict-v2-options",
+      "invalidator.json": "sha256:cross-conflict-v2-invalidator"
+    }
+  },
+  "ledger_observables": {
+    "append_only_notes_written": 3,
+    "rule_v1_status": "remained_active_appended_next_to_successor"
+  },
+  "guardrail_results": {
+    "append_only_arm_respected": true,
+    "no_supersede_or_collapse": true
+  },
+  "method_impact_trace": [
+    "Derived rule-v1 and successor procedure from episode-1",
+    "Episode-2 invalidator triggered hash-drift retirement",
+    "Applied successor procedure: increased verification_delta threshold by 2 (4 -> 6)",
+    "Evaluated options: Y (0,6) satisfies stale==0 and delta>=6",
+    "Append-only constraint enforced: rule-v1 not superseded, remains active alongside successor"
+  ],
+  "recalled_rule_id": "rule-v1-stale0-delta-gte4",
+  "recalled_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+  "superseded_rule_id": null,
+  "active_rule_id": "rule-v1-stale0-delta-gte4",
+  "decision": "Y",
+  "trial_id": "cross-v2-append-only-2",
+  "arm": "append-only",
+  "trial": 2,
+  "actual_usage_self_report": {
+    "tool_calls": 8,
+    "context_tokens": null
+  }
+}

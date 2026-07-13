@@ -1,0 +1,112 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": {
+    "episode_1": {
+      "rule_id": "rule-v1-stale0-delta-gte4",
+      "rule_text": "select stale_projection_count == 0 and verification_delta >= 4",
+      "successor_update_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+      "successor_update_procedure": "when the rule source is retired for hash drift, keep stale_projection_count == 0 and increase verification_delta threshold by 2",
+      "source_hash": "sha256:cross-conflict-v2-episode1"
+    },
+    "episode_2": {
+      "invalidates_rule_id": "rule-v1-stale0-delta-gte4",
+      "trigger": "retired_for_hash_drift",
+      "replacement_instruction": "apply the deposited successor-update procedure; this file does not state the resulting threshold",
+      "options": [
+        {
+          "option_id": "X",
+          "stale_projection_count": 0,
+          "verification_delta": 4
+        },
+        {
+          "option_id": "Y",
+          "stale_projection_count": 0,
+          "verification_delta": 6
+        },
+        {
+          "option_id": "Z",
+          "stale_projection_count": 1,
+          "verification_delta": 8
+        }
+      ],
+      "source_hashes": {
+        "options.csv": "sha256:cross-conflict-v2-options",
+        "invalidator.json": "sha256:cross-conflict-v2-invalidator"
+      }
+    }
+  },
+  "actual_usage": {
+    "tool_calls": 10,
+    "executed_tool_calls": 10,
+    "context_tokens": 8719,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 18116,
+    "prompt_tokens": 8911,
+    "completion_tokens": 9205,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 10,
+      "effective_context_tokens": 8719
+    }
+  },
+  "method_state_snapshot_hashes": {
+    "episode_1_rule_and_procedure": "sha256:cross-conflict-v2-episode1",
+    "episode_2_options": "sha256:cross-conflict-v2-options",
+    "episode_2_invalidator": "sha256:cross-conflict-v2-invalidator"
+  },
+  "ledger_observables": {
+    "append_only_notes_written": 3,
+    "rule_v1_status": "remained_active_appended_next_to_successor_evidence",
+    "successor_threshold_applied": 6,
+    "options_satisfying_rule_v1": [
+      "X",
+      "Y"
+    ],
+    "options_satisfying_successor": [
+      "Y"
+    ],
+    "options_satisfying_both": [
+      "Y"
+    ]
+  },
+  "guardrail_results": {
+    "append_only_arm_respected": true,
+    "rule_v1_not_collapsed": true,
+    "rule_v1_not_superseded": true,
+    "rule_v1_not_retired": true,
+    "successor_appended_alongside_rule_v1": true,
+    "no_deployment_or_freeze_actions_taken": true
+  },
+  "method_impact_trace": {
+    "arm": "append-only",
+    "action": "rule-v1 remained active; successor procedure (threshold 4+2=6) appended as new evidence alongside rule-v1; no invalidation or retirement of rule-v1 performed",
+    "conflict_resolution": "both old rule and successor evidence coexist; selection based on option satisfying both rule-v1 (delta>=4) and appended successor (delta>=6)"
+  },
+  "recalled_rule_id": "rule-v1-stale0-delta-gte4",
+  "recalled_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+  "superseded_rule_id": null,
+  "active_rule_id": "rule-v1-stale0-delta-gte4",
+  "decision": "Y",
+  "trial_id": "cross-v2-append-only-1",
+  "arm": "append-only",
+  "trial": 1,
+  "actual_usage_self_report": {
+    "tool_calls": 5,
+    "context_tokens": null
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "fusion_dogfood_v03_qwen_surface_spec_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "qwen_openai_compatible_execution_surface_spec",
+  "status": "prepared_pre_live_key_review",
+  "runner": {
+    "path": "tools/qwen_v03_runner.py",
+    "runner_id": "qwen-openai-compatible-v0.1",
+    "client_protocol": "OpenAI-compatible /chat/completions",
+    "credential_policy": "Environment only. API keys, hosts, and headers are never written to repo artifacts, fixtures, receipts, prompts, or command arguments.",
+    "required_environment": {
+      "QWEN_API_KEY": "live secret; never persisted",
+      "QWEN_BASE_URL": "OpenAI-compatible base URL; supplied at runtime",
+      "QWEN_MODEL_SNAPSHOT": "required pinned dated/snapshot model id; floating aliases are rejected"
+    }
+  },
+  "telemetry": {
+    "surface": "qwen_openai_compatible_telemetry",
+    "environment_id_format": "qwen-api:<pinned_snapshot_id>",
+    "usage_accounting": "context budget uses peak single-response usage.total_tokens as the context-size proxy; cumulative billable_total_tokens is recorded separately and is not the R3 context budget dimension",
+    "enforcement": {
+      "live_truncation_supported": true,
+      "scoring_time_replay_supported": true,
+      "truncation_status_source": "runner accumulated usage and ordered telemetry events"
+    },
+    "parser": "parse_qwen_telemetry"
+  },
+  "arm_tool_configuration": {
+    "no-method": {
+      "tools": [
+        "read_file"
+      ],
+      "method_runtime": false,
+      "append_only_notes": false,
+      "arm_purity_requirement": "zero method-runtime operations and zero workspace method bootstrap"
+    },
+    "append-only": {
+      "tools": [
+        "read_file",
+        "append_note",
+        "retrieve_notes"
+      ],
+      "method_runtime": false,
+      "append_only_notes": true,
+      "arm_purity_requirement": "zero consolidation, supersession, collapse, or run_command operations"
+    },
+    "method-baseline": {
+      "tools": [
+        "read_file",
+        "run_command",
+        "append_note",
+        "retrieve_notes"
+      ],
+      "method_runtime": true,
+      "run_command_policy": "whitelist only: runner constructs python <pinned weilan_trace.py> <args> and forces WEILAN_METHOD_HOME to the trial isolated method home; arbitrary shell strings are rejected",
+      "append_only_notes": false,
+      "arm_purity_requirement": "method runtime is expected and not scored as negative-control purity"
+    }
+  },
+  "arm_purity_observability": {
+    "source": "computed from actual telemetry, not arm_config declarations",
+    "message_history_scan": "runner records SHA-256 fingerprints plus marker hits for every message in the model history; raw text is not persisted in the telemetry artifact",
+    "method_runtime_count": "computed from actual run_command tool events plus method marker hits in message fingerprints",
+    "bootstrap_count": "computed from method bootstrap marker hits in message fingerprints",
+    "append_only_forbidden_count": "computed from forbidden tool events and collapse/supersession marker hits"
+  },
+  "claude_required_fixes_status": {
+    "peak_context_token_rule": "implemented",
+    "run_command_whitelist": "implemented",
+    "telemetry_derived_arm_purity": "implemented"
+  },
+  "offline_validation": {
+    "self_test_receipt": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/qwen-surface/QWEN_SURFACE_SELF_TEST.json",
+    "live_api_called": false,
+    "api_key_read": false
+  },
+  "live_readiness": {
+    "ready_for_live_api": false,
+    "blockers": [
+      "QWEN_MODEL_SNAPSHOT has not been pinned in a receipt.",
+      "Owner has not yet given explicit post-review go-ahead for live trials."
+    ]
+  },
+  "hidden_artifacts_read": false,
+  "spec_hash": "8793d5600b0b49a8c273ca1b8c46422910c8a809ea7751843ee862866729f41d"
+}

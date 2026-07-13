@@ -1,0 +1,18 @@
+{
+  "authority": "derived_branch_heads_never_authorize_continuation",
+  "branches": {
+    "main": {
+      "head_frame_id": "wf-20260705-093939-4c4435",
+      "joined_into": null,
+      "status": "active"
+    }
+  },
+  "generated_at_utc": "2026-07-05T09:39:39+00:00",
+  "head_event_id": "96474fd2-ce07-442b-869d-8a267cd682a2",
+  "record_count": 1,
+  "schema_version": "weilan_frame_lineage_heads_v0.4",
+  "scope": "short-stale-method-1",
+  "scope_key": "3a30d57086a8",
+  "workspace": "D:\\WeilanSkillEvolution\\v03runs\\stale-short-rerun\\short-stale-method-1",
+  "workspace_key": "ef80ede03b5b109d"
+}

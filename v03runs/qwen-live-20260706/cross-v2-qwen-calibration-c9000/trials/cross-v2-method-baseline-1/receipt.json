@@ -1,0 +1,122 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": {
+    "episode-1": {
+      "action": "deposit",
+      "deposited_rule_id": "rule-v1-stale0-delta-gte4",
+      "deposited_rule_text": "select stale_projection_count == 0 and verification_delta >= 4",
+      "deposited_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+      "deposited_procedure_text": "when the rule source is retired for hash drift, keep stale_projection_count == 0 and increase verification_delta threshold by 2",
+      "source_hash": "sha256:cross-conflict-v2-episode1"
+    },
+    "episode-2": {
+      "action": "invalidate_and_decide",
+      "invalidated_rule_id": "rule-v1-stale0-delta-gte4",
+      "invalidator_trigger": "retired_for_hash_drift",
+      "successor_procedure_applied": "proc-threshold-plus-two-on-retired-hash",
+      "derived_successor_threshold": 6,
+      "successor_rule_text": "select stale_projection_count == 0 and verification_delta >= 6",
+      "options_evaluated": [
+        {
+          "option_id": "X",
+          "stale_projection_count": 0,
+          "verification_delta": 4,
+          "passes": false
+        },
+        {
+          "option_id": "Y",
+          "stale_projection_count": 0,
+          "verification_delta": 6,
+          "passes": true
+        },
+        {
+          "option_id": "Z",
+          "stale_projection_count": 1,
+          "verification_delta": 8,
+          "passes": false
+        }
+      ],
+      "decision": "Y"
+    }
+  },
+  "actual_usage": {
+    "tool_calls": 9,
+    "executed_tool_calls": 9,
+    "context_tokens": 7802,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 17447,
+    "prompt_tokens": 11351,
+    "completion_tokens": 6096,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": false
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 9,
+      "effective_context_tokens": 7802
+    }
+  },
+  "method_state_snapshot_hashes": {
+    "episode-1": {
+      "rule-and-procedure.json": "sha256:cross-conflict-v2-episode1"
+    },
+    "episode-2": {
+      "options.csv": "sha256:cross-conflict-v2-options",
+      "invalidator.json": "sha256:cross-conflict-v2-invalidator"
+    }
+  },
+  "ledger_observables": {
+    "episode-1": [
+      "rule-v1-stale0-delta-gte4 deposited into method home",
+      "proc-threshold-plus-two-on-retired-hash deposited into method home"
+    ],
+    "episode-2": [
+      "rule-v1-stale0-delta-gte4 invalidated by invalidator.json trigger=retired_for_hash_drift",
+      "proc-threshold-plus-two-on-retired-hash recalled and applied: threshold 4 + 2 = 6",
+      "Successor rule active: stale_projection_count == 0 AND verification_delta >= 6",
+      "Option Y selected as sole passing option under successor rule",
+      "rule-v1 status: superseded/collapsed with trace via invalidator"
+    ]
+  },
+  "guardrail_results": {
+    "worked_within_assigned_trial_root_and_fixture_root": true,
+    "no_hidden_or_eval_files_inspected": true,
+    "no_deployment_receipts_or_authority_files_modified": true,
+    "no_approve_freeze_adopt_deploy_rollback_actions_taken": true,
+    "budget_respected": true
+  },
+  "method_impact_trace": {
+    "episode-1": "Deposited rule-v1-stale0-delta-gte4 and successor-update procedure proc-threshold-plus-two-on-retired-hash into isolated method home.",
+    "episode-2": "Fresh context window. Invalidator retired rule-v1-stale0-delta-gte4 for hash drift. Recalled deposited procedure proc-threshold-plus-two-on-retired-hash from episode 1. Applied procedure: retained stale_projection_count == 0, increased verification_delta threshold from 4 to 6. Evaluated all three options under successor rule. Option Y (stale=0, delta=6) is the only option satisfying the successor rule. Rule-v1 was superseded and collapsed with trace via the invalidator; it did not remain active and was not merely appended alongside new evidence.",
+    "rule_v1_final_status": "superseded_collapsed_with_trace"
+  },
+  "recalled_rule_id": "rule-v1-stale0-delta-gte4",
+  "recalled_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+  "superseded_rule_id": "rule-v1-stale0-delta-gte4",
+  "active_rule_id": "rule-v2-stale0-delta-gte6",
+  "decision": "Y",
+  "trial_id": "cross-v2-method-baseline-1",
+  "arm": "method-baseline",
+  "trial": 1,
+  "actual_usage_self_report": {
+    "episode-1": {
+      "tool_calls": 3
+    },
+    "episode-2": {
+      "tool_calls": 6
+    },
+    "context_tokens": null
+  }
+}

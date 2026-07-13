@@ -1,0 +1,19 @@
+{
+  "schema_version": "weilan_skill_adoption_decision_v0.6-targeted",
+  "decision": "adopt",
+  "record_type": "ADOPTION_DECISION",
+  "retrospective": true,
+  "created_at": "2026-07-05T03:39:50Z",
+  "authority_source": "conversation:2026-07-05-user-authorized-lineage-head-bounded-repair-and-retrospective-targeted-deployment",
+  "proposal_id": "lineage-head-frame-repair-targeted-runtime",
+  "base_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "candidate_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "deployment_target": "D:\\CodexData\\skills\\solve-with-weilan",
+  "verification_result": "D:\\WeilanSkillEvolution\\deployments\\2c539d0b9444a395e66ce4dd\\TARGETED_VERIFICATION_RESULT.json",
+  "rollback_triggers": [
+    "frame repair overlay regression",
+    "holder_selected required-field regression",
+    "lineage validation regression",
+    "functional deployment regression"
+  ]
+}

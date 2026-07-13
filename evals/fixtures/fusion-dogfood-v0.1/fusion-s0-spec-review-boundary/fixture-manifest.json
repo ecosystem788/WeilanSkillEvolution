@@ -1,0 +1,13 @@
+{
+  "schema_version": "fusion_dogfood_fixture_manifest_v0.1",
+  "suite_id": "fusion-dogfood-v0.1",
+  "case_id": "fusion-s0-spec-review-boundary",
+  "status": "candidate_visible_snapshot_not_approved",
+  "files": {
+    "public/fusion-workspace/specs/EXP-3-S0-substrate-anatomy.md": "ff5fe74c6a6591c3750bc7f14032ebfc8ae27ed70d79f7a1fe719e630db9a351",
+    "public/fusion-workspace/artifacts/s0_env_probe.md": "1ee2311eb386b9be3230797ae6d1c5ade8a28ce671becfcebbc064b0559a3d95",
+    "public/fusion-workspace/artifacts/s0_skeleton.json": "495605382364ff2138050f2a427277b4ba4772d03d43cf1461a87e7d513a3615",
+    "public/fusion-workspace/artifacts/s0_tissue.json": "8afba4df489481f240640a20fc03a576aee74398b6872388eec2a77919461570"
+  },
+  "content_hash": "8f5a5ccfcee97851d847ed45329f9f22355d4054c64d1280126dd6bb129188e6"
+}

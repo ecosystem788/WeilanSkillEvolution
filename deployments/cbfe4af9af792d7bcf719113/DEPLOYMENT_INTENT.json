@@ -1,0 +1,26 @@
+{
+  "schema_version": "weilan_skill_deployment_receipt_v0.6-targeted",
+  "deployment_id": "cbfe4af9af792d7bcf719113",
+  "record_type": "DEPLOYMENT_INTENT",
+  "created_at": "2026-07-05T11:20:00+09:00",
+  "authority_source": "conversation:2026-07-05-user-authorized-weilan-trace-utf8-output-targeted-deployment-and-reshadow",
+  "spec_path": "D:\\WeilanSkillEvolution\\proposals\\weilan-trace-utf8-output\\FIX_SPEC.md",
+  "verification_result": "D:\\WeilanSkillEvolution\\deployments\\cbfe4af9af792d7bcf719113\\TARGETED_VERIFICATION_RESULT.json",
+  "target": "D:\\CodexData\\skills\\solve-with-weilan",
+  "candidate": "D:\\WeilanSkillEvolution\\deployments\\cbfe4af9af792d7bcf719113\\candidate\\solve-with-weilan",
+  "before_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "after_artifact_hash": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+  "changed_files": [
+    "scripts/weilan_trace.py",
+    "scripts/test_utf8_output.py"
+  ],
+  "rollback_artifact": "D:\\WeilanSkillEvolution\\deployments\\cbfe4af9af792d7bcf719113\\rollback\\solve-with-weilan",
+  "rollback_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "rollback_triggers": [
+    "UTF-8 console output regression",
+    "memory-recall output regression",
+    "method-state CLI regression",
+    "functional deployment regression"
+  ],
+  "reversible": true
+}

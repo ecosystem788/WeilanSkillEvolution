@@ -1,0 +1,34 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "weilan-dynamics-firstcut-v0.1",
+  "rationale": "Build an isolated semantic-slot dynamics probe for DESIGN.md v0.3: q flows toward self-read structural output, q-based displacement is selected outside the existing budget validator, mutually exclusive exits are machine-checked, proxy-artifact flips become inconclusive rather than false negatives, and a true stalled oligarch can still survive to needs_gate under weak bleed/high-q settings.",
+  "base_artifact_hash": "9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9",
+  "candidate_artifact_hash": "f28bc2b678d28d6b09caae31f29587e9bb882823acacad4619083848db7ff097",
+  "changed_paths": [
+    "proposals/weilan-dynamics-firstcut-v0.1/candidate/solve-with-weilan/scripts/dynamics_firstcut.py",
+    "proposals/weilan-dynamics-firstcut-v0.1/candidate/solve-with-weilan/scripts/test_dynamics_firstcut.py"
+  ],
+  "budgets": {
+    "max_changed_files": 2,
+    "max_candidate_generations": 1,
+    "max_evaluation_trials": 0,
+    "max_deployments": 0
+  },
+  "target_metrics": [
+    "q_conserved_under_structural_output_flow",
+    "displacement_selector_uses_lowest_q_not_recency",
+    "collapse_emerges_needs_gate_and_inconclusive_are_mutually_exclusive",
+    "true_stalled_oligarch_survives_to_needs_gate_without_label_gate",
+    "q_bleed_floor_horizon_phase_map_contains_both_emergence_and_needs_gate",
+    "self_read_proxy_artifact_flip_returns_inconclusive",
+    "semantic_arena_path_has_no_enumerated_collapse_gate"
+  ],
+  "rollback_triggers": [
+    "deployed skill modified unexpectedly",
+    "q conservation regression",
+    "phase map loses either emergence or needs_gate exit",
+    "semantic budget validator modified instead of isolated selector",
+    "proxy artifact flip misreported as pass or honest negative"
+  ],
+  "candidate_authority": "proposal_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}

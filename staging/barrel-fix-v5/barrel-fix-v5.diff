@@ -1,0 +1,556 @@
+diff -r '--exclude=__pycache__' -u D:/WeilanSkillEvolution/deployments/4554ee3e1f7d12354358588c/candidate/solve-with-weilan/SKILL.md solve-with-weilan/SKILL.md
+--- D:/WeilanSkillEvolution/deployments/4554ee3e1f7d12354358588c/candidate/solve-with-weilan/SKILL.md	2026-07-07 15:25:04.047542900 +0900
++++ solve-with-weilan/SKILL.md	2026-07-07 17:03:46.908155200 +0900
+@@ -103,6 +103,8 @@
+ 
+ Never collapse merely because a route failed, became strong, or lasted a long time. Collapse concerns loss of productive governing authority.
+ 
++When continuing L2/L3 work in a scope with governance targets or prior collapses, run `governance-pressure-derive` once per session and either record the suggested pressures or state why not. When a `candidate_admitted`, `holder_selected`, or `open` output carries `trace_advisories`, address the named forbidden assumption before proceeding: bring the declared re-entry evidence, or choose a genuinely different assumption. Advisories never block; ignoring one silently is a method violation.
++
+ ## Persist L2/L3 frames
+ 
+ Read [references/event-schema.md](references/event-schema.md) before persisting a frame.
+diff -r '--exclude=__pycache__' -u D:/WeilanSkillEvolution/deployments/4554ee3e1f7d12354358588c/candidate/solve-with-weilan/references/governance-system.md solve-with-weilan/references/governance-system.md
+--- D:/WeilanSkillEvolution/deployments/4554ee3e1f7d12354358588c/candidate/solve-with-weilan/references/governance-system.md	2026-07-07 15:13:12.248748600 +0900
++++ solve-with-weilan/references/governance-system.md	2026-07-07 17:35:51.635982200 +0900
+@@ -142,3 +142,34 @@
+ 0.6 is complete when replay is deterministic, withdrawn evidence removes pressure, duplicates do not double count, local collapse does not kill parents, paused and blocked targets remain distinct and recoverable, terminal parents cannot retain active children, propagation is explicit, projection cannot acquire authority, collapse/re-entry are explainable, cross-workspace data is isolated, corrupt events are detected, and the system uses no wall-clock or background heartbeat.
+ 
+ 0.6 does not automatically evaluate every response, schedule the next frame, or run feedback-pressure-collapse-regroup as a continuous loop. Memory 0.7a adds only the read-only contract and proposal layer documented in [metabolism-system.md](metabolism-system.md); transaction commits and any bounded runner remain later phases.
++
++## Pressure Derivation（压力派生, read-only）
++
++`governance-pressure-derive --workspace <cwd> --scope <scope>` derives pressure
++suggestions from the scope's own evidence and records nothing:
++
++- two or more failed/blocked episodes whose tokens overlap an ACTIVE/WARNED/PROBATION
++  target suggest a `contradiction` pressure (three or more upgrade the suggested
++  strength to strong), citing the failing frames as evidence;
++- a target whose registered source snapshots no longer match their sources suggests a
++  `staleness` pressure;
++- failed episodes matching no registered target are reported as informational
++  `unregistered_risk`, inviting an explicit `governance-target-register`.
++
++Recordable suggestions carry a ready-to-run `governance-pressure-record` command line.
++When the scope lacks a current causal frame or all stale source refs are no longer valid
++governance evidence, the suggestion is still shown with `recordable: false` plus the
++blocking reason instead of a fake command template. Derivation is a read-only projection
++of evidence; recording pressure remains an explicit act, and nothing transitions
++automatically. Exit code 2 signals suggestions exist.
++
++## Re-entry Trace Advisories（重入痕迹提醒, read-only）
++
++`trace-check --scope <scope> --text "<candidate description>"` matches text against every
++collapse trace in the scope — frame `trace_emitted` events and governance
++`collapse_trace` records alike — by token overlap with each `forbidden_assumption`.
++`candidate_admitted`, `holder_selected`, `route_reentered` events and lineaged `open`
++surface the same advisories automatically in their command output. Advisories never
++block: the constitution's re-entry rule (new evidence satisfying the declared
++`reentry_condition`, not a rename) stays a judgment the caller must make — the mechanism
++only guarantees the trace is seen.
+Only in solve-with-weilan/scripts: test_gate_liveness.py
+diff -r '--exclude=__pycache__' -u D:/WeilanSkillEvolution/deployments/4554ee3e1f7d12354358588c/candidate/solve-with-weilan/scripts/test_slow_loop.py solve-with-weilan/scripts/test_slow_loop.py
+--- D:/WeilanSkillEvolution/deployments/4554ee3e1f7d12354358588c/candidate/solve-with-weilan/scripts/test_slow_loop.py	2026-07-07 15:56:33.601774100 +0900
++++ solve-with-weilan/scripts/test_slow_loop.py	2026-07-07 18:17:24.844796300 +0900
+@@ -3,7 +3,7 @@
+ Covers:
+ - binding budget: zero-sum admission, displacement, supersede-as-leaving;
+ - budget heads: append-only memory-budget-set, retention-plan default;
+-- merge: lineage, source union (incl. evidence refs), grounding, net shrink;
++- merge: lineage, inherited source union (incl. evidence refs), grounding, net shrink;
+ - split: grounding, parent supersession on the final part only, budget charge;
+ - reorganization entries die with terminal inherited evidence;
+ - reactivation respects the budget;
+@@ -131,6 +131,37 @@
+         weilan_trace.command_memory_merge(args)
+ 
+ 
++def test_merge_rejects_explicit_conversation_or_evidence_sources(
++    state_home, tmp_path, capsys
++):
++    source = tmp_path / "s.md"
++    source.write_text("fact\n", encoding="utf-8")
++    a = consolidate(capsys, "cold start projection", source)
++    b = consolidate(capsys, "projection cold start", source)
++    for protected_source in [
++        "evidence:not-promoted",
++        "Evidence:not-promoted",
++        "Conversation:thread#turn",
++    ]:
++        args = argparse.Namespace(
++            workspace=WORKSPACE, scope=SCOPE,
++            from_id=[a["memory_id"], b["memory_id"]], kind="decision",
++            summary="projection cold start merged", detail="", tag=[],
++            source=[protected_source], displace=[],
++        )
++        with pytest.raises(ValueError, match="explicit .*evidence"):
++            weilan_trace.command_memory_merge(args)
++
++    args = argparse.Namespace(
++        workspace=WORKSPACE, scope=SCOPE, kind="decision",
++        summary="projection cold start direct", detail="", tag=[],
++        source=["Conversation:thread#turn"], supersedes=[], displace=[],
++        conflicts_with=[],
++    )
++    with pytest.raises(ValueError, match="conversation-derived"):
++        weilan_trace.command_memory_consolidate(args)
++
++
+ def test_split_grounding_parent_flip_and_budget(state_home, tmp_path, capsys):
+     source = tmp_path / "s.md"
+     source.write_text("fact\n", encoding="utf-8")
+@@ -212,10 +243,8 @@
+ def test_merged_entry_dies_with_terminal_evidence(state_home, tmp_path, capsys):
+     source = tmp_path / "s.md"
+     source.write_text("fact\n", encoding="utf-8")
+-    a = consolidate(capsys, "durable alpha decision", source)
+-    b = consolidate(capsys, "durable beta decision", source)
+ 
+-    # hand-plant an evidence record and give one input an evidence source by merging
++    # hand-plant an evidence record and give one input an inherited evidence source.
+     evidence_dir = weilan_trace.evidence_directory(WORKSPACE, SCOPE)
+     evidence = {
+         "schema_version": weilan_trace.EVIDENCE_SCHEMA_VERSION,
+@@ -229,12 +258,24 @@
+         "source_snapshots": [],
+     }
+     weilan_trace.append_event(evidence_dir / "2026-01-01.jsonl", evidence)
++    a, _ = weilan_trace.append_semantic_memory(
++        WORKSPACE,
++        SCOPE,
++        "decision",
++        "durable alpha decision",
++        "",
++        [],
++        ["evidence:ev-merge-dep"],
++        [],
++        [],
++    )
++    b = consolidate(capsys, "durable beta decision", source)
+ 
+     args = argparse.Namespace(
+         workspace=WORKSPACE, scope=SCOPE,
+         from_id=[a["memory_id"], b["memory_id"]], kind="decision",
+         summary="durable merged decision", detail="", tag=[],
+-        source=["evidence:ev-merge-dep"], displace=[],
++        source=[], displace=[],
+     )
+     weilan_trace.command_memory_merge(args)
+     merged = json.loads(capsys.readouterr().out)
+diff -r '--exclude=__pycache__' -u D:/WeilanSkillEvolution/deployments/4554ee3e1f7d12354358588c/candidate/solve-with-weilan/scripts/weilan_trace.py solve-with-weilan/scripts/weilan_trace.py
+--- D:/WeilanSkillEvolution/deployments/4554ee3e1f7d12354358588c/candidate/solve-with-weilan/scripts/weilan_trace.py	2026-07-07 15:53:41.864850800 +0900
++++ solve-with-weilan/scripts/weilan_trace.py	2026-07-07 19:18:41.226741600 +0900
+@@ -654,19 +654,17 @@
+         if updated_state["issues"]:
+             raise RuntimeError("created invalid lineage transition: " + "; ".join(updated_state["issues"]))
+         heads = write_lineage_heads(workspace, scope, updated_records, updated_state)
+-        print(
+-            json.dumps(
+-                {
+-                    "frame_id": frame_id,
+-                    "path": str(frame_path),
+-                    "causal": causal,
+-                    "branch_heads_path": str(lineage_heads_path(workspace, scope)),
+-                    "branch_heads": heads["branches"],
+-                },
+-                ensure_ascii=False,
+-                indent=2,
+-            )
++        output = {
++            "frame_id": frame_id,
++            "path": str(frame_path),
++            "causal": causal,
++            "branch_heads_path": str(lineage_heads_path(workspace, scope)),
++            "branch_heads": heads["branches"],
++        }
++        attach_trace_advisory_result(
++            output, workspace, scope, " ".join([args.problem, args.success])
+         )
++        print(json.dumps(output, ensure_ascii=False, indent=2))
+ 
+ 
+ def command_lineage_show(args):
+@@ -768,7 +766,15 @@
+     if field_errors:
+         raise ValueError("invalid frame event: " + "; ".join(field_errors))
+     append_event(path, event)
+-    print(json.dumps({"frame_id": args.frame_id, "event_type": args.type}, ensure_ascii=False))
++    output = {"frame_id": args.frame_id, "event_type": args.type}
++    if args.type in {"candidate_admitted", "holder_selected", "route_reentered"}:
++        attach_trace_advisory_result(
++            output,
++            first["workspace"],
++            frame_scope(events),
++            " ".join(str(value) for value in data.values()),
++        )
++    print(json.dumps(output, ensure_ascii=False))
+ 
+ 
+ def required_persistence_audit_triggers(events):
+@@ -1592,6 +1598,10 @@
+     return copy.deepcopy(memo[key])
+ 
+ 
++def has_protected_grounding_prefix(source):
++    return str(source).casefold().startswith(("conversation:", "evidence:"))
++
++
+ def source_snapshot_uncached(source, workspace):
+     if source.startswith("conversation:"):
+         return conversation_turn_snapshot(source)
+@@ -2197,7 +2207,7 @@
+ def command_memory_consolidate(args):
+     prohibited = [
+         source for source in args.source
+-        if source.startswith("conversation:") or source.startswith("evidence:")
++        if has_protected_grounding_prefix(source)
+     ]
+     if prohibited:
+         raise ValueError(
+@@ -2233,6 +2243,16 @@
+ 
+ 
+ def command_memory_merge(args):
++    prohibited = [
++        source for source in args.source
++        if has_protected_grounding_prefix(source)
++    ]
++    if prohibited:
++        raise ValueError(
++            "memory-merge may inherit conversation/evidence grounding from inputs, "
++            "but explicit --source conversation:/evidence: injection must pass the "
++            "evidence promotion path first"
++        )
+     workspace = canonical_workspace(args.workspace)
+     scope = normalize_scope(args.scope)
+     from_ids = list(dict.fromkeys(args.from_id))
+@@ -3676,6 +3696,305 @@
+     )
+ 
+ 
++def collapse_trace_registry(workspace, scope):
++    """Collect collapse traces from frame episodes and governance targets.
++
++    Traces are the weak constraints the theory preserves across collapse; this
++    registry is how a new candidate can be checked against every declared
++    forbidden assumption in the scope, from both planes.
++    """
++
++    workspace = canonical_workspace(workspace)
++    scope = normalize_scope(scope)
++    registry = []
++    index = load_episode_index(workspace, scope)
++    if not episode_index_is_fresh(index, workspace, scope):
++        index = build_episode_index_value(workspace, scope)
++    for episode in index.get("episodes", []):
++        for trace in episode.get("traces", []):
++            assumption = str(trace.get("forbidden_assumption", "")).strip()
++            if not assumption:
++                continue
++            registry.append({
++                "source": episode.get("source"),
++                "forbidden_assumption": assumption,
++                "reentry_condition": str(trace.get("reentry_condition", "")).strip(),
++                "tokens": semantic_tokens(assumption),
++            })
++    warnings = []
++    _, governance = reduce_governance(workspace, scope, warnings)
++    if warnings or governance["issues"]:
++        raise ValueError(
++            "collapse trace governance registry is invalid: "
++            + "; ".join(warnings + governance["issues"])
++        )
++    for target_ref, target in governance.get("targets", {}).items():
++        trace = target.get("collapse_trace") or {}
++        assumption = str(trace.get("forbidden_assumption", "")).strip()
++        if not assumption:
++            continue
++        registry.append({
++            "source": target_ref,
++            "forbidden_assumption": assumption,
++            "reentry_condition": str(trace.get("reentry_condition", "")).strip(),
++            "tokens": semantic_tokens(assumption),
++        })
++    return registry
++
++
++def matching_forbidden_traces(text_value, registry):
++    """Advisory token-overlap match between candidate text and forbidden assumptions."""
++
++    candidate_tokens = set(semantic_tokens(text_value))
++    matches = []
++    for item in registry:
++        trace_tokens = set(item["tokens"])
++        if not trace_tokens:
++            continue
++        overlap = candidate_tokens.intersection(trace_tokens)
++        if len(overlap) >= max(2, (len(trace_tokens) + 2) // 3):
++            matches.append({
++                "source": item["source"],
++                "forbidden_assumption": item["forbidden_assumption"],
++                "reentry_condition": item["reentry_condition"],
++                "matched_tokens": sorted(overlap)[:12],
++            })
++    return matches
++
++
++def trace_reentry_advisories(workspace, scope, text_value):
++    advisories, _ = trace_reentry_advisory_result(workspace, scope, text_value)
++    return advisories
++
++
++def trace_reentry_advisory_result(workspace, scope, text_value):
++    try:
++        registry = collapse_trace_registry(workspace, scope)
++    except (OSError, ValueError, RuntimeError) as exc:
++        return [], {
++            "error": type(exc).__name__,
++            "message": str(exc),
++            "authority": "advisory_failure_never_blocks_or_authorizes",
++        }
++    if not registry:
++        return [], None
++    matches = matching_forbidden_traces(text_value, registry)
++    return [
++        {
++            **match,
++            "advisory": "candidate overlaps a collapsed route's forbidden assumption; "
++                        "re-entry requires the declared new evidence, not a rename",
++        }
++        for match in matches
++    ], None
++
++
++def attach_trace_advisory_result(output, workspace, scope, text_value):
++    advisories, advisory_error = trace_reentry_advisory_result(
++        workspace, scope, text_value
++    )
++    if advisories:
++        output["trace_advisories"] = advisories
++    if advisory_error:
++        output["trace_advisory_error"] = advisory_error
++
++
++FAILED_OR_BLOCKED_OUTCOMES = {"failed", "failure", "blocked"}
++
++
++def recordable_governance_refs(refs, workspace, scope):
++    recordable = []
++    rejected = []
++    for ref in list(dict.fromkeys(refs)):
++        try:
++            governance_evidence_refs([ref], workspace, scope)
++        except (OSError, ValueError, RuntimeError) as exc:
++            rejected.append({"ref": ref, "reason": str(exc)})
++        else:
++            recordable.append(ref)
++    return recordable, rejected
++
++
++def current_scope_frame_id(workspace, scope, episodes):
++    if not episodes:
++        return None
++    ordered = sorted(
++        episodes,
++        key=lambda item: item.get("head_timestamp_utc", ""),
++        reverse=True,
++    )
++    for episode in ordered:
++        frame_id = episode.get("frame_id")
++        if frame_id:
++            return frame_id
++    return None
++
++
++def active_pressure_covers(governance, target_ref, kind, evidence_refs):
++    evidence_set = set(evidence_refs)
++    for pressure in governance.get("pressures", {}).values():
++        if (
++            pressure.get("target_ref") == target_ref
++            and pressure.get("kind") == kind
++            and pressure.get("active")
++        ):
++            if not evidence_set or evidence_set.issubset(set(pressure.get("evidence_refs", []))):
++                return True
++    return False
++
++
++@memoized_derivation
++def command_trace_check(args):
++    workspace = canonical_workspace(args.workspace)
++    scope = normalize_scope(args.scope)
++    registry = collapse_trace_registry(workspace, scope)
++    matches = matching_forbidden_traces(args.text, registry)
++    print(json.dumps({
++        "workspace": workspace,
++        "scope": scope,
++        "trace_count": len(registry),
++        "matches": matches,
++        "authority": "read_only_advisory_never_blocks_or_authorizes",
++    }, ensure_ascii=False, indent=2))
++    return 0 if not matches else 2
++
++
++@memoized_derivation
++def command_governance_pressure_derive(args):
++    """Read-only pressure derivation: the scope's own evidence, surfaced.
++
++    Never writes. Recordable suggestions carry a ready-to-run
++    governance-pressure-record command; recording stays an explicit act.
++    """
++
++    workspace = canonical_workspace(args.workspace)
++    scope = normalize_scope(args.scope)
++    warnings = []
++    _, governance = reduce_governance(workspace, scope, warnings)
++    if warnings or governance["issues"]:
++        raise ValueError(
++            "governance state is invalid: " + "; ".join(warnings + governance["issues"])
++        )
++    index = load_episode_index(workspace, scope)
++    if not episode_index_is_fresh(index, workspace, scope):
++        index = build_episode_index_value(workspace, scope)
++    episodes = index.get("episodes", [])
++    suggestions = []
++    informational = []
++
++    def record_command(target_ref, kind, strength, evidence_refs, frame_id, required_change):
++        if not evidence_refs or not frame_id:
++            return None
++        parts = [
++            "python scripts/weilan_trace.py governance-pressure-record",
++            f'--workspace "{workspace}"', f'--scope "{scope}"',
++            f'--target-ref "{target_ref}"', f"--kind {kind}", f"--strength {strength}",
++        ]
++        parts.extend(f'--evidence "{ref}"' for ref in evidence_refs)
++        parts.append(f'--required-change "{required_change}" --frame-id "{frame_id}"')
++        return " ".join(parts)
++
++    active_states = {"ACTIVE", "WARNED", "PROBATION"}
++    for target_ref, target in governance.get("targets", {}).items():
++        if target.get("state") not in active_states:
++            continue
++        target_tokens = set(semantic_tokens(
++            " ".join([target_ref] + list(target.get("death_lines", [])))
++        ))
++        failed = []
++        for episode in episodes:
++            if episode.get("outcome") not in FAILED_OR_BLOCKED_OUTCOMES:
++                continue
++            episode_tokens = set(episode.get("tokens", []))
++            if len(target_tokens.intersection(episode_tokens)) >= 2:
++                failed.append(episode)
++        if len(failed) >= 2 and not active_pressure_covers(
++            governance, target_ref, "contradiction",
++            [episode["source"] for episode in failed[:4]],
++        ):
++            strength = "strong" if len(failed) >= 3 else "medium"
++            evidence_refs = [episode["source"] for episode in failed[:4]]
++            frame_id = failed[-1].get("frame_id") or current_scope_frame_id(
++                workspace, scope, episodes
++            )
++            required_change = "address repeated failed or blocked episodes"
++            ready_command = record_command(
++                target_ref, "contradiction", strength, evidence_refs, frame_id, required_change
++            )
++            suggestions.append({
++                "kind": "contradiction",
++                "target_ref": target_ref,
++                "strength": strength,
++                "reason": f"{len(failed)} closed episodes overlapping this target "
++                          "ended in failure or blocked without a recorded pressure",
++                "evidence_refs": evidence_refs,
++                "ready_command": ready_command,
++                "recordable": ready_command is not None,
++            })
++        snapshots = target.get("source_snapshots", [])
++        if snapshots and not governance_snapshots_fresh(snapshots, workspace):
++            # a suppressed contradiction must not suppress this target's
++            # staleness derivation, so no early continue above this point
++            if active_pressure_covers(governance, target_ref, "staleness", []):
++                continue
++            evidence_refs, rejected_refs = recordable_governance_refs(
++                list(target.get("source_refs", []))[:4], workspace, scope
++            )
++            frame_id = current_scope_frame_id(workspace, scope, episodes)
++            required_change = "refresh registered source snapshots"
++            ready_command = record_command(
++                target_ref, "staleness", "medium", evidence_refs, frame_id, required_change
++            )
++            suggestion = {
++                "kind": "staleness",
++                "target_ref": target_ref,
++                "strength": "medium",
++                "reason": "registered source snapshots no longer match their sources",
++                "evidence_refs": evidence_refs,
++                "recordable": ready_command is not None,
++            }
++            if ready_command:
++                suggestion["ready_command"] = ready_command
++            else:
++                suggestion["recording_blocked_reason"] = (
++                    "no current frame or no still-recordable evidence refs"
++                )
++            if rejected_refs:
++                suggestion["rejected_evidence_refs"] = rejected_refs
++            suggestions.append(suggestion)
++
++    target_token_sets = [
++        set(semantic_tokens(" ".join([ref] + list(target.get("death_lines", [])))))
++        for ref, target in governance.get("targets", {}).items()
++    ]
++    orphan_failures = []
++    for episode in episodes:
++        if episode.get("outcome") not in FAILED_OR_BLOCKED_OUTCOMES:
++            continue
++        episode_tokens = set(episode.get("tokens", []))
++        if not any(len(tokens.intersection(episode_tokens)) >= 2 for tokens in target_token_sets):
++            orphan_failures.append(episode["source"])
++    if len(orphan_failures) >= 2:
++        informational.append({
++            "kind": "unregistered_risk",
++            "reason": f"{len(orphan_failures)} failed or blocked episodes match no "
++                      "registered governance target; consider governance-target-register",
++            "evidence_refs": orphan_failures[:4],
++        })
++
++    print(json.dumps({
++        "workspace": workspace,
++        "scope": scope,
++        "mode": "read_only_derivation_no_pressure_recorded",
++        "episode_count": len(episodes),
++        "target_count": len(governance.get("targets", {})),
++        "suggestions": suggestions,
++        "informational": informational,
++        "authority": "derived_suggestions_never_pressure_until_explicitly_recorded",
++    }, ensure_ascii=False, indent=2))
++    return 0 if not suggestions else 2
++
++
+ def command_governance_show(args):
+     workspace = canonical_workspace(args.workspace)
+     scope = normalize_scope(args.scope)
+@@ -6155,6 +6474,23 @@
+     governance_transition_parser.add_argument("--replacement-target-ref")
+     governance_transition_parser.set_defaults(func=command_governance_target_transition)
+ 
++    trace_check_parser = subparsers.add_parser(
++        "trace-check",
++        help="read-only advisory match of text against the scope's collapse traces",
++    )
++    trace_check_parser.add_argument("--workspace", default=os.getcwd())
++    trace_check_parser.add_argument("--scope", required=True)
++    trace_check_parser.add_argument("--text", required=True)
++    trace_check_parser.set_defaults(func=command_trace_check)
++
++    pressure_derive_parser = subparsers.add_parser(
++        "governance-pressure-derive",
++        help="read-only pressure suggestions derived from scope evidence; records nothing",
++    )
++    pressure_derive_parser.add_argument("--workspace", default=os.getcwd())
++    pressure_derive_parser.add_argument("--scope", required=True)
++    pressure_derive_parser.set_defaults(func=command_governance_pressure_derive)
++
+     governance_show_parser = subparsers.add_parser(
+         "governance-show", help="deterministically replay and show scoped Memory 0.6 governance state"
+     )

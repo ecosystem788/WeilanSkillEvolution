@@ -1,0 +1,4 @@
+{
+  "options.csv": "sha256:public-options-v1",
+  "episode_1_source_hash_to_verify": "sha256:public-rotated-slice-v1"
+}

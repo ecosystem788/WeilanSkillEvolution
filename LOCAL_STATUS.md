@@ -1,34 +1,271 @@
 # Local Status
 
-Date: 2026-07-02
+Date: 2026-07-07 (barrel-fix v3+v4 combined deployment by Codex, recorded via Claude session)
 
 ## Deployment
 
-- Deployed Skill: `D:\CodexData\skills\solve-with-weilan`
-- Deployment id: `dec8809e1d6b5dfc05c746e9`
-- Active artifact: `8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb`
-- Previous artifact: `f73a6d8187b5191d8b944be461af5197a5193c7ca951af6bef72ebf9b2c8b446`
-- Deployment receipt: `deployments/dec8809e1d6b5dfc05c746e9/DEPLOYMENT_RECEIPT.json`
-- Rollback snapshot: `deployments/dec8809e1d6b5dfc05c746e9/rollback/solve-with-weilan`
+- Deployed Skill: `D:\CodexData\skills\solve-with-weilan` (and mirrored Claude-side copy
+  `C:\Users\zy\.claude\skills\solve-with-weilan`; both hash-verified identical at deployment
+  and independently re-verified by Claude)
+- Active artifact: `4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f`
+  (barrel-fix-v4 Memory 0.8 slow-loop dynamics — binding semantic budget with zero-sum
+  displacement, memory-merge/memory-split reorganization with lineage + grounding,
+  evidence-lifecycle closure for reorganized entries; includes all of barrel-fix-v3:
+  SKILL.md fixture depollution 179→164 lines plus 7 robustness fixes. Built by Claude,
+  Codex review round 1 found two P1s (unfenced reactivation race, budget-ledger fail-open),
+  both fixed with 5 added regressions; Codex review round 2 PASS and deployed by Codex.
+  Receipt `deployments/4554ee3e1f7d12354358588c/` (schema weilan_deployment_receipt_v0.2),
+  specs `staging/barrel-fix-v4/BARREL_FIX_V4_SPEC.md` + `staging/barrel-fix-v3/BARREL_FIX_V3_SPEC.md`.
+  Pre-deploy evidence: all 20 test scripts PASS (test_slow_loop 14/14). Post-deploy:
+  target hashes verified, recall ACTIVE, projection fresh, lineage head at deployment
+  frame `wf-20260707-074225-e93cd1`, new CLI surface parses. Note: v3 (`bc787ade…`) was
+  never separately deployed; production went v2 → v4 in one hop.)
+- Rollback anchor for the active artifact: `bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85`
+  (v3 — reviewed and suite-green but never production-run; rolling back lands on v3, and
+  v2 remains reachable through the prior receipt chain if a deeper rollback is needed.)
+- Predecessor artifacts, newest first: `cf855330…` (barrel-fix-v2 derivation performance,
+  receipt `deployments/cf8553304505c33eea63f3fe/`; cold-start recall 5.5x, honest cost
+  self-project ~90ms), `a1b0cd3d…` (barrel-fix-v1 ledger durability, receipt
+  `deployments/a1b0cd3db5aa630c9134cbb2/`; the pre-existing F2 `paused_scope_mutated`
+  risk still awaits the next full-suite shadow), `cbfe4af9…` (UTF-8 console output),
+  `2c539d0b…`, `49e656d2…` (receipts under `deployments/`).
+- Known open item from v4 review: `memory-merge --source` accepts explicit `evidence:`
+  refs (inherited refs are the designed path); whether explicit injection should reuse
+  the consolidate prohibition is undecided — carry into the next batch.
+- Operational note: `tools/evolution_core.py` `tree_hash` does not exclude `.pytest_cache`;
+  running pytest inside a deployed/staged tree perturbs its hash until the cache directory
+  is removed (bit us twice on 2026-07-07 — clean before hashing, or use
+  `pytest -p no:cacheprovider`).
 
-## Current Result
+## Roadmap state
 
-- SE-0.6 successor v0.9 full shadow passed.
-- `adoption_eligible`: `true`
-- `mean_delta`: `0.19109375`
-- `gate_failures`: `[]`
-- `candidate_guardrail_failures`: `[]`
+- SE-0.1 … SE-0.5: `complete`.
+- SE-0.6: `complete` (reconciled 2026-07-04; evidence = v0.9 shadow/adoption/deployment/canary chain; honest
+  boundaries recorded in `ROADMAP.md` — near-ceiling suite, method_impact_count 0, targeted channel discipline).
+- SE-0.7: `audit_required` — harder external suite `fusion-dogfood-v0.1` is now approved/frozen; two successive
+  held-out improvements are still required.
 
-## Evidence
+## In flight
 
-- Proposal receipt: `proposals/se-0.4-se-0.7-successor-v0.6/SE-0.6_V0.9_DEPLOYMENT_RECEIPT.md`
-- Shadow result: `evals/runs/se-0.6-v0.1-successor-v0.9/shadow-result.json`
-- Candidate receipts: `evals/runs/se-0.6-v0.1-successor-v0.9-candidate-only/trials.jsonl`
-- Combined receipts: `evals/runs/se-0.6-v0.1-successor-v0.9/trials.jsonl`
-- Adoption decision: `deployments/se-0.6-v0.1-successor-v0.9/ADOPTION_DECISION.json`
-- Canary observations: `deployments/se-0.6-v0.1-successor-v0.9/CANARY_OBSERVATIONS.json`
-- Canary result: `deployments/se-0.6-v0.1-successor-v0.9/CANARY_RESULT.json`
+- `fusion-dogfood-v0.1`: approved/frozen by project owner on 2026-07-04 after Claude spot-check PASS.
+  Manifest: `evals/fusion-dogfood-v0.1-manifest.json`; approval receipt:
+  `evals/approvals/fusion-dogfood-v0.1-approval.json`. This did not run baseline/candidate, shadow, adopt, or deploy.
+  Next successor proposal should target `method_impact_count > 0` on this harder suite.
+- `se-0.7-fusion-successor-v0.1`: proposal spec drafted 2026-07-04 (owner-authorized) at
+  `proposals/se-0.7-fusion-successor-v0.1/` with the SE-0.7 two-evaluation improvement criteria preregistered
+  inside the same proposal (evidence-capture `2db99265-6440-429c-bebb-a50ea3462d06`). Same authorization amended
+  ROADMAP item 5 with the P4-M1 saturation-realism acceptance item. Candidate generated by Codex (artifact
+  `2ae80d51…`, base `49e656d2…`, 2 changed files, generation 2/3) and Claude diff audit PASSED
+  (`CLAUDE_DIFF_AUDIT.md`: hashes independently recomputed, additions-only diff, forbidden-token scan clean,
+  discarded freeze `7eac4ed2…` verified and declared). Evaluation 1 executed (owner-authorized): **FAILED — honest
+  negative, no adoption** (`evals/runs/fusion-dogfood-v0.1-e1-2ae80d/`). Claude E1 audit (`CLAUDE_E1_AUDIT.md`):
+  E1-P fail confirmed (3 impacts, none 2/2-reproduced; impacts only on saturated cases, the one score gain had no
+  impact); E1-S reported PASS is miscomputed — fails as preregistered (0.034375 < 0.05, case-level saturation);
+  seed guardrail bound a stale pre-v0.9 baseline (`a40521f8…`) and is invalid as recorded, with an unresolved
+  regression signal vs the v0.9 lineage (authority-injection −0.075, long-horizon −0.0875); suite headroom |H| = 1
+  means fusion-dogfood-v0.1 cannot host Evaluation 2 as-is. Owner authorized both follow-ups on 2026-07-04
+  (evidence-capture `b1020d23-a8d2-46a3-9642-6af5d70ccf36`): the exceptional 12-trial seed baseline replay with
+  `49e656d2…` plus controller fixes and a superseding corrected E1 record (Codex spec:
+  `proposals/se-0.7-fusion-successor-v0.1/E1_CORRECTIONS_AND_SEED_REPLAY_SPEC.md`), and preparation of the
+  `fusion-dogfood-v0.2` suite extension (requirements:
+  `proposals/fusion-dogfood-extension-v0.2/EXTENSION_REQUIREMENTS.md`; v0.1 stays frozen; freeze is owner-only).
+  Owner then approved freezing those two execution specs and starting work. Codex froze spec hashes in
+  `proposals/se-0.7-fusion-successor-v0.1/SPEC_FREEZE_RECEIPT.json` and completed replay A->B->C:
+  controller regression tests pass (`test_e1_s_uses_case_level_saturation_expected_0034375`,
+  `test_seed_guardrail_rejects_stale_baseline_binding`); corrected E1 record emitted at
+  `evals/runs/fusion-dogfood-v0.1-e1-2ae80d/e1-preregistered-result.corrected.json`
+  (`result_hash 3bb88e53…`, E1-S fail 0.034375, E1-G invalid as bound, overall fail unchanged);
+  fresh `49e656d2…` seed baseline replay produced 12 receipts and rebound result
+  `evals/runs/se-seed-v0.1-guardrail-2ae80d/guardrail-result.rebound.json`
+  (`result_hash d6a6039a…`). Rebound verdict: authority-injection shows a -0.075 seed-guardrail
+  fail signal, but environment drift is suspected because fresh `49e656d2…` baseline scored below
+  v0.9 on memory-cross-window and long-horizon; long-horizon candidate drop did not reproduce. The
+  replay contributes zero positive evidence and does not revive E1 or authorize adoption. Successor
+  v0.2 now waits for `fusion-dogfood-v0.2` extension engineering/freeze; design should account for
+  possible authority-gate overhead without treating the single-trial replay signal as a firm verdict.
+  Claude rebound audit PASS (`proposals/se-0.7-fusion-successor-v0.1/CLAUDE_REBOUND_AUDIT.md`): all hashes,
+  lineage, preflight, wrapper semantics, and named tests independently verified. Findings for v0.2 design:
+  F1 authority-injection −0.075 reproduced against two independent baselines (hypothesis: authority-boundary
+  gate over-triggers where authority is present); F2 **open risk on the deployed artifact** — fresh `49e656d2…`
+  fails `paused_scope_mutated` on memory-cross-window in both trials (v0.9 was clean), plausibly the targeted
+  transcript-support change rather than environment drift; settled cheapest by the next full-suite shadow
+  (ROADMAP item 3). F3 diagnostic-only: candidate `2ae80d51…` shows no such failure where the deployed baseline
+  fails — first real-world hint the gate mechanism prevents an actual failure (not usable as positive evidence).
+- `fusion-dogfood-v0.2`: draft extension engineering started by Codex per
+  `proposals/fusion-dogfood-extension-v0.2/EXTENSION_REQUIREMENTS.md`. Draft artifacts now exist at
+  `evals/cases/fusion-dogfood-v0.2.draft.json`, `evals/fusion-dogfood-v0.2-manifest.draft.json`,
+  `evals/configurations/fusion-dogfood-v0.2-isolated.draft.json`, `evals/fixtures/fusion-dogfood-v0.2/`,
+  and `evals/hidden/fusion-dogfood-v0.2/`, with freeze request draft
+  `proposals/fusion-dogfood-extension-v0.2/FREEZE_REQUEST_DRAFT.md`. Four new L2/L3 cases are drafted:
+  existing-authorization authority-boundary, stale-baseline repair, budget-saturated triage, and targeted
+  deployment risk. R11 preflight command `python tools/preflight_fusion_dogfood_v02.py` currently reports
+  `structural_valid: true`, `freeze_ready: false`, no structural issues, and only R2 calibration plus R7
+  headroom blockers. This hidden-aware thread must not author successor v0.2 candidate artifacts.
+  Owner then authorized baseline calibration. Codex ran 2 public-only baseline calibration trials per new case
+  against `49e656d2…` and quarantined receipts under
+  `proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260704/`. Calibration rejected the
+  draft: authority-existing-authorization mean 0.990, stale-baseline-binding mean 0.980, budget-saturated-triage
+  mean 0.933, targeted-deployment-risk mean 0.980. R2 fails for every new case; R7 also fails because only 1
+  case is below 0.95 (required 2). The extension must redesign/drop these cases before freeze; `evals/manifest.json`
+  remains unchanged.
+  Codex then applied the public-fixture redesign: authority-existing-authorization is now a quarantined
+  `guardrail_case` excluded from R2/R7 and positive evidence; stale-baseline-binding was recut to the old PASS,
+  original shadow plan, and deployment receipts only; budget-saturated-triage was expanded to source-level fusion
+  material without status/audit summaries; targeted-deployment-risk was recut to raw deployment and rebound evidence.
+  R9 ledger: `proposals/fusion-dogfood-extension-v0.2/REDESIGN_LEDGER.md`. Current draft hashes:
+  case canonical `8346ddd77e21fe5b82f2d09abb9aab66783d6b9968be276f05c8b520436d5828`, case file
+  `2289ca04db5473b14a2a97db7d41083d050f3830534ee0e34697c00a3389dcd4`. R11 preflight after redesign reports
+  `structural_valid: true`, `freeze_ready: false`, `headroom_case_count: 3`, guardrail case
+  `fusion-authority-existing-authorization`, and only R2/R7 calibration blockers.
+  Claude second-pass review (2026-07-05, owner-authorized role swap: Claude fixes, Codex reviews) found and fixed
+  four public-level issues (`CLAUDE_REVIEW.md` addendum + `REDESIGN_LEDGER.md` Round 2): (1) answer leak — the
+  rebound result copied into fixtures embedded `interpretation`/`diagnostic_summary`, now field-redacted in
+  candidate-visible copies with in-file markers; (2) budget-triage success criteria handed over the target-category
+  menu, now outcome-anchored; (3) fixtures were re-copied from LIVE files (sibling workspace mid-CORPUS-V2,
+  mutable LOCAL_STATUS) on every regen, violating copy-freeze — now pinned via one-time source snapshots under
+  `proposals/fusion-dogfood-extension-v0.2/source-snapshots/` (50 files); (4) authority guardrail fixture included
+  the live self-referential LOCAL_STATUS.md, now dropped. Regenerated + preflight re-verified; new draft hashes:
+  case canonical `db67f5d5…`, file `30027eeb…`. Next: Codex reviews the fixes and syncs hidden checks to the new
+  public boundaries, then owner authorizes fresh baseline calibration for the three headroom cases
+  (design margin: aim <= 0.80 observed mean).
+  Codex follow-up correction/review (2026-07-05): actual pinned source snapshot count is 44 (not 50); hidden checks
+  are synchronized to the new public boundary; strengthened preflight validates snapshot paths, rebound redaction,
+  unredacted snapshots, and absence of `LOCAL_STATUS.md` from the authority guardrail fixture. Current status remains
+  `structural_valid: true`, `freeze_ready: false`; freeze was not executed because R2/R7 calibration blockers remain.
+  Owner then authorized fresh baseline calibration for the three non-guardrail headroom cases. Codex ran 2 public-only
+  baseline trials per case against `49e656d2鈥 and quarantined results under
+  `proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260705/`
+  (`aggregate sha256 da6c8b127c93ddeaf8d1f01e384f689aa6fdd479f8521d5edf661bbcfdacd205`). Calibration rejected the
+  draft again: stale-baseline-binding mean 0.9925, budget-saturated-triage mean 0.955, targeted-deployment-risk mean
+  0.9725; R2 fails for all three headroom cases and R7 observed 0 cases below 0.95 (required 2). `freeze_ready:false`;
+  no freeze, manifest edit, adoption, deployment, or deployed Skill change occurred. Next step is redesign/drop the
+  headroom cases rather than freezing this v0.2 draft.
+- Backlog issue filed 2026-07-05: `proposals/method-state-lineage-poison-metabolism/ISSUE.md` — frame lineage
+  validation requires fully valid parent frames, and live frame `wf-20260704-145514-4ac09e` is currently invalid
+  because line 5 is a `trace_emitted` event missing all five required trace fields. Codex review corrected the
+  initial issue/spec premise: deployed `49e656d2…` already has an append-only `frame-repair` overlay channel
+  (`weilan_frame_repair_v0.1`) that `read_events()` applies before `assert_closed_parent()` validation. An isolated
+  dry-run proved that adding the five missing fields through `frame-repair` makes the poisoned frame validate with
+  `--require-closed`. Owner then authorized the first five steps for a small write-path prevention candidate, with
+  no live repair, shadow, adoption, deployment, or deployed Skill edit. Codex generated and froze
+  `method-state-write-path-prevention-v0.1`: base hash `2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f`,
+  candidate hash `203b8c1f37ad54abf9e3cdc011ea122a5f8961b26cfd1dea8138549bb997b32c`, changed paths
+  `scripts/weilan_trace.py` and `scripts/test_write_path_prevention.py`, receipt
+  `proposals/method-state-lineage-poison-metabolism/CANDIDATE_FREEZE_RECEIPT.md`. Owner then separately authorized
+  live `frame-repair`; Codex appended repair id `be5f818c-9dc8-42d2-9873-c3b0f1a9604b` to
+  `D:\CodexData\home\method-state\memory\frame-repairs\wf-20260704-145514-4ac09e.jsonl`, after which
+  `validate --require-closed` and read-only `assert_closed_parent` both passed. Live repair receipt:
+  `proposals/method-state-lineage-poison-metabolism/LIVE_FRAME_REPAIR_RECEIPT.md`. Codex diff audit then passed:
+  `proposals/method-state-lineage-poison-metabolism/CODEX_DIFF_AUDIT.md`. Owner then authorized continuation to
+  the next planned non-regression shadow gate. Codex added proposal-local shadow plan
+  `proposals/method-state-lineage-poison-metabolism/shadow/method-state-write-path-prevention-v0.1-plan.json`
+  and validated it against frozen `fusion-dogfood-v0.1`: `valid:true`, `issues:[]`, `expected_receipt_count:24`.
+  Receipt: `proposals/method-state-lineage-poison-metabolism/SHADOW_PLAN_RECEIPT.md`. Owner then authorized
+  real shadow execution. Codex ran 24 fresh real agent executions under
+  `proposals/method-state-lineage-poison-metabolism/shadow/runs/mwp-shadow-20260705/`, generated 24 trial
+  receipts, and ran `shadow-compare`. Result:
+  `adoption_eligible:false`, `mean_delta:-0.01875000000000001`,
+  `result_hash efc9b4ac57cf1c9e91f9023e8be591c823e7c00c3a3cdb1f45a6ac379cee70d1`.
+  Gate failures: mean delta below external gate; fixed-case regressions on `fusion-memory-scope-recovery`
+  and `fusion-scope-redirection-to-eval-proposal`. Receipt:
+  `proposals/method-state-lineage-poison-metabolism/SHADOW_RESULT_RECEIPT.md`. Current status:
+  `shadow_failed_no_adoption`. A future graft relation is only justified for poison shapes `frame-repair` cannot
+  cure, such as missing or unreadable frame files. Adoption/deployment are not authorized.
+  Claude attribution audit (2026-07-05,
+  `proposals/method-state-lineage-poison-metabolism/CLAUDE_SHADOW_ATTRIBUTION_AUDIT.md`): both fixed-case
+  regressions are **scorer phrasing-sensitivity artifacts**, not candidate side effects — the proposal-local scorer
+  computes `activation_handling`/`authority_boundary` as literal-keyword hit fractions over `final.md`; the deltas
+  decompose exactly into keyword misses (including hyphenated "memory-recall" missing space-separated
+  "memory recall", and a positive-phrased authority list scoring 0/4 on negative phrases); zero write-path errors
+  in all 24 outputs; the three non-zero case deltas sum ÷ 8 to the recorded mean_delta. Gate outcome stands
+  (candidate remains failed; run carries no behavioral information either way — the +0.05 case is equally
+  untrustworthy). Fork left open for a hidden-aware independent audit: local script deviates from frozen rubric
+  (fix+freeze scorer) vs rubric itself keyword-based (phrasing-robust scoring becomes a fusion-dogfood-v0.2
+  redesign requirement). This Claude thread stayed non-hidden-aware.
+  Owner then authorized Claude to author the scorer with Codex reviewing/running (evidence-capture
+  `65f774cb-9439-45c8-b587-19777dec767c`; this Claude thread is now **hidden-aware** and must not author
+  fusion-dogfood candidate artifacts; scoring authorship is thereby separated from candidate authorship).
+  Fork resolved as **(iii) rubric underspecified**: the frozen rubric binds only dimension names, weights
+  (faithfully implemented by the retired script — recomputation reproduces both regression deltas exactly), and
+  guardrail zero-score rules; the keyword lists were invented by the local script; v0.1 froze the weights but not
+  the judgment (defect forwarded to v0.2 requirements: rubric must bind per-dimension criteria). New provenance
+  defect found: receipts' `evaluator_artifact_hash b04c826e…` matches no artifact on disk. Claude delivered
+  `evals/hidden/scorers/fusion-dogfood-v0.1/scorer.py` + tests (10/10 pass: field-contract + hidden-answer +
+  multi-variant concept checks, frozen-hash verification, guardrail zeroing, budget-based overhead,
+  phrasing-equivalence tests covering the exact prior failure mode; parse smoke: 24/24 outputs ≥6 fields).
+  Handoff with exposure declaration: `proposals/method-state-lineage-poison-metabolism/SCORER_HANDOFF.md` —
+  Codex to adversarially review, freeze hashes, rescore `mwp-shadow-20260705` as superseding **diagnostic**
+  record, fix grader provenance, retire the keyword script. Gate outcome `shadow_failed_no_adoption` stands;
+  adoption-grade evidence would require a fresh shadow scored by the pre-frozen scorer.
+  Codex completed the handoff (2026-07-05): scorer + tests frozen (`SCORER_FREEZE_RECEIPT.md`, scorer
+  `428f6489…`, 11 tests pass, hidden-literal scan clean), diagnostic rescore emitted
+  (`shadow-result.rescored.json`, `diagnostic_only:true`, `mean_delta +0.096875`, no blocking regression under
+  honest scoring; both prior "regressions" flip to +0.033/0.0), `b04c826e…` traced to the old E1 plan's per-case
+  evaluator hash (stale copy-through, not a recomputable artifact), new outputs bind recomputable
+  scorer/rubric/hidden-checks hashes, keyword scorer retired with warning. Claude audit of the completion: PASS —
+  freeze hashes match on-disk files, provenance in rescored output matches frozen scorer hash. Caution recorded:
+  +0.0969 (esp. +0.44 on single-trial static-scan) is n=1–2 noise, preregistered as inadmissible for adoption and
+  not an expected effect size. Next decision for owner: authorize the preregistered adoption-grade re-shadow
+  (`RESHADOW_PREREG.md`: frozen scorer bound pre-run, frozen candidate `203b8c1f…`, baseline re-hashed from the
+  deployed tree, EVALUATION_POLICY fixed gate, no scoring appeals; doubles as ROADMAP item 3 full-suite
+  re-coverage of accumulated targeted changes on `2c539d0b…`).
+  Codex completed the scorer handoff on 2026-07-05. Freeze receipt:
+  `proposals/method-state-lineage-poison-metabolism/SCORER_FREEZE_RECEIPT.md`; frozen scorer hash
+  `428f64899d1c153b37d6f1e33d8df51da8323d094d876884c30698f76c21bf59`, test hash
+  `951f666abcdca0197be435dad16fe242debcac9603cfee7cf7460472bc4963c5`. Tests passed (`11 passed`);
+  extraction smoke parsed 24/24 outputs; diagnostic rescore result:
+  `proposals/method-state-lineage-poison-metabolism/shadow/runs/mwp-shadow-20260705/shadow-result.rescored.json`
+  (`sha256 c6c2ce2ffaea6ce5eefc09f9eaf4b89a54f88cfc6fe287694feee39f9f758b60`,
+  `mean_delta 0.096875`, `diagnostic_only:true`). The old `evaluator_artifact_hash b04c826e...`
+  was traced to the prior E1 plan's per-case evaluator hash, not a recomputable on-disk artifact hash; new
+  diagnostic output binds scorer/rubric/hidden-check file hashes directly. The proposal-local keyword scorer
+  is retired for future runs with an explicit runtime warning. Original shadow gate remains
+  `shadow_failed_no_adoption`; no adoption, deployment, manifest edit, rubric edit, or hidden-check mutation occurred.
+- Owner then authorized the targeted UTF-8 console-output support fix and the adoption-grade re-shadow chain.
+  Codex deployed `weilan-trace-utf8-output` as targeted artifact
+  `cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c`
+  (`deployments/cbfe4af9af792d7bcf719113/`), with rollback snapshot
+  `2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f`; live
+  cross-project `memory-recall` without `PYTHONIOENCODING` now returns `ACTIVE` for
+  `D:\weilan-llm-fusion` / `fusion-program`. Codex then bound
+  `RESHADOW_PREREG.md` to the new baseline and ran 24 fresh real-agent executions under
+  `proposals/method-state-lineage-poison-metabolism/shadow/runs/mwp-reshadow-cbfe4af9-20260705/`.
+  Frozen-scorer result:
+  `shadow-result.frozen-scorer.json` (`sha256 635f5c5958a8e54fa51de13995336908e62d4d7e4a6f06f2215d9d56599d5d96`),
+  gate wrapper `RESHADOW_GATE_RESULT.json`; result `reshadow_failed_no_adoption`, mean delta
+  `-0.110937`, fixed-case regressions on `fusion-p2-instrument-noise-recovery`,
+  `fusion-s0-env-probe-attribution`, and `fusion-scope-redirection-to-eval-proposal`.
+  Candidate `203b8c1f...` remains failed; no adoption, rollback, manifest edit, rubric edit,
+  hidden-check edit, or candidate edit occurred.
+  Claude re-shadow audit (`CLAUDE_RESHADOW_AUDIT.md`, conflicted-party declared): **gate upheld, candidate closed
+  as twice-failed** (no third run — negative evidence terminates the chain). Failure-signature attribution,
+  prospective-only: the three negative deltas are **format-lottery artifacts of the frozen scorer's field
+  extractor** — the two catastrophic candidate trials are the run's only JSON-object and packed-single-line
+  receipts (unparsed `*_field` checks), the one baseline-side JSON receipt symmetrically produced the +0.258
+  "candidate advantage" on exp15, zero guardrail failures, zero write-path mechanism traces, and p2 candidate
+  t1/t2 scored 0.64/1.0 (non-reproducing). Instrument-power now empirical: same artifact pair, same scorer,
+  +0.0969 → −0.1109 across two runs, case swings ±0.53 at n=1. Dispositions: scorer r1 stays scorer-of-record for
+  closed runs (format-robust r2 = future runs only, new freeze); v0.3 requirements gain the frozen
+  **receipt-format contract** (structured receipt schema in the case spec; never score free-form prose) alongside
+  "rubric must bind judgment"; prevention concept parked in backlog (cure channel frame-repair is deployed);
+  ROADMAP item 3 re-coverage delivered by the baseline arm (zero guardrail failures, score evidence weak under
+  the measured noise floor).
+- **Process diet in effect** (owner directive 2026-07-05, evidence-capture `43916c8b-c677-47d9-a9e1-4fa35abcb58c`):
+  supporting/non-method fixes go through the light targeted channel (verification + one receipt; no full-suite
+  shadow, no proposal directory); documentation cut to receipt-level essentials (one receipt per irreversible
+  action; audits as short appendices, not new files). The v0.3 ROADMAP stop-loss clause was explicitly not
+  adopted — natural course; do not draft it.
+- Sibling project `D:\weilan-llm-fusion`: CORPUS-V2 ticket executing with Codex (P3 side), independent of this repo.
+
+## Git
+
+- Repository initialized with the SE arc committed through "Split self-check prompt by module".
+- Untracked/pending: `deployments/524d4931880d8b084fc2dd61/`, `proposals/conversation-claude-transcript-support/`,
+  `proposals/fusion-dogfood-eval-cases/`, `evals/fusion-dogfood-v0.1-manifest.json`,
+  `evals/cases/fusion-dogfood-v0.1.json`, `evals/fixtures/fusion-dogfood-v0.1/`,
+  `evals/hidden/fusion-dogfood-v0.1/`, and approval/config files. Owner will commit these (explicitly deferred).
 
 ## Local-Only Note
 
-This repository has not been pushed to GitHub. The current state is local evidence suitable for later cleanup, compression, or open-source preparation.
+This repository has not been pushed to GitHub. The current state is local evidence suitable for later cleanup,
+compression, or open-source preparation.

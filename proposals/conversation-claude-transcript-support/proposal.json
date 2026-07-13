@@ -1,0 +1,28 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "conversation-claude-transcript-support",
+  "rationale": "Extend conversation_turn_snapshot so conversation evidence can resolve Claude transcript JSONL sessions through the existing WEILAN_CODEX_SESSIONS_HOME root override, while preserving the current rule that only public user and assistant text is hashed into provenance snapshots.",
+  "base_artifact_hash": "8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb",
+  "candidate_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "changed_paths": [
+    "proposals/conversation-claude-transcript-support/candidate/solve-with-weilan/scripts/weilan_trace.py",
+    "proposals/conversation-claude-transcript-support/candidate/solve-with-weilan/scripts/test_conversation_evidence.py"
+  ],
+  "budgets": {
+    "max_changed_files": 2,
+    "max_candidate_generations": 1,
+    "max_evaluation_trials": 0,
+    "max_deployments": 0
+  },
+  "target_metrics": [
+    "claude_transcript_conversation_turn_resolves",
+    "codex_conversation_turn_snapshot_regression_free",
+    "non_public_transcript_content_excluded_from_hash"
+  ],
+  "rollback_triggers": [
+    "conversation evidence resolution regression",
+    "privacy boundary regression",
+    "source snapshot freshness regression"
+  ],
+  "candidate_authority": "proposal_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}

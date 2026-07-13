@@ -1,0 +1,99 @@
+{
+  "schema_version": "weilan_targeted_deployment_receipt_v0.1",
+  "valid": true,
+  "proposal_id": "lower-the-floor-tooth-v0.1",
+  "authority_source": "conversation:2026-07-08-user-authorized-deploy-lower-the-floor-artifact-9b2130-to-solve-with-weilan",
+  "deployment_target": "D:\\CodexData\\skills\\solve-with-weilan",
+  "candidate": {
+    "artifact_hash": "9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9",
+    "artifact_path": "proposals/lower-the-floor-tooth-v0.1/artifacts/9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9/solve-with-weilan"
+  },
+  "rollback": {
+    "before_artifact_hash": "e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32",
+    "rollback_artifact": "proposals/lower-the-floor-tooth-v0.1/deployment/deploy-20260708-9b213098/rollback/e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32/solve-with-weilan",
+    "rollback_artifact_hash": "e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32",
+    "reversible": true
+  },
+  "deployment_method": {
+    "attempted_full_directory_atomic_rename": true,
+    "full_directory_atomic_rename_result": "blocked_by_windows_access_denied_on_target_directory",
+    "completed_by": "targeted_overlay_of_only_artifact_differences_plus_cache_removal",
+    "changed_paths": [
+      "scripts/weilan_trace.py",
+      "scripts/test_memory_note.py"
+    ],
+    "removed_runtime_cache_paths": [
+      "scripts/__pycache__"
+    ],
+    "reason": "pre-deployment diff showed artifact and target differed only by memory-note command file, missing drift-guard test, and runtime pycache; final target tree hash matches the full artifact hash"
+  },
+  "bundle_invariant": {
+    "command": "memory-note",
+    "command_file": {
+      "path": "scripts/weilan_trace.py",
+      "sha256": "1ea27f9f0cccfa1d8271140449773d355756696c47d2eaea2c067ad56b3576bd"
+    },
+    "drift_guard_test": {
+      "path": "scripts/test_memory_note.py",
+      "sha256": "4a66e83d871af2f49c80ab9df6970f03710a350fea9b850fa3fee498dbd89c62"
+    },
+    "rule": "memory-note command and drift-guard test deployed together"
+  },
+  "verification": {
+    "environment": {
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "target_tree_hash_after": "9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9",
+    "artifact_tree_hash": "9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9",
+    "target_matches_artifact": true,
+    "target_pycache_exists": false,
+    "commands": [
+      {
+        "command": "python -c \"compile deployed weilan_trace.py and test_memory_note.py\"",
+        "valid": true
+      },
+      {
+        "command": "python D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_memory_note.py --temp-parent D:\\WeilanSkillEvolution\\staging",
+        "valid": true,
+        "result": {
+          "floor_lowered": "2_to_1",
+          "success_records": "evidence+semantic+promotion_audit",
+          "rejects_are_atomic": true,
+          "manual_equivalence": true,
+          "reject_equivalence_full": true,
+          "retry_no_duplicate": true,
+          "non_durable_signals_tested": 3
+        }
+      },
+      {
+        "command": "python D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_conversation_evidence.py",
+        "valid": true
+      },
+      {
+        "command": "python D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_semantic_integrity.py",
+        "valid": true
+      },
+      {
+        "command": "python D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_semantic_memory.py",
+        "valid": true
+      },
+      {
+        "command": "python D:\\CodexData\\skills\\solve-with-weilan\\scripts\\test_runtime_boundary.py",
+        "valid": true
+      },
+      {
+        "command": "python D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py memory-note --help",
+        "valid": true
+      }
+    ]
+  },
+  "rollback_triggers": [
+    "memory-note command entry missing or fails to parse",
+    "test_memory_note.py drift-guard failure on deployment target",
+    "capture/promote reject-equivalence regression",
+    "conversation evidence boundary regression",
+    "semantic integrity regression",
+    "runtime boundary regression",
+    "target tree hash mismatch against adopted artifact"
+  ]
+}

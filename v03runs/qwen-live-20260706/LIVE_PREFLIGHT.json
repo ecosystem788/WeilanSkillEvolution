@@ -1,0 +1,74 @@
+{
+  "schema_version": "fusion_dogfood_v03_harness_v0.1",
+  "surface": "qwen_openai_compatible_telemetry",
+  "runner_id": "qwen-openai-compatible-v0.1",
+  "environment_ids": [
+    "qwen-api:qwen3.7-plus-2026-05-26"
+  ],
+  "model_snapshot": "qwen3.7-plus-2026-05-26",
+  "arm": "no-method",
+  "tool_call_count": 0,
+  "executed_tool_call_count": 0,
+  "tool_call_names": [],
+  "context_token_count": 329,
+  "context_token_rule": "peak_single_response_total_tokens",
+  "billable_total_tokens": 329,
+  "prompt_token_count": 285,
+  "completion_token_count": 44,
+  "ordered_event_stream": true,
+  "arm_purity_observables": {
+    "method_runtime_operation_count": 0,
+    "method_runtime_hits": [],
+    "workspace_method_bootstrap_count": 0,
+    "workspace_method_bootstrap_hits": [],
+    "append_only_forbidden_operation_count": 0,
+    "append_only_forbidden_hits": []
+  },
+  "actual_usage": {
+    "tool_calls": 0,
+    "executed_tool_calls": 0,
+    "context_tokens": 329,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 329,
+    "prompt_tokens": 285,
+    "completion_tokens": 44,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 0,
+      "effective_context_tokens": 329
+    }
+  },
+  "final_text": "PROBE OK",
+  "hidden_artifacts_read": false,
+  "arm_purity": {
+    "schema_version": "fusion_dogfood_v03_harness_v0.1",
+    "suite_id": "fusion-dogfood-v0.3",
+    "arm": "no-method",
+    "valid": true,
+    "issues": [],
+    "observables": {
+      "method_runtime_operation_count": 0,
+      "method_runtime_hits": [],
+      "workspace_method_bootstrap_count": 0,
+      "workspace_method_bootstrap_hits": [],
+      "append_only_forbidden_operation_count": 0,
+      "append_only_forbidden_hits": []
+    },
+    "hidden_artifacts_read": false
+  },
+  "telemetry_hash": "ca85f44a83d91ca6325ab98866831a8804979e42ad23ded12fbf7aa1f961c9e3",
+  "record_type": "qwen_live_preflight",
+  "live_api_called": true,
+  "api_key_persisted": false,
+  "valid": true
+}

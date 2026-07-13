@@ -1,0 +1,31 @@
+{
+  "schema_version": "fusion_dogfood_v03_calibration_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "calibration_not_evidence",
+  "calibration_mode": "deterministic_harness_dry_run_not_model_trial",
+  "case_id": "fusion-v03-stale-holder-collapse",
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "trial_count": 2,
+  "weighted_baseline_mean": 0.68,
+  "status": "dry_run_pipeline_passed",
+  "separation": {
+    "arm_means": {
+      "no-method": 0.2,
+      "append-only": 0.435,
+      "method-baseline": 0.68
+    },
+    "ordering_passed": true,
+    "required": "no-method < append-only < method-baseline"
+  },
+  "budget_binding": null,
+  "receipt_hashes": [
+    "c24e0be41af8da03c9b35e837ecf2969848425f815f3f7524742dd8ef9be5ff6",
+    "2ef7849cea52d06ae4ea5db935c946fd1be715fec43eec9acb49cbd8ff91a344",
+    "94f23f0bad6d4ce05a520b7ef2acb5ac08457f127e117828e650e5c7df0407c9",
+    "f9fb3a056da62fed17000e66f4f758c0d679555026ede061193df5fdbb7f7a1d",
+    "457570a2e10687f068464681d495c8cee68ecf6810a40d63cccc21a856bbffd8",
+    "4f597757e3803da90123c244c2182744c99799a9578aa259ba8a1522f8cca14a"
+  ],
+  "hidden_artifacts_read": false,
+  "calibration_receipt_hash": "f39bcce09c92b79a58b656cc546235d6a6ba32d33038b9c760d559a66f0d46e6"
+}

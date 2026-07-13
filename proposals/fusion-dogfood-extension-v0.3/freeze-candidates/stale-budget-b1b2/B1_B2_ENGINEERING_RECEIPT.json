@@ -1,0 +1,33 @@
+{
+  "schema_version": "fusion_dogfood_v03_b1b2_engineering_receipt_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "status": "draft_unfrozen_engineering_candidate",
+  "case_ids": [
+    "fusion-v03-stale-holder-collapse",
+    "fusion-v03-budget-bound-ledger-triage"
+  ],
+  "case_set": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/CASE_SET_DRAFT.json",
+  "case_set_hash": "c553dfd3fab4e7f3661d90ff089806227dba8c0b25be1befed0f21b81c676a2b",
+  "source_hashes": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/source-hashes.json",
+  "source_hashes_hash": "d302fe13c467eccf4454dc50d81786ea64640e269925737916bc17c68935378d",
+  "calibration_evidence": {
+    "real_rescored_aggregate": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/real-baseline-2c539d0b-20260705/REAL_CALIBRATION_AGGREGATE_RESCORED.json",
+    "stale_holder_short_rerun": "v03runs/stale-short-rerun/SHORT_RERUN_RESULT.json",
+    "budget_winnability": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/real-baseline-2c539d0b-20260705/BUDGET_WINNABILITY_VALIDATION.json",
+    "arm_purity_audit": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/real-baseline-2c539d0b-20260705/REAL_CALIBRATION_AGGREGATE_ARM_PURITY_AUDIT.json"
+  },
+  "forbidden_actions_preserved": [
+    "no evals/manifest.json edit",
+    "no owner freeze",
+    "no approval file",
+    "no adoption",
+    "no deployment",
+    "no deployed Skill edit"
+  ],
+  "hidden_artifacts_included": false,
+  "receipt_hash": "bb839c62f77c19960230317e7949da6e9b186a3b410c7275cd2994fbaeff9952",
+  "freeze_blockers_after_arm_purity_spec": [
+    "stale-holder negative-control telemetry predates arm-purity observables; strict new R6 requires clean rerun or explicit grandfathering before owner freeze",
+    "R1 still requires a third confirmed new headroom case"
+  ]
+}

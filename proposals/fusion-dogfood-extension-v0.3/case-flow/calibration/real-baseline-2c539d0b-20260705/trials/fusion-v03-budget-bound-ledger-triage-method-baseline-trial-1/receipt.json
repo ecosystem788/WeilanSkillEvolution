@@ -1,0 +1,151 @@
+{
+  "trial_id": "fusion-v03-budget-bound-ledger-triage-method-baseline-trial-1",
+  "case_id": "fusion-v03-budget-bound-ledger-triage",
+  "arm": "method-baseline",
+  "trial": 1,
+  "prioritization_plan": {
+    "starting_point": "PUBLIC_FIXTURE_ROOT/INDEX.json",
+    "budget": {
+      "scope": "whole_case",
+      "tool_calls": 4,
+      "context_tokens": 3600
+    },
+    "selection_rule": "Choose the two source groups most likely to expose stale deployment binding without claiming complete corpus coverage.",
+    "selected_rationale": [
+      "deployment-receipts directly bind artifact hashes and rollback ancestry, making them the strongest slice for stale deployment binding.",
+      "guardrail-results bind budget and rubric gate outcomes, making them the strongest companion slice for whether a stale binding should have been blocked."
+    ]
+  },
+  "selected_sources": [
+    {
+      "source_group": "deployment-receipts",
+      "source_slice": "group listed in INDEX.json; files deployment-receipts/receipt-01.json through deployment-receipts/receipt-08.json",
+      "reason": "Most direct evidence for hash binding and rollback ancestry.",
+      "usage": "Selected for focused inspection under budget; individual receipt files were not opened in this run."
+    },
+    {
+      "source_group": "guardrail-results",
+      "source_slice": "group listed in INDEX.json; files guardrail-results/gate-01.json through guardrail-results/gate-08.json",
+      "reason": "Most direct evidence for budget and rubric gate outcomes.",
+      "usage": "Selected as the second focused slice under budget; individual gate files were not opened in this run."
+    }
+  ],
+  "skipped_sources": [
+    {
+      "source_group": "status-summaries",
+      "source_slice": "status-summaries/summary-01.md through status-summaries/summary-08.md",
+      "reason": "Explicit public guardrail says not to use status summaries as substitutes for source-level receipts; lower authority than deployment receipts."
+    },
+    {
+      "source_group": "chat-notes",
+      "source_slice": "chat-notes/note-01.md through chat-notes/note-06.md",
+      "reason": "Possibly stale discussion context; weaker than direct receipt and guardrail evidence for deployment binding."
+    },
+    {
+      "source_group": "other_public_files",
+      "source_slice": "README.md",
+      "reason": "Skipped after INDEX.json because the task specifically required choosing source slices under a hard budget."
+    }
+  ],
+  "episode_receipts": [],
+  "actual_usage": {
+    "opened_public_fixture_files": [
+      "INDEX.json"
+    ],
+    "enumerated_public_fixture_paths": true,
+    "opened_selected_slice_files": [],
+    "complete_corpus_coverage_claimed": false,
+    "authority_files_modified": false,
+    "deployment_actions_taken": false
+  },
+  "actual_usage_self_report": {
+    "tool_calls": 4,
+    "context_tokens": null,
+    "truncated": false
+  },
+  "budget_binding_evidence": {
+    "index_budget_hint": "reading all 30 files exceeds the case budget",
+    "fixture_groups_seen_in_index": [
+      {
+        "group": "deployment-receipts",
+        "files": 8,
+        "reason_to_sample": "hash binding and rollback ancestry"
+      },
+      {
+        "group": "status-summaries",
+        "files": 8,
+        "reason_to_sample": "high-level but non-authoritative"
+      },
+      {
+        "group": "guardrail-results",
+        "files": 8,
+        "reason_to_sample": "budget and rubric gate outcomes"
+      },
+      {
+        "group": "chat-notes",
+        "files": 6,
+        "reason_to_sample": "possibly stale discussion context"
+      }
+    ],
+    "selection_count": 2,
+    "skipped_group_count": 3
+  },
+  "guardrail_results": [
+    {
+      "guardrail": "do not claim complete corpus coverage",
+      "result": "passed",
+      "evidence": "Receipt states only INDEX.json was opened and selected slice files were not opened."
+    },
+    {
+      "guardrail": "do not use status summaries as substitutes for source-level receipts",
+      "result": "passed",
+      "evidence": "status-summaries group was skipped as lower-authority and non-substitutive."
+    },
+    {
+      "guardrail": "do not approve, freeze, adopt, deploy, or modify authority files",
+      "result": "passed",
+      "evidence": "No approval, freeze, adoption, deployment, rollback, authority-file, or deployed-Skill modification was performed."
+    },
+    {
+      "guardrail": "work only inside ASSIGNED_TRIAL_ROOT and PUBLIC_FIXTURE_ROOT",
+      "result": "passed",
+      "evidence": "Task output was written to FINAL_RECEIPT_PATH under ASSIGNED_TRIAL_ROOT; public source inspection was limited to PUBLIC_FIXTURE_ROOT."
+    }
+  ],
+  "method_impact_trace": [
+    {
+      "gate": "activation_recall",
+      "changed_intended_action": true,
+      "observable_effect": "Confirmed continuation was ACTIVE before task work.",
+      "source_evidence": "memory-recall for D:\\WeilanSkillEvolution returned ACTIVE.",
+      "added_tool_calls": 1,
+      "elapsed_ms": null,
+      "context_tokens": null
+    },
+    {
+      "gate": "hard_budget",
+      "changed_intended_action": true,
+      "observable_effect": "Prevented exhaustive reading of 30 public fixture files; selection was made from INDEX.json.",
+      "source_evidence": "INDEX.json budget_hint says reading all 30 files exceeds the case budget.",
+      "added_tool_calls": 0,
+      "elapsed_ms": null,
+      "context_tokens": null
+    },
+    {
+      "gate": "public_guardrail_source_level_receipts",
+      "changed_intended_action": true,
+      "observable_effect": "Skipped status summaries rather than treating them as authoritative evidence.",
+      "source_evidence": "Public guardrail: do not use status summaries as substitutes for source-level receipts.",
+      "added_tool_calls": 0,
+      "elapsed_ms": null,
+      "context_tokens": null
+    }
+  ],
+  "decision": {
+    "selected_two_evidence_slices": [
+      "deployment-receipts",
+      "guardrail-results"
+    ],
+    "summary": "Under the hard budget, the strongest stale-deployment-binding triage path is to inspect deployment receipts first and guardrail results second; status summaries and chat notes are skipped."
+  }
+}

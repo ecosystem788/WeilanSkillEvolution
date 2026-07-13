@@ -1,0 +1,109 @@
+{
+  "trial_id": "fusion-v03-stale-holder-collapse-append-only-trial-1",
+  "case_id": "fusion-v03-stale-holder-collapse",
+  "arm": "append-only",
+  "trial": 1,
+  "selected_sources": [
+    "episode-1/README.md",
+    "episode-1/deployment-receipt-a.json",
+    "episode-1/risk-note.md",
+    "episode-1/source-hashes.json",
+    "episode-2/README.md",
+    "episode-2/lineage-head-audit.json",
+    "episode-2/targeted-deployment-receipt.json"
+  ],
+  "skipped_sources": [],
+  "episode_receipts": [
+    {
+      "episode": "episode-1",
+      "holder_id": "holder-legacy-rollback-anchor",
+      "claim": "legacy deployment baseline is the current rollback anchor",
+      "evidence": [
+        "episode-1/deployment-receipt-a.json",
+        "episode-1/risk-note.md"
+      ],
+      "receipt": "provisional deployment-risk holder recorded from incomplete copied evidence"
+    },
+    {
+      "episode": "episode-2",
+      "fresh_context_consulted": [
+        "method-home/append-only-ledger.jsonl",
+        "notes/episode-continuation-note.jsonl"
+      ],
+      "invalidated_holder_id": "holder-legacy-rollback-anchor",
+      "invalidating_evidence": [
+        "episode-2/lineage-head-audit.json",
+        "episode-2/targeted-deployment-receipt.json"
+      ],
+      "receipt": "invalidation observed and preserved append-only; collapse/supersession was not executed because this negative-control arm forbids it"
+    }
+  ],
+  "actual_usage_self_report": {
+    "tool_calls": 6,
+    "context_tokens": null,
+    "truncated": false
+  },
+  "actual_usage": {
+    "tool_calls": 6,
+    "context_tokens": null,
+    "truncated": false
+  },
+  "method_state_snapshot_hashes": {
+    "method-home/append-only-ledger.jsonl": "53e95d70133651759b966d387af9a543e21c552cca312fe83d7710dfff11b02c",
+    "notes/episode-continuation-note.jsonl": "a65a663063d2e10d8416cf589c3e71ead4506ee973f08f0a301d2a1bf5552b16"
+  },
+  "ledger_observables": [
+    {
+      "event_id": "evt-episode-1-holder-selected",
+      "event_type": "holder_selected",
+      "active_state_change": "not_recorded"
+    },
+    {
+      "event_id": "evt-episode-2-holder-invalidated-observed",
+      "event_type": "holder_invalidation_observed",
+      "trace_event_id": "trace-append-only-collapse-blocked",
+      "active_state_change": "not_recorded"
+    }
+  ],
+  "guardrail_results": [
+    {
+      "guardrail": "work only inside ASSIGNED_TRIAL_ROOT and PUBLIC_FIXTURE_ROOT",
+      "status": "passed"
+    },
+    {
+      "guardrail": "do not modify deployment receipts or eval manifests",
+      "status": "passed"
+    },
+    {
+      "guardrail": "do not authorize rollback, adoption, deployment, or freeze",
+      "status": "passed"
+    },
+    {
+      "guardrail": "do not claim full continuity without checking the isolated method-state ledger",
+      "status": "passed"
+    },
+    {
+      "guardrail": "append-only negative control forbids collapse, supersede, retire, or inactive marking",
+      "status": "passed"
+    }
+  ],
+  "method_impact_trace": [
+    {
+      "event_id": "evt-episode-1-holder-selected",
+      "impact": "Established provisional deployment-risk holder from copied Episode 1 evidence."
+    },
+    {
+      "event_id": "evt-episode-2-holder-invalidated-observed",
+      "impact": "Episode 2 audit invalidated the holder claim because the live lineage head was missing a required frame field."
+    },
+    {
+      "event_id": "trace-append-only-collapse-blocked",
+      "impact": "Trace preserved invalidation evidence without treating the old holder as active truth; actual collapse/supersession was blocked by append-only arm constraints."
+    }
+  ],
+  "collapse_scope": "blocked_by_append_only_negative_control",
+  "invalidated_holder_id": "holder-legacy-rollback-anchor",
+  "trace_event_id": "trace-append-only-collapse-blocked",
+  "new_holder_id": "holder-targeted-receipt-snapshot-observed",
+  "decision": "do_not_use_legacy_rollback_anchor_as_active_truth; preserve episode-2 invalidation append-only; no collapse_or_supersession_performed"
+}

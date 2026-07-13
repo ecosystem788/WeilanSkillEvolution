@@ -1,0 +1,126 @@
+{
+  "schema_version": "fusion_dogfood_v03_harness_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "telemetry_surface_validation",
+  "selected_surface": "codex_rollout_jsonl_family",
+  "valid": true,
+  "selected": true,
+  "sessions_home": "D:\\CodexData\\home\\sessions",
+  "environment_id": "codex-rollout-jsonl-v0.142.5",
+  "enforcement": {
+    "live_truncation_supported": false,
+    "scoring_time_truncation_supported": true,
+    "truncation_status_source": "computed_by_runner_from_budget_and_ordered_rollout_events"
+  },
+  "r3_required_telemetry": {
+    "tool_call_count": true,
+    "token_usage": true,
+    "truncation_status": true
+  },
+  "same_surface_requirement": "All arms must use the same Codex rollout JSONL telemetry family, CLI version, budget accounting, and scoring-time truncation semantics; arm-specific home contents are part of the arm configuration and must be content-addressed.",
+  "surface_variants": {
+    "codex_desktop_subagent": {
+      "status": "validated_for_method_and_append_only_arms",
+      "environment_id": "codex-desktop-subagent-rollout-jsonl-v0.142.5"
+    },
+    "codex_exec_clean_home": {
+      "status": "validated_by_owner_probe_for_no_method_arm",
+      "environment_id": "codex-cli-exec-rollout-jsonl-v0.142.5",
+      "probe_record": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/arm-purity/CODEX_EXEC_CLEAN_NO_METHOD_PROBE.json"
+    }
+  },
+  "codex_exec_probe": {
+    "status": "validated_by_owner_probe_for_no_method_arm",
+    "reason": "Codex Desktop could not invoke WindowsApps codex.exe, but the owner shell validated codex exec 0.142.5 with clean CODEX_HOME and rollout JSONL telemetry.",
+    "probe_session_id": "019f3208-4c15-76b1-bd6d-ce86955782b2",
+    "probe_record": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/arm-purity/CODEX_EXEC_CLEAN_NO_METHOD_PROBE.json"
+  },
+  "claude_headless_probe": {
+    "status": "not_available",
+    "reason": "claude executable was not found on PATH in this environment."
+  },
+  "samples": [
+    {
+      "path": "D:\\CodexData\\home\\sessions\\2026\\07\\05\\rollout-2026-07-05T17-15-44-019f3158-f6a1-76e1-ad5a-96089220894b.jsonl",
+      "rollout_hash": "cac0bd259ab7cfa3b92cf64a55b5649bbba8ef4415c7851079cb731117e07682",
+      "cli_versions": [
+        "0.142.5"
+      ],
+      "environment_ids": [
+        "codex-desktop:subagent"
+      ],
+      "tool_call_count": 18,
+      "context_token_count": 507617,
+      "token_count_events": 9,
+      "ordered_event_stream": true,
+      "task_complete_seen": false,
+      "valid": true
+    },
+    {
+      "path": "D:\\CodexData\\home\\sessions\\2026\\07\\05\\rollout-2026-07-05T17-15-41-019f3158-e00f-74a3-9a06-10be6e40213c.jsonl",
+      "rollout_hash": "080474431357c13ec2fd98d29d63b18c02bee13b3bc1c291a9bff39d06c8e329",
+      "cli_versions": [
+        "0.142.5"
+      ],
+      "environment_ids": [
+        "codex-desktop:subagent"
+      ],
+      "tool_call_count": 16,
+      "context_token_count": 777965,
+      "token_count_events": 13,
+      "ordered_event_stream": true,
+      "task_complete_seen": false,
+      "valid": true
+    },
+    {
+      "path": "D:\\CodexData\\home\\sessions\\2026\\07\\05\\rollout-2026-07-05T09-36-41-019f2fb4-a84b-7fc2-8197-fb92daa7c573.jsonl",
+      "rollout_hash": "f5efc374a46d10b29a4032c6c51b92d46f7dc99fcaba40beb38201ee1171a994",
+      "cli_versions": [
+        "0.142.5"
+      ],
+      "environment_ids": [
+        "codex-desktop:vscode"
+      ],
+      "tool_call_count": 416,
+      "context_token_count": 30753204,
+      "token_count_events": 254,
+      "ordered_event_stream": true,
+      "task_complete_seen": true,
+      "valid": true
+    },
+    {
+      "path": "D:\\CodexData\\home\\sessions\\2026\\07\\05\\rollout-2026-07-05T13-09-25-019f3077-6ada-7522-b3d6-17896b97cb7d.jsonl",
+      "rollout_hash": "67f5c523c6b87c4cfc4f316850129e70b5b519d251cbb8a69030b3a56f4dbd72",
+      "cli_versions": [
+        "0.142.5"
+      ],
+      "environment_ids": [
+        "codex-desktop:vscode"
+      ],
+      "tool_call_count": 347,
+      "context_token_count": 24960425,
+      "token_count_events": 193,
+      "ordered_event_stream": true,
+      "task_complete_seen": true,
+      "valid": true
+    },
+    {
+      "path": "D:\\CodexData\\home\\sessions\\2026\\07\\05\\rollout-2026-07-05T17-15-29-019f3158-b29c-7ad1-9027-b2dda6e954b8.jsonl",
+      "rollout_hash": "5894f56ef8bf8921470c6e63e6aabbef4490adbeccbd87c948686a7eaa394b11",
+      "cli_versions": [
+        "0.142.5"
+      ],
+      "environment_ids": [
+        "codex-desktop:subagent"
+      ],
+      "tool_call_count": 23,
+      "context_token_count": 831286,
+      "token_count_events": 14,
+      "ordered_event_stream": true,
+      "task_complete_seen": true,
+      "valid": true
+    }
+  ],
+  "hidden_artifacts_read": false,
+  "validation_hash": "3cfb2771625a90d53d8ffba6931ea0c9b225aeba8e626ccd7cc5f6d08c139a46"
+}

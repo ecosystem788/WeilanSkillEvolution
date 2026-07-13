@@ -1,0 +1,55 @@
+{
+  "schema_version": "fusion_dogfood_approval_receipt_v0.1",
+  "suite_id": "fusion-dogfood-v0.1",
+  "status": "approved_frozen",
+  "approved_at_utc": "2026-07-04T08:25:19.080519+00:00",
+  "authority": "project_owner_current_codex_chat",
+  "authority_text": "User replied: ?????",
+  "claude_spot_check": {
+    "path": "proposals/fusion-dogfood-eval-cases/CLAUDE_REVIEW.md",
+    "status": "PASS",
+    "sha256": "3ff5839202b44f9ba10ace2a7a20cf01cf1c5d43f698c190c21f4678a065f78f"
+  },
+  "approved_artifacts": {
+    "manifest": {
+      "path": "evals/fusion-dogfood-v0.1-manifest.json",
+      "canonical_sha256": "f6289701f183ac768da0420e064b1f751bb8caabf3b2f6e82938a7c6868494aa",
+      "file_sha256": "4f4cca49e1736803c8620321fdef9e590caa67119e228be232ae446e59006d44"
+    },
+    "case_spec": {
+      "path": "evals/cases/fusion-dogfood-v0.1.json",
+      "canonical_sha256": "355465c562cea211108095267d3dc659d0e6f72f59d7615eff2b3653b57c68d1",
+      "file_sha256": "045cb6e8119eb7e68d89edca013de2bce949221e799ff223c72ceab484ac17ac"
+    },
+    "evaluator_artifacts": {
+      "hidden_checks": {
+        "path": "evals/hidden/fusion-dogfood-v0.1/hidden-checks.json",
+        "sha256": "a11a7dc8457b67ce74882d621b4ea128b164be2b9a2619306bd0d0a731ff2d3c"
+      },
+      "evaluator_rubric": {
+        "path": "evals/hidden/fusion-dogfood-v0.1/evaluator-rubric.json",
+        "sha256": "e8f59038ae21881f462c125b70879a096800267c5cd7bd33c01c2441d8f1c743"
+      },
+      "source_hashes": {
+        "path": "evals/hidden/fusion-dogfood-v0.1/source-hashes.json",
+        "sha256": "02806dc334bbaa39aae219b65aeb60e4e1ddc31b2d3567a0da57808a3f12629c"
+      },
+      "redaction_policy": {
+        "path": "evals/hidden/fusion-dogfood-v0.1/redaction-policy.md",
+        "sha256": "8e86cd13767ca2c66cfe834d01bc28bdd53b0af1edcdff008d1c08b29ff14b2f"
+      },
+      "execution_config": {
+        "path": "evals/configurations/fusion-dogfood-v0.1-isolated.json",
+        "sha256": "05f86a57691404db1cf1b0effe80aa1ca54fd7e317b1501569218d5aea393663"
+      }
+    }
+  },
+  "boundaries": {
+    "does_not_run_baseline_or_candidate": true,
+    "does_not_run_shadow": true,
+    "does_not_adopt": true,
+    "does_not_deploy": true,
+    "does_not_modify_deployed_skill": true,
+    "preserves_existing_seed_manifest": true
+  }
+}

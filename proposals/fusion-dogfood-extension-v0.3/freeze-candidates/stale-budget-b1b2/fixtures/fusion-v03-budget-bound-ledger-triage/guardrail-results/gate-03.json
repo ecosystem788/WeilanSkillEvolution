@@ -1,0 +1,5 @@
+{
+  "gate_id": "gate-03",
+  "budget_binding": "failed-null",
+  "finding": "dry-run budget_binding was null in the budget case"
+}

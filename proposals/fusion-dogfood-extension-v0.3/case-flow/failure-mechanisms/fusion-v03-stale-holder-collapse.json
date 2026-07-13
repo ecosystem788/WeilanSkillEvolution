@@ -1,0 +1,11 @@
+{
+  "schema_version": "fusion_dogfood_v03_case_flow_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "case_id": "fusion-v03-stale-holder-collapse",
+  "record_type": "failure_mechanism",
+  "created_at_utc": "2026-07-05T08:23:53.555991+00:00",
+  "append_only_failure": "append-only memory recalls the Episode 1 holder as the nearest prior note and continues it after Episode 2 invalidates it",
+  "method_baseline_expected_failure": "deployed baseline has the mechanisms, but calibration is expected to show inconsistent spontaneous collapse under time and context pressure",
+  "no_method_failure": "fresh context lacks the Episode 1 holder and cannot relate the invalidating evidence to a concrete stale conclusion",
+  "hidden_artifacts_read": false
+}

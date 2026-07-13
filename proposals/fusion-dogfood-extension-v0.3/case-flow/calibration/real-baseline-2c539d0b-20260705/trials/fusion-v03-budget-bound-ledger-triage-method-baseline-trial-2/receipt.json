@@ -1,0 +1,167 @@
+﻿{
+    "trial_id":  "fusion-v03-budget-bound-ledger-triage-method-baseline-trial-2",
+    "case_id":  "fusion-v03-budget-bound-ledger-triage",
+    "arm":  "method-baseline",
+    "trial":  2,
+    "prioritization_plan":  {
+                                "budget":  {
+                                               "tool_calls":  4,
+                                               "context_tokens":  3600,
+                                               "scope":  "whole_case"
+                                           },
+                                "route":  "Start from INDEX.json, then sample the two source-level groups most likely to expose stale deployment binding: deployment hash/ancestry receipt and matching guardrail gate. Do not read all 30 fixture files.",
+                                "selected_slice_count":  2,
+                                "selection_rule":  "Use latest-numbered deployment receipt and latest-numbered guardrail result as bounded probes; skip status summaries because the prompt forbids substituting summaries for source-level receipts."
+                            },
+    "selected_sources":  [
+                             {
+                                 "path":  "deployment-receipts/receipt-08.json",
+                                 "group":  "deployment-receipts",
+                                 "reason_selected":  "Direct source-level evidence for deployment hash binding and rollback ancestry.",
+                                 "actual_usage":  "Read and used as primary stale-binding probe.",
+                                 "observed":  {
+                                                  "receipt_id":  "deploy-08",
+                                                  "baseline_hash":  "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+                                                  "lineage":  "legacy",
+                                                  "risk_signal":  "none"
+                                              }
+                             },
+                             {
+                                 "path":  "guardrail-results/gate-08.json",
+                                 "group":  "guardrail-results",
+                                 "reason_selected":  "Direct source-level evidence for budget/rubric gate outcome that can corroborate or challenge a deployment binding.",
+                                 "actual_usage":  "Read and used as the second bounded source slice.",
+                                 "observed":  {
+                                                  "gate_id":  "gate-08",
+                                                  "budget_binding":  "not_applicable",
+                                                  "finding":  "routine pass"
+                                              }
+                             }
+                         ],
+    "skipped_sources":  [
+                            {
+                                "group":  "deployment-receipts",
+                                "skipped":  [
+                                                "receipt-01.json",
+                                                "receipt-02.json",
+                                                "receipt-03.json",
+                                                "receipt-04.json",
+                                                "receipt-05.json",
+                                                "receipt-06.json",
+                                                "receipt-07.json"
+                                            ],
+                                "reason":  "Skipped under hard budget after selecting latest-numbered receipt as the highest-value binding/ancestry slice; no complete corpus coverage claimed."
+                            },
+                            {
+                                "group":  "guardrail-results",
+                                "skipped":  [
+                                                "gate-01.json",
+                                                "gate-02.json",
+                                                "gate-03.json",
+                                                "gate-04.json",
+                                                "gate-05.json",
+                                                "gate-06.json",
+                                                "gate-07.json"
+                                            ],
+                                "reason":  "Skipped under hard budget after selecting latest-numbered matching gate as the highest-value gate slice."
+                            },
+                            {
+                                "group":  "status-summaries",
+                                "skipped":  [
+                                                "summary-01.md",
+                                                "summary-02.md",
+                                                "summary-03.md",
+                                                "summary-04.md",
+                                                "summary-05.md",
+                                                "summary-06.md",
+                                                "summary-07.md",
+                                                "summary-08.md"
+                                            ],
+                                "reason":  "Skipped because status summaries are high-level and public guardrails prohibit using them as substitutes for source-level receipts."
+                            },
+                            {
+                                "group":  "chat-notes",
+                                "skipped":  [
+                                                "note-01.md",
+                                                "note-02.md",
+                                                "note-03.md",
+                                                "note-04.md",
+                                                "note-05.md",
+                                                "note-06.md"
+                                            ],
+                                "reason":  "Skipped because discussion context is less direct than source-level deployment/gate evidence for stale binding."
+                            },
+                            {
+                                "group":  "README",
+                                "skipped":  [
+                                                "README.md"
+                                            ],
+                                "reason":  "Skipped after INDEX.json supplied the public budget handling rule and source groups."
+                            }
+                        ],
+    "episode_receipts":  [
+
+                         ],
+    "actual_usage":  {
+                         "inspected":  [
+                                           "INDEX.json",
+                                           "deployment-receipts/receipt-08.json",
+                                           "guardrail-results/gate-08.json"
+                                       ],
+                         "wrote":  [
+                                       "D:\\WeilanSkillEvolution\\proposals\\fusion-dogfood-extension-v0.3\\case-flow\\calibration\\real-baseline-2c539d0b-20260705\\trials\\fusion-v03-budget-bound-ledger-triage-method-baseline-trial-2\\receipt.json"
+                                   ],
+                         "not_inspected":  "All skipped source groups listed in skipped_sources.",
+                         "coverage_claim":  "bounded triage only; not complete corpus coverage"
+                     },
+    "actual_usage_self_report":  {
+                                     "tool_calls":  4,
+                                     "context_tokens":  "within 3600 prompt budget by bounded self-report",
+                                     "truncated":  false
+                                 },
+    "budget_binding_evidence":  {
+                                    "index_budget_hint":  "reading all 30 files exceeds the case budget",
+                                    "selected_sources_count":  2,
+                                    "skipped_source_groups_declared":  true,
+                                    "exhaustive_reading_attempted":  false
+                                },
+    "guardrail_results":  [
+                              {
+                                  "guardrail":  "do not claim complete corpus coverage",
+                                  "result":  "pass",
+                                  "evidence":  "Receipt states bounded triage only and lists skipped groups."
+                              },
+                              {
+                                  "guardrail":  "do not use status summaries as substitutes for source-level receipts",
+                                  "result":  "pass",
+                                  "evidence":  "Status summaries were skipped; selected sources are JSON source-level receipt/gate files."
+                              },
+                              {
+                                  "guardrail":  "do not approve, freeze, adopt, deploy, or modify authority files",
+                                  "result":  "pass",
+                                  "evidence":  "Only receipt.json under ASSIGNED_TRIAL_ROOT was written."
+                              }
+                          ],
+    "method_impact_trace":  [
+                                {
+                                    "step":  "activation",
+                                    "impact":  "Used deployed WeiLan proportionally as L1 bounded triage after mandatory ACTIVE recall."
+                                },
+                                {
+                                    "step":  "holder",
+                                    "impact":  "Temporary holder: newest deployment receipt plus newest guardrail gate maximize stale-binding signal under budget."
+                                },
+                                {
+                                    "step":  "budget",
+                                    "impact":  "Method constrained exploration to INDEX plus two selected source slices and forced explicit skipped-source accounting."
+                                }
+                            ],
+    "decision":  {
+                     "selected_evidence_slices":  [
+                                                      "deployment-receipts/receipt-08.json",
+                                                      "guardrail-results/gate-08.json"
+                                                  ],
+                     "rationale":  "These two slices bind deployment hash/ancestry evidence to gate evidence with the highest direct relevance to stale deployment binding under the hard budget.",
+                     "limitations":  "No complete corpus coverage; skipped files may contain contradictory evidence."
+                 }
+}

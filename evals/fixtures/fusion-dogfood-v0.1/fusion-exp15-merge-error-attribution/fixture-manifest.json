@@ -1,0 +1,17 @@
+{
+  "schema_version": "fusion_dogfood_fixture_manifest_v0.1",
+  "suite_id": "fusion-dogfood-v0.1",
+  "case_id": "fusion-exp15-merge-error-attribution",
+  "status": "candidate_visible_snapshot_not_approved",
+  "files": {
+    "public/fusion-workspace/specs/EXP-1.5-merge-operator.md": "1033f222f696be7fd93510fd7f7d7a1f50202c59e277aa556d51c9f76c02ff21",
+    "public/fusion-workspace/artifacts/exp15-v1_receipt.md": "9ac139317744fba025fd68238313d136379bf111c23672072f43cc4bf2303d89",
+    "public/fusion-workspace/artifacts/exp15-v1_report.json": "ea3a94d935f093d14a9ae4002464cf91a6c451aec0792716a8ca1800627eab7b",
+    "public/fusion-workspace/artifacts/exp15-v1_merge_events.jsonl": "8ed1057c66d4b735b32c0d656331abb647ee6f00f13db47aefb120d69f592223",
+    "public/fusion-workspace/artifacts/exp15b-v1_receipt.md": "2caf1983b8a4cf65e1826e61a8c77954925e55c1b3a13d0120dec3b1de47c823",
+    "public/fusion-workspace/artifacts/exp15b-v1_report.json": "042a4d47b21789636851e5c34e81085626dea26ed50030bb512f494ac5d45c83",
+    "public/fusion-workspace/artifacts/exp15b-v1_merge_events.jsonl": "45785c705b623f29ba858f82218bacbacce37d61c5b81ef5d65fa2d826af5b57",
+    "public/fusion-workspace/artifacts/exp15b-v1_budget_events.jsonl": "bdf390985b0bcaf05f901ebbd71b8259695eb1d5130662e3af01ec22ff04e4b4"
+  },
+  "content_hash": "40c19ab3a0e56e52acf117d7600e305b6076066acdd1e6a6b7d2f93279de9bf2"
+}

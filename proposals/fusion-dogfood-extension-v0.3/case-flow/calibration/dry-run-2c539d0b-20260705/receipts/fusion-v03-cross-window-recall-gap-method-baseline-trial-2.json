@@ -1,0 +1,117 @@
+{
+  "schema_version": "fusion_dogfood_v03_calibration_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "calibration_not_evidence",
+  "calibration_mode": "deterministic_harness_dry_run_not_model_trial",
+  "case_id": "fusion-v03-cross-window-recall-gap",
+  "arm": "method-baseline",
+  "trial": 2,
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "weighted_score": 0.74,
+  "episode_receipts": [
+    {
+      "episode_id": "episode-1",
+      "pre_snapshot": {
+        "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-dry-run-work-sq791yih\\fusion-v03-cross-window-recall-gap\\method-baseline\\trial-2\\method-home",
+        "files": [],
+        "tree_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "post_snapshot": {
+        "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-dry-run-work-sq791yih\\fusion-v03-cross-window-recall-gap\\method-baseline\\trial-2\\method-home",
+        "files": [
+          {
+            "path": "ledger/events.jsonl",
+            "sha256": "81260bb807d25e75f23ace384ae077ea1b54a431062b9409fe4ffda5fbf8da26",
+            "size": 546
+          }
+        ],
+        "tree_hash": "307c49c8bec7462998a49f2ed2c9da22d6af1b91ba6740642f5a446a1c18e464"
+      },
+      "actual_usage": {
+        "tool_calls": 1,
+        "context_tokens": 600,
+        "wall_clock_ms": 0,
+        "truncated": false,
+        "truncation_reason": null,
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        }
+      },
+      "termination_status": "completed"
+    },
+    {
+      "episode_id": "episode-2",
+      "pre_snapshot": {
+        "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-dry-run-work-sq791yih\\fusion-v03-cross-window-recall-gap\\method-baseline\\trial-2\\method-home",
+        "files": [
+          {
+            "path": "ledger/events.jsonl",
+            "sha256": "81260bb807d25e75f23ace384ae077ea1b54a431062b9409fe4ffda5fbf8da26",
+            "size": 546
+          }
+        ],
+        "tree_hash": "307c49c8bec7462998a49f2ed2c9da22d6af1b91ba6740642f5a446a1c18e464"
+      },
+      "post_snapshot": {
+        "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-dry-run-work-sq791yih\\fusion-v03-cross-window-recall-gap\\method-baseline\\trial-2\\method-home",
+        "files": [
+          {
+            "path": "ledger/events.jsonl",
+            "sha256": "83fdd7b92e4e66d9fbad576107da8aafe7f37893d6a51385b3d6ad5cd97c4ec4",
+            "size": 2281
+          }
+        ],
+        "tree_hash": "bebb6e945413f8389880fde77a0163188170a40c0f56e9dd63b2183f877b384a"
+      },
+      "actual_usage": {
+        "tool_calls": 2,
+        "context_tokens": 900,
+        "wall_clock_ms": 0,
+        "truncated": false,
+        "truncation_reason": null,
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        }
+      },
+      "termination_status": "completed"
+    }
+  ],
+  "actual_usage": {
+    "tool_calls": 2,
+    "context_tokens": 900,
+    "wall_clock_ms": 0,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    }
+  },
+  "ledger_grade": {
+    "passed": true,
+    "collapse_event_id": "6498b8390a452826",
+    "trace_event_id": "9e63853fb44c64cf",
+    "stale_conclusion_excluded_from_active_recall": true
+  },
+  "method_state_snapshot": {
+    "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-dry-run-work-sq791yih\\fusion-v03-cross-window-recall-gap\\method-baseline\\trial-2\\method-home",
+    "files": [
+      {
+        "path": "ledger/events.jsonl",
+        "sha256": "83fdd7b92e4e66d9fbad576107da8aafe7f37893d6a51385b3d6ad5cd97c4ec4",
+        "size": 2281
+      }
+    ],
+    "tree_hash": "bebb6e945413f8389880fde77a0163188170a40c0f56e9dd63b2183f877b384a"
+  },
+  "hidden_artifacts_read": false,
+  "receipt_hash": "6df25da9cead7a6a3f8fe939a707caab9355f554de60ed901340dd9b05b865ed"
+}

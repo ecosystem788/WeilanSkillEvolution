@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "export-receipt v1",
+  "description": "有界醒来脚手架开源导出的构建后收据（receipt 层）。由 Codex 2026-07-11 19:32:36 的固定点拆分而来：template（export-manifest-v1）是静态规则源，本 receipt 是构建产物。观察员签的是本 receipt，它单向指回被签的 template_hash。本 receipt 必须落在被 hash 的导出树之外（否则写入 built_tree_hash 即改变 built_tree_hash，固定点复活）。",
+  "type": "object",
+  "required": [
+    "receipt_version",
+    "built_at_utc",
+    "template_hash",
+    "built_tree_hash",
+    "scan_ruleset_hash",
+    "scan_result",
+    "file_hashes",
+    "test_result",
+    "target_remote",
+    "visibility",
+    "rollback"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "receipt_version": { "const": "export-receipt-v1" },
+    "built_at_utc": {
+      "type": "string",
+      "description": "构建时刻 UTC ISO-8601。由构建脚本盖，不手填。"
+    },
+    "template_hash": {
+      "type": "string",
+      "description": "被签 template（export-manifest-v1.md）的内容哈希。单向锚：template 改一字 → 此值变 → 旧签作废。"
+    },
+    "built_tree_hash": {
+      "type": "string",
+      "description": "§5 步骤2 扫描通过后、对整棵导出树取的哈希。签字绑定的主对象。导出树含 template 文档，不含本 receipt。"
+    },
+    "scan_ruleset_hash": {
+      "type": "string",
+      "description": "对 (template §4 敏感串清单 + 扫描器脚本版本) 取的哈希。单向锚：§4 放松一行 → 此值变 → 旧签作废（Codex 19:24:44）。"
+    },
+    "scan_result": {
+      "type": "object",
+      "required": ["hits", "clean", "scanned_tree_hash"],
+      "additionalProperties": false,
+      "description": "redaction scan 结果。三条硬约束（Codex 19:44:10）：① scanned_tree_hash 必填；② 构建器 MUST 断言 scanned_tree_hash == built_tree_hash，不等即 fail-closed（钉死 scan/hash 同一性）；③ clean 与 hits 单向绑定：hits==0 才能 clean:true，hits>0 必 clean:false（if/then/else 强制，见下）。",
+      "properties": {
+        "hits": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "redaction scan 命中数。非 0 即 fail-closed，receipt 不成立、不签、不推。"
+        },
+        "clean": {
+          "type": "boolean",
+          "description": "当且仅当 hits==0 时为 true（由 if/then/else 强制，非自觉）。签字前置条件。"
+        },
+        "scanned_tree_hash": {
+          "type": "string",
+          "description": "被扫的那棵导出树的哈希。构建器 MUST 断言其等于 built_tree_hash；不等 = 扫的不是端上桌的那棵，fail-closed。证明『被扫的树 = 被 hash 的树』（原 scanned_tree 改必填并绑等）。"
+        }
+      },
+      "if": { "properties": { "hits": { "const": 0 } } },
+      "then": { "properties": { "clean": { "const": true } } },
+      "else": { "properties": { "clean": { "const": false } } }
+    },
+    "file_hashes": {
+      "type": "array",
+      "description": "导出树逐文件哈希清单。路径来自 template §2 白名单；此处只放构建后实测 hash。",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string" },
+          "sha256": { "type": "string" }
+        }
+      }
+    },
+    "test_result": {
+      "type": "object",
+      "required": ["passed", "total", "green"],
+      "additionalProperties": false,
+      "properties": {
+        "passed": { "type": "integer", "minimum": 0 },
+        "total": { "type": "integer", "minimum": 0 },
+        "green": {
+          "type": "boolean",
+          "description": "导出树内候选测试全绿——证包能独立运行、不依赖本机私态（template §5 步骤4）。"
+        }
+      }
+    },
+    "target_remote": {
+      "type": "string",
+      "minLength": 1,
+      "description": "[HOLE-1 · 观察员填] 导出包推向的远端。本仓 remote 为空，此字段空则 receipt 不成立、不推。minLength:1 把『空 target 签不出』从文档承诺钉成 schema 硬闸（Codex 20:04:40 反对：裸 string 允许 target_remote='' 通过，与『schema 上签不出没远端』冲突）。"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["public", "private"],
+      "description": "[HOLE-1 · 观察员填] 公开 / 私有。enum 去掉了 unset：未定可见性即 schema 校验失败、签不出（Codex 20:04:40 反对：unset 曾能通过，与『unset 则不推』冲突）。观察员必须在 public/private 二选一后 receipt 才成立。"
+    },
+    "rollback": {
+      "type": "string",
+      "description": "回滚办法（template §6）：推前删临时导出目录；推后 git revert 该 commit，新建仓按观察员指示删库或改私有。"
+    },
+    "signatures": {
+      "type": "object",
+      "description": "签字面。观察员签的是本 receipt 四元组（built_tree_hash + scan_ruleset_hash + scan_result + template_hash）；社区双签 = Claude 提案 + Codex 同意。",
+      "additionalProperties": false,
+      "properties": {
+        "owner": { "type": "string", "description": "观察员签字时刻/标记（不含实名，避免把身份写进产物）。" },
+        "claude_proposal": { "type": "string", "description": "Claude【提案】的 peer-chat time。" },
+        "codex_consent": { "type": "string", "description": "Codex【同意】的 peer-chat time。" }
+      }
+    }
+  }
+}

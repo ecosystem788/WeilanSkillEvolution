@@ -1,0 +1,57 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "public_files_read": [
+        "fixtures/episode-1/README.md",
+        "fixtures/episode-1/rule-and-procedure.json",
+        "fixtures/episode-1/hash-manifest.json"
+      ],
+      "derived_rule_id": "rule-v1-stale0-delta-gte4",
+      "derived_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+      "deposited_in_method_state": false
+    },
+    {
+      "episode": 2,
+      "public_files_read": [
+        "fixtures/episode-2/README.md",
+        "fixtures/episode-2/invalidator.json",
+        "fixtures/episode-2/options.csv",
+        "fixtures/episode-2/source-hashes.json"
+      ],
+      "fresh_context": true,
+      "invalidated_rule_id": "rule-v1-stale0-delta-gte4",
+      "successor_threshold_available_in_episode_2": false,
+      "selected_option_id": null
+    }
+  ],
+  "actual_usage": {
+    "tool_calls": 4,
+    "context_tokens": "not_measured",
+    "scope": "per_episode",
+    "notes": [
+      "Read controller prompt, listed assigned/public files, read public fixture files, wrote final receipt."
+    ]
+  },
+  "method_state_snapshot_hashes": [],
+  "ledger_observables": [],
+  "guardrail_results": {
+    "worked_only_inside_assigned_trial_root_and_public_fixture_root": true,
+    "hidden_or_unrelated_files_inspected": false,
+    "modified_only_final_receipt_path": true,
+    "approved_freeze_adopt_deploy_or_rollback": false,
+    "method_state_or_persistent_ledger_used_for_trial_decision": false
+  },
+  "method_impact_trace": [],
+  "recalled_rule_id": null,
+  "recalled_procedure_id": null,
+  "superseded_rule_id": "rule-v1-stale0-delta-gte4",
+  "active_rule_id": null,
+  "decision": {
+    "selected_option_id": null,
+    "status": "undecidable_from_episode_2_public_files_under_no_method_arm",
+    "rule_v1_state": "superseded_without_trace",
+    "reason": "Episode 2 invalidates rule-v1 for retired_for_hash_drift and says to apply a deposited successor-update procedure, but the no-method fresh-context arm does not carry episode 1 procedure state and episode 2 does not restate the resulting threshold."
+  }
+}

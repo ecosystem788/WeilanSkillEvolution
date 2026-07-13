@@ -1,0 +1,43 @@
+{
+  "schema_version": "fusion_dogfood_v03_clean_no_method_surface_spec_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "clean_no_method_execution_surface_contract",
+  "status": "clean_no_method_surface_validated_external_probe",
+  "current_surface_probe": "v03runs/cross-conflict-redesign-v2/ARM_PURITY_PROBE.json",
+  "current_surface_status": "current_surface_invalid_for_no_method",
+  "validated_clean_surface_probe": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/arm-purity/CODEX_EXEC_CLEAN_NO_METHOD_PROBE.json",
+  "required_properties": {
+    "workspace_bootstrap": "none: no AGENTS.md, CLAUDE.md, solve-with-weilan skill, memory-recall, or workspace method directives may be injected before the public trial prompt",
+    "method_runtime_access": "disabled: no weilan_trace.py, WEILAN_METHOD_HOME, method-state ledger, memory-control, memory-search, collapse, trace, consolidation, or supersession runtime operations are callable",
+    "home_isolation": "fresh temporary CODEX_HOME / HOME / workspace with no inherited method-state or skill cache",
+    "prompt_scope": "candidate sees only public calibration prompt and public fixture root",
+    "telemetry": "must emit rollout JSONL or equivalent containing ordered events, tool-call count, token usage, truncation point/status, prompt hash, output hash, and environment id",
+    "arm_purity_gate": "validate_arm_purity(\"no-method\", trace) must pass before receipt scoring; failed purity invalidates and reruns the trial"
+  },
+  "candidate_surfaces": [
+    {
+      "surface": "codex exec in scrubbed temp workspace",
+      "status": "validated_by_owner_probe",
+      "environment_id": "codex-cli-exec-rollout-jsonl-v0.142.5",
+      "probe_session_id": "019f3208-4c15-76b1-bd6d-ce86955782b2",
+      "probe_record": "proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/arm-purity/CODEX_EXEC_CLEAN_NO_METHOD_PROBE.json",
+      "clean_home_composition_hash": "5cc6ef58042162d7ba6d3caa433d7a1d3e878fe885688a24d37bc20be5bb1ea4",
+      "local_rollout_access": false,
+      "runner_constraint": "Codex writes and hashes the runner script; the owner or an approved external shell executes it and returns rollout hashes."
+    },
+    {
+      "surface": "claude headless stream-json in scrubbed temp workspace",
+      "status": "not_available_currently",
+      "blocker": "claude executable not found on PATH"
+    },
+    {
+      "surface": "Codex Desktop subagent",
+      "status": "rejected_for_no_method",
+      "blocker": "inherits AGENTS/solve-with-weilan bootstrap and method runtime access"
+    }
+  ],
+  "ready_to_run_cross_window_v2": false,
+  "required_next_authority_or_environment_change": "Project-owner process decision is still required for who executes the frozen runner script and when to schedule the 6-trial batch; avoid overlap with P3 quota-sensitive runs.",
+  "hidden_artifacts_read": false,
+  "spec_hash": "5413e5cef167c49c90eacc793b6534eeb320748da2dd2643f7f738d2f7710220"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "weilan_targeted_verification_result_v0.1",
+  "proposal_id": "conversation-claude-transcript-support",
+  "base_artifact_hash": "8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb",
+  "candidate_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "verification_commands": [
+    "python .\\tools\\evolution_cli.py proposal-validate --proposal .\\proposals\\conversation-claude-transcript-support\\proposal.json",
+    "python .\\proposals\\conversation-claude-transcript-support\\candidate\\solve-with-weilan\\scripts\\test_conversation_evidence.py --temp-parent .\\tmp",
+    "python .\\proposals\\conversation-claude-transcript-support\\candidate\\solve-with-weilan\\scripts\\test_semantic_integrity.py --temp-parent .\\tmp"
+  ],
+  "passed": true,
+  "authority": "targeted_verification_evidence_not_full_shadow_result"
+}

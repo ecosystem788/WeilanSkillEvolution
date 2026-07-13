@@ -1,0 +1,4 @@
+{
+  "options.csv": "sha256:cross-conflict-options-v2",
+  "invalidator.json": "sha256:cross-conflict-invalidator-v2"
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "fusion_dogfood_v03_harness_v0.1",
+  "probe": "runtime-mechanism-availability",
+  "passed": true,
+  "deployed_runtime": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py",
+  "method_home": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-runtime-probe-kh_x0rdw\\method-home",
+  "workspace": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-runtime-probe-kh_x0rdw\\workspace",
+  "frame_id": "wf-20260705-082353-057833",
+  "memory_id": "6643d4ff-9266-4353-9cc6-9b8d3f1a8ba6",
+  "observable_classes": {
+    "holder_ids": true,
+    "collapse_or_supersession": true,
+    "trace_lineage": true,
+    "active_recall_exclusion": true
+  },
+  "method_home_snapshot": {
+    "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-runtime-probe-kh_x0rdw\\method-home",
+    "files": [
+      {
+        "path": "frames/2026-07-05/wf-20260705-082353-057833.jsonl",
+        "sha256": "736089d9d677ddb4982bd21c90fc3260cd68fbf3528ff6d19ea8a2c9512ab086",
+        "size": 2564
+      },
+      {
+        "path": "memory/indexes/workspaces/3fd2493cb4fbe7f2/e23814e45204.json",
+        "sha256": "0f01ec2cb120fe989e502cc0b781908e82511bf0eded2c2cd3dfeaa0ecaed0e6",
+        "size": 746
+      },
+      {
+        "path": "memory/metabolism/fences/workspaces/3fd2493cb4fbe7f2/.workspace-contract.lock",
+        "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "size": 1
+      },
+      {
+        "path": "memory/semantic/workspaces/3fd2493cb4fbe7f2/e23814e45204/2026-07-05.jsonl",
+        "sha256": "4a20cb88f507e3509aa1b0dcbc67c4dc471562e079925562d35b5b984312b2bb",
+        "size": 790
+      },
+      {
+        "path": "memory/semantic-dispositions/workspaces/3fd2493cb4fbe7f2/e23814e45204/2026-07-05.jsonl",
+        "sha256": "8e5d89b2542e57324795f7ae9cb1078e10e9d88771047183bfc0d8ddeb7c1cb8",
+        "size": 601
+      }
+    ],
+    "tree_hash": "b0b4f801462d83574223067cdaf155e9dd0c6ec427af75c00fc96ec37c8cfd1f"
+  },
+  "command_count": 10,
+  "hidden_artifacts_read": false,
+  "receipt_hash": "fd25ea07b7f911872c895c4339c816e5c2d0680a6b442e781ba2ad0770fcd98b"
+}

@@ -1,0 +1,74 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": {
+    "episode_1": {
+      "action": "deposit",
+      "rule_id": "rule-v1-stale0-delta-gte4",
+      "procedure_id": "proc-threshold-plus-two-on-retired-hash"
+    },
+    "episode_2": {
+      "action": "invalidate_and_decide",
+      "invalidated_rule_id": "rule-v1-stale0-delta-gte4",
+      "applied_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+      "decision": "Y"
+    }
+  },
+  "actual_usage": {
+    "tool_calls": 10,
+    "executed_tool_calls": 10,
+    "context_tokens": 6858,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 19786,
+    "prompt_tokens": 14045,
+    "completion_tokens": 5741,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 10,
+      "effective_context_tokens": 6858
+    }
+  },
+  "method_state_snapshot_hashes": {
+    "episode-1/rule-and-procedure.json": "sha256:cross-conflict-v2-episode1",
+    "episode-2/options.csv": "sha256:cross-conflict-v2-options",
+    "episode-2/invalidator.json": "sha256:cross-conflict-v2-invalidator"
+  },
+  "ledger_observables": {
+    "rule_v1_deposited": true,
+    "procedure_deposited": true,
+    "rule_v1_invalidated": true,
+    "successor_threshold_applied": 6
+  },
+  "guardrail_results": {
+    "no_hidden_files_inspected": true,
+    "no_deployment_modifications": true,
+    "worked_within_assigned_roots": true
+  },
+  "method_impact_trace": "rule-v1-stale0-delta-gte4 superseded/collapsed with trace via proc-threshold-plus-two-on-retired-hash",
+  "recalled_rule_id": "rule-v1-stale0-delta-gte4",
+  "recalled_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+  "superseded_rule_id": "rule-v1-stale0-delta-gte4",
+  "active_rule_id": "rule-v2-stale0-delta-gte6",
+  "decision": "Y",
+  "trial_id": "cross-v2-method-baseline-2",
+  "arm": "method-baseline",
+  "trial": 2,
+  "actual_usage_self_report": {
+    "tool_calls": 4,
+    "context_tokens": null
+  }
+}

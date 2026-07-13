@@ -1,0 +1,126 @@
+{
+  "schema_version": "fusion_dogfood_v03_harness_v0.1",
+  "surface": "qwen_openai_compatible_telemetry",
+  "runner_id": "qwen-openai-compatible-v0.1",
+  "environment_ids": [
+    "qwen-api:qwen3.7-plus-2026-05-26"
+  ],
+  "model_snapshot": "qwen3.7-plus-2026-05-26",
+  "arm": "no-method",
+  "tool_call_count": 5,
+  "executed_tool_call_count": 5,
+  "tool_call_names": [
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file",
+    "read_file"
+  ],
+  "tool_event_summaries": [
+    {
+      "index": 0,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-1/rule-and-procedure.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 1,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/invalidator.json"
+      },
+      "ok": true
+    },
+    {
+      "index": 2,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/options.csv"
+      },
+      "ok": true
+    },
+    {
+      "index": 3,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/README.md"
+      },
+      "ok": true
+    },
+    {
+      "index": 4,
+      "name": "read_file",
+      "arguments": {
+        "path": "episode-2/source-hashes.json"
+      },
+      "ok": true
+    }
+  ],
+  "context_token_count": 3585,
+  "context_token_rule": "peak_single_response_total_tokens",
+  "billable_total_tokens": 7008,
+  "prompt_token_count": 4759,
+  "completion_token_count": 2249,
+  "ordered_event_stream": true,
+  "arm_purity_observables": {
+    "method_runtime_operation_count": 0,
+    "method_runtime_hits": [],
+    "workspace_method_bootstrap_count": 0,
+    "workspace_method_bootstrap_hits": [],
+    "append_only_forbidden_operation_count": 0,
+    "append_only_forbidden_hits": []
+  },
+  "actual_usage": {
+    "tool_calls": 5,
+    "executed_tool_calls": 5,
+    "context_tokens": 3585,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 7008,
+    "prompt_tokens": 4759,
+    "completion_tokens": 2249,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": false
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 5,
+      "effective_context_tokens": 3585
+    }
+  },
+  "final_text": "Based on the public fixture files, I can now determine the outcome:\n\n**Analysis:**\n- Episode 1 established `rule-v1-stale0-delta-gte4` (threshold: verification_delta >= 4)\n- Episode 1 also deposited procedure `proc-threshold-plus-two-on-retired-hash` (increase threshold by 2 when retired for hash drift)\n- Episode 2 invalidator retires rule-v1 for hash drift and instructs to apply the successor procedure\n- Applying the procedure: new threshold = 4 + 2 = 6\n- Active rule becomes: stale_projection_count == 0 AND verification_delta >= 6\n\n**Option evaluation:**\n- X: stale=0, delta=4 → fails (4 < 6)\n- Y: stale=0, delta=6 → passes ✓\n- Z: stale=1, delta=8 → fails (stale ≠ 0)\n\n**Decision: Y**\n\nRule-v1 was **superseded** by the successor rule derived from the deposited procedure.\n\n```json\n{\n  \"case_id\": \"fusion-v03-cross-window-recall-gap-redesign-conflict-v2\",\n  \"episode_receipts\": {\n    \"episode_1\": {\n      \"rule_deposited\": \"rule-v1-stale0-delta-gte4\",\n      \"procedure_deposited\": \"proc-threshold-plus-two-on-retired-hash\",\n      \"status\": \"deposited\"\n    },\n    \"episode_2\": {\n      \"invalidator_applied\": true,\n      \"invalidated_rule\": \"rule-v1-stale0-delta-gte4\",\n      \"trigger\": \"retired_for_hash_drift\",\n      \"successor_procedure_applied\": \"proc-threshold-plus-two-on-retired-hash\",\n      \"derived_threshold\": 6,\n      \"status\": \"superseded\"\n    }\n  },\n  \"actual_usage\": {\n    \"tools_called\": [\"read_file\"],\n    \"files_read\": [\n      \"episode-1/rule-and-procedure.json\",\n      \"episode-2/invalidator.json\",\n      \"episode-2/options.csv\",\n      \"episode-2/README.md\",\n      \"episode-2/source-hashes.json\"\n    ],\n    \"method_used\": \"none (negative control arm)\"\n  },\n  \"method_state_snapshot_hashes\": {},\n  \"ledger_observables\": {},\n  \"guardrail_results\": {\n    \"no_method_arm_complied\": true,\n    \"no_episode1_carryover\": true,\n    \"episode2_treated_as_fresh\": true,\n    \"public_files_only\": true\n  },\n  \"method_impact_trace\": {\n    \"method_applied\": false,\n    \"reason\": \"negative control arm - no method\",\n    \"rule_resolution\": \"successor_procedure_applied\"\n  },\n  \"recalled_rule_id\": \"rule-v1-stale0-delta-gte4\",\n  \"recalled_procedure_id\": \"proc-threshold-plus-two-on-retired-hash\",\n  \"superseded_rule_id\": \"rule-v1-stale0-delta-gte4\",\n  \"active_rule_id\": \"rule-v2-stale0-delta-gte6\",\n  \"decision\": \"Y\"\n}\n```",
+  "hidden_artifacts_read": false,
+  "arm_purity": {
+    "schema_version": "fusion_dogfood_v03_harness_v0.1",
+    "suite_id": "fusion-dogfood-v0.3",
+    "arm": "no-method",
+    "valid": true,
+    "issues": [],
+    "observables": {
+      "method_runtime_operation_count": 0,
+      "method_runtime_hits": [],
+      "workspace_method_bootstrap_count": 0,
+      "workspace_method_bootstrap_hits": [],
+      "append_only_forbidden_operation_count": 0,
+      "append_only_forbidden_hits": []
+    },
+    "hidden_artifacts_read": false
+  },
+  "telemetry_hash": "5d212e3feb235a99fd7a73b9a683394f8d1a82523d6a2fe52604dba1b41f3ce3",
+  "receipt_output": "v03runs\\qwen-live-20260706\\cross-v2-qwen-calibration\\trials\\cross-v2-no-method-2\\receipt.json",
+  "receipt_output_hash": "7020a7018a2d2e954ca3d5b1dd275b6ce22bb16b4e1026f212455e35637186ba",
+  "valid": false
+}

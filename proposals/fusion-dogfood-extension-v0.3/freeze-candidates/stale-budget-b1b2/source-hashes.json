@@ -1,0 +1,296 @@
+{
+  "schema_version": "fusion_dogfood_source_hashes_v0.3",
+  "suite_id": "fusion-dogfood-v0.3",
+  "status": "draft_unfrozen",
+  "rows": [
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-stale-holder-collapse/episode-1/deployment-receipt-a.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-1/deployment-receipt-a.json",
+      "sha256": "39aa2c21342aca25ae87ac4bd2eaf0d28a62e609a5be9dbce346f580d2392f14",
+      "bytes": 264,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-stale-holder-collapse/episode-1/README.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-1/README.md",
+      "sha256": "61a0b24fcd79579c7693f03fb2a72c91c4977c6c76cdc5ddcc0033ae85efabd1",
+      "bytes": 203,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-stale-holder-collapse/episode-1/risk-note.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-1/risk-note.md",
+      "sha256": "9c5260618e27fc5acb0cc983915bc9d10624df8eee54746ee0622210632d7c3c",
+      "bytes": 122,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-stale-holder-collapse/episode-1/source-hashes.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-1/source-hashes.json",
+      "sha256": "cbda2b3ef80a8abbfdca920f986261c3e0c6eed50c4936cfd06fdb754f56d59c",
+      "bytes": 104,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-stale-holder-collapse/episode-2/lineage-head-audit.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-2/lineage-head-audit.json",
+      "sha256": "2972ac8ee81b218a156a152baaae50517c98057a1074facb50c9f70f34df3538",
+      "bytes": 350,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-stale-holder-collapse/episode-2/README.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-2/README.md",
+      "sha256": "a495f0e53404dabc93715cf08ec0fba033d87369951a1016a8e265fb51586146",
+      "bytes": 250,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-stale-holder-collapse/episode-2/targeted-deployment-receipt.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-2/targeted-deployment-receipt.json",
+      "sha256": "d73435c6c69fdae7786231ae5826d62e0ab089f8ddaa8270d6847b1678a81c30",
+      "bytes": 255,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "generated fixture manifest",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/fixture-manifest.json",
+      "sha256": "266c7d0c1153f5470ec8d0a2fbc1218c90d3ed9529fde2d35468c20d73cfd392",
+      "bytes": 3723,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-01.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-01.md",
+      "sha256": "42353ac62c35fa92dbaba872fd40dde0146b32cfb3c084d59f41bb4c49d16ce9",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-02.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-02.md",
+      "sha256": "33d9932845cee279f57a14e202b35465c9c21bd57461f594fd749590fc38e751",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-03.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-03.md",
+      "sha256": "77a52d1cd6a30df2ef1a38c3fa197aa6cc56b2e28381ffdfff339150b474807f",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-04.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-04.md",
+      "sha256": "ff2dfed1926143d70584a863550d84200d1d2e49cfbd60679f8d9ab14e5f5a38",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-05.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-05.md",
+      "sha256": "a02922340a5065dafaadd7660a3d28d9363d176ea3232487e46bb63ad481d963",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-06.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/chat-notes/note-06.md",
+      "sha256": "8de89b2dfe80f885f59b7ea5708b013b8685bc3b9138bb9df225b72fe4e58b5e",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-01.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-01.json",
+      "sha256": "83fc30300d0aa45ae40f1a385b114a033b9a4f6062c00f275b7dc480ac400c5c",
+      "bytes": 173,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-02.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-02.json",
+      "sha256": "ed123fd52cf36735562e0f81f48840f9a02cc4e118b3f122b8ef25a383fab597",
+      "bytes": 173,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-03.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-03.json",
+      "sha256": "6476f67078ca98ddab0208acbec08ea359622d81853f74dc2669acd6c32e99e1",
+      "bytes": 173,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-04.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-04.json",
+      "sha256": "06a9650c192ce3c4dd1eb0a27ff4f97d7bfcd5ce0d5e1f2254e476dd35845bbe",
+      "bytes": 173,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-05.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-05.json",
+      "sha256": "ba846870f6280a2edf0bcecf3ae7577d126cfa9615c112fc56b07efe9b5c5c0f",
+      "bytes": 173,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-06.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-06.json",
+      "sha256": "fb9dae52d2d32848fa077148660516c521674b3aaf9bd4f67952ddb12f5d0906",
+      "bytes": 173,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-07.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-07.json",
+      "sha256": "b45a443f874ac34e0ced60dc8c27c48beb41705dee054dd9bb040af504484352",
+      "bytes": 190,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-08.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-08.json",
+      "sha256": "6f8e26a846b54715024d469ea052f07e61da336cf75e052a236d3322bc1aeb35",
+      "bytes": 173,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-01.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-01.json",
+      "sha256": "0d43fe777f718a09221e557793eb0e70626d6a593786b4c34e8efbf210bd344a",
+      "bytes": 99,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-02.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-02.json",
+      "sha256": "08ecbf63d032821a4f9412e46fc110153d89bb475a90c7caeede8f6728e00811",
+      "bytes": 99,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-03.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-03.json",
+      "sha256": "fd13566fe3c26c0b68cc6086fe9bf0c07228a33c888165aaf9b471dacdbd9dfb",
+      "bytes": 134,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-04.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-04.json",
+      "sha256": "199b609224ad7d46901530bfce719ec904eaca9fd937eb7181224e3563130197",
+      "bytes": 99,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-05.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-05.json",
+      "sha256": "352e7262b0f672b6d6ee5c274cede46b3ac593d3bf028949119d09d942dd71a5",
+      "bytes": 99,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-06.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-06.json",
+      "sha256": "699ee7ad89a6f4bef26d6b5c66cf9aad920c369f2c7bc34d246ccb10a299698b",
+      "bytes": 99,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-07.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-07.json",
+      "sha256": "e00faebd219078d778c6493ac55464f476a58e2688333ba9451e19f3b4bd288c",
+      "bytes": 99,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-08.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-08.json",
+      "sha256": "fe43485f9e010bb9d7a250af4565d69beaab47b5c9fe7c3d5dc43dca3d136c24",
+      "bytes": 99,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/INDEX.json",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/INDEX.json",
+      "sha256": "d9de2aec6ca47dba4d5937d18eae6a5ec4231e0aac0a07116acc3aafa6923282",
+      "bytes": 619,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/README.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/README.md",
+      "sha256": "a9a7e1b180819a6222ac07d18cbc3656f92ced316b60a01457172fb4229a4e0e",
+      "bytes": 200,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-01.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-01.md",
+      "sha256": "9fd1859deedb2ac26ab54d98c8b058c72d540a916e7c2c21f5bdc88b9d8447a8",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-02.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-02.md",
+      "sha256": "e786ae92e4797aa431c36c69a96b223c6763b53a4cb4d3656581c7731a694181",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-03.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-03.md",
+      "sha256": "8ade7ba17b2bda225d9e2ce81a7eb759bd7682609bace11d77716106ecde8d8a",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-04.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-04.md",
+      "sha256": "6ea86f2a498d6eccdbadef75fe5b02991ad64dc942e6e3259bb6f61d30ffdc56",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-05.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-05.md",
+      "sha256": "2b2767bcc3667d4f269a33dfa9768d15edcca2624611649bd86f6c84aa74ea55",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-06.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-06.md",
+      "sha256": "663911ec1b448e06fc672cfce5d33ed4ad5de075f7e58d0e8798e5a561ef0ee3",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-07.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-07.md",
+      "sha256": "7056a6472ed55e6d7112ed50108e6d2eb1c5f52293e1d2209c61fc5cc2cb095e",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-08.md",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/status-summaries/summary-08.md",
+      "sha256": "b00d44a0121526f42f3f6e29ef42a48b5e52978fe025d404c7c19975150676ca",
+      "bytes": 64,
+      "redacted_fields": []
+    },
+    {
+      "source_path": "generated fixture manifest",
+      "fixture_path": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-budget-bound-ledger-triage/fixture-manifest.json",
+      "sha256": "deb9205272b65c144352a7c22371f39dc4efdb1c92e3743f362b904d68b4c231",
+      "bytes": 13871,
+      "redacted_fields": []
+    }
+  ],
+  "hidden_artifacts_included": false,
+  "source_hashes_hash": "d302fe13c467eccf4454dc50d81786ea64640e269925737916bc17c68935378d"
+}

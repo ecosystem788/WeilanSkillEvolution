@@ -1,0 +1,79 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "action": "deposit",
+      "rule_id": "rule-v1-stale0-delta-gte4",
+      "procedure_id": "proc-threshold-plus-two-on-retired-hash"
+    },
+    {
+      "episode": 2,
+      "action": "invalidate_and_decide",
+      "invalidated_rule_id": "rule-v1-stale0-delta-gte4",
+      "trigger": "retired_for_hash_drift",
+      "applied_procedure": "proc-threshold-plus-two-on-retired-hash",
+      "derived_rule_text": "select stale_projection_count == 0 and verification_delta >= 6",
+      "decision": "Y"
+    }
+  ],
+  "actual_usage": {
+    "tool_calls": 10,
+    "executed_tool_calls": 10,
+    "context_tokens": 5202,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 21717,
+    "prompt_tokens": 16970,
+    "completion_tokens": 4747,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 10,
+      "effective_context_tokens": 5202
+    }
+  },
+  "method_state_snapshot_hashes": {
+    "episode-1/rule-and-procedure.json": "sha256:cross-conflict-v2-episode1",
+    "episode-2/invalidator.json": "sha256:cross-conflict-v2-invalidator",
+    "episode-2/options.csv": "sha256:cross-conflict-v2-options"
+  },
+  "ledger_observables": {
+    "rule_v1_status": "superseded/collapsed with trace",
+    "successor_threshold": 6
+  },
+  "guardrail_results": {
+    "within_budget": true,
+    "no_hidden_files_accessed": true,
+    "no_deployment_modifications": true
+  },
+  "method_impact_trace": {
+    "rule_v1_lifecycle": "superseded/collapsed with trace",
+    "procedure_application": "increased verification_delta threshold by 2"
+  },
+  "recalled_rule_id": "rule-v1-stale0-delta-gte4",
+  "recalled_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+  "superseded_rule_id": "rule-v1-stale0-delta-gte4",
+  "active_rule_id": "rule-v1-stale0-delta-gte6-successor",
+  "decision": "Y",
+  "trial_id": "cross-v2-method-baseline-2",
+  "arm": "method-baseline",
+  "trial": 2,
+  "actual_usage_self_report": {
+    "tool_calls": 5,
+    "context_tokens": null
+  }
+}

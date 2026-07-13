@@ -1,0 +1,46 @@
+{
+  "candidate_snapshot": "D:\\WeilanSkillEvolution\\deployments\\2e3db4f5519f95f7d468\\candidate\\solve-with-weilan",
+  "candidate_tree_hash": "2e3db4f5519f95f7d468442864336ca72b6b58851c3f6dea62018df872791b47",
+  "changed_files_from_previous": [
+    "SKILL.md",
+    "references/governance-system.md",
+    "scripts/test_gate_liveness.py",
+    "scripts/test_slow_loop.py",
+    "scripts/weilan_trace.py"
+  ],
+  "created_at": "2026-07-07T10:33:34+00:00",
+  "deployed_target_hashes": {
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan": "2e3db4f5519f95f7d468442864336ca72b6b58851c3f6dea62018df872791b47",
+    "D:\\CodexData\\skills\\solve-with-weilan": "2e3db4f5519f95f7d468442864336ca72b6b58851c3f6dea62018df872791b47"
+  },
+  "deployment_id": "2e3db4f5519f95f7d468",
+  "post_deploy_verification_result": "D:\\WeilanSkillEvolution\\deployments\\2e3db4f5519f95f7d468\\POST_DEPLOY_VERIFICATION_RESULT.json",
+  "previous_tree_hash": "4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f",
+  "proposal_id": "barrel-fix-v5-collapse-gate-liveness",
+  "record_type": "DEPLOYMENT_RECEIPT",
+  "resolved_targets_installed": [
+    "D:\\CodexData\\skills\\solve-with-weilan",
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan"
+  ],
+  "rollback_command": "replace installed targets with D:\\WeilanSkillEvolution\\deployments\\2e3db4f5519f95f7d468\\rollback\\solve-with-weilan",
+  "rollback_snapshot": "D:\\WeilanSkillEvolution\\deployments\\2e3db4f5519f95f7d468\\rollback\\solve-with-weilan",
+  "rollback_snapshot_hash": "4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f",
+  "rollback_triggers": [
+    "memory-recall or projection freshness regression",
+    "governance-pressure-derive liveness or zero-write regression",
+    "trace-check or trace advisory regression",
+    "semantic slow-loop regression",
+    "full test suite regression",
+    "operator-directed rollback"
+  ],
+  "schema_version": "weilan_deployment_receipt_v0.2",
+  "target_hashes_before": {
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan": "4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f",
+    "D:\\CodexData\\skills\\solve-with-weilan": "4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f"
+  },
+  "targets": [
+    "D:\\CodexData\\skills\\solve-with-weilan",
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan"
+  ],
+  "verification_result": "D:\\WeilanSkillEvolution\\deployments\\2e3db4f5519f95f7d468\\TARGETED_VERIFICATION_RESULT.json"
+}

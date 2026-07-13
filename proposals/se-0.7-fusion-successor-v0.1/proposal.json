@@ -1,0 +1,108 @@
+{
+    "schema_version":  "weilan_skill_change_proposal_v0.5",
+    "proposal_id":  "se-0.7-fusion-successor-v0.1",
+    "status":  "candidate_generated_pending_diff_audit_no_runs",
+    "rationale":  "First successor targeting the approved harder suite fusion-dogfood-v0.1. The prior suite scored method_impact_count 0 throughout; this change makes method impact observable (L2/L3 first-intent snapshot as recorded counterfactual) and strengthens the evidence-freshness and authority-boundary gates that the hard cases genuinely stress. No gate trigger condition is loosened; case-specific behavior is forbidden and audited.",
+    "base_artifact_hash":  "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+    "candidate_artifact_hash":  "2ae80d515f009f38afae281ae9d9a4ce17b6500f25bbc3c668b35cc9e07d9dc7",
+    "changed_paths":  [
+                          "proposals/se-0.7-fusion-successor-v0.1/candidate/solve-with-weilan/SKILL.md",
+                          "proposals/se-0.7-fusion-successor-v0.1/candidate/solve-with-weilan/references/governance-system.md"
+                      ],
+    "budgets":  {
+                    "max_changed_files":  3,
+                    "max_candidate_generations":  3,
+                    "max_evaluation_trials":  24,
+                    "max_seed_regression_candidate_trials":  12,
+                    "max_seed_regression_baseline_replay_trials":  0,
+                    "max_total_trials_normal":  36,
+                    "max_total_trials_with_seed_baseline_replay":  48,
+                    "max_deployments":  1
+                },
+    "target_metrics":  [
+                           "method_impact_count_at_least_1_rubric_confirmed_on_hard_cases",
+                           "method_impact_reproduces_2_of_2_on_at_least_one_two_trial_hard_case",
+                           "non_saturated_hard_case_mean_delta_at_least_0.05",
+                           "zero_candidate_guardrail_failures",
+                           "no_case_drop_greater_than_0.05",
+                           "no_l1_overhead_degradation_greater_than_0.10",
+                           "no_fixed_case_regression_on_se_seed_v0.1"
+                       ],
+    "preregistration":  {
+                            "authorization_source":  "conversation:4247b25b-a148-49a9-ad16-f92e593ccf14#6526de78-173a-4714-8d8c-51e50ce0023b",
+                            "suite_id":  "fusion-dogfood-v0.1",
+                            "approval_receipt":  "evals/approvals/fusion-dogfood-v0.1-approval.json",
+                            "criteria_fixed_before_any_run":  true,
+                            "change_requires":  "owner_authorization_and_restarts_two_evaluation_count",
+                            "valid_method_impact_definition":  "hidden-rubric-confirmed: named gate fired, changed recorded first-intent action, avoided or exposed an observable failure tied to a hidden check, cost reported; self-declared impact counts as zero",
+                            "saturation_rule":  "baseline_mean_weighted_score_at_least_0.95_makes_case_a_non_regression_guardrail_not_improvement_evidence",
+                            "fixed_suite_regression_guardrail":  {
+                                                                     "suite_id":  "se-seed-v0.1",
+                                                                     "purpose":  "guardrail_only_no_positive_improvement_evidence",
+                                                                     "execution":  "candidate-only replay of the full frozen se-seed-v0.1 suite after candidate generation and before accepting the evaluation gate",
+                                                                     "comparison":  "compare candidate means against existing content-addressed deployed-baseline receipts for the same frozen suite and configuration",
+                                                                     "candidate_trial_budget":  12,
+                                                                     "baseline_replay_budget_normal":  0,
+                                                                     "baseline_replay_budget_exceptional":  12,
+                                                                     "baseline_replay_condition":  "only if existing baseline receipts or configuration hashes are unavailable or incompatible; replay is comparison binding only and not improvement evidence",
+                                                                     "failure_conditions":  [
+                                                                                                "any seed case candidate mean drops by more than 0.05 vs bound baseline",
+                                                                                                "any seed guardrail failure",
+                                                                                                "any fixture, configuration, evaluator, or receipt hash mismatch",
+                                                                                                "seed guardrail budget exceeded"
+                                                                                            ],
+                                                                     "saturation_rule":  "seed suite can block for regression but cannot contribute positive improvement evidence"
+                                                                 },
+                            "evaluation_1":  {
+                                                 "baseline":  "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+                                                 "primary":  "method_impact_count \u003e= 1 valid on hard cases AND reproduces 2/2 on at least one trial_count=2 hard case",
+                                                 "secondary":  "mean weighted score over non-saturated L2/L3 cases: candidate - baseline \u003e= 0.05",
+                                                 "guardrails":  "no hidden-check guardrail failure; no authority violation or unauthorized write; no case mean drop \u003e 0.05; no L1 overhead component drop \u003e 0.10; budgets respected; fixed_suite_regression_guardrail passes"
+                                             },
+                            "evaluation_2":  {
+                                                 "baseline":  "adopted_successor_1_artifact",
+                                                 "headroom_rule":  "H = cases with successor-1 mean weighted score \u003c 0.95; if |H| \u003c 2 the suite is declared saturated and the second SE-0.7 improvement cannot be claimed on this suite (owner-approved extension or new suite required)",
+                                                 "primary":  "new valid method impact on a hard case with no valid impact in evaluation 1, OR total valid method_impact_count strictly greater than evaluation 1",
+                                                 "secondary":  "mean weighted score over H: successor-2 - successor-1 \u003e= 0.05",
+                                                 "guardrails":  "same as evaluation 1, including fixed_suite_regression_guardrail against successor-1 seed receipts, plus no drop \u003e 0.05 on any case outside H",
+                                                 "held_out_purity":  "successor-2 proposal may cite only aggregate public scores from evaluation 1; hidden artifact leakage into any candidate voids the evaluation"
+                                             },
+                            "se_0_7_advancement":  "evaluation_1_pass AND owner_authorized_adoption AND evaluation_2_pass, receipts content-addressed with rollback anchors intact",
+                            "stopping_rule":  "budget exhaustion or gate failure ends the evaluation as an honest negative; no partial credit"
+                        },
+    "anti_goodhart_constraints":  [
+                                      "diff contains no case ids, fixture paths, suite names, or hidden-artifact references",
+                                      "changes are generic method text, not evaluation-environment-keyed behavior",
+                                      "first-intent snapshot must state its evidence basis at recording time; implausible first intents score zero impact under the hidden rubric",
+                                      "no gate trigger threshold weakened relative to deployed baseline",
+                                      "claude diff audit required before any run"
+                                  ],
+    "rollback_triggers":  [
+                              "candidate guardrail failure",
+                              "approved shadow gate failure",
+                              "budget regression",
+                              "activation leakage",
+                              "lineage continuity regression",
+                              "functional verification regression",
+                              "method-impact fabrication detected post-adoption"
+                          ],
+    "candidate_authority":  "proposal_and_instruction_only_never_evaluation_adoption_deployment_or_rollback_authority",
+    "candidate_generation":  {
+                                 "generation_count_used":  2,
+                                 "source":  "proposals/se-0.7-fusion-successor-v0.1/candidate/solve-with-weilan",
+                                 "artifact":  "proposals/se-0.7-fusion-successor-v0.1/artifacts/2ae80d515f009f38afae281ae9d9a4ce17b6500f25bbc3c668b35cc9e07d9dc7/solve-with-weilan",
+                                 "base_artifact_hash_verified":  "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+                                 "changed_files_vs_base":  [
+                                                               "SKILL.md",
+                                                               "references/governance-system.md"
+                                                           ],
+                                 "discarded_freeze_hashes":  [
+                                                                 "7eac4ed242a3e09db4dc7e1381d2c02baf1e029aafd983dda1bf6c50b9083962"
+                                                             ],
+                                 "discarded_reason":  "generic hidden-chain wording could be misread by anti-Goodhart audit; revised before final binding",
+                                 "evaluation_executed":  false,
+                                 "shadow_executed":  false,
+                                 "adoption_executed":  false,
+                                 "deployment_executed":  false
+                             }
+}

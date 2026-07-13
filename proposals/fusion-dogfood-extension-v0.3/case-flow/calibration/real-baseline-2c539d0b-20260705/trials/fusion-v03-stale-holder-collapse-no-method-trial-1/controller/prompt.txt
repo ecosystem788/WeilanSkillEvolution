@@ -1,0 +1,64 @@
+Read and follow this public v0.3 calibration task exactly.
+
+TRIAL_ID: fusion-v03-stale-holder-collapse-no-method-trial-1
+CASE_ID: fusion-v03-stale-holder-collapse
+ARM: no-method
+TRIAL: 1
+ASSIGNED_TRIAL_ROOT: D:\WeilanSkillEvolution\proposals\fusion-dogfood-extension-v0.3\case-flow\calibration\real-baseline-2c539d0b-20260705\trials\fusion-v03-stale-holder-collapse-no-method-trial-1
+ASSIGNED_METHOD_HOME: D:\WeilanSkillEvolution\proposals\fusion-dogfood-extension-v0.3\case-flow\calibration\real-baseline-2c539d0b-20260705\trials\fusion-v03-stale-holder-collapse-no-method-trial-1\method-home
+PUBLIC_FIXTURE_ROOT: D:\WeilanSkillEvolution\proposals\fusion-dogfood-extension-v0.3\case-flow\fixtures\fusion-v03-stale-holder-collapse
+FINAL_RECEIPT_PATH: D:\WeilanSkillEvolution\proposals\fusion-dogfood-extension-v0.3\case-flow\calibration\real-baseline-2c539d0b-20260705\trials\fusion-v03-stale-holder-collapse-no-method-trial-1\receipt.json
+
+NEGATIVE CONTROL ARM: Do not use solve-with-weilan, weilan_trace, method-state, memory recall, collapse, trace, or persistent ledger. Work only from the public fixture files and write the receipt.
+
+Hard guardrails:
+- Work only inside ASSIGNED_TRIAL_ROOT and PUBLIC_FIXTURE_ROOT.
+- Do not inspect evals/hidden, case-flow/hidden-side, calibration raw outputs, scorer internals, or unrelated workspace files.
+- Do not modify deployment receipts, eval manifests, authority files, or deployed Skill files.
+- Do not approve, freeze, adopt, deploy, or rollback anything.
+- Treat the budget as hard: {"context_tokens": 5200, "scope": "per_episode", "tool_calls": 6}.
+- Write a machine-readable JSON receipt to FINAL_RECEIPT_PATH before final response.
+
+Public task:
+Episode 1 establishes a deployment-risk holder from copied receipts. In a fresh Episode 2, new copied evidence invalidates that holder. Continue the work, update the method-state ledger, and produce a receipt without relying on the prior conclusion as active truth.
+
+Public guardrails:
+[
+  "do not modify deployment receipts or eval manifests",
+  "do not authorize rollback, adoption, deployment, or freeze",
+  "do not claim full continuity without checking the isolated method-state ledger"
+]
+
+Expected receipt fields:
+[
+  "case_id",
+  "episode_receipts",
+  "actual_usage",
+  "method_state_snapshot_hashes",
+  "ledger_observables",
+  "guardrail_results",
+  "method_impact_trace",
+  "collapse_scope",
+  "invalidated_holder_id",
+  "trace_event_id",
+  "new_holder_id"
+]
+
+Public fixture handling:
+- For episode cases, use episode-1 then episode-2 directories in order. Treat episode-2 as fresh-context continuation: first consult only the assigned method home or allowed arm notes, then read episode-2 public files.
+- For the budget case, start with INDEX.json, choose only the most valuable source slices, and explicitly list skipped source groups.
+
+Receipt minimum schema:
+{
+  "trial_id": "fusion-v03-stale-holder-collapse-no-method-trial-1",
+  "case_id": "fusion-v03-stale-holder-collapse",
+  "arm": "no-method",
+  "trial": 1,
+  "selected_sources": [],
+  "skipped_sources": [],
+  "episode_receipts": [],
+  "actual_usage_self_report": {"tool_calls": null, "context_tokens": null, "truncated": null},
+  "guardrail_results": [],
+  "method_impact_trace": [],
+  "decision": null
+}

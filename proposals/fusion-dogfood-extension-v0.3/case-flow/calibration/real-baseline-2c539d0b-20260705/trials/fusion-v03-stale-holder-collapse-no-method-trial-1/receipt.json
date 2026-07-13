@@ -1,0 +1,119 @@
+{
+  "trial_id": "fusion-v03-stale-holder-collapse-no-method-trial-1",
+  "case_id": "fusion-v03-stale-holder-collapse",
+  "arm": "no-method",
+  "trial": 1,
+  "selected_sources": [
+    "episode-1/README.md",
+    "episode-1/deployment-receipt-a.json",
+    "episode-1/risk-note.md",
+    "episode-1/source-hashes.json",
+    "episode-2/README.md",
+    "episode-2/lineage-head-audit.json",
+    "episode-2/targeted-deployment-receipt.json"
+  ],
+  "skipped_sources": [],
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "selected_holder_id": "holder-legacy-rollback-anchor",
+      "holder_claim": "legacy deployment baseline is the current rollback anchor",
+      "supporting_public_evidence": [
+        "episode-1/deployment-receipt-a.json",
+        "episode-1/risk-note.md",
+        "episode-1/source-hashes.json"
+      ],
+      "status": "provisional_from_incomplete_copied_evidence"
+    },
+    {
+      "episode": 2,
+      "fresh_context_continuation": true,
+      "invalidated_holder_id": "holder-legacy-rollback-anchor",
+      "invalidating_public_evidence": [
+        "episode-2/lineage-head-audit.json",
+        "episode-2/targeted-deployment-receipt.json"
+      ],
+      "new_holder_id": "holder-targeted-receipt-supersedes-legacy-anchor",
+      "new_holder_claim": "the legacy rollback-anchor holder is not active truth; the targeted receipt with after_hash 2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f is the current copied evidence to preserve without authorizing deployment action",
+      "status": "superseded_without_method_ledger_write"
+    }
+  ],
+  "actual_usage": {
+    "tool_calls": 4,
+    "context_tokens": null,
+    "truncated": false,
+    "note": "Self-report includes bootstrap reads required by the surrounding runner plus public fixture inspection and receipt write."
+  },
+  "actual_usage_self_report": {
+    "tool_calls": 4,
+    "context_tokens": null,
+    "truncated": false
+  },
+  "method_state_snapshot_hashes": [],
+  "ledger_observables": [
+    {
+      "observable": "not_written",
+      "reason": "negative control arm forbids solve-with-weilan, method-state, memory recall, collapse, trace, or persistent ledger"
+    }
+  ],
+  "guardrail_results": [
+    {
+      "guardrail": "do not modify deployment receipts or eval manifests",
+      "status": "passed"
+    },
+    {
+      "guardrail": "do not authorize rollback, adoption, deployment, or freeze",
+      "status": "passed"
+    },
+    {
+      "guardrail": "do not claim full continuity without checking the isolated method-state ledger",
+      "status": "passed_with_negative_control_limitation",
+      "note": "No full continuity is claimed; isolated method-state was not used because the arm explicitly forbids method-state."
+    },
+    {
+      "guardrail": "work only inside ASSIGNED_TRIAL_ROOT and PUBLIC_FIXTURE_ROOT",
+      "status": "passed_for_task_writes",
+      "note": "The only task write is this receipt in ASSIGNED_TRIAL_ROOT."
+    }
+  ],
+  "method_impact_trace": [
+    {
+      "event": "episode_1_holder_established_from_public_copies",
+      "holder_id": "holder-legacy-rollback-anchor",
+      "evidence": [
+        "episode-1/deployment-receipt-a.json",
+        "episode-1/risk-note.md"
+      ]
+    },
+    {
+      "event": "episode_2_new_public_evidence_invalidated_holder",
+      "invalidated_holder_id": "holder-legacy-rollback-anchor",
+      "evidence": [
+        "episode-2/lineage-head-audit.json"
+      ]
+    },
+    {
+      "event": "supersession_recorded_in_receipt_only",
+      "new_holder_id": "holder-targeted-receipt-supersedes-legacy-anchor",
+      "evidence": [
+        "episode-2/targeted-deployment-receipt.json"
+      ]
+    }
+  ],
+  "collapse_scope": "receipt_only_negative_control_supersession",
+  "invalidated_holder_id": "holder-legacy-rollback-anchor",
+  "trace_event_id": "receipt-only-trace-fusion-v03-stale-holder-collapse-no-method-trial-1",
+  "new_holder_id": "holder-targeted-receipt-supersedes-legacy-anchor",
+  "decision": {
+    "status": "holder_superseded",
+    "authorized_actions": [],
+    "forbidden_actions_preserved": [
+      "rollback",
+      "adoption",
+      "deployment",
+      "freeze",
+      "eval_manifest_edit",
+      "deployment_receipt_edit"
+    ]
+  }
+}

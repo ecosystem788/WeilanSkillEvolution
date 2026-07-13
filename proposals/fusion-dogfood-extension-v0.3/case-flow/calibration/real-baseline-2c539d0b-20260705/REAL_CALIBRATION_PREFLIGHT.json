@@ -1,0 +1,49 @@
+{
+  "schema_version": "fusion_dogfood_v03_calibration_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "real_calibration_preflight",
+  "valid": true,
+  "status": "ready_for_real_baseline_trials",
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "telemetry_surface": {
+    "valid": true,
+    "selected_surface": "codex_desktop_subagent_rollout_jsonl",
+    "environment_id": "codex-desktop-subagent-rollout-jsonl-v0.142.5",
+    "validation_hash": "ce9bf955888843fef53944e0d22140139ce9e071724da6273a1fafc17127348e"
+  },
+  "case_count": 3,
+  "cases": [
+    {
+      "case_id": "fusion-v03-budget-bound-ledger-triage",
+      "public_case_design": "proposals/fusion-dogfood-extension-v0.3/case-flow/case-designs/fusion-v03-budget-bound-ledger-triage.json",
+      "hidden_side_contract": "proposals/fusion-dogfood-extension-v0.3/case-flow/hidden-side/fusion-v03-budget-bound-ledger-triage.json",
+      "preregistration": "proposals/fusion-dogfood-extension-v0.3/case-flow/preregistrations/fusion-v03-budget-bound-ledger-triage.json",
+      "fixture_root": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-budget-bound-ledger-triage",
+      "ready": true,
+      "issues": []
+    },
+    {
+      "case_id": "fusion-v03-cross-window-recall-gap",
+      "public_case_design": "proposals/fusion-dogfood-extension-v0.3/case-flow/case-designs/fusion-v03-cross-window-recall-gap.json",
+      "hidden_side_contract": "proposals/fusion-dogfood-extension-v0.3/case-flow/hidden-side/fusion-v03-cross-window-recall-gap.json",
+      "preregistration": "proposals/fusion-dogfood-extension-v0.3/case-flow/preregistrations/fusion-v03-cross-window-recall-gap.json",
+      "fixture_root": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-cross-window-recall-gap",
+      "ready": true,
+      "issues": []
+    },
+    {
+      "case_id": "fusion-v03-stale-holder-collapse",
+      "public_case_design": "proposals/fusion-dogfood-extension-v0.3/case-flow/case-designs/fusion-v03-stale-holder-collapse.json",
+      "hidden_side_contract": "proposals/fusion-dogfood-extension-v0.3/case-flow/hidden-side/fusion-v03-stale-holder-collapse.json",
+      "preregistration": "proposals/fusion-dogfood-extension-v0.3/case-flow/preregistrations/fusion-v03-stale-holder-collapse.json",
+      "fixture_root": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-stale-holder-collapse",
+      "ready": true,
+      "issues": []
+    }
+  ],
+  "issues": [],
+  "authorized_trial_count": 14,
+  "trial_count_executed": 0,
+  "hidden_artifacts_read": false,
+  "preflight_hash": "a9f25663c1e0077a3b3d4acc95a91cef824d56d6406cfb3b897fa51b0eb3e33e"
+}

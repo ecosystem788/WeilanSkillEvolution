@@ -1,0 +1,46 @@
+{
+  "schema_version": "weilan_targeted_content_addressed_adoption_receipt_v0.1",
+  "valid": true,
+  "decision": "adopt",
+  "proposal_id": "method-state-atomic-replace-retry-v0.1",
+  "authority_source": "conversation:2026-07-10-owner-authorized-adopt-and-deploy-method-state-atomic-retry",
+  "adoption_scope": "authority_plane_only_deployment_requires_separate_receipt",
+  "adoption_bundle": {
+    "path": "proposals/method-state-atomic-replace-retry-v0.1/adoption/ADOPTION_BUNDLE.json",
+    "sha256": "27d45b1bd5a86ba7caa573b1835865d702e7462d42bff7b65ad6d659ab835748"
+  },
+  "drift_guard": {
+    "path": "proposals/method-state-atomic-replace-retry-v0.1/adoption/DRIFT_GUARD.ps1",
+    "sha256": "dc87b35f54ebacf65da2cad208ce19963bdd91ce8dd6a67119b0f7373988c88a",
+    "result": {
+      "valid": true,
+      "proposal_valid": true,
+      "base_artifact_hash": "847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74",
+      "candidate_artifact_hash": "fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1",
+      "changed_paths": [
+        "scripts/runtime_core.py",
+        "scripts/test_event_atomic_replace_retry.py"
+      ],
+      "freeze_created": false,
+      "focused_tests": "3 passed",
+      "full_regression": "60 passed"
+    }
+  },
+  "candidate": {
+    "artifact_hash": "fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1",
+    "artifact_path": "proposals/method-state-atomic-replace-retry-v0.1/artifacts/fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1/solve-with-weilan"
+  },
+  "deployment_boundary": {
+    "deployment_authorized": true,
+    "deployment_completed_by_this_receipt": false,
+    "deployment_target": "D:\\CodexData\\skills\\solve-with-weilan",
+    "target_tree_hash_before": "847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74",
+    "target_tree_hash_after": "847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74",
+    "target_mutated": false,
+    "separate_deployment_receipt_required": true
+  },
+  "evaluation_boundary": {
+    "targeted_supporting_change": true,
+    "next_full_suite_must_cover_accumulated_targeted_changes": true
+  }
+}

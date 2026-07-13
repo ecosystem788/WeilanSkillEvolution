@@ -1,0 +1,143 @@
+{
+  "schema_version": "weilan_dynamics_firstcut_targeted_verification_v0.2",
+  "status": "pass",
+  "verified_at_local_date": "2026-07-08",
+  "authority": "isolated_candidate_probe_never_adopts_or_deploys",
+  "candidate_artifact_hash": "f28bc2b678d28d6b09caae31f29587e9bb882823acacad4619083848db7ff097",
+  "verification_commands": [
+    "python \"D:\\WeilanSkillEvolution\\proposals\\weilan-dynamics-firstcut-v0.1\\candidate\\solve-with-weilan\\scripts\\test_dynamics_firstcut.py\"",
+    "python \"D:\\WeilanSkillEvolution\\proposals\\weilan-dynamics-firstcut-v0.1\\candidate\\solve-with-weilan\\scripts\\dynamics_firstcut.py\" --json",
+    "python .\\tools\\evolution_cli.py proposal-validate --proposal \"D:\\WeilanSkillEvolution\\proposals\\weilan-dynamics-firstcut-v0.1\\proposal.json\""
+  ],
+  "f1_path_binding": {
+    "displace_selector_layer": "scripts/dynamics_firstcut.py:select_displacement",
+    "budget_validator_kept_external": "enforce_semantic_budget is not modified by this probe",
+    "semantic_arena_no_enumerated_gate": true
+  },
+  "f2_exit_precedence": {
+    "emergence_fixture": {
+      "exit_code": "collapse_emerges_from_conservation",
+      "proxy_runs": {
+        "occurrence_narrowing_v0": {
+          "exit_code": "collapse_emerges_from_conservation",
+          "steps": 4,
+          "q_conserved": true
+        },
+        "strict_occurrence_v0": {
+          "exit_code": "collapse_emerges_from_conservation",
+          "steps": 4,
+          "q_conserved": true
+        }
+      }
+    },
+    "needs_gate_fixture": {
+      "exit_code": "collapse_needs_gate",
+      "proxy_runs": {
+        "occurrence_narrowing_v0": {
+          "exit_code": "collapse_needs_gate",
+          "steps": 8,
+          "q_conserved": true
+        },
+        "strict_occurrence_v0": {
+          "exit_code": "collapse_needs_gate",
+          "steps": 8,
+          "q_conserved": true
+        }
+      }
+    },
+    "true_stalled_survival_fixture": {
+      "exit_code": "collapse_needs_gate",
+      "oligarch_self_read_score": 0.0,
+      "oligarch_active": true,
+      "proxy_runs": {
+        "occurrence_narrowing_v0": {
+          "exit_code": "collapse_needs_gate",
+          "steps": 8,
+          "q_conserved": true
+        },
+        "strict_occurrence_v0": {
+          "exit_code": "collapse_needs_gate",
+          "steps": 8,
+          "q_conserved": true
+        }
+      }
+    },
+    "artifact_fixture": {
+      "exit_code": "inconclusive",
+      "proxy_runs": {
+        "occurrence_narrowing_v0": {
+          "exit_code": "collapse_emerges_from_conservation",
+          "steps": 4,
+          "q_conserved": true
+        },
+        "centroid_adhesion_artifact_v0": {
+          "exit_code": "collapse_needs_gate",
+          "steps": 8,
+          "q_conserved": true
+        }
+      }
+    },
+    "phase_map": {
+      "axes": {
+        "q": [0.55, 0.75, 0.9, 0.96],
+        "bleed": [0.03, 0.12, 0.3, 0.45],
+        "floor": [0.05, 0.25, 0.55],
+        "horizon": [4, 8, 16]
+      },
+      "cell_count": 144,
+      "counts": {
+        "collapse_emerges_from_conservation": 56,
+        "collapse_needs_gate": 88,
+        "inconclusive": 0,
+        "blocked_engineering": 0
+      },
+      "all_cells_q_conserved": true,
+      "sample_emergence_cell": {
+        "q": 0.55,
+        "bleed": 0.12,
+        "floor": 0.25,
+        "horizon": 8,
+        "exit_code": "collapse_emerges_from_conservation",
+        "steps": 7,
+        "final_oligarch_q": 0.0,
+        "oligarch_active": false,
+        "q_conserved": true
+      },
+      "true_stalled_survival_cell": {
+        "q": 0.96,
+        "bleed": 0.03,
+        "floor": 0.55,
+        "horizon": 8,
+        "exit_code": "collapse_needs_gate",
+        "steps": 8,
+        "final_oligarch_q": 1.0,
+        "oligarch_active": true,
+        "q_conserved": true
+      }
+    }
+  },
+  "f3_self_read_proxy_controls": {
+    "proxy": "occurrence_narrowing_v0",
+    "scores": {
+      "duplicate_neighbor": 0.43,
+      "productive_outlier": 0.7,
+      "stalled_centroid_oligarch": 0.0
+    },
+    "stalled_oligarch_low": true,
+    "productive_outlier_high": true,
+    "duplicate_penalized": true
+  },
+  "f4_single_ledger_invariant": {
+    "q_conserved_in_emergence_runs": true,
+    "q_conserved_in_all_phase_map_cells": true,
+    "starved_release_selects_lowest_q_iteratively": true,
+    "displacement_selector_uses_q_not_recency": true,
+    "selected_displacement": ["new_low_q"]
+  },
+  "explicit_boundaries": [
+    "constructed oligarch",
+    "hand-set scarcity",
+    "isolated semantic-slot arena only",
+    "no deployed skill modification"
+  ]
+}

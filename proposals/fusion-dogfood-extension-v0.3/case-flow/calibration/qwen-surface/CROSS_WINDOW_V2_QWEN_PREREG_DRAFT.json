@@ -1,0 +1,39 @@
+{
+  "schema_version": "fusion_dogfood_v03_qwen_cross_window_v2_prereg_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "case_id": "fusion-v03-cross-window-recall-gap-v2",
+  "status": "draft_pre_live_snapshot_pin",
+  "execution_surface": {
+    "surface": "qwen_openai_compatible_telemetry",
+    "environment_id": "qwen-api:<pending-pinned-snapshot-id>",
+    "model_snapshot_id": "<pending QWEN_MODEL_SNAPSHOT>",
+    "floating_alias_allowed": false,
+    "runner": "tools/qwen_v03_runner.py",
+    "runner_id": "qwen-openai-compatible-v0.1"
+  },
+  "substrate_disclosure": {
+    "substitution": "Qwen/OpenAI-compatible bare API is a substitute execution surface adopted for arm purity and telemetry isolation.",
+    "transfer_limitation": "Within-surface arm separations are valid on the pinned Qwen snapshot; transfer back to Claude/Codex production executors requires separate evidence.",
+    "junction_record_required": true
+  },
+  "failure_mechanism": {
+    "version": "cross-window redesign v2",
+    "mechanism": "Episode 1 deposits a retired or stale rule/procedure; Episode 2 supplies an invalidator and new options. Append-only retrieval should over-recall the stale note, while method-baseline should collapse/supersede it and choose the changed decision.",
+    "expected_append_only_failure": "confident continuation of the stale episode-1 rule after the invalidator appears"
+  },
+  "preregistered_expectations": {
+    "expected_method_baseline_mean_lt": 0.8,
+    "separation_ordering": "no-method < append-only < method-baseline",
+    "trial_count": 6,
+    "trials_per_arm": 2
+  },
+  "gates_before_live_trials": [
+    "Claude review recorded for this runner and prereg package.",
+    "QWEN_MODEL_SNAPSHOT pinned to an exact snapshot id.",
+    "Qwen budget recalibration plan completed for this case.",
+    "Qwen-surface winnable-in-principle walkthrough verified.",
+    "Owner explicitly authorizes the 6 live trials after review."
+  ],
+  "hidden_artifacts_read": false,
+  "prereg_hash": "7298ed8bdce018251489afc8aaa664a79167fd943faca52acfa56438b298018d"
+}

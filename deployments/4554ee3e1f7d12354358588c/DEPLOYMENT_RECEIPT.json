@@ -1,0 +1,44 @@
+{
+  "schema_version": "weilan_deployment_receipt_v0.2",
+  "record_type": "DEPLOYMENT_RECEIPT",
+  "created_at": "2026-07-07T07:44:32+00:00",
+  "deployment_id": "4554ee3e1f7d12354358588c",
+  "proposal_id": "barrel-fix-v4-memory-slow-loop",
+  "candidate_tree_hash": "4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f",
+  "previous_tree_hash": "bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85",
+  "candidate_snapshot": "D:\\WeilanSkillEvolution\\deployments\\4554ee3e1f7d12354358588c\\candidate\\solve-with-weilan",
+  "rollback_snapshot": "D:\\WeilanSkillEvolution\\deployments\\4554ee3e1f7d12354358588c\\rollback\\solve-with-weilan",
+  "rollback_snapshot_hash": "bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85",
+  "targets": [
+    "D:\\CodexData\\skills\\solve-with-weilan",
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan"
+  ],
+  "resolved_targets_installed": [
+    "D:\\CodexData\\skills\\solve-with-weilan"
+  ],
+  "deployed_target_hashes": {
+    "D:\\CodexData\\skills\\solve-with-weilan": "4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f",
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan": "4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f"
+  },
+  "target_hashes_before": {
+    "D:\\CodexData\\skills\\solve-with-weilan": "bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85",
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan": "bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85"
+  },
+  "verification_result": "D:\\WeilanSkillEvolution\\deployments\\4554ee3e1f7d12354358588c\\TARGETED_VERIFICATION_RESULT.json",
+  "rollback_triggers": [
+    "memory-recall or projection freshness regression",
+    "semantic budget admission or reactivation regression",
+    "semantic budget ledger fail-open regression",
+    "memory merge/split/evidence lifecycle laundering regression",
+    "full test suite regression",
+    "operator-directed rollback"
+  ],
+  "rollback_command": "replace resolved targets with D:\\WeilanSkillEvolution\\deployments\\4554ee3e1f7d12354358588c\\rollback\\solve-with-weilan",
+  "changed_files_from_previous": [
+    "SKILL.md",
+    "references/memory-system.md",
+    "scripts/test_slow_loop.py",
+    "scripts/weilan_trace.py"
+  ],
+  "receipt_sha256_pending_note": "computed after write as DEPLOYMENT_RECEIPT.sha256"
+}

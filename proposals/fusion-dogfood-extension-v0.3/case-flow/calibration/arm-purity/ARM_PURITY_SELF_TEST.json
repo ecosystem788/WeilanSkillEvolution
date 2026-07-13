@@ -1,0 +1,13 @@
+{
+  "schema_version": "fusion_dogfood_v03_harness_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "arm_purity_self_test",
+  "valid": true,
+  "checks": {
+    "clean_no_method_passes": true,
+    "contaminated_no_method_rejected": true,
+    "clean_append_only_passes": true,
+    "contaminated_append_only_rejected": true
+  },
+  "hidden_artifacts_read": false
+}

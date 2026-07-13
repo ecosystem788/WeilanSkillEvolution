@@ -1,0 +1,88 @@
+{
+  "schema_version": "fusion_dogfood_calibration_aggregate_v0.2",
+  "suite_id": "fusion-dogfood-v0.2",
+  "record_type": "calibration_not_evidence",
+  "created_at_utc": "2026-07-04T15:57:03.734402+00:00",
+  "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "case_results": [
+    {
+      "case_id": "fusion-stale-baseline-binding-repair",
+      "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.9925,
+      "status": "rejected_ceiling_saturation",
+      "calibration_receipt_hash": "6509772a1e367fccfb6b368d97a4bb030b735f4f6fa48922f8481b617a3ea653",
+      "trial_receipts": [
+        {
+          "trial": 1,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260705/receipts/fusion-stale-baseline-binding-repair-trial-1.json",
+          "sha256": "584130672213d2ceb72881918e2fee6b760790c2d0aff2d7230da8e01581a406",
+          "weighted_score": 0.995,
+          "r2_status": "ceiling_saturation_reject"
+        },
+        {
+          "trial": 2,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260705/receipts/fusion-stale-baseline-binding-repair-trial-2.json",
+          "sha256": "ca8aeb22b68a918386f65cd45937590465eba1b322f7fc5c8197b3513461fe8a",
+          "weighted_score": 0.99,
+          "r2_status": "ceiling_saturation_reject"
+        }
+      ]
+    },
+    {
+      "case_id": "fusion-budget-saturated-triage",
+      "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.955,
+      "status": "rejected_ceiling_saturation",
+      "calibration_receipt_hash": "1bf83ecfd5fdd4ef29af7e363b782a742be04c33132ed3223cb4a9e80af3ab7c",
+      "trial_receipts": [
+        {
+          "trial": 1,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260705/receipts/fusion-budget-saturated-triage-trial-1.json",
+          "sha256": "4bf4630609b88f88e2098cd6c8c02942b8b378d6b711cf5de77aa12be16349ef",
+          "weighted_score": 0.955,
+          "r2_status": "ceiling_saturation_reject"
+        },
+        {
+          "trial": 2,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260705/receipts/fusion-budget-saturated-triage-trial-2.json",
+          "sha256": "571f92f515893ed9d66214342e332d9c427d09a0b85b7a63df32d25ba0a2841f",
+          "weighted_score": 0.955,
+          "r2_status": "ceiling_saturation_reject"
+        }
+      ]
+    },
+    {
+      "case_id": "fusion-targeted-deployment-risk",
+      "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.9725,
+      "status": "rejected_ceiling_saturation",
+      "calibration_receipt_hash": "fb6624aff03a9f6dce7a5e524473982d66cc320f0990d6aef01b07540dac481c",
+      "trial_receipts": [
+        {
+          "trial": 1,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260705/receipts/fusion-targeted-deployment-risk-trial-1.json",
+          "sha256": "d6df8bdf16daf6020bcf752233b614bfaef1f0b996f14901b11af41bb3022a7b",
+          "weighted_score": 0.965,
+          "r2_status": "ceiling_saturation_reject"
+        },
+        {
+          "trial": 2,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260705/receipts/fusion-targeted-deployment-risk-trial-2.json",
+          "sha256": "ec6c03e91a53fefdc7d5580669052c2f0ccd7f60f26a8756da7e2bc55f836836",
+          "weighted_score": 0.98,
+          "r2_status": "ceiling_saturation_reject"
+        }
+      ]
+    }
+  ],
+  "r2_verdict": "fail_redesign_or_drop_required",
+  "r7_headroom": {
+    "required_cases_below_0_95": 2,
+    "observed_cases_below_0_95": 0,
+    "status": "fail"
+  },
+  "quarantine_policy": "Do not copy raw outputs, score breakdowns, or receipts into public fixtures, candidate prompts, proposal rationale, or candidate skill text. Freeze package may cite only aggregate R8 facts."
+}

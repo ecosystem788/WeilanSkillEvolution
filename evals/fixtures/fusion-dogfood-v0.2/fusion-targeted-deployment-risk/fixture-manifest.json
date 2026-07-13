@@ -1,0 +1,67 @@
+{
+  "schema_version": "fusion_dogfood_fixture_manifest_v0.2",
+  "suite_id": "fusion-dogfood-v0.2",
+  "case_id": "fusion-targeted-deployment-risk",
+  "status": "draft_unfrozen",
+  "candidate_visible_root": "evals/fixtures/fusion-dogfood-v0.2/fusion-targeted-deployment-risk/public",
+  "copied_at_utc": "2026-07-04T15:32:32.997453+00:00",
+  "source_snapshot_root": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-targeted-deployment-risk",
+  "snapshot_discipline": "fixtures populate from pinned snapshots; deleting a snapshot is a deliberate re-slice and must be recorded in the R9 redesign ledger",
+  "candidate_visible": [
+    {
+      "source_path": "D:\\WeilanSkillEvolution\\deployments\\524d4931880d8b084fc2dd61\\DEPLOYMENT_INTENT.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-targeted-deployment-risk/public/skill-evolution-workspace/deployments/524d4931880d8b084fc2dd61/DEPLOYMENT_INTENT.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-targeted-deployment-risk/public/skill-evolution-workspace/deployments/524d4931880d8b084fc2dd61/DEPLOYMENT_INTENT.json",
+      "sha256": "350d9173f44c7ec0faf2398d9f80edfbeec85d1676101ed97c202cc1044c4270",
+      "bytes": 1253
+    },
+    {
+      "source_path": "D:\\WeilanSkillEvolution\\deployments\\524d4931880d8b084fc2dd61\\DEPLOYMENT_RECEIPT.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-targeted-deployment-risk/public/skill-evolution-workspace/deployments/524d4931880d8b084fc2dd61/DEPLOYMENT_RECEIPT.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-targeted-deployment-risk/public/skill-evolution-workspace/deployments/524d4931880d8b084fc2dd61/DEPLOYMENT_RECEIPT.json",
+      "sha256": "350d9173f44c7ec0faf2398d9f80edfbeec85d1676101ed97c202cc1044c4270",
+      "bytes": 1253
+    },
+    {
+      "source_path": "D:\\WeilanSkillEvolution\\deployments\\524d4931880d8b084fc2dd61\\TARGETED_VERIFICATION_RESULT.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-targeted-deployment-risk/public/skill-evolution-workspace/deployments/524d4931880d8b084fc2dd61/TARGETED_VERIFICATION_RESULT.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-targeted-deployment-risk/public/skill-evolution-workspace/deployments/524d4931880d8b084fc2dd61/TARGETED_VERIFICATION_RESULT.json",
+      "sha256": "0569b45c61e0e62e30f6361320278795fc4e28c7c372b0c4ac29124180e6d080",
+      "bytes": 902
+    },
+    {
+      "source_path": "D:\\WeilanSkillEvolution\\deployments\\dec8809e1d6b5dfc05c746e9\\DEPLOYMENT_INTENT.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-targeted-deployment-risk/public/skill-evolution-workspace/deployments/dec8809e1d6b5dfc05c746e9/DEPLOYMENT_INTENT.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-targeted-deployment-risk/public/skill-evolution-workspace/deployments/dec8809e1d6b5dfc05c746e9/DEPLOYMENT_INTENT.json",
+      "sha256": "eacbd3134fcf41b2ae010b518addb4476a06029bbd008388218352f0cd4e48fc",
+      "bytes": 941
+    },
+    {
+      "source_path": "D:\\WeilanSkillEvolution\\deployments\\dec8809e1d6b5dfc05c746e9\\DEPLOYMENT_RECEIPT.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-targeted-deployment-risk/public/skill-evolution-workspace/deployments/dec8809e1d6b5dfc05c746e9/DEPLOYMENT_RECEIPT.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-targeted-deployment-risk/public/skill-evolution-workspace/deployments/dec8809e1d6b5dfc05c746e9/DEPLOYMENT_RECEIPT.json",
+      "sha256": "eacbd3134fcf41b2ae010b518addb4476a06029bbd008388218352f0cd4e48fc",
+      "bytes": 941
+    },
+    {
+      "source_path": "D:\\WeilanSkillEvolution\\evals\\runs\\se-0.6-v0.1-successor-v0.9\\shadow-result.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-targeted-deployment-risk/public/skill-evolution-workspace/evals/runs/se-0.6-v0.1-successor-v0.9/shadow-result.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-targeted-deployment-risk/public/skill-evolution-workspace/evals/runs/se-0.6-v0.1-successor-v0.9/shadow-result.json",
+      "sha256": "b4cea23b0d36394f47354e9a45735361af50b3bd2cf47407ee8c1971a483ede3",
+      "bytes": 6823
+    },
+    {
+      "source_path": "D:\\WeilanSkillEvolution\\evals\\runs\\se-seed-v0.1-guardrail-2ae80d\\guardrail-result.rebound.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-targeted-deployment-risk/public/skill-evolution-workspace/evals/runs/se-seed-v0.1-guardrail-2ae80d/guardrail-result.rebound.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-targeted-deployment-risk/public/skill-evolution-workspace/evals/runs/se-seed-v0.1-guardrail-2ae80d/guardrail-result.rebound.json",
+      "redacted_fields": [
+        "interpretation",
+        "interpretation.diagnostic_summary"
+      ],
+      "sha256": "eab43b9099fbce5a757a3018dc6d6114cf4c146718d5135cc1df907a5ea42df1",
+      "bytes": 8445
+    }
+  ],
+  "directory_references": "forbidden",
+  "calibration_material": "not included"
+}

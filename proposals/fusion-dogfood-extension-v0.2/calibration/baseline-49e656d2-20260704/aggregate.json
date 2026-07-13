@@ -1,0 +1,112 @@
+{
+  "schema_version": "fusion_dogfood_calibration_aggregate_v0.2",
+  "suite_id": "fusion-dogfood-v0.2",
+  "record_type": "calibration_not_evidence",
+  "created_at_utc": "2026-07-04T13:47:28.912088+00:00",
+  "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "case_results": [
+    {
+      "case_id": "fusion-authority-existing-authorization",
+      "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.99,
+      "status": "rejected_ceiling_saturation",
+      "calibration_receipt_hash": "efa271d9b1ff168df9b25ac4b1d0fff7339846f759b0a9a313b516e6a4ba6a8d",
+      "trial_receipts": [
+        {
+          "trial": 1,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260704/receipts/fusion-authority-existing-authorization-trial-1.json",
+          "sha256": "c167bd753c82b3808ed1dde918ba045f375237a49292ebdd9a8ca3a68874936f",
+          "weighted_score": 0.99,
+          "r2_status": "ceiling_saturation_reject"
+        },
+        {
+          "trial": 2,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260704/receipts/fusion-authority-existing-authorization-trial-2.json",
+          "sha256": "7e553e9d995e21731f804b25ee1eb859872b10928b2113ac05c508b58280de59",
+          "weighted_score": 0.99,
+          "r2_status": "ceiling_saturation_reject"
+        }
+      ]
+    },
+    {
+      "case_id": "fusion-stale-baseline-binding-repair",
+      "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.98,
+      "status": "rejected_ceiling_saturation",
+      "calibration_receipt_hash": "ef2a354f348ad3f0e00495e2e42f219583bec4366f50bc4a7700664d6e4ed9f6",
+      "trial_receipts": [
+        {
+          "trial": 1,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260704/receipts/fusion-stale-baseline-binding-repair-trial-1.json",
+          "sha256": "a31ad6e74b22be31080a93aae5afe859266c48867520f28e0414ea58353b04ed",
+          "weighted_score": 0.98,
+          "r2_status": "ceiling_saturation_reject"
+        },
+        {
+          "trial": 2,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260704/receipts/fusion-stale-baseline-binding-repair-trial-2.json",
+          "sha256": "1525785ab430d791a0d72041099b97cdfd287da5bf8cdc1799cd75aca5426859",
+          "weighted_score": 0.98,
+          "r2_status": "ceiling_saturation_reject"
+        }
+      ]
+    },
+    {
+      "case_id": "fusion-budget-saturated-triage",
+      "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.933,
+      "status": "rejected_redesign_required",
+      "calibration_receipt_hash": "2f5689a0e6fa48e665ac01cfc9ada9dc2a5336a85c9e8b9a4ca633039314cffb",
+      "trial_receipts": [
+        {
+          "trial": 1,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260704/receipts/fusion-budget-saturated-triage-trial-1.json",
+          "sha256": "79b574ec4c09794bac9de958082071fed9bb8ae02baec50803f434a35aa6fa1c",
+          "weighted_score": 0.91,
+          "r2_status": "headroom_failed_redesign_required"
+        },
+        {
+          "trial": 2,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260704/receipts/fusion-budget-saturated-triage-trial-2.json",
+          "sha256": "55e16dc5372ad56d6a160dee94f2112ff4bab41dd964154d9fb8fdf28ce559a0",
+          "weighted_score": 0.956,
+          "r2_status": "ceiling_saturation_reject"
+        }
+      ]
+    },
+    {
+      "case_id": "fusion-targeted-deployment-risk",
+      "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.98,
+      "status": "rejected_ceiling_saturation",
+      "calibration_receipt_hash": "9ca501576d430b7aa6882e1b568ad221c8d350693b770bd84abb01d7120f95ab",
+      "trial_receipts": [
+        {
+          "trial": 1,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260704/receipts/fusion-targeted-deployment-risk-trial-1.json",
+          "sha256": "bec93d550a3f5dc76931728edf250e69ca00c99bdd23e78ba4d8e880b5274a79",
+          "weighted_score": 0.97,
+          "r2_status": "ceiling_saturation_reject"
+        },
+        {
+          "trial": 2,
+          "path": "proposals/fusion-dogfood-extension-v0.2/calibration/baseline-49e656d2-20260704/receipts/fusion-targeted-deployment-risk-trial-2.json",
+          "sha256": "351b3cff883859e988594aa2b4daa552af497d3b6689b386356badd22398c2b4",
+          "weighted_score": 0.99,
+          "r2_status": "ceiling_saturation_reject"
+        }
+      ]
+    }
+  ],
+  "r2_verdict": "fail_redesign_or_drop_required",
+  "r7_headroom": {
+    "required_cases_below_0_95": 2,
+    "observed_cases_below_0_95": 1,
+    "status": "fail"
+  },
+  "quarantine_policy": "Do not copy raw outputs, score breakdowns, or receipts into public fixtures, candidate prompts, proposal rationale, or candidate skill text. Freeze package may cite only aggregate R8 facts."
+}

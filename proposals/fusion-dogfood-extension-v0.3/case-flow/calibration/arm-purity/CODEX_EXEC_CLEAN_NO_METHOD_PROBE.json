@@ -1,0 +1,47 @@
+{
+  "schema_version": "fusion_dogfood_v03_clean_no_method_probe_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "clean_no_method_surface_probe",
+  "surface": "codex_exec_clean_home_rollout_jsonl",
+  "status": "validated_by_owner_probe",
+  "session_id": "019f3208-4c15-76b1-bd6d-ce86955782b2",
+  "cli_version": "0.142.5",
+  "probe_output": "PROBE OK",
+  "reported_context_tokens": 9130,
+  "reported_rollout_format": [
+    "session_meta",
+    "event_msg",
+    "response_item",
+    "turn_context"
+  ],
+  "reported_r3_telemetry": {
+    "token_usage": true,
+    "tool_events": true,
+    "turn_fields": true,
+    "ordered_jsonl": true
+  },
+  "clean_home_composition": {
+    "auth_json": "copied from active Codex home for the probe only; credential material is not recorded in this repo",
+    "config_toml": "minimal clean config.toml",
+    "skills": "absent from path",
+    "method_state": "absent",
+    "workspace_bootstrap_files": "absent: no AGENTS.md or CLAUDE.md in temporary empty workspace",
+    "workspace": "temporary empty workspace",
+    "stdin": "explicitly closed for codex exec background process"
+  },
+  "clean_home_composition_hash": "5cc6ef58042162d7ba6d3caa433d7a1d3e878fe885688a24d37bc20be5bb1ea4",
+  "hash_scope": "user-reported clean-home composition declaration; credential bytes are intentionally excluded",
+  "arm_purity_expectation": {
+    "no_method": "valid: no workspace method bootstrap and no method runtime operations should be observable because the skill and method-state are absent",
+    "required_gate": "validate_arm_purity(\"no-method\", trace) must pass on the actual rollout before scoring"
+  },
+  "p3_shared_state_impact": {
+    "codex_home_redirect": "process-local to the shell running codex exec; normal P3 sessions continue using D:\\CodexData\\home",
+    "auth_json_copy_risk": "If the probe triggers refresh-token rotation, the original auth.json could become stale and interrupt P3 CLI work.",
+    "quota_risk": "P3 and v0.3 calibration share the same account quota; cross-window v2 batches should avoid P3 official-run windows."
+  },
+  "local_rollout_access": false,
+  "local_rollout_access_note": "The validated probe was reported from the external shell surface; this Codex Desktop context did not find the session under D:\\CodexData\\home\\sessions.",
+  "hidden_artifacts_read": false,
+  "probe_hash": "66548ef33688dce20b0b326ea117a75b4333b70dbf05cd9d04e5d7fcbde78ef5"
+}

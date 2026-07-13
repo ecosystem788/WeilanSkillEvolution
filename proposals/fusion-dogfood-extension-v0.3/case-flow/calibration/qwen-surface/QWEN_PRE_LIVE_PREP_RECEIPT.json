@@ -1,0 +1,36 @@
+{
+  "schema_version": "fusion_dogfood_v03_qwen_pre_live_prep_receipt_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "qwen_pre_live_prep_receipt",
+  "status": "prepared_for_claude_review_not_live_ready",
+  "implemented": [
+    "OpenAI-compatible Qwen runner with environment-only credentials",
+    "three arm tool configurations",
+    "per-response usage accumulation and live truncation",
+    "Qwen telemetry parser with qwen-api:<snapshot> environment id",
+    "offline budget truncation and arm purity self-tests",
+    "Claude-required peak context token accounting rule",
+    "Claude-required run_command whitelist for pinned weilan_trace.py",
+    "Claude-required telemetry-derived arm purity observables",
+    "Qwen budget recalibration plan",
+    "cross-window v2 Qwen prereg draft",
+    "Claude review request package"
+  ],
+  "verification": {
+    "pytest": "21 passed: tests/test_qwen_v03_runner.py, tests/test_fusion_dogfood_v03_harness.py, tests/test_fusion_dogfood_v03_requirements.py",
+    "harness_self_test": "passed",
+    "requirements_preflight": "passed 16/16",
+    "secret_scan": "A follow-up rg for key prefix and supplied workspace host excluding evals/hidden/** and hidden-side/** returned no matches. Earlier broad root scan also returned no matches but had an over-broad path scope, so it is not used as hidden-firewall evidence."
+  },
+  "live_api_called": false,
+  "api_key_persisted": false,
+  "api_host_persisted": false,
+  "hidden_artifacts_read": "not used for design or scoring; initial broad secret scan scope was over-broad and was superseded by an excluding-hidden scan",
+  "remaining_blockers": [
+    "QWEN_MODEL_SNAPSHOT not pinned to an exact snapshot id",
+    "Owner post-review go-ahead for live API calls not recorded",
+    "Qwen-surface budget recalibration and winnability probes not yet run live"
+  ],
+  "review_package": "proposals/fusion-dogfood-extension-v0.3/CLAUDE_REVIEW_QWEN_PREP.md",
+  "receipt_hash": "2a0139bbbd927ae35407a060e57bb4a5f2edec9243c608e0861a748a6b111b47"
+}

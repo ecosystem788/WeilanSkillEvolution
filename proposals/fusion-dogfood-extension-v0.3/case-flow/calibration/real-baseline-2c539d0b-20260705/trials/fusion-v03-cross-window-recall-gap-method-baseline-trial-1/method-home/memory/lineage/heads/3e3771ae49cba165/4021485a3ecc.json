@@ -1,0 +1,18 @@
+{
+  "authority": "derived_branch_heads_never_authorize_continuation",
+  "branches": {
+    "main": {
+      "head_frame_id": "wf-20260705-085147-66482d",
+      "joined_into": null,
+      "status": "active"
+    }
+  },
+  "generated_at_utc": "2026-07-05T08:51:47+00:00",
+  "head_event_id": "9f41dd6f-2f1d-4323-a7bb-6ebd4a94c4b0",
+  "record_count": 1,
+  "schema_version": "weilan_frame_lineage_heads_v0.4",
+  "scope": "fusion-v03-cross-window-recall-gap-method-baseline-trial-1",
+  "scope_key": "4021485a3ecc",
+  "workspace": "D:\\WeilanSkillEvolution\\proposals\\fusion-dogfood-extension-v0.3\\case-flow\\calibration\\real-baseline-2c539d0b-20260705\\trials\\fusion-v03-cross-window-recall-gap-method-baseline-trial-1",
+  "workspace_key": "3e3771ae49cba165"
+}

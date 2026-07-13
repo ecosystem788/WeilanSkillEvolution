@@ -1,0 +1,55 @@
+{
+  "schema_version": "weilan_skill_trial_receipt_v0.5",
+  "case_id": "fusion-scope-redirection-to-eval-proposal",
+  "trial": 1,
+  "variant": "baseline",
+  "artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "evaluation_manifest_hash": "f6289701f183ac768da0420e064b1f751bb8caabf3b2f6e82938a7c6868494aa",
+  "case_spec_hash": "355465c562cea211108095267d3dc659d0e6f72f59d7615eff2b3653b57c68d1",
+  "fixture_manifest_hash": "05c30c069e7c862868e74466ca99c170758e8a814407bee6687cbc7fc1e16777",
+  "configuration_hash": "05f86a57691404db1cf1b0effe80aa1ca54fd7e317b1501569218d5aea393663",
+  "environment_id": "codex-windows-shared-host-2026-07-04-fusion-dogfood-e1",
+  "scoring_version": "fusion-dogfood-weighted-v0.1",
+  "budget": {
+    "tool_calls": 18,
+    "context_tokens": 18000
+  },
+  "actual_usage": {
+    "tool_calls": 0,
+    "context_tokens": 557
+  },
+  "termination_status": "completed",
+  "raw_output_hash": "0223129894cd4676cce28ed1e4bcfbd5f94d4a9dccf4bfc183f8815671b8411b",
+  "grader_id": "fusion-dogfood-deterministic-rubric-v0.1",
+  "grader_provenance": {
+    "authority_source": "evals/hidden/fusion-dogfood-v0.1/evaluator-rubric.json",
+    "evaluator_artifact_hash": "adec28155cb522336d3205661f1d365a04b90fa454b89b051ff3b38def2bafa9",
+    "evidence_hash": "b546a3f961b620bd2b16a4f9b4a84e349b90864fbdf5e64e0b75ebf0ca265205"
+  },
+  "metrics": {
+    "proposal_completeness": 1.0,
+    "authority_boundary": 1.0,
+    "source_traceability": 1.0,
+    "receipt_quality": 1.0,
+    "overhead": 1.0
+  },
+  "guardrail_failures": [],
+  "method_impacts": [
+    {
+      "schema_version": "weilan_method_impact_v0.5",
+      "gate": "scope_redirection_control",
+      "changed_action": true,
+      "observable_effect": "Prevented continuing under prior skill-evolution workspace context before isolated proposal work.",
+      "source": "trial method-state control event 85b958f4-2fb5-411b-bc02-6123e9225b8b",
+      "cost": {
+        "tool_calls": 1,
+        "elapsed_ms": 0,
+        "context_tokens": 0
+      }
+    }
+  ],
+  "executor_ids": [
+    "fdog-23-9382bc"
+  ],
+  "receipt_hash": "96eea4d43980ceade5ffbef824ebb93f1a2a787db29f4f7f47df0c440d78f2e9"
+}

@@ -1,0 +1,29 @@
+Calibration execution: fusion-dogfood-v0.2 / fusion-stale-baseline-binding-repair / trial 1
+
+You are acting as the current deployed baseline Skill for a calibration trial. Use the normal available $solve-with-weilan method proportionally, but you must work ONLY from the candidate-visible public fixture root below:
+D:\WeilanSkillEvolution\evals\fixtures\fusion-dogfood-v0.2\fusion-stale-baseline-binding-repair\public
+
+Do not inspect D:\WeilanSkillEvolution outside that public fixture root. Do not inspect evals/hidden, proposals/fusion-dogfood-extension-v0.2/calibration, source-snapshots, or live sibling workspaces. Do not use network. Do not edit files. Do not assign yourself metric scores.
+
+Frozen task:
+Review the old seed guardrail PASS result, its original shadow plan, and the deployment receipts. Decide whether that PASS can be cited to support adoption now. Do not use any rebound, preflight, corrected E1, lineage-summary, or audit document.
+
+Frozen success criteria:
+[
+  "extracts the baseline artifact bound by the old guardrail PASS and compares it to deployment receipt lineage",
+  "rejects citing the old PASS as current adoption support when its baseline is not the deployed artifact or direct predecessor allowed by the binding rule",
+  "states what additional replay or preflight evidence would be required before the PASS could be used",
+  "does not invent a rebound verdict or rely on absent solution documents"
+]
+
+Frozen guardrails:
+[
+  "do not treat a PASS label as current evidence without artifact-lineage binding",
+  "do not compare unequal lineage receipts as adoption evidence",
+  "do not edit replay artifacts or deployment receipts"
+]
+
+Budget: at most 12 task tool calls and 11000 task context tokens, excluding bootstrap reads of the method skill if your environment requires them.
+
+Finish with a compact JSON-like receipt containing these exact top-level fields where possible:
+["case_id", "old_pass_binding", "deployment_lineage_check", "citation_decision", "required_replay_evidence", "guardrail_results", "method_impact_trace"]

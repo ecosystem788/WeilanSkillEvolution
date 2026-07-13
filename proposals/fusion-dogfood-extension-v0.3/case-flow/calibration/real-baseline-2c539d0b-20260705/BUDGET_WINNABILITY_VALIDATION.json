@@ -1,0 +1,45 @@
+{
+  "schema_version": "fusion_dogfood_v03_budget_winnability_validation_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "case_id": "fusion-v03-budget-bound-ledger-triage",
+  "budget": {
+    "tool_calls": 4,
+    "context_tokens": 3600,
+    "scope": "whole_case"
+  },
+  "status": "winnable_under_scoring_time_truncation",
+  "validated_public_call_plan": [
+    {
+      "call": 1,
+      "action": "read fixture INDEX.json",
+      "path": "fixtures/fusion-v03-budget-bound-ledger-triage/INDEX.json",
+      "purpose": "identify groups and avoid exhaustive reading"
+    },
+    {
+      "call": 2,
+      "action": "read deployment receipt signal slice",
+      "path": "fixtures/fusion-v03-budget-bound-ledger-triage/deployment-receipts/receipt-07.json",
+      "purpose": "detect after_hash 2c539d0b and hash-drift repaired signal"
+    },
+    {
+      "call": 3,
+      "action": "read guardrail signal slice",
+      "path": "fixtures/fusion-v03-budget-bound-ledger-triage/guardrail-results/gate-03.json",
+      "purpose": "detect failed-null budget_binding signal"
+    },
+    {
+      "call": 4,
+      "action": "write final receipt",
+      "path": "assigned trial receipt path",
+      "purpose": "bind selected/skipped sources and avoid full-coverage claim"
+    }
+  ],
+  "selected_sources_required_for_hidden_truth": [
+    "deployment-receipts/receipt-07.json",
+    "guardrail-results/gate-03.json"
+  ],
+  "why_baseline_missed": "Both real baseline trials selected different numbered slices after budget truncation, so low score reflects prioritization failure rather than impossible fixture access.",
+  "hidden_artifacts_read_by_candidate": false,
+  "hidden_artifacts_used_by_validator": true,
+  "validation_hash": "9c7ef605b4deab922763411ca013fec2b3e3146fe8c8455bf16ea4c27ede307b"
+}

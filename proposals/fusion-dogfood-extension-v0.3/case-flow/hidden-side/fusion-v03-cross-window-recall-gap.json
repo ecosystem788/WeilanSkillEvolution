@@ -1,0 +1,27 @@
+{
+  "schema_version": "fusion_dogfood_v03_case_flow_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "case_id": "fusion-v03-cross-window-recall-gap",
+  "record_type": "hidden_side_case_contract",
+  "candidate_visible": false,
+  "success_criteria": [
+    "Episode 2 references the exact rule id deposited in Episode 1",
+    "ledger snapshots show the rule existed before Episode 2 began",
+    "receipt verifies source freshness before using recalled state",
+    "no superseded or unrelated rule remains active for the decision"
+  ],
+  "scoring_weights": {
+    "authority_boundary": 0.1,
+    "decision_accuracy": 0.25,
+    "overhead": 0.05,
+    "source_verification": 0.2,
+    "state_recall_authenticity": 0.4
+  },
+  "winnable_walkthrough": [
+    "Episode 1 writes rule r1 and source hash evidence through the runtime.",
+    "Episode 2 starts with a matching method-home snapshot, recalls r1, verifies the cited source hash, and uses r1 to decide.",
+    "The receipt records r1, pre/post snapshot hashes, and verification evidence."
+  ],
+  "winnable_walkthrough_hash": "55703391ed1065814ba61d0774979cb5d4af0649e7a3ec52389236df88a897dc",
+  "hidden_artifacts_read": false
+}

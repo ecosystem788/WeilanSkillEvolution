@@ -1,0 +1,19 @@
+{
+  "schema_version": "weilan_skill_deployment_receipt_v0.6-targeted",
+  "deployment_id": "524d4931880d8b084fc2dd61",
+  "authority_source": "conversation:2026-07-03-user-corrected-previous-message-and-authorized-deploy",
+  "decision_path": "D:\\WeilanSkillEvolution\\deployments\\524d4931880d8b084fc2dd61\\ADOPTION_DECISION.json",
+  "verification_result": "D:\\WeilanSkillEvolution\\deployments\\524d4931880d8b084fc2dd61\\TARGETED_VERIFICATION_RESULT.json",
+  "target": "D:\\CodexData\\skills\\solve-with-weilan",
+  "candidate": "D:\\WeilanSkillEvolution\\proposals\\conversation-claude-transcript-support\\artifacts\\49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe\\solve-with-weilan",
+  "before_artifact_hash": "8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb",
+  "after_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "rollback_artifact": "D:\\WeilanSkillEvolution\\deployments\\524d4931880d8b084fc2dd61\\rollback\\solve-with-weilan",
+  "rollback_triggers": [
+    "conversation evidence resolution regression",
+    "privacy boundary regression",
+    "source snapshot freshness regression",
+    "functional verification regression"
+  ],
+  "reversible": true
+}

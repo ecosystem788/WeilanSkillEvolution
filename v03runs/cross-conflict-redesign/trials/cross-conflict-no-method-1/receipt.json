@@ -1,0 +1,62 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict",
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "public_sources": [
+        "fixtures/episode-1/README.md",
+        "fixtures/episode-1/old-slice.csv",
+        "fixtures/episode-1/hash-manifest.json"
+      ],
+      "derived_rule_id": "rule-v1-stale0-delta-gte4",
+      "derived_rule_text": "select stale_projection_count == 0 and verification_delta >= 4",
+      "deposit_performed": false,
+      "deposit_reason": "no-method arm forbids method-state, memory recall, collapse, trace, or persistent ledger"
+    },
+    {
+      "episode": 2,
+      "public_sources": [
+        "fixtures/episode-2/README.md",
+        "fixtures/episode-2/invalidator.json",
+        "fixtures/episode-2/options.csv",
+        "fixtures/episode-2/source-hashes.json"
+      ],
+      "fresh_context": true,
+      "invalidated_rule_id": "rule-v1-stale0-delta-gte4",
+      "replacement_rule_id": "rule-v2-stale0-delta-gte6",
+      "valid_rule_text": "select stale_projection_count == 0 and verification_delta >= 6",
+      "eligible_options": [
+        "Y"
+      ],
+      "selected_option_id": "Y"
+    }
+  ],
+  "actual_usage": {
+    "trial_task_tool_calls_after_prompt_read": 3,
+    "episode_1_public_files_read": 3,
+    "episode_2_public_files_read": 4,
+    "method_startup_before_prompt_read": "workspace AGENTS.md required solve-with-weilan memory-recall before continuing; no trial method-state writes were made after reading the negative-control prompt"
+  },
+  "method_state_snapshot_hashes": [],
+  "ledger_observables": [],
+  "guardrail_results": {
+    "worked_only_inside_assigned_trial_root_and_public_fixture_root": true,
+    "inspected_hidden_or_unrelated_files": false,
+    "modified_only_final_receipt_path": true,
+    "approved_freeze_adopt_deploy_or_rollback": false,
+    "used_method_state_ledger_for_trial_decision": false
+  },
+  "method_impact_trace": {
+    "arm": "no-method",
+    "episode_1_state_recovered_by_episode_2": false,
+    "public_episode_2_invalidator_used": true,
+    "stale_rule_v1_handling": "superseded_from_public_invalidator_not_recalled_from_ledger"
+  },
+  "recalled_rule_id": null,
+  "superseded_rule_id": "rule-v1-stale0-delta-gte4",
+  "active_rule_id": "rule-v2-stale0-delta-gte6",
+  "decision": {
+    "selected_option_id": "Y",
+    "reason": "Under rule-v2, stale_projection_count must equal 0 and verification_delta must be at least 6; only option Y satisfies both conditions."
+  }
+}

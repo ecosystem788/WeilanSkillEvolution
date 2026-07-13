@@ -1,0 +1,19 @@
+{
+  "candidate_tree_hash": "2e3db4f5519f95f7d468442864336ca72b6b58851c3f6dea62018df872791b47",
+  "checks": [
+    "memory-recall on deployed script returned ACTIVE for D:\\WeilanSkillEvolution",
+    "governance-pressure-derive --help succeeded on deployed script",
+    "trace-check --help succeeded on deployed script",
+    "py_compile succeeded on deployed scripts/weilan_trace.py",
+    "installed test_gate_liveness.py passed 11/11",
+    "installed test_slow_loop.py passed 15/15"
+  ],
+  "created_at": "2026-07-07T10:35:09+00:00",
+  "deployment_id": "2e3db4f5519f95f7d468",
+  "result": "pass",
+  "schema_version": "weilan_post_deploy_verification_result_v0.1",
+  "target_hashes_after_cache_cleanup": {
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan": "2e3db4f5519f95f7d468442864336ca72b6b58851c3f6dea62018df872791b47",
+    "D:\\CodexData\\skills\\solve-with-weilan": "2e3db4f5519f95f7d468442864336ca72b6b58851c3f6dea62018df872791b47"
+  }
+}

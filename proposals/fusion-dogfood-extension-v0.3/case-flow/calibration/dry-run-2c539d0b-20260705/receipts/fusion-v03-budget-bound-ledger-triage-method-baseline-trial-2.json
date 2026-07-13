@@ -1,0 +1,38 @@
+{
+  "schema_version": "fusion_dogfood_v03_calibration_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "calibration_not_evidence",
+  "calibration_mode": "deterministic_harness_dry_run_not_model_trial",
+  "case_id": "fusion-v03-budget-bound-ledger-triage",
+  "arm": "method-baseline",
+  "trial": 2,
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "weighted_score": 0.76,
+  "episode_receipts": [],
+  "actual_usage": {
+    "tool_calls": 3,
+    "context_tokens": 3276,
+    "wall_clock_ms": 0,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "whole_case",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    }
+  },
+  "ledger_grade": {
+    "passed": false,
+    "collapse_event_id": null,
+    "trace_event_id": null,
+    "stale_conclusion_excluded_from_active_recall": false
+  },
+  "method_state_snapshot": {
+    "root": "C:\\Users\\zy\\AppData\\Local\\Temp\\fusion-v03-dry-run-work-sq791yih\\fusion-v03-budget-bound-ledger-triage\\method-baseline\\trial-2\\method-home",
+    "files": [],
+    "tree_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "hidden_artifacts_read": false,
+  "receipt_hash": "f9127f62a5c9e469ec3ce0938ec3bb910bf2c63e87e9c99ef3fbd0144edb8c73"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "fusion_dogfood_calibration_trial_receipt_v0.2",
+  "suite_id": "fusion-dogfood-v0.2",
+  "case_id": "fusion-stale-baseline-binding-repair",
+  "trial": 2,
+  "variant": "baseline",
+  "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "record_type": "calibration_not_evidence",
+  "created_at_utc": "2026-07-04T15:57:03.734402+00:00",
+  "agent_id": "019f2dca-7f6c-7070-b87b-f54c8e6d0bce",
+  "weighted_score": 0.99,
+  "metrics": {
+    "baseline_lineage_accuracy": 1.0,
+    "stale_evidence_rejection": 1.0,
+    "corrected_record_handling": 1.0,
+    "source_traceability": 0.95,
+    "overhead": 0.95
+  },
+  "r2_status": "ceiling_saturation_reject",
+  "raw_output_summary": "Correctly rejected the adoption_eligible PASS label after checking that a40521f8 is not the current deployed artifact and is not shown as the direct predecessor in deployment receipts.",
+  "raw_output_hash": "5cdbf912e23d15368fcc7cfa08b9c54dacda620f846138f35eccc2b8d7d1c92f",
+  "quarantine_policy": "receipt is private calibration material; not candidate-visible and not official score evidence"
+}

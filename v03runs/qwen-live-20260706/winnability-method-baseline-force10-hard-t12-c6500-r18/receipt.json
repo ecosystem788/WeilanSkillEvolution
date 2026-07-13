@@ -1,0 +1,68 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "action": "derive_and_deposit",
+      "rule_id": "rule-v1",
+      "procedure_id": "successor-update-procedure",
+      "status": "deposited"
+    },
+    {
+      "episode": 2,
+      "action": "invalidate_and_apply",
+      "invalidated_rule_id": "rule-v1",
+      "threshold_restated": false,
+      "status": "superseded"
+    }
+  ],
+  "actual_usage": {
+    "tool_calls": 10,
+    "executed_tool_calls": 10,
+    "context_tokens": 5746,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 22450,
+    "prompt_tokens": 19753,
+    "completion_tokens": 2697,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 10,
+      "effective_context_tokens": 5746
+    }
+  },
+  "method_state_snapshot_hashes": {},
+  "ledger_observables": {},
+  "guardrail_results": {
+    "guardrails_respected": true,
+    "no_hidden_files_inspected": true,
+    "no_deployment_modifications": true
+  },
+  "method_impact_trace": "rule-v1 was superseded/collapsed with trace via invalidator",
+  "recalled_rule_id": "rule-v1",
+  "recalled_procedure_id": "successor-update-procedure",
+  "superseded_rule_id": "rule-v1",
+  "active_rule_id": null,
+  "decision": "no_option_selected",
+  "trial_id": "cross-v2-method-baseline-1",
+  "arm": "method-baseline",
+  "trial": 1,
+  "actual_usage_self_report": {
+    "tool_calls": 0,
+    "context_tokens": 0
+  }
+}

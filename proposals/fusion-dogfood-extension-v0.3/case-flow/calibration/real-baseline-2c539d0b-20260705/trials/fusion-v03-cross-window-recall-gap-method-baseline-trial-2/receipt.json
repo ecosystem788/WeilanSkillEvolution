@@ -1,0 +1,135 @@
+﻿{
+    "trial_id":  "fusion-v03-cross-window-recall-gap-method-baseline-trial-2",
+    "case_id":  "fusion-v03-cross-window-recall-gap",
+    "arm":  "method-baseline",
+    "trial":  2,
+    "selected_sources":  [
+                             "episode-1/README.md",
+                             "episode-1/hash-manifest.json",
+                             "episode-1/rotated-evidence-slice.csv",
+                             "assigned method-home/recovered-rule.json",
+                             "assigned method-home/trial-ledger.jsonl",
+                             "episode-2/README.md",
+                             "episode-2/source-hashes.json",
+                             "episode-2/options.csv"
+                         ],
+    "skipped_sources":  [
+                            "evals/hidden",
+                            "case-flow/hidden-side",
+                            "calibration raw outputs",
+                            "scorer internals",
+                            "unrelated workspace files",
+                            "live workspace files outside assigned trial root and public fixture root"
+                        ],
+    "episode_receipts":  [
+                             {
+                                 "episode":  1,
+                                 "action":  "derived_and_deposited_rule",
+                                 "rule_id":  "rule-sha256-public-rotated-slice-v1-stale_projection_count_eq_0-verification_delta_gte_4",
+                                 "source_hash":  "sha256:public-rotated-slice-v1",
+                                 "rule":  "stale_projection_count == 0 and verification_delta \u003e= 4",
+                                 "selected_source_id":  "B"
+                             },
+                             {
+                                 "episode":  2,
+                                 "action":  "recalled_rule_verified_source_hash_and_decided",
+                                 "recalled_rule_id":  "rule-sha256-public-rotated-slice-v1-stale_projection_count_eq_0-verification_delta_gte_4",
+                                 "source_hash_expected":  "sha256:public-rotated-slice-v1",
+                                 "source_hash_verified":  true,
+                                 "selectable_options":  [
+                                                            "Z"
+                                                        ],
+                                 "decision":  "Z"
+                             }
+                         ],
+    "actual_usage":  {
+                         "tool_calls_self_report":  6,
+                         "context_tokens_budget":  4800,
+                         "truncated":  false
+                     },
+    "actual_usage_self_report":  {
+                                     "tool_calls":  6,
+                                     "context_tokens":  4800,
+                                     "truncated":  false
+                                 },
+    "method_state_snapshot_hashes":  {
+                                         "method_home":  "D:\\WeilanSkillEvolution\\proposals\\fusion-dogfood-extension-v0.3\\case-flow\\calibration\\real-baseline-2c539d0b-20260705\\trials\\fusion-v03-cross-window-recall-gap-method-baseline-trial-2\\method-home",
+                                         "file_count":  2,
+                                         "snapshot_sha256":  "0667b119467ccdd6caa406cc1785a12ad692d5dc0616690dce10c0cd3f3eb461",
+                                         "recovered_rule_json_sha256":  "b551a06dd36709c9c86109b908ae66642a2ec25583042b9d0af41f6eaab5beab",
+                                         "trial_ledger_jsonl_sha256":  "16c512afabb55359d2f70df15321f9090cee2afd1f1b625e57a6c391df8ebcf2"
+                                     },
+    "ledger_observables":  [
+                               "frame_open_attempted:path_length_failed_in_deployed_helper",
+                               "rule_deposited:episode-1 source hash and threshold rule",
+                               "source_hash_verified:episode-2 expected hash matched deposit",
+                               "decision_made:episode-2 option Z"
+                           ],
+    "guardrail_results":  [
+                              {
+                                  "guardrail":  "work only inside ASSIGNED_TRIAL_ROOT and PUBLIC_FIXTURE_ROOT",
+                                  "result":  "pass"
+                              },
+                              {
+                                  "guardrail":  "do not read live workspace files",
+                                  "result":  "pass"
+                              },
+                              {
+                                  "guardrail":  "do not infer the omitted rule from task wording",
+                                  "result":  "pass",
+                                  "evidence":  "episode-2 used assigned method-home/recovered-rule.json and matching source hash"
+                              },
+                              {
+                                  "guardrail":  "do not mutate fixtures, manifests, deployment receipts, or deployed Skill",
+                                  "result":  "pass"
+                              },
+                              {
+                                  "guardrail":  "do not approve, freeze, adopt, deploy, or rollback anything",
+                                  "result":  "pass"
+                              }
+                          ],
+    "method_impact_trace":  [
+                                {
+                                    "gate":  "isolated_method_home",
+                                    "changed_intended_action":  true,
+                                    "observable_effect":  "episode-1 deposited rule before episode-2",
+                                    "source_evidence":  [
+                                                            "method-home/recovered-rule.json",
+                                                            "method-home/trial-ledger.jsonl"
+                                                        ],
+                                    "added_tool_calls":  1,
+                                    "elapsed_ms":  null,
+                                    "context_tokens":  null
+                                },
+                                {
+                                    "gate":  "fresh_context_recall",
+                                    "changed_intended_action":  true,
+                                    "observable_effect":  "episode-2 recovered rule id and verified source hash before deciding",
+                                    "source_evidence":  [
+                                                            "episode-2/source-hashes.json",
+                                                            "method-home/recovered-rule.json"
+                                                        ],
+                                    "added_tool_calls":  0,
+                                    "elapsed_ms":  null,
+                                    "context_tokens":  null
+                                },
+                                {
+                                    "gate":  "deployed_trace_helper",
+                                    "changed_intended_action":  true,
+                                    "observable_effect":  "helper path-length failure recorded instead of overclaiming closed frame",
+                                    "source_evidence":  [
+                                                            "method-home/trial-ledger.jsonl"
+                                                        ],
+                                    "added_tool_calls":  1,
+                                    "elapsed_ms":  null,
+                                    "context_tokens":  null
+                                }
+                            ],
+    "recalled_rule_id":  "rule-sha256-public-rotated-slice-v1-stale_projection_count_eq_0-verification_delta_gte_4",
+    "source_verification":  {
+                                "episode_1_manifest_hash":  "sha256:public-rotated-slice-v1",
+                                "episode_2_expected_episode_1_source_hash":  "sha256:public-rotated-slice-v1",
+                                "verified":  true
+                            },
+    "decision":  "Z"
+}

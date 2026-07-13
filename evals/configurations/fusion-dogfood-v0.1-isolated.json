@@ -1,0 +1,29 @@
+{
+  "schema_version": "fusion_dogfood_execution_config_v0.1",
+  "config_id": "fusion-dogfood-v0.1-isolated",
+  "status": "approved_frozen",
+  "approval_source": "evals/approvals/fusion-dogfood-v0.1-approval.json",
+  "suite_id": "fusion-dogfood-v0.1",
+  "candidate_visible_root_template": "evals/fixtures/fusion-dogfood-v0.1/{case_id}/public",
+  "hidden_evaluator_root": "evals/hidden/fusion-dogfood-v0.1",
+  "isolation": {
+    "baseline_candidate_inputs": "equivalent copied fixture snapshots only",
+    "weilan_method_home": "fresh isolated per trial; case 7 may seed from its fixture method-state snapshot",
+    "live_source_reads": "forbidden unless the case fixture explicitly contains the source snapshot",
+    "hidden_material_access": "evaluator only",
+    "network_or_external_api": "forbidden unless a future approved shadow plan explicitly allows it"
+  },
+  "runner_boundary": "finite foreground manifest only; no daemon, heartbeat, wakeup, polling loop, self-scheduled continuation, adoption, or deployment",
+  "trial_receipt_requirements": {
+    "must_bind": [
+      "evaluation_manifest_hash",
+      "case_spec_hash",
+      "fixture_manifest_hash",
+      "configuration_hash",
+      "environment_id",
+      "scoring_version"
+    ],
+    "method_impact": "candidate receipts must report observable Method Impact Trace records; hidden reasoning is forbidden"
+  },
+  "model_tool_config_policy": "A future shadow plan must bind the exact model/tool/runtime identifiers and use the same configuration for baseline and candidate. This suite-level config fixes isolation and artifact boundaries."
+}

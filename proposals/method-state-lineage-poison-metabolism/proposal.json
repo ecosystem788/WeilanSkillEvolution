@@ -1,0 +1,26 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "method-state-write-path-prevention-v0.1",
+  "rationale": "Prevent recurrence of parseable frame-event poison by validating every frame event before it is appended, without changing non-frame ledgers or repairing live method-state.",
+  "base_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "candidate_artifact_hash": "203b8c1f37ad54abf9e3cdc011ea122a5f8961b26cfd1dea8138549bb997b32c",
+  "changed_paths": [
+    "scripts/weilan_trace.py",
+    "scripts/test_write_path_prevention.py"
+  ],
+  "budgets": {
+    "max_changed_files": 3,
+    "max_candidate_generations": 2
+  },
+  "target_metrics": [
+    "malformed frame lifecycle events are rejected before append",
+    "failed malformed frame-event writes leave the frame file byte-for-byte unchanged",
+    "valid frame lifecycle events and non-frame control ledger writes continue to work",
+    "existing candidate Skill tests pass unchanged"
+  ],
+  "rollback_triggers": [
+    "any regression in existing Skill test scripts",
+    "any valid lifecycle sequence rejected before close solely because it is an allowed intermediate state",
+    "any non-frame ledger write blocked by frame-event validation"
+  ]
+}

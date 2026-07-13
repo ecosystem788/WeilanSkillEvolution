@@ -1,0 +1,11 @@
+{
+  "schema_version": "fusion_dogfood_v03_case_flow_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "case_id": "fusion-v03-budget-bound-ledger-triage",
+  "record_type": "failure_mechanism",
+  "created_at_utc": "2026-07-05T08:23:53.555991+00:00",
+  "append_only_failure": "not load-bearing for R6; append-only may retrieve plausible summaries but the case is judged on hard-budget source selection against hidden ground truth",
+  "method_baseline_expected_failure": "deployed baseline is expected to stay below 0.80 because the budget binds before all distributed facts can be read",
+  "no_method_failure": "not load-bearing for R6; plain fast-loop reasoning tends to over-read or overclaim coverage",
+  "hidden_artifacts_read": false
+}

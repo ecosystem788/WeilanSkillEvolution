@@ -1,0 +1,41 @@
+{
+  "schema_version": "weilan_targeted_deployment_intent_v0.1",
+  "deployment_id": "deploy-20260710-fefc8be1",
+  "proposal_id": "method-state-atomic-replace-retry-v0.1",
+  "authority_source": "conversation:2026-07-10-owner-authorized-adopt-and-deploy-method-state-atomic-retry",
+  "adoption_receipt": {
+    "path": "proposals/method-state-atomic-replace-retry-v0.1/adoption/ADOPTION_RECEIPT.json",
+    "sha256": "ce6a9072dc505930353f073419fc807b18a818e20c60ea10e990081e9572f258"
+  },
+  "deployment_target": "D:\\CodexData\\skills\\solve-with-weilan",
+  "candidate": {
+    "artifact_hash": "fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1",
+    "artifact_path": "proposals/method-state-atomic-replace-retry-v0.1/artifacts/fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1/solve-with-weilan"
+  },
+  "before_artifact_hash": "847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74",
+  "expected_after_artifact_hash": "fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1",
+  "rollback_artifact": "proposals/method-state-atomic-replace-retry-v0.1/deployment/deploy-20260710-fefc8be1/rollback/847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74/solve-with-weilan",
+  "deployment_method": {
+    "type": "targeted_atomic_file_overlay",
+    "changed_paths": [
+      "scripts/runtime_core.py",
+      "scripts/test_event_atomic_replace_retry.py"
+    ],
+    "remove_runtime_cache": "scripts/__pycache__"
+  },
+  "preconditions": [
+    "no wake-agent or wake-codex episode lock is active",
+    "deployment target matches the exact base artifact hash",
+    "candidate and frozen artifact match the exact candidate hash",
+    "rollback snapshot matches the exact base artifact hash",
+    "proposal and adoption drift guard pass"
+  ],
+  "rollback_triggers": [
+    "target tree hash does not match the adopted candidate",
+    "focused retry test failure on deployment target",
+    "full deployment-target script regression failure",
+    "real method-state canary frame cannot open and close",
+    "partial or invalid frame event file is observed"
+  ],
+  "reversible": true
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "fusion_dogfood_v03_case_flow_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "valid": true,
+  "case_count": 3,
+  "case_ids": [
+    "fusion-v03-stale-holder-collapse",
+    "fusion-v03-cross-window-recall-gap",
+    "fusion-v03-budget-bound-ledger-triage"
+  ],
+  "case_flow_root": "proposals\\fusion-dogfood-extension-v0.3\\case-flow",
+  "fixture_manifest": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/FIXTURE_MANIFEST.json",
+  "fixture_manifest_hash": "67d6893e259520919d0568eef1fdb64979ae15908168bcb8aad1168a5aa5d39d",
+  "dry_run_aggregate": "proposals\\fusion-dogfood-extension-v0.3\\case-flow\\calibration\\dry-run-2c539d0b-20260705\\aggregate.json",
+  "real_baseline_status": "pending_real_baseline_trials",
+  "hidden_artifacts_read": false
+}

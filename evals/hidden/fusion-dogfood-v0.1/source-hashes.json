@@ -1,0 +1,511 @@
+{
+  "schema_version": "fusion_dogfood_source_hashes_v0.1",
+  "suite_id": "fusion-dogfood-v0.1",
+  "generated_at_utc": "2026-07-04T07:43:47.566564+00:00",
+  "status": "fixture_snapshots_approved_frozen",
+  "policy": {
+    "candidate_visible_sources": "copied snapshots only; no live path reads",
+    "directory_references": "forbidden",
+    "project_control_policy": "PROJECT_CONTROL.json removed from public attribution fixtures where it would leak expected conclusions; retained only where source-freshness is the task object or as hidden evaluator material",
+    "case8_policy": "isolated snapshot excludes proposals/fusion-dogfood-eval-cases and uses explicit selected files only"
+  },
+  "cases": {
+    "fusion-s0-spec-review-boundary": {
+      "candidate_visible": [
+        {
+          "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-3-S0-substrate-anatomy.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-spec-review-boundary/public/fusion-workspace/specs/EXP-3-S0-substrate-anatomy.md",
+          "sha256": "ff5fe74c6a6591c3750bc7f14032ebfc8ae27ed70d79f7a1fe719e630db9a351",
+          "bytes": 15195
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\s0_env_probe.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-spec-review-boundary/public/fusion-workspace/artifacts/s0_env_probe.md",
+          "sha256": "1ee2311eb386b9be3230797ae6d1c5ade8a28ce671becfcebbc064b0559a3d95",
+          "bytes": 2483
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\s0_skeleton.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-spec-review-boundary/public/fusion-workspace/artifacts/s0_skeleton.json",
+          "sha256": "495605382364ff2138050f2a427277b4ba4772d03d43cf1461a87e7d513a3615",
+          "bytes": 61884
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\s0_tissue.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-spec-review-boundary/public/fusion-workspace/artifacts/s0_tissue.json",
+          "sha256": "8afba4df489481f240640a20fc03a576aee74398b6872388eec2a77919461570",
+          "bytes": 293675
+        }
+      ],
+      "content_hash": "8f5a5ccfcee97851d847ed45329f9f22355d4054c64d1280126dd6bb129188e6"
+    },
+    "fusion-s0-static-scan-evidence": {
+      "candidate_visible": [
+        {
+          "source_path": "D:\\weilan-llm-fusion\\tools\\s0_static_scan.py",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-static-scan-evidence/public/fusion-workspace/tools/s0_static_scan.py",
+          "sha256": "e925b2916fe1d8ffad6a07b2036f3655699d157f765043eee54f68df7e957f41",
+          "bytes": 14161
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\s0_skeleton.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-static-scan-evidence/public/fusion-workspace/artifacts/s0_skeleton.json",
+          "sha256": "495605382364ff2138050f2a427277b4ba4772d03d43cf1461a87e7d513a3615",
+          "bytes": 61884
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\s0_tissue.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-static-scan-evidence/public/fusion-workspace/artifacts/s0_tissue.json",
+          "sha256": "8afba4df489481f240640a20fc03a576aee74398b6872388eec2a77919461570",
+          "bytes": 293675
+        }
+      ],
+      "content_hash": "756780fc7067fb24c4072b0848e0f4d20e1fcedc02c3bb07d5249af8a6f605a1"
+    },
+    "fusion-s0-env-probe-attribution": {
+      "candidate_visible": [
+        {
+          "source_path": "D:\\weilan-llm-fusion\\tools\\s0_env_probe.py",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-env-probe-attribution/public/fusion-workspace/tools/s0_env_probe.py",
+          "sha256": "cf77d2d989c966ad4fd914656b2f94799a8f2f685a1df1f84b9c1716068e1245",
+          "bytes": 11365
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\s0_env_probe.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-env-probe-attribution/public/fusion-workspace/artifacts/s0_env_probe.md",
+          "sha256": "1ee2311eb386b9be3230797ae6d1c5ade8a28ce671becfcebbc064b0559a3d95",
+          "bytes": 2483
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\logs\\download-qwen35-4b.err.log",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-env-probe-attribution/public/fusion-workspace/logs/download-qwen35-4b.err.log",
+          "sha256": "131d86fc090736a011859dd38722ce9d9d0840e2602ba2a8048c8a1af465f9ec",
+          "bytes": 139
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\logs\\download-qwen35-4b-ms.err.log",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-env-probe-attribution/public/fusion-workspace/logs/download-qwen35-4b-ms.err.log",
+          "sha256": "4a4620a698e9a6263077dc1cd4c4ec566c0a5414618a35d06f1b7d601777129a",
+          "bytes": 73363
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\logs\\download-qwen35-4b-range.err.log",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-s0-env-probe-attribution/public/fusion-workspace/logs/download-qwen35-4b-range.err.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "content_hash": "0d9a3f1d0ba12e7a4a8c20c15d32ced5cc60a5d9b82f941725b071a950951291"
+    },
+    "fusion-p2-instrument-noise-recovery": {
+      "candidate_visible": [
+        {
+          "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-2-behavioral-readout.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-p2-instrument-noise-recovery/public/fusion-workspace/specs/EXP-2-behavioral-readout.md",
+          "sha256": "e6f4d67436f6eeb78b793b5763ffab8448069c27b17e46a8d15420d4fd3f158a",
+          "bytes": 13478
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-2f-final-forced-choice.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-p2-instrument-noise-recovery/public/fusion-workspace/specs/EXP-2f-final-forced-choice.md",
+          "sha256": "00b786ba2469aff87cd3be6a93eb794916b68e9e15fa0f80b1aac3caafa49626",
+          "bytes": 11527
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp2_receipt.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-p2-instrument-noise-recovery/public/fusion-workspace/artifacts/exp2_receipt.md",
+          "sha256": "0beaff056677572f5c02c4b66f10607726697c8649574fcc9fee66166d8442d5",
+          "bytes": 3064
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp2_score_report.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-p2-instrument-noise-recovery/public/fusion-workspace/artifacts/exp2_score_report.json",
+          "sha256": "60df6e016dbe1653448b3eb486f3bd08d04f65c0a46d61a6d33f882a96332be9",
+          "bytes": 6198
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp2f_receipt.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-p2-instrument-noise-recovery/public/fusion-workspace/artifacts/exp2f_receipt.md",
+          "sha256": "422211a8485f7b51117264c66129606167055cb6cb9f10d372465951be91c27f",
+          "bytes": 3702
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp2f_score_report.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-p2-instrument-noise-recovery/public/fusion-workspace/artifacts/exp2f_score_report.json",
+          "sha256": "8219c5cd738a830802b8442589374bf168c6a100a8173b91622944a728035185",
+          "bytes": 6171
+        }
+      ],
+      "content_hash": "8018cfe73087b9af1f31fa0937215337ff6aef10a6cb70998349de59bd3e1a88"
+    },
+    "fusion-exp15-merge-error-attribution": {
+      "candidate_visible": [
+        {
+          "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-1.5-merge-operator.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-exp15-merge-error-attribution/public/fusion-workspace/specs/EXP-1.5-merge-operator.md",
+          "sha256": "1033f222f696be7fd93510fd7f7d7a1f50202c59e277aa556d51c9f76c02ff21",
+          "bytes": 14369
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15-v1_receipt.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-exp15-merge-error-attribution/public/fusion-workspace/artifacts/exp15-v1_receipt.md",
+          "sha256": "9ac139317744fba025fd68238313d136379bf111c23672072f43cc4bf2303d89",
+          "bytes": 2200
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15-v1_report.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-exp15-merge-error-attribution/public/fusion-workspace/artifacts/exp15-v1_report.json",
+          "sha256": "ea3a94d935f093d14a9ae4002464cf91a6c451aec0792716a8ca1800627eab7b",
+          "bytes": 4522
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15-v1_merge_events.jsonl",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-exp15-merge-error-attribution/public/fusion-workspace/artifacts/exp15-v1_merge_events.jsonl",
+          "sha256": "8ed1057c66d4b735b32c0d656331abb647ee6f00f13db47aefb120d69f592223",
+          "bytes": 5069
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15b-v1_receipt.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-exp15-merge-error-attribution/public/fusion-workspace/artifacts/exp15b-v1_receipt.md",
+          "sha256": "2caf1983b8a4cf65e1826e61a8c77954925e55c1b3a13d0120dec3b1de47c823",
+          "bytes": 2296
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15b-v1_report.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-exp15-merge-error-attribution/public/fusion-workspace/artifacts/exp15b-v1_report.json",
+          "sha256": "042a4d47b21789636851e5c34e81085626dea26ed50030bb512f494ac5d45c83",
+          "bytes": 4667
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15b-v1_merge_events.jsonl",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-exp15-merge-error-attribution/public/fusion-workspace/artifacts/exp15b-v1_merge_events.jsonl",
+          "sha256": "45785c705b623f29ba858f82218bacbacce37d61c5b81ef5d65fa2d826af5b57",
+          "bytes": 38435
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15b-v1_budget_events.jsonl",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-exp15-merge-error-attribution/public/fusion-workspace/artifacts/exp15b-v1_budget_events.jsonl",
+          "sha256": "bdf390985b0bcaf05f901ebbd71b8259695eb1d5130662e3af01ec22ff04e4b4",
+          "bytes": 9502
+        }
+      ],
+      "content_hash": "40c19ab3a0e56e52acf117d7600e305b6076066acdd1e6a6b7d2f93279de9bf2"
+    },
+    "fusion-hidden-evidence-boundary": {
+      "candidate_visible": [
+        {
+          "source_path": "D:\\weilan-llm-fusion\\specs\\READOUT-CONTRACT-v1.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-hidden-evidence-boundary/public/fusion-workspace/specs/READOUT-CONTRACT-v1.md",
+          "sha256": "4c1ad08f4dcb49ca806d6b5b1a6eb5cc7d7487390b21137f8f93d028816286f1",
+          "bytes": 10642
+        },
+        {
+          "source_path": "D:\\WeilanSkillEvolution\\EVALUATION_POLICY.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-hidden-evidence-boundary/public/skill-evolution-workspace/EVALUATION_POLICY.md",
+          "sha256": "8abdcc7b84eff98d948883c352af52745d51577bc56f8f4d14ee0cf970641359",
+          "bytes": 2847
+        }
+      ],
+      "content_hash": "5257724238ece35078f44701477ae8741e54dd0ba4b0b075be65ff5877204962"
+    },
+    "fusion-memory-scope-recovery": {
+      "candidate_visible": [
+        {
+          "source_path": "D:\\weilan-llm-fusion\\PROJECT_CONTROL.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-memory-scope-recovery/public/fusion-workspace/PROJECT_CONTROL.json",
+          "sha256": "974c4de8cea4c4c8baa2b1e372aad377244b403b577aa94370ecc3dc416a57be",
+          "bytes": 49421
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\README.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-memory-scope-recovery/public/fusion-workspace/README.md",
+          "sha256": "69a9896f84e7d4a6fd9fbec53fb3bcc49dab7cce9b7a9789c79796ef56787fda",
+          "bytes": 1064
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\ROADMAP.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-memory-scope-recovery/public/fusion-workspace/ROADMAP.md",
+          "sha256": "a3e4e970f9d2a85218d8b64977340b7dc0306dca9b28e06496b380d34234183a",
+          "bytes": 6170
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\AGENTS.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-memory-scope-recovery/public/fusion-workspace/AGENTS.md",
+          "sha256": "c0c4d77ddb83d822d31c854894b2ab88fd0268dc31521a2c72b4fb14ee37a311",
+          "bytes": 253
+        },
+        {
+          "source_path": "D:\\CodexData\\home\\method-state\\memory\\control\\workspaces\\c87abeba95f998da\\2026-07-04.jsonl",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-memory-scope-recovery/public/method-state-snapshot/memory/control/workspaces/c87abeba95f998da/2026-07-04.jsonl",
+          "sha256": "ea154fb48fa284fc63737cf86dace60f86a90b63c59ebc32efe2d3da09c1fb3a",
+          "bytes": 573
+        },
+        {
+          "source_path": "D:\\CodexData\\home\\method-state\\memory\\projections\\workspaces\\c87abeba95f998da\\fb5920559987.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-memory-scope-recovery/public/method-state-snapshot/memory/projections/workspaces/c87abeba95f998da/fb5920559987.json",
+          "sha256": "277a62f8ce39ac1802a50b646dc3b0086b97ebf075f2af2cbd949987c3b07538",
+          "bytes": 1923
+        },
+        {
+          "source_path": "D:\\CodexData\\home\\method-state\\memory\\indexes\\workspaces\\c87abeba95f998da\\fb5920559987.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-memory-scope-recovery/public/method-state-snapshot/memory/indexes/workspaces/c87abeba95f998da/fb5920559987.json",
+          "sha256": "da02c3cf210cf85813775bb116a784faede9273361235e4fd199a9431c3ae8c6",
+          "bytes": 465144
+        },
+        {
+          "source_path": "D:\\CodexData\\home\\method-state\\memory\\episode-indexes\\workspaces\\c87abeba95f998da\\fb5920559987.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-memory-scope-recovery/public/method-state-snapshot/memory/episode-indexes/workspaces/c87abeba95f998da/fb5920559987.json",
+          "sha256": "1cc575921481130ba993df3f9e382bff590fca70476df17f905973ab004f1372",
+          "bytes": 134839
+        },
+        {
+          "source_path": "D:\\CodexData\\home\\method-state\\memory\\lineage\\heads\\c87abeba95f998da\\fb5920559987.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-memory-scope-recovery/public/method-state-snapshot/memory/lineage/heads/c87abeba95f998da/fb5920559987.json",
+          "sha256": "ddb5fd59c1146070a547050ea1b1fddee490f1307947e11be0847801a435f875",
+          "bytes": 542
+        },
+        {
+          "source_path": "D:\\CodexData\\home\\method-state\\memory\\lineage\\workspaces\\c87abeba95f998da\\fb5920559987\\2026-07-04.jsonl",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-memory-scope-recovery/public/method-state-snapshot/memory/lineage/workspaces/c87abeba95f998da/fb5920559987/2026-07-04.jsonl",
+          "sha256": "de1664c57da843090ba9d854bd60994c7c573c88e623c5eca6c3f17c2aabb92f",
+          "bytes": 2195
+        },
+        {
+          "source_path": "D:\\CodexData\\home\\method-state\\memory\\semantic\\workspaces\\c87abeba95f998da\\fb5920559987\\2026-07-03.jsonl",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-memory-scope-recovery/public/method-state-snapshot/memory/semantic/workspaces/c87abeba95f998da/fb5920559987/2026-07-03.jsonl",
+          "sha256": "450f5a4e5307ef3a44952b023bcfd7f72be25bee8f4677b3df86c291b41deef7",
+          "bytes": 7267
+        }
+      ],
+      "content_hash": "9e62dba15841c9a0c3db37649d11ebb19a84154f0faf07876e555520fe9b8308"
+    },
+    "fusion-scope-redirection-to-eval-proposal": {
+      "candidate_visible": [
+        {
+          "source_path": "D:\\WeilanSkillEvolution\\ROADMAP.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/skill-evolution-workspace/ROADMAP.md",
+          "sha256": "7e7831f265c6d8aaff96440038e96f9beaa24206541f091210f5a9cfdafbb2ef",
+          "bytes": 10328
+        },
+        {
+          "source_path": "D:\\WeilanSkillEvolution\\EVALUATION_POLICY.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/skill-evolution-workspace/EVALUATION_POLICY.md",
+          "sha256": "8abdcc7b84eff98d948883c352af52745d51577bc56f8f4d14ee0cf970641359",
+          "bytes": 2847
+        },
+        {
+          "source_path": "D:\\WeilanSkillEvolution\\LOCAL_STATUS.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/skill-evolution-workspace/LOCAL_STATUS.md",
+          "sha256": "401906dd833732b798532bd7f6ede627d3c091ece3f29b681ea0abeaca612c43",
+          "bytes": 2290
+        },
+        {
+          "source_path": "D:\\WeilanSkillEvolution\\evals\\manifest.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/skill-evolution-workspace/evals/manifest.json",
+          "sha256": "cfaa5c52efa58130a919708b89f7bd4ced06d305375e2a6ac251fc0818eaa0d8",
+          "bytes": 2487
+        },
+        {
+          "source_path": "D:\\CodexData\\skills\\solve-with-weilan\\references\\evolution-system.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/solve-with-weilan-skill/references/evolution-system.md",
+          "sha256": "10943444cb4689ed6d5ce5dd6b46816c4d74cacb49eefe51187ae18034b89264",
+          "bytes": 4760
+        },
+        {
+          "source_path": "D:\\CodexData\\skills\\solve-with-weilan\\references\\runner-system.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/solve-with-weilan-skill/references/runner-system.md",
+          "sha256": "67e482a39080fb56fe4f964a370ae0a8f18286c0836c75197f814d18e7ea6a1a",
+          "bytes": 7585
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\README.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/README.md",
+          "sha256": "69a9896f84e7d4a6fd9fbec53fb3bcc49dab7cce9b7a9789c79796ef56787fda",
+          "bytes": 1064
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\ROADMAP.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/ROADMAP.md",
+          "sha256": "a3e4e970f9d2a85218d8b64977340b7dc0306dca9b28e06496b380d34234183a",
+          "bytes": 6170
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-3-S0-substrate-anatomy.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/specs/EXP-3-S0-substrate-anatomy.md",
+          "sha256": "ff5fe74c6a6591c3750bc7f14032ebfc8ae27ed70d79f7a1fe719e630db9a351",
+          "bytes": 15195
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-2-behavioral-readout.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/specs/EXP-2-behavioral-readout.md",
+          "sha256": "e6f4d67436f6eeb78b793b5763ffab8448069c27b17e46a8d15420d4fd3f158a",
+          "bytes": 13478
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-2f-final-forced-choice.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/specs/EXP-2f-final-forced-choice.md",
+          "sha256": "00b786ba2469aff87cd3be6a93eb794916b68e9e15fa0f80b1aac3caafa49626",
+          "bytes": 11527
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-1.5-merge-operator.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/specs/EXP-1.5-merge-operator.md",
+          "sha256": "1033f222f696be7fd93510fd7f7d7a1f50202c59e277aa556d51c9f76c02ff21",
+          "bytes": 14369
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\tools\\s0_static_scan.py",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/tools/s0_static_scan.py",
+          "sha256": "e925b2916fe1d8ffad6a07b2036f3655699d157f765043eee54f68df7e957f41",
+          "bytes": 14161
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\tools\\s0_env_probe.py",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/tools/s0_env_probe.py",
+          "sha256": "cf77d2d989c966ad4fd914656b2f94799a8f2f685a1df1f84b9c1716068e1245",
+          "bytes": 11365
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\s0_env_probe.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/artifacts/s0_env_probe.md",
+          "sha256": "1ee2311eb386b9be3230797ae6d1c5ade8a28ce671becfcebbc064b0559a3d95",
+          "bytes": 2483
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\s0_skeleton.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/artifacts/s0_skeleton.json",
+          "sha256": "495605382364ff2138050f2a427277b4ba4772d03d43cf1461a87e7d513a3615",
+          "bytes": 61884
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\s0_tissue.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/artifacts/s0_tissue.json",
+          "sha256": "8afba4df489481f240640a20fc03a576aee74398b6872388eec2a77919461570",
+          "bytes": 293675
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp2_receipt.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/artifacts/exp2_receipt.md",
+          "sha256": "0beaff056677572f5c02c4b66f10607726697c8649574fcc9fee66166d8442d5",
+          "bytes": 3064
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp2_score_report.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/artifacts/exp2_score_report.json",
+          "sha256": "60df6e016dbe1653448b3eb486f3bd08d04f65c0a46d61a6d33f882a96332be9",
+          "bytes": 6198
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp2f_receipt.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/artifacts/exp2f_receipt.md",
+          "sha256": "422211a8485f7b51117264c66129606167055cb6cb9f10d372465951be91c27f",
+          "bytes": 3702
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp2f_score_report.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/artifacts/exp2f_score_report.json",
+          "sha256": "8219c5cd738a830802b8442589374bf168c6a100a8173b91622944a728035185",
+          "bytes": 6171
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15-v1_receipt.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/artifacts/exp15-v1_receipt.md",
+          "sha256": "9ac139317744fba025fd68238313d136379bf111c23672072f43cc4bf2303d89",
+          "bytes": 2200
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15-v1_report.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/artifacts/exp15-v1_report.json",
+          "sha256": "ea3a94d935f093d14a9ae4002464cf91a6c451aec0792716a8ca1800627eab7b",
+          "bytes": 4522
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15b-v1_receipt.md",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/artifacts/exp15b-v1_receipt.md",
+          "sha256": "2caf1983b8a4cf65e1826e61a8c77954925e55c1b3a13d0120dec3b1de47c823",
+          "bytes": 2296
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15b-v1_report.json",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/artifacts/exp15b-v1_report.json",
+          "sha256": "042a4d47b21789636851e5c34e81085626dea26ed50030bb512f494ac5d45c83",
+          "bytes": 4667
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\logs\\download-qwen35-4b.err.log",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/logs/download-qwen35-4b.err.log",
+          "sha256": "131d86fc090736a011859dd38722ce9d9d0840e2602ba2a8048c8a1af465f9ec",
+          "bytes": 139
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\logs\\download-qwen35-4b-ms.err.log",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/logs/download-qwen35-4b-ms.err.log",
+          "sha256": "4a4620a698e9a6263077dc1cd4c4ec566c0a5414618a35d06f1b7d601777129a",
+          "bytes": 73363
+        },
+        {
+          "source_path": "D:\\weilan-llm-fusion\\logs\\download-qwen35-4b-range.err.log",
+          "fixture_path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/fusion-workspace/logs/download-qwen35-4b-range.err.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "content_hash": "05c30c069e7c862868e74466ca99c170758e8a814407bee6687cbc7fc1e16777"
+    }
+  },
+  "hidden_sources": {
+    "evals/hidden/fusion-dogfood-v0.1/evaluator-sources/artifacts/exp2_arm_map_private.json": {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp2_arm_map_private.json",
+      "sha256": "c244c568c34dbfd03a8d0690342fadc770834a2ece8c2409a72c87a7f70f201a",
+      "bytes": 1955
+    },
+    "evals/hidden/fusion-dogfood-v0.1/evaluator-sources/artifacts/exp2f_option_map_private.json": {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp2f_option_map_private.json",
+      "sha256": "9f79230f1d33e0b20e3f5ad71ea4760d046e743d9f0c3df357094501a905e0ab",
+      "bytes": 135995
+    },
+    "evals/hidden/fusion-dogfood-v0.1/evaluator-sources/artifacts/exp2f_qwen_answers.jsonl": {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp2f_qwen_answers.jsonl",
+      "sha256": "9928cd619c1ff6cb3765d936a668d7596dd9402a218842244bfeacda730a3d9f",
+      "bytes": 137953
+    },
+    "evals/hidden/fusion-dogfood-v0.1/evaluator-sources/artifacts/exp15b-v1_oracle_answers.jsonl": {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15b-v1_oracle_answers.jsonl",
+      "sha256": "edbda84b5d91f0f51d5687b37c2d728eb01286bcbfb3a6a1f9c8f05f76aee781",
+      "bytes": 20364
+    },
+    "evals/hidden/fusion-dogfood-v0.1/evaluator-sources/PROJECT_CONTROL.json": {
+      "source_path": "D:\\weilan-llm-fusion\\PROJECT_CONTROL.json",
+      "sha256": "974c4de8cea4c4c8baa2b1e372aad377244b403b577aa94370ecc3dc416a57be",
+      "bytes": 49421
+    }
+  },
+  "artifact_hashes": {
+    "evals/hidden/fusion-dogfood-v0.1/hidden-checks.json": {
+      "sha256": "a11a7dc8457b67ce74882d621b4ea128b164be2b9a2619306bd0d0a731ff2d3c",
+      "bytes": 3350
+    },
+    "evals/hidden/fusion-dogfood-v0.1/evaluator-rubric.json": {
+      "sha256": "e8f59038ae21881f462c125b70879a096800267c5cd7bd33c01c2441d8f1c743",
+      "bytes": 2944
+    },
+    "evals/hidden/fusion-dogfood-v0.1/redaction-policy.md": {
+      "sha256": "8e86cd13767ca2c66cfe834d01bc28bdd53b0af1edcdff008d1c08b29ff14b2f",
+      "bytes": 898
+    },
+    "evals/configurations/fusion-dogfood-v0.1-isolated.json": {
+      "sha256": "05f86a57691404db1cf1b0effe80aa1ca54fd7e317b1501569218d5aea393663",
+      "bytes": 1633
+    },
+    "evals/cases/fusion-dogfood-v0.1.json": {
+      "sha256": "045cb6e8119eb7e68d89edca013de2bce949221e799ff223c72ceab484ac17ac",
+      "canonical_sha256": "355465c562cea211108095267d3dc659d0e6f72f59d7615eff2b3653b57c68d1",
+      "bytes": 22941
+    },
+    "proposals/fusion-dogfood-eval-cases/cases/fusion-dogfood-v0.1-draft.cases.json": {
+      "sha256": "73b3c24586867d9ced7e6e9faa7f8c310fbe25f46bfe9ed70d771b187dca5a28",
+      "bytes": 22991
+    }
+  },
+  "approval_source": "evals/approvals/fusion-dogfood-v0.1-approval.json"
+}

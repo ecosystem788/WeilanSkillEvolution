@@ -1,0 +1,588 @@
+{
+  "schema_version": "fusion_dogfood_v03_real_calibration_aggregate_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "trial_count": 14,
+  "status": "completed_real_baseline_calibration",
+  "case_results": [
+    {
+      "case_id": "fusion-v03-budget-bound-ledger-triage",
+      "trial_count": 2,
+      "arm_means": {
+        "method-baseline": 0.4
+      },
+      "method_baseline_mean": 0.4,
+      "r3_passed": true,
+      "r6_separation_passed": null,
+      "verdict": "keep_for_freeze_candidate",
+      "verdict_reason": "R8 baseline headroom below 0.80 with required gates satisfied",
+      "trials": [
+        {
+          "trial_id": "fusion-v03-budget-bound-ledger-triage-method-baseline-trial-1",
+          "case_id": "fusion-v03-budget-bound-ledger-triage",
+          "arm": "method-baseline",
+          "trial": 1,
+          "weighted_score": 0.4,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 8,
+            "context_tokens": 175000,
+            "last_response_context_tokens": 41816,
+            "token_count_events": 5,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "whole_case",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 17,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 4,
+              "effective_context_tokens": 3600
+            }
+          },
+          "score_reasons": {
+            "selected_receipt_07": false,
+            "selected_gate_03": false,
+            "skipped_sources_present": true,
+            "no_full_coverage_claim": false
+          },
+          "receipt_hash": "4b1f7f4b1484aba05b25516ea6b72c153bfc266b7a693cb8e7fdae18e3123725",
+          "telemetry_receipt_hash": "5af27dd1498d5d174732f350f30273c29d1183ef07bc5b90a07dee3e3eae4410"
+        },
+        {
+          "trial_id": "fusion-v03-budget-bound-ledger-triage-method-baseline-trial-2",
+          "case_id": "fusion-v03-budget-bound-ledger-triage",
+          "arm": "method-baseline",
+          "trial": 2,
+          "weighted_score": 0.4,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 5,
+            "context_tokens": 144633,
+            "last_response_context_tokens": 35738,
+            "token_count_events": 5,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "whole_case",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 13,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 4,
+              "effective_context_tokens": 3600
+            }
+          },
+          "score_reasons": {
+            "selected_receipt_07": false,
+            "selected_gate_03": false,
+            "skipped_sources_present": true,
+            "no_full_coverage_claim": false
+          },
+          "receipt_hash": "7d95ea07d76fa3f4e7abc7dcf688ca906094529c48917d7c379d11630bfc577a",
+          "telemetry_receipt_hash": "831d2644b3593592af9554b11297430e83605324b8835929c8dc81af356bdffb"
+        }
+      ],
+      "case_result_hash": "bcabb1fa29c45b3173a23ca47ab74e328bbf11bf28905637db3cc94b177b4ce7"
+    },
+    {
+      "case_id": "fusion-v03-cross-window-recall-gap",
+      "trial_count": 6,
+      "arm_means": {
+        "append-only": 0.78,
+        "method-baseline": 0.66,
+        "no-method": 0.15
+      },
+      "method_baseline_mean": 0.66,
+      "r3_passed": true,
+      "r6_separation_passed": false,
+      "verdict": "redesign",
+      "verdict_reason": "R6 negative-control separation failed",
+      "trials": [
+        {
+          "trial_id": "fusion-v03-cross-window-recall-gap-append-only-trial-1",
+          "case_id": "fusion-v03-cross-window-recall-gap",
+          "arm": "append-only",
+          "trial": 1,
+          "weighted_score": 0.78,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 7,
+            "context_tokens": 186162,
+            "last_response_context_tokens": 34859,
+            "token_count_events": 6,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 17,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 5,
+              "effective_context_tokens": 4800
+            }
+          },
+          "score_reasons": {
+            "decision_z": true,
+            "recalled_rule": true,
+            "source_verified_claim": true,
+            "fallback_or_path_issue": false
+          },
+          "receipt_hash": "7e8230062cba71adb8ecb9679ce53ca5463bf6d4ae45768f0293abb111e59b6b",
+          "telemetry_receipt_hash": "67c8473813ac9868269ec4d50632579b79351585813c25b841ee97b4833bdcca"
+        },
+        {
+          "trial_id": "fusion-v03-cross-window-recall-gap-append-only-trial-2",
+          "case_id": "fusion-v03-cross-window-recall-gap",
+          "arm": "append-only",
+          "trial": 2,
+          "weighted_score": 0.78,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 7,
+            "context_tokens": 214904,
+            "last_response_context_tokens": 35729,
+            "token_count_events": 7,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 13,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 5,
+              "effective_context_tokens": 4800
+            }
+          },
+          "score_reasons": {
+            "decision_z": true,
+            "recalled_rule": true,
+            "source_verified_claim": true,
+            "fallback_or_path_issue": false
+          },
+          "receipt_hash": "e599243835f21b13c9246809343660ee1065ddfd448dbf3321850e024702f054",
+          "telemetry_receipt_hash": "e3ad46f77649fd718df361c4c1f51ae5b04d18b668ad14f7a6f83a43963d874c"
+        },
+        {
+          "trial_id": "fusion-v03-cross-window-recall-gap-method-baseline-trial-1",
+          "case_id": "fusion-v03-cross-window-recall-gap",
+          "arm": "method-baseline",
+          "trial": 1,
+          "weighted_score": 0.66,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 13,
+            "context_tokens": 433204,
+            "last_response_context_tokens": 52695,
+            "token_count_events": 11,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 17,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 5,
+              "effective_context_tokens": 4800
+            }
+          },
+          "score_reasons": {
+            "decision_z": true,
+            "recalled_rule": true,
+            "source_verified_claim": true,
+            "fallback_or_path_issue": true
+          },
+          "receipt_hash": "ceb8ccff160018d567b9df811872624b8c552d4cf1c96351d3658fed2eee08e5",
+          "telemetry_receipt_hash": "4d897119b4bc22198a8fa223d1af3321e4f25f30a2de2cd962280696b1279706"
+        },
+        {
+          "trial_id": "fusion-v03-cross-window-recall-gap-method-baseline-trial-2",
+          "case_id": "fusion-v03-cross-window-recall-gap",
+          "arm": "method-baseline",
+          "trial": 2,
+          "weighted_score": 0.66,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 9,
+            "context_tokens": 238788,
+            "last_response_context_tokens": 43061,
+            "token_count_events": 7,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 17,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 5,
+              "effective_context_tokens": 4800
+            }
+          },
+          "score_reasons": {
+            "decision_z": true,
+            "recalled_rule": true,
+            "source_verified_claim": true,
+            "fallback_or_path_issue": true
+          },
+          "receipt_hash": "47c5c5152792f1fa73edadf869f67ba67d314b10c6c899bc7eff3003e375a566",
+          "telemetry_receipt_hash": "eb85ff2955450a6d723df0cde77dce99928ba235f72684f42e1cc129caa08dbf"
+        },
+        {
+          "trial_id": "fusion-v03-cross-window-recall-gap-no-method-trial-1",
+          "case_id": "fusion-v03-cross-window-recall-gap",
+          "arm": "no-method",
+          "trial": 1,
+          "weighted_score": 0.15,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 8,
+            "context_tokens": 193839,
+            "last_response_context_tokens": 36669,
+            "token_count_events": 6,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 19,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 5,
+              "effective_context_tokens": 4800
+            }
+          },
+          "score_reasons": {
+            "decision_z": false,
+            "recalled_rule": true,
+            "source_verified_claim": true,
+            "fallback_or_path_issue": false
+          },
+          "receipt_hash": "65ad4438f26ad85ecaf18aac6a2b276a62dfb03913556b3072a90cc6b04fd191",
+          "telemetry_receipt_hash": "12af701b1690d2ed43005901cbf3865cbc52a53ae7a2cb72916254bbe8645362"
+        },
+        {
+          "trial_id": "fusion-v03-cross-window-recall-gap-no-method-trial-2",
+          "case_id": "fusion-v03-cross-window-recall-gap",
+          "arm": "no-method",
+          "trial": 2,
+          "weighted_score": 0.15,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 13,
+            "context_tokens": 183225,
+            "last_response_context_tokens": 33858,
+            "token_count_events": 6,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 17,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 5,
+              "effective_context_tokens": 4800
+            }
+          },
+          "score_reasons": {
+            "decision_z": false,
+            "recalled_rule": false,
+            "source_verified_claim": true,
+            "fallback_or_path_issue": false
+          },
+          "receipt_hash": "3aac599828b96fc1ef9ef52d8ebf46580932ecb17e0764a66392c272eaa38a36",
+          "telemetry_receipt_hash": "5d941fafe0ed2280b907c680b50f41e9dcc9ab7e89a8c0c6c3f15865fa023a45"
+        }
+      ],
+      "case_result_hash": "544ebd2e9417e39f33dc7c07f7b67a5eab6e792be9d54dbb83b5c2fb99eb3b32"
+    },
+    {
+      "case_id": "fusion-v03-stale-holder-collapse",
+      "trial_count": 6,
+      "arm_means": {
+        "append-only": 0.55,
+        "method-baseline": 0.73,
+        "no-method": 0.35
+      },
+      "method_baseline_mean": 0.73,
+      "r3_passed": true,
+      "r6_separation_passed": true,
+      "verdict": "keep_for_freeze_candidate",
+      "verdict_reason": "R8 baseline headroom below 0.80 with required gates satisfied",
+      "trials": [
+        {
+          "trial_id": "fusion-v03-stale-holder-collapse-append-only-trial-1",
+          "case_id": "fusion-v03-stale-holder-collapse",
+          "arm": "append-only",
+          "trial": 1,
+          "weighted_score": 0.55,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 10,
+            "context_tokens": 286760,
+            "last_response_context_tokens": 35465,
+            "token_count_events": 9,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 17,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 6,
+              "effective_context_tokens": 5200
+            }
+          },
+          "score_reasons": {
+            "collapse_or_supersession": true,
+            "trace_claim": true,
+            "fallback_or_path_issue": false
+          },
+          "receipt_hash": "3a67e0a5e477980ef9e19e513f9666079baa688771500acab3896884349c5e8b",
+          "telemetry_receipt_hash": "e5790cfd1a9e7ae0608c302cfea818de15122c94009bd469a7455ca49742987c"
+        },
+        {
+          "trial_id": "fusion-v03-stale-holder-collapse-append-only-trial-2",
+          "case_id": "fusion-v03-stale-holder-collapse",
+          "arm": "append-only",
+          "trial": 2,
+          "weighted_score": 0.55,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 9,
+            "context_tokens": 259159,
+            "last_response_context_tokens": 42780,
+            "token_count_events": 7,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 17,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 6,
+              "effective_context_tokens": 5200
+            }
+          },
+          "score_reasons": {
+            "collapse_or_supersession": true,
+            "trace_claim": true,
+            "fallback_or_path_issue": false
+          },
+          "receipt_hash": "03d5cf2fa00dfd11ee0ed2d4a4123aa3f7e7f59ab0b1ab0ed2ec381430eb2262",
+          "telemetry_receipt_hash": "46022067e2df0afbd53800be6719a5e9d40b936776f1bc417984d2cc8bfbac6a"
+        },
+        {
+          "trial_id": "fusion-v03-stale-holder-collapse-method-baseline-trial-1",
+          "case_id": "fusion-v03-stale-holder-collapse",
+          "arm": "method-baseline",
+          "trial": 1,
+          "weighted_score": 0.78,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 14,
+            "context_tokens": 616353,
+            "last_response_context_tokens": 69778,
+            "token_count_events": 12,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 15,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 6,
+              "effective_context_tokens": 5200
+            }
+          },
+          "score_reasons": {
+            "collapse_or_supersession": true,
+            "trace_claim": true,
+            "fallback_or_path_issue": false
+          },
+          "receipt_hash": "6197835ab3c85111cf6db0a60994efd48dff7087a3b5a63cd6886e0f6e50e54d",
+          "telemetry_receipt_hash": "6f840d99bef798b3a001e31c1a76cc0ccbdac4dacb8cff9a631675d6a579064e"
+        },
+        {
+          "trial_id": "fusion-v03-stale-holder-collapse-method-baseline-trial-2",
+          "case_id": "fusion-v03-stale-holder-collapse",
+          "arm": "method-baseline",
+          "trial": 2,
+          "weighted_score": 0.68,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 13,
+            "context_tokens": 413562,
+            "last_response_context_tokens": 46378,
+            "token_count_events": 11,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 17,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 6,
+              "effective_context_tokens": 5200
+            }
+          },
+          "score_reasons": {
+            "collapse_or_supersession": true,
+            "trace_claim": true,
+            "fallback_or_path_issue": true
+          },
+          "receipt_hash": "f6d7415279af56e599ffe9a5f020b575749b7d288373541f0118a68c5835ccd3",
+          "telemetry_receipt_hash": "f65ee08ce2d64adb8bd43d2c32e4f8d11e74721b4f31c9be354884708cbd21cb"
+        },
+        {
+          "trial_id": "fusion-v03-stale-holder-collapse-no-method-trial-1",
+          "case_id": "fusion-v03-stale-holder-collapse",
+          "arm": "no-method",
+          "trial": 1,
+          "weighted_score": 0.35,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 7,
+            "context_tokens": 181427,
+            "last_response_context_tokens": 33506,
+            "token_count_events": 6,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 17,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 6,
+              "effective_context_tokens": 5200
+            }
+          },
+          "score_reasons": {
+            "collapse_or_supersession": true,
+            "trace_claim": true,
+            "fallback_or_path_issue": false
+          },
+          "receipt_hash": "b9fabfb10d159dbfbdc1b812097001fdc2f823f0c6939af3e887d1dc726e65e8",
+          "telemetry_receipt_hash": "db698765699b4e5e9368cc4bbacfdd4941602018d4dd66fe4ccb7da7246417eb"
+        },
+        {
+          "trial_id": "fusion-v03-stale-holder-collapse-no-method-trial-2",
+          "case_id": "fusion-v03-stale-holder-collapse",
+          "arm": "no-method",
+          "trial": 2,
+          "weighted_score": 0.35,
+          "r3_budget_bound": true,
+          "actual_usage": {
+            "tool_calls": 15,
+            "context_tokens": 195349,
+            "last_response_context_tokens": 37160,
+            "token_count_events": 6,
+            "truncated": true,
+            "truncation_reason": "context_tokens",
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "scoring_time_truncation": {
+              "truncated": true,
+              "truncation_reason": "context_tokens",
+              "truncated_at_line": 19,
+              "policy": "scoring_time_truncation",
+              "effective_tool_calls": 6,
+              "effective_context_tokens": 5200
+            }
+          },
+          "score_reasons": {
+            "collapse_or_supersession": true,
+            "trace_claim": true,
+            "fallback_or_path_issue": false
+          },
+          "receipt_hash": "610ab402fcac3c2621e9aa8b1edd6d6107ad6b802af5516bad6b0a102cd750a4",
+          "telemetry_receipt_hash": "2eed987be466a3a606ff97a6fcad2a049b90a4892fd51f0c6e7eff18fb79a86f"
+        }
+      ],
+      "case_result_hash": "0ae03c89e9daa6c02fa62a17b4f69f737b4b02e5fcf82abf7d654a227c9f8947"
+    }
+  ],
+  "r3_all_method_trials_bound": true,
+  "hidden_artifacts_read_by_candidates": false,
+  "hidden_artifacts_used_by_grader": true,
+  "aggregate_hash": "1d4181d9b0700e08f92b287d7780d7ebe4d54c61185eaeedeb2565c84e510568"
+}

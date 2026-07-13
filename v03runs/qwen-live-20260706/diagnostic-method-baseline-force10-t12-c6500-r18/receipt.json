@@ -1,0 +1,46 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": [],
+  "actual_usage": {
+    "tool_calls": 10,
+    "executed_tool_calls": 10,
+    "context_tokens": 4673,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 32929,
+    "prompt_tokens": 29958,
+    "completion_tokens": 2971,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 10,
+      "requested": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 10,
+      "effective_context_tokens": 4673
+    }
+  },
+  "method_state_snapshot_hashes": null,
+  "ledger_observables": null,
+  "guardrail_results": null,
+  "method_impact_trace": "superseded/collapsed with trace",
+  "recalled_rule_id": "rule-v1",
+  "recalled_procedure_id": "successor-update-procedure",
+  "superseded_rule_id": "rule-v1",
+  "active_rule_id": "successor-rule",
+  "decision": null,
+  "trial_id": "cross-v2-method-baseline-1",
+  "arm": "method-baseline",
+  "trial": 1,
+  "actual_usage_self_report": null
+}

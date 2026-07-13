@@ -1,0 +1,29 @@
+{
+  "schema_version": "weilan_targeted_verification_result_v0.1",
+  "record_type": "TARGETED_VERIFICATION_RESULT",
+  "created_at": "2026-07-07T05:28:48+00:00",
+  "proposal_id": "barrel-fix-v2-derivation-performance",
+  "spec_path": "D:\\WeilanSkillEvolution\\staging\\barrel-fix-v2\\BARREL_FIX_V2_SPEC.md",
+  "base_artifact_hash": "a1b0cd3db5aa630c9134cbb2cd5e25bbaf7e5105645b89a809a052d5ed15962d",
+  "candidate_artifact_hash": "cf8553304505c33eea63f3febb310542d392fcb27657c7bd40581876c38da847",
+  "file_hashes": {
+    "spec": "7dbec20d3ced9bb9d17a596c1b554665223bcc8f82aec1740365972261fb34de",
+    "references/memory-system.md": "15c7a7524e84f51a0e2361ab59a3d43ad9beee4994ace86647394997df2c2fa3",
+    "scripts/test_derivation_performance.py": "1eaac89a63a4c63794b92483d8d667fdd4251461b926a24c74ee74118dd0c166",
+    "scripts/test_evidence_lifecycle.py": "4d654c41a1619f4e7425670c429e05c32a6ae8b7768d1b4c8e8b53dfd7ddac34",
+    "scripts/test_governance.py": "4b433aa1f32bc264e07f912c7b114a659341ee3661cdf64d1e53f9a37a4fd8e5",
+    "scripts/test_metabolism.py": "f58acfe239a3933b218960901daf6537b1afe7152556b3c31652e9f59e741d9d",
+    "scripts/test_runner.py": "06d2611c39538f9289fb90ea86f519bf9092ca3124154ab154526a5e0928ba44",
+    "scripts/test_transaction.py": "8487d3ac92d7d69b68fa8abe2e6cb3dbd439cf9b2b7dd71adbbdccc2d1553fb6",
+    "scripts/test_transition_planner.py": "abca215926dbc92e55333cee0c5c9d042e00e472effec2631f4735f31ed41b54",
+    "scripts/weilan_trace.py": "20d1986ef618dbf26a398212082cc3f4d2b4f57a530137c13f8e16b4955194f0"
+  },
+  "verification_commands": [
+    "python -m pytest test_derivation_performance.py test_ledger_durability.py -q  # 22 passed (Claude independent rerun)",
+    "python -X utf8 <each of the 18 test scripts>  # all PASS (fullsuite-v2-codex.log, Claude independent rerun)",
+    "byte-equivalence on clean real-ledger copy: memory-recall/self-project/episode-search IDENTICAL to deployed",
+    "benchmark 593-file inflated ledger: recall 5.5x, episode-search 1.93x, metabolic-contract 1.18x, self-project 0.86x (accepted, documented)"
+  ],
+  "result": "PASS",
+  "review": "Codex review round applied in staging (lookup memo keys, foreign-frame ownership gate, transaction-show order, test fixture isolation); Claude independent audit PASS. See BARREL_FIX_V2_SPEC.md"
+}

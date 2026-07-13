@@ -1,0 +1,18 @@
+{
+  "authority": "derived_branch_heads_never_authorize_continuation",
+  "branches": {
+    "main": {
+      "head_frame_id": "wf-20260704-014224-6ebb25",
+      "joined_into": null,
+      "status": "active"
+    }
+  },
+  "generated_at_utc": "2026-07-04T01:42:24+00:00",
+  "head_event_id": "144b2c91-6a6b-43da-b0c2-107e8790144a",
+  "record_count": 31,
+  "schema_version": "weilan_frame_lineage_heads_v0.4",
+  "scope": "fusion-program",
+  "scope_key": "fb5920559987",
+  "workspace": "D:\\weilan-llm-fusion",
+  "workspace_key": "c87abeba95f998da"
+}

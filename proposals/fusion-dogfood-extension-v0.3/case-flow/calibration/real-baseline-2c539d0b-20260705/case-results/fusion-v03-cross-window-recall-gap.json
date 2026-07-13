@@ -1,0 +1,245 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap",
+  "trial_count": 6,
+  "arm_means": {
+    "append-only": 0.78,
+    "method-baseline": 0.66,
+    "no-method": 0.15
+  },
+  "method_baseline_mean": 0.66,
+  "r3_passed": true,
+  "r6_separation_passed": false,
+  "verdict": "redesign",
+  "verdict_reason": "R6 negative-control separation failed",
+  "trials": [
+    {
+      "trial_id": "fusion-v03-cross-window-recall-gap-append-only-trial-1",
+      "case_id": "fusion-v03-cross-window-recall-gap",
+      "arm": "append-only",
+      "trial": 1,
+      "weighted_score": 0.78,
+      "r3_budget_bound": true,
+      "actual_usage": {
+        "tool_calls": 7,
+        "context_tokens": 186162,
+        "last_response_context_tokens": 34859,
+        "token_count_events": 6,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 17,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 5,
+          "effective_context_tokens": 4800
+        }
+      },
+      "score_reasons": {
+        "decision_z": true,
+        "recalled_rule": true,
+        "source_verified_claim": true,
+        "fallback_or_path_issue": false
+      },
+      "receipt_hash": "7e8230062cba71adb8ecb9679ce53ca5463bf6d4ae45768f0293abb111e59b6b",
+      "telemetry_receipt_hash": "67c8473813ac9868269ec4d50632579b79351585813c25b841ee97b4833bdcca"
+    },
+    {
+      "trial_id": "fusion-v03-cross-window-recall-gap-append-only-trial-2",
+      "case_id": "fusion-v03-cross-window-recall-gap",
+      "arm": "append-only",
+      "trial": 2,
+      "weighted_score": 0.78,
+      "r3_budget_bound": true,
+      "actual_usage": {
+        "tool_calls": 7,
+        "context_tokens": 214904,
+        "last_response_context_tokens": 35729,
+        "token_count_events": 7,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 13,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 5,
+          "effective_context_tokens": 4800
+        }
+      },
+      "score_reasons": {
+        "decision_z": true,
+        "recalled_rule": true,
+        "source_verified_claim": true,
+        "fallback_or_path_issue": false
+      },
+      "receipt_hash": "e599243835f21b13c9246809343660ee1065ddfd448dbf3321850e024702f054",
+      "telemetry_receipt_hash": "e3ad46f77649fd718df361c4c1f51ae5b04d18b668ad14f7a6f83a43963d874c"
+    },
+    {
+      "trial_id": "fusion-v03-cross-window-recall-gap-method-baseline-trial-1",
+      "case_id": "fusion-v03-cross-window-recall-gap",
+      "arm": "method-baseline",
+      "trial": 1,
+      "weighted_score": 0.66,
+      "r3_budget_bound": true,
+      "actual_usage": {
+        "tool_calls": 13,
+        "context_tokens": 433204,
+        "last_response_context_tokens": 52695,
+        "token_count_events": 11,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 17,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 5,
+          "effective_context_tokens": 4800
+        }
+      },
+      "score_reasons": {
+        "decision_z": true,
+        "recalled_rule": true,
+        "source_verified_claim": true,
+        "fallback_or_path_issue": true
+      },
+      "receipt_hash": "ceb8ccff160018d567b9df811872624b8c552d4cf1c96351d3658fed2eee08e5",
+      "telemetry_receipt_hash": "4d897119b4bc22198a8fa223d1af3321e4f25f30a2de2cd962280696b1279706"
+    },
+    {
+      "trial_id": "fusion-v03-cross-window-recall-gap-method-baseline-trial-2",
+      "case_id": "fusion-v03-cross-window-recall-gap",
+      "arm": "method-baseline",
+      "trial": 2,
+      "weighted_score": 0.66,
+      "r3_budget_bound": true,
+      "actual_usage": {
+        "tool_calls": 9,
+        "context_tokens": 238788,
+        "last_response_context_tokens": 43061,
+        "token_count_events": 7,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 17,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 5,
+          "effective_context_tokens": 4800
+        }
+      },
+      "score_reasons": {
+        "decision_z": true,
+        "recalled_rule": true,
+        "source_verified_claim": true,
+        "fallback_or_path_issue": true
+      },
+      "receipt_hash": "47c5c5152792f1fa73edadf869f67ba67d314b10c6c899bc7eff3003e375a566",
+      "telemetry_receipt_hash": "eb85ff2955450a6d723df0cde77dce99928ba235f72684f42e1cc129caa08dbf"
+    },
+    {
+      "trial_id": "fusion-v03-cross-window-recall-gap-no-method-trial-1",
+      "case_id": "fusion-v03-cross-window-recall-gap",
+      "arm": "no-method",
+      "trial": 1,
+      "weighted_score": 0.15,
+      "r3_budget_bound": true,
+      "actual_usage": {
+        "tool_calls": 8,
+        "context_tokens": 193839,
+        "last_response_context_tokens": 36669,
+        "token_count_events": 6,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 19,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 5,
+          "effective_context_tokens": 4800
+        }
+      },
+      "score_reasons": {
+        "decision_z": false,
+        "recalled_rule": true,
+        "source_verified_claim": true,
+        "fallback_or_path_issue": false
+      },
+      "receipt_hash": "65ad4438f26ad85ecaf18aac6a2b276a62dfb03913556b3072a90cc6b04fd191",
+      "telemetry_receipt_hash": "12af701b1690d2ed43005901cbf3865cbc52a53ae7a2cb72916254bbe8645362"
+    },
+    {
+      "trial_id": "fusion-v03-cross-window-recall-gap-no-method-trial-2",
+      "case_id": "fusion-v03-cross-window-recall-gap",
+      "arm": "no-method",
+      "trial": 2,
+      "weighted_score": 0.15,
+      "r3_budget_bound": true,
+      "actual_usage": {
+        "tool_calls": 13,
+        "context_tokens": 183225,
+        "last_response_context_tokens": 33858,
+        "token_count_events": 6,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 17,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 5,
+          "effective_context_tokens": 4800
+        }
+      },
+      "score_reasons": {
+        "decision_z": false,
+        "recalled_rule": false,
+        "source_verified_claim": true,
+        "fallback_or_path_issue": false
+      },
+      "receipt_hash": "3aac599828b96fc1ef9ef52d8ebf46580932ecb17e0764a66392c272eaa38a36",
+      "telemetry_receipt_hash": "5d941fafe0ed2280b907c680b50f41e9dcc9ab7e89a8c0c6c3f15865fa023a45"
+    }
+  ],
+  "case_result_hash": "544ebd2e9417e39f33dc7c07f7b67a5eab6e792be9d54dbb83b5c2fb99eb3b32"
+}

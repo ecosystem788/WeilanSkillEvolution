@@ -1,0 +1,22 @@
+{
+  "schema_version": "fusion_dogfood_calibration_trial_receipt_v0.2",
+  "suite_id": "fusion-dogfood-v0.2",
+  "case_id": "fusion-budget-saturated-triage",
+  "trial": 1,
+  "variant": "baseline",
+  "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "record_type": "calibration_not_evidence",
+  "created_at_utc": "2026-07-04T13:47:28.912088+00:00",
+  "weighted_score": 0.91,
+  "metrics": {
+    "prioritization_under_budget": 0.95,
+    "evidence_selection": 0.85,
+    "saturation_discipline": 0.95,
+    "source_traceability": 0.9,
+    "overhead": 0.9
+  },
+  "r2_status": "headroom_failed_redesign_required",
+  "raw_output_summary": "Completed budget-aware triage, disclosed skipped sources, and selected sensible next targets; partial public coverage but still above R2 threshold.",
+  "raw_output_hash": "220c9ff3c2efc5540c66b049dad186aca8e908aab9cee315531e5150742871f6",
+  "quarantine_policy": "receipt is private calibration material; not candidate-visible and not official score evidence"
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "fusion_dogfood_fixture_manifest_v0.3",
+  "suite_id": "fusion-dogfood-v0.3",
+  "case_id": "fusion-v03-stale-holder-collapse",
+  "status": "draft_unfrozen",
+  "source_fixture_root": "proposals/fusion-dogfood-extension-v0.3/case-flow/fixtures/fusion-v03-stale-holder-collapse",
+  "fixture_root": "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse",
+  "public_files": {
+    "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-1/deployment-receipt-a.json": "39aa2c21342aca25ae87ac4bd2eaf0d28a62e609a5be9dbce346f580d2392f14",
+    "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-1/README.md": "61a0b24fcd79579c7693f03fb2a72c91c4977c6c76cdc5ddcc0033ae85efabd1",
+    "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-1/risk-note.md": "9c5260618e27fc5acb0cc983915bc9d10624df8eee54746ee0622210632d7c3c",
+    "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-1/source-hashes.json": "cbda2b3ef80a8abbfdca920f986261c3e0c6eed50c4936cfd06fdb754f56d59c",
+    "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-2/lineage-head-audit.json": "2972ac8ee81b218a156a152baaae50517c98057a1074facb50c9f70f34df3538",
+    "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-2/README.md": "a495f0e53404dabc93715cf08ec0fba033d87369951a1016a8e265fb51586146",
+    "proposals/fusion-dogfood-extension-v0.3/freeze-candidates/stale-budget-b1b2/fixtures/fusion-v03-stale-holder-collapse/episode-2/targeted-deployment-receipt.json": "d73435c6c69fdae7786231ae5826d62e0ab089f8ddaa8270d6847b1678a81c30"
+  },
+  "redacted_fields": [],
+  "tree_snapshot": {
+    "root": "D:\\WeilanSkillEvolution\\proposals\\fusion-dogfood-extension-v0.3\\freeze-candidates\\stale-budget-b1b2\\fixtures\\fusion-v03-stale-holder-collapse",
+    "files": [
+      {
+        "path": "episode-1/deployment-receipt-a.json",
+        "sha256": "39aa2c21342aca25ae87ac4bd2eaf0d28a62e609a5be9dbce346f580d2392f14",
+        "size": 264
+      },
+      {
+        "path": "episode-1/README.md",
+        "sha256": "61a0b24fcd79579c7693f03fb2a72c91c4977c6c76cdc5ddcc0033ae85efabd1",
+        "size": 203
+      },
+      {
+        "path": "episode-1/risk-note.md",
+        "sha256": "9c5260618e27fc5acb0cc983915bc9d10624df8eee54746ee0622210632d7c3c",
+        "size": 122
+      },
+      {
+        "path": "episode-1/source-hashes.json",
+        "sha256": "cbda2b3ef80a8abbfdca920f986261c3e0c6eed50c4936cfd06fdb754f56d59c",
+        "size": 104
+      },
+      {
+        "path": "episode-2/lineage-head-audit.json",
+        "sha256": "2972ac8ee81b218a156a152baaae50517c98057a1074facb50c9f70f34df3538",
+        "size": 350
+      },
+      {
+        "path": "episode-2/README.md",
+        "sha256": "a495f0e53404dabc93715cf08ec0fba033d87369951a1016a8e265fb51586146",
+        "size": 250
+      },
+      {
+        "path": "episode-2/targeted-deployment-receipt.json",
+        "sha256": "d73435c6c69fdae7786231ae5826d62e0ab089f8ddaa8270d6847b1678a81c30",
+        "size": 255
+      }
+    ],
+    "tree_hash": "993c7033b3a382b10d3408e3f87c50a22de606ba6df3877db1621acd730b1114"
+  },
+  "hidden_artifacts_included": false,
+  "manifest_hash": "cba02e9b6454322d1c20f65b31a58900455916fb3aa576497fc227fbb470eb1d"
+}

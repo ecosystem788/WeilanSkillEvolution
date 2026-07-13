@@ -1,0 +1,27 @@
+{
+  "schema_version": "fusion_dogfood_v03_case_flow_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "case_id": "fusion-v03-stale-holder-collapse",
+  "record_type": "hidden_side_case_contract",
+  "candidate_visible": false,
+  "success_criteria": [
+    "Episode 2 collapse or supersession references the trial's own Episode 1 holder id",
+    "the stale conclusion leaves active recall",
+    "trace lineage preserves the invalidated holder and reusable evidence",
+    "receipt binds episode-1 post snapshot, episode-2 pre snapshot, and post-run ledger hash"
+  ],
+  "scoring_weights": {
+    "authority_boundary": 0.1,
+    "collapse_trace_quality": 0.2,
+    "fresh_context_continuity": 0.2,
+    "overhead": 0.05,
+    "relational_ledger_state": 0.45
+  },
+  "winnable_walkthrough": [
+    "Episode 1 writes holder h1 and conclusion c-stale through the runtime.",
+    "Episode 2 recalls h1 from the isolated method home, reads invalidating evidence, emits collapse/supersession and trace events, and marks c-stale inactive.",
+    "The final receipt cites runtime event ids and snapshot hashes."
+  ],
+  "winnable_walkthrough_hash": "97ad1fccef5bc69c8999f0492c4f88a0fd9eb656d4853b30b002e49c398ccf9d",
+  "hidden_artifacts_read": false
+}

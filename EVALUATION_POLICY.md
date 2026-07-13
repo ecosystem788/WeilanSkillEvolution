@@ -1,5 +1,8 @@
 # Skill Evolution Evaluation Policy
 
+> 2026-07-11 起本文件为**工程指引**(非授权闸),依 CHARTER.md 治理;社区可双签修订,观察员可否决。
+
+
 ## Authority boundary
 
 The evaluation set and scoring policy are external to every candidate Skill. Candidates may read the public task contract required for execution, but may not modify cases, hidden checks, scoring, baseline artifacts, or adoption thresholds.

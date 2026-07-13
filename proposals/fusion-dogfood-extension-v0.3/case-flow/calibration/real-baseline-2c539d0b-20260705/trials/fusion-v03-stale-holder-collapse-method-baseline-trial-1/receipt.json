@@ -1,0 +1,131 @@
+{
+  "trial_id": "fusion-v03-stale-holder-collapse-method-baseline-trial-1",
+  "case_id": "fusion-v03-stale-holder-collapse",
+  "arm": "method-baseline",
+  "trial": 1,
+  "selected_sources": [
+    "episode-1/README.md",
+    "episode-1/deployment-receipt-a.json",
+    "episode-1/risk-note.md",
+    "episode-1/source-hashes.json",
+    "assigned-method-home ledger before episode-2",
+    "episode-2/README.md",
+    "episode-2/lineage-head-audit.json",
+    "episode-2/targeted-deployment-receipt.json"
+  ],
+  "skipped_sources": [],
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "holder_id": "holder-episode1-legacy-rollback-anchor",
+      "decision": "provisional_holder_selected",
+      "evidence": [
+        "episode-1/deployment-receipt-a.json",
+        "episode-1/risk-note.md"
+      ],
+      "claim": "legacy deployment baseline appears usable as rollback anchor"
+    },
+    {
+      "episode": 2,
+      "decision": "fresh_context_continuation_collapsed_stale_holder",
+      "invalidated_holder_id": "holder-episode1-legacy-rollback-anchor",
+      "new_holder_id": "holder-episode2-targeted-receipt-anchor",
+      "evidence": [
+        "episode-2/lineage-head-audit.json",
+        "episode-2/targeted-deployment-receipt.json"
+      ]
+    }
+  ],
+  "actual_usage": {
+    "tool_calls": 11,
+    "context_tokens": "self_report_over_5200_risk_due_to_setup_retries",
+    "truncated": false
+  },
+  "actual_usage_self_report": {
+    "tool_calls": 11,
+    "context_tokens": "self_report_over_5200_risk_due_to_setup_retries",
+    "truncated": false
+  },
+  "method_state_snapshot_hashes": {
+    "frames\\2026-07-05\\wf-20260705-084240-4ee52c.jsonl": "055f155dee1d58661d5bd2935834c852b52e2498211c12481e82e28312f087c6",
+    "memory\\audits\\persistence\\24163958380be22a\\7dc07a9433b8\\2026-07-05.jsonl": "860c9fc85c3e73a93fda7eec2aa2d21985a6cf46e2dfacf07a2e3ac97dc322c8",
+    "memory\\lineage\\heads\\24163958380be22a\\7dc07a9433b8.json": "fb0fcdc59512b3e6c2b396fa0fa62d86ea14d92816aecf52116fe1a936fba268",
+    "memory\\lineage\\workspaces\\24163958380be22a\\7dc07a9433b8\\.lineage.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "memory\\lineage\\workspaces\\24163958380be22a\\7dc07a9433b8\\2026-07-05.jsonl": "89e76d0711ba5f9c3d19cb728b21bef69febf118c406ca4c2ea6ab94b82a2b84",
+    "memory\\metabolism\\fences\\workspaces\\24163958380be22a\\.workspace-contract.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "memory\\metabolism\\fences\\workspaces\\24163958380be22a\\scopes\\7dc07a9433b8\\.scope-contract.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "ledger_observables": {
+    "frame_id": "wf-20260705-084240-4ee52c",
+    "frame_file": "D:\\WeilanSkillEvolution\\proposals\\fusion-dogfood-extension-v0.3\\case-flow\\calibration\\real-baseline-2c539d0b-20260705\\trials\\fusion-v03-stale-holder-collapse-method-baseline-trial-1\\method-home\\frames\\2026-07-05\\wf-20260705-084240-4ee52c.jsonl",
+    "validation": "validated_closed_frame_from_jsonl",
+    "event_ids": [
+      "bac01c9a-2b5e-4457-a3e1-944c93aff28d",
+      "2ecdd11a-997c-42df-9c4a-d310437af0ef",
+      "118c7f34-ab5a-4954-8b90-96d0811c7361",
+      "cdacc4a7-68fc-44f9-bd20-34695f7111d9",
+      "1d79acab-041a-4fd8-87b7-5ce83268e084",
+      "611676fa-ca92-4fa8-a1da-acc0fc22cb12",
+      "1bc1808d-455f-425a-b3dd-9ec8c81eb6c1",
+      "0ee4b864-ab93-4e3a-aa74-cae257468c7e"
+    ],
+    "event_types": [
+      "frame_opened",
+      "holder_selected",
+      "holder_warned",
+      "minimal_unit_collapsed",
+      "trace_emitted",
+      "candidates_regrouped",
+      "holder_selected",
+      "frame_closed"
+    ],
+    "isolated_method_home": "D:\\WeilanSkillEvolution\\proposals\\fusion-dogfood-extension-v0.3\\case-flow\\calibration\\real-baseline-2c539d0b-20260705\\trials\\fusion-v03-stale-holder-collapse-method-baseline-trial-1\\method-home"
+  },
+  "guardrail_results": [
+    {
+      "guardrail": "do not modify deployment receipts or eval manifests",
+      "result": "passed",
+      "evidence": "wrote only assigned trial method-home and receipt.json"
+    },
+    {
+      "guardrail": "do not authorize rollback, adoption, deployment, or freeze",
+      "result": "passed",
+      "evidence": "decision is scoped holder collapse only"
+    },
+    {
+      "guardrail": "do not claim full continuity without checking the isolated method-state ledger",
+      "result": "passed",
+      "evidence": "assigned method-home checked before episode-2 files; no prior ledger files were present"
+    },
+    {
+      "guardrail": "tool_calls budget 6",
+      "result": "failed",
+      "evidence": "setup retries for missing/long isolated method-home lock path exceeded self-reported budget"
+    }
+  ],
+  "method_impact_trace": [
+    {
+      "gate": "fresh-context ledger check",
+      "changed_intended_action": true,
+      "observable_effect": "prevented treating Episode 1 copied conclusion as active truth",
+      "source": "assigned method-home and episode-2 README"
+    },
+    {
+      "gate": "collapse gate",
+      "changed_intended_action": true,
+      "observable_effect": "collapsed only deployment-risk-holder after audit invalidated holder claim",
+      "source": "episode-2/lineage-head-audit.json"
+    },
+    {
+      "gate": "guardrail boundary",
+      "changed_intended_action": false,
+      "observable_effect": "no rollback adoption deployment freeze or receipt mutation performed",
+      "source": "public prompt guardrails"
+    }
+  ],
+  "collapse_scope": "deployment-risk-holder",
+  "invalidated_holder_id": "holder-episode1-legacy-rollback-anchor",
+  "trace_event_id": "1d79acab-041a-4fd8-87b7-5ce83268e084",
+  "new_holder_id": "holder-episode2-targeted-receipt-anchor",
+  "decision": "stale_holder_collapsed_targeted_receipt_holder_selected_no_deployment_authority"
+}

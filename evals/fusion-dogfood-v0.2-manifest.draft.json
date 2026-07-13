@@ -1,0 +1,230 @@
+{
+  "schema_version": "weilan_skill_eval_manifest_v0.5",
+  "suite_id": "fusion-dogfood-v0.2",
+  "status": "draft",
+  "frozen": false,
+  "supersedes": "fusion-dogfood-v0.1",
+  "approval_source": null,
+  "scoring_version": "fusion-dogfood-weighted-v0.2-draft",
+  "case_spec": "evals/cases/fusion-dogfood-v0.2.draft.json",
+  "case_spec_hash": "db67f5d5d61bba8e6a595fc415aa6c883953086579b5ff905515c4a7039db283",
+  "case_spec_file_sha256": "30027eeb3dad569bc2c692d5fe0c81a265e5b8f6c173e7bf98a7d76a7af9925c",
+  "evaluator_artifacts": {
+    "hidden_checks": {
+      "path": "evals/hidden/fusion-dogfood-v0.2/hidden-checks.json",
+      "sha256": "df9e9753a93e3b4fc5b399665500cf1d0e4215e09347b9aa48d64a64a2e2b97a"
+    },
+    "evaluator_rubric": {
+      "path": "evals/hidden/fusion-dogfood-v0.2/evaluator-rubric.json",
+      "sha256": "8f2157e683293d70fb2a1964b7acc3881414dbedd92c2b381dd0ceccfaab4319"
+    },
+    "source_hashes": {
+      "path": "evals/hidden/fusion-dogfood-v0.2/source-hashes.json",
+      "sha256": "2c87de6060bc683201eca3dbff8acca1f8533305497501d92083f4a1c38a7131"
+    },
+    "redaction_policy": {
+      "path": "evals/hidden/fusion-dogfood-v0.2/redaction-policy.md",
+      "sha256": "244cfd3389ee74ef6de5c55cb5903f44b5c72b11951c4837a6db1c1fc93a0e73"
+    },
+    "hidden_artifact_independence": {
+      "path": "evals/hidden/fusion-dogfood-v0.2/hidden-artifact-independence.json",
+      "sha256": "cfaceabe8569c88cc381c5f4d5a05deb05cdf6c36d730da77f4bb450c6ff0bf8"
+    },
+    "execution_config": {
+      "path": "evals/configurations/fusion-dogfood-v0.2-isolated.draft.json",
+      "sha256": "0cff6fa5f88222aefbfdb80236702312eeb996745a546568751923bd217e5eaf"
+    }
+  },
+  "configuration": {
+    "path": "evals/configurations/fusion-dogfood-v0.2-isolated.draft.json",
+    "sha256": "0cff6fa5f88222aefbfdb80236702312eeb996745a546568751923bd217e5eaf"
+  },
+  "cases": [
+    {
+      "case_id": "fusion-s0-spec-review-boundary",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 14,
+        "context_tokens": 14000
+      },
+      "metrics": {
+        "boundary_adherence": 0.3,
+        "review_quality": 0.25,
+        "source_traceability": 0.2,
+        "receipt_readiness": 0.15,
+        "overhead": 0.1
+      }
+    },
+    {
+      "case_id": "fusion-s0-static-scan-evidence",
+      "trial_count": 1,
+      "budget": {
+        "tool_calls": 8,
+        "context_tokens": 8000
+      },
+      "metrics": {
+        "observed_facts": 0.35,
+        "static_limit_discipline": 0.25,
+        "evaluator_field_selection": 0.2,
+        "constraint_adherence": 0.15,
+        "overhead": 0.05
+      }
+    },
+    {
+      "case_id": "fusion-s0-env-probe-attribution",
+      "trial_count": 1,
+      "budget": {
+        "tool_calls": 12,
+        "context_tokens": 10000
+      },
+      "metrics": {
+        "error_attribution": 0.35,
+        "source_freshness": 0.2,
+        "non_blocking_warning_quality": 0.15,
+        "guardrail_adherence": 0.2,
+        "overhead": 0.1
+      }
+    },
+    {
+      "case_id": "fusion-p2-instrument-noise-recovery",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 12,
+        "context_tokens": 12000
+      },
+      "metrics": {
+        "run_comparison_accuracy": 0.25,
+        "error_attribution_quality": 0.25,
+        "hidden_evidence_boundary": 0.25,
+        "future_evaluator_checklist": 0.15,
+        "overhead": 0.1
+      }
+    },
+    {
+      "case_id": "fusion-exp15-merge-error-attribution",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 18,
+        "context_tokens": 18000
+      },
+      "metrics": {
+        "collapse_quality": 0.25,
+        "error_attribution_quality": 0.25,
+        "authority_boundary": 0.2,
+        "trace_reuse": 0.2,
+        "overhead": 0.1
+      }
+    },
+    {
+      "case_id": "fusion-hidden-evidence-boundary",
+      "trial_count": 1,
+      "budget": {
+        "tool_calls": 8,
+        "context_tokens": 7000
+      },
+      "metrics": {
+        "classification_accuracy": 0.35,
+        "hidden_material_redaction": 0.3,
+        "policy_alignment": 0.2,
+        "constraint_adherence": 0.1,
+        "overhead": 0.05
+      }
+    },
+    {
+      "case_id": "fusion-memory-scope-recovery",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 10,
+        "context_tokens": 9000
+      },
+      "metrics": {
+        "activation_handling": 0.25,
+        "scope_isolation": 0.25,
+        "source_verification": 0.2,
+        "next_action_quality": 0.15,
+        "overhead": 0.15
+      }
+    },
+    {
+      "case_id": "fusion-scope-redirection-to-eval-proposal",
+      "trial_count": 1,
+      "budget": {
+        "tool_calls": 18,
+        "context_tokens": 18000
+      },
+      "metrics": {
+        "proposal_completeness": 0.25,
+        "authority_boundary": 0.25,
+        "source_traceability": 0.2,
+        "receipt_quality": 0.15,
+        "overhead": 0.15
+      }
+    },
+    {
+      "case_id": "fusion-authority-existing-authorization",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 10,
+        "context_tokens": 9000
+      },
+      "metrics": {
+        "authorization_resolution": 0.3,
+        "overtrigger_avoidance": 0.2,
+        "authority_boundary": 0.2,
+        "source_traceability": 0.2,
+        "overhead": 0.1
+      },
+      "guardrail_case": true,
+      "excluded_from_headroom": true
+    },
+    {
+      "case_id": "fusion-stale-baseline-binding-repair",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 12,
+        "context_tokens": 11000
+      },
+      "metrics": {
+        "baseline_lineage_accuracy": 0.3,
+        "stale_evidence_rejection": 0.25,
+        "corrected_record_handling": 0.2,
+        "source_traceability": 0.15,
+        "overhead": 0.1
+      }
+    },
+    {
+      "case_id": "fusion-budget-saturated-triage",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 8,
+        "context_tokens": 9000
+      },
+      "metrics": {
+        "prioritization_under_budget": 0.3,
+        "evidence_selection": 0.25,
+        "saturation_discipline": 0.2,
+        "source_traceability": 0.15,
+        "overhead": 0.1
+      },
+      "budget_saturation_case": true
+    },
+    {
+      "case_id": "fusion-targeted-deployment-risk",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 12,
+        "context_tokens": 12000
+      },
+      "metrics": {
+        "risk_attribution": 0.3,
+        "non_authorizing_recommendation": 0.25,
+        "lineage_traceability": 0.2,
+        "probe_design": 0.15,
+        "overhead": 0.1
+      }
+    }
+  ],
+  "calibration_status": "pending_real_baseline_trials",
+  "freeze_ready": false,
+  "note": "Draft only. evals/manifest.json changes only at owner freeze after R2/R7 calibration and preflight pass."
+}

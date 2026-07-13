@@ -1,0 +1,12 @@
+{
+  "schema_version": "fusion_dogfood_fixture_manifest_v0.1",
+  "suite_id": "fusion-dogfood-v0.1",
+  "case_id": "fusion-s0-static-scan-evidence",
+  "status": "candidate_visible_snapshot_not_approved",
+  "files": {
+    "public/fusion-workspace/tools/s0_static_scan.py": "e925b2916fe1d8ffad6a07b2036f3655699d157f765043eee54f68df7e957f41",
+    "public/fusion-workspace/artifacts/s0_skeleton.json": "495605382364ff2138050f2a427277b4ba4772d03d43cf1461a87e7d513a3615",
+    "public/fusion-workspace/artifacts/s0_tissue.json": "8afba4df489481f240640a20fc03a576aee74398b6872388eec2a77919461570"
+  },
+  "content_hash": "756780fc7067fb24c4072b0848e0f4d20e1fcedc02c3bb07d5249af8a6f605a1"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "fusion_dogfood_v03_redesign_attempt_result_v0.2",
+  "suite_id": "fusion-dogfood-v0.3",
+  "attempt": "cross-conflict-redesign-v2",
+  "status": "blocked_by_no_method_execution_contamination",
+  "executed_trials": [
+    "cross-v2-no-method-1",
+    "cross-v2-no-method-2"
+  ],
+  "finding": "The v2 fixture can block no-method when the arm is followed, but one no-method trial selected Y and reported conflict with higher-priority WeiLan bootstrap/workspace instructions. This makes no-method arm execution not clean enough for R6 calibration on this surface.",
+  "decision": "stop remaining v2 trials; do not claim redesigned cross-window calibration; next fix must isolate no-method execution from mandatory WeiLan bootstrap or use a separate non-method executor surface with equivalent telemetry.",
+  "hidden_artifacts_read": false,
+  "record_hash": "5c508a6b701ca40e59a4ebdd1154daa6300d5d2e7e4aee7bc2e837955b79dca4"
+}

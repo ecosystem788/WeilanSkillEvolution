@@ -1,0 +1,11 @@
+{
+  "schema_version": "fusion_dogfood_fixture_manifest_v0.1",
+  "suite_id": "fusion-dogfood-v0.1",
+  "case_id": "fusion-hidden-evidence-boundary",
+  "status": "candidate_visible_snapshot_not_approved",
+  "files": {
+    "public/fusion-workspace/specs/READOUT-CONTRACT-v1.md": "4c1ad08f4dcb49ca806d6b5b1a6eb5cc7d7487390b21137f8f93d028816286f1",
+    "public/skill-evolution-workspace/EVALUATION_POLICY.md": "8abdcc7b84eff98d948883c352af52745d51577bc56f8f4d14ee0cf970641359"
+  },
+  "content_hash": "5257724238ece35078f44701477ae8741e54dd0ba4b0b075be65ff5877204962"
+}

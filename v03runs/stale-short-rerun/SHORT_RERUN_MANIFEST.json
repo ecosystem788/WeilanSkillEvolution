@@ -1,0 +1,19 @@
+{
+  "schema_version": "fusion_dogfood_v03_short_rerun_manifest_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "purpose": "stale-holder method arm rerun after short-root path fix",
+  "trial_count": 2,
+  "trials": [
+    {
+      "trial_id": "short-stale-method-1",
+      "prompt": "v03runs/stale-short-rerun/short-stale-method-1/controller/prompt.txt",
+      "receipt": "v03runs/stale-short-rerun/short-stale-method-1/receipt.json"
+    },
+    {
+      "trial_id": "short-stale-method-2",
+      "prompt": "v03runs/stale-short-rerun/short-stale-method-2/controller/prompt.txt",
+      "receipt": "v03runs/stale-short-rerun/short-stale-method-2/receipt.json"
+    }
+  ],
+  "hidden_artifacts_read": false
+}

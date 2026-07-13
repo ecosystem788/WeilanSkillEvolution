@@ -1,0 +1,32 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "method-state-atomic-replace-retry-v0.1",
+  "rationale": "Make new frame event-file creation tolerate the observed intermittent Windows PermissionError by routing write_event_file_atomic through the existing bounded replace_with_retry helper, while preserving atomic replacement, explicit failure after retry exhaustion, and the current deployed Skill boundary.",
+  "base_artifact_hash": "847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74",
+  "candidate_artifact_hash": "fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1",
+  "changed_paths": [
+    "proposals/method-state-atomic-replace-retry-v0.1/candidate/solve-with-weilan/scripts/runtime_core.py",
+    "proposals/method-state-atomic-replace-retry-v0.1/candidate/solve-with-weilan/scripts/test_event_atomic_replace_retry.py"
+  ],
+  "budgets": {
+    "max_changed_files": 2,
+    "max_candidate_generations": 1,
+    "max_evaluation_trials": 0,
+    "max_deployments": 0
+  },
+  "target_metrics": [
+    "transient_permission_error_retried_to_complete_frame",
+    "retry_exhaustion_preserves_existing_frame_and_reports_error",
+    "concurrent_frame_writes_remain_complete_while_directory_is_scanned",
+    "full_candidate_script_regression_passes",
+    "deployed_skill_tree_remains_unchanged"
+  ],
+  "rollback_triggers": [
+    "partial or invalid frame event file produced",
+    "existing frame file changed after retry exhaustion",
+    "frame or ledger regression suite failure",
+    "candidate changed-file budget exceeded",
+    "deployed Skill modified without a separate adoption and deployment authorization"
+  ],
+  "candidate_authority": "proposal_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}

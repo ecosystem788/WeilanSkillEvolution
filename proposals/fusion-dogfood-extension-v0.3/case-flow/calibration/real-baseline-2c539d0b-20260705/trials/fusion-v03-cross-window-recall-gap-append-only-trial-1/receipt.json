@@ -1,0 +1,132 @@
+﻿{
+    "trial_id":  "fusion-v03-cross-window-recall-gap-append-only-trial-1",
+    "case_id":  "fusion-v03-cross-window-recall-gap",
+    "arm":  "append-only",
+    "trial":  1,
+    "selected_sources":  [
+                             "episode-1/hash-manifest.json",
+                             "episode-1/README.md",
+                             "episode-1/rotated-evidence-slice.csv",
+                             "method-home/rule-ledger.jsonl",
+                             "episode-2/README.md",
+                             "episode-2/source-hashes.json",
+                             "episode-2/options.csv"
+                         ],
+    "skipped_sources":  [
+
+                        ],
+    "episode_receipts":  [
+                             {
+                                 "episode":  1,
+                                 "action":  "derived_and_deposited_rule",
+                                 "rule_id":  "rule-public-rotated-slice-v1-stale0-delta-gte4",
+                                 "source_hash":  "sha256:public-rotated-slice-v1",
+                                 "rule":  {
+                                              "stale_projection_count":  0,
+                                              "verification_delta_min":  4
+                                          },
+                                 "evidence":  {
+                                                  "select_rows":  [
+                                                                      "B"
+                                                                  ],
+                                                  "hold_rows":  [
+                                                                    "A",
+                                                                    "C",
+                                                                    "D"
+                                                                ]
+                                              }
+                             },
+                             {
+                                 "episode":  2,
+                                 "action":  "fresh_context_recall_then_decision",
+                                 "recalled_rule_id":  "rule-public-rotated-slice-v1-stale0-delta-gte4",
+                                 "verified_episode_1_source_hash":  "sha256:public-rotated-slice-v1",
+                                 "options_evaluated":  [
+                                                           {
+                                                               "option_id":  "X",
+                                                               "selectable":  false,
+                                                               "reason":  "verification_delta below 4"
+                                                           },
+                                                           {
+                                                               "option_id":  "Y",
+                                                               "selectable":  false,
+                                                               "reason":  "stale_projection_count not 0"
+                                                           },
+                                                           {
+                                                               "option_id":  "Z",
+                                                               "selectable":  true,
+                                                               "reason":  "stale_projection_count is 0 and verification_delta is at least 4"
+                                                           }
+                                                       ]
+                             }
+                         ],
+    "actual_usage":  {
+                         "tool_calls":  4,
+                         "context_tokens":  null,
+                         "truncated":  false
+                     },
+    "actual_usage_self_report":  {
+                                     "tool_calls":  4,
+                                     "context_tokens":  null,
+                                     "truncated":  false
+                                 },
+    "method_state_snapshot_hashes":  [
+                                         {
+                                             "path":  "method-home/rule-ledger.jsonl",
+                                             "source_hash":  "sha256:public-rotated-slice-v1",
+                                             "content_hash":  "sha256:e90e33ea3742bd513a9b332dd1ace6e6f698eb47746f30389cd87d4e89c4ce36"
+                                         }
+                                     ],
+    "ledger_observables":  [
+                               {
+                                   "path":  "method-home/rule-ledger.jsonl",
+                                   "event_type":  "rule_deposited",
+                                   "append_only":  true,
+                                   "inactive_or_supersede_marker_written":  false
+                               }
+                           ],
+    "guardrail_results":  [
+                              {
+                                  "guardrail":  "do not read live workspace files",
+                                  "status":  "pass",
+                                  "evidence":  "Only assigned trial root, assigned method home, and public fixture files were inspected."
+                              },
+                              {
+                                  "guardrail":  "do not infer the omitted rule from task wording",
+                                  "status":  "pass",
+                                  "evidence":  "Episode 2 decision used rule-ledger.jsonl deposited from episode-1 rotated-evidence-slice.csv."
+                              },
+                              {
+                                  "guardrail":  "do not mutate fixtures, manifests, deployment receipts, or the deployed Skill",
+                                  "status":  "pass",
+                                  "evidence":  "Writes were limited to method-home/rule-ledger.jsonl and receipt.json under the assigned trial root."
+                              },
+                              {
+                                  "guardrail":  "negative control append-only",
+                                  "status":  "pass",
+                                  "evidence":  "A single append-only rule_deposited event was written; no collapse, supersede, retire, or inactive marker was written."
+                              }
+                          ],
+    "method_impact_trace":  [
+                                {
+                                    "episode":  1,
+                                    "impact":  "append-only method-state deposit captured the derived rule outside the public episode fixture"
+                                },
+                                {
+                                    "episode":  2,
+                                    "impact":  "fresh-context continuation recovered the deposited rule and verified the episode-1 source hash before deciding"
+                                }
+                            ],
+    "recalled_rule_id":  "rule-public-rotated-slice-v1-stale0-delta-gte4",
+    "source_verification":  {
+                                "episode_1_source_hash_from_manifest":  "sha256:public-rotated-slice-v1",
+                                "episode_1_source_hash_required_by_episode_2":  "sha256:public-rotated-slice-v1",
+                                "episode_1_source_hash_match":  true,
+                                "episode_2_options_hash":  "sha256:public-options-v1"
+                            },
+    "decision":  {
+                     "selected_option_id":  "Z",
+                     "rule_id":  "rule-public-rotated-slice-v1-stale0-delta-gte4",
+                     "bounded_decision":  "select Z"
+                 }
+}

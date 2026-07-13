@@ -1,0 +1,55 @@
+{
+  "schema_version": "fusion_dogfood_v03_cross_redesign_manifest_v0.2",
+  "suite_id": "fusion-dogfood-v0.3",
+  "trial_count": 6,
+  "trials": [
+    {
+      "trial_id": "cross-v2-no-method-1",
+      "arm": "no-method",
+      "trial": 1,
+      "prompt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-no-method-1/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-no-method-1/receipt.json"
+    },
+    {
+      "trial_id": "cross-v2-no-method-2",
+      "arm": "no-method",
+      "trial": 2,
+      "prompt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-no-method-2/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-no-method-2/receipt.json"
+    },
+    {
+      "trial_id": "cross-v2-append-only-1",
+      "arm": "append-only",
+      "trial": 1,
+      "prompt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-append-only-1/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-append-only-1/receipt.json"
+    },
+    {
+      "trial_id": "cross-v2-append-only-2",
+      "arm": "append-only",
+      "trial": 2,
+      "prompt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-append-only-2/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-append-only-2/receipt.json"
+    },
+    {
+      "trial_id": "cross-v2-method-baseline-1",
+      "arm": "method-baseline",
+      "trial": 1,
+      "prompt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-method-baseline-1/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-method-baseline-1/receipt.json"
+    },
+    {
+      "trial_id": "cross-v2-method-baseline-2",
+      "arm": "method-baseline",
+      "trial": 2,
+      "prompt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-method-baseline-2/controller/prompt.txt",
+      "receipt": "v03runs/cross-conflict-redesign-v2/trials/cross-v2-method-baseline-2/receipt.json"
+    }
+  ],
+  "hidden_ground_truth": {
+    "valid_rule_id": "rule-v2-stale0-delta-gte6",
+    "correct_decision": "Y",
+    "required_deposited_procedure_id": "proc-threshold-plus-two-on-retired-hash"
+  },
+  "hidden_artifacts_read_by_candidates": false
+}

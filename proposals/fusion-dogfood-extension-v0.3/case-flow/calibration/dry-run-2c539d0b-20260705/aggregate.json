@@ -1,0 +1,115 @@
+{
+  "schema_version": "fusion_dogfood_v03_calibration_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "calibration_not_evidence",
+  "calibration_mode": "deterministic_harness_dry_run_not_model_trial",
+  "created_at_utc": "2026-07-05T08:23:53.555991+00:00",
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "case_results": [
+    {
+      "schema_version": "fusion_dogfood_v03_calibration_v0.1",
+      "suite_id": "fusion-dogfood-v0.3",
+      "record_type": "calibration_not_evidence",
+      "calibration_mode": "deterministic_harness_dry_run_not_model_trial",
+      "case_id": "fusion-v03-stale-holder-collapse",
+      "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.68,
+      "status": "dry_run_pipeline_passed",
+      "separation": {
+        "arm_means": {
+          "no-method": 0.2,
+          "append-only": 0.435,
+          "method-baseline": 0.68
+        },
+        "ordering_passed": true,
+        "required": "no-method < append-only < method-baseline"
+      },
+      "budget_binding": null,
+      "receipt_hashes": [
+        "c24e0be41af8da03c9b35e837ecf2969848425f815f3f7524742dd8ef9be5ff6",
+        "2ef7849cea52d06ae4ea5db935c946fd1be715fec43eec9acb49cbd8ff91a344",
+        "94f23f0bad6d4ce05a520b7ef2acb5ac08457f127e117828e650e5c7df0407c9",
+        "f9fb3a056da62fed17000e66f4f758c0d679555026ede061193df5fdbb7f7a1d",
+        "457570a2e10687f068464681d495c8cee68ecf6810a40d63cccc21a856bbffd8",
+        "4f597757e3803da90123c244c2182744c99799a9578aa259ba8a1522f8cca14a"
+      ],
+      "hidden_artifacts_read": false,
+      "calibration_receipt_hash": "f39bcce09c92b79a58b656cc546235d6a6ba32d33038b9c760d559a66f0d46e6"
+    },
+    {
+      "schema_version": "fusion_dogfood_v03_calibration_v0.1",
+      "suite_id": "fusion-dogfood-v0.3",
+      "record_type": "calibration_not_evidence",
+      "calibration_mode": "deterministic_harness_dry_run_not_model_trial",
+      "case_id": "fusion-v03-cross-window-recall-gap",
+      "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.725,
+      "status": "dry_run_pipeline_passed",
+      "separation": {
+        "arm_means": {
+          "no-method": 0.15,
+          "append-only": 0.48,
+          "method-baseline": 0.725
+        },
+        "ordering_passed": true,
+        "required": "no-method < append-only < method-baseline"
+      },
+      "budget_binding": null,
+      "receipt_hashes": [
+        "bfae4049f75ff5e9f7da1a77f52121c21a8261827c18e0ecf65f763522a6d716",
+        "2c8bafc93944c86174716013b179644eceb7e4985387e9a29ffadf584db913cc",
+        "8c6ff292e29b5bd48e3b233d15dba3e5eff11a7e459f0ec219423976a6b4a1d0",
+        "d4139df47489af5ea7a96b310187154f783548b41d542c89d3109b78e52a0f43",
+        "2e7a2427ab4ee078f071606dce44ee1c28d28ffe675de350eb00916d4492cb9f",
+        "6df25da9cead7a6a3f8fe939a707caab9355f554de60ed901340dd9b05b865ed"
+      ],
+      "hidden_artifacts_read": false,
+      "calibration_receipt_hash": "c5414cc8e95573df80e98ea26f435addc20cd455f9406bb02a831cf482c1bcaa"
+    },
+    {
+      "schema_version": "fusion_dogfood_v03_calibration_v0.1",
+      "suite_id": "fusion-dogfood-v0.3",
+      "record_type": "calibration_not_evidence",
+      "calibration_mode": "deterministic_harness_dry_run_not_model_trial",
+      "case_id": "fusion-v03-budget-bound-ledger-triage",
+      "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+      "trial_count": 2,
+      "weighted_baseline_mean": 0.745,
+      "status": "dry_run_pipeline_passed",
+      "separation": null,
+      "budget_binding": {
+        "required": "at least one baseline trial reaches >=90% of a budget dimension or is truncated",
+        "passed": true,
+        "trials": [
+          {
+            "trial": 1,
+            "arm": "method-baseline",
+            "bound": true
+          },
+          {
+            "trial": 2,
+            "arm": "method-baseline",
+            "bound": true
+          }
+        ]
+      },
+      "receipt_hashes": [
+        "40d90a9c65b61a121568ebc48818f4974df6902983e8d2c211d33cb548bbd55f",
+        "f9127f62a5c9e469ec3ce0938ec3bb910bf2c63e87e9c99ef3fbd0144edb8c73"
+      ],
+      "hidden_artifacts_read": false,
+      "calibration_receipt_hash": "7cbc4f7521a1ba57570c4ecfc57c4196fb432e93b69f73fd6fc6802b7ff4ee1e"
+    }
+  ],
+  "real_baseline_status": "pending_real_baseline_trials",
+  "r8_gate_dry_run": {
+    "all_cases_preregistered_lt_0_80": true,
+    "all_load_bearing_separation_passed": true,
+    "budget_binding_cases_passed": true
+  },
+  "quarantine_policy": "Dry-run receipts validate harness gates only; they are not real model calibration evidence and must not be used for freeze.",
+  "hidden_artifacts_read": false,
+  "aggregate_hash": "ee54cd3d7830d5beb4b2bb81e67ec82d1e38882c80c11dda92e13019902660bc"
+}

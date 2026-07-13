@@ -1,0 +1,60 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "action": "deposit",
+      "deposited_rule_id": "rule-v1",
+      "deposited_procedure_id": "successor-update-procedure"
+    },
+    {
+      "episode": 2,
+      "action": "invalidate_and_decide",
+      "invalidated_rule_id": "rule-v1",
+      "rule_v1_status": "superseded/collapsed with trace",
+      "successor_threshold_restated": false
+    }
+  ],
+  "actual_usage": {
+    "tool_calls": 6,
+    "executed_tool_calls": 6,
+    "context_tokens": 4307,
+    "context_token_rule": "peak_single_response_total_tokens",
+    "billable_total_tokens": 14735,
+    "prompt_tokens": 12055,
+    "completion_tokens": 2680,
+    "truncated": false,
+    "truncation_reason": null,
+    "budget_accounting": {
+      "scope": "per_episode",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "forced_finalization": {
+      "enabled": true,
+      "threshold_tool_calls": 6,
+      "requested": true
+    },
+    "scoring_time_truncation": {
+      "truncated": false,
+      "truncation_reason": null,
+      "policy": "live_truncation_with_scoring_time_replay",
+      "effective_tool_calls": 6,
+      "effective_context_tokens": 4307
+    }
+  },
+  "method_state_snapshot_hashes": null,
+  "ledger_observables": null,
+  "guardrail_results": null,
+  "method_impact_trace": "rule-v1 deposited in episode 1; invalidated and superseded via invalidator in episode 2; deposited procedure applied; decision executed under successor rule",
+  "recalled_rule_id": "rule-v1",
+  "recalled_procedure_id": "successor-update-procedure",
+  "superseded_rule_id": "rule-v1",
+  "active_rule_id": "successor-rule",
+  "decision": null,
+  "trial_id": "cross-v2-method-baseline-1",
+  "arm": "method-baseline",
+  "trial": 1,
+  "actual_usage_self_report": null
+}

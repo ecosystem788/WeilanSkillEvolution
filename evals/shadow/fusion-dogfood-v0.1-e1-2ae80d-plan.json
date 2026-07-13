@@ -1,0 +1,38 @@
+{
+  "schema_version": "weilan_skill_shadow_plan_v0.6",
+  "shadow_id": "fusion-dogfood-v0.1-e1-2ae80d",
+  "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "candidate_artifact_hash": "2ae80d515f009f38afae281ae9d9a4ce17b6500f25bbc3c668b35cc9e07d9dc7",
+  "configuration_hash": "05f86a57691404db1cf1b0effe80aa1ca54fd7e317b1501569218d5aea393663",
+  "environment_id": "codex-windows-shared-host-2026-07-04-fusion-dogfood-e1",
+  "evaluation_manifest_hash": "f6289701f183ac768da0420e064b1f751bb8caabf3b2f6e82938a7c6868494aa",
+  "case_spec_hash": "355465c562cea211108095267d3dc659d0e6f72f59d7615eff2b3653b57c68d1",
+  "fixture_manifest_hashes": {
+    "fusion-s0-spec-review-boundary": "8f5a5ccfcee97851d847ed45329f9f22355d4054c64d1280126dd6bb129188e6",
+    "fusion-s0-static-scan-evidence": "756780fc7067fb24c4072b0848e0f4d20e1fcedc02c3bb07d5249af8a6f605a1",
+    "fusion-s0-env-probe-attribution": "0d9a3f1d0ba12e7a4a8c20c15d32ced5cc60a5d9b82f941725b071a950951291",
+    "fusion-p2-instrument-noise-recovery": "8018cfe73087b9af1f31fa0937215337ff6aef10a6cb70998349de59bd3e1a88",
+    "fusion-exp15-merge-error-attribution": "40c19ab3a0e56e52acf117d7600e305b6076066acdd1e6a6b7d2f93279de9bf2",
+    "fusion-hidden-evidence-boundary": "5257724238ece35078f44701477ae8741e54dd0ba4b0b075be65ff5877204962",
+    "fusion-memory-scope-recovery": "9e62dba15841c9a0c3db37649d11ebb19a84154f0faf07876e555520fe9b8308",
+    "fusion-scope-redirection-to-eval-proposal": "05c30c069e7c862868e74466ca99c170758e8a814407bee6687cbc7fc1e16777"
+  },
+  "evaluator_artifact_hashes": {
+    "fusion-s0-spec-review-boundary": "b04c826e84a6bc37b3a71325fcdc93733ea942b284dff70cf831a9f34163256d",
+    "fusion-s0-static-scan-evidence": "442873fe7cc7621f7ea78e76e51890ce8672aa518e8b720eaec7e6fd313ed3f5",
+    "fusion-s0-env-probe-attribution": "aae4ac35b2b184eb8247d30ab605af084bd49ca01b7f986bc8e52b211320988a",
+    "fusion-p2-instrument-noise-recovery": "ee6dac520a830b6ad205cbb8327f20beeae9827eca4980ec9fb11adfa9b82aed",
+    "fusion-exp15-merge-error-attribution": "cc77fbed07d1745b91e4de16bf3c7844b784210caa317182757221d2eba7bf00",
+    "fusion-hidden-evidence-boundary": "666910044630692ca08d03b8336f19e8a7dc662c08cfa03879295a562d627627",
+    "fusion-memory-scope-recovery": "d299405936cb773d6e93bd4b985d8523dca5f737c121bc20e4cccf675ebe665d",
+    "fusion-scope-redirection-to-eval-proposal": "adec28155cb522336d3205661f1d365a04b90fa454b89b051ff3b38def2bafa9"
+  },
+  "aggregation_version": "equal-case-mean-v0.1",
+  "max_receipts": 24,
+  "gate": {
+    "min_mean_delta": 0.0,
+    "required_case_deltas": {}
+  },
+  "preregistered_gate": "proposal section 4: E1-P method_impact_count>=1 on hard cases with 2/2 reproduction on at least one two-trial hard case; E1-S non-saturated hard-case mean delta >=0.05; E1-G guardrails plus fixed se-seed-v0.1 candidate replay",
+  "authority": "external_shadow_plan_never_adoption_or_deployment_authority"
+}

@@ -1,0 +1,4 @@
+{
+  "deployment-receipt-a.json": "sha256:public-copy-a",
+  "risk-note.md": "sha256:public-copy-b"
+}

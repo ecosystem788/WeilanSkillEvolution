@@ -1,0 +1,545 @@
+{
+  "schema_version": "fusion_dogfood_v03_real_calibration_aggregate_v0.2",
+  "suite_id": "fusion-dogfood-v0.3",
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "trial_count": 6,
+  "status": "completed_real_baseline_calibration_rescored",
+  "case_results": [
+    {
+      "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+      "trial_count": 6,
+      "arm_means": {
+        "append-only": 0.55,
+        "method-baseline": 0.45,
+        "no-method": 0.225
+      },
+      "method_baseline_mean": 0.45,
+      "r3_passed": true,
+      "r6_separation_passed": false,
+      "invalid_arm_purity_trials": [],
+      "verdict": "redesign",
+      "verdict_reason": "R6 negative-control separation failed",
+      "trials": [
+        {
+          "trial_id": "cross-v2-append-only-1",
+          "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+          "arm": "append-only",
+          "trial": 1,
+          "weighted_score": 0.55,
+          "r3_budget_bound": true,
+          "trial_valid_for_scoring": true,
+          "arm_purity": {
+            "schema_version": "fusion_dogfood_v03_harness_v0.1",
+            "suite_id": "fusion-dogfood-v0.3",
+            "arm": "append-only",
+            "valid": true,
+            "issues": [],
+            "observables": {
+              "method_runtime_operation_count": 0,
+              "method_runtime_hits": [],
+              "workspace_method_bootstrap_count": 0,
+              "workspace_method_bootstrap_hits": [],
+              "append_only_forbidden_operation_count": 0,
+              "append_only_forbidden_hits": []
+            },
+            "hidden_artifacts_read": false
+          },
+          "actual_usage": {
+            "tool_calls": 10,
+            "executed_tool_calls": 10,
+            "context_tokens": 8719,
+            "context_token_rule": "peak_single_response_total_tokens",
+            "billable_total_tokens": 18116,
+            "prompt_tokens": 8911,
+            "completion_tokens": 9205,
+            "truncated": false,
+            "truncation_reason": null,
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "forced_finalization": {
+              "enabled": true,
+              "threshold_tool_calls": 10,
+              "requested": true
+            },
+            "scoring_time_truncation": {
+              "truncated": false,
+              "truncation_reason": null,
+              "policy": "live_truncation_with_scoring_time_replay",
+              "effective_tool_calls": 10,
+              "effective_context_tokens": 8719
+            }
+          },
+          "score_reasons": {
+            "decision_y": true,
+            "conflict_recognized": true,
+            "recalled_procedure": true,
+            "certified_runtime_collapse_or_supersession": false,
+            "certified_runtime_trace": false,
+            "fallback_or_path_issue": false,
+            "scoring_note": "v2 correct decision is Y; method mechanism credit requires authenticated runtime collapse/trace, not receipt text"
+          },
+          "receipt_hash": "2c73b18a87682a611acec3a8823a9ea534ebdf3a2489712baf250521c5883efd",
+          "telemetry_receipt_hash": "f1add0dd1a4f3fea05b32ba24ed729ed05285ee428f2c3884f91e5f170fcb9d1"
+        },
+        {
+          "trial_id": "cross-v2-append-only-2",
+          "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+          "arm": "append-only",
+          "trial": 2,
+          "weighted_score": 0.55,
+          "r3_budget_bound": true,
+          "trial_valid_for_scoring": true,
+          "arm_purity": {
+            "schema_version": "fusion_dogfood_v03_harness_v0.1",
+            "suite_id": "fusion-dogfood-v0.3",
+            "arm": "append-only",
+            "valid": true,
+            "issues": [],
+            "observables": {
+              "method_runtime_operation_count": 0,
+              "method_runtime_hits": [],
+              "workspace_method_bootstrap_count": 0,
+              "workspace_method_bootstrap_hits": [],
+              "append_only_forbidden_operation_count": 0,
+              "append_only_forbidden_hits": []
+            },
+            "hidden_artifacts_read": false
+          },
+          "actual_usage": {
+            "tool_calls": 10,
+            "executed_tool_calls": 10,
+            "context_tokens": 5678,
+            "context_token_rule": "peak_single_response_total_tokens",
+            "billable_total_tokens": 15017,
+            "prompt_tokens": 8785,
+            "completion_tokens": 6232,
+            "truncated": false,
+            "truncation_reason": null,
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "forced_finalization": {
+              "enabled": true,
+              "threshold_tool_calls": 10,
+              "requested": true
+            },
+            "scoring_time_truncation": {
+              "truncated": false,
+              "truncation_reason": null,
+              "policy": "live_truncation_with_scoring_time_replay",
+              "effective_tool_calls": 10,
+              "effective_context_tokens": 5678
+            }
+          },
+          "score_reasons": {
+            "decision_y": true,
+            "conflict_recognized": true,
+            "recalled_procedure": true,
+            "certified_runtime_collapse_or_supersession": false,
+            "certified_runtime_trace": false,
+            "fallback_or_path_issue": false,
+            "scoring_note": "v2 correct decision is Y; method mechanism credit requires authenticated runtime collapse/trace, not receipt text"
+          },
+          "receipt_hash": "95891dbbf55289ee22dec7a60f0c63f0b21c9f8464c7bb81c9a802f8f7342caa",
+          "telemetry_receipt_hash": "c95e52cd2d4354f101ea24d4eb0dfee9994816fcd60f05f5665af102606589e3"
+        },
+        {
+          "trial_id": "cross-v2-method-baseline-1",
+          "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+          "arm": "method-baseline",
+          "trial": 1,
+          "weighted_score": 0.45,
+          "r3_budget_bound": true,
+          "trial_valid_for_scoring": true,
+          "arm_purity": {
+            "schema_version": "fusion_dogfood_v03_harness_v0.1",
+            "suite_id": "fusion-dogfood-v0.3",
+            "arm": "method-baseline",
+            "valid": true,
+            "issues": [],
+            "observables": {
+              "method_runtime_operation_count": 3,
+              "method_runtime_hits": [
+                {
+                  "marker": "solve-with-weilan",
+                  "source": "message:0"
+                },
+                {
+                  "marker": "solve-with-weilan",
+                  "source": "message:10"
+                },
+                {
+                  "marker": "weilan_trace.py",
+                  "source": "message:10"
+                }
+              ],
+              "workspace_method_bootstrap_count": 0,
+              "workspace_method_bootstrap_hits": [],
+              "append_only_forbidden_operation_count": 0,
+              "append_only_forbidden_hits": []
+            },
+            "hidden_artifacts_read": false
+          },
+          "actual_usage": {
+            "tool_calls": 9,
+            "executed_tool_calls": 9,
+            "context_tokens": 7802,
+            "context_token_rule": "peak_single_response_total_tokens",
+            "billable_total_tokens": 17447,
+            "prompt_tokens": 11351,
+            "completion_tokens": 6096,
+            "truncated": false,
+            "truncation_reason": null,
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "forced_finalization": {
+              "enabled": true,
+              "threshold_tool_calls": 10,
+              "requested": false
+            },
+            "scoring_time_truncation": {
+              "truncated": false,
+              "truncation_reason": null,
+              "policy": "live_truncation_with_scoring_time_replay",
+              "effective_tool_calls": 9,
+              "effective_context_tokens": 7802
+            }
+          },
+          "score_reasons": {
+            "decision_y": true,
+            "conflict_recognized": true,
+            "recalled_procedure": true,
+            "certified_runtime_collapse_or_supersession": false,
+            "certified_runtime_trace": false,
+            "fallback_or_path_issue": false,
+            "scoring_note": "v2 correct decision is Y; method mechanism credit requires authenticated runtime collapse/trace, not receipt text"
+          },
+          "receipt_hash": "b03eda53e4f7faed7f737a6ba564bc2bed8bcbc42e8ecfcf4f060a97dffdd7a7",
+          "telemetry_receipt_hash": "1238150f71cd27a502284d3272cf8eaddcb5d1d56c26122c9830d1e8e13d526d"
+        },
+        {
+          "trial_id": "cross-v2-method-baseline-2",
+          "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+          "arm": "method-baseline",
+          "trial": 2,
+          "weighted_score": 0.45,
+          "r3_budget_bound": true,
+          "trial_valid_for_scoring": true,
+          "arm_purity": {
+            "schema_version": "fusion_dogfood_v03_harness_v0.1",
+            "suite_id": "fusion-dogfood-v0.3",
+            "arm": "method-baseline",
+            "valid": true,
+            "issues": [],
+            "observables": {
+              "method_runtime_operation_count": 19,
+              "method_runtime_hits": [
+                {
+                  "marker": "solve-with-weilan",
+                  "source": "message:0"
+                },
+                {
+                  "marker": "solve-with-weilan",
+                  "source": "message:10"
+                },
+                {
+                  "marker": "lineage-show",
+                  "source": "message:11"
+                },
+                {
+                  "marker": "memory-consolidate",
+                  "source": "message:11"
+                },
+                {
+                  "marker": "memory-disposition",
+                  "source": "message:11"
+                },
+                {
+                  "marker": "memory-recall",
+                  "source": "message:11"
+                },
+                {
+                  "marker": "weilan_trace.py",
+                  "source": "message:11"
+                },
+                {
+                  "marker": "lineage-show",
+                  "source": "message:12"
+                },
+                {
+                  "marker": "memory-consolidate",
+                  "source": "message:12"
+                },
+                {
+                  "marker": "memory-disposition",
+                  "source": "message:12"
+                },
+                {
+                  "marker": "memory-recall",
+                  "source": "message:12"
+                },
+                {
+                  "marker": "weilan_trace.py",
+                  "source": "message:12"
+                },
+                {
+                  "marker": "lineage-show",
+                  "source": "message:13"
+                },
+                {
+                  "marker": "memory-consolidate",
+                  "source": "message:13"
+                },
+                {
+                  "marker": "memory-disposition",
+                  "source": "message:13"
+                },
+                {
+                  "marker": "memory-recall",
+                  "source": "message:13"
+                },
+                {
+                  "marker": "weilan_trace.py",
+                  "source": "message:13"
+                },
+                {
+                  "marker": "run_command",
+                  "source": "tool_event:7"
+                },
+                {
+                  "marker": "run_command",
+                  "source": "tool_event:8"
+                }
+              ],
+              "workspace_method_bootstrap_count": 0,
+              "workspace_method_bootstrap_hits": [],
+              "append_only_forbidden_operation_count": 8,
+              "append_only_forbidden_hits": [
+                {
+                  "marker": "run_command",
+                  "source": "tool_event:7"
+                },
+                {
+                  "marker": "run_command",
+                  "source": "tool_event:8"
+                },
+                {
+                  "marker": "memory-consolidate",
+                  "source": "message:11"
+                },
+                {
+                  "marker": "memory-disposition",
+                  "source": "message:11"
+                },
+                {
+                  "marker": "memory-consolidate",
+                  "source": "message:12"
+                },
+                {
+                  "marker": "memory-disposition",
+                  "source": "message:12"
+                },
+                {
+                  "marker": "memory-consolidate",
+                  "source": "message:13"
+                },
+                {
+                  "marker": "memory-disposition",
+                  "source": "message:13"
+                }
+              ]
+            },
+            "hidden_artifacts_read": false
+          },
+          "actual_usage": {
+            "tool_calls": 10,
+            "executed_tool_calls": 10,
+            "context_tokens": 6858,
+            "context_token_rule": "peak_single_response_total_tokens",
+            "billable_total_tokens": 19786,
+            "prompt_tokens": 14045,
+            "completion_tokens": 5741,
+            "truncated": false,
+            "truncation_reason": null,
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "forced_finalization": {
+              "enabled": true,
+              "threshold_tool_calls": 10,
+              "requested": true
+            },
+            "scoring_time_truncation": {
+              "truncated": false,
+              "truncation_reason": null,
+              "policy": "live_truncation_with_scoring_time_replay",
+              "effective_tool_calls": 10,
+              "effective_context_tokens": 6858
+            }
+          },
+          "score_reasons": {
+            "decision_y": true,
+            "conflict_recognized": true,
+            "recalled_procedure": true,
+            "certified_runtime_collapse_or_supersession": false,
+            "certified_runtime_trace": false,
+            "fallback_or_path_issue": false,
+            "scoring_note": "v2 correct decision is Y; method mechanism credit requires authenticated runtime collapse/trace, not receipt text"
+          },
+          "receipt_hash": "7e6ba53f1147df1df49ed711095b1fe94d3ba34d4fa8b0d2ec91dbc01b094c4f",
+          "telemetry_receipt_hash": "6065d0723e71231804cfcd59a4a769f366c4140003c1ac220ca9a6f2e6d74998"
+        },
+        {
+          "trial_id": "cross-v2-no-method-1",
+          "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+          "arm": "no-method",
+          "trial": 1,
+          "weighted_score": 0.3,
+          "r3_budget_bound": true,
+          "trial_valid_for_scoring": true,
+          "arm_purity": {
+            "schema_version": "fusion_dogfood_v03_harness_v0.1",
+            "suite_id": "fusion-dogfood-v0.3",
+            "arm": "no-method",
+            "valid": true,
+            "issues": [],
+            "observables": {
+              "method_runtime_operation_count": 0,
+              "method_runtime_hits": [],
+              "workspace_method_bootstrap_count": 0,
+              "workspace_method_bootstrap_hits": [],
+              "append_only_forbidden_operation_count": 0,
+              "append_only_forbidden_hits": []
+            },
+            "hidden_artifacts_read": false
+          },
+          "actual_usage": {
+            "tool_calls": 7,
+            "executed_tool_calls": 7,
+            "context_tokens": 7476,
+            "context_token_rule": "peak_single_response_total_tokens",
+            "billable_total_tokens": 14481,
+            "prompt_tokens": 8425,
+            "completion_tokens": 6056,
+            "truncated": false,
+            "truncation_reason": null,
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "forced_finalization": {
+              "enabled": true,
+              "threshold_tool_calls": 10,
+              "requested": false
+            },
+            "scoring_time_truncation": {
+              "truncated": false,
+              "truncation_reason": null,
+              "policy": "live_truncation_with_scoring_time_replay",
+              "effective_tool_calls": 7,
+              "effective_context_tokens": 7476
+            }
+          },
+          "score_reasons": {
+            "decision_y": true,
+            "conflict_recognized": true,
+            "recalled_procedure": true,
+            "certified_runtime_collapse_or_supersession": false,
+            "certified_runtime_trace": false,
+            "fallback_or_path_issue": false,
+            "scoring_note": "v2 correct decision is Y; method mechanism credit requires authenticated runtime collapse/trace, not receipt text"
+          },
+          "receipt_hash": "1792a99f18c60e2a047882a82ed05bd07ded11a6e54633212af4ae5f60c501bd",
+          "telemetry_receipt_hash": "d63cdb47cd54824fd18c26dd2c0fe96c324de71ac87cb9bc57f419cb76a8a186"
+        },
+        {
+          "trial_id": "cross-v2-no-method-2",
+          "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+          "arm": "no-method",
+          "trial": 2,
+          "weighted_score": 0.15,
+          "r3_budget_bound": true,
+          "trial_valid_for_scoring": true,
+          "arm_purity": {
+            "schema_version": "fusion_dogfood_v03_harness_v0.1",
+            "suite_id": "fusion-dogfood-v0.3",
+            "arm": "no-method",
+            "valid": true,
+            "issues": [],
+            "observables": {
+              "method_runtime_operation_count": 0,
+              "method_runtime_hits": [],
+              "workspace_method_bootstrap_count": 0,
+              "workspace_method_bootstrap_hits": [],
+              "append_only_forbidden_operation_count": 0,
+              "append_only_forbidden_hits": []
+            },
+            "hidden_artifacts_read": false
+          },
+          "actual_usage": {
+            "tool_calls": 10,
+            "executed_tool_calls": 10,
+            "context_tokens": 6068,
+            "context_token_rule": "peak_single_response_total_tokens",
+            "billable_total_tokens": 18011,
+            "prompt_tokens": 11692,
+            "completion_tokens": 6319,
+            "truncated": false,
+            "truncation_reason": null,
+            "budget_accounting": {
+              "scope": "per_episode",
+              "setup_overhead_counted": false,
+              "method_state_operations_counted": true,
+              "retrieval_operations_counted": true
+            },
+            "forced_finalization": {
+              "enabled": true,
+              "threshold_tool_calls": 10,
+              "requested": true
+            },
+            "scoring_time_truncation": {
+              "truncated": false,
+              "truncation_reason": null,
+              "policy": "live_truncation_with_scoring_time_replay",
+              "effective_tool_calls": 10,
+              "effective_context_tokens": 6068
+            }
+          },
+          "score_reasons": {
+            "decision_y": false,
+            "conflict_recognized": true,
+            "recalled_procedure": true,
+            "certified_runtime_collapse_or_supersession": false,
+            "certified_runtime_trace": false,
+            "fallback_or_path_issue": false,
+            "scoring_note": "v2 correct decision is Y; method mechanism credit requires authenticated runtime collapse/trace, not receipt text"
+          },
+          "receipt_hash": "a5b5b6ed2052ca30c4487fc2c643410484e48a527884c6290345c7ab44b70606",
+          "telemetry_receipt_hash": "88fb4cfe35f752cc5262b39199610c2b37ec501f8dbe27a20307a3757ba40566"
+        }
+      ],
+      "case_result_hash": "d12af3214e2a8ce01e76d309c98c52b0627ea06327f4c5d92281751c1d36d395"
+    }
+  ],
+  "r3_all_method_trials_bound": true,
+  "scoring_policy": "authenticated runtime collapse/trace required for method mechanism credit; negative-control receipt-only text is not certified mechanism evidence",
+  "hidden_artifacts_read_by_candidates": false,
+  "hidden_artifacts_used_by_grader": true,
+  "aggregate_hash": "6d7b922e9998c4921390c4a0c12b1a7faac03e0c2ef739cf11e0aeaa8dafa9c4"
+}

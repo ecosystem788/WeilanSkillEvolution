@@ -1,0 +1,8 @@
+{
+  "current_deployed_artifact": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "direct_predecessor_artifact": "8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb",
+  "schema_version": "seed_replay_deployment_lineage_v0.1",
+  "current_deployment_receipt": "deployments/524d4931880d8b084fc2dd61/DEPLOYMENT_RECEIPT.json",
+  "direct_predecessor_deployment_receipt": "deployments/dec8809e1d6b5dfc05c746e9/DEPLOYMENT_RECEIPT.json",
+  "result_hash": "bb5a35d5483c20ba58ed828588e1917bac868a9e3ff5f1bee2894faab99443d4"
+}

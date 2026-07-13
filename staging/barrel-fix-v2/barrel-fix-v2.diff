@@ -1,0 +1,1206 @@
+diff -r -N '--exclude=__pycache__' '--exclude=.pytest_cache' '--exclude=tmp-tests' -u /d/CodexData/skills/solve-with-weilan/references/memory-system.md solve-with-weilan/references/memory-system.md
+--- /d/CodexData/skills/solve-with-weilan/references/memory-system.md	2026-07-07 10:13:35.873129800 +0900
++++ solve-with-weilan/references/memory-system.md	2026-07-07 10:58:17.568387600 +0900
+@@ -191,6 +191,8 @@
+ python scripts/weilan_trace.py evidence-show --workspace "<cwd>" --scope "memory-system"
+ ```
+ 
++`evidence-show`, `governance-show`, `prospective-show`, and `metabolic-transaction-show` listings return the newest 20 entries by default (`--limit N`, `0` = unlimited) and always report the total count plus a truncated flag, so the caller's context stays bounded regardless of ledger age.
++
+ ## Promotion Gate（晋升门）
+ 
+ Chat-derived content must pass `evidence-promote`; do not bypass the gate with direct `memory-consolidate`.
+diff -r -N '--exclude=__pycache__' '--exclude=.pytest_cache' '--exclude=tmp-tests' -u /d/CodexData/skills/solve-with-weilan/scripts/test_derivation_performance.py solve-with-weilan/scripts/test_derivation_performance.py
+--- /d/CodexData/skills/solve-with-weilan/scripts/test_derivation_performance.py	1970-01-01 09:00:00.000000000 +0900
++++ solve-with-weilan/scripts/test_derivation_performance.py	2026-07-07 11:23:27.275895300 +0900
+@@ -0,0 +1,333 @@
++"""Regression tests for derivation memoization and bounded output (barrel-fix-v2).
++
++Covers:
++- one scoped ledger load per derivation scope, with warning replay;
++- no memo reuse outside a scope, and no stale read-after-write across commands;
++- memoized source snapshots are mutation-safe copies;
++- tiered id lookup uses hints but still falls back to the global scan;
++- hinted and unhinted id lookups do not share memo slots;
++- a corrupt frame in a foreign workspace no longer breaks scoped indexing;
++- a corrupt frame in the current workspace/scope still fails hard;
++- show commands bound their listing output with --limit.
++"""
++
++import argparse
++import json
++import sys
++from pathlib import Path
++
++import pytest
++
++SCRIPT_DIR = Path(__file__).resolve().parent
++sys.path.insert(0, str(SCRIPT_DIR))
++
++import runtime_core
++import weilan_trace
++
++
++WORKSPACE = r"D:\DerivationPerfTest"
++OTHER_WORKSPACE = r"D:\DerivationPerfOtherWorkspace"
++SCOPE = "derivation"
++
++
++@pytest.fixture()
++def state_home(tmp_path, monkeypatch):
++    home = tmp_path / "method-state"
++    monkeypatch.setenv("WEILAN_METHOD_HOME", str(home))
++    return home
++
++
++def write_evidence_record(index, scope=SCOPE, timestamp=None, workspace=WORKSPACE, evidence_id=None):
++    directory = weilan_trace.evidence_directory(workspace, scope)
++    record = {
++        "schema_version": weilan_trace.EVIDENCE_SCHEMA_VERSION,
++        "evidence_id": evidence_id or f"ev-{index:04d}",
++        "timestamp_utc": timestamp or f"2026-01-01T00:{index:02d}:00+00:00",
++        "workspace": runtime_core.canonical_workspace(workspace),
++        "scope": scope,
++        "signal": "architectural_decision",
++        "claim": f"claim {index}",
++        "sources": [],
++        "source_snapshots": [],
++    }
++    weilan_trace.append_event(directory / "2026-01-01.jsonl", record)
++    return record
++
++
++def write_semantic_record(memory_id, workspace=WORKSPACE, scope=SCOPE, timestamp="2026-01-01T00:00:00+00:00"):
++    directory = (
++        runtime_core.state_root() / "memory" / "semantic" / "workspaces"
++        / runtime_core.workspace_key(workspace) / runtime_core.scope_key(scope)
++    )
++    record = {
++        "schema_version": weilan_trace.SEMANTIC_SCHEMA_VERSION,
++        "memory_id": memory_id,
++        "timestamp_utc": timestamp,
++        "authority": "derived_semantic_memory_never_authorizes_continuation",
++        "workspace": runtime_core.canonical_workspace(workspace),
++        "workspace_key": runtime_core.workspace_key(workspace),
++        "scope": scope,
++        "scope_key": runtime_core.scope_key(scope),
++        "kind": "decision",
++        "summary": f"semantic {memory_id}",
++        "detail": "",
++        "tags": [],
++        "sources": [],
++        "source_snapshots": [],
++        "supersedes": [],
++        "conflicts_with": [],
++    }
++    weilan_trace.append_event(directory / "2026-01-01.jsonl", record)
++    return record
++
++
++def test_scoped_load_runs_once_per_memo_scope(state_home, monkeypatch):
++    write_evidence_record(1)
++    calls = {"count": 0}
++    original = weilan_trace.read_jsonl_records
++
++    def counting(path, warnings):
++        calls["count"] += 1
++        return original(path, warnings)
++
++    monkeypatch.setattr(weilan_trace, "read_jsonl_records", counting)
++
++    with weilan_trace.derivation_memo_scope():
++        first = weilan_trace.load_evidence_records(WORKSPACE, SCOPE)
++        inside = calls["count"]
++        second = weilan_trace.load_evidence_records(WORKSPACE, SCOPE)
++        assert calls["count"] == inside
++        assert first is second
++
++    # outside any scope every load re-reads the ledger
++    weilan_trace.load_evidence_records(WORKSPACE, SCOPE)
++    after_first = calls["count"]
++    weilan_trace.load_evidence_records(WORKSPACE, SCOPE)
++    assert calls["count"] > after_first
++
++
++def test_memo_replays_warnings_on_hit(state_home):
++    directory = weilan_trace.evidence_directory(WORKSPACE, SCOPE)
++    weilan_trace.append_event(directory / "2026-01-01.jsonl", {"schema_version": "wrong"})
++    with weilan_trace.derivation_memo_scope():
++        first_warnings = []
++        weilan_trace.load_evidence_records(WORKSPACE, SCOPE, first_warnings)
++        second_warnings = []
++        weilan_trace.load_evidence_records(WORKSPACE, SCOPE, second_warnings)
++    assert first_warnings and first_warnings == second_warnings
++
++
++def test_no_stale_read_after_write_across_commands(state_home, tmp_path, capsys):
++    source_file = tmp_path / "source.md"
++    source_file.write_text("fact\n", encoding="utf-8")
++
++    def consolidate(summary, supersedes=None):
++        args = argparse.Namespace(
++            workspace=WORKSPACE, scope=SCOPE, kind="decision", summary=summary,
++            detail="", tag=[], source=[str(source_file)],
++            supersedes=supersedes or [], conflicts_with=[],
++        )
++        weilan_trace.command_memory_consolidate(args)
++        return json.loads(capsys.readouterr().out)
++
++    first = consolidate("first durable decision")
++    # the second command must observe the first entry (supersedes validation)
++    second = consolidate("second decision replacing the first", [first["memory_id"]])
++    assert second["saved"] is True
++    assert second["active_entry_count"] == 1
++
++
++def test_memoized_source_snapshot_is_mutation_safe(state_home, tmp_path):
++    source_file = tmp_path / "snap.md"
++    source_file.write_text("content\n", encoding="utf-8")
++    ref = str(source_file)
++    with weilan_trace.derivation_memo_scope():
++        first = weilan_trace.source_snapshot(ref, WORKSPACE)
++        first["injected"] = True
++        second = weilan_trace.source_snapshot(ref, WORKSPACE)
++        assert "injected" not in second
++        assert second["exists"] is True
++
++
++def test_tiered_lookup_hint_and_global_fallback(state_home):
++    record = write_evidence_record(7)
++    hinted = weilan_trace.find_evidence("ev-0007", workspace=WORKSPACE, scope=SCOPE)
++    assert hinted["evidence_id"] == record["evidence_id"]
++    # wrong hints must still resolve through the global tier
++    fallback = weilan_trace.find_evidence(
++        "ev-0007", workspace=r"D:\SomeOtherWorkspace", scope="unrelated"
++    )
++    assert fallback["evidence_id"] == record["evidence_id"]
++    with pytest.raises(FileNotFoundError):
++        weilan_trace.find_evidence("ev-missing", workspace=WORKSPACE, scope=SCOPE)
++
++
++def test_lookup_memo_keeps_hint_semantics_separate(state_home):
++    write_evidence_record(1, workspace=WORKSPACE, evidence_id="ev-duplicate")
++    write_evidence_record(2, workspace=OTHER_WORKSPACE, evidence_id="ev-duplicate")
++    write_semantic_record("mem-duplicate", workspace=WORKSPACE)
++    write_semantic_record("mem-duplicate", workspace=OTHER_WORKSPACE)
++
++    with weilan_trace.derivation_memo_scope():
++        assert weilan_trace.find_evidence(
++            "ev-duplicate", workspace=WORKSPACE, scope=SCOPE
++        )["workspace"] == runtime_core.canonical_workspace(WORKSPACE)
++        with pytest.raises(RuntimeError, match="multiple evidence"):
++            weilan_trace.find_evidence("ev-duplicate")
++        assert weilan_trace.find_semantic_memory(
++            "mem-duplicate", workspace=WORKSPACE, scope=SCOPE
++        )["workspace"] == runtime_core.canonical_workspace(WORKSPACE)
++        with pytest.raises(RuntimeError, match="multiple semantic"):
++            weilan_trace.find_semantic_memory("mem-duplicate")
++
++    with weilan_trace.derivation_memo_scope():
++        with pytest.raises(RuntimeError, match="multiple evidence"):
++            weilan_trace.find_evidence("ev-duplicate")
++        assert weilan_trace.find_evidence(
++            "ev-duplicate", workspace=WORKSPACE, scope=SCOPE
++        )["workspace"] == runtime_core.canonical_workspace(WORKSPACE)
++        with pytest.raises(RuntimeError, match="multiple semantic"):
++            weilan_trace.find_semantic_memory("mem-duplicate")
++        assert weilan_trace.find_semantic_memory(
++            "mem-duplicate", workspace=WORKSPACE, scope=SCOPE
++        )["workspace"] == runtime_core.canonical_workspace(WORKSPACE)
++
++
++def test_foreign_corrupt_frame_does_not_break_scoped_indexing(state_home):
++    good = weilan_trace.make_event(
++        "frame-good", "frame_opened", "L2", WORKSPACE, {"causal": {"scope": SCOPE}}
++    )
++    good_path = runtime_core.state_root() / "frames" / "2026-01-01" / "frame-good.jsonl"
++    weilan_trace.append_event(good_path, good)
++
++    foreign = weilan_trace.make_event(
++        "frame-foreign", "frame_opened", "L2", OTHER_WORKSPACE, {"causal": {"scope": SCOPE}}
++    )
++    bad_path = runtime_core.state_root() / "frames" / "2026-01-01" / "frame-foreign.jsonl"
++    bad_path.parent.mkdir(parents=True, exist_ok=True)
++    bad_path.write_text(
++        json.dumps(foreign, ensure_ascii=False) + "\nnot json\n",
++        encoding="utf-8",
++    )
++
++    paths = weilan_trace.scoped_frame_paths(WORKSPACE, SCOPE)
++    assert paths == [good_path]
++    index = weilan_trace.build_episode_index_value(WORKSPACE, SCOPE)
++    assert index["episode_count"] == 1
++
++
++def test_current_scope_corrupt_frame_still_breaks_scoped_indexing(state_home):
++    good = weilan_trace.make_event(
++        "frame-good", "frame_opened", "L2", WORKSPACE, {"causal": {"scope": SCOPE}}
++    )
++    good_path = runtime_core.state_root() / "frames" / "2026-01-01" / "frame-good.jsonl"
++    weilan_trace.append_event(good_path, good)
++
++    bad = weilan_trace.make_event(
++        "frame-bad", "frame_opened", "L2", WORKSPACE, {"causal": {"scope": SCOPE}}
++    )
++    bad_path = runtime_core.state_root() / "frames" / "2026-01-01" / "frame-bad.jsonl"
++    bad_path.write_text(
++        json.dumps(bad, ensure_ascii=False) + "\nnot json\n",
++        encoding="utf-8",
++    )
++
++    with pytest.raises(ValueError, match="invalid JSON"):
++        weilan_trace.scoped_frame_paths(WORKSPACE, SCOPE)
++    with pytest.raises(ValueError, match="invalid JSON"):
++        weilan_trace.build_episode_index_value(WORKSPACE, SCOPE)
++
++
++def test_evidence_show_bounds_output(state_home, capsys):
++    for index in range(1, 26):
++        write_evidence_record(index)
++
++    def show(limit):
++        args = argparse.Namespace(
++            workspace=WORKSPACE, scope=SCOPE, evidence_id=None, limit=limit
++        )
++        weilan_trace.command_evidence_show(args)
++        return json.loads(capsys.readouterr().out)
++
++    default = show(20)
++    assert default["evidence_count"] == 25
++    assert default["returned_count"] == 20
++    assert default["truncated"] is True
++    # newest-first slice keeps the latest records
++    returned_ids = {item["evidence_id"] for item in default["results"]}
++    assert "ev-0025" in returned_ids and "ev-0001" not in returned_ids
++
++    unlimited = show(0)
++    assert unlimited["returned_count"] == 25
++    assert unlimited["truncated"] is False
++
++
++def test_prospective_show_bounds_causal_events(state_home, monkeypatch, capsys):
++    monkeypatch.setattr(weilan_trace, "assert_scope_write_allowed", lambda w, s, o: None)
++    for index in range(1, 26):
++        weilan_trace.append_prospective_event(
++            WORKSPACE, SCOPE, "causal_event_observed",
++            {
++                "causal_event_id": f"ce-{index:04d}",
++                "event_kind": "tool",
++                "event_name": f"tests_green_{index}",
++                "observed_at_utc": f"2026-01-01T00:{index:02d}:00+00:00",
++                "payload_hash": None,
++                "sources": ["frame:none"],
++                "source_snapshots": [{"ref": "frame:none", "exists": True}],
++            },
++        )
++    args = argparse.Namespace(workspace=WORKSPACE, scope=SCOPE, limit=20)
++    weilan_trace.command_prospective_show(args)
++    output = json.loads(capsys.readouterr().out)
++    assert output["causal_event_count"] == 25
++    assert len(output["causal_events"]) == 20
++    assert output["causal_events_truncated"] is True
++    assert "ce-0025" in output["causal_events"]
++
++
++def test_transaction_show_limit_uses_reducer_order_not_id_sort(state_home, monkeypatch, capsys):
++    old = {
++        "transaction_id": "wtx-z-old",
++        "idempotency_key": "old",
++        "state": "PREPARED",
++        "contract_hash": "c",
++        "proposal_hash": "p",
++        "request_hash": None,
++        "plan_hash": None,
++        "bundle_hash": "b",
++        "intents": [],
++        "receipt": None,
++    }
++    newest = {
++        **old,
++        "transaction_id": "wtx-a-new",
++        "idempotency_key": "new",
++    }
++    state = {
++        "issues": [],
++        "head_event_id": "head",
++        "head_sequence": 2,
++        "transactions": {
++            old["transaction_id"]: old,
++            newest["transaction_id"]: newest,
++        },
++    }
++    monkeypatch.setattr(weilan_trace, "load_transaction_records", lambda *args: [])
++    monkeypatch.setattr(weilan_trace, "reduce_transactions", lambda records: state)
++
++    args = argparse.Namespace(workspace=WORKSPACE, scope=SCOPE, transaction_id=None, limit=1)
++    weilan_trace.command_metabolic_transaction_show(args)
++    output = json.loads(capsys.readouterr().out)
++    assert output["transaction_count"] == 2
++    assert output["returned_count"] == 1
++    assert output["truncated"] is True
++    assert output["transactions"][0]["transaction_id"] == "wtx-a-new"
++
++
++def main():
++    raise SystemExit(pytest.main([__file__, "-q"]))
++
++
++if __name__ == "__main__":
++    main()
+diff -r -N '--exclude=__pycache__' '--exclude=.pytest_cache' '--exclude=tmp-tests' -u /d/CodexData/skills/solve-with-weilan/scripts/test_evidence_lifecycle.py solve-with-weilan/scripts/test_evidence_lifecycle.py
+--- /d/CodexData/skills/solve-with-weilan/scripts/test_evidence_lifecycle.py	2026-07-07 09:14:08.739821400 +0900
++++ solve-with-weilan/scripts/test_evidence_lifecycle.py	2026-07-07 12:04:26.935187900 +0900
+@@ -192,6 +192,7 @@
+         root = Path(temporary)
+         environment = os.environ.copy()
+         environment["WEILAN_ALLOW_UNRESOLVED_CONVERSATION"] = "1"
++        environment["WEILAN_CODEX_SESSIONS_HOME"] = str(root / "sessions")
+         environment["WEILAN_METHOD_HOME"] = str(root / "method-state")
+         workspace = str(root / "workspace")
+         unrelated = str(root / "unrelated")
+diff -r -N '--exclude=__pycache__' '--exclude=.pytest_cache' '--exclude=tmp-tests' -u /d/CodexData/skills/solve-with-weilan/scripts/test_governance.py solve-with-weilan/scripts/test_governance.py
+--- /d/CodexData/skills/solve-with-weilan/scripts/test_governance.py	2026-07-07 09:14:10.122350500 +0900
++++ solve-with-weilan/scripts/test_governance.py	2026-07-07 12:04:26.937940200 +0900
+@@ -287,6 +287,7 @@
+         root = Path(temporary)
+         environment = os.environ.copy()
+         environment["WEILAN_ALLOW_UNRESOLVED_CONVERSATION"] = "1"
++        environment["WEILAN_CODEX_SESSIONS_HOME"] = str(root / "sessions")
+         environment["WEILAN_METHOD_HOME"] = str(root / "method-state")
+         workspace = str(root / "workspace")
+         unrelated = str(root / "unrelated")
+diff -r -N '--exclude=__pycache__' '--exclude=.pytest_cache' '--exclude=tmp-tests' -u /d/CodexData/skills/solve-with-weilan/scripts/test_metabolism.py solve-with-weilan/scripts/test_metabolism.py
+--- /d/CodexData/skills/solve-with-weilan/scripts/test_metabolism.py	2026-07-07 09:14:11.016260700 +0900
++++ solve-with-weilan/scripts/test_metabolism.py	2026-07-07 12:04:26.938990600 +0900
+@@ -156,6 +156,7 @@
+         root = Path(temporary)
+         environment = os.environ.copy()
+         environment["WEILAN_ALLOW_UNRESOLVED_CONVERSATION"] = "1"
++        environment["WEILAN_CODEX_SESSIONS_HOME"] = str(root / "sessions")
+         method_state = root / "method-state"
+         environment["WEILAN_METHOD_HOME"] = str(method_state)
+         workspace = str(root / "workspace")
+diff -r -N '--exclude=__pycache__' '--exclude=.pytest_cache' '--exclude=tmp-tests' -u /d/CodexData/skills/solve-with-weilan/scripts/test_runner.py solve-with-weilan/scripts/test_runner.py
+--- /d/CodexData/skills/solve-with-weilan/scripts/test_runner.py	2026-07-07 09:14:11.938985100 +0900
++++ solve-with-weilan/scripts/test_runner.py	2026-07-07 12:04:26.942798700 +0900
+@@ -592,6 +592,7 @@
+         root = Path(temporary)
+         environment = os.environ.copy()
+         environment["WEILAN_ALLOW_UNRESOLVED_CONVERSATION"] = "1"
++        environment["WEILAN_CODEX_SESSIONS_HOME"] = str(root / "sessions")
+         environment["WEILAN_METHOD_HOME"] = str(root / "method-state")
+         quiescent_test(root, environment)
+         one_step_test(root, environment)
+diff -r -N '--exclude=__pycache__' '--exclude=.pytest_cache' '--exclude=tmp-tests' -u /d/CodexData/skills/solve-with-weilan/scripts/test_transaction.py solve-with-weilan/scripts/test_transaction.py
+--- /d/CodexData/skills/solve-with-weilan/scripts/test_transaction.py	2026-07-07 09:14:13.721874600 +0900
++++ solve-with-weilan/scripts/test_transaction.py	2026-07-07 12:04:26.950823800 +0900
+@@ -834,6 +834,7 @@
+         method_state = root / "method-state"
+         environment = os.environ.copy()
+         environment["WEILAN_ALLOW_UNRESOLVED_CONVERSATION"] = "1"
++        environment["WEILAN_CODEX_SESSIONS_HOME"] = str(root / "sessions")
+         environment["WEILAN_METHOD_HOME"] = str(method_state)
+         cli_transaction_test(root, method_state, environment)
+         stale_and_abort_test(root, method_state, environment)
+diff -r -N '--exclude=__pycache__' '--exclude=.pytest_cache' '--exclude=tmp-tests' -u /d/CodexData/skills/solve-with-weilan/scripts/test_transition_planner.py solve-with-weilan/scripts/test_transition_planner.py
+--- /d/CodexData/skills/solve-with-weilan/scripts/test_transition_planner.py	2026-07-07 09:14:14.166792900 +0900
++++ solve-with-weilan/scripts/test_transition_planner.py	2026-07-07 12:04:26.947906800 +0900
+@@ -604,6 +604,7 @@
+         method_state = root / "method-state"
+         environment = os.environ.copy()
+         environment["WEILAN_ALLOW_UNRESOLVED_CONVERSATION"] = "1"
++        environment["WEILAN_CODEX_SESSIONS_HOME"] = str(root / "sessions")
+         environment["WEILAN_METHOD_HOME"] = str(method_state)
+         continue_test(root, method_state, environment)
+         fork_join_test(root, environment)
+diff -r -N '--exclude=__pycache__' '--exclude=.pytest_cache' '--exclude=tmp-tests' -u /d/CodexData/skills/solve-with-weilan/scripts/weilan_trace.py solve-with-weilan/scripts/weilan_trace.py
+--- /d/CodexData/skills/solve-with-weilan/scripts/weilan_trace.py	2026-07-07 10:12:48.352679800 +0900
++++ solve-with-weilan/scripts/weilan_trace.py	2026-07-07 11:22:44.074649600 +0900
+@@ -1,12 +1,15 @@
+ """Frame/Trace recorder and federated workspace memory for solve-with-weilan."""
+ 
+ import argparse
++import copy
+ import hashlib
+ import json
+ import os
+ import re
+ import sys
+ import uuid
++from contextlib import contextmanager
++from contextvars import ContextVar
+ from datetime import datetime, timezone
+ from pathlib import Path
+ 
+@@ -288,15 +291,18 @@
+ 
+ 
+ def read_events(path):
+-    events = read_events_raw(path)
+-    if not events:
+-        return events
+-    warnings = []
+-    repairs = load_frame_repairs(events[0].get("frame_id"), warnings)
+-    repaired = apply_frame_repairs(events, repairs, warnings)
+-    if warnings:
+-        raise ValueError("invalid frame repair ledger: " + "; ".join(warnings))
+-    return repaired
++    def load():
++        events = read_events_raw(path)
++        if not events:
++            return events
++        warnings = []
++        repairs = load_frame_repairs(events[0].get("frame_id"), warnings)
++        repaired = apply_frame_repairs(events, repairs, warnings)
++        if warnings:
++            raise ValueError("invalid frame repair ledger: " + "; ".join(warnings))
++        return repaired
++
++    return memoized_value(("frame_events", str(path)), load)
+ 
+ 
+ def append_event(path, event):
+@@ -1050,6 +1056,72 @@
+     return requested_normalized.startswith(prefix)
+ 
+ 
++_DERIVATION_MEMO = ContextVar("weilan_derivation_memo", default=None)
++
++
++@contextmanager
++def derivation_memo_scope():
++    """Memoize pure source-resolution reads inside one read-only derivation.
++
++    Enter this scope only around code whose reads are not followed by ledger
++    writes that those same reads must observe; a write inside the scope could
++    otherwise serve stale read-after-write data. Writes to derived caches
++    (projections, indexes) and to ledgers that are never snapshot sources
++    (governance appends) are safe. Nested scopes reuse the outermost memo.
++    """
++
++    if _DERIVATION_MEMO.get() is not None:
++        yield
++        return
++    token = _DERIVATION_MEMO.set({})
++    try:
++        yield
++    finally:
++        _DERIVATION_MEMO.reset(token)
++
++
++def memoized_records(kind, workspace, scope, warnings, loader):
++    """Serve one scoped ledger load per derivation, replaying its warnings."""
++
++    memo = _DERIVATION_MEMO.get()
++    if memo is None:
++        return loader(warnings)
++    key = (kind, workspace_key(workspace), scope_key(scope))
++    if key not in memo:
++        collected = []
++        memo[key] = (loader(collected), collected)
++    records, collected = memo[key]
++    if warnings is not None:
++        warnings.extend(collected)
++    return records
++
++
++def memoized_value(key, loader):
++    memo = _DERIVATION_MEMO.get()
++    if memo is None:
++        return loader()
++    if key not in memo:
++        memo[key] = loader()
++    return memo[key]
++
++
++def memoized_derivation(func):
++    """Run a read-only derivation inside one shared memo scope.
++
++    Apply only to functions that never perform writes their own later reads
++    must observe. Derived-cache writes (projection, index files) and
++    governance-ledger appends are safe because no memoized loader reads them.
++    """
++
++    def wrapper(*args, **kwargs):
++        with derivation_memo_scope():
++            return func(*args, **kwargs)
++
++    wrapper.__name__ = func.__name__
++    wrapper.__doc__ = func.__doc__
++    return wrapper
++
++
+ def read_jsonl_records(path, warnings):
+     records = []
+     try:
+@@ -1178,62 +1250,57 @@
+     )
+ 
+ 
++def load_scoped_ledger_records(kind, directory, schema_version, workspace, scope, warnings, validate_identity=False):
++    def loader(sink):
++        records = []
++        for path in sorted(directory.glob("*.jsonl")) if directory.exists() else []:
++            for record in read_jsonl_records(path, sink):
++                if record.get("schema_version") != schema_version:
++                    sink.append(f"{path.name}: unsupported {kind.replace('_', ' ')} schema")
++                    continue
++                if validate_identity:
++                    if normalized_workspace(record.get("workspace", "")) != normalized_workspace(workspace):
++                        sink.append(f"{path.name}: {kind.replace('_', ' ')} workspace mismatch")
++                        continue
++                    if normalize_scope(record.get("scope")).casefold() != normalize_scope(scope).casefold():
++                        sink.append(f"{path.name}: {kind.replace('_', ' ')} scope mismatch")
++                        continue
++                records.append(record)
++        return records
++
++    return memoized_records(kind, workspace, scope, warnings, loader)
++
++
+ def load_evidence_records(workspace, scope, warnings=None):
+     warnings = warnings if warnings is not None else []
+-    root = evidence_directory(workspace, scope)
+-    records = []
+-    for path in sorted(root.glob("*.jsonl")) if root.exists() else []:
+-        for record in read_jsonl_records(path, warnings):
+-            if record.get("schema_version") != EVIDENCE_SCHEMA_VERSION:
+-                warnings.append(f"{path.name}: unsupported evidence schema")
+-                continue
+-            if normalized_workspace(record.get("workspace", "")) != normalized_workspace(workspace):
+-                warnings.append(f"{path.name}: evidence workspace mismatch")
+-                continue
+-            if normalize_scope(record.get("scope")).casefold() != normalize_scope(scope).casefold():
+-                warnings.append(f"{path.name}: evidence scope mismatch")
+-                continue
+-            records.append(record)
+-    return records
++    return load_scoped_ledger_records(
++        "evidence", evidence_directory(workspace, scope), EVIDENCE_SCHEMA_VERSION,
++        workspace, scope, warnings, validate_identity=True,
++    )
+ 
+ 
+ def load_promotion_records(workspace, scope, warnings=None):
+     warnings = warnings if warnings is not None else []
+-    root = promotion_directory(workspace, scope)
+-    records = []
+-    for path in sorted(root.glob("*.jsonl")) if root.exists() else []:
+-        for record in read_jsonl_records(path, warnings):
+-            if record.get("schema_version") != PROMOTION_SCHEMA_VERSION:
+-                warnings.append(f"{path.name}: unsupported promotion schema")
+-                continue
+-            records.append(record)
+-    return records
++    return load_scoped_ledger_records(
++        "promotion", promotion_directory(workspace, scope), PROMOTION_SCHEMA_VERSION,
++        workspace, scope, warnings,
++    )
+ 
+ 
+ def load_evidence_lifecycle_records(workspace, scope, warnings=None):
+     warnings = warnings if warnings is not None else []
+-    root = evidence_lifecycle_directory(workspace, scope)
+-    records = []
+-    for path in sorted(root.glob("*.jsonl")) if root.exists() else []:
+-        for record in read_jsonl_records(path, warnings):
+-            if record.get("schema_version") != EVIDENCE_LIFECYCLE_SCHEMA_VERSION:
+-                warnings.append(f"{path.name}: unsupported evidence lifecycle schema")
+-                continue
+-            records.append(record)
+-    return records
++    return load_scoped_ledger_records(
++        "evidence_lifecycle", evidence_lifecycle_directory(workspace, scope),
++        EVIDENCE_LIFECYCLE_SCHEMA_VERSION, workspace, scope, warnings,
++    )
+ 
+ 
+ def load_persistence_audit_records(workspace, scope, warnings=None):
+     warnings = warnings if warnings is not None else []
+-    root = persistence_audit_directory(workspace, scope)
+-    records = []
+-    for path in sorted(root.glob("*.jsonl")) if root.exists() else []:
+-        for record in read_jsonl_records(path, warnings):
+-            if record.get("schema_version") != PERSISTENCE_AUDIT_SCHEMA_VERSION:
+-                warnings.append(f"{path.name}: unsupported persistence audit schema")
+-                continue
+-            records.append(record)
+-    return records
++    return load_scoped_ledger_records(
++        "persistence_audit", persistence_audit_directory(workspace, scope),
++        PERSISTENCE_AUDIT_SCHEMA_VERSION, workspace, scope, warnings,
++    )
+ 
+ 
+ def evidence_lifecycle_head(evidence, warnings=None):
+@@ -1286,17 +1353,53 @@
+     }
+ 
+ 
+-def find_evidence(evidence_id):
+-    root = state_root() / "memory" / "evidence" / "workspaces"
+-    matches = []
+-    if root.exists():
+-        for path in root.glob("*/*/*.jsonl"):
+-            for record in read_jsonl_records(path, []):
+-                if (
+-                    record.get("schema_version") == EVIDENCE_SCHEMA_VERSION
++def scoped_lookup_tiers(root, workspace=None, scope=None):
++    """Search paths for an id lookup: scoped, then workspace-wide, then global.
++
++    Ids are UUID-unique, so the first tier that matches is authoritative and
++    the global scan runs only when no hint tier contains the id.
++    """
++
++    tiers = []
++    if workspace is not None and scope is not None:
++        tiers.append((root / workspace_key(workspace) / scope_key(scope), "*.jsonl"))
++    if workspace is not None:
++        tiers.append((root / workspace_key(workspace), "*/*.jsonl"))
++    tiers.append((root, "*/*/*.jsonl"))
++    for tier, pattern in tiers:
++        yield tier, pattern
++
++
++def lookup_memo_key(kind, record_id, workspace=None, scope=None):
++    return (
++        kind,
++        record_id,
++        workspace_key(workspace) if workspace is not None else None,
++        scope_key(scope) if scope is not None else None,
++    )
++
++
++def find_evidence(evidence_id, workspace=None, scope=None):
++    def locate():
++        root = state_root() / "memory" / "evidence" / "workspaces"
++        if root.exists():
++            for tier, pattern in scoped_lookup_tiers(root, workspace, scope):
++                if not tier.exists():
++                    continue
++                matches = [
++                    record
++                    for path in tier.glob(pattern)
++                    for record in read_jsonl_records(path, [])
++                    if record.get("schema_version") == EVIDENCE_SCHEMA_VERSION
+                     and record.get("evidence_id") == evidence_id
+-                ):
+-                    matches.append(record)
++                ]
++                if matches:
++                    return matches
++        return []
++
++    matches = memoized_value(
++        lookup_memo_key("evidence_lookup", evidence_id, workspace, scope), locate
++    )
+     if not matches:
+         raise FileNotFoundError(f"evidence not found: {evidence_id}")
+     if len(matches) > 1:
+@@ -1477,12 +1580,24 @@
+ 
+ 
+ def source_snapshot(source, workspace):
++    memo = _DERIVATION_MEMO.get()
++    if memo is None:
++        return source_snapshot_uncached(source, workspace)
++    key = ("source_snapshot", source, normalized_workspace(workspace))
++    if key not in memo:
++        memo[key] = source_snapshot_uncached(source, workspace)
++    # snapshots are stored into projections and compared by value; copy on
++    # every memo hit so no caller can mutate the shared cached object
++    return copy.deepcopy(memo[key])
++
++
++def source_snapshot_uncached(source, workspace):
+     if source.startswith("conversation:"):
+         return conversation_turn_snapshot(source)
+     if source.startswith("evidence:"):
+         evidence_id = source.split(":", 1)[1]
+         try:
+-            record = find_evidence(evidence_id)
++            record = find_evidence(evidence_id, workspace=workspace)
+         except (OSError, ValueError, RuntimeError):
+             return {"kind": "conversation_evidence", "ref": source, "exists": False}
+         content_hash = hashlib.sha256(
+@@ -1517,7 +1632,7 @@
+     if source.startswith("memory:"):
+         memory_id = source.split(":", 1)[1]
+         try:
+-            record = find_semantic_memory(memory_id)
++            record = find_semantic_memory(memory_id, workspace=workspace)
+         except (OSError, ValueError, RuntimeError):
+             return {"kind": "semantic_memory", "ref": source, "exists": False}
+         return {
+@@ -1585,33 +1700,47 @@
+ 
+ def load_semantic_entries(workspace, scope, warnings=None):
+     warnings = warnings if warnings is not None else []
+-    entries = []
+-    for path in semantic_paths(workspace, scope):
+-        for record in read_jsonl_records(path, warnings):
+-            if record.get("schema_version") != SEMANTIC_SCHEMA_VERSION:
+-                warnings.append(f"{path.name}: unsupported semantic schema")
+-                continue
+-            if normalized_workspace(record.get("workspace", "")) != normalized_workspace(workspace):
+-                warnings.append(f"{path.name}: workspace mismatch")
+-                continue
+-            if normalize_scope(record.get("scope")).casefold() != normalize_scope(scope).casefold():
+-                warnings.append(f"{path.name}: scope mismatch")
+-                continue
+-            entries.append(record)
+-    return entries
+ 
++    def loader(sink):
++        entries = []
++        for path in semantic_paths(workspace, scope):
++            for record in read_jsonl_records(path, sink):
++                if record.get("schema_version") != SEMANTIC_SCHEMA_VERSION:
++                    sink.append(f"{path.name}: unsupported semantic schema")
++                    continue
++                if normalized_workspace(record.get("workspace", "")) != normalized_workspace(workspace):
++                    sink.append(f"{path.name}: workspace mismatch")
++                    continue
++                if normalize_scope(record.get("scope")).casefold() != normalize_scope(scope).casefold():
++                    sink.append(f"{path.name}: scope mismatch")
++                    continue
++                entries.append(record)
++        return entries
+ 
+-def find_semantic_memory(memory_id):
+-    root = state_root() / "memory" / "semantic" / "workspaces"
+-    matches = []
+-    if root.exists():
+-        for path in root.glob("*/*/*.jsonl"):
+-            matches.extend(
+-                record
+-                for record in read_jsonl_records(path, [])
+-                if record.get("schema_version") == SEMANTIC_SCHEMA_VERSION
+-                and record.get("memory_id") == memory_id
+-            )
++    return memoized_records("semantic_entries", workspace, scope, warnings, loader)
++
++
++def find_semantic_memory(memory_id, workspace=None, scope=None):
++    def locate():
++        root = state_root() / "memory" / "semantic" / "workspaces"
++        if root.exists():
++            for tier, pattern in scoped_lookup_tiers(root, workspace, scope):
++                if not tier.exists():
++                    continue
++                matches = [
++                    record
++                    for path in tier.glob(pattern)
++                    for record in read_jsonl_records(path, [])
++                    if record.get("schema_version") == SEMANTIC_SCHEMA_VERSION
++                    and record.get("memory_id") == memory_id
++                ]
++                if matches:
++                    return matches
++        return []
++
++    matches = memoized_value(
++        lookup_memo_key("semantic_memory_lookup", memory_id, workspace, scope), locate
++    )
+     if not matches:
+         raise FileNotFoundError(f"semantic memory not found: {memory_id}")
+     if len(matches) > 1:
+@@ -1632,16 +1761,20 @@
+ 
+ def load_semantic_dispositions(workspace, scope, warnings=None):
+     warnings = warnings if warnings is not None else []
+-    root = semantic_disposition_directory(workspace, scope)
+-    records = []
+-    if root.exists():
+-        for path in sorted(root.glob("*.jsonl")):
+-            for record in read_jsonl_records(path, warnings):
+-                if record.get("schema_version") == SEMANTIC_DISPOSITION_SCHEMA_VERSION:
+-                    records.append(record)
+-                else:
+-                    warnings.append(f"{path.name}: unsupported semantic disposition schema")
+-    return records
++
++    def loader(sink):
++        root = semantic_disposition_directory(workspace, scope)
++        records = []
++        if root.exists():
++            for path in sorted(root.glob("*.jsonl")):
++                for record in read_jsonl_records(path, sink):
++                    if record.get("schema_version") == SEMANTIC_DISPOSITION_SCHEMA_VERSION:
++                        records.append(record)
++                    else:
++                        sink.append(f"{path.name}: unsupported semantic disposition schema")
++        return records
++
++    return memoized_records("semantic_dispositions", workspace, scope, warnings, loader)
+ 
+ 
+ def semantic_disposition_heads(workspace, scope, warnings=None):
+@@ -1672,7 +1805,9 @@
+         evidence_id = entry.get("promotion", {}).get("evidence_id")
+         if evidence_id:
+             try:
+-                evidence = find_evidence(evidence_id)
++                evidence = find_evidence(
++                    evidence_id, workspace=entry.get("workspace"), scope=entry.get("scope")
++                )
+                 if evidence_state(evidence)["state"] != "PROMOTED":
+                     continue
+             except (OSError, ValueError, RuntimeError):
+@@ -1688,7 +1823,9 @@
+         if not evidence_id:
+             continue
+         try:
+-            evidence = find_evidence(evidence_id)
++            evidence = find_evidence(
++                evidence_id, workspace=entry.get("workspace"), scope=entry.get("scope")
++            )
+             lifecycle = evidence_state(evidence)
+             state[evidence_id] = {
+                 "state": lifecycle["state"],
+@@ -1721,6 +1858,7 @@
+     )
+ 
+ 
++@memoized_derivation
+ def build_semantic_index_value(workspace, scope, warnings=None):
+     warnings = warnings if warnings is not None else []
+     paths = semantic_paths(workspace, scope)
+@@ -1781,6 +1919,7 @@
+     return index
+ 
+ 
++@memoized_derivation
+ def semantic_index_is_fresh(index, workspace, scope):
+     if not index or index.get("source_state") != semantic_source_state(
+         semantic_paths(workspace, scope)
+@@ -2396,6 +2535,7 @@
+     return 1 if warnings else 0
+ 
+ 
++@memoized_derivation
+ def command_evidence_show(args):
+     workspace = canonical_workspace(args.workspace)
+     scope = normalize_scope(args.scope)
+@@ -2425,10 +2565,18 @@
+             item["semantic_memory_id"] = promotion.get("semantic_memory_id")
+             item["promotion_id"] = promotion.get("promotion_id")
+         results.append(item)
++    total = len(results)
++    limit = getattr(args, "limit", 20)
++    if limit and total > limit:
++        results = sorted(
++            results, key=lambda item: item.get("timestamp_utc", ""), reverse=True
++        )[:limit]
+     output = {
+         "workspace": workspace,
+         "scope": scope,
+-        "evidence_count": len(results),
++        "evidence_count": total,
++        "returned_count": len(results),
++        "truncated": len(results) < total,
+         "results": results,
+         "promotion_audit_count": len(promotions),
+         "authority": "evidence_and_promotion_status_never_activation_authority",
+@@ -2649,12 +2797,26 @@
+     scope = normalize_scope(args.scope)
+     warnings = []
+     records, state = reduce_prospective(workspace, scope, warnings)
++    causal_events = state["causal_events"]
++    total_events = len(causal_events)
++    limit = getattr(args, "limit", 20)
++    truncated = False
++    if limit and total_events > limit:
++        newest = sorted(
++            causal_events.items(),
++            key=lambda item: item[1].get("observed_at_utc", ""),
++            reverse=True,
++        )[:limit]
++        causal_events = dict(newest)
++        truncated = True
+     print(json.dumps({
+         "workspace": workspace,
+         "scope": scope,
+         "record_count": len(records),
+         "goals": state["goals"],
+-        "causal_events": state["causal_events"],
++        "causal_events": causal_events,
++        "causal_event_count": total_events,
++        "causal_events_truncated": truncated,
+         "issues": state["issues"],
+         "warnings": warnings,
+         "authority": "prospective_state_never_activation_or_action_authority",
+@@ -2701,6 +2863,7 @@
+     return all(snapshot.get("exists", True) for snapshot in current)
+ 
+ 
++@memoized_derivation
+ def reduce_governance(workspace, scope, warnings=None):
+     workspace = canonical_workspace(workspace)
+     scope = normalize_scope(scope)
+@@ -2732,7 +2895,7 @@
+     snapshots = source_snapshots(unique, workspace)
+     for ref, snapshot in zip(unique, snapshots):
+         if ref.startswith("evidence:"):
+-            evidence = find_evidence(ref.split(":", 1)[1])
++            evidence = find_evidence(ref.split(":", 1)[1], workspace=workspace, scope=scope)
+             if normalized_workspace(evidence.get("workspace", "")) != normalized_workspace(workspace):
+                 raise ValueError(f"evidence belongs to another workspace: {ref}")
+             if scope and normalize_scope(evidence.get("scope")).casefold() != normalize_scope(scope).casefold():
+@@ -2758,7 +2921,7 @@
+     for ref in evidence_refs:
+         if not ref.startswith("evidence:"):
+             continue
+-        evidence = find_evidence(ref.split(":", 1)[1])
++        evidence = find_evidence(ref.split(":", 1)[1], workspace=workspace, scope=scope)
+         if (
+             normalized_workspace(evidence.get("workspace", "")) == normalized_workspace(workspace)
+             and normalize_scope(evidence.get("scope")).casefold() == normalize_scope(scope).casefold()
+@@ -2774,6 +2937,7 @@
+     return False
+ 
+ 
++@memoized_derivation
+ def append_governance_event(workspace, scope, event_type, data):
+     workspace = canonical_workspace(workspace)
+     scope = normalize_scope(scope)
+@@ -3166,10 +3330,29 @@
+             for pressure_id, pressure in state["pressures"].items()
+             if pressure["target_ref"] == args.target_ref
+         }
++    limit = getattr(args, "limit", 20)
++    result["pressure_count"] = len(result["pressures"])
++    if limit and len(result["pressures"]) > limit:
++        newest = sorted(
++            result["pressures"].items(),
++            key=lambda item: item[1].get("timestamp_utc", ""),
++            reverse=True,
++        )[:limit]
++        result["pressures"] = dict(newest)
++        result["pressures_truncated"] = True
++    if limit:
++        for target_ref, target in list(result["targets"].items()):
++            history = target.get("transition_history")
++            if isinstance(history, list) and len(history) > limit:
++                trimmed = dict(target)
++                trimmed["transition_history"] = history[-limit:]
++                trimmed["transition_history_truncated"] = True
++                result["targets"][target_ref] = trimmed
+     print(json.dumps(result, ensure_ascii=False, indent=2))
+     return 1 if result["issues"] else 0
+ 
+ 
++@memoized_derivation
+ def build_self_projection(workspace, scope):
+     workspace = canonical_workspace(workspace)
+     scope = normalize_scope(scope)
+@@ -3251,6 +3434,7 @@
+     return 1 if result["issues"] else 0
+ 
+ 
++@memoized_derivation
+ def current_metabolic_contract(workspace, scope):
+     workspace = canonical_workspace(workspace)
+     scope = normalize_scope(scope)
+@@ -3853,15 +4037,24 @@
+             raise ValueError("transaction not found")
+         result = transaction_summary(transaction, state)
+     else:
++        summaries = [
++            transaction_summary(value, state)
++            for value in transactions.values()
++        ]
++        total = len(summaries)
++        limit = getattr(args, "limit", 20)
++        truncated = False
++        if limit and total > limit:
++            summaries = summaries[-limit:]
++            truncated = True
+         result = {
+             "schema_version": TRANSACTION_SCHEMA_VERSION,
+             "workspace": workspace,
+             "scope": scope,
+-            "transaction_count": len(transactions),
+-            "transactions": [
+-                transaction_summary(value, state)
+-                for _, value in sorted(transactions.items())
+-            ],
++            "transaction_count": total,
++            "returned_count": len(summaries),
++            "truncated": truncated,
++            "transactions": summaries,
+             "journal_head": {
+                 "event_id": state["head_event_id"],
+                 "sequence": state["head_sequence"],
+@@ -3948,7 +4141,7 @@
+         )
+         return match.get("timestamp_utc", "") if match else ""
+     if ref.startswith("evidence:"):
+-        evidence = find_evidence(ref.split(":", 1)[1])
++        evidence = find_evidence(ref.split(":", 1)[1], workspace=workspace, scope=scope)
+         return evidence.get("timestamp_utc", "")
+     pressure_matches = [
+         value
+@@ -4483,6 +4676,7 @@
+     }, ensure_ascii=False, indent=2))
+ 
+ 
++@memoized_derivation
+ def command_memory_retention_plan(args):
+     if args.max_active < 0:
+         raise ValueError("--max-active cannot be negative")
+@@ -4513,6 +4707,7 @@
+     }, ensure_ascii=False, indent=2))
+ 
+ 
++@memoized_derivation
+ def command_memory_conflicts(args):
+     workspace = canonical_workspace(args.workspace)
+     scope = normalize_scope(args.scope)
+@@ -4547,23 +4742,53 @@
+     return normalize_scope(events[0].get("data", {}).get("causal", {}).get("scope"))
+ 
+ 
++def corrupt_frame_is_foreign(path, workspace, scope):
++    for _, _, raw, _ in iter_ledger_lines(path):
++        if not raw.strip():
++            continue
++        try:
++            first = json.loads(raw.decode("utf-8"))
++        except (UnicodeDecodeError, json.JSONDecodeError):
++            return False
++        frame_workspace = first.get("workspace")
++        if not frame_workspace:
++            return False
++        return (
++            normalized_workspace(frame_workspace) != normalized_workspace(workspace)
++            or frame_scope([first]).casefold() != normalize_scope(scope).casefold()
++        )
++    return False
++
++
+ def scoped_frame_paths(workspace, scope):
+     workspace = canonical_workspace(workspace)
+     scope = normalize_scope(scope)
+-    paths = []
+-    root = state_root() / "frames"
+-    if not root.exists():
++
++    def scan():
++        paths = []
++        root = state_root() / "frames"
++        if not root.exists():
++            return paths
++        for path in sorted(root.glob("*/*.jsonl")):
++            try:
++                events = read_events(path)
++            except (OSError, ValueError, RuntimeError) as exc:
++                if corrupt_frame_is_foreign(path, workspace, scope):
++                    sys.stderr.write(f"weilan warning: skipping unreadable frame file {path.name}: {exc}\n")
++                    continue
++                raise
++            if not events:
++                continue
++            if normalized_workspace(events[0].get("workspace", "")) != normalized_workspace(workspace):
++                continue
++            if frame_scope(events).casefold() != scope.casefold():
++                continue
++            paths.append(path)
+         return paths
+-    for path in sorted(root.glob("*/*.jsonl")):
+-        events = read_events(path)
+-        if not events:
+-            continue
+-        if normalized_workspace(events[0].get("workspace", "")) != normalized_workspace(workspace):
+-            continue
+-        if frame_scope(events).casefold() != scope.casefold():
+-            continue
+-        paths.append(path)
+-    return paths
++
++    return memoized_value(
++        ("scoped_frame_paths", workspace_key(workspace), scope_key(scope)), scan
++    )
+ 
+ 
+ def frame_source_state(paths):
+@@ -4689,6 +4914,7 @@
+     return bool(index) and index.get("source_state") == frame_source_state(scoped_frame_paths(workspace, scope))
+ 
+ 
++@memoized_derivation
+ def command_episode_index(args):
+     index = rebuild_episode_index(args.workspace, args.scope)
+     print(json.dumps({
+@@ -4700,6 +4926,7 @@
+     }, ensure_ascii=False, indent=2))
+ 
+ 
++@memoized_derivation
+ def command_episode_search(args):
+     if args.limit < 1 or args.limit > 100:
+         raise ValueError("--limit must be between 1 and 100")
+@@ -4738,6 +4965,7 @@
+     }, ensure_ascii=False, indent=2))
+ 
+ 
++@memoized_derivation
+ def command_memory_search(args):
+     requested = canonical_workspace(args.workspace)
+     if args.limit < 1 or args.limit > 100:
+@@ -4827,6 +5055,7 @@
+     print(json.dumps(output, ensure_ascii=False, indent=2))
+ 
+ 
++@memoized_derivation
+ def command_memory_archive_plan(args):
+     workspace = canonical_workspace(args.workspace)
+     try:
+@@ -4964,6 +5193,7 @@
+     return path
+ 
+ 
++@memoized_derivation
+ def command_projection_rebuild(args):
+     workspace = canonical_workspace(args.workspace)
+     scope = normalize_scope(args.scope)
+@@ -5181,6 +5411,7 @@
+     }
+ 
+ 
++@memoized_derivation
+ def command_memory_recall(args):
+     requested = canonical_workspace(args.workspace)
+     controls, control_warnings = load_control_records()
+@@ -5392,6 +5623,7 @@
+     )
+     prospective_show_parser.add_argument("--workspace", default=os.getcwd())
+     prospective_show_parser.add_argument("--scope", required=True)
++    prospective_show_parser.add_argument("--limit", type=int, default=20, help="max entries in listing output; 0 = unlimited")
+     prospective_show_parser.set_defaults(func=command_prospective_show)
+ 
+     governance_target_parser = subparsers.add_parser(
+@@ -5492,6 +5724,7 @@
+     governance_show_parser.add_argument("--workspace", default=os.getcwd())
+     governance_show_parser.add_argument("--scope", required=True)
+     governance_show_parser.add_argument("--target-ref")
++    governance_show_parser.add_argument("--limit", type=int, default=20, help="max entries in listing output; 0 = unlimited")
+     governance_show_parser.set_defaults(func=command_governance_show)
+ 
+     self_project_parser = subparsers.add_parser(
+@@ -5579,6 +5812,7 @@
+     metabolic_show_parser.add_argument("--workspace", default=os.getcwd())
+     metabolic_show_parser.add_argument("--scope", required=True)
+     metabolic_show_parser.add_argument("--transaction-id")
++    metabolic_show_parser.add_argument("--limit", type=int, default=20, help="max entries in listing output; 0 = unlimited")
+     metabolic_show_parser.set_defaults(func=command_metabolic_transaction_show)
+ 
+     for command_name, help_text, handler in (
+@@ -5768,6 +6002,7 @@
+     evidence_show_parser.add_argument("--workspace", default=os.getcwd())
+     evidence_show_parser.add_argument("--scope", default="workspace")
+     evidence_show_parser.add_argument("--evidence-id")
++    evidence_show_parser.add_argument("--limit", type=int, default=20, help="max entries in listing output; 0 = unlimited")
+     evidence_show_parser.set_defaults(func=command_evidence_show)
+ 
+     persistence_audit_parser = subparsers.add_parser(

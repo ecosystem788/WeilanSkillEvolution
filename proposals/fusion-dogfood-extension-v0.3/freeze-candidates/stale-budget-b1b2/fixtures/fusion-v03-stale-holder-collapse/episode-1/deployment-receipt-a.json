@@ -1,0 +1,7 @@
+{
+  "receipt_id": "deploy-a",
+  "baseline_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "status": "accepted",
+  "lineage_frame": "wf-legacy-standalone",
+  "claim": "legacy deployment baseline is the current rollback anchor"
+}

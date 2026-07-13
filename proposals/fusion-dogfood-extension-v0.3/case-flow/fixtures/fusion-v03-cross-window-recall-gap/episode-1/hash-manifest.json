@@ -1,0 +1,4 @@
+{
+  "rotated-evidence-slice.csv": "sha256:public-rotated-slice-v1",
+  "expected_rule_id_hint": "derive a rule id from the source hash and threshold pair"
+}

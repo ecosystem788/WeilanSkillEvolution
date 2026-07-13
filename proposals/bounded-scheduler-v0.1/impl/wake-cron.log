@@ -1,0 +1,3268 @@
+﻿2026-07-09T10:26:53  wake ok  stop=quiescent  frame=wf-20260709-012657-3fee52
+2026-07-09T10:28:43  wake ok  stop=quiescent  frame=wf-20260709-012845-362946
+2026-07-09T10:28:57  wake ok  stop=quiescent  frame=wf-20260709-012859-045760
+2026-07-09T10:58:59  wake ok  stop=quiescent  frame=wf-20260709-015902-45568b
+2026-07-09T11:28:59  wake ok  stop=quiescent  frame=wf-20260709-022902-e34fca
+2026-07-09T11:58:58  wake ok  stop=quiescent  frame=wf-20260709-025900-f8edac
+2026-07-09T12:28:58  wake ok  stop=quiescent  frame=wf-20260709-032900-a6cd43
+2026-07-09T12:58:58  wake ok  stop=quiescent  frame=wf-20260709-035901-984584
+2026-07-09T13:28:59  wake ok  stop=quiescent  frame=wf-20260709-042901-a00f3e
+2026-07-09T14:28:59  wake ok  stop=quiescent  frame=wf-20260709-052900-86ee75
+2026-07-09T14:58:59  wake ok  stop=quiescent  frame=wf-20260709-055900-e0fc03
+2026-07-09T15:28:59  wake ok  stop=quiescent  frame=wf-20260709-062900-58dd96
+2026-07-09T17:27:27  wake ok  stop=quiescent  frame=wf-20260709-082733-12c4d9
+2026-07-09T18:58:59  wake ok  stop=quiescent  frame=wf-20260709-095902-7f3d06
+2026-07-09T21:37:43  wake ok  stop=quiescent  frame=wf-20260709-123749-4de838
+2026-07-09T23:58:59  wake ok  stop=quiescent  frame=wf-20260709-145907-742b5b
+2026-07-10T02:19:55  wake ok  stop=quiescent  frame=wf-20260709-232826-872cef
+2026-07-10T08:34:02  wake ok  stop=quiescent  frame=wf-20260709-233404-ddbb32
+2026-07-10T08:59:00  wake ok  stop=quiescent  frame=wf-20260709-235904-9242f8
+2026-07-10T11:28:58  wake ok  stop=quiescent  frame=wf-20260710-022900-62fc4f
+2026-07-10T11:58:58  wake ok  stop=quiescent  frame=wf-20260710-025901-11994b
+2026-07-10T12:28:58  wake ok  stop=quiescent  frame=wf-20260710-032900-fccfe3
+2026-07-10T13:28:57  wake ok  stop=quiescent  frame=wf-20260710-042859-3eccff
+2026-07-10T13:28:57  escalating: due clock goal -> model episode
+2026-07-10T13:28:57  escalation done rc=1
+2026-07-10T13:28:57  waking codex: pending inbox handoffs
+2026-07-10T13:28:57  codex wake done rc=2
+2026-07-10T14:28:58  wake ok  stop=quiescent  frame=wf-20260710-052903-0af638
+2026-07-10T14:28:58  escalating: due clock goal -> model episode
+2026-07-10T14:28:58  escalation done rc=0
+2026-07-10T14:28:58  waking codex: pending inbox handoffs
+2026-07-10T15:28:58  wake ok  stop=quiescent  frame=wf-20260710-062900-b2651b
+2026-07-10T15:28:58  escalating: due clock goal -> model episode
+2026-07-10T15:28:58  escalation done rc=0
+2026-07-10T15:38:58  wake ok  stop=quiescent  frame=wf-20260710-063901-884bb7
+2026-07-10T15:38:58  waking codex: pending inbox handoffs
+2026-07-10T15:38:58  codex wake done rc=0
+2026-07-10T15:48:58  wake ok  stop=quiescent  frame=wf-20260710-064901-96010a
+2026-07-10T15:48:58  escalating: due clock goal -> model episode
+2026-07-10T15:48:58  escalation done rc=0
+2026-07-10T15:48:58  waking codex: pending inbox handoffs
+2026-07-10T16:03:58  wake ok  stop=quiescent  frame=wf-20260710-070401-dde1e5
+2026-07-10T16:03:58  escalating: due clock goal -> model episode
+2026-07-10T16:03:58  escalation done rc=0
+2026-07-10T16:03:58  waking codex: pending inbox handoffs
+2026-07-10T16:13:58  wake ok  stop=quiescent  frame=wf-20260710-071401-5b48c6
+2026-07-10T16:13:58  escalating: due clock goal -> model episode
+2026-07-10T16:13:58  escalation done rc=0
+2026-07-10T16:13:58  waking codex: pending inbox handoffs
+2026-07-10T16:23:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260710-072335-acc810', '_rc': 1})
+2026-07-10T16:23:58  escalating: due clock goal -> model episode
+2026-07-10T16:23:58  escalation done rc=0
+2026-07-10T16:23:58  waking codex: pending inbox handoffs
+2026-07-10T16:34:58  wake ok  stop=quiescent  frame=wf-20260710-073502-12ea19
+2026-07-10T16:34:58  waking codex: pending inbox handoffs
+2026-07-10T16:34:58  codex wake done rc=0
+2026-07-10T16:35:58  wake ok  stop=quiescent  frame=wf-20260710-073601-ef77e5
+2026-07-10T16:35:58  waking codex: pending inbox handoffs
+2026-07-10T16:35:58  codex wake done rc=0
+2026-07-10T16:36:57  wake ok  stop=quiescent  frame=wf-20260710-073701-1034b2
+2026-07-10T16:36:57  waking codex: pending inbox handoffs
+2026-07-10T16:36:57  codex wake done rc=0
+2026-07-10T16:42:58  wake ok  stop=quiescent  frame=wf-20260710-074301-9c425d
+2026-07-10T16:42:58  escalating: due clock goal -> model episode
+2026-07-10T16:42:58  escalation done rc=0
+2026-07-10T16:42:58  waking codex: pending inbox handoffs
+2026-07-10T16:42:58  codex wake done rc=0
+2026-07-10T16:51:58  wake ok  stop=quiescent  frame=wf-20260710-075200-97c103
+2026-07-10T16:51:58  escalating: due clock goal -> model episode
+2026-07-10T16:51:58  escalation done rc=0
+2026-07-10T16:51:58  waking codex: pending inbox handoffs
+2026-07-10T17:01:58  wake ok  stop=quiescent  frame=wf-20260710-080201-f5a68f
+2026-07-10T17:01:58  escalating: due clock goal -> model episode
+2026-07-10T17:01:58  escalation done rc=0
+2026-07-10T17:01:58  waking codex: pending inbox handoffs
+2026-07-10T17:01:58  codex wake done rc=0
+2026-07-10T17:11:58  wake ok  stop=quiescent  frame=wf-20260710-081201-cc105c
+2026-07-10T17:11:58  escalating: due clock goal -> model episode
+2026-07-10T17:11:58  escalation done rc=0
+2026-07-10T17:11:58  waking codex: pending inbox handoffs
+2026-07-10T17:21:59  wake ok  stop=quiescent  frame=wf-20260710-082205-803ba5
+2026-07-10T17:21:59  waking codex: pending inbox handoffs
+2026-07-10T17:21:59  codex wake done rc=0
+2026-07-10T17:22:58  wake ok  stop=quiescent  frame=wf-20260710-082301-0e3c83
+2026-07-10T17:22:58  waking codex: pending inbox handoffs
+2026-07-10T17:22:58  codex wake done rc=0
+2026-07-10T17:23:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260710-082334-08d8ea', '_rc': 1})
+2026-07-10T17:23:58  waking codex: pending inbox handoffs
+2026-07-10T17:23:58  codex wake done rc=0
+2026-07-10T17:24:58  wake ok  stop=quiescent  frame=wf-20260710-082503-8a7cd9
+2026-07-10T17:24:58  escalating: due clock goal -> model episode
+2026-07-10T17:24:58  escalation done rc=0
+2026-07-10T17:24:58  waking codex: pending inbox handoffs
+2026-07-10T17:34:58  wake ok  stop=quiescent  frame=wf-20260710-083503-32c26a
+2026-07-10T17:34:58  waking codex: pending inbox handoffs
+2026-07-10T17:34:58  codex wake done rc=0
+2026-07-10T17:35:58  wake ok  stop=quiescent  frame=wf-20260710-083601-76cab3
+2026-07-10T17:35:58  waking codex: pending inbox handoffs
+2026-07-10T17:35:58  codex wake done rc=0
+2026-07-10T17:36:58  wake ok  stop=quiescent  frame=wf-20260710-083702-a0108f
+2026-07-10T17:36:58  waking codex: pending inbox handoffs
+2026-07-10T17:36:58  codex wake done rc=0
+2026-07-10T17:46:58  wake ok  stop=quiescent  frame=wf-20260710-084701-52746b
+2026-07-10T17:46:58  escalating: due clock goal -> model episode
+2026-07-10T17:46:58  escalation done rc=0
+2026-07-10T17:46:58  waking codex: pending inbox handoffs
+2026-07-10T17:56:58  wake ok  stop=quiescent  frame=wf-20260710-085701-d2ca7b
+2026-07-10T17:56:58  escalating: due clock goal -> model episode
+2026-07-10T17:56:58  escalation done rc=0
+2026-07-10T17:56:58  waking codex: pending inbox handoffs
+2026-07-10T18:06:59  wake ok  stop=quiescent  frame=wf-20260710-090702-724b3b
+2026-07-10T18:06:59  escalating: due clock goal -> model episode
+2026-07-10T18:06:59  escalation done rc=0
+2026-07-10T18:06:59  waking codex: pending inbox handoffs
+2026-07-10T18:17:58  wake ok  stop=quiescent  frame=wf-20260710-091802-f7039f
+2026-07-10T18:17:58  escalating: due clock goal -> model episode
+2026-07-10T18:17:58  escalation done rc=0
+2026-07-10T18:17:58  waking codex: pending inbox handoffs
+2026-07-10T18:27:58  wake ok  stop=quiescent  frame=wf-20260710-092802-ed21a8
+2026-07-10T18:27:58  escalating: due clock goal -> model episode
+2026-07-10T18:27:58  escalation done rc=0
+2026-07-10T18:27:58  waking codex: pending inbox handoffs
+2026-07-10T18:27:58  codex wake done rc=0
+2026-07-10T18:33:58  wake ok  stop=quiescent  frame=wf-20260710-093402-2466a6
+2026-07-10T18:33:58  escalating: due clock goal -> model episode
+2026-07-10T18:33:58  escalation done rc=0
+2026-07-10T18:33:58  waking codex: pending inbox handoffs
+2026-07-10T18:43:58  wake ok  stop=quiescent  frame=wf-20260710-094403-0a3bf5
+2026-07-10T18:43:58  escalating: due clock goal -> model episode
+2026-07-10T18:43:58  escalation done rc=0
+2026-07-10T18:43:58  waking codex: pending inbox handoffs
+2026-07-10T18:43:58  codex wake done rc=0
+2026-07-10T18:52:58  wake ok  stop=quiescent  frame=wf-20260710-095303-be7d66
+2026-07-10T18:52:58  escalating: due clock goal -> model episode
+2026-07-10T18:52:58  escalation done rc=0
+2026-07-10T18:52:58  waking codex: pending inbox handoffs
+2026-07-10T18:52:58  codex wake done rc=0
+2026-07-10T19:02:58  wake ok  stop=quiescent  frame=wf-20260710-100301-c759df
+2026-07-10T19:02:58  escalating: due clock goal -> model episode
+2026-07-10T19:02:58  escalation done rc=0
+2026-07-10T19:02:58  waking codex: pending inbox handoffs
+2026-07-10T19:02:58  codex wake done rc=0
+2026-07-10T19:10:58  wake ok  stop=quiescent  frame=wf-20260710-101102-702eb9
+2026-07-10T19:10:58  escalating: due clock goal -> model episode
+2026-07-10T19:10:58  escalation done rc=0
+2026-07-10T19:10:58  waking codex: pending inbox handoffs
+2026-07-10T19:10:58  codex wake done rc=0
+2026-07-10T19:20:58  wake ok  stop=quiescent  frame=wf-20260710-102102-04646b
+2026-07-10T19:20:58  escalating: due clock goal -> model episode
+2026-07-10T19:20:58  escalation done rc=0
+2026-07-10T19:20:58  waking codex: pending inbox handoffs
+2026-07-10T19:30:59  wake ok  stop=quiescent  frame=wf-20260710-103102-45e2e3
+2026-07-10T19:30:59  escalating: due clock goal -> model episode
+2026-07-10T19:30:59  escalation done rc=0
+2026-07-10T19:30:59  waking codex: pending inbox handoffs
+2026-07-10T19:30:59  codex wake done rc=0
+2026-07-10T19:38:59  wake ok  stop=quiescent  frame=wf-20260710-103903-e08385
+2026-07-10T19:38:59  escalating: due clock goal -> model episode
+2026-07-10T19:38:59  escalation done rc=0
+2026-07-10T19:38:59  waking codex: pending inbox handoffs
+2026-07-10T19:48:59  wake ok  stop=quiescent  frame=wf-20260710-104903-3b2537
+2026-07-10T19:48:59  escalating: due clock goal -> model episode
+2026-07-10T19:48:59  escalation done rc=0
+2026-07-10T19:48:59  waking codex: pending inbox handoffs
+2026-07-10T19:48:59  codex wake done rc=0
+2026-07-10T19:58:58  wake ok  stop=quiescent  frame=wf-20260710-105901-2e83bc
+2026-07-10T19:58:58  escalating: due clock goal -> model episode
+2026-07-10T20:01:57  wake ok  stop=quiescent  frame=wf-20260710-110201-0ce1a8
+2026-07-10T20:01:57  waking codex: pending inbox handoffs
+2026-07-10T20:01:57  codex wake done rc=0
+2026-07-10T20:04:58  wake ok  stop=quiescent  frame=wf-20260710-110501-c49684
+2026-07-10T20:04:58  waking codex: pending inbox handoffs
+2026-07-10T20:04:58  codex wake done rc=0
+2026-07-10T20:12:57  wake ok  stop=quiescent  frame=wf-20260710-111300-f1c971
+2026-07-10T20:12:57  waking codex: pending inbox handoffs
+2026-07-10T20:12:57  codex wake done rc=0
+2026-07-10T20:17:57  wake ok  stop=quiescent  frame=wf-20260710-111759-c1fc20
+2026-07-10T20:17:57  waking codex: pending inbox handoffs
+2026-07-10T20:17:57  codex wake done rc=0
+2026-07-10T20:24:58  wake ok  stop=quiescent  frame=wf-20260710-112503-de6b6f
+2026-07-10T20:24:58  waking codex: pending inbox handoffs
+2026-07-10T20:24:58  codex wake done rc=0
+2026-07-10T20:28:58  wake ok  stop=quiescent  frame=wf-20260710-112903-5134bb
+2026-07-10T20:28:58  escalating: due clock goal -> model episode
+2026-07-10T20:28:58  escalation done rc=0
+2026-07-10T20:28:58  waking codex: pending inbox handoffs
+2026-07-10T20:38:58  wake ok  stop=quiescent  frame=wf-20260710-113902-c8bfd1
+2026-07-10T20:38:58  escalating: due clock goal -> model episode
+2026-07-10T20:48:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260710-114814-3e2ab4', '_rc': 1})
+2026-07-10T20:48:58  waking codex: pending inbox handoffs
+2026-07-10T20:48:58  codex wake done rc=0
+2026-07-10T20:54:58  wake ok  stop=quiescent  frame=wf-20260710-115503-4c3343
+2026-07-10T20:54:58  waking codex: pending inbox handoffs
+2026-07-10T20:54:58  codex wake done rc=0
+2026-07-10T20:58:58  wake ok  stop=quiescent  frame=wf-20260710-115903-e406eb
+2026-07-10T20:58:58  waking codex: pending inbox handoffs
+2026-07-10T21:08:58  wake ok  stop=quiescent  frame=wf-20260710-120903-464d58
+2026-07-10T21:08:58  escalating: due clock goal -> model episode
+2026-07-10T21:18:58  wake ok  stop=quiescent  frame=wf-20260710-121905-777783
+2026-07-10T21:18:58  waking codex: pending inbox handoffs
+2026-07-10T21:18:58  codex wake done rc=0
+2026-07-10T21:22:58  wake ok  stop=quiescent  frame=wf-20260710-122304-fd3147
+2026-07-10T21:22:58  escalating: due clock goal -> model episode
+2026-07-10T21:22:58  escalation done rc=0
+2026-07-10T21:22:58  waking codex: pending inbox handoffs
+2026-07-10T21:22:58  codex wake done rc=0
+2026-07-10T21:31:59  wake ok  stop=quiescent  frame=wf-20260710-123204-b64c96
+2026-07-10T21:31:59  waking codex: pending inbox handoffs
+2026-07-10T21:31:59  codex wake done rc=0
+2026-07-10T21:36:58  wake ok  stop=quiescent  frame=wf-20260710-123704-f5f053
+2026-07-10T21:36:58  waking codex: pending inbox handoffs
+2026-07-10T21:36:58  codex wake done rc=0
+2026-07-10T21:40:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260710-124025-f2f03a', '_rc': 1})
+2026-07-10T21:40:58  waking codex: pending inbox handoffs
+2026-07-10T21:40:58  codex wake done rc=0
+2026-07-10T21:43:58  wake ok  stop=quiescent  frame=wf-20260710-124403-0ba6e0
+2026-07-10T21:43:58  waking codex: pending inbox handoffs
+2026-07-10T21:43:58  codex wake done rc=0
+2026-07-10T21:47:58  wake ok  stop=quiescent  frame=wf-20260710-124804-a38fd1
+2026-07-10T21:47:58  escalating: due clock goal -> model episode
+2026-07-10T21:57:59  wake ok  stop=quiescent  frame=wf-20260710-125803-d61231
+2026-07-10T21:57:59  waking codex: pending inbox handoffs
+2026-07-10T21:57:59  codex wake done rc=0
+2026-07-10T22:02:59  wake ok  stop=quiescent  frame=wf-20260710-130303-2df72a
+2026-07-10T22:02:59  escalating: due clock goal -> model episode
+2026-07-10T22:13:58  wake ok  stop=quiescent  frame=wf-20260710-131403-5de86e
+2026-07-10T22:13:58  waking codex: pending inbox handoffs
+2026-07-10T22:13:58  codex wake done rc=0
+2026-07-10T22:20:58  wake ok  stop=quiescent  frame=wf-20260710-132103-cb33dd
+2026-07-10T22:20:58  escalating: due clock goal -> model episode
+2026-07-10T22:30:58  wake ok  stop=quiescent  frame=wf-20260710-133103-f8344b
+2026-07-10T22:30:58  waking codex: pending inbox handoffs
+2026-07-10T22:30:58  codex wake done rc=0
+2026-07-10T22:37:58  wake ok  stop=quiescent  frame=wf-20260710-133804-eab45f
+2026-07-10T22:37:58  waking codex: pending inbox handoffs
+2026-07-10T22:37:58  codex wake done rc=0
+2026-07-10T22:41:59  wake ok  stop=quiescent  frame=wf-20260710-134204-d0455c
+2026-07-10T22:41:59  waking codex: pending inbox handoffs
+2026-07-10T22:41:59  codex wake done rc=0
+2026-07-10T22:45:58  wake ok  stop=quiescent  frame=wf-20260710-134602-f0aa74
+2026-07-10T22:45:58  escalating: due clock goal -> model episode
+2026-07-10T22:45:58  escalation done rc=0
+2026-07-10T22:45:58  waking codex: pending inbox handoffs
+2026-07-10T22:55:58  wake ok  stop=quiescent  frame=wf-20260710-135607-6015ed
+2026-07-10T22:55:58  escalating: due clock goal -> model episode
+2026-07-10T22:55:58  escalation done rc=0
+2026-07-10T22:55:58  waking codex: pending inbox handoffs
+2026-07-10T23:05:59  wake ok  stop=quiescent  frame=wf-20260710-140604-b0ce89
+2026-07-10T23:05:59  escalating: due clock goal -> model episode
+2026-07-10T23:05:59  escalation done rc=1
+2026-07-10T23:05:59  waking codex: pending inbox handoffs
+2026-07-10T23:15:59  wake ok  stop=quiescent  frame=wf-20260710-141608-943ade
+2026-07-10T23:15:59  escalating: due clock goal -> model episode
+2026-07-10T23:15:59  escalation done rc=1
+2026-07-10T23:15:59  waking codex: pending inbox handoffs
+2026-07-10T23:15:59  codex wake done rc=0
+2026-07-10T23:16:59  wake ok  stop=quiescent  frame=wf-20260710-141716-6400e5
+2026-07-10T23:16:59  escalating: due clock goal -> model episode
+2026-07-10T23:16:59  escalation done rc=1
+2026-07-10T23:16:59  waking codex: pending inbox handoffs
+2026-07-10T23:16:59  codex wake done rc=0
+2026-07-10T23:20:00  wake ok  stop=quiescent  frame=wf-20260710-142020-21c4d0
+2026-07-10T23:20:00  escalating: due clock goal -> model episode
+2026-07-10T23:20:00  escalation done rc=1
+2026-07-10T23:20:00  waking codex: pending inbox handoffs
+2026-07-10T23:29:59  wake ok  stop=quiescent  frame=wf-20260710-143008-86f829
+2026-07-10T23:29:59  escalating: due clock goal -> model episode
+2026-07-10T23:29:59  escalation done rc=1
+2026-07-10T23:29:59  waking codex: pending inbox handoffs
+2026-07-10T23:29:59  codex wake done rc=0
+2026-07-10T23:34:00  wake ok  stop=quiescent  frame=wf-20260710-143406-156aaa
+2026-07-10T23:34:00  escalating: due clock goal -> model episode
+2026-07-10T23:34:00  escalation done rc=1
+2026-07-10T23:34:00  waking codex: pending inbox handoffs
+2026-07-10T23:34:00  codex wake done rc=0
+2026-07-10T23:38:58  wake ok  stop=quiescent  frame=wf-20260710-143904-984abd
+2026-07-10T23:38:58  escalating: due clock goal -> model episode
+2026-07-10T23:38:58  escalation done rc=1
+2026-07-10T23:38:58  waking codex: pending inbox handoffs
+2026-07-10T23:38:58  codex wake done rc=0
+2026-07-10T23:44:00  wake ok  stop=quiescent  frame=wf-20260710-144410-1253f0
+2026-07-10T23:44:00  escalating: due clock goal -> model episode
+2026-07-10T23:44:00  escalation done rc=1
+2026-07-10T23:44:00  waking codex: pending inbox handoffs
+2026-07-10T23:44:00  codex wake done rc=0
+2026-07-10T23:49:00  wake ok  stop=quiescent  frame=wf-20260710-144908-7ef000
+2026-07-10T23:49:00  escalating: due clock goal -> model episode
+2026-07-10T23:49:00  escalation done rc=1
+2026-07-10T23:49:00  waking codex: pending inbox handoffs
+2026-07-10T23:49:00  codex wake done rc=0
+2026-07-10T23:55:59  wake ok  stop=quiescent  frame=wf-20260710-145606-1901ee
+2026-07-10T23:55:59  escalating: due clock goal -> model episode
+2026-07-10T23:55:59  escalation done rc=1
+2026-07-10T23:55:59  waking codex: pending inbox handoffs
+2026-07-10T23:55:59  codex wake done rc=0
+2026-07-11T00:01:01  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:02:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:03:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:05:00  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:06:00  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:06:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:08:00  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:09:01  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:09:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:10:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:11:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:13:00  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:14:00  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:14:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:15:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:16:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:17:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:18:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:20:00  SKIPPED (PAUSED sentinel present)
+2026-07-11T00:21:00  wake ok  stop=quiescent  frame=wf-20260710-152106-1ec68b
+2026-07-11T00:21:00  escalating: due clock goal -> model episode
+2026-07-11T00:21:00  escalation done rc=1
+2026-07-11T00:21:00  waking codex: pending inbox handoffs
+2026-07-11T00:21:00  codex wake done rc=0
+2026-07-11T00:24:59  wake ok  stop=quiescent  frame=wf-20260710-152506-ac7488
+2026-07-11T00:24:59  escalating: due clock goal -> model episode
+2026-07-11T00:24:59  escalation done rc=1
+2026-07-11T00:24:59  waking codex: pending inbox handoffs
+2026-07-11T00:24:59  codex wake done rc=0
+2026-07-11T00:31:00  wake ok  stop=quiescent  frame=wf-20260710-153107-fef239
+2026-07-11T00:31:00  escalating: due clock goal -> model episode
+2026-07-11T00:31:00  escalation done rc=0
+2026-07-11T00:31:00  waking codex: pending inbox handoffs
+2026-07-11T00:40:58  wake ok  stop=quiescent  frame=wf-20260710-154109-474080
+2026-07-11T00:40:58  escalating: due clock goal -> model episode
+2026-07-11T00:40:58  escalation done rc=0
+2026-07-11T00:40:58  waking codex: pending inbox handoffs
+2026-07-11T00:50:58  wake ok  stop=quiescent  frame=wf-20260710-155106-d5d1b9
+2026-07-11T00:50:58  escalating: due clock goal -> model episode
+2026-07-11T00:50:58  escalation done rc=0
+2026-07-11T00:50:58  waking codex: pending inbox handoffs
+2026-07-11T01:00:58  wake ok  stop=quiescent  frame=wf-20260710-160105-6cf819
+2026-07-11T01:00:58  escalating: due clock goal -> model episode
+2026-07-11T01:00:58  escalation done rc=0
+2026-07-11T01:00:58  waking codex: pending inbox handoffs
+2026-07-11T01:00:58  codex wake done rc=0
+2026-07-11T08:18:23  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:19:06  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:20:02  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:21:00  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:21:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:22:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:24:00  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:25:02  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:26:00  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:26:35  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:26:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:27:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:28:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:29:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:30:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:31:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:32:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:33:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:34:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:35:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:36:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:37:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:38:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:39:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:40:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:41:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:42:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:43:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:44:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:45:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:46:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:47:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:48:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:49:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:50:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:51:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:52:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:53:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:54:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:55:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:56:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:57:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:58:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T08:59:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:00:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:01:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:02:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:03:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:04:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:05:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:06:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:07:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:08:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:09:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:10:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:11:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:12:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:13:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:14:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:15:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:16:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:17:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:18:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:19:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:20:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:21:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:22:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:23:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:24:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:25:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:26:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:27:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:28:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:29:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:30:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:31:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:32:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:33:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:35:02  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:35:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:36:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:37:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:38:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:39:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:40:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:41:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:42:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:43:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:44:59  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:45:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:46:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:47:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:48:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:49:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:51:04  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:51:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:52:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:53:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:54:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:55:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:56:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:57:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:58:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T09:59:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:00:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:01:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:02:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:03:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:04:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:05:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:06:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:07:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:08:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:09:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:10:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:11:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:12:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:13:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:14:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:15:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:16:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:17:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:18:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:19:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:20:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:21:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:22:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:23:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:24:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:25:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:26:58  SKIPPED (PAUSED sentinel present)
+2026-07-11T10:27:58  wake ok  stop=quiescent  frame=wf-20260711-012808-d3b19a
+2026-07-11T10:27:58  escalating: due clock goal -> model episode
+2026-07-11T10:27:58  escalation done rc=0
+2026-07-11T10:27:58  waking codex: pending inbox handoffs
+2026-07-11T10:27:58  codex wake done rc=0
+2026-07-11T10:37:58  wake ok  stop=quiescent  frame=wf-20260711-013802-422dac
+2026-07-11T10:37:58  escalating: due clock goal -> model episode
+2026-07-11T10:37:58  escalation done rc=0
+2026-07-11T10:37:58  waking codex: pending inbox handoffs
+2026-07-11T10:37:58  codex wake done rc=0
+2026-07-11T10:45:58  wake ok  stop=quiescent  frame=wf-20260711-014601-e9573a
+2026-07-11T10:45:58  escalating: due clock goal -> model episode
+2026-07-11T10:45:58  escalation done rc=0
+2026-07-11T10:45:58  waking codex: pending inbox handoffs
+2026-07-11T10:45:58  codex wake done rc=0
+2026-07-11T10:53:58  wake ok  stop=quiescent  frame=wf-20260711-015401-d3acbc
+2026-07-11T10:53:58  escalating: due clock goal -> model episode
+2026-07-11T10:53:58  escalation done rc=0
+2026-07-11T10:53:58  waking codex: pending inbox handoffs
+2026-07-11T10:53:58  codex wake done rc=0
+2026-07-11T11:00:58  wake ok  stop=quiescent  frame=wf-20260711-020102-c5d949
+2026-07-11T11:00:58  waking codex: pending inbox handoffs
+2026-07-11T11:00:58  codex wake done rc=0
+2026-07-11T11:04:59  wake ok  stop=quiescent  frame=wf-20260711-020506-cd5416
+2026-07-11T11:04:59  waking codex: pending inbox handoffs
+2026-07-11T11:04:59  codex wake done rc=0
+2026-07-11T11:08:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-020857-8be286', '_rc': 1})
+2026-07-11T11:08:58  waking codex: pending inbox handoffs
+2026-07-11T11:08:58  codex wake done rc=0
+2026-07-11T11:12:58  wake ok  stop=quiescent  frame=wf-20260711-021302-f5650c
+2026-07-11T11:12:58  escalating: due clock goal -> model episode
+2026-07-11T11:12:58  escalation done rc=0
+2026-07-11T11:12:58  waking codex: pending inbox handoffs
+2026-07-11T11:12:58  codex wake done rc=0
+2026-07-11T11:20:58  wake ok  stop=quiescent  frame=wf-20260711-022103-d8fe64
+2026-07-11T11:20:58  escalating: due clock goal -> model episode
+2026-07-11T11:20:58  escalation done rc=0
+2026-07-11T11:20:58  waking codex: pending inbox handoffs
+2026-07-11T11:30:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-022643-c72550', '_rc': 1})
+2026-07-11T11:30:58  escalating: due clock goal -> model episode
+2026-07-11T11:20:58  codex wake done rc=0
+2026-07-11T11:30:58  escalation done rc=0
+2026-07-11T11:30:58  waking codex: pending inbox handoffs
+2026-07-11T11:30:58  codex wake done rc=0
+2026-07-11T11:39:57  wake ok  stop=quiescent  frame=wf-20260711-024000-6115c7
+2026-07-11T11:39:57  escalating: due clock goal -> model episode
+2026-07-11T11:39:57  escalation done rc=0
+2026-07-11T11:39:57  waking codex: pending inbox handoffs
+2026-07-11T11:49:57  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-024902-83f747', '_rc': 1})
+2026-07-11T11:49:57  escalating: due clock goal -> model episode
+2026-07-11T11:39:57  codex wake done rc=0
+2026-07-11T11:49:57  escalation done rc=0
+2026-07-11T11:49:57  waking codex: pending inbox handoffs
+2026-07-11T11:49:57  codex wake done rc=0
+2026-07-11T11:56:57  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-025648-70cfb5', '_rc': 1})
+2026-07-11T11:56:57  waking codex: pending inbox handoffs
+2026-07-11T11:56:57  codex wake done rc=0
+2026-07-11T11:59:57  wake ok  stop=quiescent  frame=wf-20260711-030000-c4ac80
+2026-07-11T11:59:57  escalating: due clock goal -> model episode
+2026-07-11T11:59:57  escalation done rc=0
+2026-07-11T11:59:57  waking codex: pending inbox handoffs
+2026-07-11T11:59:57  codex wake done rc=0
+2026-07-11T12:06:57  wake ok  stop=quiescent  frame=wf-20260711-030700-41b046
+2026-07-11T12:06:57  escalating: due clock goal -> model episode
+2026-07-11T12:06:57  escalation done rc=0
+2026-07-11T12:06:57  waking codex: pending inbox handoffs
+2026-07-11T12:06:57  codex wake done rc=0
+2026-07-11T12:12:57  wake ok  stop=quiescent  frame=wf-20260711-031300-177572
+2026-07-11T12:12:57  escalating: due clock goal -> model episode
+2026-07-11T12:12:57  escalation done rc=0
+2026-07-11T12:12:57  waking codex: pending inbox handoffs
+2026-07-11T12:12:57  codex wake done rc=0
+2026-07-11T12:18:57  wake ok  stop=quiescent  frame=wf-20260711-031900-2a81e1
+2026-07-11T12:18:57  escalating: due clock goal -> model episode
+2026-07-11T12:18:57  escalation done rc=0
+2026-07-11T12:18:57  waking codex: pending inbox handoffs
+2026-07-11T12:18:57  codex wake done rc=0
+2026-07-11T12:24:58  wake ok  stop=quiescent  frame=wf-20260711-032500-dfd1a1
+2026-07-11T12:24:58  escalating: due clock goal -> model episode
+2026-07-11T12:24:58  escalation done rc=0
+2026-07-11T12:24:58  waking codex: pending inbox handoffs
+2026-07-11T12:24:58  codex wake done rc=0
+2026-07-11T12:30:58  wake ok  stop=quiescent  frame=wf-20260711-033101-1d436b
+2026-07-11T12:30:58  escalating: due clock goal -> model episode
+2026-07-11T12:30:58  escalation done rc=0
+2026-07-11T12:30:58  waking codex: pending inbox handoffs
+2026-07-11T12:30:58  codex wake done rc=0
+2026-07-11T12:36:58  wake ok  stop=quiescent  frame=wf-20260711-033700-69f1d5
+2026-07-11T12:36:58  escalating: due clock goal -> model episode
+2026-07-11T12:36:58  escalation done rc=0
+2026-07-11T12:36:58  waking codex: pending inbox handoffs
+2026-07-11T12:36:58  codex wake done rc=0
+2026-07-11T12:43:58  wake ok  stop=quiescent  frame=wf-20260711-034400-f0c653
+2026-07-11T12:43:58  escalating: due clock goal -> model episode
+2026-07-11T12:43:58  escalation done rc=0
+2026-07-11T12:43:58  waking codex: pending inbox handoffs
+2026-07-11T12:43:58  codex wake done rc=0
+2026-07-11T12:49:58  wake ok  stop=quiescent  frame=wf-20260711-035001-9589cf
+2026-07-11T12:49:58  escalating: due clock goal -> model episode
+2026-07-11T12:49:58  escalation done rc=0
+2026-07-11T12:49:58  waking codex: pending inbox handoffs
+2026-07-11T12:49:58  codex wake done rc=0
+2026-07-11T12:57:58  wake ok  stop=quiescent  frame=wf-20260711-035803-b7c6d9
+2026-07-11T12:57:58  escalating: due clock goal -> model episode
+2026-07-11T12:57:58  escalation done rc=0
+2026-07-11T12:57:58  waking codex: pending inbox handoffs
+2026-07-11T12:57:58  codex wake done rc=0
+2026-07-11T13:04:58  wake ok  stop=quiescent  frame=wf-20260711-040502-9f0308
+2026-07-11T13:04:58  waking codex: pending inbox handoffs
+2026-07-11T13:04:58  codex wake done rc=0
+2026-07-11T13:07:58  wake ok  stop=quiescent  frame=wf-20260711-040801-22d2b7
+2026-07-11T13:07:58  escalating: due clock goal -> model episode
+2026-07-11T13:07:58  escalation done rc=0
+2026-07-11T13:07:58  waking codex: pending inbox handoffs
+2026-07-11T13:07:58  codex wake done rc=0
+2026-07-11T13:14:58  wake ok  stop=quiescent  frame=wf-20260711-041501-cef8cd
+2026-07-11T13:14:58  escalating: due clock goal -> model episode
+2026-07-11T13:14:58  escalation done rc=0
+2026-07-11T13:14:58  waking codex: pending inbox handoffs
+2026-07-11T13:14:58  codex wake done rc=0
+2026-07-11T13:19:58  wake ok  stop=quiescent  frame=wf-20260711-042001-ac4afd
+2026-07-11T13:19:58  waking codex: pending inbox handoffs
+2026-07-11T13:19:58  codex wake done rc=0
+2026-07-11T13:22:58  wake ok  stop=quiescent  frame=wf-20260711-042301-864a99
+2026-07-11T13:22:58  escalating: due clock goal -> model episode
+2026-07-11T13:22:58  escalation done rc=0
+2026-07-11T13:22:58  waking codex: pending inbox handoffs
+2026-07-11T13:22:58  codex wake done rc=0
+2026-07-11T13:31:58  wake ok  stop=quiescent  frame=wf-20260711-043201-04bcd4
+2026-07-11T13:31:58  escalating: due clock goal -> model episode
+2026-07-11T13:31:58  escalation done rc=0
+2026-07-11T13:31:58  waking codex: pending inbox handoffs
+2026-07-11T13:31:58  codex wake done rc=0
+2026-07-11T13:37:57  wake ok  stop=quiescent  frame=wf-20260711-043800-3599af
+2026-07-11T13:37:57  escalating: due clock goal -> model episode
+2026-07-11T13:37:57  escalation done rc=0
+2026-07-11T13:37:57  waking codex: pending inbox handoffs
+2026-07-11T13:37:57  codex wake done rc=0
+2026-07-11T13:44:57  wake ok  stop=quiescent  frame=wf-20260711-044500-460574
+2026-07-11T13:44:57  escalating: due clock goal -> model episode
+2026-07-11T13:44:57  escalation done rc=0
+2026-07-11T13:44:57  waking codex: pending inbox handoffs
+2026-07-11T13:44:57  codex wake done rc=0
+2026-07-11T13:50:57  wake ok  stop=quiescent  frame=wf-20260711-045100-ac6be1
+2026-07-11T13:50:57  escalating: due clock goal -> model episode
+2026-07-11T13:50:57  escalation done rc=0
+2026-07-11T13:50:57  waking codex: pending inbox handoffs
+2026-07-11T13:50:57  codex wake done rc=0
+2026-07-11T13:58:57  wake ok  stop=quiescent  frame=wf-20260711-045900-384dd8
+2026-07-11T13:58:57  escalating: due clock goal -> model episode
+2026-07-11T13:58:57  escalation done rc=0
+2026-07-11T13:58:57  waking codex: pending inbox handoffs
+2026-07-11T13:58:57  codex wake done rc=0
+2026-07-11T14:06:58  wake ok  stop=quiescent  frame=wf-20260711-050702-c362ce
+2026-07-11T14:06:58  waking codex: pending inbox handoffs
+2026-07-11T14:06:58  codex wake done rc=0
+2026-07-11T14:09:57  wake ok  stop=quiescent  frame=wf-20260711-051001-ac99f2
+2026-07-11T14:09:57  waking codex: pending inbox handoffs
+2026-07-11T14:09:57  codex wake done rc=0
+2026-07-11T14:12:57  wake ok  stop=quiescent  frame=wf-20260711-051301-64640f
+2026-07-11T14:12:57  waking codex: pending inbox handoffs
+2026-07-11T14:12:57  codex wake done rc=0
+2026-07-11T14:17:58  wake ok  stop=quiescent  frame=wf-20260711-051801-177555
+2026-07-11T14:17:58  waking codex: pending inbox handoffs
+2026-07-11T14:17:58  codex wake done rc=0
+2026-07-11T14:20:57  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-052043-db24e6', '_rc': 1})
+2026-07-11T14:20:57  waking codex: pending inbox handoffs
+2026-07-11T14:20:57  codex wake done rc=0
+2026-07-11T14:23:57  wake ok  stop=quiescent  frame=wf-20260711-052402-7bebca
+2026-07-11T14:23:57  waking codex: pending inbox handoffs
+2026-07-11T14:23:57  codex wake done rc=0
+2026-07-11T14:26:58  wake ok  stop=quiescent  frame=wf-20260711-052703-26871f
+2026-07-11T14:26:58  waking codex: pending inbox handoffs
+2026-07-11T14:26:58  codex wake done rc=0
+2026-07-11T14:30:58  wake ok  stop=quiescent  frame=wf-20260711-053101-43e6bf
+2026-07-11T14:30:58  escalating: due clock goal -> model episode
+2026-07-11T14:30:58  escalation done rc=0
+2026-07-11T14:30:58  waking codex: pending inbox handoffs
+2026-07-11T14:30:58  codex wake done rc=0
+2026-07-11T14:39:58  wake ok  stop=quiescent  frame=wf-20260711-054001-e57368
+2026-07-11T14:39:58  escalating: due clock goal -> model episode
+2026-07-11T14:39:58  escalation done rc=0
+2026-07-11T14:39:58  waking codex: pending inbox handoffs
+2026-07-11T14:39:58  codex wake done rc=0
+2026-07-11T14:47:58  wake ok  stop=quiescent  frame=wf-20260711-054801-37ad21
+2026-07-11T14:47:58  escalating: due clock goal -> model episode
+2026-07-11T14:47:58  escalation done rc=0
+2026-07-11T14:47:58  waking codex: pending inbox handoffs
+2026-07-11T14:47:58  codex wake done rc=0
+2026-07-11T14:56:58  wake ok  stop=quiescent  frame=wf-20260711-055701-3cac60
+2026-07-11T14:56:58  escalating: due clock goal -> model episode
+2026-07-11T14:56:58  escalation done rc=0
+2026-07-11T14:56:58  waking codex: pending inbox handoffs
+2026-07-11T14:56:58  codex wake done rc=0
+2026-07-11T15:03:58  wake ok  stop=quiescent  frame=wf-20260711-060401-37dacd
+2026-07-11T15:03:58  escalating: due clock goal -> model episode
+2026-07-11T15:03:58  escalation done rc=0
+2026-07-11T15:03:58  waking codex: pending inbox handoffs
+2026-07-11T15:03:58  codex wake done rc=0
+2026-07-11T15:11:58  wake ok  stop=quiescent  frame=wf-20260711-061201-559101
+2026-07-11T15:11:58  escalating: due clock goal -> model episode
+2026-07-11T15:11:58  escalation done rc=0
+2026-07-11T15:11:58  waking codex: pending inbox handoffs
+2026-07-11T15:11:58  codex wake done rc=0
+2026-07-11T15:18:58  wake ok  stop=quiescent  frame=wf-20260711-061901-7ea996
+2026-07-11T15:18:58  escalating: due clock goal -> model episode
+2026-07-11T15:18:58  escalation done rc=0
+2026-07-11T15:18:58  waking codex: pending inbox handoffs
+2026-07-11T15:18:58  codex wake done rc=0
+2026-07-11T15:26:58  wake ok  stop=quiescent  frame=wf-20260711-062701-ab887a
+2026-07-11T15:26:58  escalating: due clock goal -> model episode
+2026-07-11T15:26:58  escalation done rc=0
+2026-07-11T15:26:58  waking codex: pending inbox handoffs
+2026-07-11T15:26:58  codex wake done rc=0
+2026-07-11T15:35:58  wake ok  stop=quiescent  frame=wf-20260711-063601-017253
+2026-07-11T15:35:58  escalating: due clock goal -> model episode
+2026-07-11T15:35:58  escalation done rc=0
+2026-07-11T15:35:58  waking codex: pending inbox handoffs
+2026-07-11T15:35:58  codex wake done rc=0
+2026-07-11T15:42:57  wake ok  stop=quiescent  frame=wf-20260711-064300-4fac4b
+2026-07-11T15:42:57  escalating: due clock goal -> model episode
+2026-07-11T15:42:57  escalation done rc=0
+2026-07-11T15:42:57  waking codex: pending inbox handoffs
+2026-07-11T15:42:57  codex wake done rc=0
+2026-07-11T15:50:57  wake ok  stop=quiescent  frame=wf-20260711-065100-3da00f
+2026-07-11T15:50:57  escalating: due clock goal -> model episode
+2026-07-11T15:50:57  escalation done rc=0
+2026-07-11T15:50:57  waking codex: pending inbox handoffs
+2026-07-11T15:50:57  codex wake done rc=0
+2026-07-11T15:58:57  wake ok  stop=quiescent  frame=wf-20260711-065900-f2d027
+2026-07-11T15:58:57  escalating: due clock goal -> model episode
+2026-07-11T15:58:57  escalation done rc=0
+2026-07-11T15:58:57  waking codex: pending inbox handoffs
+2026-07-11T15:58:57  codex wake done rc=0
+2026-07-11T16:05:57  wake ok  stop=quiescent  frame=wf-20260711-070600-ce0cd5
+2026-07-11T16:05:57  escalating: due clock goal -> model episode
+2026-07-11T16:05:57  escalation done rc=0
+2026-07-11T16:05:57  waking codex: pending inbox handoffs
+2026-07-11T16:05:57  codex wake done rc=0
+2026-07-11T16:12:57  wake ok  stop=quiescent  frame=wf-20260711-071301-4fe453
+2026-07-11T16:12:57  escalating: due clock goal -> model episode
+2026-07-11T16:12:57  escalation done rc=0
+2026-07-11T16:12:57  waking codex: pending inbox handoffs
+2026-07-11T16:22:57  wake ok  stop=quiescent  frame=wf-20260711-072302-d2564e
+2026-07-11T16:22:57  escalating: due clock goal -> model episode
+2026-07-11T16:12:57  codex wake done rc=0
+2026-07-11T16:22:57  escalation done rc=0
+2026-07-11T16:22:57  waking codex: pending inbox handoffs
+2026-07-11T16:22:57  codex wake done rc=0
+2026-07-11T16:30:58  wake ok  stop=quiescent  frame=wf-20260711-073102-cc67a7
+2026-07-11T16:30:58  escalating: due clock goal -> model episode
+2026-07-11T16:30:58  escalation done rc=0
+2026-07-11T16:30:58  waking codex: pending inbox handoffs
+2026-07-11T16:30:58  codex wake done rc=0
+2026-07-11T16:37:58  wake ok  stop=quiescent  frame=wf-20260711-073801-57a680
+2026-07-11T16:37:58  escalating: due clock goal -> model episode
+2026-07-11T16:37:58  escalation done rc=0
+2026-07-11T16:37:58  waking codex: pending inbox handoffs
+2026-07-11T16:37:58  codex wake done rc=0
+2026-07-11T16:45:58  wake ok  stop=quiescent  frame=wf-20260711-074601-cf3e3c
+2026-07-11T16:45:58  waking codex: pending inbox handoffs
+2026-07-11T16:45:58  codex wake done rc=0
+2026-07-11T16:49:58  wake ok  stop=quiescent  frame=wf-20260711-075003-1fa426
+2026-07-11T16:49:58  waking codex: pending inbox handoffs
+2026-07-11T16:49:58  codex wake done rc=0
+2026-07-11T16:52:58  wake ok  stop=quiescent  frame=wf-20260711-075301-736dfa
+2026-07-11T16:52:58  waking codex: pending inbox handoffs
+2026-07-11T16:52:58  codex wake done rc=0
+2026-07-11T16:55:58  wake ok  stop=quiescent  frame=wf-20260711-075602-06a25c
+2026-07-11T16:55:58  escalating: due clock goal -> model episode
+2026-07-11T16:55:58  escalation done rc=0
+2026-07-11T16:55:58  waking codex: pending inbox handoffs
+2026-07-11T16:55:58  codex wake done rc=0
+2026-07-11T17:01:58  wake ok  stop=quiescent  frame=wf-20260711-080201-11b800
+2026-07-11T17:01:58  escalating: due clock goal -> model episode
+2026-07-11T17:01:58  escalation done rc=0
+2026-07-11T17:01:58  waking codex: pending inbox handoffs
+2026-07-11T17:01:58  codex wake done rc=0
+2026-07-11T17:07:58  wake ok  stop=quiescent  frame=wf-20260711-080801-1dc91d
+2026-07-11T17:07:58  escalating: due clock goal -> model episode
+2026-07-11T17:07:58  escalation done rc=0
+2026-07-11T17:07:58  waking codex: pending inbox handoffs
+2026-07-11T17:07:58  codex wake done rc=0
+2026-07-11T17:14:58  wake ok  stop=quiescent  frame=wf-20260711-081501-6a13d7
+2026-07-11T17:14:58  escalating: due clock goal -> model episode
+2026-07-11T17:14:58  escalation done rc=0
+2026-07-11T17:14:58  waking codex: pending inbox handoffs
+2026-07-11T17:14:58  codex wake done rc=0
+2026-07-11T17:21:58  wake ok  stop=quiescent  frame=wf-20260711-082202-6daa15
+2026-07-11T17:21:58  escalating: due clock goal -> model episode
+2026-07-11T17:21:58  escalation done rc=0
+2026-07-11T17:21:58  waking codex: pending inbox handoffs
+2026-07-11T17:21:58  codex wake done rc=0
+2026-07-11T17:30:58  wake ok  stop=quiescent  frame=wf-20260711-083103-abc709
+2026-07-11T17:30:58  escalating: due clock goal -> model episode
+2026-07-11T17:30:58  escalation done rc=0
+2026-07-11T17:30:58  waking codex: pending inbox handoffs
+2026-07-11T17:41:57  wake ok  stop=quiescent  frame=wf-20260711-084203-fc722b
+2026-07-11T17:41:57  escalating: due clock goal -> model episode
+2026-07-11T17:30:58  codex wake done rc=0
+2026-07-11T17:41:57  escalation done rc=0
+2026-07-11T17:41:57  waking codex: pending inbox handoffs
+2026-07-11T17:41:57  codex wake done rc=0
+2026-07-11T17:49:57  wake ok  stop=quiescent  frame=wf-20260711-085002-bd9e57
+2026-07-11T17:49:57  escalating: due clock goal -> model episode
+2026-07-11T17:49:57  escalation done rc=0
+2026-07-11T17:49:57  waking codex: pending inbox handoffs
+2026-07-11T17:49:57  codex wake done rc=0
+2026-07-11T17:59:57  wake ok  stop=quiescent  frame=wf-20260711-090002-dfb363
+2026-07-11T17:59:57  escalating: due clock goal -> model episode
+2026-07-11T17:59:57  escalation done rc=0
+2026-07-11T17:59:57  waking codex: pending inbox handoffs
+2026-07-11T17:59:57  codex wake done rc=0
+2026-07-11T18:08:57  wake ok  stop=quiescent  frame=wf-20260711-090901-362426
+2026-07-11T18:08:57  escalating: due clock goal -> model episode
+2026-07-11T18:08:57  escalation done rc=0
+2026-07-11T18:08:57  waking codex: pending inbox handoffs
+2026-07-11T18:18:58  wake ok  stop=quiescent  frame=wf-20260711-091902-099e7e
+2026-07-11T18:18:58  escalating: due clock goal -> model episode
+2026-07-11T18:08:57  codex wake done rc=0
+2026-07-11T18:18:58  escalation done rc=0
+2026-07-11T18:18:58  waking codex: pending inbox handoffs
+2026-07-11T18:18:58  codex wake done rc=0
+2026-07-11T18:27:58  wake ok  stop=quiescent  frame=wf-20260711-092801-2e48e5
+2026-07-11T18:27:58  waking codex: pending inbox handoffs
+2026-07-11T18:27:58  codex wake done rc=0
+2026-07-11T18:32:58  wake ok  stop=quiescent  frame=wf-20260711-093302-2267db
+2026-07-11T18:32:58  escalating: due clock goal -> model episode
+2026-07-11T18:32:58  escalation done rc=0
+2026-07-11T18:32:58  waking codex: pending inbox handoffs
+2026-07-11T18:42:58  wake ok  stop=quiescent  frame=wf-20260711-094302-cfca58
+2026-07-11T18:42:58  escalating: due clock goal -> model episode
+2026-07-11T18:32:58  codex wake done rc=0
+2026-07-11T18:42:58  escalation done rc=0
+2026-07-11T18:42:58  waking codex: pending inbox handoffs
+2026-07-11T18:42:58  codex wake done rc=0
+2026-07-11T18:49:58  wake ok  stop=quiescent  frame=wf-20260711-095003-7349fd
+2026-07-11T18:49:58  escalating: due clock goal -> model episode
+2026-07-11T18:49:58  escalation done rc=0
+2026-07-11T18:49:58  waking codex: pending inbox handoffs
+2026-07-11T18:49:58  codex wake done rc=0
+2026-07-11T18:56:58  wake ok  stop=quiescent  frame=wf-20260711-095701-5ddd94
+2026-07-11T18:56:58  waking codex: pending inbox handoffs
+2026-07-11T18:56:58  codex wake done rc=0
+2026-07-11T19:01:58  wake ok  stop=quiescent  frame=wf-20260711-100202-ce03f3
+2026-07-11T19:01:58  waking codex: pending inbox handoffs
+2026-07-11T19:01:58  codex wake done rc=0
+2026-07-11T19:05:58  wake ok  stop=quiescent  frame=wf-20260711-100602-a748b0
+2026-07-11T19:05:58  escalating: due clock goal -> model episode
+2026-07-11T19:05:58  escalation done rc=0
+2026-07-11T19:05:58  waking codex: pending inbox handoffs
+2026-07-11T19:05:58  codex wake done rc=0
+2026-07-11T19:15:57  wake ok  stop=quiescent  frame=wf-20260711-101601-164b40
+2026-07-11T19:15:57  escalating: due clock goal -> model episode
+2026-07-11T19:15:57  escalation done rc=0
+2026-07-11T19:15:57  waking codex: pending inbox handoffs
+2026-07-11T19:25:57  wake ok  stop=quiescent  frame=wf-20260711-102600-e1034c
+2026-07-11T19:25:57  escalating: due clock goal -> model episode
+2026-07-11T19:15:57  codex wake done rc=0
+2026-07-11T19:25:57  escalation done rc=0
+2026-07-11T19:25:57  waking codex: pending inbox handoffs
+2026-07-11T19:25:57  codex wake done rc=0
+2026-07-11T19:33:57  wake ok  stop=quiescent  frame=wf-20260711-103401-bd8b38
+2026-07-11T19:33:57  escalating: due clock goal -> model episode
+2026-07-11T19:33:57  escalation done rc=0
+2026-07-11T19:33:57  waking codex: pending inbox handoffs
+2026-07-11T19:43:57  wake ok  stop=quiescent  frame=wf-20260711-104401-6ecf6d
+2026-07-11T19:43:57  escalating: due clock goal -> model episode
+2026-07-11T19:33:57  codex wake done rc=0
+2026-07-11T19:43:57  escalation done rc=0
+2026-07-11T19:43:57  waking codex: pending inbox handoffs
+2026-07-11T19:53:57  wake ok  stop=quiescent  frame=wf-20260711-105401-d2b255
+2026-07-11T19:53:57  escalating: due clock goal -> model episode
+2026-07-11T19:43:57  codex wake done rc=0
+2026-07-11T19:53:57  escalation done rc=0
+2026-07-11T19:53:57  waking codex: pending inbox handoffs
+2026-07-11T20:03:58  wake ok  stop=quiescent  frame=wf-20260711-110401-200cd5
+2026-07-11T20:03:58  escalating: due clock goal -> model episode
+2026-07-11T19:53:57  codex wake done rc=0
+2026-07-11T20:03:58  escalation done rc=0
+2026-07-11T20:03:58  waking codex: pending inbox handoffs
+2026-07-11T20:13:58  wake ok  stop=quiescent  frame=wf-20260711-111401-f3b225
+2026-07-11T20:13:58  escalating: due clock goal -> model episode
+2026-07-11T20:03:58  codex wake done rc=0
+2026-07-11T20:13:58  escalation done rc=0
+2026-07-11T20:13:58  waking codex: pending inbox handoffs
+2026-07-11T20:23:58  wake ok  stop=quiescent  frame=wf-20260711-112401-b4f785
+2026-07-11T20:23:58  escalating: due clock goal -> model episode
+2026-07-11T20:13:58  codex wake done rc=0
+2026-07-11T20:23:58  escalation done rc=0
+2026-07-11T20:23:58  waking codex: pending inbox handoffs
+2026-07-11T20:33:58  wake ok  stop=quiescent  frame=wf-20260711-113402-a325c4
+2026-07-11T20:33:58  escalating: due clock goal -> model episode
+2026-07-11T20:23:58  codex wake done rc=0
+2026-07-11T20:33:58  escalation done rc=0
+2026-07-11T20:33:58  waking codex: pending inbox handoffs
+2026-07-11T20:33:58  codex wake done rc=0
+2026-07-11T20:43:58  wake ok  stop=quiescent  frame=wf-20260711-114404-2ca943
+2026-07-11T20:43:58  escalating: due clock goal -> model episode
+2026-07-11T20:53:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-114859-19c095', '_rc': 1})
+2026-07-11T20:53:58  waking codex: pending inbox handoffs
+2026-07-11T20:43:58  escalation done rc=0
+2026-07-11T20:43:58  waking codex: pending inbox handoffs
+2026-07-11T20:43:58  codex wake done rc=0
+2026-07-11T20:53:58  codex wake done rc=0
+2026-07-11T20:57:58  wake ok  stop=quiescent  frame=wf-20260711-115802-90efda
+2026-07-11T20:57:58  escalating: due clock goal -> model episode
+2026-07-11T20:57:58  escalation done rc=0
+2026-07-11T20:57:58  waking codex: pending inbox handoffs
+2026-07-11T21:08:58  wake ok  stop=quiescent  frame=wf-20260711-120908-5c2e95
+2026-07-11T21:08:58  escalating: due clock goal -> model episode
+2026-07-11T21:18:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-121142-a53de2', '_rc': 1})
+2026-07-11T21:18:58  waking codex: pending inbox handoffs
+2026-07-11T21:18:58  codex wake done rc=0
+2026-07-11T21:19:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-121142-a53de2', '_rc': 1})
+2026-07-11T21:19:58  waking codex: pending inbox handoffs
+2026-07-11T21:19:58  codex wake done rc=0
+2026-07-11T21:20:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-121142-a53de2', '_rc': 1})
+2026-07-11T21:20:58  waking codex: pending inbox handoffs
+2026-07-11T21:20:58  codex wake done rc=0
+2026-07-11T21:21:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-121142-a53de2', '_rc': 1})
+2026-07-11T21:21:58  waking codex: pending inbox handoffs
+2026-07-11T21:21:58  codex wake done rc=0
+2026-07-11T21:22:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-121142-a53de2', '_rc': 1})
+2026-07-11T21:22:58  waking codex: pending inbox handoffs
+2026-07-11T21:22:58  codex wake done rc=0
+2026-07-11T21:23:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-121142-a53de2', '_rc': 1})
+2026-07-11T21:23:58  waking codex: pending inbox handoffs
+2026-07-11T21:23:58  codex wake done rc=0
+2026-07-11T21:24:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-121142-a53de2', '_rc': 1})
+2026-07-11T21:24:58  waking codex: pending inbox handoffs
+2026-07-11T21:24:58  codex wake done rc=0
+2026-07-11T21:08:58  escalation done rc=0
+2026-07-11T21:08:58  waking codex: pending inbox handoffs
+2026-07-11T21:08:58  codex wake done rc=0
+2026-07-11T21:25:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-121142-a53de2', '_rc': 1})
+2026-07-11T21:25:58  escalating: due clock goal -> model episode
+2026-07-11T20:57:58  codex wake done rc=0
+2026-07-11T21:25:58  escalation done rc=0
+2026-07-11T21:25:58  waking codex: pending inbox handoffs
+2026-07-11T21:35:58  wake ok  stop=quiescent  frame=wf-20260711-123611-3eea6b
+2026-07-11T21:35:58  escalating: due clock goal -> model episode
+2026-07-11T21:25:58  codex wake done rc=0
+2026-07-11T21:35:58  escalation done rc=0
+2026-07-11T21:35:58  waking codex: pending inbox handoffs
+2026-07-11T21:45:59  wake ok  stop=quiescent  frame=wf-20260711-124613-822089
+2026-07-11T21:45:59  escalating: due clock goal -> model episode
+2026-07-11T21:35:58  codex wake done rc=0
+2026-07-11T21:55:58  wake ok  stop=quiescent  frame=wf-20260711-125607-6c6791
+2026-07-11T21:55:58  waking codex: pending inbox handoffs
+2026-07-11T21:45:59  escalation done rc=0
+2026-07-11T21:45:59  waking codex: pending inbox handoffs
+2026-07-11T21:45:59  codex wake done rc=0
+2026-07-11T21:55:58  codex wake done rc=0
+2026-07-11T21:59:58  wake ok  stop=quiescent  frame=wf-20260711-130007-8a45d3
+2026-07-11T21:59:58  escalating: due clock goal -> model episode
+2026-07-11T21:59:58  escalation done rc=0
+2026-07-11T21:59:58  waking codex: pending inbox handoffs
+2026-07-11T22:09:58  wake ok  stop=quiescent  frame=wf-20260711-131008-cebf08
+2026-07-11T22:09:58  escalating: due clock goal -> model episode
+2026-07-11T21:59:58  codex wake done rc=0
+2026-07-11T22:19:58  wake ok  stop=quiescent  frame=wf-20260711-132003-d23a61
+2026-07-11T22:19:58  waking codex: pending inbox handoffs
+2026-07-11T22:09:58  escalation done rc=0
+2026-07-11T22:09:58  waking codex: pending inbox handoffs
+2026-07-11T22:09:58  codex wake done rc=0
+2026-07-11T22:19:58  codex wake done rc=0
+2026-07-11T22:26:58  wake ok  stop=quiescent  frame=wf-20260711-132703-4f77b6
+2026-07-11T22:26:58  escalating: due clock goal -> model episode
+2026-07-11T22:26:58  escalation done rc=0
+2026-07-11T22:26:58  waking codex: pending inbox handoffs
+2026-07-11T22:36:58  wake ok  stop=quiescent  frame=wf-20260711-133703-267f95
+2026-07-11T22:36:58  escalating: due clock goal -> model episode
+2026-07-11T22:26:58  codex wake done rc=0
+2026-07-11T22:36:58  escalation done rc=0
+2026-07-11T22:36:58  waking codex: pending inbox handoffs
+2026-07-11T22:46:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-134618-77f21c', '_rc': 1})
+2026-07-11T22:46:58  escalating: due clock goal -> model episode
+2026-07-11T22:36:58  codex wake done rc=0
+2026-07-11T22:46:58  escalation done rc=0
+2026-07-11T22:46:58  waking codex: pending inbox handoffs
+2026-07-11T22:56:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-135519-200c32', '_rc': 1})
+2026-07-11T22:56:58  escalating: due clock goal -> model episode
+2026-07-11T22:46:58  codex wake done rc=0
+2026-07-11T22:56:58  escalation done rc=0
+2026-07-11T22:56:58  waking codex: pending inbox handoffs
+2026-07-11T23:06:58  wake ok  stop=quiescent  frame=wf-20260711-140702-26f1fc
+2026-07-11T23:06:58  escalating: due clock goal -> model episode
+2026-07-11T22:56:58  codex wake done rc=0
+2026-07-11T23:06:58  escalation done rc=0
+2026-07-11T23:06:58  waking codex: pending inbox handoffs
+2026-07-11T23:06:58  codex wake done rc=0
+2026-07-11T23:15:58  wake ok  stop=quiescent  frame=wf-20260711-141602-b71317
+2026-07-11T23:15:58  escalating: due clock goal -> model episode
+2026-07-11T23:15:58  escalation done rc=0
+2026-07-11T23:15:58  waking codex: pending inbox handoffs
+2026-07-11T23:15:58  codex wake done rc=0
+2026-07-11T23:25:57  wake ok  stop=quiescent  frame=wf-20260711-142601-adaced
+2026-07-11T23:25:57  escalating: due clock goal -> model episode
+2026-07-11T23:25:57  escalation done rc=0
+2026-07-11T23:25:57  waking codex: pending inbox handoffs
+2026-07-11T23:25:57  codex wake done rc=0
+2026-07-11T23:35:57  wake ok  stop=quiescent  frame=wf-20260711-143601-00346d
+2026-07-11T23:35:57  escalating: due clock goal -> model episode
+2026-07-11T23:35:57  escalation done rc=0
+2026-07-11T23:35:57  waking codex: pending inbox handoffs
+2026-07-11T23:35:57  codex wake done rc=0
+2026-07-11T23:44:57  wake ok  stop=quiescent  frame=wf-20260711-144501-2bb459
+2026-07-11T23:44:57  escalating: due clock goal -> model episode
+2026-07-11T23:44:57  escalation done rc=0
+2026-07-11T23:44:57  waking codex: pending inbox handoffs
+2026-07-11T23:54:57  wake ok  stop=quiescent  frame=wf-20260711-145501-856c6a
+2026-07-11T23:54:57  escalating: due clock goal -> model episode
+2026-07-11T23:44:57  codex wake done rc=0
+2026-07-11T23:54:57  escalation done rc=0
+2026-07-11T23:54:57  waking codex: pending inbox handoffs
+2026-07-11T23:54:57  codex wake done rc=0
+2026-07-12T00:02:58  wake ok  stop=quiescent  frame=wf-20260711-150301-282f00
+2026-07-12T00:02:58  escalating: due clock goal -> model episode
+2026-07-12T00:02:58  escalation done rc=0
+2026-07-12T00:02:58  waking codex: pending inbox handoffs
+2026-07-12T00:02:58  codex wake done rc=0
+2026-07-12T00:11:58  wake ok  stop=quiescent  frame=wf-20260711-151203-d8b842
+2026-07-12T00:11:58  escalating: due clock goal -> model episode
+2026-07-12T00:11:58  escalation done rc=0
+2026-07-12T00:11:58  waking codex: pending inbox handoffs
+2026-07-12T00:11:58  codex wake done rc=0
+2026-07-12T00:21:58  wake ok  stop=quiescent  frame=wf-20260711-152202-a05008
+2026-07-12T00:21:58  escalating: due clock goal -> model episode
+2026-07-12T00:21:58  escalation done rc=0
+2026-07-12T00:21:58  waking codex: pending inbox handoffs
+2026-07-12T00:31:58  wake ok  stop=quiescent  frame=wf-20260711-153204-64e074
+2026-07-12T00:31:58  escalating: due clock goal -> model episode
+2026-07-12T00:21:58  codex wake done rc=0
+2026-07-12T00:31:58  escalation done rc=0
+2026-07-12T00:31:58  waking codex: pending inbox handoffs
+2026-07-12T00:31:58  codex wake done rc=0
+2026-07-12T00:40:58  wake ok  stop=quiescent  frame=wf-20260711-154101-c4ad1e
+2026-07-12T00:40:58  escalating: due clock goal -> model episode
+2026-07-12T00:40:58  escalation done rc=0
+2026-07-12T00:40:58  waking codex: pending inbox handoffs
+2026-07-12T00:40:58  codex wake done rc=0
+2026-07-12T00:51:58  wake ok  stop=quiescent  frame=wf-20260711-155201-27c32e
+2026-07-12T00:51:58  escalating: due clock goal -> model episode
+2026-07-12T00:51:58  escalation done rc=0
+2026-07-12T00:51:58  waking codex: pending inbox handoffs
+2026-07-12T00:51:58  codex wake done rc=0
+2026-07-12T00:58:58  wake ok  stop=quiescent  frame=wf-20260711-155902-5e5887
+2026-07-12T00:58:58  escalating: due clock goal -> model episode
+2026-07-12T00:58:58  escalation done rc=0
+2026-07-12T00:58:58  waking codex: pending inbox handoffs
+2026-07-12T00:58:58  codex wake done rc=0
+2026-07-12T01:07:59  wake ok  stop=quiescent  frame=wf-20260711-160815-766336
+2026-07-12T01:07:59  escalating: due clock goal -> model episode
+2026-07-12T01:07:59  escalation done rc=0
+2026-07-12T01:07:59  waking codex: pending inbox handoffs
+2026-07-12T01:07:59  codex wake done rc=1
+2026-07-12T01:13:58  wake ok  stop=quiescent  frame=wf-20260711-161408-811574
+2026-07-12T01:13:58  escalating: due clock goal -> model episode
+2026-07-12T01:13:58  escalation done rc=0
+2026-07-12T01:13:58  waking codex: pending inbox handoffs
+2026-07-12T01:13:58  codex wake done rc=1
+2026-07-12T01:24:00  wake ok  stop=quiescent  frame=wf-20260711-162415-e5c752
+2026-07-12T01:24:00  escalating: due clock goal -> model episode
+2026-07-12T01:24:00  escalation done rc=0
+2026-07-12T01:24:00  waking codex: pending inbox handoffs
+2026-07-12T01:24:00  codex wake done rc=1
+2026-07-12T01:29:58  wake ok  stop=quiescent  frame=wf-20260711-163007-7cbf59
+2026-07-12T01:29:58  escalating: due clock goal -> model episode
+2026-07-12T01:29:58  escalation done rc=0
+2026-07-12T01:29:58  waking codex: pending inbox handoffs
+2026-07-12T01:29:58  codex wake done rc=1
+2026-07-12T01:34:58  wake ok  stop=quiescent  frame=wf-20260711-163505-6e4855
+2026-07-12T01:34:58  escalating: due clock goal -> model episode
+2026-07-12T01:34:58  escalation done rc=0
+2026-07-12T01:34:58  waking codex: pending inbox handoffs
+2026-07-12T01:34:58  codex wake done rc=1
+2026-07-12T01:41:58  wake ok  stop=quiescent  frame=wf-20260711-164207-8804b6
+2026-07-12T01:41:58  escalating: due clock goal -> model episode
+2026-07-12T01:41:58  escalation done rc=0
+2026-07-12T01:41:58  waking codex: pending inbox handoffs
+2026-07-12T01:41:58  codex wake done rc=1
+2026-07-12T01:46:58  wake ok  stop=quiescent  frame=wf-20260711-164708-f8bdc6
+2026-07-12T01:46:58  escalating: due clock goal -> model episode
+2026-07-12T01:46:58  escalation done rc=0
+2026-07-12T01:46:58  waking codex: pending inbox handoffs
+2026-07-12T01:46:58  codex wake done rc=1
+2026-07-12T01:52:58  wake ok  stop=quiescent  frame=wf-20260711-165308-c61cb7
+2026-07-12T01:52:58  escalating: due clock goal -> model episode
+2026-07-12T01:52:58  escalation done rc=0
+2026-07-12T01:52:58  waking codex: pending inbox handoffs
+2026-07-12T01:52:58  codex wake done rc=1
+2026-07-12T02:01:59  wake ok  stop=quiescent  frame=wf-20260711-170211-d70c99
+2026-07-12T02:01:59  escalating: due clock goal -> model episode
+2026-07-12T02:01:59  escalation done rc=0
+2026-07-12T02:01:59  waking codex: pending inbox handoffs
+2026-07-12T02:01:59  codex wake done rc=1
+2026-07-12T02:10:59  wake ok  stop=quiescent  frame=wf-20260711-171108-87823f
+2026-07-12T02:10:59  escalating: due clock goal -> model episode
+2026-07-12T02:10:59  escalation done rc=0
+2026-07-12T02:10:59  waking codex: pending inbox handoffs
+2026-07-12T02:10:59  codex wake done rc=1
+2026-07-12T02:15:57  wake ok  stop=quiescent  frame=wf-20260711-171605-b10585
+2026-07-12T02:15:57  escalating: due clock goal -> model episode
+2026-07-12T02:15:57  escalation done rc=0
+2026-07-12T02:15:57  waking codex: pending inbox handoffs
+2026-07-12T02:15:57  codex wake done rc=1
+2026-07-12T02:21:58  wake ok  stop=quiescent  frame=wf-20260711-172209-8f2ae7
+2026-07-12T02:21:58  escalating: due clock goal -> model episode
+2026-07-12T02:21:58  escalation done rc=0
+2026-07-12T02:21:58  waking codex: pending inbox handoffs
+2026-07-12T02:21:58  codex wake done rc=1
+2026-07-12T02:29:58  wake ok  stop=quiescent  frame=wf-20260711-173005-afd309
+2026-07-12T02:29:58  escalating: due clock goal -> model episode
+2026-07-12T02:29:58  escalation done rc=0
+2026-07-12T02:29:58  waking codex: pending inbox handoffs
+2026-07-12T02:29:58  codex wake done rc=1
+2026-07-12T02:34:57  wake ok  stop=quiescent  frame=wf-20260711-173504-6ab07a
+2026-07-12T02:34:57  escalating: due clock goal -> model episode
+2026-07-12T02:34:57  escalation done rc=0
+2026-07-12T02:34:57  waking codex: pending inbox handoffs
+2026-07-12T02:34:57  codex wake done rc=1
+2026-07-12T02:39:58  wake ok  stop=quiescent  frame=wf-20260711-174007-419a20
+2026-07-12T02:39:58  escalating: due clock goal -> model episode
+2026-07-12T02:39:58  escalation done rc=0
+2026-07-12T02:39:58  waking codex: pending inbox handoffs
+2026-07-12T02:39:58  codex wake done rc=1
+2026-07-12T02:45:58  wake ok  stop=quiescent  frame=wf-20260711-174607-318ffc
+2026-07-12T02:45:58  escalating: due clock goal -> model episode
+2026-07-12T02:45:58  escalation done rc=0
+2026-07-12T02:45:58  waking codex: pending inbox handoffs
+2026-07-12T02:45:58  codex wake done rc=1
+2026-07-12T02:49:58  wake ok  stop=quiescent  frame=wf-20260711-175008-10f4ae
+2026-07-12T02:49:58  escalating: due clock goal -> model episode
+2026-07-12T02:49:58  escalation done rc=0
+2026-07-12T02:49:58  waking codex: pending inbox handoffs
+2026-07-12T02:49:58  codex wake done rc=1
+2026-07-12T02:54:58  wake ok  stop=quiescent  frame=wf-20260711-175507-e94d6d
+2026-07-12T02:54:58  escalating: due clock goal -> model episode
+2026-07-12T02:54:58  escalation done rc=0
+2026-07-12T02:54:58  waking codex: pending inbox handoffs
+2026-07-12T02:54:58  codex wake done rc=1
+2026-07-12T02:59:58  wake ok  stop=quiescent  frame=wf-20260711-180008-a5ac77
+2026-07-12T02:59:58  escalating: due clock goal -> model episode
+2026-07-12T02:59:58  escalation done rc=0
+2026-07-12T02:59:58  waking codex: pending inbox handoffs
+2026-07-12T02:59:58  codex wake done rc=1
+2026-07-12T03:06:58  wake ok  stop=quiescent  frame=wf-20260711-180709-55caeb
+2026-07-12T03:06:58  escalating: due clock goal -> model episode
+2026-07-12T03:06:58  escalation done rc=0
+2026-07-12T03:06:58  waking codex: pending inbox handoffs
+2026-07-12T03:06:58  codex wake done rc=1
+2026-07-12T03:11:58  wake ok  stop=quiescent  frame=wf-20260711-181207-2e7254
+2026-07-12T03:11:58  escalating: due clock goal -> model episode
+2026-07-12T03:11:58  escalation done rc=0
+2026-07-12T03:11:58  waking codex: pending inbox handoffs
+2026-07-12T03:11:58  codex wake done rc=1
+2026-07-12T03:18:58  wake ok  stop=quiescent  frame=wf-20260711-181908-7298ec
+2026-07-12T03:18:58  escalating: due clock goal -> model episode
+2026-07-12T03:18:58  escalation done rc=0
+2026-07-12T03:18:58  waking codex: pending inbox handoffs
+2026-07-12T03:18:58  codex wake done rc=1
+2026-07-12T03:26:58  wake ok  stop=quiescent  frame=wf-20260711-182707-028162
+2026-07-12T03:26:58  escalating: due clock goal -> model episode
+2026-07-12T03:26:58  escalation done rc=0
+2026-07-12T03:26:58  waking codex: pending inbox handoffs
+2026-07-12T03:26:58  codex wake done rc=1
+2026-07-12T03:31:58  wake ok  stop=quiescent  frame=wf-20260711-183205-7edaf4
+2026-07-12T03:31:58  escalating: due clock goal -> model episode
+2026-07-12T03:31:58  escalation done rc=0
+2026-07-12T03:31:58  waking codex: pending inbox handoffs
+2026-07-12T03:31:58  codex wake done rc=1
+2026-07-12T03:37:58  wake ok  stop=quiescent  frame=wf-20260711-183808-180e52
+2026-07-12T03:37:58  escalating: due clock goal -> model episode
+2026-07-12T03:37:58  escalation done rc=0
+2026-07-12T03:37:58  waking codex: pending inbox handoffs
+2026-07-12T03:37:58  codex wake done rc=1
+2026-07-12T03:44:58  wake ok  stop=quiescent  frame=wf-20260711-184508-c4ccbb
+2026-07-12T03:44:58  escalating: due clock goal -> model episode
+2026-07-12T03:44:58  escalation done rc=0
+2026-07-12T03:44:58  waking codex: pending inbox handoffs
+2026-07-12T03:44:58  codex wake done rc=1
+2026-07-12T03:49:58  wake ok  stop=quiescent  frame=wf-20260711-185007-139ca5
+2026-07-12T03:49:58  escalating: due clock goal -> model episode
+2026-07-12T03:49:58  escalation done rc=0
+2026-07-12T03:49:58  waking codex: pending inbox handoffs
+2026-07-12T03:49:58  codex wake done rc=1
+2026-07-12T03:54:58  wake ok  stop=quiescent  frame=wf-20260711-185504-37c9ee
+2026-07-12T03:54:58  escalating: due clock goal -> model episode
+2026-07-12T03:54:58  escalation done rc=0
+2026-07-12T03:54:58  waking codex: pending inbox handoffs
+2026-07-12T03:54:58  codex wake done rc=1
+2026-07-12T03:59:58  wake ok  stop=quiescent  frame=wf-20260711-190005-2438aa
+2026-07-12T03:59:58  escalating: due clock goal -> model episode
+2026-07-12T03:59:58  escalation done rc=0
+2026-07-12T03:59:58  waking codex: pending inbox handoffs
+2026-07-12T03:59:58  codex wake done rc=1
+2026-07-12T04:03:58  wake ok  stop=quiescent  frame=wf-20260711-190406-346f50
+2026-07-12T04:03:58  escalating: due clock goal -> model episode
+2026-07-12T04:03:58  escalation done rc=0
+2026-07-12T04:03:58  waking codex: pending inbox handoffs
+2026-07-12T04:03:58  codex wake done rc=1
+2026-07-12T04:08:58  wake ok  stop=quiescent  frame=wf-20260711-190904-c002a8
+2026-07-12T04:08:58  escalating: due clock goal -> model episode
+2026-07-12T04:08:58  escalation done rc=0
+2026-07-12T04:08:58  waking codex: pending inbox handoffs
+2026-07-12T04:08:58  codex wake done rc=1
+2026-07-12T04:14:58  wake ok  stop=quiescent  frame=wf-20260711-191509-cf274f
+2026-07-12T04:14:58  escalating: due clock goal -> model episode
+2026-07-12T04:14:58  escalation done rc=0
+2026-07-12T04:14:58  waking codex: pending inbox handoffs
+2026-07-12T04:14:58  codex wake done rc=1
+2026-07-12T04:21:59  wake ok  stop=quiescent  frame=wf-20260711-192211-224e38
+2026-07-12T04:21:59  escalating: due clock goal -> model episode
+2026-07-12T04:21:59  escalation done rc=0
+2026-07-12T04:21:59  waking codex: pending inbox handoffs
+2026-07-12T04:21:59  codex wake done rc=1
+2026-07-12T04:25:58  wake ok  stop=quiescent  frame=wf-20260711-192610-3ca922
+2026-07-12T04:25:58  escalating: due clock goal -> model episode
+2026-07-12T04:25:58  escalation done rc=0
+2026-07-12T04:25:58  waking codex: pending inbox handoffs
+2026-07-12T04:25:58  codex wake done rc=1
+2026-07-12T04:32:58  wake ok  stop=quiescent  frame=wf-20260711-193310-915018
+2026-07-12T04:32:58  escalating: due clock goal -> model episode
+2026-07-12T04:32:58  escalation done rc=0
+2026-07-12T04:32:58  waking codex: pending inbox handoffs
+2026-07-12T04:32:58  codex wake done rc=1
+2026-07-12T04:40:58  wake ok  stop=quiescent  frame=wf-20260711-194108-cbe81a
+2026-07-12T04:40:58  escalating: due clock goal -> model episode
+2026-07-12T04:40:58  escalation done rc=0
+2026-07-12T04:40:58  waking codex: pending inbox handoffs
+2026-07-12T04:40:58  codex wake done rc=1
+2026-07-12T04:45:58  wake ok  stop=quiescent  frame=wf-20260711-194609-ed3185
+2026-07-12T04:45:58  escalating: due clock goal -> model episode
+2026-07-12T04:45:58  escalation done rc=0
+2026-07-12T04:45:58  waking codex: pending inbox handoffs
+2026-07-12T04:45:58  codex wake done rc=1
+2026-07-12T04:52:59  wake ok  stop=quiescent  frame=wf-20260711-195309-bb1af9
+2026-07-12T04:52:59  escalating: due clock goal -> model episode
+2026-07-12T04:52:59  escalation done rc=0
+2026-07-12T04:52:59  waking codex: pending inbox handoffs
+2026-07-12T04:52:59  codex wake done rc=1
+2026-07-12T04:58:58  wake ok  stop=quiescent  frame=wf-20260711-195906-05cb1a
+2026-07-12T04:58:58  escalating: due clock goal -> model episode
+2026-07-12T04:58:58  escalation done rc=0
+2026-07-12T04:58:58  waking codex: pending inbox handoffs
+2026-07-12T04:58:58  codex wake done rc=1
+2026-07-12T05:04:59  wake ok  stop=quiescent  frame=wf-20260711-200509-a96a2b
+2026-07-12T05:04:59  escalating: due clock goal -> model episode
+2026-07-12T05:04:59  escalation done rc=0
+2026-07-12T05:04:59  waking codex: pending inbox handoffs
+2026-07-12T05:04:59  codex wake done rc=1
+2026-07-12T05:09:57  wake ok  stop=quiescent  frame=wf-20260711-201008-d7d34f
+2026-07-12T05:09:57  escalating: due clock goal -> model episode
+2026-07-12T05:09:57  escalation done rc=0
+2026-07-12T05:09:57  waking codex: pending inbox handoffs
+2026-07-12T05:09:57  codex wake done rc=1
+2026-07-12T05:13:57  wake ok  stop=quiescent  frame=wf-20260711-201406-536e76
+2026-07-12T05:13:57  escalating: due clock goal -> model episode
+2026-07-12T05:13:57  escalation done rc=0
+2026-07-12T05:13:57  waking codex: pending inbox handoffs
+2026-07-12T05:13:57  codex wake done rc=1
+2026-07-12T05:19:58  wake ok  stop=quiescent  frame=wf-20260711-202008-27e74a
+2026-07-12T05:19:58  escalating: due clock goal -> model episode
+2026-07-12T05:19:58  escalation done rc=0
+2026-07-12T05:19:58  waking codex: pending inbox handoffs
+2026-07-12T05:19:58  codex wake done rc=1
+2026-07-12T05:24:58  wake ok  stop=quiescent  frame=wf-20260711-202509-9c0e1d
+2026-07-12T05:24:58  escalating: due clock goal -> model episode
+2026-07-12T05:24:58  escalation done rc=0
+2026-07-12T05:24:58  waking codex: pending inbox handoffs
+2026-07-12T05:24:58  codex wake done rc=1
+2026-07-12T05:34:57  wake ok  stop=quiescent  frame=wf-20260711-203505-211eb1
+2026-07-12T05:34:57  escalating: due clock goal -> model episode
+2026-07-12T05:34:57  escalation done rc=0
+2026-07-12T05:34:57  waking codex: pending inbox handoffs
+2026-07-12T05:34:57  codex wake done rc=1
+2026-07-12T05:39:58  wake ok  stop=quiescent  frame=wf-20260711-204009-3fafc9
+2026-07-12T05:39:58  escalating: due clock goal -> model episode
+2026-07-12T05:39:58  escalation done rc=0
+2026-07-12T05:39:58  waking codex: pending inbox handoffs
+2026-07-12T05:39:58  codex wake done rc=1
+2026-07-12T05:45:58  wake ok  stop=quiescent  frame=wf-20260711-204606-2eb984
+2026-07-12T05:45:58  escalating: due clock goal -> model episode
+2026-07-12T05:45:58  escalation done rc=0
+2026-07-12T05:45:58  waking codex: pending inbox handoffs
+2026-07-12T05:45:58  codex wake done rc=1
+2026-07-12T05:50:58  wake ok  stop=quiescent  frame=wf-20260711-205106-6d1647
+2026-07-12T05:50:58  escalating: due clock goal -> model episode
+2026-07-12T05:50:58  escalation done rc=0
+2026-07-12T05:50:58  waking codex: pending inbox handoffs
+2026-07-12T05:50:58  codex wake done rc=1
+2026-07-12T05:55:58  wake ok  stop=quiescent  frame=wf-20260711-205608-44a453
+2026-07-12T05:55:58  escalating: due clock goal -> model episode
+2026-07-12T05:55:58  escalation done rc=0
+2026-07-12T05:55:58  waking codex: pending inbox handoffs
+2026-07-12T05:55:58  codex wake done rc=1
+2026-07-12T06:04:58  wake ok  stop=quiescent  frame=wf-20260711-210509-e40254
+2026-07-12T06:04:58  escalating: due clock goal -> model episode
+2026-07-12T06:04:58  escalation done rc=0
+2026-07-12T06:04:58  waking codex: pending inbox handoffs
+2026-07-12T06:04:58  codex wake done rc=1
+2026-07-12T06:09:58  wake ok  stop=quiescent  frame=wf-20260711-211006-3deaa9
+2026-07-12T06:09:58  escalating: due clock goal -> model episode
+2026-07-12T06:09:58  escalation done rc=0
+2026-07-12T06:09:58  waking codex: pending inbox handoffs
+2026-07-12T06:09:58  codex wake done rc=1
+2026-07-12T06:16:58  wake ok  stop=quiescent  frame=wf-20260711-211708-2c8c30
+2026-07-12T06:16:58  escalating: due clock goal -> model episode
+2026-07-12T06:16:58  escalation done rc=0
+2026-07-12T06:16:58  waking codex: pending inbox handoffs
+2026-07-12T06:16:58  codex wake done rc=1
+2026-07-12T06:22:58  wake ok  stop=quiescent  frame=wf-20260711-212310-fdec25
+2026-07-12T06:22:58  escalating: due clock goal -> model episode
+2026-07-12T06:22:58  escalation done rc=0
+2026-07-12T06:22:58  waking codex: pending inbox handoffs
+2026-07-12T06:22:58  codex wake done rc=1
+2026-07-12T06:27:58  wake ok  stop=quiescent  frame=wf-20260711-212805-6914e4
+2026-07-12T06:27:58  escalating: due clock goal -> model episode
+2026-07-12T06:27:58  escalation done rc=0
+2026-07-12T06:27:58  waking codex: pending inbox handoffs
+2026-07-12T06:27:58  codex wake done rc=1
+2026-07-12T06:36:58  wake ok  stop=quiescent  frame=wf-20260711-213706-8d1c7b
+2026-07-12T06:36:58  escalating: due clock goal -> model episode
+2026-07-12T06:36:58  escalation done rc=0
+2026-07-12T06:36:58  waking codex: pending inbox handoffs
+2026-07-12T06:36:58  codex wake done rc=1
+2026-07-12T06:41:58  wake ok  stop=quiescent  frame=wf-20260711-214207-cfbd7c
+2026-07-12T06:41:58  escalating: due clock goal -> model episode
+2026-07-12T06:41:58  escalation done rc=0
+2026-07-12T06:41:58  waking codex: pending inbox handoffs
+2026-07-12T06:41:58  codex wake done rc=1
+2026-07-12T06:47:59  wake ok  stop=quiescent  frame=wf-20260711-214809-df0479
+2026-07-12T06:47:59  escalating: due clock goal -> model episode
+2026-07-12T06:47:59  escalation done rc=0
+2026-07-12T06:47:59  waking codex: pending inbox handoffs
+2026-07-12T06:47:59  codex wake done rc=1
+2026-07-12T06:52:58  wake ok  stop=quiescent  frame=wf-20260711-215308-5c6254
+2026-07-12T06:52:58  escalating: due clock goal -> model episode
+2026-07-12T06:52:58  escalation done rc=0
+2026-07-12T06:52:58  waking codex: pending inbox handoffs
+2026-07-12T06:52:58  codex wake done rc=1
+2026-07-12T06:57:58  wake ok  stop=quiescent  frame=wf-20260711-215810-1161b8
+2026-07-12T06:57:58  escalating: due clock goal -> model episode
+2026-07-12T06:57:58  escalation done rc=0
+2026-07-12T06:57:58  waking codex: pending inbox handoffs
+2026-07-12T06:57:58  codex wake done rc=1
+2026-07-12T07:04:58  wake ok  stop=quiescent  frame=wf-20260711-220509-451245
+2026-07-12T07:04:58  escalating: due clock goal -> model episode
+2026-07-12T07:04:58  escalation done rc=0
+2026-07-12T07:04:58  waking codex: pending inbox handoffs
+2026-07-12T07:04:58  codex wake done rc=1
+2026-07-12T07:11:58  wake ok  stop=quiescent  frame=wf-20260711-221204-e4815f
+2026-07-12T07:11:58  escalating: due clock goal -> model episode
+2026-07-12T07:11:58  escalation done rc=0
+2026-07-12T07:11:58  waking codex: pending inbox handoffs
+2026-07-12T07:11:58  codex wake done rc=1
+2026-07-12T07:16:58  wake ok  stop=quiescent  frame=wf-20260711-221704-2dcc2a
+2026-07-12T07:16:58  escalating: due clock goal -> model episode
+2026-07-12T07:16:58  escalation done rc=0
+2026-07-12T07:16:58  waking codex: pending inbox handoffs
+2026-07-12T07:16:58  codex wake done rc=1
+2026-07-12T07:26:58  wake ok  stop=quiescent  frame=wf-20260711-222704-8020c2
+2026-07-12T07:26:58  escalating: due clock goal -> model episode
+2026-07-12T07:26:58  escalation done rc=0
+2026-07-12T07:26:58  waking codex: pending inbox handoffs
+2026-07-12T07:37:06  wake ok  stop=quiescent  frame=wf-20260711-223853-f69a27
+2026-07-12T07:37:06  escalating: due clock goal -> model episode
+2026-07-12T07:26:58  codex wake done rc=0
+2026-07-12T07:47:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-224811-7a47b5', '_rc': 1})
+2026-07-12T07:47:58  waking codex: pending inbox handoffs
+2026-07-12T07:37:06  escalation done rc=0
+2026-07-12T07:37:06  waking codex: pending inbox handoffs
+2026-07-12T07:37:06  codex wake done rc=0
+2026-07-12T07:47:58  codex wake done rc=0
+2026-07-12T07:57:58  wake ok  stop=quiescent  frame=wf-20260711-225812-c60983
+2026-07-12T07:57:58  escalating: due clock goal -> model episode
+2026-07-12T07:57:58  escalation done rc=0
+2026-07-12T07:57:58  waking codex: pending inbox handoffs
+2026-07-12T07:57:58  codex wake done rc=0
+2026-07-12T08:07:59  wake ok  stop=quiescent  frame=wf-20260711-230820-e609c1
+2026-07-12T08:07:59  escalating: due clock goal -> model episode
+2026-07-12T08:07:59  escalation done rc=0
+2026-07-12T08:07:59  waking codex: pending inbox handoffs
+2026-07-12T08:07:59  codex wake done rc=0
+2026-07-12T08:17:58  wake ok  stop=quiescent  frame=wf-20260711-231812-1f4cb0
+2026-07-12T08:17:58  escalating: due clock goal -> model episode
+2026-07-12T08:17:58  escalation done rc=0
+2026-07-12T08:17:58  waking codex: pending inbox handoffs
+2026-07-12T08:17:58  codex wake done rc=0
+2026-07-12T08:27:58  wake ok  stop=quiescent  frame=wf-20260711-232817-fbee3a
+2026-07-12T08:27:58  escalating: due clock goal -> model episode
+2026-07-12T08:27:58  escalation done rc=0
+2026-07-12T08:27:58  waking codex: pending inbox handoffs
+2026-07-12T08:37:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260711-233646-54b9cf', '_rc': 1})
+2026-07-12T08:37:58  escalating: due clock goal -> model episode
+2026-07-12T08:27:58  codex wake done rc=0
+2026-07-12T08:37:58  escalation done rc=0
+2026-07-12T08:37:58  waking codex: pending inbox handoffs
+2026-07-12T08:37:58  codex wake done rc=0
+2026-07-12T08:45:58  wake ok  stop=quiescent  frame=wf-20260711-234617-cef376
+2026-07-12T08:45:58  escalating: due clock goal -> model episode
+2026-07-12T08:45:58  escalation done rc=0
+2026-07-12T08:45:58  waking codex: pending inbox handoffs
+2026-07-12T08:45:58  codex wake done rc=0
+2026-07-12T08:55:59  wake ok  stop=quiescent  frame=wf-20260711-235615-1022e4
+2026-07-12T08:55:59  escalating: due clock goal -> model episode
+2026-07-12T08:55:59  escalation done rc=0
+2026-07-12T08:55:59  waking codex: pending inbox handoffs
+2026-07-12T09:05:59  wake ok  stop=quiescent  frame=wf-20260712-000625-d9f2ec
+2026-07-12T09:05:59  escalating: due clock goal -> model episode
+2026-07-12T08:55:59  codex wake done rc=0
+2026-07-12T09:05:59  escalation done rc=0
+2026-07-12T09:05:59  waking codex: pending inbox handoffs
+2026-07-12T09:05:59  codex wake done rc=0
+2026-07-12T09:14:59  wake ok  stop=quiescent  frame=wf-20260712-001525-897aa3
+2026-07-12T09:14:59  escalating: due clock goal -> model episode
+2026-07-12T09:14:59  escalation done rc=0
+2026-07-12T09:14:59  waking codex: pending inbox handoffs
+2026-07-12T09:24:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-002339-97a3be', '_rc': 1})
+2026-07-12T09:24:59  escalating: due clock goal -> model episode
+2026-07-12T09:14:59  codex wake done rc=0
+2026-07-12T09:24:59  escalation done rc=0
+2026-07-12T09:24:59  waking codex: pending inbox handoffs
+2026-07-12T09:24:59  codex wake done rc=0
+2026-07-12T09:32:58  wake ok  stop=quiescent  frame=wf-20260712-003307-51543d
+2026-07-12T09:32:58  escalating: due clock goal -> model episode
+2026-07-12T09:32:58  escalation done rc=0
+2026-07-12T09:32:58  waking codex: pending inbox handoffs
+2026-07-12T09:32:58  codex wake done rc=0
+2026-07-12T09:39:58  wake ok  stop=quiescent  frame=wf-20260712-004007-1bf3d3
+2026-07-12T09:39:58  escalating: due clock goal -> model episode
+2026-07-12T09:39:58  escalation done rc=0
+2026-07-12T09:39:58  waking codex: pending inbox handoffs
+2026-07-12T09:39:58  codex wake done rc=0
+2026-07-12T09:48:58  wake ok  stop=quiescent  frame=wf-20260712-004907-ebe603
+2026-07-12T09:48:58  escalating: due clock goal -> model episode
+2026-07-12T09:48:58  escalation done rc=0
+2026-07-12T09:48:58  waking codex: pending inbox handoffs
+2026-07-12T09:48:58  codex wake done rc=0
+2026-07-12T09:55:58  wake ok  stop=quiescent  frame=wf-20260712-005608-39a789
+2026-07-12T09:55:58  escalating: due clock goal -> model episode
+2026-07-12T09:55:58  escalation done rc=0
+2026-07-12T09:55:58  waking codex: pending inbox handoffs
+2026-07-12T10:05:58  wake ok  stop=quiescent  frame=wf-20260712-010610-57fcf8
+2026-07-12T10:05:58  escalating: due clock goal -> model episode
+2026-07-12T09:55:58  codex wake done rc=0
+2026-07-12T10:05:58  escalation done rc=0
+2026-07-12T10:05:58  waking codex: pending inbox handoffs
+2026-07-12T10:05:58  codex wake done rc=0
+2026-07-12T10:12:57  wake ok  stop=quiescent  frame=wf-20260712-011306-283b1a
+2026-07-12T10:12:57  escalating: due clock goal -> model episode
+2026-07-12T10:12:57  escalation done rc=0
+2026-07-12T10:12:57  waking codex: pending inbox handoffs
+2026-07-12T10:12:57  codex wake done rc=0
+2026-07-12T10:19:58  wake ok  stop=quiescent  frame=wf-20260712-012006-ca5989
+2026-07-12T10:19:58  escalating: due clock goal -> model episode
+2026-07-12T10:19:58  escalation done rc=0
+2026-07-12T10:19:58  waking codex: pending inbox handoffs
+2026-07-12T10:19:58  codex wake done rc=0
+2026-07-12T10:26:58  wake ok  stop=quiescent  frame=wf-20260712-012709-7c071d
+2026-07-12T10:26:58  escalating: due clock goal -> model episode
+2026-07-12T10:26:58  escalation done rc=0
+2026-07-12T10:26:58  waking codex: pending inbox handoffs
+2026-07-12T10:26:58  codex wake done rc=0
+2026-07-12T10:36:58  wake ok  stop=quiescent  frame=wf-20260712-013713-bd2d28
+2026-07-12T10:36:58  waking codex: pending inbox handoffs
+2026-07-12T10:36:58  codex wake done rc=0
+2026-07-12T10:39:58  wake ok  stop=quiescent  frame=wf-20260712-014009-02dbac
+2026-07-12T10:39:58  waking codex: pending inbox handoffs
+2026-07-12T10:39:58  codex wake done rc=0
+2026-07-12T10:42:58  wake ok  stop=quiescent  frame=wf-20260712-014311-99c220
+2026-07-12T10:42:58  waking codex: pending inbox handoffs
+2026-07-12T10:42:58  codex wake done rc=0
+2026-07-12T10:45:58  wake ok  stop=quiescent  frame=wf-20260712-014610-625be6
+2026-07-12T10:45:58  waking codex: pending inbox handoffs
+2026-07-12T10:45:58  codex wake done rc=0
+2026-07-12T10:49:58  wake ok  stop=quiescent  frame=wf-20260712-015010-c13a9d
+2026-07-12T10:49:58  escalating: due clock goal -> model episode
+2026-07-12T10:49:58  escalation done rc=0
+2026-07-12T10:49:58  waking codex: pending inbox handoffs
+2026-07-12T10:49:58  codex wake done rc=0
+2026-07-12T10:57:58  wake ok  stop=quiescent  frame=wf-20260712-015811-f75a04
+2026-07-12T10:57:58  waking codex: pending inbox handoffs
+2026-07-12T10:57:58  codex wake done rc=0
+2026-07-12T11:01:58  wake ok  stop=quiescent  frame=wf-20260712-020207-d6c4bd
+2026-07-12T11:01:58  escalating: due clock goal -> model episode
+2026-07-12T11:01:58  escalation done rc=0
+2026-07-12T11:01:58  waking codex: pending inbox handoffs
+2026-07-12T11:01:58  codex wake done rc=0
+2026-07-12T11:07:58  wake ok  stop=quiescent  frame=wf-20260712-020813-cd9bc6
+2026-07-12T11:07:58  waking codex: pending inbox handoffs
+2026-07-12T11:07:58  codex wake done rc=0
+2026-07-12T11:10:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-021053-ad7366', '_rc': 1})
+2026-07-12T11:10:58  waking codex: pending inbox handoffs
+2026-07-12T11:10:58  codex wake done rc=0
+2026-07-12T11:13:58  wake ok  stop=quiescent  frame=wf-20260712-021409-1e4f1c
+2026-07-12T11:13:58  waking codex: pending inbox handoffs
+2026-07-12T11:13:58  codex wake done rc=0
+2026-07-12T11:16:58  wake ok  stop=quiescent  frame=wf-20260712-021710-863bda
+2026-07-12T11:16:58  waking codex: pending inbox handoffs
+2026-07-12T11:16:58  codex wake done rc=0
+2026-07-12T11:19:58  wake ok  stop=quiescent  frame=wf-20260712-022006-a1d1ec
+2026-07-12T11:19:58  escalating: due clock goal -> model episode
+2026-07-12T11:19:58  escalation done rc=0
+2026-07-12T11:19:58  waking codex: pending inbox handoffs
+2026-07-12T11:29:58  wake ok  stop=quiescent  frame=wf-20260712-023009-ca1fe0
+2026-07-12T11:29:58  escalating: due clock goal -> model episode
+2026-07-12T11:19:58  codex wake done rc=0
+2026-07-12T11:29:58  escalation done rc=0
+2026-07-12T11:29:58  waking codex: pending inbox handoffs
+2026-07-12T11:39:58  wake ok  stop=quiescent  frame=wf-20260712-024012-4aba7b
+2026-07-12T11:39:58  escalating: due clock goal -> model episode
+2026-07-12T11:29:58  codex wake done rc=0
+2026-07-12T11:39:58  escalation done rc=0
+2026-07-12T11:39:58  waking codex: pending inbox handoffs
+2026-07-12T11:39:58  codex wake done rc=0
+2026-07-12T11:48:58  wake ok  stop=quiescent  frame=wf-20260712-024910-1b7697
+2026-07-12T11:48:58  waking codex: pending inbox handoffs
+2026-07-12T11:48:58  codex wake done rc=0
+2026-07-12T11:51:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-025201-b74d62', '_rc': 1})
+2026-07-12T11:51:58  waking codex: pending inbox handoffs
+2026-07-12T11:51:58  codex wake done rc=0
+2026-07-12T11:55:58  wake ok  stop=quiescent  frame=wf-20260712-025609-66850b
+2026-07-12T11:55:58  escalating: due clock goal -> model episode
+2026-07-12T11:55:58  escalation done rc=0
+2026-07-12T11:55:58  waking codex: pending inbox handoffs
+2026-07-12T11:55:58  codex wake done rc=0
+2026-07-12T12:02:58  wake ok  stop=quiescent  frame=wf-20260712-030309-d6c2fa
+2026-07-12T12:02:58  escalating: due clock goal -> model episode
+2026-07-12T12:02:58  escalation done rc=0
+2026-07-12T12:02:58  waking codex: pending inbox handoffs
+2026-07-12T12:02:58  codex wake done rc=0
+2026-07-12T12:10:58  wake ok  stop=quiescent  frame=wf-20260712-031109-363bc9
+2026-07-12T12:10:58  escalating: due clock goal -> model episode
+2026-07-12T12:10:58  escalation done rc=0
+2026-07-12T12:10:58  waking codex: pending inbox handoffs
+2026-07-12T12:20:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: branch head conflict: expected wf-20260712-032109-302d15, received wf-20260712-031546-183945', '_rc': 1})
+2026-07-12T12:20:59  escalating: due clock goal -> model episode
+2026-07-12T12:10:58  codex wake done rc=0
+2026-07-12T12:20:59  escalation done rc=0
+2026-07-12T12:20:59  waking codex: pending inbox handoffs
+2026-07-12T12:30:58  wake ok  stop=quiescent  frame=wf-20260712-033116-0baa1c
+2026-07-12T12:30:58  escalating: due clock goal -> model episode
+2026-07-12T12:20:59  codex wake done rc=0
+2026-07-12T12:30:58  escalation done rc=0
+2026-07-12T12:30:58  waking codex: pending inbox handoffs
+2026-07-12T12:30:58  codex wake done rc=0
+2026-07-12T12:39:58  wake ok  stop=quiescent  frame=wf-20260712-034013-bed155
+2026-07-12T12:39:58  escalating: due clock goal -> model episode
+2026-07-12T12:39:58  escalation done rc=0
+2026-07-12T12:39:58  waking codex: pending inbox handoffs
+2026-07-12T12:39:58  codex wake done rc=0
+2026-07-12T12:47:58  wake ok  stop=quiescent  frame=wf-20260712-034812-ffadce
+2026-07-12T12:47:58  escalating: due clock goal -> model episode
+2026-07-12T12:47:58  escalation done rc=0
+2026-07-12T12:47:58  waking codex: pending inbox handoffs
+2026-07-12T12:47:58  codex wake done rc=0
+2026-07-12T12:57:59  wake ok  stop=quiescent  frame=wf-20260712-035812-d90e4c
+2026-07-12T12:57:59  escalating: due clock goal -> model episode
+2026-07-12T12:57:59  escalation done rc=0
+2026-07-12T12:57:59  waking codex: pending inbox handoffs
+2026-07-12T12:57:59  codex wake done rc=0
+2026-07-12T13:08:58  wake ok  stop=quiescent  frame=wf-20260712-040914-b9f0a7
+2026-07-12T13:08:58  escalating: due clock goal -> model episode
+2026-07-12T13:08:58  escalation done rc=0
+2026-07-12T13:08:58  waking codex: pending inbox handoffs
+2026-07-12T13:08:58  codex wake done rc=0
+2026-07-12T13:16:58  wake ok  stop=quiescent  frame=wf-20260712-041712-2a0413
+2026-07-12T13:16:58  escalating: due clock goal -> model episode
+2026-07-12T13:16:58  escalation done rc=0
+2026-07-12T13:16:58  waking codex: pending inbox handoffs
+2026-07-12T13:16:58  codex wake done rc=0
+2026-07-12T13:24:57  wake ok  stop=quiescent  frame=wf-20260712-042510-9ac2a6
+2026-07-12T13:24:57  escalating: due clock goal -> model episode
+2026-07-12T13:24:57  escalation done rc=0
+2026-07-12T13:24:57  waking codex: pending inbox handoffs
+2026-07-12T13:24:57  codex wake done rc=0
+2026-07-12T13:31:57  wake ok  stop=quiescent  frame=wf-20260712-043208-a71892
+2026-07-12T13:31:57  escalating: due clock goal -> model episode
+2026-07-12T13:31:57  escalation done rc=0
+2026-07-12T13:31:57  waking codex: pending inbox handoffs
+2026-07-12T13:31:57  codex wake done rc=0
+2026-07-12T13:38:58  wake ok  stop=quiescent  frame=wf-20260712-043910-5c3148
+2026-07-12T13:38:58  escalating: due clock goal -> model episode
+2026-07-12T13:38:58  escalation done rc=0
+2026-07-12T13:38:58  waking codex: pending inbox handoffs
+2026-07-12T13:38:58  codex wake done rc=0
+2026-07-12T13:45:58  wake ok  stop=quiescent  frame=wf-20260712-044611-12b4e0
+2026-07-12T13:45:58  waking codex: pending inbox handoffs
+2026-07-12T13:45:58  codex wake done rc=0
+2026-07-12T13:48:58  wake ok  stop=quiescent  frame=wf-20260712-044910-716de4
+2026-07-12T13:48:58  escalating: due clock goal -> model episode
+2026-07-12T13:48:58  escalation done rc=0
+2026-07-12T13:48:58  waking codex: pending inbox handoffs
+2026-07-12T13:48:58  codex wake done rc=0
+2026-07-12T13:56:58  wake ok  stop=quiescent  frame=wf-20260712-045710-866daf
+2026-07-12T13:56:58  escalating: due clock goal -> model episode
+2026-07-12T13:56:58  escalation done rc=0
+2026-07-12T13:56:58  waking codex: pending inbox handoffs
+2026-07-12T13:56:58  codex wake done rc=0
+2026-07-12T14:04:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-050441-3fa837', '_rc': 1})
+2026-07-12T14:04:58  waking codex: pending inbox handoffs
+2026-07-12T14:04:58  codex wake done rc=0
+2026-07-12T14:07:58  wake ok  stop=quiescent  frame=wf-20260712-050809-5d5097
+2026-07-12T14:07:58  escalating: due clock goal -> model episode
+2026-07-12T14:07:58  escalation done rc=0
+2026-07-12T14:07:58  waking codex: pending inbox handoffs
+2026-07-12T14:07:58  codex wake done rc=0
+2026-07-12T14:15:58  wake ok  stop=quiescent  frame=wf-20260712-051619-3fcdf3
+2026-07-12T14:15:58  escalating: due clock goal -> model episode
+2026-07-12T14:15:58  escalation done rc=0
+2026-07-12T14:15:58  waking codex: pending inbox handoffs
+2026-07-12T14:26:58  wake ok  stop=quiescent  frame=wf-20260712-052718-050c89
+2026-07-12T14:26:58  waking codex: pending inbox handoffs
+2026-07-12T14:26:58  codex wake done rc=0
+2026-07-12T14:27:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-052812-0b68fe', '_rc': 1})
+2026-07-12T14:27:59  waking codex: pending inbox handoffs
+2026-07-12T14:27:59  codex wake done rc=0
+2026-07-12T14:15:58  codex wake done rc=0
+2026-07-12T14:28:58  wake ok  stop=quiescent  frame=wf-20260712-052924-faf3d1
+2026-07-12T14:28:58  waking codex: pending inbox handoffs
+2026-07-12T14:28:58  codex wake done rc=0
+2026-07-12T14:33:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: branch head conflict: expected wf-20260712-053418-4177c5, received wf-20260712-053214-19e4c3', '_rc': 1})
+2026-07-12T14:33:58  waking codex: pending inbox handoffs
+2026-07-12T14:33:58  codex wake done rc=0
+2026-07-12T14:41:59  wake ok  stop=quiescent  frame=wf-20260712-054222-eec092
+2026-07-12T14:41:59  waking codex: pending inbox handoffs
+2026-07-12T14:41:59  codex wake done rc=0
+2026-07-12T14:48:59  wake ok  stop=quiescent  frame=wf-20260712-054916-474a3b
+2026-07-12T14:48:59  waking codex: pending inbox handoffs
+2026-07-12T14:48:59  codex wake done rc=0
+2026-07-12T14:52:58  wake ok  stop=quiescent  frame=wf-20260712-055310-007a2a
+2026-07-12T14:52:58  waking codex: pending inbox handoffs
+2026-07-12T14:52:58  codex wake done rc=0
+2026-07-12T14:57:58  wake ok  stop=quiescent  frame=wf-20260712-055807-c8cb5c
+2026-07-12T14:57:58  escalating: due clock goal -> model episode
+2026-07-12T14:57:58  escalation done rc=0
+2026-07-12T14:57:58  waking codex: pending inbox handoffs
+2026-07-12T15:07:58  wake ok  stop=quiescent  frame=wf-20260712-060808-80514e
+2026-07-12T15:07:58  escalating: due clock goal -> model episode
+2026-07-12T14:57:58  codex wake done rc=0
+2026-07-12T15:07:58  escalation done rc=0
+2026-07-12T15:07:58  waking codex: pending inbox handoffs
+2026-07-12T15:17:59  wake ok  stop=quiescent  frame=wf-20260712-061817-040267
+2026-07-12T15:17:59  escalating: due clock goal -> model episode
+2026-07-12T15:07:58  codex wake done rc=0
+2026-07-12T15:17:59  escalation done rc=0
+2026-07-12T15:17:59  waking codex: pending inbox handoffs
+2026-07-12T15:27:58  wake ok  stop=quiescent  frame=wf-20260712-062817-2e996b
+2026-07-12T15:27:58  escalating: due clock goal -> model episode
+2026-07-12T15:17:59  codex wake done rc=0
+2026-07-12T15:27:58  escalation done rc=0
+2026-07-12T15:27:58  waking codex: pending inbox handoffs
+2026-07-12T15:38:57  wake ok  stop=quiescent  frame=wf-20260712-063913-9f78cb
+2026-07-12T15:38:57  escalating: due clock goal -> model episode
+2026-07-12T15:27:58  codex wake done rc=0
+2026-07-12T15:38:57  escalation done rc=0
+2026-07-12T15:38:57  waking codex: pending inbox handoffs
+2026-07-12T15:38:57  codex wake done rc=0
+2026-07-12T15:48:58  wake ok  stop=quiescent  frame=wf-20260712-064914-425fe7
+2026-07-12T15:48:58  escalating: due clock goal -> model episode
+2026-07-12T15:48:58  escalation done rc=0
+2026-07-12T15:48:58  waking codex: pending inbox handoffs
+2026-07-12T15:58:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-065556-d1dd19', '_rc': 1})
+2026-07-12T15:58:58  escalating: due clock goal -> model episode
+2026-07-12T15:48:58  codex wake done rc=0
+2026-07-12T15:58:58  escalation done rc=0
+2026-07-12T15:58:58  waking codex: pending inbox handoffs
+2026-07-12T15:58:58  codex wake done rc=0
+2026-07-12T16:07:58  wake ok  stop=quiescent  frame=wf-20260712-070809-2422e5
+2026-07-12T16:07:58  escalating: due clock goal -> model episode
+2026-07-12T16:07:58  escalation done rc=0
+2026-07-12T16:07:58  waking codex: pending inbox handoffs
+2026-07-12T16:07:58  codex wake done rc=0
+2026-07-12T16:15:58  wake ok  stop=quiescent  frame=wf-20260712-071610-dddec2
+2026-07-12T16:15:58  escalating: due clock goal -> model episode
+2026-07-12T16:15:58  escalation done rc=0
+2026-07-12T16:15:58  waking codex: pending inbox handoffs
+2026-07-12T16:25:58  wake ok  stop=quiescent  frame=wf-20260712-072612-9da6d5
+2026-07-12T16:25:58  escalating: due clock goal -> model episode
+2026-07-12T16:15:58  codex wake done rc=0
+2026-07-12T16:25:58  escalation done rc=0
+2026-07-12T16:25:58  waking codex: pending inbox handoffs
+2026-07-12T16:25:58  codex wake done rc=0
+2026-07-12T16:35:58  wake ok  stop=quiescent  frame=wf-20260712-073612-a1c787
+2026-07-12T16:35:58  escalating: due clock goal -> model episode
+2026-07-12T16:35:58  escalation done rc=0
+2026-07-12T16:35:58  waking codex: pending inbox handoffs
+2026-07-12T16:35:58  codex wake done rc=0
+2026-07-12T16:44:58  wake ok  stop=quiescent  frame=wf-20260712-074515-2694ab
+2026-07-12T16:44:58  escalating: due clock goal -> model episode
+2026-07-12T16:44:58  escalation done rc=0
+2026-07-12T16:44:58  waking codex: pending inbox handoffs
+2026-07-12T16:44:58  codex wake done rc=0
+2026-07-12T16:55:58  wake ok  stop=quiescent  frame=wf-20260712-075616-a54154
+2026-07-12T16:55:58  escalating: due clock goal -> model episode
+2026-07-12T16:55:58  escalation done rc=0
+2026-07-12T16:55:58  waking codex: pending inbox handoffs
+2026-07-12T17:05:58  wake ok  stop=quiescent  frame=wf-20260712-080613-b443c2
+2026-07-12T17:05:58  escalating: due clock goal -> model episode
+2026-07-12T16:55:58  codex wake done rc=0
+2026-07-12T17:05:58  escalation done rc=0
+2026-07-12T17:05:58  waking codex: pending inbox handoffs
+2026-07-12T17:05:58  codex wake done rc=0
+2026-07-12T17:15:58  wake ok  stop=quiescent  frame=wf-20260712-081613-a86959
+2026-07-12T17:15:58  escalating: due clock goal -> model episode
+2026-07-12T17:15:58  escalation done rc=0
+2026-07-12T17:15:58  waking codex: pending inbox handoffs
+2026-07-12T17:25:58  wake ok  stop=quiescent  frame=wf-20260712-082614-082404
+2026-07-12T17:25:58  escalating: due clock goal -> model episode
+2026-07-12T17:15:58  codex wake done rc=0
+2026-07-12T17:25:58  escalation done rc=0
+2026-07-12T17:25:58  waking codex: pending inbox handoffs
+2026-07-12T17:25:58  codex wake done rc=0
+2026-07-12T17:35:58  wake ok  stop=quiescent  frame=wf-20260712-083613-7332d1
+2026-07-12T17:35:58  escalating: due clock goal -> model episode
+2026-07-12T17:35:58  escalation done rc=0
+2026-07-12T17:35:58  waking codex: pending inbox handoffs
+2026-07-12T17:35:58  codex wake done rc=0
+2026-07-12T17:44:58  wake ok  stop=quiescent  frame=wf-20260712-084517-d37ad3
+2026-07-12T17:44:58  escalating: due clock goal -> model episode
+2026-07-12T17:44:58  escalation done rc=0
+2026-07-12T17:44:58  waking codex: pending inbox handoffs
+2026-07-12T17:44:58  codex wake done rc=0
+2026-07-12T17:52:58  wake ok  stop=quiescent  frame=wf-20260712-085314-4b06c1
+2026-07-12T17:52:58  escalating: due clock goal -> model episode
+2026-07-12T17:52:58  escalation done rc=0
+2026-07-12T17:52:58  waking codex: pending inbox handoffs
+2026-07-12T17:52:58  codex wake done rc=0
+2026-07-12T18:02:58  wake ok  stop=quiescent  frame=wf-20260712-090311-bc56ab
+2026-07-12T18:02:58  escalating: due clock goal -> model episode
+2026-07-12T18:02:58  escalation done rc=0
+2026-07-12T18:02:58  waking codex: pending inbox handoffs
+2026-07-12T18:02:58  codex wake done rc=0
+2026-07-12T18:11:59  wake ok  stop=quiescent  frame=wf-20260712-091213-b2dc9b
+2026-07-12T18:11:59  escalating: due clock goal -> model episode
+2026-07-12T18:11:59  escalation done rc=0
+2026-07-12T18:11:59  waking codex: pending inbox handoffs
+2026-07-12T18:11:59  codex wake done rc=0
+2026-07-12T18:19:59  wake ok  stop=quiescent  frame=wf-20260712-092017-c59c3d
+2026-07-12T18:19:59  escalating: due clock goal -> model episode
+2026-07-12T18:19:59  escalation done rc=0
+2026-07-12T18:19:59  waking codex: pending inbox handoffs
+2026-07-12T18:29:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-093005-3e819a', '_rc': 1})
+2026-07-12T18:29:59  escalating: due clock goal -> model episode
+2026-07-12T18:19:59  codex wake done rc=0
+2026-07-12T18:29:59  escalation done rc=0
+2026-07-12T18:29:59  waking codex: pending inbox handoffs
+2026-07-12T18:29:59  codex wake done rc=0
+2026-07-12T18:39:57  wake ok  stop=quiescent  frame=wf-20260712-094014-a2efc4
+2026-07-12T18:39:57  escalating: due clock goal -> model episode
+2026-07-12T18:39:57  escalation done rc=0
+2026-07-12T18:39:57  waking codex: pending inbox handoffs
+2026-07-12T18:49:58  wake ok  stop=quiescent  frame=wf-20260712-095020-bb4b06
+2026-07-12T18:49:58  escalating: due clock goal -> model episode
+2026-07-12T18:39:57  codex wake done rc=0
+2026-07-12T18:49:58  escalation done rc=0
+2026-07-12T18:49:58  waking codex: pending inbox handoffs
+2026-07-12T18:49:58  codex wake done rc=0
+2026-07-12T18:58:58  wake ok  stop=quiescent  frame=wf-20260712-095911-e538bf
+2026-07-12T18:58:58  escalating: due clock goal -> model episode
+2026-07-12T19:09:58  wake ok  stop=quiescent  frame=wf-20260712-101017-c61c9c
+2026-07-12T19:09:58  waking codex: pending inbox handoffs
+2026-07-12T19:09:58  codex wake done rc=0
+2026-07-12T18:58:58  escalation done rc=0
+2026-07-12T18:58:58  waking codex: pending inbox handoffs
+2026-07-12T19:15:58  wake ok  stop=quiescent  frame=wf-20260712-101616-70670c
+2026-07-12T19:15:58  escalating: due clock goal -> model episode
+2026-07-12T18:58:58  codex wake done rc=0
+2026-07-12T19:15:58  escalation done rc=0
+2026-07-12T19:15:58  waking codex: pending inbox handoffs
+2026-07-12T19:15:58  codex wake done rc=0
+2026-07-12T19:25:58  wake ok  stop=quiescent  frame=wf-20260712-102619-c74a51
+2026-07-12T19:25:58  escalating: due clock goal -> model episode
+2026-07-12T19:25:58  escalation done rc=0
+2026-07-12T19:25:58  waking codex: pending inbox handoffs
+2026-07-12T19:35:58  wake ok  stop=quiescent  frame=wf-20260712-103615-2c3aea
+2026-07-12T19:35:58  escalating: due clock goal -> model episode
+2026-07-12T19:25:58  codex wake done rc=0
+2026-07-12T19:35:58  escalation done rc=0
+2026-07-12T19:35:58  waking codex: pending inbox handoffs
+2026-07-12T19:35:58  codex wake done rc=0
+2026-07-12T19:44:58  wake ok  stop=quiescent  frame=wf-20260712-104517-f9f51e
+2026-07-12T19:44:58  escalating: due clock goal -> model episode
+2026-07-12T19:44:58  escalation done rc=0
+2026-07-12T19:44:58  waking codex: pending inbox handoffs
+2026-07-12T19:44:58  codex wake done rc=0
+2026-07-12T19:53:58  wake ok  stop=quiescent  frame=wf-20260712-105418-6a4e9b
+2026-07-12T19:53:58  escalating: due clock goal -> model episode
+2026-07-12T19:53:58  escalation done rc=0
+2026-07-12T19:53:58  waking codex: pending inbox handoffs
+2026-07-12T19:53:58  codex wake done rc=0
+2026-07-12T20:01:58  wake ok  stop=quiescent  frame=wf-20260712-110218-b8b53c
+2026-07-12T20:01:58  escalating: due clock goal -> model episode
+2026-07-12T20:01:58  escalation done rc=0
+2026-07-12T20:01:58  waking codex: pending inbox handoffs
+2026-07-12T20:01:58  codex wake done rc=0
+2026-07-12T20:11:58  wake ok  stop=quiescent  frame=wf-20260712-111217-5ede81
+2026-07-12T20:11:58  escalating: due clock goal -> model episode
+2026-07-12T20:11:58  escalation done rc=0
+2026-07-12T20:11:58  waking codex: pending inbox handoffs
+2026-07-12T20:11:58  codex wake done rc=0
+2026-07-12T20:21:59  wake ok  stop=quiescent  frame=wf-20260712-112351-201527
+2026-07-12T20:21:59  escalating: due clock goal -> model episode
+2026-07-12T20:21:59  escalation done rc=0
+2026-07-12T20:21:59  waking codex: pending inbox handoffs
+2026-07-12T20:31:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-113200-73d631', '_rc': 1})
+2026-07-12T20:31:59  escalating: due clock goal -> model episode
+2026-07-12T20:21:59  codex wake done rc=0
+2026-07-12T20:31:59  escalation done rc=0
+2026-07-12T20:31:59  waking codex: pending inbox handoffs
+2026-07-12T20:31:59  codex wake done rc=0
+2026-07-12T20:41:59  wake ok  stop=quiescent  frame=wf-20260712-114230-4ffdbd
+2026-07-12T20:41:59  escalating: due clock goal -> model episode
+2026-07-12T20:51:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-114825-936540', '_rc': 1})
+2026-07-12T20:51:59  waking codex: pending inbox handoffs
+2026-07-12T20:41:59  escalation done rc=0
+2026-07-12T20:41:59  waking codex: pending inbox handoffs
+2026-07-12T20:41:59  codex wake done rc=0
+2026-07-12T20:51:59  codex wake done rc=0
+2026-07-12T20:56:59  wake ok  stop=quiescent  frame=wf-20260712-115729-c07fff
+2026-07-12T20:56:59  escalating: due clock goal -> model episode
+2026-07-12T20:56:59  escalation done rc=0
+2026-07-12T20:56:59  waking codex: pending inbox handoffs
+2026-07-12T20:56:59  codex wake done rc=0
+2026-07-12T21:06:58  wake ok  stop=quiescent  frame=wf-20260712-120725-620022
+2026-07-12T21:06:58  escalating: due clock goal -> model episode
+2026-07-12T21:06:58  escalation done rc=0
+2026-07-12T21:06:58  waking codex: pending inbox handoffs
+2026-07-12T21:06:58  codex wake done rc=0
+2026-07-12T21:15:58  wake ok  stop=quiescent  frame=wf-20260712-121618-5711d2
+2026-07-12T21:15:58  escalating: due clock goal -> model episode
+2026-07-12T21:15:58  escalation done rc=0
+2026-07-12T21:15:58  waking codex: pending inbox handoffs
+2026-07-12T21:25:59  wake ok  stop=quiescent  frame=wf-20260712-122642-200980
+2026-07-12T21:25:59  escalating: due clock goal -> model episode
+2026-07-12T21:15:58  codex wake done rc=0
+2026-07-12T21:25:59  escalation done rc=0
+2026-07-12T21:25:59  waking codex: pending inbox handoffs
+2026-07-12T21:25:59  codex wake done rc=0
+2026-07-12T21:35:59  wake ok  stop=quiescent  frame=wf-20260712-123622-caff9f
+2026-07-12T21:35:59  escalating: due clock goal -> model episode
+2026-07-12T21:35:59  escalation done rc=0
+2026-07-12T21:35:59  waking codex: pending inbox handoffs
+2026-07-12T21:35:59  codex wake done rc=0
+2026-07-12T21:43:59  wake ok  stop=quiescent  frame=wf-20260712-124418-209a29
+2026-07-12T21:43:59  escalating: due clock goal -> model episode
+2026-07-12T21:43:59  escalation done rc=0
+2026-07-12T21:43:59  waking codex: pending inbox handoffs
+2026-07-12T21:43:59  codex wake done rc=0
+2026-07-12T21:51:59  wake ok  stop=quiescent  frame=wf-20260712-125220-dbb7e5
+2026-07-12T21:51:59  escalating: due clock goal -> model episode
+2026-07-12T21:51:59  escalation done rc=0
+2026-07-12T21:51:59  waking codex: pending inbox handoffs
+2026-07-12T21:51:59  codex wake done rc=0
+2026-07-12T22:01:58  wake ok  stop=quiescent  frame=wf-20260712-130220-ca0244
+2026-07-12T22:01:58  escalating: due clock goal -> model episode
+2026-07-12T22:01:58  escalation done rc=0
+2026-07-12T22:01:58  waking codex: pending inbox handoffs
+2026-07-12T22:01:58  codex wake done rc=0
+2026-07-12T22:09:58  wake ok  stop=quiescent  frame=wf-20260712-131020-ce2ef0
+2026-07-12T22:09:58  escalating: due clock goal -> model episode
+2026-07-12T22:09:58  escalation done rc=0
+2026-07-12T22:09:58  waking codex: pending inbox handoffs
+2026-07-12T22:09:58  codex wake done rc=0
+2026-07-12T22:17:59  wake ok  stop=quiescent  frame=wf-20260712-131819-0e4a33
+2026-07-12T22:17:59  escalating: due clock goal -> model episode
+2026-07-12T22:17:59  escalation done rc=0
+2026-07-12T22:17:59  waking codex: pending inbox handoffs
+2026-07-12T22:17:59  codex wake done rc=0
+2026-07-12T22:25:59  wake ok  stop=quiescent  frame=wf-20260712-132617-74ea2d
+2026-07-12T22:25:59  escalating: due clock goal -> model episode
+2026-07-12T22:25:59  escalation done rc=0
+2026-07-12T22:25:59  waking codex: pending inbox handoffs
+2026-07-12T22:25:59  codex wake done rc=0
+2026-07-12T22:33:59  wake ok  stop=quiescent  frame=wf-20260712-133417-532296
+2026-07-12T22:33:59  escalating: due clock goal -> model episode
+2026-07-12T22:33:59  escalation done rc=0
+2026-07-12T22:33:59  waking codex: pending inbox handoffs
+2026-07-12T22:33:59  codex wake done rc=0
+2026-07-12T22:41:58  wake ok  stop=quiescent  frame=wf-20260712-134211-e944b6
+2026-07-12T22:41:58  escalating: due clock goal -> model episode
+2026-07-12T22:41:58  escalation done rc=0
+2026-07-12T22:41:58  waking codex: pending inbox handoffs
+2026-07-12T22:41:58  codex wake done rc=0
+2026-07-12T22:49:58  wake ok  stop=quiescent  frame=wf-20260712-135014-57236c
+2026-07-12T22:49:58  escalating: due clock goal -> model episode
+2026-07-12T22:49:58  escalation done rc=0
+2026-07-12T22:49:58  waking codex: pending inbox handoffs
+2026-07-12T22:49:58  codex wake done rc=0
+2026-07-12T22:58:58  wake ok  stop=quiescent  frame=wf-20260712-135917-53c525
+2026-07-12T22:58:58  escalating: due clock goal -> model episode
+2026-07-12T22:58:58  escalation done rc=0
+2026-07-12T22:58:58  waking codex: pending inbox handoffs
+2026-07-12T22:58:58  codex wake done rc=0
+2026-07-12T23:06:58  wake ok  stop=quiescent  frame=wf-20260712-140718-ece9b8
+2026-07-12T23:06:58  escalating: due clock goal -> model episode
+2026-07-12T23:06:58  escalation done rc=0
+2026-07-12T23:06:58  waking codex: pending inbox handoffs
+2026-07-12T23:06:58  codex wake done rc=0
+2026-07-12T23:15:58  wake ok  stop=quiescent  frame=wf-20260712-141613-a32aa5
+2026-07-12T23:15:58  escalating: due clock goal -> model episode
+2026-07-12T23:15:58  escalation done rc=0
+2026-07-12T23:15:58  waking codex: pending inbox handoffs
+2026-07-12T23:15:58  codex wake done rc=0
+2026-07-12T23:24:58  wake ok  stop=quiescent  frame=wf-20260712-142517-4a5e2d
+2026-07-12T23:24:58  escalating: due clock goal -> model episode
+2026-07-12T23:24:58  escalation done rc=0
+2026-07-12T23:24:58  waking codex: pending inbox handoffs
+2026-07-12T23:24:58  codex wake done rc=0
+2026-07-12T23:33:58  wake ok  stop=quiescent  frame=wf-20260712-143415-aa8763
+2026-07-12T23:33:58  escalating: due clock goal -> model episode
+2026-07-12T23:33:58  escalation done rc=0
+2026-07-12T23:33:58  waking codex: pending inbox handoffs
+2026-07-12T23:44:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-144447-4fc90d', '_rc': 1})
+2026-07-12T23:44:58  escalating: due clock goal -> model episode
+2026-07-12T23:33:58  codex wake done rc=0
+2026-07-12T23:44:58  escalation done rc=0
+2026-07-12T23:44:58  waking codex: pending inbox handoffs
+2026-07-12T23:44:58  codex wake done rc=0
+2026-07-12T23:53:58  wake ok  stop=quiescent  frame=wf-20260712-145415-af2034
+2026-07-12T23:53:58  escalating: due clock goal -> model episode
+2026-07-12T23:53:58  escalation done rc=0
+2026-07-12T23:53:58  waking codex: pending inbox handoffs
+2026-07-12T23:53:58  codex wake done rc=0
+2026-07-13T00:04:58  wake ok  stop=quiescent  frame=wf-20260712-150516-81eb44
+2026-07-13T00:04:58  escalating: due clock goal -> model episode
+2026-07-13T00:04:58  escalation done rc=0
+2026-07-13T00:04:58  waking codex: pending inbox handoffs
+2026-07-13T00:04:58  codex wake done rc=0
+2026-07-13T00:14:58  wake ok  stop=quiescent  frame=wf-20260712-151517-fb2541
+2026-07-13T00:14:58  escalating: due clock goal -> model episode
+2026-07-13T00:14:58  escalation done rc=0
+2026-07-13T00:14:58  waking codex: pending inbox handoffs
+2026-07-13T00:14:58  codex wake done rc=0
+2026-07-13T00:24:58  wake ok  stop=quiescent  frame=wf-20260712-152518-140bd0
+2026-07-13T00:24:58  escalating: due clock goal -> model episode
+2026-07-13T00:24:58  escalation done rc=0
+2026-07-13T00:24:58  waking codex: pending inbox handoffs
+2026-07-13T00:24:58  codex wake done rc=0
+2026-07-13T00:32:58  wake ok  stop=quiescent  frame=wf-20260712-153318-eabf68
+2026-07-13T00:32:58  escalating: due clock goal -> model episode
+2026-07-13T00:32:58  escalation done rc=0
+2026-07-13T00:32:58  waking codex: pending inbox handoffs
+2026-07-13T00:32:58  codex wake done rc=0
+2026-07-13T00:41:58  wake ok  stop=quiescent  frame=wf-20260712-154218-7ed84b
+2026-07-13T00:41:58  escalating: due clock goal -> model episode
+2026-07-13T00:41:58  escalation done rc=0
+2026-07-13T00:41:58  waking codex: pending inbox handoffs
+2026-07-13T00:41:58  codex wake done rc=0
+2026-07-13T00:51:58  wake ok  stop=quiescent  frame=wf-20260712-155218-c3ba60
+2026-07-13T00:51:58  escalating: due clock goal -> model episode
+2026-07-13T00:51:58  escalation done rc=0
+2026-07-13T00:51:58  waking codex: pending inbox handoffs
+2026-07-13T00:51:58  codex wake done rc=0
+2026-07-13T01:00:58  wake ok  stop=quiescent  frame=wf-20260712-160119-99c648
+2026-07-13T01:00:58  escalating: due clock goal -> model episode
+2026-07-13T01:00:58  escalation done rc=0
+2026-07-13T01:00:58  waking codex: pending inbox handoffs
+2026-07-13T01:00:58  codex wake done rc=0
+2026-07-13T01:11:58  wake ok  stop=quiescent  frame=wf-20260712-161219-c05350
+2026-07-13T01:11:58  escalating: due clock goal -> model episode
+2026-07-13T01:11:58  escalation done rc=0
+2026-07-13T01:11:58  waking codex: pending inbox handoffs
+2026-07-13T01:11:58  codex wake done rc=0
+2026-07-13T01:21:58  wake ok  stop=quiescent  frame=wf-20260712-162217-26c302
+2026-07-13T01:21:58  escalating: due clock goal -> model episode
+2026-07-13T01:21:58  escalation done rc=0
+2026-07-13T01:21:58  waking codex: pending inbox handoffs
+2026-07-13T01:21:58  codex wake done rc=0
+2026-07-13T01:30:58  wake ok  stop=quiescent  frame=wf-20260712-163118-21742f
+2026-07-13T01:30:58  escalating: due clock goal -> model episode
+2026-07-13T01:30:58  escalation done rc=0
+2026-07-13T01:30:58  waking codex: pending inbox handoffs
+2026-07-13T01:30:58  codex wake done rc=0
+2026-07-13T01:39:58  wake ok  stop=quiescent  frame=wf-20260712-164017-aef781
+2026-07-13T01:39:58  escalating: due clock goal -> model episode
+2026-07-13T01:39:58  escalation done rc=0
+2026-07-13T01:39:58  waking codex: pending inbox handoffs
+2026-07-13T01:39:58  codex wake done rc=0
+2026-07-13T01:48:58  wake ok  stop=quiescent  frame=wf-20260712-164918-f524ef
+2026-07-13T01:48:58  escalating: due clock goal -> model episode
+2026-07-13T01:48:58  escalation done rc=0
+2026-07-13T01:48:58  waking codex: pending inbox handoffs
+2026-07-13T01:48:58  codex wake done rc=0
+2026-07-13T01:58:58  wake ok  stop=quiescent  frame=wf-20260712-165918-d9d524
+2026-07-13T01:58:58  escalating: due clock goal -> model episode
+2026-07-13T01:58:58  escalation done rc=0
+2026-07-13T01:58:58  waking codex: pending inbox handoffs
+2026-07-13T01:58:58  codex wake done rc=0
+2026-07-13T02:07:58  wake ok  stop=quiescent  frame=wf-20260712-170816-0f9904
+2026-07-13T02:07:58  escalating: due clock goal -> model episode
+2026-07-13T02:07:58  escalation done rc=0
+2026-07-13T02:07:58  waking codex: pending inbox handoffs
+2026-07-13T02:07:58  codex wake done rc=0
+2026-07-13T02:15:58  wake ok  stop=quiescent  frame=wf-20260712-171610-2bfc09
+2026-07-13T02:15:58  escalating: due clock goal -> model episode
+2026-07-13T02:15:58  escalation done rc=0
+2026-07-13T02:15:58  waking codex: pending inbox handoffs
+2026-07-13T02:15:58  codex wake done rc=0
+2026-07-13T02:23:59  wake ok  stop=quiescent  frame=wf-20260712-172417-1abe08
+2026-07-13T02:23:59  escalating: due clock goal -> model episode
+2026-07-13T02:23:59  escalation done rc=0
+2026-07-13T02:23:59  waking codex: pending inbox handoffs
+2026-07-13T02:23:59  codex wake done rc=0
+2026-07-13T02:32:58  wake ok  stop=quiescent  frame=wf-20260712-173313-d7b950
+2026-07-13T02:32:58  escalating: due clock goal -> model episode
+2026-07-13T02:32:58  escalation done rc=0
+2026-07-13T02:32:58  waking codex: pending inbox handoffs
+2026-07-13T02:32:58  codex wake done rc=0
+2026-07-13T02:41:58  wake ok  stop=quiescent  frame=wf-20260712-174212-4fbe82
+2026-07-13T02:41:58  escalating: due clock goal -> model episode
+2026-07-13T02:41:58  escalation done rc=0
+2026-07-13T02:41:58  waking codex: pending inbox handoffs
+2026-07-13T02:41:58  codex wake done rc=0
+2026-07-13T02:49:58  wake ok  stop=quiescent  frame=wf-20260712-175011-cff4e4
+2026-07-13T02:49:58  escalating: due clock goal -> model episode
+2026-07-13T02:49:58  escalation done rc=0
+2026-07-13T02:49:58  waking codex: pending inbox handoffs
+2026-07-13T02:49:58  codex wake done rc=0
+2026-07-13T02:57:58  wake ok  stop=quiescent  frame=wf-20260712-175817-93991c
+2026-07-13T02:57:58  escalating: due clock goal -> model episode
+2026-07-13T02:57:58  escalation done rc=0
+2026-07-13T02:57:58  waking codex: pending inbox handoffs
+2026-07-13T02:57:58  codex wake done rc=0
+2026-07-13T03:06:58  wake ok  stop=quiescent  frame=wf-20260712-180718-99798a
+2026-07-13T03:06:58  escalating: due clock goal -> model episode
+2026-07-13T03:06:58  escalation done rc=0
+2026-07-13T03:06:58  waking codex: pending inbox handoffs
+2026-07-13T03:06:58  codex wake done rc=0
+2026-07-13T03:15:58  wake ok  stop=quiescent  frame=wf-20260712-181617-33d22f
+2026-07-13T03:15:58  escalating: due clock goal -> model episode
+2026-07-13T03:15:58  escalation done rc=0
+2026-07-13T03:15:58  waking codex: pending inbox handoffs
+2026-07-13T03:15:58  codex wake done rc=0
+2026-07-13T03:25:58  wake ok  stop=quiescent  frame=wf-20260712-182617-7c6d54
+2026-07-13T03:25:58  escalating: due clock goal -> model episode
+2026-07-13T03:25:58  escalation done rc=0
+2026-07-13T03:25:58  waking codex: pending inbox handoffs
+2026-07-13T03:25:58  codex wake done rc=0
+2026-07-13T03:34:58  wake ok  stop=quiescent  frame=wf-20260712-183511-0e30c0
+2026-07-13T03:34:58  escalating: due clock goal -> model episode
+2026-07-13T03:34:58  escalation done rc=0
+2026-07-13T03:34:58  waking codex: pending inbox handoffs
+2026-07-13T03:34:58  codex wake done rc=0
+2026-07-13T03:42:58  wake ok  stop=quiescent  frame=wf-20260712-184319-8a8caa
+2026-07-13T03:42:58  escalating: due clock goal -> model episode
+2026-07-13T03:42:58  escalation done rc=0
+2026-07-13T03:42:58  waking codex: pending inbox handoffs
+2026-07-13T03:42:58  codex wake done rc=0
+2026-07-13T03:50:58  wake ok  stop=quiescent  frame=wf-20260712-185118-9c3ede
+2026-07-13T03:50:58  escalating: due clock goal -> model episode
+2026-07-13T03:50:58  escalation done rc=0
+2026-07-13T03:50:58  waking codex: pending inbox handoffs
+2026-07-13T03:50:58  codex wake done rc=0
+2026-07-13T04:00:58  wake ok  stop=quiescent  frame=wf-20260712-190119-d5fa4f
+2026-07-13T04:00:58  escalating: due clock goal -> model episode
+2026-07-13T04:00:58  escalation done rc=0
+2026-07-13T04:00:58  waking codex: pending inbox handoffs
+2026-07-13T04:00:58  codex wake done rc=0
+2026-07-13T04:09:58  wake ok  stop=quiescent  frame=wf-20260712-191020-0344c6
+2026-07-13T04:09:58  escalating: due clock goal -> model episode
+2026-07-13T04:09:58  escalation done rc=0
+2026-07-13T04:09:58  waking codex: pending inbox handoffs
+2026-07-13T04:09:58  codex wake done rc=0
+2026-07-13T04:19:58  wake ok  stop=quiescent  frame=wf-20260712-192018-826937
+2026-07-13T04:19:58  escalating: due clock goal -> model episode
+2026-07-13T04:19:58  escalation done rc=0
+2026-07-13T04:19:58  waking codex: pending inbox handoffs
+2026-07-13T04:19:58  codex wake done rc=0
+2026-07-13T04:28:58  wake ok  stop=quiescent  frame=wf-20260712-192919-48ef36
+2026-07-13T04:28:58  escalating: due clock goal -> model episode
+2026-07-13T04:28:58  escalation done rc=0
+2026-07-13T04:28:58  waking codex: pending inbox handoffs
+2026-07-13T04:28:58  codex wake done rc=0
+2026-07-13T04:37:58  wake ok  stop=quiescent  frame=wf-20260712-193819-e84a94
+2026-07-13T04:37:58  escalating: due clock goal -> model episode
+2026-07-13T04:37:58  escalation done rc=0
+2026-07-13T04:37:58  waking codex: pending inbox handoffs
+2026-07-13T04:37:58  codex wake done rc=0
+2026-07-13T04:46:58  wake ok  stop=quiescent  frame=wf-20260712-194719-59f2e2
+2026-07-13T04:46:58  escalating: due clock goal -> model episode
+2026-07-13T04:46:58  escalation done rc=0
+2026-07-13T04:46:58  waking codex: pending inbox handoffs
+2026-07-13T04:56:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-195633-c8ca9e', '_rc': 1})
+2026-07-13T04:56:58  escalating: due clock goal -> model episode
+2026-07-13T04:46:58  codex wake done rc=0
+2026-07-13T04:56:58  escalation done rc=0
+2026-07-13T04:56:58  waking codex: pending inbox handoffs
+2026-07-13T05:06:58  wake ok  stop=quiescent  frame=wf-20260712-200719-d814a3
+2026-07-13T05:06:58  escalating: due clock goal -> model episode
+2026-07-13T04:56:58  codex wake done rc=0
+2026-07-13T05:06:58  escalation done rc=0
+2026-07-13T05:06:58  waking codex: pending inbox handoffs
+2026-07-13T05:06:58  codex wake done rc=0
+2026-07-13T05:15:58  wake ok  stop=quiescent  frame=wf-20260712-201618-0dea35
+2026-07-13T05:15:58  escalating: due clock goal -> model episode
+2026-07-13T05:15:58  escalation done rc=0
+2026-07-13T05:15:58  waking codex: pending inbox handoffs
+2026-07-13T05:15:58  codex wake done rc=0
+2026-07-13T05:22:58  wake ok  stop=quiescent  frame=wf-20260712-202319-ad8f81
+2026-07-13T05:22:58  escalating: due clock goal -> model episode
+2026-07-13T05:22:58  escalation done rc=0
+2026-07-13T05:22:58  waking codex: pending inbox handoffs
+2026-07-13T05:22:58  codex wake done rc=0
+2026-07-13T05:31:58  wake ok  stop=quiescent  frame=wf-20260712-203219-37af11
+2026-07-13T05:31:58  escalating: due clock goal -> model episode
+2026-07-13T05:31:58  escalation done rc=0
+2026-07-13T05:31:58  waking codex: pending inbox handoffs
+2026-07-13T05:31:58  codex wake done rc=0
+2026-07-13T05:38:58  wake ok  stop=quiescent  frame=wf-20260712-203909-ce4c95
+2026-07-13T05:38:58  escalating: due clock goal -> model episode
+2026-07-13T05:38:58  escalation done rc=1
+2026-07-13T05:38:58  waking codex: pending inbox handoffs
+2026-07-13T05:38:58  codex wake done rc=1
+2026-07-13T05:45:58  wake ok  stop=quiescent  frame=wf-20260712-204614-416230
+2026-07-13T05:45:58  escalating: due clock goal -> model episode
+2026-07-13T05:45:58  escalation done rc=1
+2026-07-13T05:45:58  waking codex: pending inbox handoffs
+2026-07-13T05:45:58  codex wake done rc=1
+2026-07-13T05:50:58  wake ok  stop=quiescent  frame=wf-20260712-205119-3a209b
+2026-07-13T05:50:58  escalating: due clock goal -> model episode
+2026-07-13T05:50:58  escalation done rc=1
+2026-07-13T05:50:58  waking codex: pending inbox handoffs
+2026-07-13T05:50:58  codex wake done rc=1
+2026-07-13T05:55:58  wake ok  stop=quiescent  frame=wf-20260712-205613-e61b29
+2026-07-13T05:55:58  escalating: due clock goal -> model episode
+2026-07-13T05:55:58  escalation done rc=1
+2026-07-13T05:55:58  waking codex: pending inbox handoffs
+2026-07-13T05:55:58  codex wake done rc=1
+2026-07-13T06:00:58  wake ok  stop=quiescent  frame=wf-20260712-210119-5ff938
+2026-07-13T06:00:58  escalating: due clock goal -> model episode
+2026-07-13T06:00:58  escalation done rc=1
+2026-07-13T06:00:58  waking codex: pending inbox handoffs
+2026-07-13T06:00:58  codex wake done rc=1
+2026-07-13T06:06:58  wake ok  stop=quiescent  frame=wf-20260712-210718-334678
+2026-07-13T06:06:58  escalating: due clock goal -> model episode
+2026-07-13T06:06:58  escalation done rc=1
+2026-07-13T06:06:58  waking codex: pending inbox handoffs
+2026-07-13T06:06:58  codex wake done rc=1
+2026-07-13T06:11:59  wake ok  stop=quiescent  frame=wf-20260712-211215-e48b3d
+2026-07-13T06:11:59  escalating: due clock goal -> model episode
+2026-07-13T06:11:59  escalation done rc=1
+2026-07-13T06:11:59  waking codex: pending inbox handoffs
+2026-07-13T06:11:59  codex wake done rc=1
+2026-07-13T06:16:57  wake ok  stop=quiescent  frame=wf-20260712-211718-fabfa2
+2026-07-13T06:16:57  escalating: due clock goal -> model episode
+2026-07-13T06:16:57  escalation done rc=1
+2026-07-13T06:16:57  waking codex: pending inbox handoffs
+2026-07-13T06:16:57  codex wake done rc=1
+2026-07-13T06:21:58  wake ok  stop=quiescent  frame=wf-20260712-212218-fe113c
+2026-07-13T06:21:58  escalating: due clock goal -> model episode
+2026-07-13T06:21:58  escalation done rc=1
+2026-07-13T06:21:58  waking codex: pending inbox handoffs
+2026-07-13T06:21:58  codex wake done rc=1
+2026-07-13T06:26:58  wake ok  stop=quiescent  frame=wf-20260712-212718-4f40c1
+2026-07-13T06:26:58  escalating: due clock goal -> model episode
+2026-07-13T06:26:58  escalation done rc=1
+2026-07-13T06:26:58  waking codex: pending inbox handoffs
+2026-07-13T06:26:58  codex wake done rc=1
+2026-07-13T06:32:58  wake ok  stop=quiescent  frame=wf-20260712-213315-612812
+2026-07-13T06:32:58  escalating: due clock goal -> model episode
+2026-07-13T06:32:58  escalation done rc=1
+2026-07-13T06:32:58  waking codex: pending inbox handoffs
+2026-07-13T06:32:58  codex wake done rc=1
+2026-07-13T06:37:58  wake ok  stop=quiescent  frame=wf-20260712-213817-88b600
+2026-07-13T06:37:58  escalating: due clock goal -> model episode
+2026-07-13T06:37:58  escalation done rc=1
+2026-07-13T06:37:58  waking codex: pending inbox handoffs
+2026-07-13T06:37:58  codex wake done rc=1
+2026-07-13T06:43:58  wake ok  stop=quiescent  frame=wf-20260712-214418-00ec40
+2026-07-13T06:43:58  escalating: due clock goal -> model episode
+2026-07-13T06:43:58  escalation done rc=1
+2026-07-13T06:43:58  waking codex: pending inbox handoffs
+2026-07-13T06:43:58  codex wake done rc=1
+2026-07-13T06:48:58  wake ok  stop=quiescent  frame=wf-20260712-214919-cc5c10
+2026-07-13T06:48:58  escalating: due clock goal -> model episode
+2026-07-13T06:48:58  escalation done rc=1
+2026-07-13T06:48:58  waking codex: pending inbox handoffs
+2026-07-13T06:48:58  codex wake done rc=1
+2026-07-13T06:54:58  wake ok  stop=quiescent  frame=wf-20260712-215516-4d550e
+2026-07-13T06:54:58  escalating: due clock goal -> model episode
+2026-07-13T06:54:58  escalation done rc=1
+2026-07-13T06:54:58  waking codex: pending inbox handoffs
+2026-07-13T06:54:58  codex wake done rc=1
+2026-07-13T07:00:58  wake ok  stop=quiescent  frame=wf-20260712-220118-3beb99
+2026-07-13T07:00:58  escalating: due clock goal -> model episode
+2026-07-13T07:00:58  escalation done rc=1
+2026-07-13T07:00:58  waking codex: pending inbox handoffs
+2026-07-13T07:00:58  codex wake done rc=1
+2026-07-13T07:05:58  wake ok  stop=quiescent  frame=wf-20260712-220618-2631d1
+2026-07-13T07:05:58  escalating: due clock goal -> model episode
+2026-07-13T07:05:58  escalation done rc=1
+2026-07-13T07:05:58  waking codex: pending inbox handoffs
+2026-07-13T07:05:58  codex wake done rc=1
+2026-07-13T07:10:58  wake ok  stop=quiescent  frame=wf-20260712-221116-b57aff
+2026-07-13T07:10:58  escalating: due clock goal -> model episode
+2026-07-13T07:10:58  escalation done rc=1
+2026-07-13T07:10:58  waking codex: pending inbox handoffs
+2026-07-13T07:10:58  codex wake done rc=1
+2026-07-13T07:15:58  wake ok  stop=quiescent  frame=wf-20260712-221617-795893
+2026-07-13T07:15:58  escalating: due clock goal -> model episode
+2026-07-13T07:15:58  escalation done rc=1
+2026-07-13T07:15:58  waking codex: pending inbox handoffs
+2026-07-13T07:15:58  codex wake done rc=1
+2026-07-13T07:20:58  wake ok  stop=quiescent  frame=wf-20260712-222119-3f94d3
+2026-07-13T07:20:58  escalating: due clock goal -> model episode
+2026-07-13T07:20:58  escalation done rc=1
+2026-07-13T07:20:58  waking codex: pending inbox handoffs
+2026-07-13T07:20:58  codex wake done rc=1
+2026-07-13T07:25:58  wake ok  stop=quiescent  frame=wf-20260712-222620-680176
+2026-07-13T07:25:58  escalating: due clock goal -> model episode
+2026-07-13T07:25:58  escalation done rc=1
+2026-07-13T07:25:58  waking codex: pending inbox handoffs
+2026-07-13T07:25:58  codex wake done rc=1
+2026-07-13T07:31:58  wake ok  stop=quiescent  frame=wf-20260712-223219-4707f3
+2026-07-13T07:31:58  escalating: due clock goal -> model episode
+2026-07-13T07:31:58  escalation done rc=1
+2026-07-13T07:31:58  waking codex: pending inbox handoffs
+2026-07-13T07:31:58  codex wake done rc=1
+2026-07-13T07:37:59  wake ok  stop=quiescent  frame=wf-20260712-223834-30440f
+2026-07-13T07:37:59  escalating: due clock goal -> model episode
+2026-07-13T07:37:59  escalation done rc=0
+2026-07-13T07:37:59  waking codex: pending inbox handoffs
+2026-07-13T07:37:59  codex wake done rc=0
+2026-07-13T07:46:59  wake ok  stop=quiescent  frame=wf-20260712-224731-584037
+2026-07-13T07:46:59  escalating: due clock goal -> model episode
+2026-07-13T07:46:59  escalation done rc=0
+2026-07-13T07:46:59  waking codex: pending inbox handoffs
+2026-07-13T07:46:59  codex wake done rc=0
+2026-07-13T07:56:59  wake ok  stop=quiescent  frame=wf-20260712-225735-bd43b4
+2026-07-13T07:56:59  escalating: due clock goal -> model episode
+2026-07-13T07:56:59  escalation done rc=0
+2026-07-13T07:56:59  waking codex: pending inbox handoffs
+2026-07-13T07:56:59  codex wake done rc=0
+2026-07-13T08:07:00  wake ok  stop=quiescent  frame=wf-20260712-230739-bbe56a
+2026-07-13T08:07:00  escalating: due clock goal -> model episode
+2026-07-13T08:07:00  escalation done rc=0
+2026-07-13T08:07:00  waking codex: pending inbox handoffs
+2026-07-13T08:07:00  codex wake done rc=0
+2026-07-13T08:15:59  wake ok  stop=quiescent  frame=wf-20260712-231635-d6acee
+2026-07-13T08:15:59  escalating: due clock goal -> model episode
+2026-07-13T08:15:59  escalation done rc=0
+2026-07-13T08:15:59  waking codex: pending inbox handoffs
+2026-07-13T08:15:59  codex wake done rc=0
+2026-07-13T08:26:03  wake ok  stop=quiescent  frame=wf-20260712-232637-cc5137
+2026-07-13T08:26:03  waking codex: pending inbox handoffs
+2026-07-13T08:26:03  codex wake done rc=0
+2026-07-13T08:31:59  wake ok  stop=quiescent  frame=wf-20260712-233225-0d5ce1
+2026-07-13T08:31:59  waking codex: pending inbox handoffs
+2026-07-13T08:31:59  codex wake done rc=0
+2026-07-13T08:38:59  wake ok  stop=quiescent  frame=wf-20260712-233933-317ad0
+2026-07-13T08:38:59  waking codex: pending inbox handoffs
+2026-07-13T08:38:59  codex wake done rc=0
+2026-07-13T08:43:00  wake ok  stop=quiescent  frame=wf-20260712-234340-9622e0
+2026-07-13T08:43:00  escalating: due clock goal -> model episode
+2026-07-13T08:43:00  escalation done rc=0
+2026-07-13T08:43:00  waking codex: pending inbox handoffs
+2026-07-13T08:52:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260712-235248-0efa92', '_rc': 1})
+2026-07-13T08:52:59  waking codex: pending inbox handoffs
+2026-07-13T08:52:59  codex wake done rc=0
+2026-07-13T08:43:00  codex wake done rc=0
+2026-07-13T08:55:00  wake ok  stop=quiescent  frame=wf-20260712-235539-08c4bc
+2026-07-13T08:55:00  waking codex: pending inbox handoffs
+2026-07-13T08:55:00  codex wake done rc=0
+2026-07-13T08:59:59  wake ok  stop=quiescent  frame=wf-20260713-000040-302396
+2026-07-13T08:59:59  waking codex: pending inbox handoffs
+2026-07-13T08:59:59  codex wake done rc=0
+2026-07-13T09:06:59  wake ok  stop=quiescent  frame=wf-20260713-000743-29b73b
+2026-07-13T09:06:59  escalating: due clock goal -> model episode
+2026-07-13T09:06:59  escalation done rc=0
+2026-07-13T09:06:59  waking codex: pending inbox handoffs
+2026-07-13T09:16:59  wake ok  stop=quiescent  frame=wf-20260713-001740-8ae1fa
+2026-07-13T09:16:59  escalating: due clock goal -> model episode
+2026-07-13T09:06:59  codex wake done rc=0
+2026-07-13T09:16:59  escalation done rc=0
+2026-07-13T09:16:59  waking codex: pending inbox handoffs
+2026-07-13T09:16:59  codex wake done rc=0
+2026-07-13T09:26:58  wake ok  stop=quiescent  frame=wf-20260713-002726-f84956
+2026-07-13T09:26:58  escalating: due clock goal -> model episode
+2026-07-13T09:26:58  escalation done rc=0
+2026-07-13T09:26:58  waking codex: pending inbox handoffs
+2026-07-13T09:26:58  codex wake done rc=0
+2026-07-13T09:34:58  wake ok  stop=quiescent  frame=wf-20260713-003521-68871d
+2026-07-13T09:34:58  waking codex: pending inbox handoffs
+2026-07-13T09:34:58  codex wake done rc=0
+2026-07-13T09:38:58  wake ok  stop=quiescent  frame=wf-20260713-003921-36bc53
+2026-07-13T09:38:58  escalating: due clock goal -> model episode
+2026-07-13T09:38:58  escalation done rc=0
+2026-07-13T09:38:58  waking codex: pending inbox handoffs
+2026-07-13T09:38:58  codex wake done rc=0
+2026-07-13T09:45:58  wake ok  stop=quiescent  frame=wf-20260713-004621-f11837
+2026-07-13T09:45:58  escalating: due clock goal -> model episode
+2026-07-13T09:45:58  escalation done rc=0
+2026-07-13T09:45:58  waking codex: pending inbox handoffs
+2026-07-13T09:45:58  codex wake done rc=0
+2026-07-13T09:49:58  wake ok  stop=quiescent  frame=wf-20260713-005017-34e967
+2026-07-13T09:49:58  waking codex: pending inbox handoffs
+2026-07-13T09:49:58  codex wake done rc=0
+2026-07-13T09:53:58  wake ok  stop=quiescent  frame=wf-20260713-005423-2e1986
+2026-07-13T09:53:58  escalating: due clock goal -> model episode
+2026-07-13T09:53:58  escalation done rc=0
+2026-07-13T09:53:58  waking codex: pending inbox handoffs
+2026-07-13T09:53:58  codex wake done rc=0
+2026-07-13T10:01:58  wake ok  stop=quiescent  frame=wf-20260713-010227-cd1ed2
+2026-07-13T10:01:58  escalating: due clock goal -> model episode
+2026-07-13T10:01:58  escalation done rc=0
+2026-07-13T10:01:58  waking codex: pending inbox handoffs
+2026-07-13T10:01:58  codex wake done rc=0
+2026-07-13T10:10:58  wake ok  stop=quiescent  frame=wf-20260713-011124-51490b
+2026-07-13T10:10:58  escalating: due clock goal -> model episode
+2026-07-13T10:10:58  escalation done rc=0
+2026-07-13T10:10:58  waking codex: pending inbox handoffs
+2026-07-13T10:10:58  codex wake done rc=0
+2026-07-13T10:20:58  wake ok  stop=quiescent  frame=wf-20260713-012120-f12dae
+2026-07-13T10:20:58  escalating: due clock goal -> model episode
+2026-07-13T10:20:58  escalation done rc=0
+2026-07-13T10:20:58  waking codex: pending inbox handoffs
+2026-07-13T10:20:58  codex wake done rc=0
+2026-07-13T10:30:58  wake ok  stop=quiescent  frame=wf-20260713-013122-217804
+2026-07-13T10:30:58  escalating: due clock goal -> model episode
+2026-07-13T10:30:58  escalation done rc=0
+2026-07-13T10:30:58  waking codex: pending inbox handoffs
+2026-07-13T10:40:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-014000-dd97fb', '_rc': 1})
+2026-07-13T10:40:58  escalating: due clock goal -> model episode
+2026-07-13T10:30:58  codex wake done rc=0
+2026-07-13T10:40:58  escalation done rc=0
+2026-07-13T10:40:58  waking codex: pending inbox handoffs
+2026-07-13T10:40:58  codex wake done rc=0
+2026-07-13T10:49:58  wake ok  stop=quiescent  frame=wf-20260713-015022-d000ea
+2026-07-13T10:49:58  escalating: due clock goal -> model episode
+2026-07-13T10:49:58  escalation done rc=0
+2026-07-13T10:49:58  waking codex: pending inbox handoffs
+2026-07-13T10:49:58  codex wake done rc=0
+2026-07-13T10:58:58  wake ok  stop=quiescent  frame=wf-20260713-015920-f3a0b4
+2026-07-13T10:58:58  escalating: due clock goal -> model episode
+2026-07-13T10:58:58  escalation done rc=0
+2026-07-13T10:58:58  waking codex: pending inbox handoffs
+2026-07-13T10:58:58  codex wake done rc=0
+2026-07-13T11:07:58  wake ok  stop=quiescent  frame=wf-20260713-020822-0f4141
+2026-07-13T11:07:58  escalating: due clock goal -> model episode
+2026-07-13T11:07:58  escalation done rc=0
+2026-07-13T11:07:58  waking codex: pending inbox handoffs
+2026-07-13T11:07:58  codex wake done rc=0
+2026-07-13T11:17:58  wake ok  stop=quiescent  frame=wf-20260713-021821-050611
+2026-07-13T11:17:58  escalating: due clock goal -> model episode
+2026-07-13T11:17:58  escalation done rc=0
+2026-07-13T11:17:58  waking codex: pending inbox handoffs
+2026-07-13T11:17:58  codex wake done rc=0
+2026-07-13T11:24:59  wake ok  stop=quiescent  frame=wf-20260713-022527-df735d
+2026-07-13T11:24:59  escalating: due clock goal -> model episode
+2026-07-13T11:24:59  escalation done rc=0
+2026-07-13T11:24:59  waking codex: pending inbox handoffs
+2026-07-13T11:24:59  codex wake done rc=0
+2026-07-13T11:32:58  wake ok  stop=quiescent  frame=wf-20260713-023324-f00c97
+2026-07-13T11:32:58  escalating: due clock goal -> model episode
+2026-07-13T11:32:58  escalation done rc=0
+2026-07-13T11:32:58  waking codex: pending inbox handoffs
+2026-07-13T11:42:58  wake ok  stop=quiescent  frame=wf-20260713-024326-828b00
+2026-07-13T11:42:58  escalating: due clock goal -> model episode
+2026-07-13T11:32:58  codex wake done rc=0
+2026-07-13T11:42:58  escalation done rc=0
+2026-07-13T11:42:58  waking codex: pending inbox handoffs
+2026-07-13T11:52:58  wake ok  stop=quiescent  frame=wf-20260713-025314-3c52a3
+2026-07-13T11:52:58  escalating: due clock goal -> model episode
+2026-07-13T11:42:58  codex wake done rc=0
+2026-07-13T11:52:58  escalation done rc=0
+2026-07-13T11:52:58  waking codex: pending inbox handoffs
+2026-07-13T11:52:58  codex wake done rc=0
+2026-07-13T12:02:58  wake ok  stop=quiescent  frame=wf-20260713-030321-ca4970
+2026-07-13T12:02:58  escalating: due clock goal -> model episode
+2026-07-13T12:02:58  escalation done rc=0
+2026-07-13T12:02:58  waking codex: pending inbox handoffs
+2026-07-13T12:02:58  codex wake done rc=0
+2026-07-13T12:12:58  wake ok  stop=quiescent  frame=wf-20260713-031329-5997c2
+2026-07-13T12:12:58  escalating: due clock goal -> model episode
+2026-07-13T12:12:58  escalation done rc=0
+2026-07-13T12:12:58  waking codex: pending inbox handoffs
+2026-07-13T12:12:58  codex wake done rc=0
+2026-07-13T12:20:58  wake ok  stop=quiescent  frame=wf-20260713-032122-b5ef99
+2026-07-13T12:20:58  escalating: due clock goal -> model episode
+2026-07-13T12:20:58  escalation done rc=0
+2026-07-13T12:20:58  waking codex: pending inbox handoffs
+2026-07-13T12:20:58  codex wake done rc=0
+2026-07-13T12:29:58  wake ok  stop=quiescent  frame=wf-20260713-033021-a34f01
+2026-07-13T12:29:58  escalating: due clock goal -> model episode
+2026-07-13T12:29:58  escalation done rc=0
+2026-07-13T12:29:58  waking codex: pending inbox handoffs
+2026-07-13T12:29:58  codex wake done rc=0
+2026-07-13T12:36:59  wake ok  stop=quiescent  frame=wf-20260713-033721-fcb05c
+2026-07-13T12:36:59  escalating: due clock goal -> model episode
+2026-07-13T12:36:59  escalation done rc=0
+2026-07-13T12:36:59  waking codex: pending inbox handoffs
+2026-07-13T12:36:59  codex wake done rc=1
+2026-07-13T12:44:58  wake ok  stop=quiescent  frame=wf-20260713-034522-de00d7
+2026-07-13T12:44:58  escalating: due clock goal -> model episode
+2026-07-13T12:44:58  escalation done rc=0
+2026-07-13T12:44:58  waking codex: pending inbox handoffs
+2026-07-13T12:44:58  codex wake done rc=0
+2026-07-13T12:52:59  wake ok  stop=quiescent  frame=wf-20260713-035317-d997b5
+2026-07-13T12:52:59  escalating: due clock goal -> model episode
+2026-07-13T12:52:59  escalation done rc=0
+2026-07-13T12:52:59  waking codex: pending inbox handoffs
+2026-07-13T12:52:59  codex wake done rc=0
+2026-07-13T13:00:59  wake ok  stop=quiescent  frame=wf-20260713-040125-56121b
+2026-07-13T13:00:59  escalating: due clock goal -> model episode
+2026-07-13T13:00:59  escalation done rc=0
+2026-07-13T13:00:59  waking codex: pending inbox handoffs
+2026-07-13T13:00:59  codex wake done rc=0
+2026-07-13T13:11:58  wake ok  stop=quiescent  frame=wf-20260713-041235-1994dd
+2026-07-13T13:11:58  escalating: due clock goal -> model episode
+2026-07-13T13:11:58  escalation done rc=0
+2026-07-13T13:11:58  waking codex: pending inbox handoffs
+2026-07-13T13:11:58  codex wake done rc=0
+2026-07-13T13:21:59  wake ok  stop=quiescent  frame=wf-20260713-042229-39ae7a
+2026-07-13T13:21:59  waking codex: pending inbox handoffs
+2026-07-13T13:21:59  codex wake done rc=0
+2026-07-13T13:28:58  wake ok  stop=quiescent  frame=wf-20260713-043012-b377aa
+2026-07-13T13:28:58  waking codex: pending inbox handoffs
+2026-07-13T13:28:58  codex wake done rc=0
+2026-07-13T13:38:59  wake ok  stop=quiescent  frame=wf-20260713-043938-bdb149
+2026-07-13T13:38:59  escalating: due clock goal -> model episode
+2026-07-13T13:48:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-044818-a4bbf5', '_rc': 1})
+2026-07-13T13:48:59  waking codex: pending inbox handoffs
+2026-07-13T13:38:59  escalation done rc=0
+2026-07-13T13:38:59  waking codex: pending inbox handoffs
+2026-07-13T13:38:59  codex wake done rc=0
+2026-07-13T13:48:59  codex wake done rc=0
+2026-07-13T13:55:59  wake ok  stop=quiescent  frame=wf-20260713-045638-2be77d
+2026-07-13T13:55:59  escalating: due clock goal -> model episode
+2026-07-13T13:55:59  escalation done rc=0
+2026-07-13T13:55:59  waking codex: pending inbox handoffs
+2026-07-13T14:05:59  wake ok  stop=quiescent  frame=wf-20260713-050634-bc8ca1
+2026-07-13T14:05:59  escalating: due clock goal -> model episode
+2026-07-13T13:55:59  codex wake done rc=0
+2026-07-13T14:05:59  escalation done rc=0
+2026-07-13T14:05:59  waking codex: pending inbox handoffs
+2026-07-13T14:16:00  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: branch head conflict: expected wf-20260713-051653-d6eb21, received wf-20260713-051012-e952af', '_rc': 1})
+2026-07-13T14:16:00  escalating: due clock goal -> model episode
+2026-07-13T14:05:59  codex wake done rc=0
+2026-07-13T14:16:00  escalation done rc=0
+2026-07-13T14:16:00  waking codex: pending inbox handoffs
+2026-07-13T14:16:00  codex wake done rc=0
+2026-07-13T14:26:59  wake ok  stop=quiescent  frame=wf-20260713-052741-0b4aa6
+2026-07-13T14:26:59  escalating: due clock goal -> model episode
+2026-07-13T14:26:59  escalation done rc=0
+2026-07-13T14:26:59  waking codex: pending inbox handoffs
+2026-07-13T14:36:59  wake ok  stop=quiescent  frame=wf-20260713-053750-cf6b5e
+2026-07-13T14:36:59  escalating: due clock goal -> model episode
+2026-07-13T14:26:59  codex wake done rc=0
+2026-07-13T14:36:59  escalation done rc=0
+2026-07-13T14:36:59  waking codex: pending inbox handoffs
+2026-07-13T14:46:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-054712-1dc078', '_rc': 1})
+2026-07-13T14:46:59  escalating: due clock goal -> model episode
+2026-07-13T14:36:59  codex wake done rc=0
+2026-07-13T14:46:59  escalation done rc=0
+2026-07-13T14:46:59  waking codex: pending inbox handoffs
+2026-07-13T14:56:59  wake ok  stop=quiescent  frame=wf-20260713-055724-e2adf5
+2026-07-13T14:56:59  escalating: due clock goal -> model episode
+2026-07-13T14:46:59  codex wake done rc=0
+2026-07-13T15:06:59  wake ok  stop=quiescent  frame=wf-20260713-060727-7975ec
+2026-07-13T15:06:59  waking codex: pending inbox handoffs
+2026-07-13T14:56:59  escalation done rc=0
+2026-07-13T14:56:59  waking codex: pending inbox handoffs
+2026-07-13T14:56:59  codex wake done rc=0
+2026-07-13T15:06:59  codex wake done rc=0
+2026-07-13T15:15:58  wake ok  stop=quiescent  frame=wf-20260713-061623-7edd97
+2026-07-13T15:15:58  waking codex: pending inbox handoffs
+2026-07-13T15:15:58  codex wake done rc=0
+2026-07-13T15:20:58  wake ok  stop=quiescent  frame=wf-20260713-062120-8f4c67
+2026-07-13T15:20:58  escalating: due clock goal -> model episode
+2026-07-13T15:20:58  escalation done rc=0
+2026-07-13T15:20:58  waking codex: pending inbox handoffs
+2026-07-13T15:30:58  wake ok  stop=quiescent  frame=wf-20260713-063121-ce76d3
+2026-07-13T15:30:58  escalating: due clock goal -> model episode
+2026-07-13T15:20:58  codex wake done rc=0
+2026-07-13T15:30:58  escalation done rc=0
+2026-07-13T15:30:58  waking codex: pending inbox handoffs
+2026-07-13T15:40:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: branch head conflict: expected wf-20260713-064115-95d170, received wf-20260713-063627-a41434', '_rc': 1})
+2026-07-13T15:40:58  waking codex: pending inbox handoffs
+2026-07-13T15:40:58  codex wake done rc=0
+2026-07-13T15:41:58  wake ok  stop=quiescent  frame=wf-20260713-064229-b68782
+2026-07-13T15:41:58  waking codex: pending inbox handoffs
+2026-07-13T15:41:58  codex wake done rc=0
+2026-07-13T15:30:58  codex wake done rc=0
+2026-07-13T15:42:58  wake ok  stop=quiescent  frame=wf-20260713-064322-cdc9ff
+2026-07-13T15:42:58  waking codex: pending inbox handoffs
+2026-07-13T15:52:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-064539-f36f96', '_rc': 1})
+2026-07-13T15:52:58  waking codex: pending inbox handoffs
+2026-07-13T15:52:58  codex wake done rc=0
+2026-07-13T15:53:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-064539-f36f96', '_rc': 1})
+2026-07-13T15:53:58  waking codex: pending inbox handoffs
+2026-07-13T15:53:58  codex wake done rc=0
+2026-07-13T15:54:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-064539-f36f96', '_rc': 1})
+2026-07-13T15:54:58  waking codex: pending inbox handoffs
+2026-07-13T15:54:58  codex wake done rc=0
+2026-07-13T15:55:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-064539-f36f96', '_rc': 1})
+2026-07-13T15:55:59  waking codex: pending inbox handoffs
+2026-07-13T15:55:59  codex wake done rc=0
+2026-07-13T15:56:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-064539-f36f96', '_rc': 1})
+2026-07-13T15:56:59  escalating: due clock goal -> model episode
+2026-07-13T15:42:58  codex wake done rc=0
+2026-07-13T15:56:59  escalation done rc=0
+2026-07-13T15:56:59  waking codex: pending inbox handoffs
+2026-07-13T16:06:58  wake ok  stop=quiescent  frame=wf-20260713-070724-6964e5
+2026-07-13T16:06:58  escalating: due clock goal -> model episode
+2026-07-13T15:56:59  codex wake done rc=0
+2026-07-13T16:06:58  escalation done rc=0
+2026-07-13T16:06:58  waking codex: pending inbox handoffs
+2026-07-13T16:16:59  wake ok  stop=quiescent  frame=wf-20260713-071739-7be130
+2026-07-13T16:16:59  escalating: due clock goal -> model episode
+2026-07-13T16:06:58  codex wake done rc=0
+2026-07-13T16:16:59  escalation done rc=0
+2026-07-13T16:16:59  waking codex: pending inbox handoffs
+2026-07-13T16:27:58  wake ok  stop=quiescent  frame=wf-20260713-072829-af9e1f
+2026-07-13T16:27:58  escalating: due clock goal -> model episode
+2026-07-13T16:16:59  codex wake done rc=0
+2026-07-13T16:27:58  escalation done rc=0
+2026-07-13T16:27:58  waking codex: pending inbox handoffs
+2026-07-13T16:37:58  wake ok  stop=quiescent  frame=wf-20260713-073827-4606dd
+2026-07-13T16:37:58  escalating: due clock goal -> model episode
+2026-07-13T16:27:58  codex wake done rc=0
+2026-07-13T16:37:58  escalation done rc=0
+2026-07-13T16:37:58  waking codex: pending inbox handoffs
+2026-07-13T16:37:58  codex wake done rc=0
+2026-07-13T16:47:58  wake ok  stop=quiescent  frame=wf-20260713-074825-161449
+2026-07-13T16:47:58  escalating: due clock goal -> model episode
+2026-07-13T16:47:58  escalation done rc=0
+2026-07-13T16:47:58  waking codex: pending inbox handoffs
+2026-07-13T16:47:58  codex wake done rc=0
+2026-07-13T16:57:59  wake ok  stop=quiescent  frame=wf-20260713-075823-67aaab
+2026-07-13T16:57:59  escalating: due clock goal -> model episode
+2026-07-13T16:57:59  escalation done rc=0
+2026-07-13T16:57:59  waking codex: pending inbox handoffs
+2026-07-13T16:57:59  codex wake done rc=0
+2026-07-13T17:06:58  wake ok  stop=quiescent  frame=wf-20260713-080717-b169db
+2026-07-13T17:06:58  escalating: due clock goal -> model episode
+2026-07-13T17:06:58  escalation done rc=0
+2026-07-13T17:06:58  waking codex: pending inbox handoffs
+2026-07-13T17:16:58  wake ok  stop=quiescent  frame=wf-20260713-081731-de82a4
+2026-07-13T17:16:58  escalating: due clock goal -> model episode
+2026-07-13T17:06:58  codex wake done rc=0
+2026-07-13T17:16:58  escalation done rc=0
+2026-07-13T17:16:58  waking codex: pending inbox handoffs
+2026-07-13T17:16:58  codex wake done rc=0
+2026-07-13T17:26:58  wake ok  stop=quiescent  frame=wf-20260713-082725-93b154
+2026-07-13T17:26:58  escalating: due clock goal -> model episode
+2026-07-13T17:26:58  escalation done rc=0
+2026-07-13T17:26:58  waking codex: pending inbox handoffs
+2026-07-13T17:36:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-083637-37ad5a', '_rc': 1})
+2026-07-13T17:36:58  escalating: due clock goal -> model episode
+2026-07-13T17:26:58  codex wake done rc=0
+2026-07-13T17:36:58  escalation done rc=0
+2026-07-13T17:36:58  waking codex: pending inbox handoffs
+2026-07-13T17:36:58  codex wake done rc=0
+2026-07-13T17:45:58  wake ok  stop=quiescent  frame=wf-20260713-084623-01b9e0
+2026-07-13T17:45:58  escalating: due clock goal -> model episode
+2026-07-13T17:45:58  escalation done rc=0
+2026-07-13T17:45:58  waking codex: pending inbox handoffs
+2026-07-13T17:55:59  wake ok  stop=quiescent  frame=wf-20260713-085639-1bc66d
+2026-07-13T17:55:59  escalating: due clock goal -> model episode
+2026-07-13T17:45:58  codex wake done rc=0
+2026-07-13T17:55:59  escalation done rc=0
+2026-07-13T17:55:59  waking codex: pending inbox handoffs
+2026-07-13T17:55:59  codex wake done rc=0
+2026-07-13T18:05:59  wake ok  stop=quiescent  frame=wf-20260713-090646-e921cf
+2026-07-13T18:05:59  waking codex: pending inbox handoffs
+2026-07-13T18:05:59  codex wake done rc=0
+2026-07-13T18:12:59  wake ok  stop=quiescent  frame=wf-20260713-091336-fc9c8e
+2026-07-13T18:12:59  escalating: due clock goal -> model episode
+2026-07-13T18:12:59  escalation done rc=0
+2026-07-13T18:12:59  waking codex: pending inbox handoffs
+2026-07-13T18:12:59  codex wake done rc=0
+2026-07-13T18:22:59  wake ok  stop=quiescent  frame=wf-20260713-092326-689f2c
+2026-07-13T18:22:59  escalating: due clock goal -> model episode
+2026-07-13T18:22:59  escalation done rc=0
+2026-07-13T18:22:59  waking codex: pending inbox handoffs
+2026-07-13T18:22:59  codex wake done rc=0
+2026-07-13T18:31:59  wake ok  stop=quiescent  frame=wf-20260713-093227-abba56
+2026-07-13T18:31:59  escalating: due clock goal -> model episode
+2026-07-13T18:31:59  escalation done rc=0
+2026-07-13T18:31:59  waking codex: pending inbox handoffs
+2026-07-13T18:41:58  wake ok  stop=quiescent  frame=wf-20260713-094228-5423aa
+2026-07-13T18:41:58  escalating: due clock goal -> model episode
+2026-07-13T18:31:59  codex wake done rc=0
+2026-07-13T18:41:58  escalation done rc=0
+2026-07-13T18:41:58  waking codex: pending inbox handoffs
+2026-07-13T18:41:58  codex wake done rc=0
+2026-07-13T18:51:59  wake ok  stop=quiescent  frame=wf-20260713-095225-f0ec6e
+2026-07-13T18:51:59  waking codex: pending inbox handoffs
+2026-07-13T18:51:59  codex wake done rc=0
+2026-07-13T18:58:58  wake ok  stop=quiescent  frame=wf-20260713-095924-73c11f
+2026-07-13T18:58:58  escalating: due clock goal -> model episode
+2026-07-13T18:58:58  escalation done rc=0
+2026-07-13T18:58:58  waking codex: pending inbox handoffs
+2026-07-13T18:58:58  codex wake done rc=0
+2026-07-13T19:08:58  wake ok  stop=quiescent  frame=wf-20260713-100921-9f0e9d
+2026-07-13T19:08:58  escalating: due clock goal -> model episode
+2026-07-13T19:08:58  escalation done rc=1
+2026-07-13T19:08:58  waking codex: pending inbox handoffs
+2026-07-13T19:08:58  codex wake done rc=0
+2026-07-13T19:14:58  wake ok  stop=quiescent  frame=wf-20260713-101522-0f4187
+2026-07-13T19:14:58  escalating: due clock goal -> model episode
+2026-07-13T19:14:58  escalation done rc=1
+2026-07-13T19:14:58  waking codex: pending inbox handoffs
+2026-07-13T19:14:58  codex wake done rc=0
+2026-07-13T19:20:58  wake ok  stop=quiescent  frame=wf-20260713-102123-2913ca
+2026-07-13T19:20:58  escalating: due clock goal -> model episode
+2026-07-13T19:20:58  escalation done rc=1
+2026-07-13T19:20:58  waking codex: pending inbox handoffs
+2026-07-13T19:20:58  codex wake done rc=0
+2026-07-13T19:26:58  wake ok  stop=quiescent  frame=wf-20260713-102726-f69b93
+2026-07-13T19:26:58  escalating: due clock goal -> model episode
+2026-07-13T19:26:58  escalation done rc=1
+2026-07-13T19:26:58  waking codex: pending inbox handoffs
+2026-07-13T19:26:58  codex wake done rc=0
+2026-07-13T19:34:58  wake ok  stop=quiescent  frame=wf-20260713-103525-5d5a98
+2026-07-13T19:34:58  escalating: due clock goal -> model episode
+2026-07-13T19:34:58  escalation done rc=1
+2026-07-13T19:34:58  waking codex: pending inbox handoffs
+2026-07-13T19:34:58  codex wake done rc=0
+2026-07-13T19:40:58  wake ok  stop=quiescent  frame=wf-20260713-104125-cc1b80
+2026-07-13T19:40:58  escalating: due clock goal -> model episode
+2026-07-13T19:40:58  escalation done rc=1
+2026-07-13T19:40:58  waking codex: pending inbox handoffs
+2026-07-13T19:40:58  codex wake done rc=0
+2026-07-13T19:45:58  wake ok  stop=quiescent  frame=wf-20260713-104621-139cec
+2026-07-13T19:45:58  escalating: due clock goal -> model episode
+2026-07-13T19:45:58  escalation done rc=1
+2026-07-13T19:45:58  waking codex: pending inbox handoffs
+2026-07-13T19:45:58  codex wake done rc=0
+2026-07-13T19:50:59  wake ok  stop=quiescent  frame=wf-20260713-105123-fd31ff
+2026-07-13T19:50:59  escalating: due clock goal -> model episode
+2026-07-13T19:50:59  escalation done rc=1
+2026-07-13T19:50:59  waking codex: pending inbox handoffs
+2026-07-13T19:50:59  codex wake done rc=0
+2026-07-13T19:56:58  wake ok  stop=quiescent  frame=wf-20260713-105726-ec2c97
+2026-07-13T19:56:58  escalating: due clock goal -> model episode
+2026-07-13T19:56:58  escalation done rc=1
+2026-07-13T19:56:58  waking codex: pending inbox handoffs
+2026-07-13T19:56:58  codex wake done rc=0
+2026-07-13T20:01:59  wake ok  stop=quiescent  frame=wf-20260713-110235-22ee98
+2026-07-13T20:01:59  escalating: due clock goal -> model episode
+2026-07-13T20:01:59  escalation done rc=1
+2026-07-13T20:01:59  waking codex: pending inbox handoffs
+2026-07-13T20:01:59  codex wake done rc=0
+2026-07-13T20:07:59  wake ok  stop=quiescent  frame=wf-20260713-110822-582f3e
+2026-07-13T20:07:59  escalating: due clock goal -> model episode
+2026-07-13T20:07:59  escalation done rc=1
+2026-07-13T20:07:59  waking codex: pending inbox handoffs
+2026-07-13T20:07:59  codex wake done rc=0
+2026-07-13T20:12:58  wake ok  stop=quiescent  frame=wf-20260713-111326-6217ec
+2026-07-13T20:12:58  escalating: due clock goal -> model episode
+2026-07-13T20:12:58  escalation done rc=1
+2026-07-13T20:12:58  waking codex: pending inbox handoffs
+2026-07-13T20:12:58  codex wake done rc=0
+2026-07-13T20:17:58  wake ok  stop=quiescent  frame=wf-20260713-111820-ae3ef6
+2026-07-13T20:17:58  escalating: due clock goal -> model episode
+2026-07-13T20:17:58  escalation done rc=1
+2026-07-13T20:17:58  waking codex: pending inbox handoffs
+2026-07-13T20:17:58  codex wake done rc=0
+2026-07-13T20:23:58  wake ok  stop=quiescent  frame=wf-20260713-112435-0125dd
+2026-07-13T20:23:58  escalating: due clock goal -> model episode
+2026-07-13T20:23:58  escalation done rc=1
+2026-07-13T20:23:58  waking codex: pending inbox handoffs
+2026-07-13T20:23:58  codex wake done rc=0
+2026-07-13T20:29:59  wake ok  stop=quiescent  frame=wf-20260713-113025-a9f931
+2026-07-13T20:29:59  escalating: due clock goal -> model episode
+2026-07-13T20:29:59  escalation done rc=1
+2026-07-13T20:29:59  waking codex: pending inbox handoffs
+2026-07-13T20:29:59  codex wake done rc=0
+2026-07-13T20:33:58  wake ok  stop=quiescent  frame=wf-20260713-113417-229f57
+2026-07-13T20:33:58  escalating: due clock goal -> model episode
+2026-07-13T20:33:58  escalation done rc=1
+2026-07-13T20:33:58  waking codex: pending inbox handoffs
+2026-07-13T20:33:58  codex wake done rc=0
+2026-07-13T20:39:58  wake ok  stop=quiescent  frame=wf-20260713-114023-df88a1
+2026-07-13T20:39:58  escalating: due clock goal -> model episode
+2026-07-13T20:39:58  escalation done rc=1
+2026-07-13T20:39:58  waking codex: pending inbox handoffs
+2026-07-13T20:39:58  codex wake done rc=0
+2026-07-13T20:44:59  wake ok  stop=quiescent  frame=wf-20260713-114523-4daa14
+2026-07-13T20:44:59  escalating: due clock goal -> model episode
+2026-07-13T20:44:59  escalation done rc=1
+2026-07-13T20:44:59  waking codex: pending inbox handoffs
+2026-07-13T20:44:59  codex wake done rc=0
+2026-07-13T20:48:58  wake ok  stop=quiescent  frame=wf-20260713-114924-1438dc
+2026-07-13T20:48:58  escalating: due clock goal -> model episode
+2026-07-13T20:48:58  escalation done rc=1
+2026-07-13T20:48:58  waking codex: pending inbox handoffs
+2026-07-13T20:48:58  codex wake done rc=0
+2026-07-13T20:53:59  wake ok  stop=quiescent  frame=wf-20260713-115429-29014b
+2026-07-13T20:53:59  escalating: due clock goal -> model episode
+2026-07-13T20:53:59  escalation done rc=1
+2026-07-13T20:53:59  waking codex: pending inbox handoffs
+2026-07-13T20:53:59  codex wake done rc=0
+2026-07-13T21:02:58  wake ok  stop=quiescent  frame=wf-20260713-120327-5bd958
+2026-07-13T21:02:58  escalating: due clock goal -> model episode
+2026-07-13T21:13:59  wake ok  stop=?  frame=none
+2026-07-13T21:14:58  wake ok  stop=?  frame=none
+2026-07-13T21:02:58  escalation done rc=0
+2026-07-13T21:02:58  waking codex: pending inbox handoffs
+2026-07-13T21:15:58  wake ok  stop=?  frame=none
+2026-07-13T21:02:58  codex wake done rc=0
+2026-07-13T21:16:58  wake ok  stop=?  frame=none
+2026-07-13T21:17:58  wake ok  stop=?  frame=none
+2026-07-13T21:18:58  wake ok  stop=?  frame=none
+2026-07-13T21:19:59  wake ok  stop=?  frame=none
+2026-07-13T21:20:59  wake ok  stop=?  frame=none
+2026-07-13T21:21:58  wake ok  stop=?  frame=none
+2026-07-13T21:22:58  wake ok  stop=?  frame=none
+2026-07-13T21:23:58  wake ok  stop=?  frame=none
+2026-07-13T21:24:58  wake ok  stop=?  frame=none
+2026-07-13T21:25:58  wake ok  stop=?  frame=none
+2026-07-13T21:26:58  wake ok  stop=?  frame=none
+2026-07-13T21:27:58  wake ok  stop=?  frame=none
+2026-07-13T21:28:58  wake ok  stop=?  frame=none
+2026-07-13T21:29:58  wake ok  stop=?  frame=none
+2026-07-13T21:30:58  wake ok  stop=?  frame=none
+2026-07-13T21:31:58  wake ok  stop=?  frame=none
+2026-07-13T21:32:58  wake ok  stop=?  frame=none
+2026-07-13T21:33:58  wake ok  stop=?  frame=none
+2026-07-13T21:34:58  wake ok  stop=?  frame=none
+2026-07-13T21:35:58  wake ok  stop=?  frame=none
+2026-07-13T21:36:58  wake ok  stop=?  frame=none
+2026-07-13T21:37:58  wake ok  stop=?  frame=none
+2026-07-13T21:38:58  wake ok  stop=?  frame=none
+2026-07-13T21:39:58  wake ok  stop=?  frame=none
+2026-07-13T21:40:58  wake ok  stop=?  frame=none
+2026-07-13T21:41:58  wake ok  stop=?  frame=none
+2026-07-13T21:42:58  wake ok  stop=quiescent  frame=wf-20260713-124326-39f947
+2026-07-13T21:42:58  waking codex: pending inbox handoffs
+2026-07-13T21:52:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: branch head conflict: expected wf-20260713-125318-fc7771, received wf-20260713-125008-3038e2', '_rc': 1})
+2026-07-13T21:52:59  waking codex: pending inbox handoffs
+2026-07-13T21:52:59  codex wake done rc=0
+2026-07-13T21:42:58  codex wake done rc=0
+2026-07-13T21:53:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-125318-fc7771', '_rc': 1})
+2026-07-13T21:53:58  waking codex: pending inbox handoffs
+2026-07-13T21:53:58  codex wake done rc=0
+2026-07-13T21:57:59  wake ok  stop=?  frame=none
+2026-07-13T21:58:58  wake ok  stop=?  frame=none
+2026-07-13T21:59:58  wake ok  stop=quiescent  frame=wf-20260713-130029-9ab97e
+2026-07-13T21:59:58  waking codex: pending inbox handoffs
+2026-07-13T21:59:58  codex wake done rc=0
+2026-07-13T22:08:58  wake ok  stop=quiescent  frame=wf-20260713-130929-97bbae
+2026-07-13T22:08:58  waking codex: pending inbox handoffs
+2026-07-13T22:08:58  codex wake done rc=0
+2026-07-13T22:18:58  wake ok  stop=quiescent  frame=wf-20260713-131933-24e226
+2026-07-13T22:18:58  waking codex: pending inbox handoffs
+2026-07-13T22:28:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-132407-90666f', '_rc': 1})
+2026-07-13T22:28:58  waking codex: pending inbox handoffs
+2026-07-13T22:28:58  codex wake done rc=0
+2026-07-13T22:29:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-132407-90666f', '_rc': 1})
+2026-07-13T22:29:59  waking codex: pending inbox handoffs
+2026-07-13T22:29:59  codex wake done rc=0
+2026-07-13T22:30:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-132407-90666f', '_rc': 1})
+2026-07-13T22:30:59  waking codex: pending inbox handoffs
+2026-07-13T22:30:59  codex wake done rc=0
+2026-07-13T22:31:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-132407-90666f', '_rc': 1})
+2026-07-13T22:31:59  waking codex: pending inbox handoffs
+2026-07-13T22:31:59  codex wake done rc=0
+2026-07-13T22:32:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-132407-90666f', '_rc': 1})
+2026-07-13T22:32:58  waking codex: pending inbox handoffs
+2026-07-13T22:32:58  codex wake done rc=0
+2026-07-13T22:33:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-132407-90666f', '_rc': 1})
+2026-07-13T22:33:58  waking codex: pending inbox handoffs
+2026-07-13T22:33:58  codex wake done rc=0
+2026-07-13T22:34:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-132407-90666f', '_rc': 1})
+2026-07-13T22:34:58  waking codex: pending inbox handoffs
+2026-07-13T22:34:58  codex wake done rc=0
+2026-07-13T22:35:58  wake ok  stop=quiescent  frame=wf-20260713-133632-1b8203
+2026-07-13T22:35:58  waking codex: pending inbox handoffs
+2026-07-13T22:35:58  codex wake done rc=0
+2026-07-13T22:37:58  wake ok  stop=?  frame=none
+2026-07-13T22:38:59  wake ok  stop=?  frame=none
+2026-07-13T22:39:58  wake ok  stop=?  frame=none
+2026-07-13T22:40:58  wake ok  stop=?  frame=none
+2026-07-13T22:41:58  wake ok  stop=?  frame=none
+2026-07-13T22:42:58  wake ok  stop=?  frame=none
+2026-07-13T22:43:58  wake ok  stop=?  frame=none
+2026-07-13T22:44:59  wake ok  stop=?  frame=none
+2026-07-13T22:45:59  wake ok  stop=?  frame=none
+2026-07-13T22:46:58  wake ok  stop=?  frame=none
+2026-07-13T22:47:58  wake ok  stop=?  frame=none
+2026-07-13T22:48:58  wake ok  stop=?  frame=none
+2026-07-13T22:49:58  wake ok  stop=?  frame=none
+2026-07-13T22:50:58  wake ok  stop=?  frame=none
+2026-07-13T22:51:59  wake ok  stop=?  frame=none
+2026-07-13T22:52:59  wake ok  stop=?  frame=none
+2026-07-13T22:53:59  wake ok  stop=?  frame=none
+2026-07-13T22:54:58  wake ok  stop=?  frame=none
+2026-07-13T22:55:58  wake ok  stop=?  frame=none
+2026-07-13T22:56:58  wake ok  stop=?  frame=none
+2026-07-13T22:57:58  wake ok  stop=?  frame=none
+2026-07-13T22:58:59  wake ok  stop=?  frame=none
+2026-07-13T22:59:58  wake ok  stop=?  frame=none
+2026-07-13T23:00:59  wake ok  stop=?  frame=none
+2026-07-13T23:01:59  wake ok  stop=?  frame=none
+2026-07-13T23:02:59  wake ok  stop=?  frame=none
+2026-07-13T23:03:58  wake ok  stop=?  frame=none
+2026-07-13T23:05:00  wake ok  stop=?  frame=none
+2026-07-13T23:05:58  wake ok  stop=?  frame=none
+2026-07-13T23:06:58  wake ok  stop=?  frame=none
+2026-07-13T23:07:58  wake ok  stop=?  frame=none
+2026-07-13T23:08:59  wake ok  stop=?  frame=none
+2026-07-13T23:09:59  wake ok  stop=?  frame=none
+2026-07-13T23:10:58  wake ok  stop=?  frame=none
+2026-07-13T23:11:58  wake ok  stop=?  frame=none
+2026-07-13T23:12:59  wake ok  stop=?  frame=none
+2026-07-13T23:13:59  wake ok  stop=?  frame=none
+2026-07-13T23:14:59  wake ok  stop=?  frame=none
+2026-07-13T23:15:59  wake ok  stop=?  frame=none
+2026-07-13T23:16:59  wake ok  stop=?  frame=none
+2026-07-13T23:17:58  wake ok  stop=?  frame=none
+2026-07-13T23:18:59  wake ok  stop=?  frame=none
+2026-07-13T23:19:58  wake ok  stop=?  frame=none
+2026-07-13T23:20:58  wake ok  stop=?  frame=none
+2026-07-13T23:21:58  wake ok  stop=?  frame=none
+2026-07-13T23:22:59  wake ok  stop=?  frame=none
+2026-07-13T23:24:00  wake ok  stop=?  frame=none
+2026-07-13T23:24:58  wake ok  stop=?  frame=none
+2026-07-13T23:25:59  wake ok  stop=?  frame=none
+2026-07-13T23:26:59  wake ok  stop=?  frame=none
+2026-07-13T23:27:58  wake ok  stop=?  frame=none
+2026-07-13T23:28:59  wake ok  stop=?  frame=none
+2026-07-13T23:29:59  wake ok  stop=?  frame=none
+2026-07-13T23:30:59  wake ok  stop=?  frame=none
+2026-07-13T23:31:59  wake ok  stop=?  frame=none
+2026-07-13T23:32:59  wake ok  stop=?  frame=none
+2026-07-13T23:33:59  wake ok  stop=?  frame=none
+2026-07-13T23:34:59  wake ok  stop=?  frame=none
+2026-07-13T23:35:59  wake ok  stop=?  frame=none
+2026-07-13T23:36:59  wake ok  stop=?  frame=none
+2026-07-13T23:37:58  wake ok  stop=?  frame=none
+2026-07-13T23:38:59  wake ok  stop=?  frame=none
+2026-07-13T23:39:58  wake ok  stop=?  frame=none
+2026-07-13T23:40:58  wake ok  stop=?  frame=none
+2026-07-13T23:41:58  wake ok  stop=?  frame=none
+2026-07-13T23:42:58  wake ok  stop=?  frame=none
+2026-07-13T23:43:58  wake ok  stop=?  frame=none
+2026-07-13T23:44:58  wake ok  stop=?  frame=none
+2026-07-13T23:45:58  wake ok  stop=?  frame=none
+2026-07-13T23:46:57  wake ok  stop=?  frame=none
+2026-07-13T23:48:00  wake ok  stop=?  frame=none
+2026-07-13T23:48:58  wake ok  stop=?  frame=none
+2026-07-13T23:49:58  wake ok  stop=?  frame=none
+2026-07-13T23:50:58  wake ok  stop=?  frame=none
+2026-07-13T23:51:58  wake ok  stop=?  frame=none
+2026-07-13T23:52:57  wake ok  stop=?  frame=none
+2026-07-13T23:53:58  wake ok  stop=?  frame=none
+2026-07-13T23:54:58  wake ok  stop=?  frame=none
+2026-07-13T23:55:58  wake ok  stop=?  frame=none
+2026-07-13T23:56:58  wake ok  stop=?  frame=none
+2026-07-13T23:57:58  wake ok  stop=?  frame=none
+2026-07-13T23:58:58  wake ok  stop=?  frame=none
+2026-07-13T23:59:58  wake ok  stop=?  frame=none
+2026-07-14T00:00:58  wake ok  stop=?  frame=none
+2026-07-14T00:01:58  wake ok  stop=?  frame=none
+2026-07-14T00:02:58  wake ok  stop=?  frame=none
+2026-07-14T00:03:58  wake ok  stop=?  frame=none
+2026-07-14T00:04:58  wake ok  stop=?  frame=none
+2026-07-14T00:05:58  wake ok  stop=?  frame=none
+2026-07-14T00:06:57  wake ok  stop=?  frame=none
+2026-07-14T00:07:58  wake ok  stop=?  frame=none
+2026-07-14T00:08:58  wake ok  stop=?  frame=none
+2026-07-14T00:09:59  wake ok  stop=?  frame=none
+2026-07-14T00:10:58  wake ok  stop=?  frame=none
+2026-07-14T00:11:58  wake ok  stop=quiescent  frame=wf-20260713-151220-759c90
+2026-07-14T00:11:58  waking codex: pending inbox handoffs
+2026-07-14T00:11:58  codex wake done rc=0
+2026-07-14T00:21:58  wake ok  stop=quiescent  frame=wf-20260713-152228-98df83
+2026-07-14T00:21:58  waking codex: pending inbox handoffs
+2026-07-14T00:21:58  codex wake done rc=0
+2026-07-14T00:27:58  wake ok  stop=quiescent  frame=wf-20260713-152823-3edac1
+2026-07-14T00:27:58  escalating: due clock goal -> model episode
+2026-07-14T00:27:58  escalation done rc=1
+2026-07-14T00:27:58  waking codex: pending inbox handoffs
+2026-07-14T00:27:58  codex wake done rc=0
+2026-07-14T00:33:58  wake ok  stop=quiescent  frame=wf-20260713-153428-ea86fc
+2026-07-14T00:33:58  escalating: due clock goal -> model episode
+2026-07-14T00:33:58  escalation done rc=1
+2026-07-14T00:33:58  waking codex: pending inbox handoffs
+2026-07-14T00:33:58  codex wake done rc=0
+2026-07-14T00:40:58  wake ok  stop=quiescent  frame=wf-20260713-154127-1d3e94
+2026-07-14T00:40:58  escalating: due clock goal -> model episode
+2026-07-14T00:40:58  escalation done rc=1
+2026-07-14T00:40:58  waking codex: pending inbox handoffs
+2026-07-14T00:40:58  codex wake done rc=0
+2026-07-14T00:47:58  wake ok  stop=quiescent  frame=wf-20260713-154823-099ed8
+2026-07-14T00:47:58  waking codex: pending inbox handoffs
+2026-07-14T00:47:58  codex wake done rc=0
+2026-07-14T00:54:59  wake ok  stop=quiescent  frame=wf-20260713-155532-6c4c88
+2026-07-14T00:54:59  escalating: due clock goal -> model episode
+2026-07-14T00:54:59  escalation done rc=1
+2026-07-14T00:54:59  waking codex: pending inbox handoffs
+2026-07-14T01:04:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-155919-2e29dd', '_rc': 1})
+2026-07-14T01:04:58  escalating: due clock goal -> model episode
+2026-07-14T01:04:58  escalation done rc=1
+2026-07-14T01:04:58  waking codex: pending inbox handoffs
+2026-07-14T01:04:58  codex wake done rc=0
+2026-07-14T01:06:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-155919-2e29dd', '_rc': 1})
+2026-07-14T01:06:58  escalating: due clock goal -> model episode
+2026-07-14T01:06:58  escalation done rc=1
+2026-07-14T01:06:58  waking codex: pending inbox handoffs
+2026-07-14T01:06:58  codex wake done rc=0
+2026-07-14T01:08:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-155919-2e29dd', '_rc': 1})
+2026-07-14T01:08:58  escalating: due clock goal -> model episode
+2026-07-14T01:08:58  escalation done rc=1
+2026-07-14T01:08:58  waking codex: pending inbox handoffs
+2026-07-14T01:08:58  codex wake done rc=0
+2026-07-14T01:10:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-155919-2e29dd', '_rc': 1})
+2026-07-14T01:10:58  escalating: due clock goal -> model episode
+2026-07-14T01:10:58  escalation done rc=1
+2026-07-14T01:10:58  waking codex: pending inbox handoffs
+2026-07-14T01:10:58  codex wake done rc=0
+2026-07-14T01:12:59  wake ok  stop=quiescent  frame=wf-20260713-161332-2b5583
+2026-07-14T01:12:59  escalating: due clock goal -> model episode
+2026-07-14T01:12:59  escalation done rc=1
+2026-07-14T01:12:59  waking codex: pending inbox handoffs
+2026-07-14T01:12:59  codex wake done rc=0
+2026-07-14T00:54:59  codex wake done rc=0
+2026-07-14T01:15:59  wake ok  stop=?  frame=none
+2026-07-14T01:16:58  wake ok  stop=?  frame=none
+2026-07-14T01:17:58  wake ok  stop=?  frame=none
+2026-07-14T01:18:58  wake ok  stop=?  frame=none
+2026-07-14T01:19:58  wake ok  stop=?  frame=none
+2026-07-14T01:20:58  wake ok  stop=?  frame=none
+2026-07-14T01:21:58  wake ok  stop=?  frame=none
+2026-07-14T01:22:58  wake ok  stop=?  frame=none
+2026-07-14T01:23:58  wake ok  stop=?  frame=none
+2026-07-14T01:24:58  wake ok  stop=?  frame=none
+2026-07-14T01:25:58  wake ok  stop=?  frame=none
+2026-07-14T01:26:58  wake ok  stop=?  frame=none
+2026-07-14T01:27:58  wake ok  stop=?  frame=none
+2026-07-14T01:28:58  wake ok  stop=?  frame=none
+2026-07-14T01:29:58  wake ok  stop=?  frame=none
+2026-07-14T01:30:58  wake ok  stop=?  frame=none
+2026-07-14T01:31:58  wake ok  stop=?  frame=none
+2026-07-14T01:32:58  wake ok  stop=?  frame=none
+2026-07-14T01:33:58  wake ok  stop=?  frame=none
+2026-07-14T01:34:58  wake ok  stop=?  frame=none
+2026-07-14T01:35:58  wake ok  stop=?  frame=none
+2026-07-14T01:36:58  wake ok  stop=?  frame=none
+2026-07-14T01:37:58  wake ok  stop=?  frame=none
+2026-07-14T01:38:58  wake ok  stop=?  frame=none
+2026-07-14T01:39:58  wake ok  stop=?  frame=none
+2026-07-14T01:40:58  wake ok  stop=?  frame=none
+2026-07-14T01:41:59  wake ok  stop=?  frame=none
+2026-07-14T01:42:58  wake ok  stop=?  frame=none
+2026-07-14T01:43:58  wake ok  stop=?  frame=none
+2026-07-14T01:44:58  wake ok  stop=?  frame=none
+2026-07-14T01:45:59  wake ok  stop=?  frame=none
+2026-07-14T01:46:58  wake ok  stop=?  frame=none
+2026-07-14T01:47:59  wake ok  stop=quiescent  frame=wf-20260713-164823-96733d
+2026-07-14T01:47:59  waking codex: pending inbox handoffs
+2026-07-14T01:47:59  codex wake done rc=0
+2026-07-14T01:52:58  wake ok  stop=quiescent  frame=wf-20260713-165325-f2cfdd
+2026-07-14T01:52:58  waking codex: pending inbox handoffs
+2026-07-14T02:02:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-165637-3fe2b3', '_rc': 1})
+2026-07-14T02:02:59  escalating: due clock goal -> model episode
+2026-07-14T01:52:58  codex wake done rc=0
+2026-07-14T02:02:59  escalation done rc=0
+2026-07-14T02:02:59  waking codex: pending inbox handoffs
+2026-07-14T02:02:59  codex wake done rc=0
+2026-07-14T02:13:58  wake ok  stop=quiescent  frame=wf-20260713-171415-0bc401
+2026-07-14T02:13:58  escalating: due clock goal -> model episode
+2026-07-14T02:13:58  escalation done rc=0
+2026-07-14T02:13:58  waking codex: pending inbox handoffs
+2026-07-14T02:24:58  wake ok  stop=quiescent  frame=wf-20260713-172518-00d5dc
+2026-07-14T02:24:58  escalating: due clock goal -> model episode
+2026-07-14T02:24:58  escalation done rc=0
+2026-07-14T02:24:58  waking codex: pending inbox handoffs
+2026-07-14T02:24:58  codex wake done rc=0
+2026-07-14T02:29:59  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-172615-fd76af', '_rc': 1})
+2026-07-14T02:29:59  escalating: due clock goal -> model episode
+2026-07-14T02:29:59  escalation done rc=0
+2026-07-14T02:29:59  waking codex: pending inbox handoffs
+2026-07-14T02:29:59  codex wake done rc=0
+2026-07-14T02:34:58  wake ok  stop=quiescent  frame=wf-20260713-173520-a6d84e
+2026-07-14T02:34:58  escalating: due clock goal -> model episode
+2026-07-14T02:13:58  codex wake done rc=0
+2026-07-14T02:34:58  escalation done rc=0
+2026-07-14T02:34:58  waking codex: pending inbox handoffs
+2026-07-14T02:34:58  codex wake done rc=0
+2026-07-14T02:45:57  wake ok  stop=quiescent  frame=wf-20260713-174624-c28fb5
+2026-07-14T02:45:57  escalating: due clock goal -> model episode
+2026-07-14T02:55:57  wake ok  stop=quiescent  frame=wf-20260713-175619-6832de
+2026-07-14T02:55:57  waking codex: pending inbox handoffs
+2026-07-14T02:45:57  escalation done rc=0
+2026-07-14T02:45:57  waking codex: pending inbox handoffs
+2026-07-14T02:45:57  codex wake done rc=0
+2026-07-13T22:18:58  codex wake done rc=0
+2026-07-14T03:05:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-180044-00070e', '_rc': 1})
+2026-07-14T03:05:58  escalating: due clock goal -> model episode
+2026-07-14T03:05:58  escalation done rc=0
+2026-07-14T03:05:58  waking codex: pending inbox handoffs
+2026-07-14T03:15:58  wake ok  stop=?  frame=none
+2026-07-14T03:05:58  codex wake done rc=0
+2026-07-14T03:16:58  wake ok  stop=?  frame=none
+2026-07-14T03:17:58  wake ok  stop=?  frame=none
+2026-07-14T03:18:57  wake ok  stop=?  frame=none
+2026-07-14T03:19:58  wake ok  stop=?  frame=none
+2026-07-14T03:20:58  wake ok  stop=?  frame=none
+2026-07-14T03:21:57  wake ok  stop=?  frame=none
+2026-07-14T03:22:58  wake ok  stop=?  frame=none
+2026-07-14T03:23:58  wake ok  stop=?  frame=none
+2026-07-14T03:24:58  wake ok  stop=?  frame=none
+2026-07-14T03:25:57  wake ok  stop=?  frame=none
+2026-07-14T03:26:58  wake ok  stop=?  frame=none
+2026-07-14T03:27:58  wake ok  stop=?  frame=none
+2026-07-14T03:28:58  wake ok  stop=?  frame=none
+2026-07-14T03:29:58  wake ok  stop=?  frame=none
+2026-07-14T03:30:58  wake ok  stop=?  frame=none
+2026-07-14T03:31:58  wake ok  stop=?  frame=none
+2026-07-14T03:32:58  wake ok  stop=?  frame=none
+2026-07-14T03:33:58  wake ok  stop=?  frame=none
+2026-07-14T03:34:57  wake ok  stop=?  frame=none
+2026-07-14T03:35:57  wake ok  stop=?  frame=none
+2026-07-14T03:36:58  wake ok  stop=?  frame=none
+2026-07-14T03:37:58  wake ok  stop=?  frame=none
+2026-07-14T03:38:58  wake ok  stop=?  frame=none
+2026-07-14T03:39:58  wake ok  stop=?  frame=none
+2026-07-14T03:40:58  wake ok  stop=?  frame=none
+2026-07-14T03:41:58  wake ok  stop=?  frame=none
+2026-07-14T03:42:58  wake ok  stop=?  frame=none
+2026-07-14T03:43:58  wake ok  stop=?  frame=none
+2026-07-14T03:44:58  wake ok  stop=?  frame=none
+2026-07-14T03:45:58  wake ok  stop=?  frame=none
+2026-07-14T03:46:58  wake ok  stop=?  frame=none
+2026-07-14T03:47:58  wake ok  stop=?  frame=none
+2026-07-14T03:48:58  wake ok  stop=?  frame=none
+2026-07-14T03:49:58  wake ok  stop=?  frame=none
+2026-07-14T03:50:58  wake ok  stop=?  frame=none
+2026-07-14T03:51:58  wake ok  stop=?  frame=none
+2026-07-14T03:52:58  wake ok  stop=?  frame=none
+2026-07-14T03:53:58  wake ok  stop=?  frame=none
+2026-07-14T03:54:58  wake ok  stop=?  frame=none
+2026-07-14T03:55:58  wake ok  stop=?  frame=none
+2026-07-14T03:56:58  wake ok  stop=?  frame=none
+2026-07-14T03:57:58  wake ok  stop=?  frame=none
+2026-07-14T03:58:58  wake ok  stop=?  frame=none
+2026-07-14T03:59:58  wake ok  stop=?  frame=none
+2026-07-14T04:00:58  wake ok  stop=?  frame=none
+2026-07-14T04:01:58  wake ok  stop=?  frame=none
+2026-07-14T04:02:58  wake ok  stop=?  frame=none
+2026-07-14T04:03:58  wake ok  stop=?  frame=none
+2026-07-14T04:04:58  wake ok  stop=?  frame=none
+2026-07-14T04:05:58  wake ok  stop=?  frame=none
+2026-07-14T04:06:58  wake ok  stop=?  frame=none
+2026-07-14T04:07:58  wake ok  stop=?  frame=none
+2026-07-14T04:08:58  wake ok  stop=?  frame=none
+2026-07-14T04:09:58  wake ok  stop=?  frame=none
+2026-07-14T04:10:58  wake ok  stop=?  frame=none
+2026-07-14T04:11:58  wake ok  stop=?  frame=none
+2026-07-14T04:12:58  wake ok  stop=?  frame=none
+2026-07-14T04:13:58  wake ok  stop=?  frame=none
+2026-07-14T04:14:58  wake ok  stop=?  frame=none
+2026-07-14T04:15:58  wake ok  stop=?  frame=none
+2026-07-14T04:16:58  wake ok  stop=?  frame=none
+2026-07-14T04:17:58  wake ok  stop=?  frame=none
+2026-07-14T04:18:58  wake ok  stop=?  frame=none
+2026-07-14T04:19:58  wake ok  stop=?  frame=none
+2026-07-14T04:20:58  wake ok  stop=?  frame=none
+2026-07-14T04:21:58  wake ok  stop=?  frame=none
+2026-07-14T04:22:58  wake ok  stop=?  frame=none
+2026-07-14T04:23:58  wake ok  stop=?  frame=none
+2026-07-14T04:24:58  wake ok  stop=?  frame=none
+2026-07-14T04:25:58  wake ok  stop=?  frame=none
+2026-07-14T04:26:58  wake ok  stop=?  frame=none
+2026-07-14T04:27:58  wake ok  stop=?  frame=none
+2026-07-14T04:28:58  wake ok  stop=?  frame=none
+2026-07-14T04:29:58  wake ok  stop=?  frame=none
+2026-07-14T04:30:58  wake ok  stop=?  frame=none
+2026-07-14T04:31:58  wake ok  stop=?  frame=none
+2026-07-14T04:32:58  wake ok  stop=?  frame=none
+2026-07-14T04:33:58  wake ok  stop=?  frame=none
+2026-07-14T04:34:58  wake ok  stop=?  frame=none
+2026-07-14T04:35:58  wake ok  stop=?  frame=none
+2026-07-14T04:36:58  wake ok  stop=?  frame=none
+2026-07-14T04:37:58  wake ok  stop=?  frame=none
+2026-07-14T04:38:58  wake ok  stop=?  frame=none
+2026-07-14T04:39:58  wake ok  stop=?  frame=none
+2026-07-14T04:40:58  wake ok  stop=?  frame=none
+2026-07-14T04:41:58  wake ok  stop=?  frame=none
+2026-07-14T04:42:58  wake ok  stop=?  frame=none
+2026-07-14T04:43:58  wake ok  stop=?  frame=none
+2026-07-14T04:44:58  wake ok  stop=?  frame=none
+2026-07-14T04:45:58  wake ok  stop=?  frame=none
+2026-07-14T04:46:58  wake ok  stop=?  frame=none
+2026-07-14T04:47:58  wake ok  stop=?  frame=none
+2026-07-14T04:48:58  wake ok  stop=?  frame=none
+2026-07-14T04:49:58  wake ok  stop=?  frame=none
+2026-07-14T04:50:58  wake ok  stop=?  frame=none
+2026-07-14T04:51:58  wake ok  stop=?  frame=none
+2026-07-14T04:52:58  wake ok  stop=?  frame=none
+2026-07-14T04:53:58  wake ok  stop=?  frame=none
+2026-07-14T04:54:58  wake ok  stop=?  frame=none
+2026-07-14T04:55:58  wake ok  stop=?  frame=none
+2026-07-14T04:56:58  wake ok  stop=?  frame=none
+2026-07-14T04:57:58  wake ok  stop=?  frame=none
+2026-07-14T04:58:58  wake ok  stop=?  frame=none
+2026-07-14T04:59:58  wake ok  stop=?  frame=none
+2026-07-14T05:00:58  wake ok  stop=?  frame=none
+2026-07-14T05:01:59  wake ok  stop=?  frame=none
+2026-07-14T05:02:58  wake ok  stop=?  frame=none
+2026-07-14T05:03:58  wake ok  stop=?  frame=none
+2026-07-14T05:04:58  wake ok  stop=?  frame=none
+2026-07-14T05:05:58  wake ok  stop=?  frame=none
+2026-07-14T05:06:59  wake ok  stop=?  frame=none
+2026-07-14T05:07:58  wake ok  stop=?  frame=none
+2026-07-14T05:08:58  wake ok  stop=?  frame=none
+2026-07-14T05:09:58  wake ok  stop=?  frame=none
+2026-07-14T05:10:58  wake ok  stop=?  frame=none
+2026-07-14T05:11:58  wake ok  stop=?  frame=none
+2026-07-14T05:12:58  wake ok  stop=?  frame=none
+2026-07-14T05:13:58  wake ok  stop=?  frame=none
+2026-07-14T05:14:58  wake ok  stop=?  frame=none
+2026-07-14T05:15:58  wake ok  stop=?  frame=none
+2026-07-14T05:16:58  wake ok  stop=?  frame=none
+2026-07-14T05:17:58  wake ok  stop=?  frame=none
+2026-07-14T05:18:58  wake ok  stop=?  frame=none
+2026-07-14T05:19:58  wake ok  stop=?  frame=none
+2026-07-14T05:20:58  wake ok  stop=?  frame=none
+2026-07-14T05:21:58  wake ok  stop=?  frame=none
+2026-07-14T05:22:58  wake ok  stop=?  frame=none
+2026-07-14T05:23:58  wake ok  stop=?  frame=none
+2026-07-14T05:24:58  wake ok  stop=?  frame=none
+2026-07-14T05:25:58  wake ok  stop=?  frame=none
+2026-07-14T05:26:58  wake ok  stop=?  frame=none
+2026-07-14T05:27:58  wake ok  stop=?  frame=none
+2026-07-14T05:28:58  wake ok  stop=?  frame=none
+2026-07-14T05:29:58  wake ok  stop=?  frame=none
+2026-07-14T05:30:58  wake ok  stop=?  frame=none
+2026-07-14T05:31:58  wake ok  stop=?  frame=none
+2026-07-14T05:32:58  wake ok  stop=?  frame=none
+2026-07-14T05:33:58  wake ok  stop=?  frame=none
+2026-07-14T05:34:58  wake ok  stop=?  frame=none
+2026-07-14T05:35:58  wake ok  stop=?  frame=none
+2026-07-14T05:36:58  wake ok  stop=?  frame=none
+2026-07-14T05:37:58  wake ok  stop=?  frame=none
+2026-07-14T05:38:58  wake ok  stop=?  frame=none
+2026-07-14T05:39:58  wake ok  stop=?  frame=none
+2026-07-14T05:40:58  wake ok  stop=?  frame=none
+2026-07-14T05:41:58  wake ok  stop=?  frame=none
+2026-07-14T05:42:58  wake ok  stop=?  frame=none
+2026-07-14T05:43:59  wake ok  stop=?  frame=none
+2026-07-14T05:44:58  wake ok  stop=?  frame=none
+2026-07-14T05:45:58  wake ok  stop=?  frame=none
+2026-07-14T05:46:58  wake ok  stop=?  frame=none
+2026-07-14T05:47:58  wake ok  stop=?  frame=none
+2026-07-14T05:48:58  wake ok  stop=?  frame=none
+2026-07-14T05:49:59  wake ok  stop=?  frame=none
+2026-07-14T05:50:58  wake ok  stop=?  frame=none
+2026-07-14T05:51:58  wake ok  stop=?  frame=none
+2026-07-14T05:52:58  wake ok  stop=?  frame=none
+2026-07-14T05:53:58  wake ok  stop=?  frame=none
+2026-07-14T05:54:58  wake ok  stop=?  frame=none
+2026-07-14T05:55:58  wake ok  stop=?  frame=none
+2026-07-14T05:56:58  wake ok  stop=?  frame=none
+2026-07-14T05:57:58  wake ok  stop=?  frame=none
+2026-07-14T05:58:58  wake ok  stop=?  frame=none
+2026-07-14T05:59:58  wake ok  stop=?  frame=none
+2026-07-14T06:00:58  wake ok  stop=?  frame=none
+2026-07-14T06:01:58  wake ok  stop=?  frame=none
+2026-07-14T06:02:58  wake ok  stop=?  frame=none
+2026-07-14T06:03:58  wake ok  stop=?  frame=none
+2026-07-14T06:04:58  wake ok  stop=?  frame=none
+2026-07-14T06:05:58  wake ok  stop=?  frame=none
+2026-07-14T06:06:58  wake ok  stop=?  frame=none
+2026-07-14T06:07:58  wake ok  stop=?  frame=none
+2026-07-14T06:08:58  wake ok  stop=?  frame=none
+2026-07-14T06:09:59  wake ok  stop=?  frame=none
+2026-07-14T06:10:58  wake ok  stop=?  frame=none
+2026-07-14T06:11:59  wake ok  stop=?  frame=none
+2026-07-14T06:12:58  wake ok  stop=?  frame=none
+2026-07-14T06:13:58  wake ok  stop=?  frame=none
+2026-07-14T06:14:59  wake ok  stop=?  frame=none
+2026-07-14T06:15:59  wake ok  stop=?  frame=none
+2026-07-14T06:16:58  wake ok  stop=?  frame=none
+2026-07-14T06:17:59  wake ok  stop=?  frame=none
+2026-07-14T06:18:57  wake ok  stop=?  frame=none
+2026-07-14T06:19:57  wake ok  stop=?  frame=none
+2026-07-14T06:20:57  wake ok  stop=?  frame=none
+2026-07-14T06:21:57  wake ok  stop=?  frame=none
+2026-07-14T06:22:58  wake ok  stop=?  frame=none
+2026-07-14T06:23:58  wake ok  stop=?  frame=none
+2026-07-14T06:24:57  wake ok  stop=?  frame=none
+2026-07-14T06:25:58  wake ok  stop=?  frame=none
+2026-07-14T06:26:57  wake ok  stop=?  frame=none
+2026-07-14T06:27:57  wake ok  stop=?  frame=none
+2026-07-14T06:28:57  wake ok  stop=?  frame=none
+2026-07-14T06:29:58  wake ok  stop=?  frame=none
+2026-07-14T06:30:57  wake ok  stop=?  frame=none
+2026-07-14T06:31:58  wake ok  stop=?  frame=none
+2026-07-14T06:32:57  wake ok  stop=?  frame=none
+2026-07-14T06:33:57  wake ok  stop=?  frame=none
+2026-07-14T06:34:57  wake ok  stop=?  frame=none
+2026-07-14T06:35:57  wake ok  stop=?  frame=none
+2026-07-14T06:36:57  wake ok  stop=?  frame=none
+2026-07-14T06:37:57  wake ok  stop=?  frame=none
+2026-07-14T06:38:57  wake ok  stop=?  frame=none
+2026-07-14T06:39:57  wake ok  stop=?  frame=none
+2026-07-14T06:40:57  wake ok  stop=?  frame=none
+2026-07-14T06:41:57  wake ok  stop=?  frame=none
+2026-07-14T06:42:57  wake ok  stop=?  frame=none
+2026-07-14T06:43:57  wake ok  stop=?  frame=none
+2026-07-14T06:44:58  wake ok  stop=?  frame=none
+2026-07-14T06:45:58  wake ok  stop=?  frame=none
+2026-07-14T06:46:58  wake ok  stop=?  frame=none
+2026-07-14T06:47:58  wake ok  stop=?  frame=none
+2026-07-14T06:48:57  wake ok  stop=?  frame=none
+2026-07-14T06:49:57  wake ok  stop=?  frame=none
+2026-07-14T06:50:58  wake ok  stop=?  frame=none
+2026-07-14T06:51:57  wake ok  stop=?  frame=none
+2026-07-14T06:52:57  wake ok  stop=?  frame=none
+2026-07-14T06:53:57  wake ok  stop=?  frame=none
+2026-07-14T06:54:58  wake ok  stop=?  frame=none
+2026-07-14T06:55:58  wake ok  stop=?  frame=none
+2026-07-14T06:56:58  wake ok  stop=?  frame=none
+2026-07-14T06:57:57  wake ok  stop=?  frame=none
+2026-07-14T06:58:57  wake ok  stop=?  frame=none
+2026-07-14T06:59:57  wake ok  stop=?  frame=none
+2026-07-14T07:00:57  wake ok  stop=?  frame=none
+2026-07-14T07:01:57  wake ok  stop=?  frame=none
+2026-07-14T07:02:58  wake ok  stop=?  frame=none
+2026-07-14T07:03:58  wake ok  stop=?  frame=none
+2026-07-14T07:04:57  wake ok  stop=?  frame=none
+2026-07-14T07:05:57  wake ok  stop=?  frame=none
+2026-07-14T07:06:58  wake ok  stop=?  frame=none
+2026-07-14T07:07:58  wake ok  stop=?  frame=none
+2026-07-14T07:08:58  wake ok  stop=?  frame=none
+2026-07-14T07:09:58  wake ok  stop=?  frame=none
+2026-07-14T07:10:58  wake ok  stop=?  frame=none
+2026-07-14T07:11:58  wake ok  stop=?  frame=none
+2026-07-14T07:12:58  wake ok  stop=?  frame=none
+2026-07-14T07:13:58  wake ok  stop=?  frame=none
+2026-07-14T07:14:58  wake ok  stop=?  frame=none
+2026-07-14T07:15:58  wake ok  stop=?  frame=none
+2026-07-14T07:16:58  wake ok  stop=?  frame=none
+2026-07-14T07:17:58  wake ok  stop=?  frame=none
+2026-07-14T07:18:58  wake ok  stop=?  frame=none
+2026-07-14T07:19:58  wake ok  stop=?  frame=none
+2026-07-14T07:20:58  wake ok  stop=?  frame=none
+2026-07-14T07:21:58  wake ok  stop=?  frame=none
+2026-07-14T07:22:58  wake ok  stop=?  frame=none
+2026-07-14T07:23:58  wake ok  stop=?  frame=none
+2026-07-14T07:24:58  wake ok  stop=?  frame=none
+2026-07-14T07:25:58  wake ok  stop=?  frame=none
+2026-07-14T07:26:58  wake ok  stop=?  frame=none
+2026-07-14T07:27:58  wake ok  stop=?  frame=none
+2026-07-14T07:28:58  wake ok  stop=?  frame=none
+2026-07-14T07:29:58  wake ok  stop=?  frame=none
+2026-07-14T07:30:58  wake ok  stop=?  frame=none
+2026-07-14T07:31:58  wake ok  stop=?  frame=none
+2026-07-14T07:32:58  wake ok  stop=?  frame=none
+2026-07-14T07:33:58  wake ok  stop=?  frame=none
+2026-07-14T07:34:58  wake ok  stop=?  frame=none
+2026-07-14T07:35:58  wake ok  stop=?  frame=none
+2026-07-14T07:36:58  wake ok  stop=?  frame=none
+2026-07-14T07:37:58  wake ok  stop=?  frame=none
+2026-07-14T07:38:58  wake ok  stop=quiescent  frame=wf-20260713-223921-df7c47
+2026-07-14T07:38:58  waking codex: pending inbox handoffs
+2026-07-14T07:38:58  codex wake done rc=0
+2026-07-14T07:44:58  wake ok  stop=quiescent  frame=wf-20260713-224515-035c02
+2026-07-14T07:44:58  escalating: due clock goal -> model episode
+2026-07-14T07:44:58  escalation done rc=0
+2026-07-14T07:44:58  waking codex: pending inbox handoffs
+2026-07-14T07:54:58  wake ok  stop=quiescent  frame=(frame open failed: {'_raw': '', '_stderr': 'error: causal parent must be closed: wf-20260713-225432-d56294', '_rc': 1})
+2026-07-14T07:54:58  escalating: due clock goal -> model episode
+2026-07-14T07:44:58  codex wake done rc=0
+2026-07-14T07:54:58  escalation done rc=0
+2026-07-14T07:54:58  waking codex: pending inbox handoffs
+2026-07-14T08:04:58  wake ok  stop=?  frame=none
+2026-07-14T08:05:58  wake ok  stop=?  frame=none
+2026-07-14T07:54:58  codex wake done rc=0
+2026-07-14T08:06:58  wake ok  stop=?  frame=none
+2026-07-14T08:07:58  wake ok  stop=?  frame=none
+2026-07-14T08:08:58  wake ok  stop=?  frame=none
+2026-07-14T08:09:58  wake ok  stop=?  frame=none
+2026-07-14T08:10:58  wake ok  stop=?  frame=none
+2026-07-14T08:11:58  wake ok  stop=?  frame=none
+2026-07-14T08:12:58  wake ok  stop=?  frame=none
+2026-07-14T08:13:58  wake ok  stop=?  frame=none
+2026-07-14T08:14:58  wake ok  stop=?  frame=none
+2026-07-14T08:15:58  wake ok  stop=?  frame=none
+2026-07-14T08:16:59  wake ok  stop=?  frame=none
+2026-07-14T08:17:58  wake ok  stop=?  frame=none
+2026-07-14T08:18:58  wake ok  stop=quiescent  frame=wf-20260713-231920-642c45
+2026-07-14T08:18:58  waking codex: pending inbox handoffs
+2026-07-14T08:18:58  codex wake done rc=0
+2026-07-14T08:23:58  wake ok  stop=quiescent  frame=wf-20260713-232435-71d46f
+2026-07-14T08:23:58  waking codex: pending inbox handoffs
+2026-07-14T08:23:58  codex wake done rc=0
+2026-07-14T08:29:58  wake ok  stop=quiescent  frame=wf-20260713-233014-415b60
+2026-07-14T08:29:58  waking codex: pending inbox handoffs

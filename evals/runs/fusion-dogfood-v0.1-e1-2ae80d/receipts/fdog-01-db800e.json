@@ -1,0 +1,42 @@
+{
+  "schema_version": "weilan_skill_trial_receipt_v0.5",
+  "case_id": "fusion-s0-spec-review-boundary",
+  "trial": 1,
+  "variant": "candidate",
+  "artifact_hash": "2ae80d515f009f38afae281ae9d9a4ce17b6500f25bbc3c668b35cc9e07d9dc7",
+  "evaluation_manifest_hash": "f6289701f183ac768da0420e064b1f751bb8caabf3b2f6e82938a7c6868494aa",
+  "case_spec_hash": "355465c562cea211108095267d3dc659d0e6f72f59d7615eff2b3653b57c68d1",
+  "fixture_manifest_hash": "8f5a5ccfcee97851d847ed45329f9f22355d4054c64d1280126dd6bb129188e6",
+  "configuration_hash": "05f86a57691404db1cf1b0effe80aa1ca54fd7e317b1501569218d5aea393663",
+  "environment_id": "codex-windows-shared-host-2026-07-04-fusion-dogfood-e1",
+  "scoring_version": "fusion-dogfood-weighted-v0.1",
+  "budget": {
+    "tool_calls": 14,
+    "context_tokens": 14000
+  },
+  "actual_usage": {
+    "tool_calls": 0,
+    "context_tokens": 2137
+  },
+  "termination_status": "completed",
+  "raw_output_hash": "0efb8bf65184b98b7429b0eb058ca34ab0eb41fb33e8d76c5c680817bdd1181f",
+  "grader_id": "fusion-dogfood-deterministic-rubric-v0.1",
+  "grader_provenance": {
+    "authority_source": "evals/hidden/fusion-dogfood-v0.1/evaluator-rubric.json",
+    "evaluator_artifact_hash": "b04c826e84a6bc37b3a71325fcdc93733ea942b284dff70cf831a9f34163256d",
+    "evidence_hash": "e3ba1437969887b29c6da554dfd9d0755e86b54c1431422cb696d03ae7ff34c6"
+  },
+  "metrics": {
+    "boundary_adherence": 1.0,
+    "review_quality": 1.0,
+    "source_traceability": 1.0,
+    "receipt_readiness": 1.0,
+    "overhead": 1.0
+  },
+  "guardrail_failures": [],
+  "method_impacts": [],
+  "executor_ids": [
+    "fdog-01-db800e"
+  ],
+  "receipt_hash": "c023b3657ae9a2a08b604e98da70f61ce33b34fc230dcefe87d774fc49d171e2"
+}

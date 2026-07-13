@@ -1,0 +1,34 @@
+{
+  "schema_version": "fusion_dogfood_v03_calibration_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "calibration_not_evidence",
+  "calibration_mode": "deterministic_harness_dry_run_not_model_trial",
+  "case_id": "fusion-v03-budget-bound-ledger-triage",
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "trial_count": 2,
+  "weighted_baseline_mean": 0.745,
+  "status": "dry_run_pipeline_passed",
+  "separation": null,
+  "budget_binding": {
+    "required": "at least one baseline trial reaches >=90% of a budget dimension or is truncated",
+    "passed": true,
+    "trials": [
+      {
+        "trial": 1,
+        "arm": "method-baseline",
+        "bound": true
+      },
+      {
+        "trial": 2,
+        "arm": "method-baseline",
+        "bound": true
+      }
+    ]
+  },
+  "receipt_hashes": [
+    "40d90a9c65b61a121568ebc48818f4974df6902983e8d2c211d33cb548bbd55f",
+    "f9127f62a5c9e469ec3ce0938ec3bb910bf2c63e87e9c99ef3fbd0144edb8c73"
+  ],
+  "hidden_artifacts_read": false,
+  "calibration_receipt_hash": "7cbc4f7521a1ba57570c4ecfc57c4196fb432e93b69f73fd6fc6802b7ff4ee1e"
+}

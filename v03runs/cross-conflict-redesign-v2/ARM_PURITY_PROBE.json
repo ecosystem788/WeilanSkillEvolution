@@ -1,0 +1,359 @@
+{
+  "schema_version": "fusion_dogfood_v03_arm_purity_probe_v0.2",
+  "suite_id": "fusion-dogfood-v0.3",
+  "surface": "codex_desktop_subagent_rollout_jsonl",
+  "status": "current_surface_invalid_for_no_method",
+  "records": [
+    {
+      "trial_id": "cross-v2-no-method-1",
+      "rollout_path": "D:\\CodexData\\home\\sessions\\2026\\07\\05\\rollout-2026-07-05T18-51-47-019f31b0-ddb9-73c3-9ff7-6146ee6f1047.jsonl",
+      "rollout_hash": "ecd3290dd110215134f2e1137e9c75b0cdccef3293bf924120f40d41abe7fc9b",
+      "arm_purity": {
+        "schema_version": "fusion_dogfood_v03_harness_v0.1",
+        "suite_id": "fusion-dogfood-v0.3",
+        "arm": "no-method",
+        "valid": false,
+        "issues": [
+          "no_method_used_method_runtime_operations",
+          "no_method_surface_contains_method_bootstrap"
+        ],
+        "observables": {
+          "method_runtime_operation_count": 14,
+          "method_runtime_hits": [
+            {
+              "line": 11,
+              "marker": "solve-with-weilan",
+              "payload_type": "function_call"
+            },
+            {
+              "line": 12,
+              "marker": "weilan_trace.py",
+              "payload_type": "function_call"
+            },
+            {
+              "line": 12,
+              "marker": "solve-with-weilan",
+              "payload_type": "function_call"
+            },
+            {
+              "line": 12,
+              "marker": "memory-recall",
+              "payload_type": "function_call"
+            },
+            {
+              "line": 13,
+              "marker": "solve-with-weilan",
+              "payload_type": "function_call"
+            },
+            {
+              "line": 15,
+              "marker": "weilan_trace.py",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 15,
+              "marker": "solve-with-weilan",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 15,
+              "marker": "WEILAN_METHOD_HOME",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 15,
+              "marker": "memory-recall",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 15,
+              "marker": "memory-consolidate",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 15,
+              "marker": "lineage-show",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 15,
+              "marker": "minimal_unit_collapsed",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 15,
+              "marker": "trace_emitted",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 18,
+              "marker": "solve-with-weilan",
+              "payload_type": "function_call_output"
+            }
+          ],
+          "workspace_method_bootstrap_count": 3,
+          "workspace_method_bootstrap_hits": [
+            {
+              "line": 4,
+              "marker": "AGENTS.md instructions",
+              "payload_type": "message"
+            },
+            {
+              "line": 4,
+              "marker": "Use `$solve-with-weilan`",
+              "payload_type": "message"
+            },
+            {
+              "line": 4,
+              "marker": "memory-recall --workspace",
+              "payload_type": "message"
+            }
+          ],
+          "append_only_forbidden_operation_count": 3,
+          "append_only_forbidden_hits": [
+            {
+              "line": 15,
+              "marker": "memory-consolidate",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 15,
+              "marker": "minimal_unit_collapsed",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 15,
+              "marker": "trace_emitted",
+              "payload_type": "function_call_output"
+            }
+          ]
+        },
+        "hidden_artifacts_read": false
+      },
+      "actual_usage": {
+        "tool_calls": 15,
+        "context_tokens": 184790,
+        "last_response_context_tokens": 33983,
+        "token_count_events": 6,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 19,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 5,
+          "effective_context_tokens": 4800
+        }
+      }
+    },
+    {
+      "trial_id": "cross-v2-no-method-2",
+      "rollout_path": "D:\\CodexData\\home\\sessions\\2026\\07\\05\\rollout-2026-07-05T18-52-02-019f31b1-1810-7ce1-941b-a975a614d7ae.jsonl",
+      "rollout_hash": "c3644dfaf0ded816592bed1a3f19f3dc240f817e2a23b18bfb5fe8d0c3e3b583",
+      "arm_purity": {
+        "schema_version": "fusion_dogfood_v03_harness_v0.1",
+        "suite_id": "fusion-dogfood-v0.3",
+        "arm": "no-method",
+        "valid": false,
+        "issues": [
+          "no_method_used_method_runtime_operations",
+          "no_method_surface_contains_method_bootstrap"
+        ],
+        "observables": {
+          "method_runtime_operation_count": 22,
+          "method_runtime_hits": [
+            {
+              "line": 11,
+              "marker": "solve-with-weilan",
+              "payload_type": "function_call"
+            },
+            {
+              "line": 12,
+              "marker": "solve-with-weilan",
+              "payload_type": "function_call"
+            },
+            {
+              "line": 13,
+              "marker": "weilan_trace.py",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 13,
+              "marker": "solve-with-weilan",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 13,
+              "marker": "WEILAN_METHOD_HOME",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 13,
+              "marker": "memory-recall",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 13,
+              "marker": "memory-consolidate",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 13,
+              "marker": "lineage-show",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 13,
+              "marker": "minimal_unit_collapsed",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 13,
+              "marker": "trace_emitted",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 19,
+              "marker": "solve-with-weilan",
+              "payload_type": "function_call"
+            },
+            {
+              "line": 20,
+              "marker": "weilan_trace.py",
+              "payload_type": "function_call"
+            },
+            {
+              "line": 20,
+              "marker": "solve-with-weilan",
+              "payload_type": "function_call"
+            },
+            {
+              "line": 20,
+              "marker": "memory-recall",
+              "payload_type": "function_call"
+            },
+            {
+              "line": 21,
+              "marker": "weilan_trace.py",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 21,
+              "marker": "WEILAN_METHOD_HOME",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 21,
+              "marker": "memory-recall",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 21,
+              "marker": "memory-consolidate",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 21,
+              "marker": "memory-disposition",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 21,
+              "marker": "lineage-show",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 29,
+              "marker": "solve-with-weilan",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 63,
+              "marker": "solve-with-weilan",
+              "payload_type": "custom_tool_call"
+            }
+          ],
+          "workspace_method_bootstrap_count": 3,
+          "workspace_method_bootstrap_hits": [
+            {
+              "line": 4,
+              "marker": "AGENTS.md instructions",
+              "payload_type": "message"
+            },
+            {
+              "line": 4,
+              "marker": "Use `$solve-with-weilan`",
+              "payload_type": "message"
+            },
+            {
+              "line": 4,
+              "marker": "memory-recall --workspace",
+              "payload_type": "message"
+            }
+          ],
+          "append_only_forbidden_operation_count": 5,
+          "append_only_forbidden_hits": [
+            {
+              "line": 13,
+              "marker": "memory-consolidate",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 13,
+              "marker": "minimal_unit_collapsed",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 13,
+              "marker": "trace_emitted",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 21,
+              "marker": "memory-consolidate",
+              "payload_type": "function_call_output"
+            },
+            {
+              "line": 21,
+              "marker": "memory-disposition",
+              "payload_type": "function_call_output"
+            }
+          ]
+        },
+        "hidden_artifacts_read": false
+      },
+      "actual_usage": {
+        "tool_calls": 18,
+        "context_tokens": 284610,
+        "last_response_context_tokens": 41086,
+        "token_count_events": 8,
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "budget_accounting": {
+          "scope": "per_episode",
+          "setup_overhead_counted": false,
+          "method_state_operations_counted": true,
+          "retrieval_operations_counted": true
+        },
+        "scoring_time_truncation": {
+          "truncated": true,
+          "truncation_reason": "context_tokens",
+          "truncated_at_line": 15,
+          "policy": "scoring_time_truncation",
+          "effective_tool_calls": 5,
+          "effective_context_tokens": 4800
+        }
+      }
+    }
+  ],
+  "decision": "Do not run cross-window no-method trials on this surface until bootstrap/method directives are scrubbed or a separate clean executor with equivalent telemetry is available.",
+  "hidden_artifacts_read": false,
+  "probe_hash": "8061b236b48dd665f869d26f2646a08ee7762911947fc936af11355d85fbbb91"
+}

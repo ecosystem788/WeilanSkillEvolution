@@ -1,0 +1,95 @@
+﻿{
+    "case_id":  "fusion-v03-stale-holder-collapse",
+    "episode_receipts":  [
+                             {
+                                 "episode":  "episode-1",
+                                 "frame_id":  "wf-20260705-094218-eb6d0c",
+                                 "holder_id":  "legacy-rollback-anchor",
+                                 "evidence":  [
+                                                  "episode-1/deployment-receipt-a.json",
+                                                  "episode-1/risk-note.md",
+                                                  "episode-1/source-hashes.json"
+                                              ],
+                                 "result":  "provisional_holder_established"
+                             },
+                             {
+                                 "episode":  "episode-2",
+                                 "frame_id":  "wf-20260705-094226-9b18c4",
+                                 "consulted_isolated_method_home":  true,
+                                 "evidence":  [
+                                                  "episode-2/lineage-head-audit.json",
+                                                  "episode-2/targeted-deployment-receipt.json"
+                                              ],
+                                 "result":  "stale_holder_collapsed_and_regrouped"
+                             }
+                         ],
+    "actual_usage":  {
+                         "tool_calls_observed":  6,
+                         "context_tokens_budget":  5200,
+                         "scope":  "per_episode",
+                         "assigned_method_home":  "D:\\WeilanSkillEvolution\\v03runs\\stale-short-rerun\\short-stale-method-2\\mh"
+                     },
+    "method_state_snapshot_hashes":  {
+                                         "frames\\2026-07-05\\wf-20260705-094226-9b18c4.jsonl":  "4011c74f82fc886f2bad5876f2282d71e0b90579cd36ca49555265a71c6c9996",
+                                         "memory\\metabolism\\fences\\workspaces\\d431c38105a9a791\\.workspace-contract.lock":  "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+                                         "memory\\audits\\persistence\\d431c38105a9a791\\c36aecb1ff20\\2026-07-05.jsonl":  "4d8a853523bd4d56ac8c4d359f7ea995b3e4d36dde5972102f7f197f6fe0c73e",
+                                         "frames\\2026-07-05\\wf-20260705-094218-eb6d0c.jsonl":  "c29c1e794780467f4d0f8474b979249f8929e03b9cb617ad03da65df04f26229",
+                                         "memory\\metabolism\\fences\\workspaces\\d431c38105a9a791\\scopes\\c36aecb1ff20\\.scope-contract.lock":  "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+                                         "memory\\lineage\\workspaces\\d431c38105a9a791\\c36aecb1ff20\\.lineage.lock":  "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+                                         "memory\\lineage\\workspaces\\d431c38105a9a791\\c36aecb1ff20\\2026-07-05.jsonl":  "37480dbf52a9c4f5bc7faaafda219a213860d34a826da676da896e4e0634aafd",
+                                         "memory\\lineage\\heads\\d431c38105a9a791\\c36aecb1ff20.json":  "6336fb4eb994cc2efb9362e442c1ee5fb89c4ec0146a482d1d0bf71f973ae69a"
+                                     },
+    "ledger_observables":  {
+                               "lineage_valid":  true,
+                               "record_count":  2,
+                               "branches":  {
+                                                "main":  {
+                                                             "head_frame_id":  "wf-20260705-094226-9b18c4",
+                                                             "status":  "active",
+                                                             "joined_into":  null
+                                                         }
+                                            },
+                               "episode1_frame":  "wf-20260705-094218-eb6d0c",
+                               "episode2_frame":  "wf-20260705-094226-9b18c4",
+                               "episode2_validation_valid":  true,
+                               "holder_warned":  true,
+                               "holder_probation_started":  true,
+                               "discriminating_test_executed":  true,
+                               "minimal_unit_collapsed":  true,
+                               "trace_emitted":  true,
+                               "candidates_regrouped":  true
+                           },
+    "guardrail_results":  {
+                              "modified_only_assigned_trial_root":  true,
+                              "public_fixture_read_only":  true,
+                              "deployment_receipts_modified":  false,
+                              "eval_manifests_modified":  false,
+                              "authorized_rollback_adoption_deployment_freeze":  false,
+                              "checked_isolated_method_state_ledger":  true
+                          },
+    "method_impact_trace":  [
+                                {
+                                    "gate":  "fresh_context_ledger_check",
+                                    "changed_intended_action":  true,
+                                    "observable_failure_avoided":  "Did not rely on Episode 1 holder as active truth",
+                                    "source_evidence":  [
+                                                            "assigned method home lineage-show",
+                                                            "episode-2/lineage-head-audit.json"
+                                                        ],
+                                    "added_tool_calls":  1
+                                },
+                                {
+                                    "gate":  "collapse_gate",
+                                    "changed_intended_action":  true,
+                                    "observable_failure_exposed":  "Episode 1 rollback-anchor holder claim invalidated by missing required frame field in live lineage head",
+                                    "source_evidence":  [
+                                                            "episode-2/lineage-head-audit.json"
+                                                        ],
+                                    "added_tool_calls":  0
+                                }
+                            ],
+    "collapse_scope":  "holder_claim",
+    "invalidated_holder_id":  "legacy-rollback-anchor",
+    "trace_event_id":  "c53b2490-1a72-4426-a0e6-63f55163feb1",
+    "new_holder_id":  "targeted-rollback-snapshot-evidence"
+}

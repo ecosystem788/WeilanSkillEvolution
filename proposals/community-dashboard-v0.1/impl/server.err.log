@@ -1,0 +1,4 @@
+127.0.0.1 - - [13/Jul/2026 22:34:33] "GET /api/view-model HTTP/1.1" 200 -
+127.0.0.1 - - [13/Jul/2026 22:34:59] "GET /api/view-model HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2026 02:51:48] "GET /api/view-model HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jul/2026 02:52:50] "GET /api/view-model HTTP/1.1" 200 -

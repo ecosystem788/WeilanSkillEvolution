@@ -1,0 +1,20 @@
+{
+  "schema_version": "fusion_dogfood_v03_qwen_live_block_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "qwen_live_start_block",
+  "status": "blocked_missing_runtime_environment",
+  "requested_action": "run Qwen-surface budget/winnability probes, then 6-trial calibration",
+  "reason": "Live Qwen work requires runtime environment variables. The current process has no QWEN_API_KEY, no QWEN_BASE_URL, and no pinned QWEN_MODEL_SNAPSHOT. The API key and host were provided in chat, but key hygiene forbids copying them from chat into command arguments, repository files, receipts, fixtures, or persisted configuration.",
+  "required_environment": {
+    "QWEN_API_KEY": "must be set in the process environment by the owner or shell before Codex runs live calls",
+    "QWEN_BASE_URL": "must be set in the process environment by the owner or shell before Codex runs live calls",
+    "QWEN_MODEL_SNAPSHOT": "must be an exact pinned snapshot/model id; floating aliases are rejected"
+  },
+  "live_api_called": false,
+  "api_key_persisted": false,
+  "api_host_persisted": false,
+  "six_trial_calibration_started": false,
+  "hidden_artifacts_read": false,
+  "next_unblock_step": "Set QWEN_API_KEY, QWEN_BASE_URL, and QWEN_MODEL_SNAPSHOT in the runtime environment, then rerun the live preflight.",
+  "receipt_hash": "07f49bfea9f76df3abd8044e90f5bf32616928b1edd417c1f2e61d3668381eed"
+}

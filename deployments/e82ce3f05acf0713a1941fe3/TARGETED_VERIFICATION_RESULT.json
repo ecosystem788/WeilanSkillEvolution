@@ -1,0 +1,17 @@
+﻿{
+    "schema_version":  "weilan_targeted_verification_result_v0.1",
+    "deployment_id":  "e82ce3f05acf0713a1941fe3",
+    "candidate_tree_hash":  "e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32",
+    "created_at":  "2026-07-08T03:28:13Z",
+    "result":  "pass",
+    "checks":  [
+                   "candidate test_false_zero_guard.py passed before deployment",
+                   "candidate test_semantic_memory.py passed before deployment",
+                   "installed test_false_zero_guard.py passed after deployment",
+                   "installed test_semantic_memory.py passed after deployment",
+                   "installed scripts/weilan_trace.py py_compile passed",
+                   "projection-rebuild completed for D:\\WeilanSkillEvolution scope skill-evolution with no warnings",
+                   "memory-recall for D:\\WeilanSkillEvolution scope skill-evolution returned ACTIVE after rebuild",
+                   "D:\\CodexData and Claude installed skill targets match candidate tree hash"
+               ]
+}

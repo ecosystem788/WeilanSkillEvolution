@@ -1,0 +1,5 @@
+{
+  "invalidates_rule_id": "rule-v1-stale0-delta-gte4",
+  "reason": "source hash retired after recalibration; threshold changed from >=4 to >=6",
+  "replacement_rule_id": "rule-v2-stale0-delta-gte6"
+}

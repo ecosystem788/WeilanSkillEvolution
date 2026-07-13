@@ -1,0 +1,46 @@
+{
+  "schema_version": "fusion_dogfood_v03_real_calibration_block_v0.2",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "real_calibration_blocked",
+  "created_at_utc": "2026-07-05T08:18:07.398998+00:00",
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "authorization_source": "conversation:2026-07-05-user-authorized-v03-real-baseline-calibration",
+  "status": "blocked_before_execution",
+  "blocking_reason": "Real baseline calibration preflight failed. Do not execute the authorized 14 trials until every case has an entity fixture root, hidden scoring contract, preregistration, and validated telemetry surface.",
+  "preflight_hash": "71936aed0d3a5f87fbc116bc8bf054bb77b90d80df9631bb95b9a9522220c080",
+  "preflight_issues": [
+    "one_or_more_cases_not_fixture_ready"
+  ],
+  "case_issues": [
+    {
+      "case_id": "fusion-v03-budget-bound-ledger-triage",
+      "issues": [
+        "public_fixture_root_missing"
+      ]
+    },
+    {
+      "case_id": "fusion-v03-cross-window-recall-gap",
+      "issues": [
+        "public_fixture_root_missing"
+      ]
+    },
+    {
+      "case_id": "fusion-v03-stale-holder-collapse",
+      "issues": [
+        "public_fixture_root_missing"
+      ]
+    }
+  ],
+  "telemetry_surface": {
+    "valid": true,
+    "selected_surface": "codex_desktop_subagent_rollout_jsonl",
+    "environment_id": "codex-desktop-subagent-rollout-jsonl-v0.142.5",
+    "validation_hash": "ff0fdb28455ef317bad876cd13130f8444eef6ec79bf3a4e7ea60903959b1d77"
+  },
+  "trial_count_authorized": 14,
+  "trial_count_executed": 0,
+  "r3_gate_position": "fail_closed",
+  "not_a_case_verdict": true,
+  "hidden_artifacts_read": false,
+  "receipt_hash": "98907defadd38028d410311ca52745954e00501aa1fb38e08319147e01603cc6"
+}

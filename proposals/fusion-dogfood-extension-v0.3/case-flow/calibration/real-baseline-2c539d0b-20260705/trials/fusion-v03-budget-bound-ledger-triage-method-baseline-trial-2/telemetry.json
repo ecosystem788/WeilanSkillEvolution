@@ -1,0 +1,87 @@
+{
+  "schema_version": "fusion_dogfood_v03_real_trial_telemetry_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "trial_id": "fusion-v03-budget-bound-ledger-triage-method-baseline-trial-2",
+  "case_id": "fusion-v03-budget-bound-ledger-triage",
+  "arm": "method-baseline",
+  "trial": 2,
+  "rollout_trace": {
+    "schema_version": "fusion_dogfood_v03_harness_v0.1",
+    "surface": "codex_desktop_rollout_jsonl",
+    "rollout_path": "D:\\CodexData\\home\\sessions\\2026\\07\\05\\rollout-2026-07-05T17-57-47-019f317f-6e72-7841-9504-e1e0f9f40796.jsonl",
+    "rollout_hash": "90c2e44b58cc5e3a595ea4e3a3c9f41b4de366ca690e5e422d68d8e22ae49967",
+    "rollout_size_bytes": 155082,
+    "cli_versions": [
+      "0.142.5"
+    ],
+    "environment_ids": [
+      "codex-desktop:subagent"
+    ],
+    "turn_ids": [
+      "019f317f-82e4-74a3-9cc3-98341bdec5be"
+    ],
+    "tool_call_count": 5,
+    "tool_call_names": [
+      "shell_command",
+      "shell_command",
+      "shell_command",
+      "shell_command",
+      "shell_command"
+    ],
+    "context_token_count": 144633,
+    "token_count_events": 5,
+    "task_complete_seen": true,
+    "context_compacted_seen": false,
+    "ordered_event_stream": true,
+    "actual_usage": {
+      "tool_calls": 5,
+      "context_tokens": 144633,
+      "last_response_context_tokens": 35738,
+      "token_count_events": 5,
+      "truncated": true,
+      "truncation_reason": "context_tokens",
+      "budget_accounting": {
+        "scope": "whole_case",
+        "setup_overhead_counted": false,
+        "method_state_operations_counted": true,
+        "retrieval_operations_counted": true
+      },
+      "scoring_time_truncation": {
+        "truncated": true,
+        "truncation_reason": "context_tokens",
+        "truncated_at_line": 13,
+        "policy": "scoring_time_truncation",
+        "effective_tool_calls": 4,
+        "effective_context_tokens": 3600
+      }
+    }
+  },
+  "receipt_hash": "7d95ea07d76fa3f4e7abc7dcf688ca906094529c48917d7c379d11630bfc577a",
+  "controller_prompt_hash": "d94a1a9122fbafab3a95dc61a2409debd3567f2cb06c278dbc13b1f36877bddf",
+  "actual_usage": {
+    "tool_calls": 5,
+    "context_tokens": 144633,
+    "last_response_context_tokens": 35738,
+    "token_count_events": 5,
+    "truncated": true,
+    "truncation_reason": "context_tokens",
+    "budget_accounting": {
+      "scope": "whole_case",
+      "setup_overhead_counted": false,
+      "method_state_operations_counted": true,
+      "retrieval_operations_counted": true
+    },
+    "scoring_time_truncation": {
+      "truncated": true,
+      "truncation_reason": "context_tokens",
+      "truncated_at_line": 13,
+      "policy": "scoring_time_truncation",
+      "effective_tool_calls": 4,
+      "effective_context_tokens": 3600
+    }
+  },
+  "r3_budget_bound": true,
+  "receipt_encoding": "utf-8-sig",
+  "hidden_artifacts_read": false,
+  "telemetry_receipt_hash": "831d2644b3593592af9554b11297430e83605324b8835929c8dc81af356bdffb"
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "fusion_dogfood_v03_real_calibration_block_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "record_type": "real_calibration_blocked",
+  "created_at_utc": "2026-07-05T04:18:00Z",
+  "baseline_artifact_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+  "authorization_source": "conversation:2026-07-05-user-authorized-v03-real-baseline-calibration",
+  "authorized_trial_plan": {
+    "fusion-v03-stale-holder-collapse": {
+      "method-baseline": 2,
+      "no-method": 2,
+      "append-only": 2
+    },
+    "fusion-v03-cross-window-recall-gap": {
+      "method-baseline": 2,
+      "no-method": 2,
+      "append-only": 2
+    },
+    "fusion-v03-budget-bound-ledger-triage": {
+      "method-baseline": 2
+    }
+  },
+  "trial_count_authorized": 14,
+  "trial_count_executed": 0,
+  "status": "blocked_before_execution",
+  "blocking_reason": "The available subagent execution surface returns final messages but not a complete, parseable rollout trace with task tool-call count, task context-token estimate, truncation status, and per-episode usage. Running the 14 trials without that telemetry would produce unverifiable actual_usage and violate R3 hard-budget enforcement.",
+  "r3_gate_position": "fail_closed",
+  "budget_binding_policy": "For budget_saturation_case trials, real calibration must show at least one method-baseline trial reaching >=90% of a budget dimension or being mechanically truncated. budget_binding null or low observed usage is not accepted.",
+  "negative_control_policy": "For load-bearing episode cases, no-method and append-only arms require equivalent prompts and budgets plus auditable actual_usage. They were not run because the same telemetry gap applies.",
+  "not_a_case_verdict": true,
+  "case_design_status": "case-flow dry-run valid; real baseline calibration pending a telemetry-capable execution runner",
+  "hidden_artifacts_read": false
+}

@@ -1,0 +1,217 @@
+{
+  "schema_version": "fusion_dogfood_fixture_manifest_v0.2",
+  "suite_id": "fusion-dogfood-v0.2",
+  "case_id": "fusion-budget-saturated-triage",
+  "status": "draft_unfrozen",
+  "candidate_visible_root": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public",
+  "copied_at_utc": "2026-07-04T15:32:32.997453+00:00",
+  "source_snapshot_root": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage",
+  "snapshot_discipline": "fixtures populate from pinned snapshots; deleting a snapshot is a deliberate re-slice and must be recorded in the R9 redesign ledger",
+  "candidate_visible": [
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-0-drift-overmerge.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-0-drift-overmerge.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-0-drift-overmerge.md",
+      "sha256": "b8019a965fbacd92a04d451302aa51c1c8278fe57141e9f67cf27a37d3e909be",
+      "bytes": 7626
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-1-sparse-oracle-budget.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-1-sparse-oracle-budget.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-1-sparse-oracle-budget.md",
+      "sha256": "64f647eff876146649e263ad2c6dea1167aee9f57cb0f91926284c5a179f107f",
+      "bytes": 9900
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-1.5-merge-operator.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-1.5-merge-operator.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-1.5-merge-operator.md",
+      "sha256": "1033f222f696be7fd93510fd7f7d7a1f50202c59e277aa556d51c9f76c02ff21",
+      "bytes": 14369
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-2-behavioral-readout.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-2-behavioral-readout.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-2-behavioral-readout.md",
+      "sha256": "e6f4d67436f6eeb78b793b5763ffab8448069c27b17e46a8d15420d4fd3f158a",
+      "bytes": 13478
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-2f-final-forced-choice.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-2f-final-forced-choice.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-2f-final-forced-choice.md",
+      "sha256": "00b786ba2469aff87cd3be6a93eb794916b68e9e15fa0f80b1aac3caafa49626",
+      "bytes": 11527
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-3-S0-substrate-anatomy.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-3-S0-substrate-anatomy.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-3-S0-substrate-anatomy.md",
+      "sha256": "ff5fe74c6a6591c3750bc7f14032ebfc8ae27ed70d79f7a1fe719e630db9a351",
+      "bytes": 15195
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-4-ledger-metabolism-M0.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-4-ledger-metabolism-M0.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-4-ledger-metabolism-M0.md",
+      "sha256": "790ad23e5a4266ef90f7ef0bf849c4a4ed002d8e61c7e2544394faa55e620a55",
+      "bytes": 12574
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-5-S1-sense-state-transfer.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-5-S1-sense-state-transfer.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-5-S1-sense-state-transfer.md",
+      "sha256": "21e5ad1ec424d01f6d821d36573807f8beeaf6cd746757e41c6cca35a570ea5c",
+      "bytes": 14902
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-6-S1-M0b-bundle-carrier.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-6-S1-M0b-bundle-carrier.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-6-S1-M0b-bundle-carrier.md",
+      "sha256": "87d7b6519405aa153d80af0a34c58d9b9df84aa5cb0ecd3d853229856afde52c",
+      "bytes": 13696
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-7-S1B-state-vs-budget.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-7-S1B-state-vs-budget.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-7-S1B-state-vs-budget.md",
+      "sha256": "38e2b35fe5a6fea2d2b628d1039d9b9e0604729d587b2b6cfb2c7d25d95d9038",
+      "bytes": 10237
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-8-S2-M0-blunt-state-governance.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-8-S2-M0-blunt-state-governance.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-8-S2-M0-blunt-state-governance.md",
+      "sha256": "6dd53ab908e748424f74892abc16a55b9242e7baaa5a7c668159cd57378e82b2",
+      "bytes": 10518
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\EXP-8-S2-M0-v0.4-repair-proposal.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-8-S2-M0-v0.4-repair-proposal.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/EXP-8-S2-M0-v0.4-repair-proposal.md",
+      "sha256": "585aba397e131e9da0cb6697554c0a4456a20db8b5dac2eeadeb48987f62aa79",
+      "bytes": 12034
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\PROPOSAL-dual-line-redesign.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/PROPOSAL-dual-line-redesign.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/PROPOSAL-dual-line-redesign.md",
+      "sha256": "53229acf9231017b5f42a28500c5abbd3d1424e54fe45bd18fe680ac101b135d",
+      "bytes": 5350
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\READOUT-CONTRACT-v1.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/READOUT-CONTRACT-v1.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/READOUT-CONTRACT-v1.md",
+      "sha256": "4c1ad08f4dcb49ca806d6b5b1a6eb5cc7d7487390b21137f8f93d028816286f1",
+      "bytes": 10642
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\specs\\TICKET-CORPUS-V2.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/specs/TICKET-CORPUS-V2.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/specs/TICKET-CORPUS-V2.md",
+      "sha256": "b71a39428dc5984dd046199d1ad9300658c4f88f7b3b88fcf12ef232416e71ca",
+      "bytes": 8222
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\tools\\s0_static_scan.py",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/tools/s0_static_scan.py",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/tools/s0_static_scan.py",
+      "sha256": "e925b2916fe1d8ffad6a07b2036f3655699d157f765043eee54f68df7e957f41",
+      "bytes": 14161
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\tools\\s0_env_probe.py",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/tools/s0_env_probe.py",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/tools/s0_env_probe.py",
+      "sha256": "cf77d2d989c966ad4fd914656b2f94799a8f2f685a1df1f84b9c1716068e1245",
+      "bytes": 11365
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\corpus_v2_build_report.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/corpus_v2_build_report.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/corpus_v2_build_report.md",
+      "sha256": "3c45a1893af11615beb7801e65f67da9582de2ffcc7a8f4d9ca413461ae9cf7d",
+      "bytes": 11529
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\corpus_v2_build_report.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/corpus_v2_build_report.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/corpus_v2_build_report.json",
+      "sha256": "b28d1dad61b744852a2ad5a58eadb35b3b64186911eaa574e3e5ce60f72d132d",
+      "bytes": 52312
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\corpus_v2_measure.log",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/corpus_v2_measure.log",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/corpus_v2_measure.log",
+      "sha256": "1a3705e4c8762dcaa688e4bb194537dd60c65bb10d3778fa18d14b2691a4fd3e",
+      "bytes": 7924
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp0_report.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp0_report.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp0_report.json",
+      "sha256": "48013daee36bd5da7b8a407a4e2b839b9ac62fbc436faa58b2274192fcc1ff24",
+      "bytes": 1716
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp1_claude_report.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp1_claude_report.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp1_claude_report.json",
+      "sha256": "f89d58268654815cc53fd7c621c7e6466c267146869a64aee605e38bf7aea01f",
+      "bytes": 2547
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp1_scripted_report.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp1_scripted_report.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp1_scripted_report.json",
+      "sha256": "bbb70867d440932a65042babf5e97f0070c623812afdf5df676a5a76ac3434a7",
+      "bytes": 2501
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15-v1_receipt.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp15-v1_receipt.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp15-v1_receipt.md",
+      "sha256": "9ac139317744fba025fd68238313d136379bf111c23672072f43cc4bf2303d89",
+      "bytes": 2200
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15-v1_report.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp15-v1_report.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp15-v1_report.json",
+      "sha256": "ea3a94d935f093d14a9ae4002464cf91a6c451aec0792716a8ca1800627eab7b",
+      "bytes": 4522
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15b-v1_receipt.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp15b-v1_receipt.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp15b-v1_receipt.md",
+      "sha256": "2caf1983b8a4cf65e1826e61a8c77954925e55c1b3a13d0120dec3b1de47c823",
+      "bytes": 2296
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp15b-v1_report.json",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp15b-v1_report.json",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp15b-v1_report.json",
+      "sha256": "042a4d47b21789636851e5c34e81085626dea26ed50030bb512f494ac5d45c83",
+      "bytes": 4667
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp3-s0-v1_receipt.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp3-s0-v1_receipt.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp3-s0-v1_receipt.md",
+      "sha256": "38f35f8bdebeba4d7bef5d8e512539da605e474c3fb4ea24302df613c640845b",
+      "bytes": 1464
+    },
+    {
+      "source_path": "D:\\weilan-llm-fusion\\artifacts\\exp4-m0-v1_receipt.md",
+      "snapshot_path": "proposals/fusion-dogfood-extension-v0.2/source-snapshots/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp4-m0-v1_receipt.md",
+      "fixture_path": "evals/fixtures/fusion-dogfood-v0.2/fusion-budget-saturated-triage/public/fusion-workspace/artifacts/exp4-m0-v1_receipt.md",
+      "sha256": "f277534585a40e4a1eee47c036d8b1aad7bc2da0976321032456f54aff47fdae",
+      "bytes": 1557
+    }
+  ],
+  "directory_references": "forbidden",
+  "calibration_material": "not included"
+}

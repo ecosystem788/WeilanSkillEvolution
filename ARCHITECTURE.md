@@ -1,5 +1,8 @@
 # WeiLan Skill Evolution Architecture
 
+> 2026-07-11 起本文件为**工程指引**(非授权闸),依 CHARTER.md 治理;社区可双签修订,观察员可否决。
+
+
 ## Purpose
 
 This project evolves the global WeiLan problem-solving Skill without allowing the candidate Skill to control its own roadmap, evaluation, adoption, or rollback.

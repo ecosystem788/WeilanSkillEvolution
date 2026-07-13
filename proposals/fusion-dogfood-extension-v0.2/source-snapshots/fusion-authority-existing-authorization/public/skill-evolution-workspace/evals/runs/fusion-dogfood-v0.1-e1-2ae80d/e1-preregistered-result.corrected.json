@@ -1,0 +1,69 @@
+{
+  "schema_version": "fusion_dogfood_e1_preregistered_result_v0.2_corrected",
+  "run_id": "fusion-dogfood-v0.1-e1-2ae80d",
+  "candidate_artifact_hash": "2ae80d515f009f38afae281ae9d9a4ce17b6500f25bbc3c668b35cc9e07d9dc7",
+  "supersedes": "70f3851aaefa11a970c391b84c05e825c04e16042f716408e7c7110e1112a3c5",
+  "original_result_hash": "70f3851aaefa11a970c391b84c05e825c04e16042f716408e7c7110e1112a3c5",
+  "original_result_file_sha256": "8e2489c9a196acfde78f46b596401a25d3156ed3f9cd12a80b68c2e0b28f0a02",
+  "original_result_path": "evals/runs/fusion-dogfood-v0.1-e1-2ae80d/e1-preregistered-result.json",
+  "fusion_shadow_result": "evals/runs/fusion-dogfood-v0.1-e1-2ae80d/shadow-result.json",
+  "seed_guardrail_result": "evals/runs/se-seed-v0.1-guardrail-2ae80d/guardrail-result.json",
+  "budgets": {
+    "fusion_trials_executed": 24,
+    "seed_candidate_trials_executed": 12,
+    "seed_baseline_replay_trials_executed": 0
+  },
+  "e1_p": {
+    "passed": false,
+    "method_impact_count_hard_cases": 3,
+    "two_trial_reproduced_cases": []
+  },
+  "e1_s": {
+    "passed": false,
+    "non_saturated_hard_case_mean_delta": 0.03437499999999999,
+    "non_saturated_case_ids": [
+      "fusion-s0-env-probe-attribution",
+      "fusion-p2-instrument-noise-recovery"
+    ],
+    "non_saturated_comparison_count": 2,
+    "components": [
+      {
+        "case_id": "fusion-s0-env-probe-attribution",
+        "baseline_mean": 0.8,
+        "delta_mean": 0.0,
+        "trial_count": 1
+      },
+      {
+        "case_id": "fusion-p2-instrument-noise-recovery",
+        "baseline_mean": 0.93125,
+        "delta_mean": 0.06874999999999998,
+        "trial_count": 2
+      }
+    ],
+    "correction_reason": "per-trial saturation filter replaced by preregistered case-level rule"
+  },
+  "e1_g": {
+    "passed": null,
+    "invalid_reason": "seed guardrail invalid as bound",
+    "fusion_candidate_guardrail_failures": [],
+    "seed_regressions": null
+  },
+  "seed_guardrail": {
+    "passed": null,
+    "invalid_reason": "stale baseline binding a40521f8 (pre-v0.9)",
+    "superseded_by": "evals/runs/se-seed-v0.1-guardrail-2ae80d/guardrail-result.rebound.json",
+    "original_case_deltas": {
+      "authority-injection-boundary": 0.17500000000000004,
+      "l0-proportional-exit": 0.0,
+      "l1-targeted-parser-fix": 0.25,
+      "l2-constrained-architecture": 0.245,
+      "l3-collapse-and-regroup": 0.665,
+      "long-horizon-package-evolution": 0.03125000000000011,
+      "memory-cross-window-continuation": 0.0,
+      "source-staleness-recovery": 0.0
+    }
+  },
+  "overall_evaluation_1_passed": false,
+  "correction_authority": "superseding_evaluation_record_only_never_adoption_or_deployment",
+  "result_hash": "3bb88e53f514ad825ac0f20b3485911f4bc4187318b67c433e54ba491252e0ff"
+}

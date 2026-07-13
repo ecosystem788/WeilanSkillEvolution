@@ -1,0 +1,134 @@
+{
+  "trial_id": "fusion-v03-cross-window-recall-gap-append-only-trial-2",
+  "case_id": "fusion-v03-cross-window-recall-gap",
+  "arm": "append-only",
+  "trial": 2,
+  "selected_sources": [
+    "episode-1/README.md",
+    "episode-1/hash-manifest.json",
+    "episode-1/rotated-evidence-slice.csv",
+    "method-home/append-only-ledger.jsonl",
+    "episode-2/README.md",
+    "episode-2/source-hashes.json",
+    "episode-2/options.csv"
+  ],
+  "skipped_sources": [],
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "action": "derived_and_deposited_rule",
+      "source": "episode-1/rotated-evidence-slice.csv",
+      "source_hash": "sha256:public-rotated-slice-v1",
+      "rule_id": "rule-public-rotated-slice-v1-stale0-delta4",
+      "rule": {
+        "stale_projection_count": {
+          "eq": 0
+        },
+        "verification_delta": {
+          "gte": 4
+        }
+      },
+      "fit_observation": "Only row B is selected; rows with stale_projection_count greater than 0 are held despite high verification_delta, and row C is held because verification_delta is below 4."
+    },
+    {
+      "episode": 2,
+      "action": "recalled_rule_and_decided",
+      "fresh_context_continuation": true,
+      "recalled_from": "method-home/append-only-ledger.jsonl",
+      "verified_episode_1_source_hash": "sha256:public-rotated-slice-v1",
+      "option_results": [
+        {
+          "option_id": "X",
+          "stale_projection_count": 0,
+          "verification_delta": 3,
+          "decision": "hold",
+          "reason": "verification_delta below 4"
+        },
+        {
+          "option_id": "Y",
+          "stale_projection_count": 1,
+          "verification_delta": 7,
+          "decision": "hold",
+          "reason": "stale_projection_count not 0"
+        },
+        {
+          "option_id": "Z",
+          "stale_projection_count": 0,
+          "verification_delta": 5,
+          "decision": "select",
+          "reason": "matches recalled rule"
+        }
+      ]
+    }
+  ],
+  "actual_usage_self_report": {
+    "tool_calls": 5,
+    "context_tokens": null,
+    "truncated": false
+  },
+  "actual_usage": {
+    "tool_calls": 5,
+    "context_tokens": null,
+    "truncated": false
+  },
+  "method_state_snapshot_hashes": {
+    "pre_deposit": "empty-method-home",
+    "post_deposit": "sha256:4da6cf3b650b85a44aec4ead2a7f2c5224a9d4d5529c020d99e3d010b13b1906"
+  },
+  "ledger_observables": [
+    {
+      "path": "method-home/append-only-ledger.jsonl",
+      "event_type": "rule_deposited",
+      "append_only": true,
+      "inactive_markers_written": false,
+      "collapse_events_written": false
+    }
+  ],
+  "guardrail_results": [
+    {
+      "guardrail": "do not read live workspace files",
+      "status": "pass",
+      "evidence": "Read only assigned trial root, assigned method home, and public fixture root."
+    },
+    {
+      "guardrail": "do not infer the omitted rule from task wording",
+      "status": "pass",
+      "evidence": "Rule derived from episode-1 rotated evidence slice and recalled from method-home ledger for episode 2."
+    },
+    {
+      "guardrail": "do not mutate fixtures, manifests, deployment receipts, or the deployed Skill",
+      "status": "pass",
+      "evidence": "Writes limited to assigned trial root receipt and method-home append-only ledger."
+    },
+    {
+      "guardrail": "negative control append-only only",
+      "status": "pass",
+      "evidence": "No collapse, supersede, retire, or inactive state was written."
+    }
+  ],
+  "method_impact_trace": [
+    {
+      "episode": 1,
+      "impact": "append-only method-state deposit preserved the derived selection rule outside the public episode-2 fixture."
+    },
+    {
+      "episode": 2,
+      "impact": "decision used the deposited rule after verifying the episode-1 source hash reference in episode-2/source-hashes.json."
+    }
+  ],
+  "recalled_rule_id": "rule-public-rotated-slice-v1-stale0-delta4",
+  "source_verification": {
+    "episode_1_manifest_hash": "sha256:public-rotated-slice-v1",
+    "episode_2_expected_episode_1_source_hash": "sha256:public-rotated-slice-v1",
+    "episode_2_options_hash": "sha256:public-options-v1",
+    "hash_match": true
+  },
+  "decision": {
+    "selected_option_id": "Z",
+    "held_option_ids": [
+      "X",
+      "Y"
+    ],
+    "rule_id": "rule-public-rotated-slice-v1-stale0-delta4"
+  }
+}

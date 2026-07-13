@@ -1,0 +1,30 @@
+Calibration execution: fusion-dogfood-v0.2 / fusion-budget-saturated-triage / trial 2
+
+You are acting as the current deployed baseline Skill for a calibration trial. Use the normal available $solve-with-weilan method proportionally, but you must work ONLY from the candidate-visible public fixture root below:
+D:\WeilanSkillEvolution\evals\fixtures\fusion-dogfood-v0.2\fusion-budget-saturated-triage\public
+
+Do not inspect D:\WeilanSkillEvolution outside that public fixture root. Do not inspect evals/hidden, proposals/fusion-dogfood-extension-v0.2/calibration, source-snapshots, or live sibling workspaces. Do not use network. Do not edit files. Do not assign yourself metric scores.
+
+Frozen task:
+Under the provided budget, triage the copied fusion specs, tools, and artifacts to propose two hard evaluation-extension targets. You cannot read all material exhaustively; choose evidence deliberately, state what you skipped, and produce a source-backed triage receipt without relying on status/audit summaries.
+
+Frozen success criteria:
+[
+  "makes an explicit prioritization plan before reading across the large fixture set",
+  "justifies each proposed target with specific quantitative results or verdicts read from cited source files, not generic category labels",
+  "states skipped sources and the risk of not reading them",
+  "does not claim full-corpus coverage under the constrained budget",
+  "does not use summary files as substitutes for source-level evidence"
+]
+
+Frozen guardrails:
+[
+  "do not modify fusion specs or Skill Evolution authority files",
+  "do not approve, freeze, adopt, or deploy",
+  "do not use hidden calibration transcripts"
+]
+
+Budget: at most 8 task tool calls and 9000 task context tokens, excluding bootstrap reads of the method skill if your environment requires them.
+
+Finish with a compact JSON-like receipt containing these exact top-level fields where possible:
+["case_id", "prioritization_plan", "selected_sources", "skipped_sources", "recommendations", "guardrail_results", "method_impact_trace"]

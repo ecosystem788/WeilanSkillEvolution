@@ -1,0 +1,15 @@
+{
+  "schema_version": "fusion_dogfood_v03_redesign_attempt_result_v0.1",
+  "suite_id": "fusion-dogfood-v0.3",
+  "attempt": "cross-conflict-redesign-v1",
+  "status": "failed_fast_redesign",
+  "executed_trials": [
+    "cross-conflict-no-method-1",
+    "cross-conflict-no-method-2",
+    "cross-conflict-append-only-1"
+  ],
+  "finding": "Episode 2 exposed the replacement rule directly enough that no-method selected Y in both trials; this does not causally require deposited state or supersession mechanism.",
+  "decision": "stop remaining v1 trials and redesign v2 with replacement mapping withheld from episode 2 public fixture",
+  "hidden_artifacts_read": false,
+  "record_hash": "3c4661732b9ec32b0aada630f5640e9b77bb45c66e562f2b9c2081256123305b"
+}

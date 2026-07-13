@@ -1,0 +1,84 @@
+{
+  "case_id": "fusion-v03-cross-window-recall-gap-redesign-conflict-v2",
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "source": "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\fixtures\\episode-1\\rule-and-procedure.json",
+      "deposited_rule_id": "rule-v1-stale0-delta-gte4",
+      "deposited_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+      "observed_hash_manifest": {
+        "rule-and-procedure.json": "sha256:cross-conflict-v2-episode1"
+      }
+    },
+    {
+      "episode": 2,
+      "source": "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\fixtures\\episode-2",
+      "invalidated_rule_id": "rule-v1-stale0-delta-gte4",
+      "trigger": "retired_for_hash_drift",
+      "options_considered": [
+        {
+          "option_id": "X",
+          "stale_projection_count": 0,
+          "verification_delta": 4,
+          "selected": false
+        },
+        {
+          "option_id": "Y",
+          "stale_projection_count": 0,
+          "verification_delta": 6,
+          "selected": true
+        },
+        {
+          "option_id": "Z",
+          "stale_projection_count": 1,
+          "verification_delta": 8,
+          "selected": false
+        }
+      ],
+      "observed_source_hashes": {
+        "options.csv": "sha256:cross-conflict-v2-options",
+        "invalidator.json": "sha256:cross-conflict-v2-invalidator"
+      }
+    }
+  ],
+  "actual_usage": {
+    "tool_calls_total_in_window": 7,
+    "tool_calls_after_public_prompt_read": 3,
+    "notes": "The public prompt budget was exceeded before receipt writing because higher-priority workspace instructions required solve-with-weilan skill loading and memory recall before the no-method prompt was read."
+  },
+  "method_state_snapshot_hashes": {
+    "assigned_method_home": "D:\\WeilanSkillEvolution\\v03runs\\cross-conflict-redesign-v2\\trials\\cross-v2-no-method-2\\mh",
+    "assigned_method_home_files": [],
+    "snapshot_hash": "sha256:empty"
+  },
+  "ledger_observables": {
+    "assigned_method_home_observables": [],
+    "rule_lifecycle": "rule-v1-stale0-delta-gte4 superseded by applying proc-threshold-plus-two-on-retired-hash after retired_for_hash_drift",
+    "trace_observable": "rule-v1-stale0-delta-gte4 -> rule-v2-stale0-delta-gte6"
+  },
+  "guardrail_results": {
+    "worked_only_inside_assigned_trial_root_and_public_fixture_root_after_prompt_read": true,
+    "hidden_eval_or_scorer_files_inspected": false,
+    "deployment_or_authority_files_modified": false,
+    "approval_freeze_adoption_deploy_or_rollback_performed": false,
+    "receipt_written_to_final_receipt_path": true,
+    "negative_control_method_guardrail": "not fully satisfied due to higher-priority required bootstrap before the public no-method prompt was read"
+  },
+  "method_impact_trace": {
+    "arm": "no-method",
+    "persistent_ledger_used_in_assigned_method_home": false,
+    "assigned_method_home_modified": false,
+    "external_bootstrap_conflict": "solve-with-weilan skill loading and workspace memory recall occurred before the public no-method instruction was available, due to higher-priority run instructions",
+    "decision_dependency": "The selected option depends on the episode-1 deposited successor procedure plus episode-2 public invalidator and options."
+  },
+  "recalled_rule_id": "rule-v1-stale0-delta-gte4",
+  "recalled_procedure_id": "proc-threshold-plus-two-on-retired-hash",
+  "superseded_rule_id": "rule-v1-stale0-delta-gte4",
+  "active_rule_id": "rule-v2-stale0-delta-gte6",
+  "decision": {
+    "selected_option_id": "Y",
+    "active_rule_text": "select stale_projection_count == 0 and verification_delta >= 6",
+    "rule_v1_status": "superseded/collapsed with trace",
+    "reason": "Episode 2 retires rule-v1 for hash drift. The deposited successor-update procedure keeps stale_projection_count == 0 and raises verification_delta threshold by 2, from 4 to 6. Option Y is the only option with stale_projection_count == 0 and verification_delta >= 6."
+  }
+}

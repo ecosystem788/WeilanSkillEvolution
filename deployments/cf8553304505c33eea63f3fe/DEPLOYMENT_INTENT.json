@@ -1,0 +1,37 @@
+{
+  "schema_version": "weilan_skill_deployment_receipt_v0.6-targeted",
+  "deployment_id": "cf8553304505c33eea63f3fe",
+  "created_at": "2026-07-07T05:28:48+00:00",
+  "authority_source": "conversation:2026-07-07-user-authorized-barrel-fix-v2-direct-deployment",
+  "spec_path": "D:\\WeilanSkillEvolution\\staging\\barrel-fix-v2\\BARREL_FIX_V2_SPEC.md",
+  "verification_result": "D:\\WeilanSkillEvolution\\deployments\\cf8553304505c33eea63f3fe\\TARGETED_VERIFICATION_RESULT.json",
+  "targets": [
+    "D:\\CodexData\\skills\\solve-with-weilan",
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan"
+  ],
+  "candidate": "D:\\WeilanSkillEvolution\\deployments\\cf8553304505c33eea63f3fe\\candidate\\solve-with-weilan",
+  "before_artifact_hash": "a1b0cd3db5aa630c9134cbb2cd5e25bbaf7e5105645b89a809a052d5ed15962d",
+  "after_artifact_hash": "cf8553304505c33eea63f3febb310542d392fcb27657c7bd40581876c38da847",
+  "changed_files": [
+    "references/memory-system.md",
+    "scripts/test_derivation_performance.py",
+    "scripts/test_evidence_lifecycle.py",
+    "scripts/test_governance.py",
+    "scripts/test_metabolism.py",
+    "scripts/test_runner.py",
+    "scripts/test_transaction.py",
+    "scripts/test_transition_planner.py",
+    "scripts/weilan_trace.py"
+  ],
+  "rollback_artifact": "D:\\WeilanSkillEvolution\\deployments\\cf8553304505c33eea63f3fe\\rollback\\solve-with-weilan",
+  "rollback_artifact_hash": "a1b0cd3db5aa630c9134cbb2cd5e25bbaf7e5105645b89a809a052d5ed15962d",
+  "rollback_triggers": [
+    "memory-recall or projection freshness regression",
+    "stale read-after-write anywhere in evidence/semantic/governance planes",
+    "id lookup returning wrong-workspace records",
+    "episode index dropping current-scope frames",
+    "show command output contract regression in eval harnesses"
+  ],
+  "reversible": true,
+  "record_type": "DEPLOYMENT_INTENT"
+}

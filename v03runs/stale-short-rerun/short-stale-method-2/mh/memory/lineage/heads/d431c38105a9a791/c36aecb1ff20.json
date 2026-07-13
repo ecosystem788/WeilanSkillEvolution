@@ -1,0 +1,18 @@
+{
+  "authority": "derived_branch_heads_never_authorize_continuation",
+  "branches": {
+    "main": {
+      "head_frame_id": "wf-20260705-094226-9b18c4",
+      "joined_into": null,
+      "status": "active"
+    }
+  },
+  "generated_at_utc": "2026-07-05T09:42:26+00:00",
+  "head_event_id": "4140f70b-5447-4927-b037-53270a09ac13",
+  "record_count": 2,
+  "schema_version": "weilan_frame_lineage_heads_v0.4",
+  "scope": "skill-evolution",
+  "scope_key": "c36aecb1ff20",
+  "workspace": "D:\\WeilanSkillEvolution",
+  "workspace_key": "d431c38105a9a791"
+}

@@ -1,0 +1,558 @@
+diff -r '--exclude=__pycache__' -u C:/Users/zy/.claude/skills/solve-with-weilan/references/memory-system.md solve-with-weilan/references/memory-system.md
+--- C:/Users/zy/.claude/skills/solve-with-weilan/references/memory-system.md	2026-07-02 12:20:11.835162400 +0900
++++ solve-with-weilan/references/memory-system.md	2026-07-07 10:13:35.873129800 +0900
+@@ -46,6 +46,8 @@
+ 
+ Control, event, semantic, evidence, audit, and governance files are append-only and date-sharded. Projections and indexes are derived views and may be replaced atomically.
+ 
++A crash can leave one torn unterminated final line in an append-only shard. Readers skip exactly that torn tail, and the next append seals it into an isolated line after preserving the fragment's byte identity (offset, length, SHA-256) in an append-only `<shard>.torn` quarantine sidecar. Shards are never truncated; lines are decoded as strict UTF-8, and any terminated undecodable line whose exact byte range is not quarantined remains a hard error. Governance appends validate the replayed ledger before writing, so a concurrent-writer race rejects the losing event instead of persisting an invalid replay. Evidence Promotion and semantic consolidation writers hold the same workspace/scope contract fence as the other direct writers, which keeps "one evidence fragment cannot be promoted twice" true under concurrent sessions.
++
+ ## Control events
+ 
+ Record an explicit user pause, resume, stop, block, close, or scope redirection immediately:
+diff -r '--exclude=__pycache__' -u C:/Users/zy/.claude/skills/solve-with-weilan/references/transaction-system.md solve-with-weilan/references/transaction-system.md
+--- C:/Users/zy/.claude/skills/solve-with-weilan/references/transaction-system.md	2026-06-30 12:09:42.795339300 +0900
++++ solve-with-weilan/references/transaction-system.md	2026-07-07 10:13:32.077852800 +0900
+@@ -41,7 +41,15 @@
+ - a missing receipt does not undo a committed bundle;
+ - ABORT leaves staged envelopes permanently invisible without deleting history.
+ 
+-The contract check and coordinator COMMIT share one Contract Commit Fence（契约提交栅栏）. Lock order is workspace fence, scope fence, then transaction lock. Control, lineaged Frame, Governance, Evidence Lifecycle, and Persistence Audit writers use the same workspace/scope fence. The current contract loader runs only after those fences are held, so an internal contract-head mutation is serialized entirely before the check or after COMMIT; a caller-supplied stale hash is never trusted as the current state.
++The contract check and coordinator COMMIT share one Contract Commit Fence（契约提交栅栏）. Lock order is workspace fence, scope fence, then transaction lock. Control, lineaged Frame, Governance, Evidence Lifecycle, Persistence Audit, Evidence Promotion, and semantic consolidation writers use the same workspace/scope fence. PREPARE and recovery staging hold that fence in the same order before the transaction lock, because staging appends pending envelopes into the same participant ledgers that direct writers append to. The current contract loader runs only after those fences are held, so an internal contract-head mutation is serialized entirely before the check or after COMMIT; a caller-supplied stale hash is never trusted as the current state.
++
++## Durability degradation boundaries
++
++An interrupted append can leave one torn unterminated final line in a ledger. Readers skip exactly that torn tail, and the next append seals it: the fragment's byte identity (offset, length, SHA-256) is preserved in an append-only `<ledger>.torn` quarantine sidecar, the fragment becomes an isolated non-record line, and the new record is appended after it. Ledgers are never truncated. Ledger lines are decoded as strict UTF-8; a newline-terminated line with invalid UTF-8 or invalid JSON remains a hard validation error unless its exact byte range is quarantined in the sidecar.
++
++Journal identity replay compares workspace and scope case-insensitively; raw casing differences of the same scope key are not an identity change.
++
++When the coordinator journal itself fails replay, readers do not fail every ledger and frame read in the workspace. Pending envelopes stay invisible — the same conservative treatment as an uncommitted transaction — and one process-level warning names the broken journal until `metabolic-recover` repairs it. An envelope that fails its own integrity validation is still a hard read error for the ledger that contains it.
+ 
+ One top-level CLI command pins a transaction visibility snapshot. A concurrent COMMIT cannot cause that command to observe part of the bundle before the boundary and another part after it.
+ 
+diff -r '--exclude=__pycache__' -u C:/Users/zy/.claude/skills/solve-with-weilan/scripts/runner.py solve-with-weilan/scripts/runner.py
+--- C:/Users/zy/.claude/skills/solve-with-weilan/scripts/runner.py	2026-06-30 12:17:10.127422200 +0900
++++ solve-with-weilan/scripts/runner.py	2026-07-07 10:12:28.291452300 +0900
+@@ -8,6 +8,13 @@
+ from datetime import datetime, timezone
+ from pathlib import Path
+ 
++from transaction import (
++    is_quarantined_torn_fragment,
++    iter_ledger_lines,
++    terminate_torn_tail,
++    warn_torn_tail,
++)
++
+ 
+ RUNNER_SCHEMA_VERSION = "weilan_runner_event_v0.7d"
+ MANIFEST_SCHEMA_VERSION = "weilan_runner_manifest_v0.7d"
+@@ -166,14 +173,18 @@
+     records = []
+     if not Path(path).exists():
+         return records
+-    with Path(path).open("r", encoding="utf-8") as handle:
+-        for number, line in enumerate(handle, 1):
+-            if not line.strip():
++    for number, offset, raw, terminated in iter_ledger_lines(path):
++        if not raw.strip():
++            continue
++        try:
++            records.append(json.loads(raw.decode("utf-8")))
++        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
++            if not terminated:
++                warn_torn_tail(path, number)
+                 continue
+-            try:
+-                records.append(json.loads(line))
+-            except json.JSONDecodeError as exc:
+-                raise ValueError(f"{Path(path).name}:{number}: {exc}") from exc
++            if is_quarantined_torn_fragment(path, offset, raw):
++                continue
++            raise ValueError(f"{Path(path).name}:{number}: {exc}") from exc
+     return records
+ 
+ 
+@@ -187,8 +198,10 @@
+ def append_jsonl(path, record):
+     path = Path(path)
+     path.parent.mkdir(parents=True, exist_ok=True)
+-    with path.open("a", encoding="utf-8", newline="\n") as handle:
+-        handle.write(json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n")
++    line = (json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8")
++    with path.open("a+b") as handle:
++        terminate_torn_tail(path, handle)
++        handle.write(line)
+         handle.flush()
+         os.fsync(handle.fileno())
+ 
+@@ -255,9 +268,9 @@
+             issues.append(f"{label}: unsupported schema_version")
+             continue
+         identity = (
+-            record.get("workspace"),
++            str(record.get("workspace") or "").casefold(),
+             record.get("workspace_key"),
+-            record.get("scope"),
++            str(record.get("scope") or "").casefold(),
+             record.get("scope_key"),
+         )
+         if any(not value for value in identity):
+Only in solve-with-weilan/scripts: test_ledger_durability.py
+diff -r '--exclude=__pycache__' -u C:/Users/zy/.claude/skills/solve-with-weilan/scripts/transaction.py solve-with-weilan/scripts/transaction.py
+--- C:/Users/zy/.claude/skills/solve-with-weilan/scripts/transaction.py	2026-06-30 11:53:03.252515700 +0900
++++ solve-with-weilan/scripts/transaction.py	2026-07-07 10:12:15.724210400 +0900
+@@ -8,6 +8,7 @@
+ import hashlib
+ import json
+ import os
++import sys
+ import uuid
+ from contextlib import contextmanager
+ from contextvars import ContextVar
+@@ -79,18 +80,129 @@
+     return sorted(directory.glob("*.jsonl")) if directory.exists() else []
+ 
+ 
++def torn_tail_quarantine_path(path):
++    return Path(path).with_name(Path(path).name + ".torn")
++
++
++def iter_ledger_lines(path):
++    """Yield (number, offset, line_bytes, terminated) for each physical ledger line.
++
++    Lines are split on b"\\n" without decoding, so readers can enforce strict
++    UTF-8 per line and address quarantined fragments by byte identity. By
++    construction only the final physical line can be unterminated.
++    """
++
++    data = Path(path).read_bytes()
++    offset = 0
++    number = 0
++    chunks = data.split(b"\n")
++    for chunk in chunks[:-1]:
++        number += 1
++        yield number, offset, chunk, True
++        offset += len(chunk) + 1
++    tail = chunks[-1]
++    if tail:
++        yield number + 1, offset, tail, False
++
++
++def is_quarantined_torn_fragment(path, offset, line_bytes):
++    """Return True only for the exact quarantined fragment at this byte range.
++
++    Matching is by offset, length, and SHA-256 of the fragment bytes, never by
++    text, so a later unrelated bad line with identical content cannot be
++    silently suppressed.
++    """
++
++    quarantine = torn_tail_quarantine_path(path)
++    if not quarantine.exists():
++        return False
++    digest = hashlib.sha256(line_bytes).hexdigest()
++    try:
++        raw_records = quarantine.read_bytes().split(b"\n")
++    except OSError:
++        return False
++    for raw in raw_records:
++        if not raw.strip():
++            continue
++        try:
++            record = json.loads(raw.decode("utf-8"))
++        except (UnicodeDecodeError, json.JSONDecodeError):
++            continue
++        if (
++            record.get("fragment_offset") == offset
++            and record.get("fragment_length") == len(line_bytes)
++            and record.get("fragment_sha256") == digest
++        ):
++            return True
++    return False
++
++
++def warn_torn_tail(path, number):
++    sys.stderr.write(
++        f"weilan warning: ignored torn unterminated line {number} in {Path(path).name}; "
++        "the next append will quarantine it\n"
++    )
++
++
++def terminate_torn_tail(path, handle):
++    """Seal a torn trailing fragment left by an interrupted append.
++
++    The fragment was never a durably committed record. Never truncate the
++    ledger: record the fragment's byte identity (offset, length, SHA-256) in
++    an append-only `.torn` sidecar, then write one newline so the fragment
++    becomes an isolated line that readers skip only at that exact byte range.
++    A concurrent complete append at worst turns this newline into a blank
++    line, which every reader already ignores.
++    """
++
++    handle.seek(0, os.SEEK_END)
++    size = handle.tell()
++    if size == 0:
++        return
++    handle.seek(size - 1)
++    if handle.read(1) == b"\n":
++        return
++    handle.seek(0)
++    data = handle.read()
++    cut = data.rfind(b"\n") + 1
++    fragment = data[cut:]
++    quarantine_record = {
++        "quarantined_at_utc": utc_now(),
++        "source": Path(path).name,
++        "reason": "torn_tail_from_interrupted_append",
++        "fragment_offset": cut,
++        "fragment_length": len(fragment),
++        "fragment_sha256": hashlib.sha256(fragment).hexdigest(),
++        "fragment_preview": fragment.decode("utf-8", "replace"),
++    }
++    quarantine = torn_tail_quarantine_path(path)
++    with quarantine.open("ab") as sidecar:
++        sidecar.write(
++            (json.dumps(quarantine_record, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8")
++        )
++        sidecar.flush()
++        os.fsync(sidecar.fileno())
++    handle.write(b"\n")
++    handle.flush()
++    os.fsync(handle.fileno())
++
++
+ def raw_read_jsonl(path):
+     records = []
+     if not Path(path).exists():
+         return records
+-    with Path(path).open("r", encoding="utf-8") as handle:
+-        for number, line in enumerate(handle, 1):
+-            if not line.strip():
++    for number, offset, raw, terminated in iter_ledger_lines(path):
++        if not raw.strip():
++            continue
++        try:
++            records.append(json.loads(raw.decode("utf-8")))
++        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
++            if not terminated:
++                warn_torn_tail(path, number)
+                 continue
+-            try:
+-                records.append(json.loads(line))
+-            except json.JSONDecodeError as exc:
+-                raise ValueError(f"{Path(path).name}:{number}: {exc}") from exc
++            if is_quarantined_torn_fragment(path, offset, raw):
++                continue
++            raise ValueError(f"{Path(path).name}:{number}: {exc}") from exc
+     return records
+ 
+ 
+@@ -120,8 +232,10 @@
+ def append_jsonl(path, record):
+     path = Path(path)
+     path.parent.mkdir(parents=True, exist_ok=True)
+-    with path.open("a", encoding="utf-8", newline="\n") as handle:
+-        handle.write(json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n")
++    line = (json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8")
++    with path.open("a+b") as handle:
++        terminate_torn_tail(path, handle)
++        handle.write(line)
+         handle.flush()
+         os.fsync(handle.fileno())
+ 
+@@ -183,6 +297,21 @@
+             yield
+ 
+ 
++@contextmanager
++def staging_fence(root, workspace_key, scope_key, directory):
++    """Serialize participant-ledger staging against direct ledger writers.
++
++    Staging appends pending envelopes into the same daily JSONL files that
++    direct writers (control, frame, governance, evidence) append to under the
++    contract fence, so it must hold the same fence. Lock order stays
++    workspace fence, scope fence, then transaction lock, matching COMMIT.
++    """
++
++    with contract_fence(root, workspace_key, scope_key):
++        with exclusive_file_lock(directory / ".transaction.lock"):
++            yield
++
++
+ def normalize_intents(intents):
+     if not isinstance(intents, list) or not intents:
+         raise ValueError("transaction requires at least one intent")
+@@ -236,9 +365,9 @@
+             issues.append(f"{label}: unsupported schema_version")
+             continue
+         identity = (
+-            record.get("workspace"),
++            str(record.get("workspace") or "").casefold(),
+             record.get("workspace_key"),
+-            record.get("scope"),
++            str(record.get("scope") or "").casefold(),
+             record.get("scope_key"),
+         )
+         if any(not value for value in identity):
+@@ -507,7 +636,7 @@
+     bundle_hash = stable_hash(intents)
+     transaction_id = transaction_id_for(workspace_key, scope_key, idempotency_key)
+     directory = transaction_directory(root, workspace_key, scope_key)
+-    with exclusive_file_lock(directory / ".transaction.lock"):
++    with staging_fence(root, workspace_key, scope_key, directory):
+         records = load_transaction_records(root, workspace_key, scope_key)
+         state = reduce_transactions(records)
+         if state["issues"]:
+@@ -697,7 +826,7 @@
+     transaction_id,
+ ):
+     directory = transaction_directory(root, workspace_key, scope_key)
+-    with exclusive_file_lock(directory / ".transaction.lock"):
++    with staging_fence(root, workspace_key, scope_key, directory):
+         records = load_transaction_records(root, workspace_key, scope_key)
+         state = reduce_transactions(records)
+         if state["issues"]:
+@@ -736,18 +865,40 @@
+         return transaction, state
+ 
+ 
++_WARNED_INVALID_JOURNALS = set()
++
++
++def _warn_journal_invalid(key, issues):
++    """Surface a broken transaction journal once per process without wedging readers.
++
++    A corrupt journal must not make every frame or ledger read in the
++    workspace raise; pending envelopes are simply kept invisible, which is the
++    same conservative treatment as an uncommitted transaction.
++    """
++
++    if key in _WARNED_INVALID_JOURNALS:
++        return
++    _WARNED_INVALID_JOURNALS.add(key)
++    summary = issues[0] if issues else "unknown issue"
++    sys.stderr.write(
++        f"weilan warning: transaction journal for workspace_key={key[1]} scope_key={key[2]} "
++        f"is invalid ({len(issues)} issue(s); first: {summary}); pending envelopes stay hidden "
++        "until metabolic-recover repairs the journal\n"
++    )
++
++
+ def resolve_pending_record(root, record, warnings=None, source_path=None):
+     """Return payload for committed pending records, None while invisible."""
+ 
+     if record.get("schema_version") != PENDING_SCHEMA_VERSION:
+         return record
+     warnings = warnings if warnings is not None else []
++    key = (
++        str(Path(root).resolve()),
++        record.get("workspace_key", ""),
++        record.get("scope_key", ""),
++    )
+     try:
+-        key = (
+-            str(Path(root).resolve()),
+-            record.get("workspace_key", ""),
+-            record.get("scope_key", ""),
+-        )
+         cache = _VISIBILITY_CACHE.get()
+         state = cache.get(key) if cache is not None else None
+         if state is None:
+@@ -756,7 +907,7 @@
+             if cache is not None:
+                 cache[key] = state
+         if state["issues"]:
+-            warnings.extend(state["issues"])
++            _warn_journal_invalid(key, state["issues"])
+             return None
+         transaction = state["transactions"].get(record.get("transaction_id"))
+         if not transaction or transaction["state"] != "COMMITTED":
+@@ -784,5 +935,5 @@
+             return None
+         return record["payload"]
+     except (OSError, ValueError, TypeError) as exc:
+-        warnings.append(str(exc))
++        _warn_journal_invalid(key, [str(exc)])
+         return None
+diff -r '--exclude=__pycache__' -u C:/Users/zy/.claude/skills/solve-with-weilan/scripts/weilan_trace.py solve-with-weilan/scripts/weilan_trace.py
+--- C:/Users/zy/.claude/skills/solve-with-weilan/scripts/weilan_trace.py	2026-07-05 20:02:05.824873300 +0900
++++ solve-with-weilan/scripts/weilan_trace.py	2026-07-07 10:12:48.352679800 +0900
+@@ -57,6 +57,8 @@
+     abort_transaction,
+     commit_transaction,
+     contract_fence,
++    is_quarantined_torn_fragment,
++    iter_ledger_lines,
+     load_transaction_records,
+     normalize_intents as normalize_transaction_intents,
+     prepare_transaction,
+@@ -64,7 +66,9 @@
+     reduce_transactions,
+     reset_visibility_snapshot,
+     resolve_pending_record,
++    terminate_torn_tail,
+     transaction_visibility_scope,
++    warn_torn_tail,
+     workspace_contract_fence,
+ )
+ from transition_planner import (
+@@ -220,19 +224,23 @@
+ def read_events_raw(path):
+     events = []
+     warnings = []
+-    with path.open("r", encoding="utf-8") as handle:
+-        for number, line in enumerate(handle, 1):
+-            if not line.strip():
+-                continue
+-            try:
+-                record = json.loads(line)
+-                resolved = resolve_pending_record(
+-                    state_root(), record, warnings, source_path=path
+-                )
+-                if resolved is not None:
+-                    events.append(resolved)
+-            except json.JSONDecodeError as exc:
+-                raise ValueError(f"invalid JSON at line {number}: {exc}") from exc
++    for number, offset, raw, terminated in iter_ledger_lines(path):
++        if not raw.strip():
++            continue
++        try:
++            record = json.loads(raw.decode("utf-8"))
++        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
++            if not terminated:
++                warn_torn_tail(path, number)
++                continue
++            if is_quarantined_torn_fragment(path, offset, raw):
++                continue
++            raise ValueError(f"invalid JSON at line {number}: {exc}") from exc
++        resolved = resolve_pending_record(
++            state_root(), record, warnings, source_path=path
++        )
++        if resolved is not None:
++            events.append(resolved)
+     if warnings:
+         raise ValueError("invalid pending transaction envelope: " + "; ".join(warnings))
+     return events
+@@ -293,8 +301,10 @@
+ 
+ def append_event(path, event):
+     path.parent.mkdir(parents=True, exist_ok=True)
+-    with path.open("a", encoding="utf-8", newline="\n") as handle:
+-        handle.write(json.dumps(event, ensure_ascii=False, sort_keys=True) + "\n")
++    line = (json.dumps(event, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8")
++    with path.open("a+b") as handle:
++        terminate_torn_tail(path, handle)
++        handle.write(line)
+         handle.flush()
+         os.fsync(handle.fileno())
+ 
+@@ -1043,21 +1053,28 @@
+ def read_jsonl_records(path, warnings):
+     records = []
+     try:
+-        with path.open("r", encoding="utf-8") as handle:
+-            for number, line in enumerate(handle, 1):
+-                if not line.strip():
+-                    continue
+-                try:
+-                    record = json.loads(line)
+-                    resolved = resolve_pending_record(
+-                        state_root(), record, warnings, source_path=path
+-                    )
+-                    if resolved is not None:
+-                        records.append(resolved)
+-                except json.JSONDecodeError as exc:
+-                    warnings.append(f"{path.name}:{number}: {exc}")
++        lines = list(iter_ledger_lines(path))
+     except OSError as exc:
+         warnings.append(f"{path.name}: {exc}")
++        return records
++    for number, offset, raw, terminated in lines:
++        if not raw.strip():
++            continue
++        try:
++            record = json.loads(raw.decode("utf-8"))
++        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
++            if not terminated:
++                warn_torn_tail(path, number)
++                continue
++            if is_quarantined_torn_fragment(path, offset, raw):
++                continue
++            warnings.append(f"{path.name}:{number}: {exc}")
++            continue
++        resolved = resolve_pending_record(
++            state_root(), record, warnings, source_path=path
++        )
++        if resolved is not None:
++            records.append(resolved)
+     return records
+ 
+ 
+@@ -1870,17 +1887,22 @@
+         raise ValueError(
+             "conversation-derived semantic memory must pass evidence-capture and evidence-promote"
+         )
+-    result, _ = append_semantic_memory(
+-        args.workspace,
+-        args.scope,
+-        args.kind,
+-        args.summary,
+-        args.detail,
+-        args.tag,
+-        args.source,
+-        args.supersedes,
+-        args.conflicts_with,
+-    )
++    workspace = canonical_workspace(args.workspace)
++    scope = normalize_scope(args.scope)
++    with contract_fence(
++        state_root(), workspace_key(workspace), scope_key(scope)
++    ):
++        result, _ = append_semantic_memory(
++            workspace,
++            scope,
++            args.kind,
++            args.summary,
++            args.detail,
++            args.tag,
++            args.source,
++            args.supersedes,
++            args.conflicts_with,
++        )
+     print(json.dumps(result, ensure_ascii=False, indent=2))
+ 
+ 
+@@ -2016,6 +2038,13 @@
+ def command_evidence_promote(args):
+     workspace = canonical_workspace(args.workspace)
+     scope = normalize_scope(args.scope)
++    with contract_fence(
++        state_root(), workspace_key(workspace), scope_key(scope)
++    ):
++        return command_evidence_promote_fenced(args, workspace, scope)
++
++
++def command_evidence_promote_fenced(args, workspace, scope):
+     warnings = []
+     evidence_matches = [
+         record
+@@ -2772,9 +2801,6 @@
+                 "event_type": event_type,
+                 "data": data,
+             }
+-            date_dir = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+-            path = governance_directory(workspace, scope) / f"{date_dir}.jsonl"
+-            append_event(path, event)
+             updated_state = reduce_governance_events(
+                 records + [event],
+                 lambda snapshots: governance_snapshots_fresh(snapshots, workspace),
+@@ -2783,6 +2809,9 @@
+                 raise RuntimeError(
+                     "governance event produced invalid replay: " + "; ".join(updated_state["issues"])
+                 )
++            date_dir = datetime.now(timezone.utc).strftime("%Y-%m-%d")
++            path = governance_directory(workspace, scope) / f"{date_dir}.jsonl"
++            append_event(path, event)
+             return event, updated_state, path
+ 
+ 

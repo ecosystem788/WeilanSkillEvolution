@@ -1,0 +1,23 @@
+{
+  "schema_version": "fusion_dogfood_calibration_trial_receipt_v0.2",
+  "suite_id": "fusion-dogfood-v0.2",
+  "case_id": "fusion-targeted-deployment-risk",
+  "trial": 1,
+  "variant": "baseline",
+  "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "record_type": "calibration_not_evidence",
+  "created_at_utc": "2026-07-04T15:57:03.734402+00:00",
+  "agent_id": "019f2dd2-d380-7043-8433-5aaeb7c3d8fe",
+  "weighted_score": 0.965,
+  "metrics": {
+    "risk_attribution": 0.95,
+    "non_authorizing_recommendation": 1.0,
+    "lineage_traceability": 0.95,
+    "probe_design": 1.0,
+    "overhead": 0.9
+  },
+  "r2_status": "ceiling_saturation_reject",
+  "raw_output_summary": "Classified the signal as open_deployed_artifact_risk from current 49e656d2 deployment, predecessor 8e9c7555 shadow, targeted verification limits, and raw rebound memory-cross-window failures; recommended full-suite shadow plus optional diagnostic probe without rollback/adoption/deployment.",
+  "raw_output_hash": "9feb403f442339b745a85e7331ffb45cb11562aa2e75f80f23152368adb09336",
+  "quarantine_policy": "receipt is private calibration material; not candidate-visible and not official score evidence"
+}

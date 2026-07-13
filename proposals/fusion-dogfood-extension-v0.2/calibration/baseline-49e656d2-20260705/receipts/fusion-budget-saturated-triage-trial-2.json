@@ -1,0 +1,23 @@
+{
+  "schema_version": "fusion_dogfood_calibration_trial_receipt_v0.2",
+  "suite_id": "fusion-dogfood-v0.2",
+  "case_id": "fusion-budget-saturated-triage",
+  "trial": 2,
+  "variant": "baseline",
+  "baseline_artifact_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+  "record_type": "calibration_not_evidence",
+  "created_at_utc": "2026-07-04T15:57:03.734402+00:00",
+  "agent_id": "019f2dd2-862f-76c0-8a59-e49246440111",
+  "weighted_score": 0.955,
+  "metrics": {
+    "prioritization_under_budget": 0.95,
+    "evidence_selection": 0.95,
+    "saturation_discipline": 1.0,
+    "source_traceability": 0.95,
+    "overhead": 0.9
+  },
+  "r2_status": "ceiling_saturation_reject",
+  "raw_output_summary": "Produced a source-level triage using explicit numeric/verdict anchors from EXP-1, EXP-2f, EXP-7, and EXP-8, with clear skipped-source risk and no freeze/adoption/deployment action.",
+  "raw_output_hash": "e603d87c944aa942a06103d21a478f242118178067d6268d70004f36c03ab672",
+  "quarantine_policy": "receipt is private calibration material; not candidate-visible and not official score evidence"
+}

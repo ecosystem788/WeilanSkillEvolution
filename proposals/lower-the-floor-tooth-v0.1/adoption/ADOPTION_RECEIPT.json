@@ -1,0 +1,49 @@
+{
+  "schema_version": "weilan_targeted_content_addressed_adoption_receipt_v0.1",
+  "valid": true,
+  "decision": "adopt",
+  "proposal_id": "lower-the-floor-tooth-v0.1",
+  "authority_source": "conversation:2026-07-08-user-authorized-adoption-stage-command-plus-drift-guard-bundle",
+  "adoption_scope": "authority_plane_only_no_deployment",
+  "adoption_bundle": {
+    "path": "proposals/lower-the-floor-tooth-v0.1/adoption/ADOPTION_BUNDLE.json",
+    "sha256": "fc9214392eb1b2937a5494229de32c05431467da3508a0d94d8f6ac673a25002"
+  },
+  "drift_guard": {
+    "path": "proposals/lower-the-floor-tooth-v0.1/adoption/DRIFT_GUARD.ps1",
+    "sha256": "299ae36b7cceea03f89ec358e2d7e9ce511b05a48d23240950c17ff3a595d641",
+    "result": {
+      "valid": true,
+      "artifact_hash": "9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9",
+      "command_file_hash": "1ea27f9f0cccfa1d8271140449773d355756696c47d2eaea2c067ad56b3576bd",
+      "drift_guard_test_hash": "4a66e83d871af2f49c80ab9df6970f03710a350fea9b850fa3fee498dbd89c62",
+      "freeze_created": false,
+      "reject_equivalence_full": true,
+      "retry_no_duplicate": true,
+      "manual_equivalence": true,
+      "rejects_are_atomic": true
+    }
+  },
+  "candidate": {
+    "artifact_hash": "9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9",
+    "artifact_path": "proposals/lower-the-floor-tooth-v0.1/artifacts/9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9/solve-with-weilan",
+    "artifact_tree_hash_after_verification": "9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9"
+  },
+  "bundle_invariant": {
+    "command": "memory-note",
+    "drift_guard_test": "test_memory_note.py",
+    "rule": "command and drift-guard test are adopted together"
+  },
+  "deployment_boundary": {
+    "deployment_authorized": false,
+    "deployment_target": "D:\\CodexData\\skills\\solve-with-weilan",
+    "target_tree_hash_before": "e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32",
+    "target_tree_hash_after": "e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32",
+    "target_mutated": false
+  },
+  "rollback": {
+    "type": "adoption_record_reversal_only",
+    "deployment_rollback_not_applicable": true,
+    "instructions": "Before deployment, reversal means superseding this adoption receipt in the authority plane while preserving this historical receipt."
+  }
+}

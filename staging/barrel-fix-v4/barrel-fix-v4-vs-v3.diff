@@ -1,0 +1,654 @@
+diff -r '--exclude=__pycache__' -u D:/WeilanSkillEvolution/staging/barrel-fix-v3/solve-with-weilan/SKILL.md solve-with-weilan/SKILL.md
+--- D:/WeilanSkillEvolution/staging/barrel-fix-v3/solve-with-weilan/SKILL.md	2026-07-07 14:39:20.886302400 +0900
++++ solve-with-weilan/SKILL.md	2026-07-07 15:25:04.047542900 +0900
+@@ -33,6 +33,8 @@
+ 
+ Cold-start is a recall operation in the memory system, not a separate handoff database. Refresh only the affected scoped projection after a material L2/L3 change or before leaving unfinished work; prefer `projection-rebuild` so focus, status, next action, decisions, questions, and provenance are reduced from controls, Frames, and active semantic memory instead of rewritten by hand. After an `ACTIVE` result, use `memory-search` for durable conclusions and `episode-search` for prior holders, tests, failures, collapses, traces, and outcomes. Both are evidence and never activation authority. Before opening continued L2/L3 work, inspect `lineage-show` when the scope has a causal ledger, then declare the exact branch relation and parent head. When a conversation contains an important durable directive, decision, constraint, verified result, repeated preference, or unresolved risk, capture only a concise sourced evidence fragment with a resolvable exact `conversation:<thread>#<turn>` locator. Never capture ordinary chat, acknowledgements, transient status, or the full transcript. Chat-derived semantic memory must pass `evidence-promote`; direct consolidation rejects conversation and evidence sources. Before ending an L2/L3 frame, changing route, or switching version, run Persistence Audit: cite promoted evidence or record an explicit non-persistence reason. Withdrawn, expired, superseded, dormant, and retired evidence or memory must not remain active recall inputs.
+ 
++The active semantic set is budget-bound (Memory 0.8). When a consolidate, promote, split, or reactivation is rejected with `semantic budget exhausted`, do not retry blindly: either merge redundant entries first (`memory-merge`), split an over-mixed one (`memory-split`), name an explicit `--displace <memory-id>` (dormant, reversible), or — only with reason — raise the scope budget via `memory-budget-set`. Prefer merging over displacing when candidates overlap; prefer displacing stale task-local facts over lessons and decisions; never displace constraints or open questions silently.
++
+ For Memory 0.6 governance work, read [references/governance-system.md](references/governance-system.md). Record pressure and target lifecycle only through the append-only Governance Ledger while the scope is explicitly active. Pressure may change governance eligibility but never evidence, facts, or control. Cross-scale effects require explicit propagation. `self-project` is a deterministic read-only view and cannot authorize action or restore a paused scope.
+ 
+ For SE-0.4 future intentions, read [references/prospective-system.md](references/prospective-system.md). Register bounded causal conditions, append only explicit user/tool/environment/authorized-clock observations, and derive at most one read-only cycle plan. Never let an observation transition a goal automatically or create a timer, scheduler, heartbeat, wakeup, or background loop.
+diff -r '--exclude=__pycache__' -u D:/WeilanSkillEvolution/staging/barrel-fix-v3/solve-with-weilan/references/memory-system.md solve-with-weilan/references/memory-system.md
+--- D:/WeilanSkillEvolution/staging/barrel-fix-v3/solve-with-weilan/references/memory-system.md	2026-07-07 14:40:09.174682700 +0900
++++ solve-with-weilan/references/memory-system.md	2026-07-07 15:25:04.045374800 +0900
+@@ -337,6 +337,21 @@
+ 
+ Use direct `memory-consolidate` for non-chat evidence or trusted system-produced results. Chat-derived claims must enter through Conversation Evidence and Promotion Gate. Do not consolidate routine tool calls, transient status, hidden reasoning, raw conversations, credentials, or facts already owned by a project source without adding a useful cross-task conclusion.
+ 
++## Conservation and reorganization（守恒与重组, Memory 0.8）
++
++The active semantic set is a bounded existence budget, not an unbounded log. Every scope has a binding `max_active` head (default 100, set explicitly with `memory-budget-set --max-active N --reason ...`; append-only history). Once the budget is full, any write that grows the active set — `memory-consolidate`, `evidence-promote`, `memory-split`, or a `memory-disposition --state active` reactivation — must name `--displace <memory-id>`. Displacement appends a dormant disposition (`displaced_by_budget:<new-id>`), reversible and never a deletion. Entries the same write supersedes count as leaving, so a correction or merge at full budget needs no displacement. A rejected admission lists the oldest unprotected displacement candidates; `constraint`, `open_question`, and `critical`-tagged entries are never suggested, though an explicit `--displace` may still name them.
++
++Reorganization is how the set competes instead of merely accumulating:
++
++```powershell
++python scripts/weilan_trace.py memory-merge --workspace "<cwd>" --scope "..." --from <id> --from <id> --kind decision --summary "..."
++python scripts/weilan_trace.py memory-split --workspace "<cwd>" --scope "..." --memory-id <id> --part '{"summary": "..."}' --part '{"summary": "..."}'
++```
++
++`memory-merge` folds redundant active entries into one entry that supersedes all inputs, inherits the union of their sources (including `evidence:` refs — restructuring preserves grounding without re-passing the Promotion Gate), and records `reorganization: {kind: merge, from: [...]}`. `memory-split` breaks one over-mixed entry into two or more grounded parts; only the final part supersedes the parent, so an interrupted split never deactivates the parent before every part is durable. Merged or split entries whose inherited `evidence:` sources later become withdrawn, expired, or superseded leave active recall exactly like promotion-backed entries. Merge and split summaries must have lexical grounding in their inputs; the caller (the LLM) remains the cohesion judge, the ledger only enforces lineage, budget, and grounding.
++
++`memory-retention-plan` now defaults to the scope budget and remains read-only. The dynamics this section adds are deliberately minimal: bounded budget plus explicit merge/split/displace is the method-plane projection of conservation-competition-collapse; there is still no timer, no background loop, and no automatic transition.
++
+ ## Archive boundary
+ 
+ Archival must preserve control heads, source resolution, and append-only evidence. Until an integrity-manifest archive reader exists:
+Only in solve-with-weilan/scripts: test_slow_loop.py
+diff -r '--exclude=__pycache__' -u D:/WeilanSkillEvolution/staging/barrel-fix-v3/solve-with-weilan/scripts/weilan_trace.py solve-with-weilan/scripts/weilan_trace.py
+--- D:/WeilanSkillEvolution/staging/barrel-fix-v3/solve-with-weilan/scripts/weilan_trace.py	2026-07-07 14:44:46.575659300 +0900
++++ solve-with-weilan/scripts/weilan_trace.py	2026-07-07 15:53:41.864850800 +0900
+@@ -1813,16 +1813,49 @@
+                     continue
+             except (OSError, ValueError, RuntimeError):
+                 continue
++        if entry.get("reorganization") and reorganization_evidence_terminal(entry):
++            continue
+         active.append(entry)
+     return active
+ 
+ 
++def reorganization_evidence_terminal(entry):
++    """A merged/split entry dies with any inherited terminal evidence source.
++
++    Reorganization inherits evidence refs from its inputs instead of passing
++    the Promotion Gate again; the lifecycle dependency must therefore be
++    checked here exactly as it is for promotion-backed entries.
++    """
++
++    terminal_states = {state.upper() for state in EVIDENCE_TERMINAL_STATES}
++    for source in entry.get("sources", []):
++        if not source.startswith("evidence:"):
++            continue
++        try:
++            evidence = find_evidence(
++                source.split(":", 1)[1],
++                workspace=entry.get("workspace"),
++                scope=entry.get("scope"),
++            )
++        except (OSError, ValueError, RuntimeError):
++            return True
++        if evidence_state(evidence)["state"] in terminal_states:
++            return True
++    return False
++
++
+ def semantic_evidence_dependency_state(entries):
+     state = {}
++    dependency_ids = {}
+     for entry in entries:
+         evidence_id = entry.get("promotion", {}).get("evidence_id")
+-        if not evidence_id:
+-            continue
++        if evidence_id:
++            dependency_ids.setdefault(evidence_id, entry)
++        if entry.get("reorganization"):
++            for source in entry.get("sources", []):
++                if source.startswith("evidence:"):
++                    dependency_ids.setdefault(source.split(":", 1)[1], entry)
++    for evidence_id, entry in dependency_ids.items():
+         try:
+             evidence = find_evidence(
+                 evidence_id, workspace=entry.get("workspace"), scope=entry.get("scope")
+@@ -1939,6 +1972,133 @@
+     )
+ 
+ 
++SEMANTIC_BUDGET_SCHEMA_VERSION = "weilan_semantic_budget_v0.1"
++DEFAULT_SEMANTIC_BUDGET = 100
++PROTECTED_SEMANTIC_KINDS = {"constraint", "open_question"}
++
++
++def semantic_budget_path(workspace, scope):
++    return (
++        state_root() / "memory" / "semantic-budgets" / "workspaces"
++        / workspace_key(workspace) / f"{scope_key(scope)}.jsonl"
++    )
++
++
++def load_semantic_budget_records(workspace, scope):
++    """Strict loader for the binding budget ledger: corruption fails closed.
++
++    A binding budget must never fall back to a default or a stale head because
++    its ledger is unreadable; every admission this budget guards would then be
++    running on invented authority. Torn tails from interrupted appends are
++    still healed by the durability layer; anything else rejects.
++    """
++
++    path = semantic_budget_path(workspace, scope)
++    if not path.exists():
++        return []
++    warnings = []
++    records = read_jsonl_records(path, warnings)
++    if warnings:
++        raise ValueError(
++            "semantic budget ledger is invalid: " + "; ".join(warnings)
++            + f"; admission stays closed until {path} is restored or quarantined"
++        )
++    for index, record in enumerate(records, 1):
++        label = f"semantic budget record {index}"
++        if record.get("schema_version") != SEMANTIC_BUDGET_SCHEMA_VERSION:
++            raise ValueError(f"{label}: unsupported schema_version")
++        if normalized_workspace(record.get("workspace", "")) != normalized_workspace(workspace):
++            raise ValueError(f"{label}: workspace mismatch")
++        if normalize_scope(record.get("scope")).casefold() != normalize_scope(scope).casefold():
++            raise ValueError(f"{label}: scope mismatch")
++        max_active = record.get("max_active")
++        if not isinstance(max_active, int) or isinstance(max_active, bool) or max_active < 1:
++            raise ValueError(f"{label}: max_active must be a positive integer")
++    return records
++
++
++def semantic_budget_head(workspace, scope):
++    records = load_semantic_budget_records(workspace, scope)
++    return records[-1] if records else None
++
++
++def semantic_budget(workspace, scope):
++    head = semantic_budget_head(workspace, scope)
++    if head is not None:
++        return int(head["max_active"])
++    return int(os.environ.get("WEILAN_SEMANTIC_BUDGET_DEFAULT", DEFAULT_SEMANTIC_BUDGET))
++
++
++def semantic_entry_protected(entry):
++    return entry.get("kind") in PROTECTED_SEMANTIC_KINDS or "critical" in entry.get("tags", [])
++
++
++def enforce_semantic_budget(workspace, scope, incoming, displace, leaving_ids=(), warnings=None):
++    """Zero-sum admission for the active semantic set (Memory 0.8 conservation).
++
++    The active recall set is the scope's existence budget: once it is full, a
++    new durable entry must name what it displaces. Displacement is an explicit
++    dormant disposition (reversible), never deletion. Entries that this same
++    write supersedes are counted as leaving, so a correction or merge at full
++    budget needs no displacement.
++    """
++
++    warnings = warnings if warnings is not None else []
++    budget = semantic_budget(workspace, scope)
++    active = active_semantic_entries(
++        load_semantic_entries(workspace, scope, warnings), workspace, scope, warnings
++    )
++    active_ids = {entry["memory_id"] for entry in active}
++    displaced = list(dict.fromkeys(displace or []))
++    for memory_id in displaced:
++        if memory_id not in active_ids:
++            raise ValueError(f"displacement target is not an active semantic memory: {memory_id}")
++    leaving = {memory_id for memory_id in leaving_ids if memory_id in active_ids}
++    projected = len(active) - len(leaving) - len(displaced) + incoming
++    if projected > budget:
++        remaining = [
++            entry for entry in active
++            if entry["memory_id"] not in leaving and entry["memory_id"] not in set(displaced)
++        ]
++        candidates = [entry for entry in remaining if not semantic_entry_protected(entry)][:5]
++        listing = "; ".join(
++            "{} ({}: {})".format(entry["memory_id"], entry["kind"], entry["summary"][:48])
++            for entry in candidates
++        ) or "none - only protected entries remain; retire or split one explicitly"
++        raise ValueError(
++            "semantic budget exhausted: "
++            f"active={len(active)}, incoming={incoming}, leaving={len(leaving)}, "
++            f"displaced={len(displaced)}, max_active={budget}. "
++            "Name --displace <memory-id> (dormant, reversible), merge redundant entries, "
++            "or raise the budget with memory-budget-set. Oldest unprotected candidates: "
++            + listing
++        )
++    return displaced
++
++
++def append_displacement_dispositions(workspace, scope, displaced_ids, new_memory_id):
++    event_ids = []
++    for memory_id in displaced_ids:
++        event = {
++            "schema_version": SEMANTIC_DISPOSITION_SCHEMA_VERSION,
++            "event_id": str(uuid.uuid4()),
++            "timestamp_utc": utc_now(),
++            "authority": "explicit_semantic_retention_control_never_activation_authority",
++            "workspace": workspace,
++            "workspace_key": workspace_key(workspace),
++            "scope": scope,
++            "scope_key": scope_key(scope),
++            "memory_id": memory_id,
++            "state": "dormant",
++            "reason": f"displaced_by_budget:{new_memory_id}",
++            "source": f"memory:{new_memory_id}",
++        }
++        date_dir = datetime.now(timezone.utc).strftime("%Y-%m-%d")
++        append_event(semantic_disposition_directory(workspace, scope) / f"{date_dir}.jsonl", event)
++        event_ids.append(event["event_id"])
++    return event_ids
++
++
+ def append_semantic_memory(
+     workspace,
+     scope,
+@@ -1950,12 +2110,21 @@
+     supersedes,
+     conflicts_with=None,
+     promotion=None,
++    reorganization=None,
++    displace=None,
++    enforce_budget=True,
+ ):
+     workspace = canonical_workspace(workspace)
+     scope = normalize_scope(scope)
+     if not summary.strip():
+         raise ValueError("semantic summary cannot be empty")
+     warnings = []
++    if enforce_budget:
++        displaced = enforce_semantic_budget(
++            workspace, scope, 1, displace, leaving_ids=supersedes, warnings=warnings
++        )
++    else:
++        displaced = list(dict.fromkeys(displace or []))
+     existing = load_semantic_entries(workspace, scope, warnings)
+     existing_ids = {entry.get("memory_id") for entry in existing}
+     unknown = sorted(set(supersedes) - existing_ids)
+@@ -1989,6 +2158,8 @@
+     }
+     if promotion:
+         entry["promotion"] = promotion
++    if reorganization:
++        entry["reorganization"] = reorganization
+     encoded = json.dumps(entry, ensure_ascii=False, sort_keys=True).encode("utf-8")
+     if len(encoded) > MAX_SEMANTIC_ENTRY_BYTES:
+         raise ValueError(f"semantic entry exceeds {MAX_SEMANTIC_ENTRY_BYTES} bytes")
+@@ -2003,6 +2174,9 @@
+         / f"{date_dir}.jsonl"
+     )
+     append_event(path, entry)
++    displacement_events = append_displacement_dispositions(
++        workspace, scope, displaced, entry["memory_id"]
++    )
+     index = rebuild_semantic_index(workspace, scope, warnings)
+     result = {
+         "saved": True,
+@@ -2012,6 +2186,8 @@
+         "path": str(path),
+         "index_path": str(semantic_index_path(workspace, scope)),
+         "active_entry_count": index["active_entry_count"],
++        "displaced": displaced,
++        "displacement_event_ids": displacement_events,
+     }
+     if warnings:
+         result["warnings"] = warnings
+@@ -2042,10 +2218,194 @@
+             args.source,
+             args.supersedes,
+             args.conflicts_with,
++            displace=getattr(args, "displace", []),
+         )
+     print(json.dumps(result, ensure_ascii=False, indent=2))
+ 
+ 
++def semantic_reorganization_grounding(candidate_text, input_entries):
++    input_tokens = set()
++    for entry in input_entries:
++        input_tokens.update(semantic_tokens(
++            " ".join([entry.get("summary", ""), entry.get("detail", "")])
++        ))
++    return bool(set(semantic_tokens(candidate_text)).intersection(input_tokens))
++
++
++def command_memory_merge(args):
++    workspace = canonical_workspace(args.workspace)
++    scope = normalize_scope(args.scope)
++    from_ids = list(dict.fromkeys(args.from_id))
++    if len(from_ids) < 2:
++        raise ValueError("memory-merge requires at least two distinct --from ids")
++    with contract_fence(state_root(), workspace_key(workspace), scope_key(scope)):
++        warnings = []
++        active = active_semantic_entries(
++            load_semantic_entries(workspace, scope, warnings), workspace, scope, warnings
++        )
++        by_id = {entry["memory_id"]: entry for entry in active}
++        missing = [memory_id for memory_id in from_ids if memory_id not in by_id]
++        if missing:
++            raise ValueError(
++                "merge inputs must be active semantic memories: " + ", ".join(missing)
++            )
++        inputs = [by_id[memory_id] for memory_id in from_ids]
++        if not semantic_reorganization_grounding(args.summary, inputs):
++            raise ValueError(
++                "merged summary has no lexical grounding in the input entries"
++            )
++        sources = list(dict.fromkeys(
++            [source for entry in inputs for source in entry.get("sources", [])]
++            + list(args.source)
++        ))
++        tags = sorted({tag for entry in inputs for tag in entry.get("tags", [])}
++                      | {tag.strip().casefold() for tag in args.tag if tag.strip()})
++        conflicts = sorted({
++            conflict
++            for entry in inputs
++            for conflict in entry.get("conflicts_with", [])
++            if conflict not in set(from_ids)
++        })
++        displaced = enforce_semantic_budget(
++            workspace, scope, 1, args.displace, leaving_ids=from_ids, warnings=warnings
++        )
++        result, entry = append_semantic_memory(
++            workspace,
++            scope,
++            args.kind,
++            args.summary,
++            args.detail,
++            tags,
++            sources,
++            from_ids,
++            conflicts,
++            reorganization={"kind": "merge", "from": from_ids},
++            displace=displaced,
++            enforce_budget=False,
++        )
++    result["reorganization"] = entry["reorganization"]
++    result["merged_from"] = from_ids
++    if warnings:
++        result["warnings"] = result.get("warnings", []) + warnings
++    print(json.dumps(result, ensure_ascii=False, indent=2))
++
++
++def parse_split_part(raw, index):
++    try:
++        part = json.loads(raw)
++    except json.JSONDecodeError as exc:
++        raise ValueError(f"--part {index} is not a JSON object: {exc}") from exc
++    if not isinstance(part, dict) or not str(part.get("summary", "")).strip():
++        raise ValueError(f"--part {index} requires an object with a non-empty summary")
++    kind = part.get("kind")
++    if kind is not None and kind not in SEMANTIC_KINDS:
++        raise ValueError(f"--part {index} kind must be one of {', '.join(SEMANTIC_KINDS)}")
++    tags = part.get("tags", [])
++    if not isinstance(tags, list):
++        raise ValueError(f"--part {index} tags must be a list")
++    return {
++        "kind": kind,
++        "summary": str(part["summary"]).strip(),
++        "detail": str(part.get("detail", "")),
++        "tags": [str(tag) for tag in tags],
++    }
++
++
++def command_memory_split(args):
++    workspace = canonical_workspace(args.workspace)
++    scope = normalize_scope(args.scope)
++    parts = [parse_split_part(raw, index) for index, raw in enumerate(args.part, 1)]
++    if len(parts) < 2:
++        raise ValueError("memory-split requires at least two --part objects")
++    with contract_fence(state_root(), workspace_key(workspace), scope_key(scope)):
++        warnings = []
++        active = active_semantic_entries(
++            load_semantic_entries(workspace, scope, warnings), workspace, scope, warnings
++        )
++        by_id = {entry["memory_id"]: entry for entry in active}
++        parent = by_id.get(args.memory_id)
++        if parent is None:
++            raise ValueError(
++                f"split target must be an active semantic memory: {args.memory_id}"
++            )
++        for index, part in enumerate(parts, 1):
++            if not semantic_reorganization_grounding(
++                " ".join([part["summary"], part["detail"]]), [parent]
++            ):
++                raise ValueError(
++                    f"--part {index} has no lexical grounding in the split target"
++                )
++        displaced = enforce_semantic_budget(
++            workspace, scope, len(parts), args.displace,
++            leaving_ids=[args.memory_id], warnings=warnings,
++        )
++        created = []
++        reorganization = {"kind": "split", "from": [args.memory_id], "part_count": len(parts)}
++        for index, part in enumerate(parts, 1):
++            # only the final part supersedes the parent, so an interrupted
++            # split never deactivates the parent before every part is durable
++            is_last = index == len(parts)
++            result, entry = append_semantic_memory(
++                workspace,
++                scope,
++                part["kind"] or parent.get("kind"),
++                part["summary"],
++                part["detail"],
++                part["tags"],
++                parent.get("sources", []),
++                [args.memory_id] if is_last else [],
++                [],
++                reorganization={**reorganization, "part": index},
++                displace=displaced if is_last else [],
++                enforce_budget=False,
++            )
++            created.append({"memory_id": entry["memory_id"], "summary": part["summary"]})
++    output = {
++        "saved": True,
++        "split_from": args.memory_id,
++        "created": created,
++        "displaced": displaced,
++        "active_entry_count": result["active_entry_count"],
++    }
++    if warnings:
++        output["warnings"] = warnings
++    print(json.dumps(output, ensure_ascii=False, indent=2))
++
++
++def command_memory_budget_set(args):
++    workspace = canonical_workspace(args.workspace)
++    scope = normalize_scope(args.scope)
++    if args.max_active < 1:
++        raise ValueError("--max-active must be a positive integer")
++    if not args.reason.strip():
++        raise ValueError("--reason cannot be empty")
++    with contract_fence(state_root(), workspace_key(workspace), scope_key(scope)):
++        previous = semantic_budget(workspace, scope)
++        event = {
++            "schema_version": SEMANTIC_BUDGET_SCHEMA_VERSION,
++            "event_id": str(uuid.uuid4()),
++            "timestamp_utc": utc_now(),
++            "authority": "explicit_semantic_budget_control_never_activation_authority",
++            "workspace": workspace,
++            "workspace_key": workspace_key(workspace),
++            "scope": scope,
++            "scope_key": scope_key(scope),
++            "max_active": args.max_active,
++            "previous_max_active": previous,
++            "reason": args.reason.strip(),
++        }
++        append_event(semantic_budget_path(workspace, scope), event)
++    print(json.dumps({
++        "saved": True,
++        "event_id": event["event_id"],
++        "workspace": workspace,
++        "scope": scope,
++        "max_active": args.max_active,
++        "previous_max_active": previous,
++        "history_preserved": True,
++    }, ensure_ascii=False, indent=2))
++
++
+ def command_evidence_capture(args):
+     workspace = canonical_workspace(args.workspace)
+     scope = normalize_scope(args.scope)
+@@ -2235,6 +2595,16 @@
+     summary_tokens = set(semantic_tokens(args.summary))
+     if not claim_tokens.intersection(summary_tokens):
+         reasons.append("semantic_summary_not_grounded_in_evidence_claim")
++    displaced = []
++    budget_detail = None
++    if not reasons:
++        try:
++            displaced = enforce_semantic_budget(
++                workspace, scope, 1, getattr(args, "displace", []), warnings=warnings
++            )
++        except ValueError as exc:
++            reasons.append("semantic_budget_exhausted")
++            budget_detail = str(exc)
+ 
+     promotion_id = str(uuid.uuid4())
+     now = utc_now()
+@@ -2274,6 +2644,8 @@
+             "semantic_memory_written": False,
+             "audit_path": str(path),
+         }
++        if budget_detail:
++            result["budget_detail"] = budget_detail
+         if warnings:
+             result["warnings"] = warnings
+         print(json.dumps(result, ensure_ascii=False, indent=2))
+@@ -2290,6 +2662,8 @@
+         sources,
+         args.supersedes,
+         args.conflicts_with,
++        displace=displaced,
++        enforce_budget=False,
+         promotion={
+             "schema_version": PROMOTION_SCHEMA_VERSION,
+             "promotion_id": promotion_id,
+@@ -4658,9 +5032,23 @@
+ def command_memory_disposition(args):
+     workspace = canonical_workspace(args.workspace)
+     scope = normalize_scope(args.scope)
++    with contract_fence(
++        state_root(), workspace_key(workspace), scope_key(scope)
++    ):
++        return command_memory_disposition_fenced(args, workspace, scope)
++
++
++def command_memory_disposition_fenced(args, workspace, scope):
+     entries = load_semantic_entries(workspace, scope, [])
+     if args.memory_id not in {entry.get("memory_id") for entry in entries}:
+         raise ValueError(f"unknown scoped semantic memory: {args.memory_id}")
++    displaced = []
++    if args.state == "active":
++        # reload-check-write happens inside the same contract fence, so two
++        # concurrent growers cannot both pass the budget on one stale active set
++        displaced = enforce_semantic_budget(
++            workspace, scope, 1, getattr(args, "displace", []), warnings=[]
++        )
+     event = {
+         "schema_version": SEMANTIC_DISPOSITION_SCHEMA_VERSION,
+         "event_id": str(uuid.uuid4()),
+@@ -4677,6 +5065,8 @@
+     }
+     path = semantic_disposition_directory(workspace, scope) / f"{datetime.now(timezone.utc):%Y-%m-%d}.jsonl"
+     append_event(path, event)
++    if displaced:
++        append_displacement_dispositions(workspace, scope, displaced, args.memory_id)
+     index = rebuild_semantic_index(workspace, scope, [])
+     print(json.dumps({
+         "saved": True,
+@@ -4691,10 +5081,11 @@
+ 
+ @memoized_derivation
+ def command_memory_retention_plan(args):
+-    if args.max_active < 0:
+-        raise ValueError("--max-active cannot be negative")
+     workspace = canonical_workspace(args.workspace)
+     scope = normalize_scope(args.scope)
++    max_active = args.max_active if args.max_active is not None else semantic_budget(workspace, scope)
++    if max_active < 0:
++        raise ValueError("--max-active cannot be negative")
+     warnings = []
+     entries = active_semantic_entries(
+         load_semantic_entries(workspace, scope, warnings), workspace, scope, warnings
+@@ -4702,20 +5093,21 @@
+     protected_kinds = {"constraint", "open_question"}
+     protected = [entry for entry in entries if entry.get("kind") in protected_kinds or "critical" in entry.get("tags", [])]
+     candidates = [entry for entry in entries if entry not in protected]
+-    overflow = max(0, len(entries) - args.max_active)
++    overflow = max(0, len(entries) - max_active)
+     proposed = candidates[:overflow]
+     print(json.dumps({
+         "workspace": workspace,
+         "scope": scope,
+         "mode": "plan_only_no_state_changed",
+-        "max_active": args.max_active,
++        "max_active": max_active,
++        "budget_head": semantic_budget(workspace, scope),
+         "active_count": len(entries),
+         "protected_count": len(protected),
+         "proposed_dormant": [
+             {"memory_id": entry["memory_id"], "kind": entry["kind"], "summary": entry["summary"]}
+             for entry in proposed
+         ],
+-        "bounded": len(entries) - len(proposed) <= max(args.max_active, len(protected)),
++        "bounded": len(entries) - len(proposed) <= max(max_active, len(protected)),
+         "warnings": warnings,
+     }, ensure_ascii=False, indent=2))
+ 
+@@ -6016,6 +6408,7 @@
+     evidence_promote_parser.add_argument("--scope", default="workspace")
+     evidence_promote_parser.add_argument("--evidence-id", required=True)
+     evidence_promote_parser.add_argument("--kind", choices=SEMANTIC_KINDS, required=True)
++    evidence_promote_parser.add_argument("--displace", action="append", default=[], help="active memory id to make dormant when the semantic budget is full")
+     evidence_promote_parser.add_argument("--summary", required=True)
+     evidence_promote_parser.add_argument("--detail", default="")
+     evidence_promote_parser.add_argument("--tag", action="append", default=[])
+@@ -6084,9 +6477,49 @@
+     memory_consolidate_parser.add_argument("--tag", action="append", default=[])
+     memory_consolidate_parser.add_argument("--source", action="append", required=True)
+     memory_consolidate_parser.add_argument("--supersedes", action="append", default=[])
++    memory_consolidate_parser.add_argument("--displace", action="append", default=[], help="active memory id to make dormant when the semantic budget is full")
+     memory_consolidate_parser.add_argument("--conflicts-with", action="append", default=[])
+     memory_consolidate_parser.set_defaults(func=command_memory_consolidate)
+ 
++    memory_budget_parser = subparsers.add_parser(
++        "memory-budget-set",
++        help="set the binding active-recall budget for one scope (append-only head)",
++    )
++    memory_budget_parser.add_argument("--workspace", default=os.getcwd())
++    memory_budget_parser.add_argument("--scope", default="workspace")
++    memory_budget_parser.add_argument("--max-active", type=int, required=True)
++    memory_budget_parser.add_argument("--reason", required=True)
++    memory_budget_parser.set_defaults(func=command_memory_budget_set)
++
++    memory_merge_parser = subparsers.add_parser(
++        "memory-merge",
++        help="merge redundant active semantic memories into one entry with full lineage",
++    )
++    memory_merge_parser.add_argument("--workspace", default=os.getcwd())
++    memory_merge_parser.add_argument("--scope", default="workspace")
++    memory_merge_parser.add_argument("--from", dest="from_id", action="append", required=True)
++    memory_merge_parser.add_argument("--kind", choices=SEMANTIC_KINDS, required=True)
++    memory_merge_parser.add_argument("--summary", required=True)
++    memory_merge_parser.add_argument("--detail", default="")
++    memory_merge_parser.add_argument("--tag", action="append", default=[])
++    memory_merge_parser.add_argument("--source", action="append", default=[])
++    memory_merge_parser.add_argument("--displace", action="append", default=[], help="active memory id to make dormant when the semantic budget is full")
++    memory_merge_parser.set_defaults(func=command_memory_merge)
++
++    memory_split_parser = subparsers.add_parser(
++        "memory-split",
++        help="split one over-mixed active semantic memory into parts with full lineage",
++    )
++    memory_split_parser.add_argument("--workspace", default=os.getcwd())
++    memory_split_parser.add_argument("--scope", default="workspace")
++    memory_split_parser.add_argument("--memory-id", required=True)
++    memory_split_parser.add_argument(
++        "--part", action="append", required=True,
++        help='JSON object: {"summary": ..., "detail"?: ..., "kind"?: ..., "tags"?: [...]}',
++    )
++    memory_split_parser.add_argument("--displace", action="append", default=[], help="active memory id to make dormant when the semantic budget is full")
++    memory_split_parser.set_defaults(func=command_memory_split)
++
+     memory_index_parser = subparsers.add_parser(
+         "memory-index", help="rebuild the replaceable semantic memory index"
+     )
+@@ -6103,6 +6536,7 @@
+     memory_disposition_parser.add_argument("--memory-id", required=True)
+     memory_disposition_parser.add_argument("--state", choices=SEMANTIC_DISPOSITIONS, required=True)
+     memory_disposition_parser.add_argument("--reason", required=True)
++    memory_disposition_parser.add_argument("--displace", action="append", default=[], help="active memory id to make dormant when the semantic budget is full")
+     memory_disposition_parser.add_argument("--source", action="append", default=[])
+     memory_disposition_parser.set_defaults(func=command_memory_disposition)
+ 
+@@ -6112,7 +6546,7 @@
+     )
+     memory_retention_parser.add_argument("--workspace", default=os.getcwd())
+     memory_retention_parser.add_argument("--scope", required=True)
+-    memory_retention_parser.add_argument("--max-active", type=int, required=True)
++    memory_retention_parser.add_argument("--max-active", type=int, default=None, help="defaults to the scope budget")
+     memory_retention_parser.set_defaults(func=command_memory_retention_plan)
+ 
+     memory_conflicts_parser = subparsers.add_parser(

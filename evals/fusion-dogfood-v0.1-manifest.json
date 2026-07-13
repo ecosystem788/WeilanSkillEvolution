@@ -1,0 +1,160 @@
+{
+  "schema_version": "weilan_skill_eval_manifest_v0.5",
+  "suite_id": "fusion-dogfood-v0.1",
+  "status": "approved",
+  "frozen": true,
+  "approval_source": "evals/approvals/fusion-dogfood-v0.1-approval.json",
+  "scoring_version": "fusion-dogfood-weighted-v0.1",
+  "case_spec": "evals/cases/fusion-dogfood-v0.1.json",
+  "case_spec_hash": "355465c562cea211108095267d3dc659d0e6f72f59d7615eff2b3653b57c68d1",
+  "case_spec_file_sha256": "045cb6e8119eb7e68d89edca013de2bce949221e799ff223c72ceab484ac17ac",
+  "evaluator_artifacts": {
+    "hidden_checks": {
+      "path": "evals/hidden/fusion-dogfood-v0.1/hidden-checks.json",
+      "sha256": "a11a7dc8457b67ce74882d621b4ea128b164be2b9a2619306bd0d0a731ff2d3c"
+    },
+    "evaluator_rubric": {
+      "path": "evals/hidden/fusion-dogfood-v0.1/evaluator-rubric.json",
+      "sha256": "e8f59038ae21881f462c125b70879a096800267c5cd7bd33c01c2441d8f1c743"
+    },
+    "source_hashes": {
+      "path": "evals/hidden/fusion-dogfood-v0.1/source-hashes.json",
+      "sha256": "02806dc334bbaa39aae219b65aeb60e4e1ddc31b2d3567a0da57808a3f12629c"
+    },
+    "redaction_policy": {
+      "path": "evals/hidden/fusion-dogfood-v0.1/redaction-policy.md",
+      "sha256": "8e86cd13767ca2c66cfe834d01bc28bdd53b0af1edcdff008d1c08b29ff14b2f"
+    },
+    "execution_config": {
+      "path": "evals/configurations/fusion-dogfood-v0.1-isolated.json",
+      "sha256": "05f86a57691404db1cf1b0effe80aa1ca54fd7e317b1501569218d5aea393663"
+    }
+  },
+  "configuration": {
+    "path": "evals/configurations/fusion-dogfood-v0.1-isolated.json",
+    "sha256": "05f86a57691404db1cf1b0effe80aa1ca54fd7e317b1501569218d5aea393663"
+  },
+  "cases": [
+    {
+      "case_id": "fusion-s0-spec-review-boundary",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 14,
+        "context_tokens": 14000
+      },
+      "metrics": {
+        "boundary_adherence": 0.3,
+        "review_quality": 0.25,
+        "source_traceability": 0.2,
+        "receipt_readiness": 0.15,
+        "overhead": 0.1
+      }
+    },
+    {
+      "case_id": "fusion-s0-static-scan-evidence",
+      "trial_count": 1,
+      "budget": {
+        "tool_calls": 8,
+        "context_tokens": 8000
+      },
+      "metrics": {
+        "observed_facts": 0.35,
+        "static_limit_discipline": 0.25,
+        "evaluator_field_selection": 0.2,
+        "constraint_adherence": 0.15,
+        "overhead": 0.05
+      }
+    },
+    {
+      "case_id": "fusion-s0-env-probe-attribution",
+      "trial_count": 1,
+      "budget": {
+        "tool_calls": 12,
+        "context_tokens": 10000
+      },
+      "metrics": {
+        "error_attribution": 0.35,
+        "source_freshness": 0.2,
+        "non_blocking_warning_quality": 0.15,
+        "guardrail_adherence": 0.2,
+        "overhead": 0.1
+      }
+    },
+    {
+      "case_id": "fusion-p2-instrument-noise-recovery",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 12,
+        "context_tokens": 12000
+      },
+      "metrics": {
+        "run_comparison_accuracy": 0.25,
+        "error_attribution_quality": 0.25,
+        "hidden_evidence_boundary": 0.25,
+        "future_evaluator_checklist": 0.15,
+        "overhead": 0.1
+      }
+    },
+    {
+      "case_id": "fusion-exp15-merge-error-attribution",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 18,
+        "context_tokens": 18000
+      },
+      "metrics": {
+        "collapse_quality": 0.25,
+        "error_attribution_quality": 0.25,
+        "authority_boundary": 0.2,
+        "trace_reuse": 0.2,
+        "overhead": 0.1
+      }
+    },
+    {
+      "case_id": "fusion-hidden-evidence-boundary",
+      "trial_count": 1,
+      "budget": {
+        "tool_calls": 8,
+        "context_tokens": 7000
+      },
+      "metrics": {
+        "classification_accuracy": 0.35,
+        "hidden_material_redaction": 0.3,
+        "policy_alignment": 0.2,
+        "constraint_adherence": 0.1,
+        "overhead": 0.05
+      }
+    },
+    {
+      "case_id": "fusion-memory-scope-recovery",
+      "trial_count": 2,
+      "budget": {
+        "tool_calls": 10,
+        "context_tokens": 9000
+      },
+      "metrics": {
+        "activation_handling": 0.25,
+        "scope_isolation": 0.25,
+        "source_verification": 0.2,
+        "next_action_quality": 0.15,
+        "overhead": 0.15
+      }
+    },
+    {
+      "case_id": "fusion-scope-redirection-to-eval-proposal",
+      "trial_count": 1,
+      "budget": {
+        "tool_calls": 18,
+        "context_tokens": 18000
+      },
+      "metrics": {
+        "proposal_completeness": 0.25,
+        "authority_boundary": 0.25,
+        "source_traceability": 0.2,
+        "receipt_quality": 0.15,
+        "overhead": 0.15
+      }
+    }
+  ],
+  "note": "Externally approved and frozen harder dogfood evaluation suite. This supplements se-seed-v0.1 and does not mutate evals/manifest.json. Any case, fixture, hidden artifact, or scoring change requires a new explicit approval."
+}

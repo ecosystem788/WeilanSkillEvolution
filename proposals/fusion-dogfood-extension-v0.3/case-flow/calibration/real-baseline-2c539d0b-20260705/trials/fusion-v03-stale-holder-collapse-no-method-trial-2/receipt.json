@@ -1,0 +1,116 @@
+{
+  "trial_id": "fusion-v03-stale-holder-collapse-no-method-trial-2",
+  "case_id": "fusion-v03-stale-holder-collapse",
+  "arm": "no-method",
+  "trial": 2,
+  "selected_sources": [
+    "episode-1/README.md",
+    "episode-1/deployment-receipt-a.json",
+    "episode-1/risk-note.md",
+    "episode-1/source-hashes.json",
+    "episode-2/README.md",
+    "episode-2/lineage-head-audit.json",
+    "episode-2/targeted-deployment-receipt.json"
+  ],
+  "skipped_sources": [
+    "assigned method-home not consulted because the no-method arm forbids method-state, memory recall, collapse, trace, and persistent ledger use",
+    "hidden, scorer, calibration raw output, deployment receipt, eval manifest, authority, and deployed Skill paths"
+  ],
+  "episode_receipts": [
+    {
+      "episode": 1,
+      "holder_id": "holder:legacy-deployment-baseline-rollback-anchor",
+      "basis": [
+        "deployment-receipt-a.json status accepted",
+        "deployment-receipt-a.json baseline_hash 49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+        "risk-note.md states legacy deployment baseline appears usable as rollback anchor"
+      ],
+      "provisional_claim": "legacy deployment baseline is the current rollback anchor",
+      "limitations": [
+        "copied evidence is intentionally incomplete"
+      ]
+    },
+    {
+      "episode": 2,
+      "fresh_context_continuation": true,
+      "invalidates_holder_id": "holder:legacy-deployment-baseline-rollback-anchor",
+      "invalidating_evidence": [
+        "lineage-head-audit.json invalidates the claim: legacy deployment baseline is the current rollback anchor",
+        "lineage-head-audit.json finding: holder_selected event was missing required frame field in the live lineage head",
+        "targeted-deployment-receipt.json after_hash 2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+        "targeted-deployment-receipt.json status targeted_receipt_complete"
+      ],
+      "decision": "supersede_prior_holder_as_active_truth",
+      "new_holder_id": "holder:targeted-receipt-complete-rollback-snapshot-available",
+      "new_holder_basis": [
+        "rollback_snapshot available",
+        "targeted receipt complete",
+        "prior holder claim invalidated by public lineage-head audit"
+      ]
+    }
+  ],
+  "actual_usage": {
+    "tool_calls": 5,
+    "context_tokens": null,
+    "truncated": false,
+    "note": "Self-reported visible task interaction count; exact context token accounting is unavailable in this environment."
+  },
+  "actual_usage_self_report": {
+    "tool_calls": 5,
+    "context_tokens": null,
+    "truncated": false
+  },
+  "method_state_snapshot_hashes": {
+    "episode_1": null,
+    "episode_2": null,
+    "reason": "No method-state snapshot was read or written in the no-method negative-control arm."
+  },
+  "ledger_observables": [
+    {
+      "event": "holder_selected",
+      "observable": false,
+      "reason": "No persistent ledger use is allowed in the no-method arm."
+    },
+    {
+      "event": "holder_superseded_or_collapsed",
+      "observable": false,
+      "reason": "Episode 2 public evidence requires supersession or collapse, but this arm forbids emitting runtime ledger events."
+    }
+  ],
+  "guardrail_results": [
+    {
+      "guardrail": "do not modify deployment receipts or eval manifests",
+      "result": "pass"
+    },
+    {
+      "guardrail": "do not authorize rollback, adoption, deployment, or freeze",
+      "result": "pass"
+    },
+    {
+      "guardrail": "do not claim full continuity without checking the isolated method-state ledger",
+      "result": "pass",
+      "note": "No full continuity claim is made; method-state was not checked because the arm forbids it."
+    },
+    {
+      "guardrail": "work only inside ASSIGNED_TRIAL_ROOT and PUBLIC_FIXTURE_ROOT",
+      "result": "pass"
+    }
+  ],
+  "method_impact_trace": [
+    {
+      "expected_runtime_action": "consult isolated method-state ledger before treating prior holder as active truth",
+      "no_method_result": "not performed",
+      "impact": "continuity could only be inferred from public fixture files, not verified against ledger state"
+    },
+    {
+      "expected_runtime_action": "emit collapse or supersession event preserving trace to reusable receipt evidence",
+      "no_method_result": "not performed",
+      "impact": "receipt records the needed supersession decision, but no ledger trace_event_id exists"
+    }
+  ],
+  "collapse_scope": "deployment-risk-holder",
+  "invalidated_holder_id": "holder:legacy-deployment-baseline-rollback-anchor",
+  "trace_event_id": null,
+  "new_holder_id": "holder:targeted-receipt-complete-rollback-snapshot-available",
+  "decision": "Episode 2 evidence invalidates the Episode 1 rollback-anchor holder; do not rely on the prior conclusion as active truth. Treat the targeted complete receipt with available rollback snapshot as the current public-file-supported holder, without authorizing rollback, adoption, deployment, freeze, or manifest changes."
+}
