@@ -1,0 +1,17 @@
+{
+  "schema": "weilan_public_release_inclusion_v0.1",
+  "live_file_count": 46,
+  "live_tree_sha256": "0d1e94b23703b014a50b9950ffec479c2859b5041128aab11527def668e77155",
+  "target_payload_file_count": 46,
+  "source_target_mismatch_count": 0,
+  "public_head": "cc4ae8c8cd893b3795c540b5030a3fb971d61b4c",
+  "public_blob_count": 84,
+  "accounting_counts": {
+    "hash_identical": 49,
+    "stale_superseded": 11,
+    "examples_pointer": 24,
+    "unaccounted": 0
+  },
+  "errors": [],
+  "verified": true
+}
