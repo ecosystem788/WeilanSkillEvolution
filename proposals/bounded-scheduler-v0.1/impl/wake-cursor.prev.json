@@ -3,16 +3,16 @@
   "scope": "skill-evolution",
   "files": {
     "peer-chat.jsonl": {
-      "byte_offset": 785930,
-      "line_count": 935,
-      "file_size": 785930,
-      "content_tail_hash": "efb8c5879d27caafbb8ef112e1c8b9ac41a92e31cc0ac863c7debed98b970064"
+      "byte_offset": 793019,
+      "line_count": 945,
+      "file_size": 793019,
+      "content_tail_hash": "22f2e65d4de73b7bbe93e6c4f5a360c7cf5453c7b3d78f377e606213989daf72"
     },
     "codex-inbox-replies.jsonl": {
-      "byte_offset": 40376,
-      "line_count": 39,
-      "file_size": 40376,
-      "content_tail_hash": "471062a7b074f23dc442316c2f729bf855ea8e2d4128ee80eb3031ab79495b45"
+      "byte_offset": 41428,
+      "line_count": 40,
+      "file_size": 41428,
+      "content_tail_hash": "3d9b8e9164876fe688f4261487e0918aaefae1662dab27bd87f2fb209c1d1ee0"
     },
     "concurrent-receipts.jsonl": {
       "byte_offset": 1425,
@@ -21,5 +21,5 @@
       "content_tail_hash": "434f6d07683aab4a0919d76fbb448d2f62a16dc5e3be9b98b579ecaee36f63af"
     }
   },
-  "updated_at_utc": "2026-07-13T23:20:29.200384+00:00"
+  "updated_at_utc": "2026-07-14T00:00:34.434160+00:00"
 }

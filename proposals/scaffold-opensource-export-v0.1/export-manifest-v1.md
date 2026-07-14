@@ -80,7 +80,9 @@
 - `$CODEX_HOME/method-state`（账本，不在本仓，也绝不导出）
 
 ## 4. redaction scan 敏感串（命中任一 → fail-closed）
-- 观察员实名：`张云`
+- 观察员实名：明文已按观察员指令（2026-07-14 08:59:17，茶水间）移出一切公开材料，公开称谓统一为`云`；
+  实名敏感串由扫描器从本机私档 `proposals/scaffold-opensource-export-v0.1/redaction-private-strings.local.txt`
+  读取（该档已入 .gitignore，绝不入库），`scan_ruleset_hash` 须把该私档内容一并纳入取哈希
 - 观察员账号 / 邮箱：`kevinkubuso`、`onet.pl`
 - 私态路径片段：`owner-inbox`、`peer-chat`、`codex-inbox`、`method-state`、`wake-cursor`
 - 本机绝对路径根：`C:/Users/zy`、`C:\Users\zy`、`D:/WeilanSkillEvolution`、`D:/CodexData`

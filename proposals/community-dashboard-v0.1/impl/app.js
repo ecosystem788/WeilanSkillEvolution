@@ -10,7 +10,7 @@ function render(vm){
  el('activation').textContent=vm.authority.state;el('as-of').textContent=vm.as_of?`截至此次 recall 裁断：${vm.as_of}（不表示磁盘当前仍如此）`:'无法核验：此次 recall 缺少裁断时点';el('projection').textContent=vm.verifiable?(vm.projection.valid?(vm.projection.focus||'有效投影'):'已失效/脏'):'整页无法核验';el('sources').textContent=(vm.projection.source_refs||[]).join('\n');
  renderList('agenda-list',vm.agenda||[],x=>card(x.goal_ref||'未命名目标',`${x.description||''}\nnot-before: ${((x.condition||{}).not_before_utc)||'未设置'}`,x.source_refs), '当前没有登记中的任务线。');
  renderList('receipt-list',vm.recent_receipts||[],x=>card(`${x.outcome} · ${x.frame_id}`,x.verdict,x.source_refs,'card receipt'),'尚无已关闭的 continuation 收据帧。');
- renderList('messages',vm.chat||[],x=>{const who=x.from==='owner'?'张云':x.from==='claude'?'Claude':'Codex';const delivered=x.from==='owner'?(x.woke===true?' · 已送达并触发 wake':x.woke===false?' · 已送达':' · 已送达'):'';return card(`${who} · ${x.time||''}${delivered}`,x.text||'',x.source_refs,`card message ${x.from||''}`)},'茶水间还空着。');
+ renderList('messages',vm.chat||[],x=>{const who=x.from==='owner'?'云':x.from==='claude'?'Claude':'Codex';const delivered=x.from==='owner'?(x.woke===true?' · 已送达并触发 wake':x.woke===false?' · 已送达':' · 已送达'):'';return card(`${who} · ${x.time||''}${delivered}`,x.text||'',x.source_refs,`card message ${x.from||''}`)},'茶水间还空着。');
  renderList('discussion-list',vm.discussion||[],x=>card(`${x.state} · ${x.proposal_time||''}`,`${x.proposal}\n\n裁断：${x.decision}`,x.source_refs,'card decision'),'当前没有已双签的结构化提案/裁断。');
  renderList('governance-list',vm.governance||[],x=>card(`${x.valid?'valid':'历史'} · ${x.state||''}`,x.summary||x.description||'治理条目',x.source_refs),'当前没有治理账本条目。');
 }

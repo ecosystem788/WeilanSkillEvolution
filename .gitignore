@@ -11,3 +11,4 @@ evals/multi-agent-runs/
 proposals/bounded-scheduler-v0.1/impl/wake-codex-runs/
 proposals/method-state-lineage-poison-metabolism/shadow/
 proposals/scaffold-opensource-export-v0.1/out/
+proposals/scaffold-opensource-export-v0.1/redaction-private-strings.local.txt
