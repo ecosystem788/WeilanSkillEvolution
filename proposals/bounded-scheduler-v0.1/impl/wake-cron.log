@@ -3529,3 +3529,41 @@
 2026-07-14T13:18:57  waking codex: pending inbox handoffs
 2026-07-14T13:28:58  wake ok  stop=quiescent  frame=wf-20260714-042912-5d80c5
 2026-07-14T13:28:58  escalating: due clock goal -> model episode
+2026-07-14T13:18:57  codex wake done rc=0
+2026-07-14T13:28:58  escalation done rc=0
+2026-07-14T13:28:58  waking codex: pending inbox handoffs
+2026-07-14T13:38:57  wake ok  stop=quiescent  frame=wf-20260714-043907-a88ade
+2026-07-14T13:38:57  escalating: due clock goal -> model episode
+2026-07-14T13:28:58  codex wake done rc=0
+2026-07-14T13:38:57  escalation done rc=0
+2026-07-14T13:38:57  waking codex: pending inbox handoffs
+2026-07-14T13:48:58  wake ok  stop=quiescent  frame=wf-20260714-044913-7adea6
+2026-07-14T13:48:58  escalating: due clock goal -> model episode
+2026-07-14T13:38:57  codex wake done rc=0
+2026-07-14T13:48:58  escalation done rc=0
+2026-07-14T13:48:58  waking codex: pending inbox handoffs
+2026-07-14T13:58:58  ERROR rc=3 stage=native_exit diag_sha256=ec3c0dacea693580066af4e878998921fdeb0ed5c33459bb3268a57230e893d3 stderr={   "frame_commit_failure": {     "stage": "frame_open_stale_head",     "command": "open",     "rc": 1,     "stderr": "error: causal parent must be closed: wf-20260714-045705-b2cc03",     "attempted_parent": "wf-20260714-045705-b2cc03",    
+2026-07-14T13:59:58  ERROR rc=3 stage=native_exit diag_sha256=ec3c0dacea693580066af4e878998921fdeb0ed5c33459bb3268a57230e893d3 stderr={   "frame_commit_failure": {     "stage": "frame_open_stale_head",     "command": "open",     "rc": 1,     "stderr": "error: causal parent must be closed: wf-20260714-045705-b2cc03",     "attempted_parent": "wf-20260714-045705-b2cc03",    
+2026-07-14T13:48:58  codex wake done rc=0
+2026-07-14T14:00:58  ERROR rc=0 stage=json_parse diag_sha256=53cc4a550edf2674ae54f60ecec7f971c0a739a0a9a4ba92b4969e0077cfacbd stderr={   "briefing": {     "activation_state": "ACTIVE",     "continuation_allowed": true,     "head_frame": "frame:wf-20260714-044945-0a2dd6",     "focus": "Handle two newly delivered Codex inbox records whose text is irreversibly stored as que
+2026-07-14T14:00:58  ALERT sentinel_failure_streak=3 action=wake_agent
+2026-07-14T14:10:58  ERROR rc=0 stage=json_parse diag_sha256=c3fbc7226cb2ea4d3a84a73fa925df27d114cecb180bad1e8b289028d2e0802f stderr={   "briefing": {     "activation_state": "ACTIVE",     "continuation_allowed": true,     "head_frame": "frame:wf-20260714-045705-b2cc03",     "focus": "Implement the double-signed sentinel failure honesty proposal in wake.py and run_wake_c
+2026-07-14T14:11:58  ERROR rc=0 stage=json_parse diag_sha256=7a251b0deeb139b19ce775c3f71c68085d29d15797eb38c8c6c5ce64b4f1cab9 stderr={   "briefing": {     "activation_state": "ACTIVE",     "continuation_allowed": true,     "head_frame": "frame:wf-20260714-045705-b2cc03",     "focus": "Implement the double-signed sentinel failure honesty proposal in wake.py and run_wake_c
+2026-07-14T14:12:44  ERROR rc=0 stage=json_parse diag_sha256=77b280233be042e0e9a52d3b6c25e8bc3be5d66400dc2b990f0cf20bd60b64b2 stderr={   "briefing": {     "activation_state": "ACTIVE",     "continuation_allowed": true,     "head_frame": "frame:wf-20260714-045705-b2cc03",     "focus": "Implement the double-signed sentinel failure honesty proposal in wake.py and run_wake_c
+2026-07-14T14:12:58  ERROR rc=0 stage=json_parse diag_sha256=5cc3223d275f01f132c517dbe841e51b2e9f8a5c7a043ab0f223de18156a763c stderr={   "briefing": {     "activation_state": "ACTIVE",     "continuation_allowed": true,     "head_frame": "frame:wf-20260714-045705-b2cc03",     "focus": "Implement the double-signed sentinel failure honesty proposal in wake.py and run_wake_c
+2026-07-14T14:13:58  ERROR rc=0 stage=json_parse diag_sha256=b1502b97f05e9eba4b1111af1bb41c13a32d462e4e94dac6dc1f1d09c8f58b90 stderr={   "briefing": {     "activation_state": "ACTIVE",     "continuation_allowed": true,     "head_frame": "frame:wf-20260714-045705-b2cc03",     "focus": "Implement the double-signed sentinel failure honesty proposal in wake.py and run_wake_c
+2026-07-14T14:14:58  ERROR rc=0 stage=json_parse diag_sha256=56c7e53a5a2fea42a1d84d3be3682b5e2bcf6b60133731a6cfdd85f76ccf127a stderr={   "briefing": {     "activation_state": "ACTIVE",     "continuation_allowed": true,     "head_frame": "frame:wf-20260714-045705-b2cc03",     "focus": "Implement the double-signed sentinel failure honesty proposal in wake.py and run_wake_c
+2026-07-14T14:15:58  ERROR rc=0 stage=json_parse diag_sha256=18f1a5b46c25a82070862860e1ec9bca325fda4074de692ea6b17cccce4d906e stderr={   "briefing": {     "activation_state": "ACTIVE",     "continuation_allowed": true,     "head_frame": "frame:wf-20260714-045705-b2cc03",     "focus": "Implement the double-signed sentinel failure honesty proposal in wake.py and run_wake_c
+2026-07-14T14:16:58  wake ok  stop=quiescent  frame=wf-20260714-051708-22cbc6
+2026-07-14T14:16:58  waking codex: pending inbox handoffs
+2026-07-14T14:16:58  codex wake done rc=0
+2026-07-14T14:19:52  wake ok  stop=quiescent  frame=wf-20260714-052003-97426d
+2026-07-14T14:19:58  wake ok  stop=quiescent  frame=wf-20260714-052014-65e999
+2026-07-14T14:19:58  waking codex: pending inbox handoffs
+2026-07-14T14:19:58  codex wake done rc=0
+2026-07-14T14:22:58  wake ok  stop=quiescent  frame=wf-20260714-052325-a163b5
+2026-07-14T14:22:58  waking codex: pending inbox handoffs
+2026-07-14T14:00:58  alert wake_agent done rc=0
+2026-07-14T14:22:58  codex wake done rc=0
+2026-07-14T14:28:58  wake ok  stop=quiescent  frame=wf-20260714-052911-bf0793
+2026-07-14T14:28:58  escalating: due clock goal -> model episode

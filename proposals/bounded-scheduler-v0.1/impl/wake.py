@@ -52,6 +52,27 @@ WAKE_LOCK = HERE / "wake-agent.lock"
 CHAT_EXPERIMENT = HERE / "CHAT_EXPERIMENT"
 
 
+class TraceCommandError(RuntimeError):
+    """A trace command failed or did not return one JSON object."""
+
+    def __init__(self, command: tuple[str, ...], result: dict):
+        super().__init__(f"trace command failed: {command[0] if command else 'unknown'}")
+        self.command = command
+        self.result = result
+
+
+class FrameCommitFailure(RuntimeError):
+    """A bounded, machine-readable failure while committing the wake receipt."""
+
+    def __init__(self, stage: str, detail: dict):
+        super().__init__(f"frame commit failed at {stage}")
+        self.stage = stage
+        self.detail = detail
+
+    def as_dict(self) -> dict:
+        return {"stage": self.stage, **self.detail}
+
+
 def _trace(*args) -> dict:
     """Run a weilan_trace subcommand and parse its JSON stdout."""
     import os
@@ -65,10 +86,20 @@ def _trace(*args) -> dict:
         env=env,
     )
     out = proc.stdout.strip()
+    result = {
+        "_raw": out[:800],
+        "_stderr": proc.stderr.strip()[:800],
+        "_rc": proc.returncode,
+    }
     try:
-        return json.loads(out)
+        parsed = json.loads(out)
     except json.JSONDecodeError:
-        return {"_raw": out, "_stderr": proc.stderr.strip(), "_rc": proc.returncode}
+        raise TraceCommandError(tuple(str(a) for a in args), result)
+    if proc.returncode != 0 or not isinstance(parsed, dict):
+        if isinstance(parsed, dict):
+            result["trace_error"] = parsed
+        raise TraceCommandError(tuple(str(a) for a in args), result)
+    return parsed
 
 
 # --- Bus IN: read the live ledger ------------------------------------------
@@ -256,6 +287,27 @@ def _current_head() -> str:
     return (((lin.get("branches") or {}).get("main")) or {}).get("head_frame_id", "")
 
 
+def _commit_failure(stage: str, exc: TraceCommandError, **extra) -> FrameCommitFailure:
+    detail = {
+        "command": exc.command[0] if exc.command else "unknown",
+        "rc": exc.result.get("_rc"),
+        "stderr": (exc.result.get("_stderr") or "")[:400],
+    }
+    trace_error = exc.result.get("trace_error")
+    if trace_error:
+        detail["trace_error"] = trace_error
+    detail.update(extra)
+    return FrameCommitFailure(stage, detail)
+
+
+def _is_head_conflict(exc: TraceCommandError) -> bool:
+    text = json.dumps(exc.result, ensure_ascii=False).lower()
+    return any(token in text for token in (
+        "branch-head conflict", "branch head conflict", "causal parent must be closed",
+        "not the current branch head", "stale head",
+    ))
+
+
 def emit_receipt_frame(receipt, brief: dict) -> str:
     head = _current_head()
     open_args = [
@@ -265,17 +317,46 @@ def emit_receipt_frame(receipt, brief: dict) -> str:
     ]
     if head:
         open_args += ["--relation", "continue", "--parent", head]
-    frame = _trace(*open_args)
+    try:
+        frame = _trace(*open_args)
+    except TraceCommandError as first_error:
+        if not head or not _is_head_conflict(first_error):
+            raise _commit_failure("frame_open", first_error, attempted_parent=head)
+        refreshed_head = _current_head()
+        if not refreshed_head or refreshed_head == head:
+            raise _commit_failure(
+                "frame_open_stale_head", first_error,
+                attempted_parent=head, refreshed_parent=refreshed_head,
+            )
+        try:
+            _trace("validate", "--frame-id", refreshed_head, "--require-closed")
+        except TraceCommandError as validate_error:
+            raise _commit_failure(
+                "refreshed_head_not_closed", validate_error,
+                attempted_parent=head, refreshed_parent=refreshed_head,
+            )
+        retry_args = list(open_args)
+        retry_args[retry_args.index(head)] = refreshed_head
+        try:
+            frame = _trace(*retry_args)
+        except TraceCommandError as retry_error:
+            raise _commit_failure(
+                "frame_open_retry", retry_error,
+                attempted_parent=head, refreshed_parent=refreshed_head,
+            )
     fid = frame.get("frame_id")
     if not fid:
-        return f"(frame open failed: {frame})"
-    _trace("persistence-audit", "--frame-id", fid, "--trigger", "round_end",
-           "--decision", "not_persisted",
-           "--reason", "wake receipt = ledger coordination; project truth = repo+ledger")
-    _trace("close", "--frame-id", fid, "--outcome", "success",
-           "--verdict", f"wake receipt {receipt.receipt_hash()[:12]}: "
-                        f"stop={receipt.stop_reason}, structure={receipt.structure_events}, "
-                        f"queued={len(receipt.queued_for_owner)}")
+        raise FrameCommitFailure("frame_open_result", {"reason": "missing frame_id"})
+    try:
+        _trace("persistence-audit", "--frame-id", fid, "--trigger", "round_end",
+               "--decision", "not_persisted",
+               "--reason", "wake receipt = ledger coordination; project truth = repo+ledger")
+        _trace("close", "--frame-id", fid, "--outcome", "success",
+               "--verdict", f"wake receipt {receipt.receipt_hash()[:12]}: "
+                            f"stop={receipt.stop_reason}, structure={receipt.structure_events}, "
+                            f"queued={len(receipt.queued_for_owner)}")
+    except TraceCommandError as exc:
+        raise _commit_failure("frame_finalize", exc, frame_id=fid)
     return fid
 
 
@@ -335,7 +416,17 @@ def main() -> int:
                     help="write a receipt frame to the ledger (still no cron)")
     args = ap.parse_args()
 
-    report = wake(commit=args.commit)
+    try:
+        report = wake(commit=args.commit)
+    except FrameCommitFailure as exc:
+        report = {"frame_commit_failure": exc.as_dict()}
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 3
+    except TraceCommandError as exc:
+        failure = _commit_failure("trace_command", exc)
+        report = {"frame_commit_failure": failure.as_dict()}
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 3
     print(json.dumps(report, ensure_ascii=False, indent=2))
 
     r = report.get("receipt", {})
