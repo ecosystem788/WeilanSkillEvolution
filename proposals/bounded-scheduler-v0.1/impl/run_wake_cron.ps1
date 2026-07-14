@@ -116,13 +116,25 @@ try {
     Add-LogLine "$stamp  wake ok  stop=$stop  frame=$frame"
 
     if ($report.escalation_due -eq $true -and -not $NoEscalate) {
-        Add-LogLine "$stamp  escalating: due clock goal -> model episode"
+        $escalationReasons = @($report.escalation_reasons | Where-Object {
+            -not [string]::IsNullOrWhiteSpace([string]$_)
+        })
+        $escalationReasonText = if ($escalationReasons.Count -gt 0) {
+            $escalationReasons -join ","
+        } else { "unknown" }
+        Add-LogLine "$stamp  escalating: reasons=$escalationReasonText -> model episode"
         & powershell -NoProfile -ExecutionPolicy Bypass -File $WakeAgentScript
         Add-LogLine "$stamp  escalation done rc=$LASTEXITCODE"
     }
 
     if ($report.codex_due -eq $true -and -not $NoEscalate) {
-        Add-LogLine "$stamp  waking codex: pending inbox handoffs"
+        $codexReasons = @($report.codex_wake_reasons | Where-Object {
+            -not [string]::IsNullOrWhiteSpace([string]$_)
+        })
+        $codexReasonText = if ($codexReasons.Count -gt 0) {
+            $codexReasons -join ","
+        } else { "unknown" }
+        Add-LogLine "$stamp  waking codex: reasons=$codexReasonText"
         & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $here "wake_codex.ps1")
         Add-LogLine "$stamp  codex wake done rc=$LASTEXITCODE"
     }

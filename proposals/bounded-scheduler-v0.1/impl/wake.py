@@ -393,6 +393,15 @@ def wake(commit: bool = False) -> dict:
     report["chat_experiment"] = chat_mode
     clock_ready = any(f.get("cycle") == "READY" for f in prospective["fired"])
     if commit and (clock_ready or mic_pending > 0 or chat_mode):
+        report["escalation_reasons"] = [
+            reason
+            for active, reason in (
+                (clock_ready, "clock"),
+                (mic_pending > 0, "owner_inbox"),
+                (chat_mode, "chat"),
+            )
+            if active
+        ]
         report["escalation"] = escalation_decision()
         report["escalation_due"] = report["escalation"] == "due"
 
@@ -401,6 +410,14 @@ def wake(commit: bool = False) -> dict:
     pending = codex_inbox_pending()
     report["codex_inbox_pending"] = pending
     if commit and (pending > 0 or chat_mode) and not PAUSED.exists():
+        report["codex_wake_reasons"] = [
+            reason
+            for active, reason in (
+                (pending > 0, "handoffs"),
+                (chat_mode, "chat"),
+            )
+            if active
+        ]
         report["codex_due"] = True
     return report
 

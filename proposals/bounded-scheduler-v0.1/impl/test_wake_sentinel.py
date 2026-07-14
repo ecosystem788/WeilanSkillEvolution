@@ -28,6 +28,47 @@ def _trace_error(message="branch-head conflict"):
     )
 
 
+def _wake_with_reasons(monkeypatch, tmp_path, *, fired=None, owner=0, handoffs=0):
+    receipt = SimpleNamespace(
+        crossed_irreversible_gate=True,
+        to_json=lambda: json.dumps({"crossed_irreversible_gate": True}),
+        receipt_hash=lambda: "b" * 64,
+    )
+    chat = tmp_path / "CHAT_EXPERIMENT"
+    chat.touch()
+    monkeypatch.setattr(wake, "CHAT_EXPERIMENT", chat)
+    monkeypatch.setattr(wake, "PAUSED", tmp_path / "PAUSED")
+    monkeypatch.setattr(wake, "read_ledger_state", lambda: {})
+    monkeypatch.setattr(wake, "briefing", lambda recall: {"continuation_allowed": True})
+    monkeypatch.setattr(wake, "build_wake_brief", lambda recall: {})
+    monkeypatch.setattr(wake, "derive_work_queue", lambda recall: [])
+    monkeypatch.setattr(wake, "run_episode", lambda queue: receipt)
+    monkeypatch.setattr(
+        wake, "check_prospective_clock", lambda write: {"fired": fired or []}
+    )
+    monkeypatch.setattr(wake, "owner_inbox_pending", lambda: owner)
+    monkeypatch.setattr(wake, "codex_inbox_pending", lambda: handoffs)
+    monkeypatch.setattr(wake, "escalation_decision", lambda: "due")
+    return wake.wake(commit=True)
+
+
+def test_escalation_reasons_chat_only(monkeypatch, tmp_path):
+    report = _wake_with_reasons(monkeypatch, tmp_path)
+    assert report["escalation_reasons"] == ["chat"]
+
+
+def test_escalation_reasons_preserve_clock_and_chat(monkeypatch, tmp_path):
+    report = _wake_with_reasons(
+        monkeypatch, tmp_path, fired=[{"cycle": "READY"}]
+    )
+    assert report["escalation_reasons"] == ["clock", "chat"]
+
+
+def test_codex_wake_reasons_chat_without_handoffs(monkeypatch, tmp_path):
+    report = _wake_with_reasons(monkeypatch, tmp_path, handoffs=0)
+    assert report["codex_wake_reasons"] == ["chat"]
+
+
 def test_trace_rejects_nonzero_and_non_json(monkeypatch):
     def completed(rc, stdout):
         return SimpleNamespace(returncode=rc, stdout=stdout, stderr="boom")
@@ -165,4 +206,3 @@ print(json.dumps(report, ensure_ascii=False, indent=2))
     log_text = log.read_text(encoding="utf-8-sig") if log.exists() else "(no log)"
     assert proc.returncode == 0, log_text
     assert " wake ok " in log_text and "静默" in log_text, log_text
-
