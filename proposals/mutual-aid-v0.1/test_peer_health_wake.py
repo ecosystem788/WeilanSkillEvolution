@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from peer_health_wake import run_check
+from peer_health_wake import main, run_check
 
 
 NOW = datetime(2026, 7, 12, 2, tzinfo=timezone.utc)  # 11:00 UTC+9
@@ -78,6 +78,40 @@ def test_malformed_or_missing_relevant_time_fails_safe_whole_round(tmp_path):
     )
     assert run_check(root=tmp_path, now=NOW) == []
     assert alerts(tmp_path) == []
+
+
+def test_malformed_json_row_is_visible_without_discarding_good_anchor(tmp_path):
+    fixture(tmp_path)
+    with (tmp_path / "peer-chat.jsonl").open("a", encoding="utf-8") as stream:
+        stream.write(r'{"from":"claude","text":"D:\bad\escape"}' + "\n")
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert result == []
+    assert result.activity_anchor == {
+        "time_utc": "2026-07-12T01:55:00+00:00",
+        "source_ref": "peer-chat.jsonl:1@2026-07-12 10:55:00 (codex activity)",
+    }
+    assert len(result.parse_errors) == 1
+    assert result.parse_errors[0]["source"] == "peer-chat.jsonl:2"
+
+
+def test_whole_file_read_failure_is_visible_in_cli(tmp_path, monkeypatch, capsys):
+    fixture(tmp_path)
+    original = Path.read_text
+
+    def unreadable(path, *args, **kwargs):
+        if path.name == "peer-chat.jsonl":
+            raise PermissionError("test unreadable file")
+        return original(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", unreadable)
+    assert main(["--root", str(tmp_path)]) == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["check"] == "skipped"
+    assert report["appended"] == []
+    assert report["skipped"]["source"] == "peer-chat.jsonl"
+    assert "PermissionError" in report["skipped"]["reason"]
 
 
 def test_authority_surfaces_are_byte_identical(tmp_path):
