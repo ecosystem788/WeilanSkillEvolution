@@ -76,6 +76,25 @@ def test_small_future_skew_is_fresh_and_resolves_open_incident(tmp_path):
     )
     assert [event["event"] for event in appended] == ["resolved"]
     assert appended[0]["reason"] == "peer_fresh"
+    assert appended[0]["status"] == "closed"
+
+
+def test_backlog_change_resolution_reads_closed_not_healthy(tmp_path):
+    path = tmp_path / "peer-health-alerts.jsonl"
+    check(path)
+    # Peer is still silent past threshold, only the backlog signature changed:
+    # the same wake both resolves the stale incident and raises a fresh one.
+    appended = check(path, old_hours=25, pending=("job-c",))
+    assert [event["event"] for event in appended] == ["resolved", "raised"]
+    resolved, raised = appended
+    # Known answer: this triple means "alert lifecycle closed, recovery
+    # unknown" — it must never be read as peer healthy or incident open.
+    assert (resolved["event"], resolved["status"], resolved["reason"]) == (
+        "resolved",
+        "closed",
+        "backlog_changed_or_cleared",
+    )
+    assert raised["status"] == "suspected"
 
 
 def test_large_future_skew_returns_without_touching_alert_lifecycle(tmp_path):

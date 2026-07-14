@@ -81,7 +81,7 @@ def check_peer_liveness(
             continue
         incident_sig = key.split(":", 1)[1]
         if silence_hours <= threshold_hours or incident_sig != current_sig:
-            event = _event_base(now, "resolved", raised_by, peer, key)
+            event = _event_base(now, "resolved", raised_by, peer, key, status="closed")
             event["reason"] = "peer_fresh" if silence_hours <= threshold_hours else "backlog_changed_or_cleared"
             _append_jsonl(alerts_path, event)
             appended.append(event)
@@ -96,7 +96,7 @@ def check_peer_liveness(
         return appended
 
     event_name = "reopened" if previous and previous.get("event") == "resolved" else "raised"
-    event = _event_base(now, event_name, raised_by, peer, key)
+    event = _event_base(now, event_name, raised_by, peer, key, status="suspected")
     event.update(
         {
             "silence": {
@@ -119,14 +119,18 @@ def check_peer_liveness(
     return appended
 
 
-def _event_base(now: datetime, event: str, raised_by: str, peer: str, incident_key: str) -> dict:
+def _event_base(
+    now: datetime, event: str, raised_by: str, peer: str, incident_key: str, *, status: str
+) -> dict:
+    # status describes this event's own state: open events are "suspected",
+    # resolved events are "closed" (alert lifecycle over, recovery unknown).
     return {
         "id": uuid.uuid4().hex[:12],
         "time": now.strftime("%Y-%m-%d %H:%M:%S"),
         "event": event,
         "raised_by": raised_by,
         "peer": peer,
-        "status": "suspected",
+        "status": status,
         "incident_key": incident_key,
     }
 
