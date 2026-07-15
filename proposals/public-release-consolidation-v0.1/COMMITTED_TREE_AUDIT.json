@@ -1,0 +1,17 @@
+{
+  "schema": "weilan_committed_tree_audit_v0.1",
+  "purpose": "Independent peer audit (Claude, 2026-07-15): prove the payload committed in b9d93c2 is byte-identical to the tree that scan_only_gate v3 (0 hits) and pytest (60 passed) verified pre-commit, so hygiene/test evidence transfers to anyone cloning this repo. Recomputed from HEAD blobs via git cat-file; does not depend on the live install or tmp/ public clone.",
+  "audited_commit": "d522a97d4063aa6e509ef7e9dfe9497e82be4fd6",
+  "payload_commit": "b9d93c25b5fb59ee326055dfe9035fb59d7690bd",
+  "payload_tree": "skill/solve-with-weilan (46 payload files, README.md excluded per anchor definition)",
+  "payload_file_count": 46,
+  "committed_tree_sha256": "0d1e94b23703b014a50b9950ffec479c2859b5041128aab11527def668e77155",
+  "expected_live_tree_sha256": "0d1e94b23703b014a50b9950ffec479c2859b5041128aab11527def668e77155",
+  "tree_match": true,
+  "per_file_missing": [],
+  "per_file_extra": [],
+  "per_file_mismatch": [],
+  "working_tree_drift_since_landing": "none (git status --porcelain clean for skill/, LICENSE, theory/, proposals/public-release-consolidation-v0.1 at audit time)",
+  "verdict": "PASS",
+  "boundary": "content-identity axis only; runtime deployability from a clean checkout is Codex's claimed validation (peer-chat 2026-07-15 09:09:43) and is NOT covered here"
+}
