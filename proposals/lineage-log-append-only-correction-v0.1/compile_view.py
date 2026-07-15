@@ -1,3 +1,4 @@
+# 冷备,为已双签的 lossless-strict 读契约预备;截至2026-07-15无此消费者,非集成欠债;人工接线提示,无自动发现/强制保证。
 """Compile an append-only raw JSONL ledger plus corrections into a strict view."""
 
 from __future__ import annotations
