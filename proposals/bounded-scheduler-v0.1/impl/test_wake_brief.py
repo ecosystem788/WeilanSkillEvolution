@@ -9,6 +9,10 @@ import wake_brief
 
 
 STAMP = "2026-07-10T09:30:00+00:00"
+SEAM_BAD_JSON = b'{"broken":}\n'
+SEAM_NON_OBJECT = b'["not", "an", "object"]\n'
+SEAM_VALID_ROW = b'{"tail":"ok"}\n'
+SEAM_TAIL = SEAM_BAD_JSON + SEAM_NON_OBJECT + SEAM_VALID_ROW
 
 
 def write_jsonl(path: Path, rows: list[dict]) -> None:
@@ -73,6 +77,17 @@ def build(root: Path, **kwargs):
     )
 
 
+def assert_tail_matches_full_scan(path: Path, prefix: bytes, tail: list[dict]) -> None:
+    full_scan = wake_brief.read_jsonl(path)
+    expected = full_scan[prefix.count(b"\n") :]
+
+    assert tail == expected
+    assert [row["reason_code"] for row in tail[:2]] == ["invalid_json", "not_object"]
+    assert [row["line"] for row in tail[:2]] == [prefix.count(b"\n") + 1, prefix.count(b"\n") + 2]
+    assert [row["byte_offset"] for row in tail[:2]] == [len(prefix), len(prefix) + len(SEAM_BAD_JSON)]
+    assert tail[2] == {"tail": "ok"}
+
+
 def test_lossless_aggregation_keeps_delta_text_and_sources(tmp_path: Path) -> None:
     seed_root(tmp_path)
 
@@ -126,6 +141,126 @@ def test_incremental_tail_uses_valid_cursor(tmp_path: Path) -> None:
     assert brief["cursor_status"] == {"status": "incremental"}
     assert [row["text"] for row in brief["peer_chat_new"]] == ["new chat"]
     assert [row["reply_to"] for row in brief["codex_replies_unreviewed"]] == ["c"]
+
+
+def test_tail_jsonl_real_cursor_uses_absolute_diagnostic_coordinates(tmp_path: Path) -> None:
+    chat_path = tmp_path / "peer-chat.jsonl"
+    cursor_path = tmp_path / "wake-cursor.json"
+    prefix = b'{"seed":1}\n{"seed":2}\n'
+    chat_path.write_bytes(prefix)
+    wake_brief.write_cursor(tmp_path, cursor_path, "skill-evolution", STAMP)
+    with chat_path.open("ab") as handle:
+        handle.write(SEAM_TAIL)
+
+    cursor, load_reason = wake_brief.load_cursor(cursor_path)
+    assert load_reason is None
+    assert cursor is not None
+    assert cursor["files"]["peer-chat.jsonl"]["line_count"] == prefix.count(b"\n")
+    mode, reason, details = wake_brief.validate_cursor(tmp_path, cursor, load_reason)
+    assert (mode, reason, details) == ("incremental", None, None)
+
+    tail = wake_brief._tail_jsonl(tmp_path, "peer-chat.jsonl", mode, cursor)
+
+    assert_tail_matches_full_scan(chat_path, prefix, tail)
+
+
+def test_tail_jsonl_legacy_splitlines_cursor_rewrites_then_resumes_incrementally(tmp_path: Path) -> None:
+    chat_path = tmp_path / "peer-chat.jsonl"
+    cursor_path = tmp_path / "wake-cursor.json"
+    legacy_prefix = b'{"seed":1}\r{"seed":2}\n'
+    assert len(legacy_prefix.splitlines()) != legacy_prefix.count(b"\n")
+    chat_path.write_bytes(legacy_prefix)
+    legacy_cursor = wake_brief.write_cursor(tmp_path, cursor_path, "skill-evolution", STAMP)
+    legacy_cursor["files"]["peer-chat.jsonl"]["line_count"] = len(legacy_prefix.splitlines())
+    cursor_path.write_text(json.dumps(legacy_cursor), encoding="utf-8")
+    with chat_path.open("ab") as handle:
+        handle.write(SEAM_TAIL)
+
+    cursor, load_reason = wake_brief.load_cursor(cursor_path)
+    assert load_reason is None
+    assert cursor is not None
+    mode, reason, details = wake_brief.validate_cursor(tmp_path, cursor, load_reason)
+    assert mode == "full_rescan"
+    assert reason == "line_count_mismatch"
+    assert details is not None
+    assert details["tracked_file"] == "peer-chat.jsonl"
+    assert wake_brief._tail_jsonl(tmp_path, "peer-chat.jsonl", mode, cursor) == wake_brief.read_jsonl(chat_path)
+
+    wake_brief.write_cursor(tmp_path, cursor_path, "skill-evolution", STAMP, preserve_previous=True)
+    rewritten, load_reason = wake_brief.load_cursor(cursor_path)
+    assert load_reason is None
+    assert rewritten is not None
+    observed_prefix = chat_path.read_bytes()
+    assert rewritten["files"]["peer-chat.jsonl"]["line_count"] == observed_prefix.count(b"\n")
+    assert rewritten["files"]["peer-chat.jsonl"]["line_count"] != len(observed_prefix.splitlines())
+    assert wake_brief.validate_cursor(tmp_path, rewritten, load_reason) == ("incremental", None, None)
+
+    with chat_path.open("ab") as handle:
+        handle.write(SEAM_TAIL)
+    mode, reason, details = wake_brief.validate_cursor(tmp_path, rewritten, load_reason)
+    assert (mode, reason, details) == ("incremental", None, None)
+    tail = wake_brief._tail_jsonl(tmp_path, "peer-chat.jsonl", mode, rewritten)
+
+    assert_tail_matches_full_scan(chat_path, observed_prefix, tail)
+
+
+def test_eol_only_drift_keeps_new_tail_and_is_observable(tmp_path: Path) -> None:
+    seed_root(tmp_path)
+    cursor_path = tmp_path / "wake-cursor.json"
+    wake_brief.write_cursor(tmp_path, cursor_path, "skill-evolution", STAMP)
+
+    chat_path = tmp_path / "peer-chat.jsonl"
+    original_lf = chat_path.read_bytes().replace(b"\r\n", b"\n")
+    chat_path.write_bytes(original_lf)
+    wake_brief.write_cursor(tmp_path, cursor_path, "skill-evolution", STAMP)
+    chat_path.write_bytes(original_lf.replace(b"\n", b"\r\n") + b'{"from":"codex","text":"new tail"}\r\n')
+
+    brief = build(tmp_path)
+
+    assert brief["cursor_status"]["status"] == "representation_drift"
+    assert brief["cursor_status"]["reason"] == "eol_only_prefix_change"
+    assert [row["text"] for row in brief["peer_chat_new"]] == ["new tail"]
+
+
+def test_same_length_content_rewrite_still_forces_full_rescan(tmp_path: Path) -> None:
+    seed_root(tmp_path)
+    wake_brief.write_cursor(tmp_path, tmp_path / "wake-cursor.json", "skill-evolution", STAMP)
+    chat_path = tmp_path / "peer-chat.jsonl"
+    original = chat_path.read_bytes()
+    rewritten = original.replace(b"chat A", b"chat X")
+    assert len(rewritten) == len(original)
+    chat_path.write_bytes(rewritten)
+
+    brief = build(tmp_path)
+
+    assert brief["cursor_status"]["status"] == "full_rescan"
+    assert brief["cursor_status"]["reason"] == "prefix_mismatch"
+
+
+def test_normal_append_remains_incremental_with_dual_anchor_cursor(tmp_path: Path) -> None:
+    seed_root(tmp_path)
+    wake_brief.write_cursor(tmp_path, tmp_path / "wake-cursor.json", "skill-evolution", STAMP)
+    with (tmp_path / "peer-chat.jsonl").open("ab") as handle:
+        handle.write(b'{"from":"codex","text":"ordinary tail"}\n')
+
+    brief = build(tmp_path)
+
+    assert brief["cursor_status"] == {"status": "incremental"}
+    assert [row["text"] for row in brief["peer_chat_new"]] == ["ordinary tail"]
+
+
+def test_crlf_to_lf_shrink_can_still_resume_by_line_count(tmp_path: Path) -> None:
+    seed_root(tmp_path)
+    chat_path = tmp_path / "peer-chat.jsonl"
+    original_lf = chat_path.read_bytes().replace(b"\r\n", b"\n")
+    chat_path.write_bytes(original_lf.replace(b"\n", b"\r\n"))
+    wake_brief.write_cursor(tmp_path, tmp_path / "wake-cursor.json", "skill-evolution", STAMP)
+
+    chat_path.write_bytes(chat_path.read_bytes().replace(b"\r\n", b"\n") + b'{"from":"codex","text":"tail after shrink"}\n')
+    brief = build(tmp_path)
+
+    assert brief["cursor_status"]["status"] == "representation_drift"
+    assert [row["text"] for row in brief["peer_chat_new"]] == ["tail after shrink"]
 
 
 def test_missing_cursor_falls_back_to_full_rescan(tmp_path: Path) -> None:
