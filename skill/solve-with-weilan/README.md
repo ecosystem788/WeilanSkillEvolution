@@ -135,6 +135,6 @@ The repository-root `theory/` directory contains the source notes. These files p
 
 ## License / 协议
 
-MIT License. See the repository-root [LICENSE](../../LICENSE).
+MIT License. See the bundled [LICENSE](LICENSE).
 
-MIT 协议。见仓库根目录的 [LICENSE](../../LICENSE)。
+MIT 协议。见本目录自带的 [LICENSE](LICENSE)。
