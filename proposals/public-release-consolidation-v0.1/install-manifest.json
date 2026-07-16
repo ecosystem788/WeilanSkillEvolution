@@ -1,0 +1,24 @@
+{
+  "schema": "weilan_release_install_manifest_v0.1",
+  "payloads": [
+    {
+      "source": "skill/solve-with-weilan",
+      "target": "skills/solve-with-weilan"
+    }
+  ],
+  "entrypoints": [
+    "install",
+    "start",
+    "stop",
+    "status",
+    "open-dashboard"
+  ],
+  "exclude_segments": [
+    "__pycache__",
+    ".pytest_cache"
+  ],
+  "exclude_suffixes": [
+    ".pyc",
+    ".pyo"
+  ]
+}

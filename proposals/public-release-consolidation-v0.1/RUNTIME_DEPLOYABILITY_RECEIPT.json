@@ -1,0 +1,49 @@
+{
+  "schema": "weilan_skill_runtime_deployability_receipt_v0.1",
+  "time": "2026-07-15T11:25:53+09:00",
+  "verdict": "PASS_WITH_BOUNDARY",
+  "scope": "Clean isolated installation, discovery, CLI invocation, fresh-ledger recall, and uninstall rollback of skill/solve-with-weilan only.",
+  "source": {
+    "head_commit": "1a212a7c0d0937629a62481900b99a2b5e6b5824",
+    "clone_commit": "1a212a7c0d0937629a62481900b99a2b5e6b5824",
+    "audited_commit": "d522a97d4063aa6e509ef7e9dfe9497e82be4fd6",
+    "audited_skill_tree": "12fcefbcf9c59f27ab33900b920f30b7c866cb5c",
+    "head_skill_tree": "12fcefbcf9c59f27ab33900b920f30b7c866cb5c",
+    "construction": "Local git clone --no-checkout followed by cone sparse-checkout of skill/solve-with-weilan at the exact HEAD commit."
+  },
+  "installation": {
+    "target": "A fresh temporary fake CODEX_HOME/skills/solve-with-weilan; neither live installed Skill entry was touched.",
+    "source_file_count": 47,
+    "installed_file_count": 47,
+    "sha256_mismatch_count": 0,
+    "skill_md_present": true
+  },
+  "invocation": {
+    "command_1": "python <isolated-install>/scripts/weilan_trace.py --help",
+    "command_1_exit": 0,
+    "command_2": "python <isolated-install>/scripts/weilan_trace.py memory-recall --workspace <fresh-workspace>",
+    "command_2_exit": 0,
+    "command_2_activation_state": "NO_CONTEXT",
+    "method_state": "A fresh temporary WEILAN_METHOD_HOME, isolated from the real community ledger."
+  },
+  "rollback": {
+    "action": "Removed only the verified temporary solve-with-weilan installation target.",
+    "target_absent_after_rollback": true,
+    "preexisting_sibling_sentinel_preserved": true,
+    "temporary_run_root_removed": true
+  },
+  "failed_probe": {
+    "route": "git archive HEAD followed by Windows tar.exe extraction of the full repository",
+    "result": "FAIL_BEFORE_INSTALL",
+    "evidence": "tar.exe reported Invalid empty pathname for tracked Chinese filenames; no install or live mutation occurred.",
+    "disposition": "The archive-extraction construction route is not a supported clean-checkout proof on this Windows host. The successful proof used git clone plus sparse checkout instead."
+  },
+  "boundaries": [
+    "This receipt closes the installability and runtime-call axis for the Skill payload only; it does not claim that the whole autonomous-community runtime is release-ready.",
+    "The repository still lacks the proposed setup.ps1 and deterministic install/start/stop/status/open-dashboard entry points, and README.md still labels the repository as a live working tree rather than a packaged release.",
+    "Rollback was mechanically verified in the isolated target, but the Skill README does not yet document an uninstall command.",
+    "No tag, release publication, adoption, live deployment, sibling-repository migration, or authority-file change was performed."
+  ],
+  "live_skill_modified": false,
+  "community_ledger_used_for_probe": false
+}
