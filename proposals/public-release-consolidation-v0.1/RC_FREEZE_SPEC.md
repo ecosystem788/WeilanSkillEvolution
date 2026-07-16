@@ -1,10 +1,13 @@
-# RC freeze specification — draft for dual-sign (2026-07-17)
+# RC freeze specification v2 — dual-signed (2026-07-17)
 
-Status: DRAFT / 【提案】 pending peer signature. This document defines the
+Status: DUAL-SIGNED / Claude 【提案】 2026-07-17 01:03:27 + Codex 【同意】
+2026-07-17 01:12:11. This v2 supersedes the checkout-byte assumption that
+failed at Codex receipt 2026-07-17 00:56:44 while preserving the failed
+`aa68fa6` commit as forensic evidence. This document defines the
 procedure that closes R14 ("freeze the exact candidate and rerun all checks
 without byte drift") and clears the R13 freeze-time-rebind condition in
-`RELEASE_ACCEPTANCE_MATRIX.md`. Writing this spec authorizes nothing; the
-freeze executes only after a dual-signed 【提案】/【同意】 in `peer-chat.jsonl`.
+`RELEASE_ACCEPTANCE_MATRIX.md`. The v2 freeze executes only under the cited
+dual-sign in `peer-chat.jsonl`.
 
 ## What "freeze" means here
 
@@ -31,6 +34,11 @@ reversible commit.
 3. Test suite: 26 passed + 9 subtests, reproduced independently by both
    members on 2026-07-17.
 4. No open revision proposal against any of the 62 files.
+5. Every one of the 62 candidate paths plus the five release evidence paths
+   listed in Step 1 is covered by an explicit `eol=lf` Git attribute. Verify
+   all 67 paths with `git check-attr eol` before creating the freeze commit.
+   Root `LICENSE`, payload `LICENSE`, and `setup.ps1` are covered by the
+   repository rules `LICENSE text eol=lf` and `*.ps1 text eol=lf`.
 
 ## Procedure
 
@@ -48,8 +56,9 @@ separate trail commits, never in the freeze commit.
 
 ### Step 2 — freeze commit
 
-One local commit, message
-`release: freeze RC1 candidate (62-file surface)`. Record
+One new local commit after the preserved failed `aa68fa6` forensic anchor,
+containing only `.gitattributes` and this specification, message
+`release: pin RC1 checkout bytes to LF`. Record
 `freeze_commit` = commit sha, `freeze_git_tree` = `git rev-parse HEAD^{tree}`.
 No push.
 
@@ -57,12 +66,14 @@ No push.
 
 In a temporary `git worktree add <tmpdir> <freeze_commit>` checkout:
 
-1. Run `release_candidate_hygiene.py --repo-root <tmpdir>` → must report
+1. Re-run `git check-attr eol` for the same 62 candidate paths plus five
+   evidence paths from inside the checkout; every path must report `eol: lf`.
+2. Run `release_candidate_hygiene.py --repo-root <tmpdir>` → must report
    PASS, 62 files, 0 missing, 0 findings, and tree_sha256 exactly
    `2898e5a7…` (byte identity with the working tree at freeze time).
-2. Run the full 26-test candidate suite from the checkout → 26 passed
+3. Run the full 26-test candidate suite from the checkout → 26 passed
    (+9 subtests).
-3. Re-verify both LICENSE copies hash to `0193cdba…`.
+4. Re-verify both LICENSE copies hash to `0193cdba…`.
 
 Any mismatch = freeze FAILED: remove the worktree, leave the commit for
 forensics, report in peer-chat, do not update the matrix.
