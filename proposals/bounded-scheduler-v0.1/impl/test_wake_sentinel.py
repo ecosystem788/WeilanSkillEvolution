@@ -206,3 +206,54 @@ print(json.dumps(report, ensure_ascii=False, indent=2))
     log_text = log.read_text(encoding="utf-8-sig") if log.exists() else "(no log)"
     assert proc.returncode == 0, log_text
     assert " wake ok " in log_text and "静默" in log_text, log_text
+
+
+@pytest.mark.parametrize("codepage", [65001, 936])
+def test_wake_agent_capture_is_utf8_on_any_console_codepage(tmp_path, codepage):
+    wrapper_source = (HERE / "wake_agent.ps1").read_text(encoding="utf-8")
+    assert '& cmd /c "claude -p' in wrapper_source
+    assert "new-object system.text.utf8encoding($false, $true)" in wrapper_source.lower()
+
+    fake = tmp_path / "fake_claude.py"
+    fake.write_text(
+        """import json
+print(json.dumps({
+    'subtype': 'success', 'num_turns': 2, 'total_cost_usd': 0.25,
+    'result': '\u65b9\u5411\uff1a\u5fae\u6f9c\u6001\u52bf\u611f\u77e5' * 600,
+}, ensure_ascii=False))
+""",
+        encoding="utf-8",
+    )
+    fake_cmd = tmp_path / "claude.cmd"
+    fake_cmd.write_text(
+        f'@echo off\r\n"{sys.executable}" "{fake}" %*\r\n', encoding="ascii"
+    )
+    transcript = tmp_path / "transcript.json"
+    errors = tmp_path / "transcript.err.txt"
+    fixture = tmp_path / "capture.ps1"
+    fixture.write_text(
+        f'''$ErrorActionPreference = "Stop"
+$outFile = "{transcript}"
+$errFile = "{errors}"
+$prompt = "{tmp_path / 'wake_prompt.md'}"
+& cmd /c "claude -p `"现在醒来，执行这一回合的自主工作。照系统提示的纪律来。`" --append-system-prompt-file `"$prompt`" --dangerously-skip-permissions --output-format json 1>`"$outFile`" 2>`"$errFile`""
+if ($LASTEXITCODE -ne 0) {{ exit $LASTEXITCODE }}
+$utf8Strict = New-Object System.Text.UTF8Encoding($false, $true)
+$text = [System.IO.File]::ReadAllText($outFile, $utf8Strict)
+$null = $text | ConvertFrom-Json
+''',
+        encoding="utf-8-sig",
+    )
+    inner = (
+        f'chcp {codepage} >nul & powershell -NoProfile -ExecutionPolicy Bypass '
+        f'-File {fixture}'
+    )
+    env = {**os.environ, "PATH": f"{tmp_path}{os.pathsep}{os.environ['PATH']}"}
+    proc = subprocess.run(
+        ["cmd", "/c", inner], env=env, capture_output=True, timeout=60
+    )
+    assert proc.returncode == 0, proc.stderr.decode(errors="replace")
+    raw = transcript.read_bytes()
+    assert not raw.startswith((b"\xff\xfe", b"\xfe\xff"))
+    parsed = json.loads(raw.decode("utf-8", errors="strict"))
+    assert parsed["result"].startswith("方向：微澜态势感知")

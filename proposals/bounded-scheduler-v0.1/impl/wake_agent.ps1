@@ -106,22 +106,18 @@ $outFile = Join-Path $runs "$stamp.json"
 
 $errFile = Join-Path $runs "$stamp.err.txt"
 try {
-    # PS 5.1: native stderr redirect wraps lines in NativeCommandError; with
-    # EAP=Stop that throws on the first stderr byte even when claude exits 0.
-    # Scope EAP=Continue to this call and keep stderr in its own file so the
-    # JSON transcript stays clean.
-    $ErrorActionPreference = "Continue"
-    & claude -p "现在醒来，执行这一回合的自主工作。照系统提示的纪律来。" `
-        --append-system-prompt-file $prompt `
-        --dangerously-skip-permissions `
-        --output-format json 1> $outFile 2> $errFile
+    # Keep the child's UTF-8 streams as bytes until explicit decoding. PS 5.1
+    # native redirection decodes through the console codepage and re-encodes as
+    # UTF-16, which can corrupt CJK and even swallow adjacent JSON quotes.
+    & cmd /c "claude -p `"现在醒来，执行这一回合的自主工作。照系统提示的纪律来。`" --append-system-prompt-file `"$prompt`" --dangerously-skip-permissions --output-format json 1>`"$outFile`" 2>`"$errFile`""
     $rc = $LASTEXITCODE
-    $ErrorActionPreference = "Stop"
     $headAfter = Get-Head
 
     $cost = "?"; $turns = "?"; $ok = "?"
     try {
-        $j = Get-Content $outFile -Raw | ConvertFrom-Json
+        $utf8Strict = New-Object System.Text.UTF8Encoding($false, $true)
+        $transcript = [System.IO.File]::ReadAllText($outFile, $utf8Strict)
+        $j = $transcript | ConvertFrom-Json
         $cost  = $j.total_cost_usd
         $turns = $j.num_turns
         $ok    = $j.subtype

@@ -40,6 +40,7 @@ import wake_brief as wake_brief_mod  # noqa: E402
 TRACE = r"C:/Users/zy/.claude/skills/solve-with-weilan/scripts/weilan_trace.py"
 WORKSPACE = r"D:\WeilanSkillEvolution"
 SCOPE = "skill-evolution"
+BRANCH = "main"
 
 HERE = Path(__file__).resolve().parent
 PAUSED = HERE / "PAUSED"
@@ -106,6 +107,43 @@ def _trace(*args) -> dict:
 
 def read_ledger_state() -> dict:
     return _trace("memory-recall", "--workspace", WORKSPACE, "--scope", SCOPE)
+
+
+def refresh_recall_if_stale(recall: dict) -> tuple[dict, dict]:
+    """Repair one stale derived projection, then re-enter through recall.
+
+    STALE is not a pause or a new grant of authority.  The memory contract says
+    to rebuild the affected projection and recall again, so this helper does
+    exactly that once.  Any state that remains non-continuable is handled by
+    the normal fail-closed gate in ``wake``.
+    """
+    activation = recall.get("activation", {}) if isinstance(recall, dict) else {}
+    before_state = activation.get("state")
+    recovery = {
+        "attempted": False,
+        "before_state": before_state,
+        "after_state": before_state,
+    }
+    if before_state != "STALE":
+        return recall, recovery
+
+    recovery["attempted"] = True
+    recovery["reason_codes"] = activation.get("reason_codes") or []
+    rebuilt = _trace(
+        "projection-rebuild", "--workspace", WORKSPACE,
+        "--scope", SCOPE, "--branch", BRANCH,
+    )
+    refreshed = read_ledger_state()
+    refreshed_activation = (
+        refreshed.get("activation", {}) if isinstance(refreshed, dict) else {}
+    )
+    recovery.update({
+        "rebuilt": bool(rebuilt.get("rebuilt")),
+        "projection_id": rebuilt.get("projection_id"),
+        "after_state": refreshed_activation.get("state"),
+        "continuation_allowed": refreshed_activation.get("continuation_allowed"),
+    })
+    return refreshed, recovery
 
 
 def ledger_self_audit(_action) -> object:
@@ -364,11 +402,13 @@ def emit_receipt_frame(receipt, brief: dict) -> str:
 
 def wake(commit: bool = False) -> dict:
     recall = read_ledger_state()
+    recall, projection_recovery = refresh_recall_if_stale(recall)
     brief = briefing(recall)
     compact_brief = build_wake_brief(recall)
     if brief.get("continuation_allowed") is False:
         return {"aborted": "continuation_not_allowed", "briefing": brief,
-                "wake_brief": compact_brief}
+                "wake_brief": compact_brief,
+                "projection_recovery": projection_recovery}
 
     queue = derive_work_queue(recall)
     receipt = run_episode(queue)
@@ -379,6 +419,7 @@ def wake(commit: bool = False) -> dict:
         "receipt": json.loads(receipt.to_json()),
         "receipt_hash": receipt.receipt_hash(),
         "committed_frame": None,
+        "projection_recovery": projection_recovery,
     }
     if commit and not receipt.crossed_irreversible_gate:
         report["committed_frame"] = emit_receipt_frame(receipt, brief)

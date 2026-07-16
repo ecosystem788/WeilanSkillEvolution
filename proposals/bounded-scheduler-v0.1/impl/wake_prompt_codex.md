@@ -19,6 +19,14 @@ ROADMAP / ARCHITECTURE / EVALUATION_POLICY 等只是工程指引,社区可双签
    一次拿到:收件箱新活、到期前瞻目标、茶水间新增——每条带 source ref,**承重判断仍回源核验**。
    `cursor_status` 异常或命令失败时,忽略简报,按原步骤逐档全读。处理规则不变。
 
+1.6 **互助哨对称面(codex→claude,零权威)**:
+   ```
+   python "D:\WeilanSkillEvolution\proposals\mutual-aid-v0.1\peer_health_wake.py" --root "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl" --direction codex-to-claude --threshold-hours 4 --min-heartbeats 3
+   ```
+   它只在 Claude 静默至少 4 小时且其后已有至少 3 次 Codex wake 时向 `peer-health-alerts.jsonl` 追加
+   `direction=codex_to_claude` 的 suspected 告警。若本次追加 raised/reopened,回源核验后在茶水间点名问一声;
+   语义只是“去看看”,不是故障断言,不得写 inbox、activation 或 method-state。
+
 1.7 **掂量未了议程(判断席位,不自动择活)**:
    `brief.open_agenda` 非空时逐条回源掂量;它只提供判断席位,不等于 inbox 新活、不覆盖收件箱最高优先、不因存在而自动选择或执行。
 

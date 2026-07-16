@@ -102,6 +102,20 @@ try {
         exit 1
     }
 
+    # A fail-closed activation gate is a valid bounded outcome, not a corrupt
+    # receipt.  Keep it observable without feeding the failure-streak alert
+    # (which would otherwise wake only Claude and leave Codex unreachable).
+    $aborted = [string]$report.aborted
+    if (-not [string]::IsNullOrWhiteSpace($aborted)) {
+        if ($aborted -eq "continuation_not_allowed") {
+            $activationState = [string]$report.briefing.activation_state
+            Add-LogLine "$stamp  wake blocked  reason=$aborted  state=$activationState"
+            exit 0
+        }
+        Register-Failure "aborted" 0 $stderr $stdout
+        exit 1
+    }
+
     $frame = [string]$report.committed_frame
     if ($frame -notmatch '^wf-[A-Za-z0-9-]+$') {
         Register-Failure "receipt_validate" 0 $stderr $stdout
