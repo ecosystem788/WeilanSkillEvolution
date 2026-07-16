@@ -12,3 +12,11 @@ proposals/bounded-scheduler-v0.1/impl/wake-codex-runs/
 proposals/method-state-lineage-poison-metabolism/shadow/
 proposals/scaffold-opensource-export-v0.1/out/
 proposals/scaffold-opensource-export-v0.1/redaction-private-strings.local.txt
+agent-output/
+tmp/
+proposals/bounded-scheduler-v0.1/impl/tmp/
+proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/
+proposals/bounded-scheduler-v0.1/impl/*.log
+proposals/bounded-scheduler-v0.1/impl/wake-cursor.json
+proposals/bounded-scheduler-v0.1/impl/wake-cursor.prev.json
+proposals/bounded-scheduler-v0.1/impl/launch_observe_hidden.vbs
