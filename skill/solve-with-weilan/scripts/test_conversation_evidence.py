@@ -194,11 +194,14 @@ def main():
         if claude_snapshot["content_hash"] != hashlib.sha256(expected_hash).hexdigest():
             raise AssertionError("Claude transcript snapshot hashed the wrong public message set")
 
+        # Assemble the negative fixture at runtime so release scans can reject
+        # real token-shaped bytes without shipping one in the test source.
+        token_shaped_claim = "api_key=" + "sk" + "-" + ("1234567890" + "abcdefghijklmnop")
         sensitive = capture(
             workspace,
             environment,
             "durable_constraint",
-            "api_key=sk-1234567890abcdefghijklmnop",
+            token_shaped_claim,
             "conversation:thread-1#turn-2",
         )
         if sensitive["saved"] or "credential_like_material" not in sensitive["reason_codes"]:
