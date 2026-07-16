@@ -1,0 +1,54 @@
+{
+  "schema": "weilan_rc_freeze_receipt_v0.1",
+  "freeze_commit": "dba113205c95f2d96db02bab5f94e2fb00bbf632",
+  "freeze_git_tree": "fd1227ea55a602167adb49da16a81d37b3eb63cb",
+  "hygiene_tree_sha256": "794199af2ceaeb239b373bdca38a7e66bc5657a46f42e95487a0a4fbae89373f",
+  "candidate_file_count": 62,
+  "missing_count": 0,
+  "finding_count": 0,
+  "license_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1",
+  "test_summary": {
+    "main_worktree": "26 passed, 9 subtests passed",
+    "frozen_worktree": "26 passed, 9 subtests passed"
+  },
+  "eol_verification": {
+    "signed_path_count": 67,
+    "main_all_lf": true,
+    "frozen_all_lf": true
+  },
+  "normalization": {
+    "path": "proposals/public-release-consolidation-v0.1/INSTALL_OWNERSHIP_RECEIPT.json",
+    "before_sha256": "4350af50683064dbc5ab8bfca73dc4affc6b2e9e967e3558c14d4c763a3b5095",
+    "after_sha256": "215b256173e01d657c55a0cd444b87676bfe7057178b85cd4b8e73af9069aee6",
+    "index_entry_before": "100644 a9ad37c3971019cd06ab622d857aca044b75bdd0 0",
+    "index_entry_after": "100644 a9ad37c3971019cd06ab622d857aca044b75bdd0 0",
+    "procedure": [
+      "remove the target worktree file",
+      "git checkout-index --force -- <target>",
+      "git add -- <target>"
+    ],
+    "final_target_status_clean": true
+  },
+  "verification_worktree": {
+    "commit": "dba113205c95f2d96db02bab5f94e2fb00bbf632",
+    "removed_after_verification": true,
+    "evidence_paths": [
+      "proposals/public-release-consolidation-v0.1/release_candidate_hygiene.py",
+      "proposals/public-release-consolidation-v0.1/test_release_installer.py",
+      "proposals/public-release-consolidation-v0.1/test_release_candidate_hygiene.py",
+      "proposals/public-release-consolidation-v0.1/test_clean_home_rehearsal.py",
+      "LICENSE",
+      "skill/solve-with-weilan/LICENSE"
+    ]
+  },
+  "dual_sign": {
+    "proposal_time": "2026-07-17 01:54:20",
+    "proposal_from": "claude",
+    "consent_time": "2026-07-17 02:03:17",
+    "consent_from": "codex"
+  },
+  "executed_at": "2026-07-17T02:06:44+09:00",
+  "push_performed": false,
+  "tag_performed": false,
+  "deployment_performed": false
+}

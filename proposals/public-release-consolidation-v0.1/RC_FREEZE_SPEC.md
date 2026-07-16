@@ -1,4 +1,4 @@
-# RC freeze specification v2 — dual-signed (2026-07-17)
+# RC freeze specification v5 — dual-signed and executed (2026-07-17)
 
 Status: DUAL-SIGNED / Claude 【提案】 2026-07-17 01:03:27 + Codex 【同意】
 2026-07-17 01:12:11. This v2 supersedes the checkout-byte assumption that
@@ -8,6 +8,48 @@ procedure that closes R14 ("freeze the exact candidate and rerun all checks
 without byte drift") and clears the R13 freeze-time-rebind condition in
 `RELEASE_ACCEPTANCE_MATRIX.md`. The v2 freeze executes only under the cited
 dual-sign in `peer-chat.jsonl`.
+
+## v3-v5 normalization amendment and execution record
+
+The immutable RC anchor remains commit
+`dba113205c95f2d96db02bab5f94e2fb00bbf632` (Git tree
+`fd1227ea55a602167adb49da16a81d37b3eb63cb`). Its index already contained the
+intended LF blob, but the main Windows worktree retained a stat-clean CRLF
+copy of `INSTALL_OWNERSHIP_RECEIPT.json`. The following signed amendments
+changed only the worktree normalization procedure; they did not rewrite the
+candidate blob or create another freeze anchor.
+
+- v3 (Claude proposal `2026-07-17 01:23:07`, Codex consent
+  `2026-07-17 01:33:51`) replaced the internally contradictory v2 hygiene
+  target with normalized tree
+  `794199af2ceaeb239b373bdca38a7e66bc5657a46f42e95487a0a4fbae89373f`.
+  Execution stopped because ordinary `git checkout -- <path>` did not rewrite
+  the stat-clean CRLF worktree file.
+- v4 (Codex proposal `2026-07-17 01:42:51`, Claude consent
+  `2026-07-17 01:49:37`) tried `git checkout-index --force -- <path>`.
+  Execution again stopped: with the file present and its cached stat matching,
+  checkout-index skipped the write despite `--force`.
+- v5 (Claude proposal `2026-07-17 01:54:20`, Codex consent
+  `2026-07-17 02:03:17`) supersedes both failed normalization commands with
+  this exact three-action sequence:
+
+  1. remove only
+     `proposals/public-release-consolidation-v0.1/INSTALL_OWNERSHIP_RECEIPT.json`;
+  2. run `git checkout-index --force -- <that-path>` and require raw SHA-256
+     `215b256173e01d657c55a0cd444b87676bfe7057178b85cd4b8e73af9069aee6`
+     plus `w/lf`;
+  3. record `git ls-files -s`, run `git add -- <that-path>`, and require the
+     index entry to remain exactly
+     `100644 a9ad37c3971019cd06ab622d857aca044b75bdd0 0` with an empty target
+     status.
+
+The v5 sequence passed on the main worktree. Main and a fresh checkout of the
+freeze anchor then independently produced `PASS`, 62 files, 0 missing,
+0 findings, hygiene tree `794199af...`, 67/67 signed paths with `eol=lf`,
+26 tests plus 9 subtests, and two byte-identical LICENSE files at SHA-256
+`0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1`.
+`FREEZE_RECEIPT.json` binds the full hashes and execution evidence. No push,
+tag, deployment, or live-Skill adoption occurred.
 
 ## What "freeze" means here
 
