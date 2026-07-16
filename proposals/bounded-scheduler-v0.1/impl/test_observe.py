@@ -2,6 +2,7 @@
 
 import re
 import sys
+import time
 from pathlib import Path
 from unittest.mock import patch
 
@@ -10,6 +11,44 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import observe  # noqa: E402
+
+
+def test_scheduler_interval_label_uses_real_task_interval():
+    assert observe.scheduler_interval_label("PT1M") == "每 1 分钟"
+    assert observe.scheduler_interval_label("PT1H30M") == "每 1 小时 30 分钟"
+    assert observe.scheduler_interval_label(None) == "周期未知"
+
+
+def test_scheduler_status_returns_fresh_cache_without_sync_query():
+    cached_at = time.monotonic()
+    cached = {
+        "state": "Ready",
+        "interval": "PT1M",
+        "updated_at": "2026-07-15 17:00:00",
+        "_cached_monotonic": cached_at,
+    }
+    with (
+        patch.object(observe, "_scheduler_cache", cached),
+        patch.object(observe, "_scheduler_refreshing", False),
+        patch.object(observe, "_query_scheduler_status") as query,
+    ):
+        result = observe.scheduler_status()
+    query.assert_not_called()
+    assert result["state"] == "Ready"
+    assert result["interval"] == "PT1M"
+    assert "_cached_monotonic" not in result
+
+
+def test_render_shows_real_scheduler_interval_not_hard_coded_value():
+    sched = {
+        "state": "Ready",
+        "interval": "PT1M",
+        "updated_at": "2026-07-15 17:00:00",
+    }
+    with patch.object(observe, "scheduler_status", return_value=sched):
+        page = observe.render()
+    assert "心跳运行中 · 每 1 分钟" in page
+    assert "心跳运行中 · 每 30 分钟" not in page
 
 
 def test_output_window_renders_newest_receipt_first():

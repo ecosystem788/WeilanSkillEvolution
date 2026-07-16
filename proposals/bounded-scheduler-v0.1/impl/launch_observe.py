@@ -17,6 +17,7 @@ from ctypes import wintypes
 PORT = 8787
 SERVER = Path(__file__).resolve().parent / "observe.py"
 LOG = SERVER.parent / "observe-server.log"
+DASHBOARD_URL = f"http://127.0.0.1:{PORT}/"
 
 CREATE_BREAKAWAY_FROM_JOB = 0x01000000
 ERROR_ACCESS_DENIED = 5
@@ -142,9 +143,12 @@ def _start_via_wmi(python: Path, port: int) -> int:
     command = _cmd_exe_command(python, port)
     script = (
         "$ErrorActionPreference='Stop';"
+        "$startup=New-CimInstance -ClassName Win32_ProcessStartup -ClientOnly -Property @{"
+        "ShowWindow=[uint16]0};"
         "$r=Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{"
         f"CommandLine={_ps_single_quote(command)};"
-        f"CurrentDirectory={_ps_single_quote(str(SERVER.parent))}}};"
+        f"CurrentDirectory={_ps_single_quote(str(SERVER.parent))};"
+        "ProcessStartupInformation=$startup};"
         "if([int]$r.ReturnValue -ne 0){throw ('Win32_Process.Create failed: '+$r.ReturnValue)};"
         "$deadline=(Get-Date).AddSeconds(10);"
         "do{"
@@ -217,6 +221,76 @@ def start_server(port: int = PORT) -> LaunchResult:
     return LaunchResult(pid, "wmi", before)
 
 
+def _chrome_candidates() -> list[Path]:
+    roots = [
+        os.environ.get("ProgramFiles(x86)"),
+        os.environ.get("ProgramFiles"),
+        os.environ.get("LOCALAPPDATA"),
+    ]
+    return [
+        Path(root) / "Google" / "Chrome" / "Application" / "chrome.exe"
+        for root in roots
+        if root
+    ]
+
+
+def _find_chrome() -> Path | None:
+    return next((path for path in _chrome_candidates() if path.is_file()), None)
+
+
+def _start_chrome_via_wmi(chrome: Path, url: str) -> int:
+    command = subprocess.list2cmdline([str(chrome), "--new-window", url])
+    script = (
+        "$ErrorActionPreference='Stop';"
+        "$r=Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{"
+        f"CommandLine={_ps_single_quote(command)};"
+        f"CurrentDirectory={_ps_single_quote(str(chrome.parent))}}};"
+        "if([int]$r.ReturnValue -ne 0){throw ('Chrome Create failed: '+$r.ReturnValue)};"
+        "[Console]::Out.Write([string]$r.ProcessId)"
+    )
+    encoded = base64.b64encode(script.encode("utf-16le")).decode("ascii")
+    completed = subprocess.run(
+        [
+            "powershell.exe", "-NoLogo", "-NoProfile", "-NonInteractive",
+            "-WindowStyle", "Hidden", "-EncodedCommand", encoded,
+        ],
+        creationflags=subprocess.CREATE_NO_WINDOW,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    if completed.returncode != 0:
+        detail = (completed.stderr or completed.stdout or "no error text").strip()
+        raise RuntimeError(f"Chrome WMI launch failed (rc={completed.returncode}): {detail}")
+    return int(completed.stdout.strip())
+
+
+def open_dashboard(url: str = DASHBOARD_URL) -> str:
+    """Open a visible Chrome window without tying it to the launcher's Job."""
+    chrome = _find_chrome()
+    if chrome is not None:
+        if current_process_in_job():
+            _start_chrome_via_wmi(chrome, url)
+            return "chrome-wmi"
+        subprocess.Popen(
+            [str(chrome), "--new-window", url],
+            creationflags=_base_creation_flags(),
+            close_fds=True,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        return "chrome-direct"
+
+    startfile = getattr(os, "startfile", None)
+    if startfile is not None:
+        startfile(url)
+        return "windows-default"
+    if webbrowser.open(url):
+        return "webbrowser"
+    raise RuntimeError(f"No browser accepted dashboard URL: {url}")
+
+
 def wait_until_up(port: int = PORT) -> None:
     for _ in range(40):
         if port_up(port):
@@ -229,7 +303,7 @@ def main() -> None:
     if not port_up(PORT):
         start_server(PORT)
         wait_until_up(PORT)
-    webbrowser.open(f"http://127.0.0.1:{PORT}/")
+    open_dashboard(DASHBOARD_URL)
 
 
 if __name__ == "__main__":

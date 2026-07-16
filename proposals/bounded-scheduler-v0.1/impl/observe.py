@@ -64,6 +64,16 @@ PROSPECTIVE = METHOD_STATE / "memory" / "prospective" / "workspaces" / WORKSPACE
 GATE_MIGRATION_BOUNDARY = 824
 
 HEARTBEAT_TASK = "WeilanBoundedSchedulerWake"
+SCHEDULER_CACHE_TTL_SECONDS = 30
+SCHEDULER_QUERY_TIMEOUT_SECONDS = 15
+_scheduler_cache_lock = threading.Lock()
+_scheduler_cache = {
+    "state": "QUERY_PENDING",
+    "updated_at": None,
+    "interval": None,
+    "_cached_monotonic": 0.0,
+}
+_scheduler_refreshing = False
 
 
 # --- readers (all read-only) -------------------------------------------------
@@ -277,12 +287,13 @@ def inflight_codex_work() -> list[dict]:
     return [e for e in read_jsonl(CODEX_INBOX) if e.get("id") not in replied]
 
 
-def scheduler_status() -> dict:
+def _query_scheduler_status() -> dict:
     cmd = (
         f"$t = Get-ScheduledTask -TaskName '{HEARTBEAT_TASK}' -ErrorAction SilentlyContinue; "
         f"$i = Get-ScheduledTaskInfo -TaskName '{HEARTBEAT_TASK}' -ErrorAction SilentlyContinue; "
         "if ($t) { @{state=[string]$t.State; last=[string]$i.LastRunTime; "
-        "next=[string]$i.NextRunTime; last_result=$i.LastTaskResult} | ConvertTo-Json } "
+        "next=[string]$i.NextRunTime; last_result=$i.LastTaskResult; "
+        "interval=[string]$t.Triggers[0].Repetition.Interval} | ConvertTo-Json } "
         "else { '{\"state\": \"NOT_REGISTERED\"}' }"
     )
     try:
@@ -290,12 +301,57 @@ def scheduler_status() -> dict:
         # 不加这个标志的话,每次页面渲染 spawn powershell 都会在桌面弹一个新控制台窗。
         proc = subprocess.run(
             ["powershell", "-NoProfile", "-Command", cmd],
-            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=20,
+            capture_output=True, text=True, encoding="utf-8", errors="replace",
+            timeout=SCHEDULER_QUERY_TIMEOUT_SECONDS,
             creationflags=subprocess.CREATE_NO_WINDOW,
         )
-        return json.loads(proc.stdout.strip() or "{}")
+        result = json.loads(proc.stdout.strip() or "{}")
+        result["updated_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        return result
     except (subprocess.SubprocessError, ValueError, OSError):
-        return {"state": "QUERY_FAILED"}
+        return {
+            "state": "QUERY_FAILED",
+            "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        }
+
+
+def _refresh_scheduler_cache() -> None:
+    global _scheduler_cache, _scheduler_refreshing
+    result = _query_scheduler_status()
+    result["_cached_monotonic"] = time.monotonic()
+    with _scheduler_cache_lock:
+        _scheduler_cache = result
+        _scheduler_refreshing = False
+
+
+def scheduler_status() -> dict:
+    """Return immediately; refresh the slow Task Scheduler query in background."""
+    global _scheduler_refreshing
+    now = time.monotonic()
+    with _scheduler_cache_lock:
+        cached = dict(_scheduler_cache)
+        age = now - float(cached.get("_cached_monotonic") or 0.0)
+        if age >= SCHEDULER_CACHE_TTL_SECONDS and not _scheduler_refreshing:
+            _scheduler_refreshing = True
+            threading.Thread(target=_refresh_scheduler_cache, daemon=True).start()
+    cached.pop("_cached_monotonic", None)
+    return cached
+
+
+def scheduler_interval_label(interval: str | None) -> str:
+    """Render the Task Scheduler ISO-8601 repetition interval for humans."""
+    match = re.fullmatch(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", interval or "")
+    if not match:
+        return "周期未知"
+    hours, minutes, seconds = (int(value or 0) for value in match.groups())
+    parts = []
+    if hours:
+        parts.append(f"{hours} 小时")
+    if minutes:
+        parts.append(f"{minutes} 分钟")
+    if seconds:
+        parts.append(f"{seconds} 秒")
+    return "每 " + " ".join(parts) if parts else "周期未知"
 
 
 # --- the mic: message in -> event-driven bounded wake -------------------------
@@ -514,14 +570,20 @@ def render() -> str:
                 if e.get("time") and e.get("kind")][:40]
 
     state = sched.get("state", "状态查询失败")
+    interval_label = scheduler_interval_label(sched.get("interval"))
+    status_updated = sched.get("updated_at") or "等待首次查询"
+    status_title = f' title="计划任务状态更新于 {esc(status_updated)}"'
     if paused:
         sched_badge = '<span class="badge warn">已暂停(PAUSED 哨兵在)</span>'
-    elif state == "Ready":
-        sched_badge = '<span class="badge ok">心跳运行中 · 每 30 分钟</span>'
+    elif state in {"Ready", "Running"}:
+        sched_badge = (f'<span class="badge ok"{status_title}>心跳运行中 · '
+                       f'{esc(interval_label)}</span>')
+    elif state == "QUERY_PENDING":
+        sched_badge = '<span class="badge warn">计划任务状态查询中…</span>'
     elif state == "NOT_REGISTERED":
         sched_badge = '<span class="badge off">心跳未注册</span>'
     else:
-        sched_badge = f'<span class="badge warn">{esc(state)}</span>'
+        sched_badge = f'<span class="badge warn"{status_title}>{esc(state)}</span>'
     if running:
         sched_badge += ' &nbsp;<span class="badge warn">⚡ 模型回合进行中…</span>'
 

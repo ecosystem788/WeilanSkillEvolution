@@ -108,6 +108,8 @@ def test_wmi_returns_observe_child_pid_not_cmd_wrapper_pid():
         assert launcher._start_via_wmi(Path(r"C:\Python Dir\python.exe"), 18787) == 505
     encoded = run.call_args.args[0][-1]
     script = __import__("base64").b64decode(encoded).decode("utf-16le")
+    assert "ProcessStartupInformation=$startup" in script
+    assert "ShowWindow=[uint16]0" in script
     assert "ParentProcessId=" in script
     assert "*observe.py*" in script
     assert "*--port 18787*" in script
@@ -140,9 +142,35 @@ def test_main_preserves_port_wait_and_browser_behavior():
         patch.object(launcher, "port_up", return_value=False),
         patch.object(launcher, "start_server") as start,
         patch.object(launcher, "wait_until_up") as wait,
-        patch.object(launcher.webbrowser, "open") as browser,
+        patch.object(launcher, "open_dashboard") as browser,
     ):
         launcher.main()
     start.assert_called_once_with(launcher.PORT)
     wait.assert_called_once_with(launcher.PORT)
     browser.assert_called_once_with(f"http://127.0.0.1:{launcher.PORT}/")
+
+
+def test_dashboard_uses_visible_chrome_via_wmi_inside_job():
+    chrome = Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe")
+    with (
+        patch.object(launcher, "_find_chrome", return_value=chrome),
+        patch.object(launcher, "current_process_in_job", return_value=True),
+        patch.object(launcher, "_start_chrome_via_wmi", return_value=707) as start,
+        patch.object(launcher.subprocess, "Popen") as popen,
+    ):
+        assert launcher.open_dashboard("http://127.0.0.1:8787/") == "chrome-wmi"
+    start.assert_called_once_with(chrome, "http://127.0.0.1:8787/")
+    popen.assert_not_called()
+
+
+def test_dashboard_uses_direct_new_window_outside_job():
+    chrome = Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe")
+    with (
+        patch.object(launcher, "_find_chrome", return_value=chrome),
+        patch.object(launcher, "current_process_in_job", return_value=False),
+        patch.object(launcher.subprocess, "Popen") as popen,
+    ):
+        assert launcher.open_dashboard("http://127.0.0.1:8787/") == "chrome-direct"
+    assert popen.call_args.args[0] == [
+        str(chrome), "--new-window", "http://127.0.0.1:8787/",
+    ]
