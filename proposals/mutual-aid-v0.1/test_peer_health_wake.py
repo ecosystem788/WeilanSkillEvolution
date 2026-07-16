@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from peer_health_wake import main, run_check
+from peer_health_wake import main, run_check, run_reverse_check
 
 
 NOW = datetime(2026, 7, 12, 2, tzinfo=timezone.utc)  # 11:00 UTC+9
@@ -27,6 +27,77 @@ def fixture(root: Path, activity_time="2026-07-12 10:55:00", replied=False):
 def alerts(root):
     path = root / "peer-health-alerts.jsonl"
     return [] if not path.exists() else [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+
+
+def cron_line(stamp: str, parent: str) -> str:
+    return (
+        f'{stamp} ERROR rc=3 stage=native_exit stderr={{"frame_commit_failure":'
+        f'{{"stage":"frame_open_stale_head","attempted_parent":"{parent}"}}}}'
+    )
+
+
+def write_cron(root: Path, lines: list[str]) -> None:
+    (root / "wake-cron.log").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def reverse_fixture(root: Path, *, claude_time="2026-07-16 16:00:00", heartbeat_count=3):
+    append(root / "peer-chat.jsonl", {"from": "claude", "time": "2026-07-16 15:00:00", "text": "here"})
+    append(
+        root / "concurrent-receipts.jsonl",
+        {"wake_id": "claude-wake-test", "time": "2026-07-16 15:30:00", "work_performed": False},
+    )
+    runs = root / "wake-agent-runs"
+    runs.mkdir(parents=True)
+    run_name = claude_time.replace(" ", "T").replace(":", "-")
+    (runs / f"{run_name}.json").write_text("{}", encoding="utf-8")
+    codex_runs = root / "wake-codex-runs"
+    codex_runs.mkdir(parents=True)
+    for hour in range(17, 17 + heartbeat_count):
+        (codex_runs / f"2026-07-16T{hour:02d}-00-00.jsonl").write_text("", encoding="utf-8")
+
+
+def test_terminal_same_parent_streak_raises_orphan_alert_with_evidence(tmp_path):
+    fixture(tmp_path)
+    write_cron(tmp_path, [cron_line(f"2026-07-16T18:{minute:02d}:58", "wf-parent-a") for minute in range(10)])
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert len(result) == 1
+    alert = result[0]
+    assert alert["kind"] == "orphan_frame"
+    assert alert["parent_frame_id"] == "wf-parent-a"
+    assert alert["first_error_time"] == "2026-07-16T18:00:58"
+    assert alert["last_error_time"] == "2026-07-16T18:09:58"
+    assert alert["consecutive_count"] == 10
+    assert alert["authority"] == "none"
+
+
+def test_real_current_log_tail_does_not_raise_orphan_alert(tmp_path):
+    fixture(tmp_path)
+    real_log = Path(__file__).resolve().parents[1] / "bounded-scheduler-v0.1" / "impl" / "wake-cron.log"
+    (tmp_path / "wake-cron.log").write_bytes(real_log.read_bytes())
+
+    assert run_check(root=tmp_path, now=NOW) == []
+    assert alerts(tmp_path) == []
+
+
+def test_success_line_truncates_old_orphan_streak(tmp_path):
+    fixture(tmp_path)
+    lines = [cron_line(f"2026-07-16T18:{minute:02d}:58", "wf-parent-a") for minute in range(10)]
+    lines.append("2026-07-16T18:10:58 wake ok stop=quiescent frame=wf-success")
+    write_cron(tmp_path, lines)
+
+    assert run_check(root=tmp_path, now=NOW) == []
+    assert alerts(tmp_path) == []
+
+
+def test_unresolved_same_parent_orphan_alert_is_deduplicated(tmp_path):
+    fixture(tmp_path)
+    write_cron(tmp_path, [cron_line(f"2026-07-16T18:{minute:02d}:58", "wf-parent-a") for minute in range(10)])
+
+    assert len(run_check(root=tmp_path, now=NOW)) == 1
+    assert run_check(root=tmp_path, now=NOW) == []
+    assert len(alerts(tmp_path)) == 1
 
 
 def test_real_shape_fresh_activity_does_not_raise(tmp_path):
@@ -93,19 +164,21 @@ def test_malformed_json_row_is_visible_without_discarding_good_anchor(tmp_path):
         "source_ref": "peer-chat.jsonl:1@2026-07-12 10:55:00 (codex activity)",
     }
     assert len(result.parse_errors) == 1
-    assert result.parse_errors[0]["source"] == "peer-chat.jsonl:2"
+    assert result.parse_errors[0]["source"] == (tmp_path / "peer-chat.jsonl").as_posix()
+    assert result.parse_errors[0]["line"] == 2
+    assert result.parse_errors[0]["reason_code"] == "invalid_json"
 
 
 def test_whole_file_read_failure_is_visible_in_cli(tmp_path, monkeypatch, capsys):
     fixture(tmp_path)
-    original = Path.read_text
+    original = Path.read_bytes
 
     def unreadable(path, *args, **kwargs):
         if path.name == "peer-chat.jsonl":
             raise PermissionError("test unreadable file")
         return original(path, *args, **kwargs)
 
-    monkeypatch.setattr(Path, "read_text", unreadable)
+    monkeypatch.setattr(Path, "read_bytes", unreadable)
     assert main(["--root", str(tmp_path)]) == 0
     report = json.loads(capsys.readouterr().out)
     assert report["check"] == "skipped"
@@ -122,3 +195,30 @@ def test_authority_surfaces_are_byte_identical(tmp_path):
     before = {path: path.read_bytes() for path in protected}
     run_check(root=tmp_path, now=NOW)
     assert {path: path.read_bytes() for path in protected} == before
+
+
+def test_reverse_silence_with_three_codex_heartbeats_raises_complete_alert(tmp_path):
+    reverse_fixture(tmp_path)
+    result = run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc))
+    assert len(result) == 1
+    alert = result[0]
+    assert alert["direction"] == "codex_to_claude"
+    assert alert["peer"] == "claude" and alert["raised_by"] == "codex"
+    assert alert["silence"]["threshold_hours"] == 4
+    assert alert["silence"]["source_ref"].startswith("wake-agent-runs/")
+    assert alert["observer_heartbeats"]["count"] == 3
+    assert alert["authority"] == "none"
+
+
+def test_reverse_fresh_claude_does_not_alert(tmp_path):
+    reverse_fixture(tmp_path, claude_time="2026-07-16 20:00:00")
+    assert run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc)) == []
+    assert not (tmp_path / "peer-health-alerts.jsonl").exists()
+
+
+def test_reverse_unresolved_same_anchor_is_reported_once(tmp_path):
+    reverse_fixture(tmp_path)
+    now = datetime(2026, 7, 16, 12, tzinfo=timezone.utc)
+    assert len(run_reverse_check(root=tmp_path, now=now)) == 1
+    assert run_reverse_check(root=tmp_path, now=now) == []
+    assert len(alerts(tmp_path)) == 1
