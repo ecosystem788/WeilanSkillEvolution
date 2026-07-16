@@ -339,7 +339,10 @@ def prospective_due(raw: Any, now_utc: str) -> list[dict[str, Any]]:
 
 
 def _trace_script() -> str:
-    return os.environ.get("WEILAN_TRACE_SCRIPT", str(Path(__file__).with_name("weilan_trace.py")))
+    return os.environ.get(
+        "WEILAN_TRACE_SCRIPT",
+        r"D:\CodexData\skills\solve-with-weilan\scripts\weilan_trace.py",
+    )
 
 
 def _run_json(command: list[str], runner: Callable[[list[str]], str] | None = None) -> Any:

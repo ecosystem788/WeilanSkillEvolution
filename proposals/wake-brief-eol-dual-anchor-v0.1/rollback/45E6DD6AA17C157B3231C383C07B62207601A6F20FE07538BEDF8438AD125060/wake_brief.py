@@ -90,19 +90,6 @@ def _line_count(data: bytes) -> int:
     return len(data.splitlines())
 
 
-def _normalize_eol(data: bytes) -> bytes:
-    return data.replace(b"\r\n", b"\n")
-
-
-def _prefix_for_line_count(data: bytes, line_count: int) -> bytes | None:
-    if line_count < 0:
-        return None
-    lines = data.splitlines(keepends=True)
-    if len(lines) < line_count:
-        return None
-    return b"".join(lines[:line_count])
-
-
 def cursor_entry_for(path: Path, byte_offset: int | None = None) -> dict[str, Any]:
     data = path.read_bytes() if path.exists() else b""
     prefix = data if byte_offset is None else data[:byte_offset]
@@ -111,7 +98,6 @@ def cursor_entry_for(path: Path, byte_offset: int | None = None) -> dict[str, An
         "line_count": _line_count(prefix),
         "file_size": len(data),
         "content_tail_hash": _sha256(prefix),
-        "normalized_prefix_hash": _sha256(_normalize_eol(prefix)),
     }
 
 
@@ -139,7 +125,6 @@ def validate_cursor(
     if not isinstance(files, dict):
         return "full_rescan", "unreadable_cursor", None
 
-    representation_drift_details: list[dict[str, Any]] = []
     for name in TRACKED_CURSOR_FILES:
         entry = files.get(name)
         if not isinstance(entry, dict):
@@ -152,7 +137,6 @@ def validate_cursor(
         offset = int(entry.get("byte_offset", 0))
         stored_lines = int(entry.get("line_count", 0))
         stored_hash = str(entry.get("content_tail_hash", ""))
-        stored_normalized_hash = entry.get("normalized_prefix_hash")
 
         actual_offset = min(offset, size)
         actual_prefix = data[:actual_offset]
@@ -172,42 +156,17 @@ def validate_cursor(
             },
         }
 
-        # write_cursor records the whole observed file, so these two values are
-        # an integrity pair.  Do not let a tampered offset borrow the normalized
-        # anchor and masquerade as representation-only drift.
-        if offset != stored_size:
-            return "full_rescan", "offset_oob" if offset > size else "prefix_mismatch", details
-
-        raw_prefix_matches = offset <= size and _sha256(data[:offset]) == stored_hash
-        if raw_prefix_matches:
-            if _line_count(data[:offset]) != stored_lines:
-                return "full_rescan", "line_count_mismatch", details
-            continue
-
-        line_prefix = _prefix_for_line_count(data, stored_lines)
-        normalized_prefix_matches = (
-            isinstance(stored_normalized_hash, str)
-            and line_prefix is not None
-            and _sha256(_normalize_eol(line_prefix)) == stored_normalized_hash
-        )
-        if normalized_prefix_matches:
-            representation_drift_details.append(
-                {
-                    **details,
-                    "stored_normalized_prefix_hash": stored_normalized_hash,
-                    "actual_normalized_prefix_hash": _sha256(_normalize_eol(line_prefix)),
-                }
-            )
-            continue
-
         if size < stored_size:
             return "full_rescan", "file_shrank", details
         if offset > size:
             return "full_rescan", "offset_oob", details
-        return "full_rescan", "prefix_mismatch", details
 
-    if representation_drift_details:
-        return "representation_drift", "eol_only_prefix_change", {"files": representation_drift_details}
+        prefix = data[:offset]
+        if _sha256(prefix) != stored_hash:
+            return "full_rescan", "prefix_mismatch", details
+        if _line_count(prefix) != stored_lines:
+            return "full_rescan", "line_count_mismatch", details
+
     return "incremental", None, None
 
 
@@ -265,15 +224,8 @@ def _tail_jsonl(root: Path, name: str, mode: str, cursor: dict[str, Any] | None)
     if not path.exists():
         return []
     data = path.read_bytes()
-    if mode in {"incremental", "representation_drift"} and cursor is not None:
-        entry = cursor["files"][name]
-        if mode == "representation_drift":
-            stored_lines = int(entry["line_count"])
-            prefix = _prefix_for_line_count(data, stored_lines)
-            if prefix is None:
-                return _jsonl_from_bytes(path, data, start_line=0)
-            return _jsonl_from_bytes(path, data[len(prefix) :], start_line=stored_lines)
-        offset = int(entry["byte_offset"])
+    if mode == "incremental" and cursor is not None:
+        offset = int(cursor["files"][name]["byte_offset"])
         prefix = data[:offset]
         return _jsonl_from_bytes(path, data[offset:], start_line=_line_count(prefix))
     return _jsonl_from_bytes(path, data, start_line=0)
@@ -339,7 +291,10 @@ def prospective_due(raw: Any, now_utc: str) -> list[dict[str, Any]]:
 
 
 def _trace_script() -> str:
-    return os.environ.get("WEILAN_TRACE_SCRIPT", str(Path(__file__).with_name("weilan_trace.py")))
+    return os.environ.get(
+        "WEILAN_TRACE_SCRIPT",
+        r"D:\CodexData\skills\solve-with-weilan\scripts\weilan_trace.py",
+    )
 
 
 def _run_json(command: list[str], runner: Callable[[list[str]], str] | None = None) -> Any:
