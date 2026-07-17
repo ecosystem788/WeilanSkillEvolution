@@ -90,6 +90,13 @@ def worker(args: argparse.Namespace) -> int:
             original_receipt_write(path, result)
 
         installer._write_receipt_atomic = pause_before_receipt
+    elif args.action == "hold-lock":
+        reached = Path(args.reached).resolve()
+        release = Path(args.release).resolve()
+        with installer._InstallRootMutex(install_root):
+            reached.write_text("reached\n", encoding="utf-8")
+            wait_for(release)
+        return 0
 
     if args.action == "uninstall":
         result = installer.uninstall(install_root)
@@ -195,12 +202,12 @@ class R9FaultInjectionTests(unittest.TestCase):
             gate.write_text("go\n", encoding="utf-8")
             wait_for(reached)
             uninstalling = self.run_worker("uninstall", root, gate)
-            uninstall_result = self.collect(uninstalling)
-            self.assertEqual(uninstall_result["status"], "uninstalled")
             release.write_text("go\n", encoding="utf-8")
             install_result = self.collect(installing)
             self.assertEqual(install_result["status"], "installed")
-            self.assert_healthy_receipt_matches_disk(root)
+            uninstall_result = self.collect(uninstalling)
+            self.assertEqual(uninstall_result["status"], "uninstalled")
+            self.assertEqual(self.installer.status(root)["state"], "absent")
 
     def test_hard_kill_during_payload_write_refuses_with_exact_conflict_and_preserves_unknown(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -249,6 +256,70 @@ class R9FaultInjectionTests(unittest.TestCase):
             uninstalled = self.installer.uninstall(root)
             self.assertEqual(uninstalled["status"], "uninstalled")
             self.assertEqual(sentinel.read_text(encoding="utf-8"), "keep\n")
+
+    @unittest.skipUnless(os.name == "nt", "Windows named-mutex contract")
+    def test_mutex_identity_collapses_case_trailing_separator_and_junction_alias(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            target = base / "Target"
+            target.mkdir()
+            alias = base / "alias"
+            completed = subprocess.run(
+                ["cmd", "/c", "mklink", "/J", str(alias), str(target)],
+                text=True,
+                capture_output=True,
+            )
+            self.assertEqual(completed.returncode, 0, completed.stderr or completed.stdout)
+            self.assertEqual(self.installer._mutex_name(target), self.installer._mutex_name(alias))
+            self.assertEqual(
+                self.installer._mutex_name(Path(str(target).upper() + os.sep)),
+                self.installer._mutex_name(target),
+            )
+
+    @unittest.skipUnless(os.name == "nt", "Windows named-mutex contract")
+    def test_different_roots_do_not_share_one_global_mutex(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            first_root, second_root = base / "first", base / "second"
+            gate, reached, release = base / "start", base / "reached", base / "release"
+            holder = self.run_worker("hold-lock", first_root, gate, reached=reached, release=release)
+            gate.write_text("go\n", encoding="utf-8")
+            wait_for(reached)
+            result = self.installer.install(
+                self.rc_root,
+                second_root,
+                self.manifest,
+                command_finder=fake_command_finder,
+            )
+            self.assertEqual(result["status"], "installed")
+            release.write_text("go\n", encoding="utf-8")
+            self.collect(holder)
+
+    @unittest.skipUnless(os.name == "nt", "Windows named-mutex contract")
+    def test_bounded_wait_returns_actionable_conflict(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            root = base / "install"
+            gate, reached, release = base / "start", base / "reached", base / "release"
+            holder = self.run_worker("hold-lock", root, gate, reached=reached, release=release)
+            gate.write_text("go\n", encoding="utf-8")
+            wait_for(reached)
+            started = time.monotonic()
+            try:
+                result = self.installer.install(
+                    self.rc_root,
+                    root,
+                    self.manifest,
+                    command_finder=fake_command_finder,
+                )
+            finally:
+                release.write_text("go\n", encoding="utf-8")
+                self.collect(holder)
+            elapsed = time.monotonic() - started
+            self.assertEqual(result["status"], "conflict")
+            self.assertEqual(result["code"], "install_root_busy")
+            self.assertIn("retry", result["hint"].lower())
+            self.assertLess(elapsed, 8.0, "bounded wait must remain well below the 30s harness timeout")
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:

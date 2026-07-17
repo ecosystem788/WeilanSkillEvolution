@@ -7,6 +7,7 @@ runtime activation until the scheduler's machine-specific paths are removed.
 from __future__ import annotations
 
 import argparse
+import ctypes
 import hashlib
 import json
 import os
@@ -20,11 +21,85 @@ from typing import Callable, Iterable
 HERE = Path(__file__).resolve().parent
 DEFAULT_MANIFEST = HERE / "install-manifest.json"
 RECEIPT_NAME = "install-receipt.json"
+MUTEX_WAIT_SECONDS = 5.0
+WAIT_OBJECT_0 = 0x00000000
+WAIT_ABANDONED = 0x00000080
+WAIT_TIMEOUT = 0x00000102
+WAIT_FAILED = 0xFFFFFFFF
 REQUIRED_COMMANDS = {
     "python": "Install Python 3 and ensure 'python' is available on PATH.",
     "codex": "Install Codex and ensure 'codex' is available on PATH.",
     "claude": "Install Claude Code and ensure 'claude' is available on PATH.",
 }
+
+
+class InstallRootBusyError(RuntimeError):
+    """The bounded wait for another installer operating on this root expired."""
+
+
+def _mutex_name(install_root: Path) -> str:
+    """Return one session-local mutex name for every spelling of a final root."""
+    final_root = str(install_root.resolve(strict=False)).replace("/", "\\").rstrip("\\").casefold()
+    identity = hashlib.sha256(final_root.encode("utf-8")).hexdigest()
+    # Local\ is deliberate: installation is an interactive per-session operation,
+    # and unrelated Windows sessions must not be serialized globally.
+    return f"Local\\WeiLanReleaseInstaller-{identity}"
+
+
+class _InstallRootMutex:
+    def __init__(self, install_root: Path, wait_seconds: float = MUTEX_WAIT_SECONDS) -> None:
+        self.name = _mutex_name(install_root)
+        self.wait_seconds = wait_seconds
+        self.handle = None
+        self.abandoned = False
+
+    def __enter__(self) -> "_InstallRootMutex":
+        if os.name != "nt":
+            return self
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.CreateMutexW.argtypes = (ctypes.c_void_p, ctypes.c_bool, ctypes.c_wchar_p)
+        kernel32.CreateMutexW.restype = ctypes.c_void_p
+        kernel32.WaitForSingleObject.argtypes = (ctypes.c_void_p, ctypes.c_uint32)
+        kernel32.WaitForSingleObject.restype = ctypes.c_uint32
+        handle = kernel32.CreateMutexW(None, False, self.name)
+        if not handle:
+            raise OSError(ctypes.get_last_error(), f"CreateMutexW failed for {self.name}")
+        wait_ms = max(0, min(round(self.wait_seconds * 1000), 0xFFFFFFFE))
+        result = kernel32.WaitForSingleObject(handle, wait_ms)
+        if result in (WAIT_OBJECT_0, WAIT_ABANDONED):
+            self.handle = handle
+            self.abandoned = result == WAIT_ABANDONED
+            return self
+        kernel32.CloseHandle(handle)
+        if result == WAIT_TIMEOUT:
+            raise InstallRootBusyError(
+                f"another install or uninstall still owns {self.name}; retry after it finishes"
+            )
+        if result == WAIT_FAILED:
+            raise OSError(ctypes.get_last_error(), f"WaitForSingleObject failed for {self.name}")
+        raise OSError(f"unexpected mutex wait result {result} for {self.name}")
+
+    def __exit__(self, exc_type, exc_value, traceback) -> None:
+        if self.handle is None:
+            return
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        try:
+            if not kernel32.ReleaseMutex(self.handle):
+                raise OSError(ctypes.get_last_error(), f"ReleaseMutex failed for {self.name}")
+        finally:
+            kernel32.CloseHandle(self.handle)
+            self.handle = None
+
+
+def _busy_result(schema: str, error: InstallRootBusyError) -> dict:
+    return {
+        "schema": schema,
+        "status": "conflict",
+        "code": "install_root_busy",
+        "message": str(error),
+        "hint": "Wait for the competing install or uninstall to finish, then retry.",
+        "conflicts": ["install_root_busy"],
+    }
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -353,7 +428,7 @@ def _write_receipt_atomic(path: Path, result: dict) -> None:
             Path(temporary_name).unlink(missing_ok=True)
 
 
-def install(
+def _install_locked(
     repo_root: Path,
     install_root: Path,
     manifest_path: Path,
@@ -429,6 +504,22 @@ def install(
     return result
 
 
+def install(
+    repo_root: Path,
+    install_root: Path,
+    manifest_path: Path,
+    receipt: Path | None = None,
+    command_finder: Callable[[str], str | None] = shutil.which,
+) -> dict:
+    try:
+        with _InstallRootMutex(install_root):
+            # WAIT_ABANDONED is still ownership: the ordinary disk/receipt checks
+            # below decide whether to repair or return an exact conflict.
+            return _install_locked(repo_root, install_root, manifest_path, receipt, command_finder)
+    except InstallRootBusyError as error:
+        return _busy_result("weilan_release_install_result_v0.1", error)
+
+
 def load_receipt(install_root: Path, receipt: Path | None = None) -> tuple[Path, dict | None]:
     path = _receipt_path(install_root, receipt)
     if not path.exists():
@@ -462,7 +553,7 @@ def status(install_root: Path, receipt: Path | None = None) -> dict:
     }
 
 
-def uninstall(install_root: Path, receipt: Path | None = None) -> dict:
+def _uninstall_locked(install_root: Path, receipt: Path | None = None) -> dict:
     install_root = install_root.resolve()
     receipt_path, data = load_receipt(install_root, receipt)
     if data is None:
@@ -495,6 +586,14 @@ def uninstall(install_root: Path, receipt: Path | None = None) -> dict:
         "removed": removed,
         "conflicts": sorted(conflicts),
     }
+
+
+def uninstall(install_root: Path, receipt: Path | None = None) -> dict:
+    try:
+        with _InstallRootMutex(install_root):
+            return _uninstall_locked(install_root, receipt)
+    except InstallRootBusyError as error:
+        return _busy_result("weilan_release_uninstall_result_v0.1", error)
 
 
 def entry(name: str, install_root: Path, receipt: Path | None, smoke: bool) -> tuple[int, dict]:

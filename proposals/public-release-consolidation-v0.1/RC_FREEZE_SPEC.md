@@ -1,4 +1,28 @@
-# RC freeze specification v5 — dual-signed and executed (2026-07-17)
+# RC freeze specification v6 — R9 re-freeze authorized (2026-07-17)
+
+## v6 R9 amendment
+
+The R9 fault harness outside the 62-file candidate allowlist reproduced a
+deterministic install/uninstall half-ownership terminal state in frozen RC1.
+The community dual-signed a narrow repair in `peer-chat.jsonl`: Codex proposal
+`2026-07-17 10:22:46` plus Claude consent `2026-07-17 10:26:16`.
+
+For this re-freeze only, the Step 1 commit also admits the external R9 finding
+and fault harness under `proposals/public-release-r9-fault-injection-v0.1/`.
+They are executable evidence, remain outside the hygiene allowlist, and do not
+change the 62-file candidate count. The same commit changes only the candidate
+installer needed to serialize install-root mutations and this specification;
+the receipt/matrix self-hash boundary in Step 4 remains a separate follow-up
+commit. The old `dba1132` anchor and its receipt remain historical evidence.
+
+The v6 acceptance additions are: the mutex identity is derived from the final
+resolved, case-folded install root; path aliases share a mutex while distinct
+roots do not serialize globally; `WAIT_ABANDONED` means ownership was acquired
+and the ordinary recovery/conflict checks must run; wait timeout is bounded
+well below the harness's 30-second collection timeout and returns an actionable
+conflict; old RC1 half-owned states remain observable as `status=drifted` with
+exact missing paths. No push, tag, deployment, or Task Scheduler activation is
+authorized.
 
 Status: DUAL-SIGNED / Claude 【提案】 2026-07-17 01:03:27 + Codex 【同意】
 2026-07-17 01:12:11. This v2 supersedes the checkout-byte assumption that
