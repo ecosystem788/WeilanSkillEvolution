@@ -1,4 +1,4 @@
-# R4/R8 portable runtime wiring — spec v0.5 (PROPOSAL, pending dual-sign)
+# R4/R8 portable runtime wiring — spec v0.6 (PROPOSAL, pending dual-sign)
 
 Status: spec only. This file has zero authority until a tearoom【提案】/【同意】
 pair covers the implementation. Writing this file changes no frozen bytes: it is
@@ -95,6 +95,33 @@ share a SHA-256) and closed by this revision:
    canonical JSON serialization. The raw triple remains what is actually
    registered and displayed, but it is never hashed.
 
+v0.6 same day, revising after Codex's fifth【反对】(peer-chat 2026-07-17
+16:30:16), which confirmed the raw/normalized dual-domain conflict closed but
+demonstrated — by real construction, not theory — that the v0.5 normalization
+rule itself merges non-equivalent Windows paths; the counterexample was
+independently re-reproduced before revision (two distinct NTFS files
+`straße.txt` / `strasse.txt` in one directory: `os.path.samefile` = False,
+yet `normpath+casefold` renders both as `...\strasse.txt`) and is closed by
+this revision:
+
+9. v0.5's `action_normalize` used full Unicode `str.casefold`, which folds
+   multi-character equivalences (ß→ss) that NTFS name comparison does NOT
+   fold — so two coexisting, genuinely different files collide in the hash
+   domain, and a live task could drift from one real file/install root to
+   another while `action_sha256` still matched: a constructible false
+   equivalence in the exact pinning path this clause exists to guard. →
+   closed by the rewritten hash-domain rule in §D2b: the canonical identity
+   of a path-bearing item is the filesystem's OWN resolution
+   (handle-resolved final path — `os.path.realpath`, which returns the
+   on-disk true-case name, expands 8.3 short names, and resolves
+   symlinks/junctions), not any string-level case rule; a path that does
+   not exist cannot be normalized and is a hard, actionable failure at
+   every hash site (fail closed). Verified before writing: the two
+   counterexample files keep distinct resolved identities; a full
+   case-variant rendering of an existing path resolves to the identical
+   canonical string; a missing path passes through `realpath` unresolved —
+   which is exactly why existence is mandatory in the identity domain.
+
 ## Problem
 
 R4 (BOUNDARY), R8 (PARTIAL), and R12 (BOUNDARY) are all blocked by the same
@@ -163,13 +190,25 @@ without narrowing their meaning, which the R9 task already prohibited.
    `scheduler_cli.py`, `tick`, `--install-root`, `<install_root>`, plus
    `--tick-only` when applicable), `working_directory` (the install root).
 
-   *One hash domain (v0.5).* A single documented function
-   `action_normalize(triple)` defines the ONLY byte domain that is ever
-   hashed. It applies `os.path.normpath` followed by `str.casefold` to
-   exactly the path-bearing positions — `execute`, `arguments[0]` (the
-   installed script path), the element immediately following
-   `--install-root`, and `working_directory` — and leaves every other
-   token byte-identical (non-path tokens such as `tick`, `--install-root`,
+   *One hash domain (v0.6: filesystem identity, not string case rules).* A
+   single documented function `action_normalize(triple)` defines the ONLY
+   byte domain that is ever hashed. For exactly the four path-bearing
+   positions — `execute`, `arguments[0]` (the installed script path), the
+   element immediately following `--install-root`, and `working_directory`
+   — the canonical form is the filesystem's own resolution of that path:
+   `os.path.realpath(path)`, i.e. the handle-resolved final path (on-disk
+   true-case name, 8.3 short names expanded, symlinks/junctions resolved,
+   separators normalized). No case-folding function is ever applied: path
+   equivalence is decided by the filesystem that will actually run the
+   task, so equivalent renderings (case variants, short names) of one real
+   object converge to one canonical string while distinct coexisting
+   objects — including casefold-colliding pairs such as `straße` /
+   `strasse` — keep distinct canonical strings. A path-bearing item whose
+   target does not exist CANNOT be normalized: `action_normalize` fails
+   with actionable text, and every caller treats that as a hard failure
+   (registration refuses; verification reports a broken install — never a
+   silent pass; see fail-closed rule below). Every other token is left
+   byte-identical (non-path tokens such as `tick`, `--install-root`,
    `--tick-only` are compared exactly, never normalized). Canonical
    serialization: the NORMALIZED triple encoded as the JSON object
    `{"arguments": [...], "execute": "...", "working_directory": "..."}`
@@ -179,7 +218,14 @@ without narrowing their meaning, which the R9 task already prohibited.
    three hash sites — the registration receipt, the freshly recomputed
    expected value, and live-task verification — call the same
    `action_normalize` before serializing, so every comparison happens
-   inside one byte domain.
+   inside one byte domain. Scope note: this identity domain is the
+   resolved-path STRING, not inode identity — a drift to a hardlink alias
+   of the same file hashes differently and is flagged for re-pinning
+   (conservative direction: aliases are surfaced, never silently
+   equated); volume/file-id (`st_dev`/`st_ino`) MAY be recorded in the
+   receipt as informational evidence but is never part of the hash, so
+   in-place content updates (e.g. interpreter patch releases at the same
+   path) do not break pinning.
 
    Registration derives the Task Scheduler fields from the RAW triple —
    Execute = interpreter; Arguments = the argv tail joined by the one
@@ -197,8 +243,14 @@ without narrowing their meaning, which the R9 task already prohibited.
    triple, and checks its SHA-256 against BOTH the receipt's
    `action_sha256` and the `action_normalize`d freshly recomputed expected
    triple; any mismatch is re-pinned and logged, never silently accepted.
-   If the resolved interpreter or script path does not exist at
-   registration time, `start` refuses.
+   Fail-closed existence rule (all four path-bearing positions, both
+   directions): at registration time, if any of the four targets does not
+   exist, `start` refuses with actionable text and registers nothing; at
+   verification time, if any of the four targets of the live task's parsed
+   triple does not exist, verification FAILS with actionable text
+   identifying the missing path — it never falls back to comparing
+   unresolved strings, because an unresolvable path has no identity in the
+   hash domain.
 3. **Read-only dashboard (`dashboard.py`).** New shipped file; a view-only
    derivation of observe.py's report layer. Parameters (no baked defaults):
    `--repo-root`, `--method-home`, `--port` (env overrides `WEILAN_REPO_ROOT`,
@@ -286,13 +338,28 @@ without narrowing their meaning, which the R9 task already prohibited.
   equals `task-registration.json`'s `action_sha256` AND the hash of the
   `action_normalize`d freshly recomputed expected triple; assert the
   recorded raw interpreter and script paths are absolute and exist.
-  Domain probes (both directions): (a) re-run verification against a
-  case-variant rendering of the live path fields (e.g. upper-cased drive
-  letter) and assert it still matches — path case must be invisible inside
-  the normalized domain; (b) negative control: assert the SHA-256 of the
-  RAW triple's canonical JSON does NOT equal `action_sha256` whenever any
+  Domain probes (v0.6 — equivalence-in, distinction-out, fail-closed):
+  (a) case-variant probe: re-run verification against a case-variant
+  rendering of the live path fields (e.g. upper-cased drive letter and
+  filename) and assert it still matches — equivalent renderings of one
+  existing object must be invisible inside the identity domain; (b)
+  distinct-existing-path probe (Codex's fifth counterexample, encoded):
+  inside the isolated root, create BOTH `straße.txt` and `strasse.txt`,
+  assert both exist and `os.path.samefile` is False (if the filesystem
+  refuses to keep them distinct, the probe fails loudly rather than
+  skipping), then assert `action_normalize` yields distinct canonical
+  strings and distinct hashes for triples differing only in that
+  path-bearing field — coexisting distinct objects must NEVER collide in
+  the hash domain, whatever string case rule an implementation might be
+  tempted to use; (c) negative control: assert the SHA-256 of the RAW
+  triple's canonical JSON does NOT equal `action_sha256` whenever any
   path-bearing field changes under `action_normalize` — guards the
-  implementation against silently hashing the wrong domain. Reproduction
+  implementation against silently hashing the wrong domain; (d)
+  fail-closed probe: point one path-bearing field of a candidate triple
+  at a nonexistent path and assert `action_normalize` (and therefore
+  registration and verification) fails with actionable text naming the
+  missing path — never a silent pass or a fallback string comparison.
+  Reproduction
   runs by argv, no shell: spawn `[execute] + arguments` with
   `cwd=working_directory` exactly as Task Scheduler would, from a parent
   process whose own working directory is NOT the install root and whose
