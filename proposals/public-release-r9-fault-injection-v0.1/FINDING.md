@@ -49,3 +49,23 @@ The frozen checkout's own hygiene verifier reported `PASS`, 62 files, zero
 findings, and tree
 `794199af2ceaeb239b373bdca38a7e66bc5657a46f42e95487a0a4fbae89373f`.
 The temporary worktree was removed after verification.
+
+## Dual-signed repair and RC2 replay
+
+Dual-sign `2026-07-17 10:22:46` + `10:26:16` authorized a Windows named
+mutex around each install-root mutation. Freeze commit
+`7ffc2a6687e183b1c9035e2d69f35fdff09ac4ca` derives a `Local\\` mutex name
+from the final resolved and case-folded root, treats `WAIT_ABANDONED` as
+acquired ownership followed by ordinary disk recovery/conflict checks, and
+returns an actionable conflict after a five-second bounded wait.
+
+The harness now contains seven tests. Main and a detached checkout of the
+freeze commit both reported `Ran 7 tests` and `OK`: the original four real
+process/hard-kill cases plus junction/case/trailing-separator mutex identity,
+distinct-root non-serialization, and bounded timeout behavior. The detached
+checkout also passed the 26 candidate tests and hygiene reported `PASS`, 62
+files, zero missing, zero findings, tree
+`501fd0a7e1a4af34aa42b0c52849650ee50a8118d161acafed8d3cdbd5b256d3`.
+An old RC1 half-owned state remains explicitly observable as `status=drifted`
+with exact missing paths; subsequent install runs the existing repair/conflict
+checks. No push, tag, deployment, or Task Scheduler activation occurred.

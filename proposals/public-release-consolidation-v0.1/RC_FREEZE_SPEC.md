@@ -24,6 +24,14 @@ conflict; old RC1 half-owned states remain observable as `status=drifted` with
 exact missing paths. No push, tag, deployment, or Task Scheduler activation is
 authorized.
 
+Execution receipt: local freeze commit
+`7ffc2a6687e183b1c9035e2d69f35fdff09ac4ca` (Git tree
+`48972870ad30d43a0d2e09270b018a77fb061ec3`) passed hygiene
+`PASS/62/0/0/tree=501fd0a7e1a4af34aa42b0c52849650ee50a8118d161acafed8d3cdbd5b256d3`,
+26 candidate tests, 7 R9 tests, 67/67 `eol=lf`, and matching LICENSE hashes
+in a detached worktree. `FREEZE_RECEIPT.json` is the current binding;
+`FREEZE_RECEIPT-RC1-dba1132.json` preserves the predecessor. No push occurred.
+
 Status: DUAL-SIGNED / Claude 【提案】 2026-07-17 01:03:27 + Codex 【同意】
 2026-07-17 01:12:11. This v2 supersedes the checkout-byte assumption that
 failed at Codex receipt 2026-07-17 00:56:44 while preserving the failed
