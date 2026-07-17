@@ -4,7 +4,10 @@ import hashlib
 import json
 import os
 import subprocess
+import sys
 import tempfile
+import time
+import uuid
 from datetime import datetime
 from pathlib import Path
 
@@ -61,9 +64,34 @@ def run_script(script: Path, *arguments: str) -> tuple[int, dict]:
     return completed.returncode, json.loads(completed.stdout.lstrip("\ufeff"))
 
 
+def product_tasks() -> set[str]:
+    completed = subprocess.run(
+        ["powershell", "-NoProfile", "-NonInteractive", "-Command",
+         "@(Get-ScheduledTask -TaskName 'WeilanScheduler-*' -ErrorAction SilentlyContinue | ForEach-Object TaskName)|ConvertTo-Json -Compress"],
+        text=True, encoding="utf-8", capture_output=True, timeout=30,
+    )
+    if completed.returncode != 0:
+        raise RuntimeError(completed.stderr or completed.stdout)
+    value = json.loads(completed.stdout.strip().lstrip("\ufeff") or "[]")
+    return {value} if isinstance(value, str) else set(value or [])
+
+
+def redact_paths(value, replacements: tuple[tuple[str, str], ...]):
+    if isinstance(value, dict):
+        return {key: redact_paths(item, replacements) for key, item in value.items()}
+    if isinstance(value, list):
+        return [redact_paths(item, replacements) for item in value]
+    if isinstance(value, str):
+        for source, replacement in replacements:
+            value = value.replace(source, replacement)
+        return value
+    return value
+
+
 def main() -> int:
     live_skills = configured_live_skills()
     live_before = {str(path): tree_hash(path) for path in live_skills}
+    product_tasks_before = product_tasks()
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary) / "fake-home"
         root.mkdir()
@@ -78,13 +106,25 @@ def main() -> int:
             installer.sha256_file(root / Path(item["path"])) == item["sha256"]
             for item in installed["owned_files"]
         )
-        entry_results = {
-            "install": run_entry(root, "install"),
-            "start": run_entry(root, "start", "-Smoke"),
-            "stop": run_entry(root, "stop", "-Smoke"),
-            "status": run_entry(root, "status"),
-            "open-dashboard": run_entry(root, "open-dashboard", "-Smoke"),
-        }
+        runtime = installer._runtime_module(root)
+        task_name = f"WeilanReleaseTest-{uuid.uuid4().hex}"
+        ticks = root / "data" / "runtime" / "scheduler-ticks.jsonl"
+        try:
+            entry_results = {
+                "install": run_entry(root, "install"),
+                "start": run_entry(root, "start", "-TickOnly", "-TaskName", task_name),
+            }
+            runtime.trigger_task(task_name)
+            deadline = time.monotonic() + 20
+            while time.monotonic() < deadline and not ticks.is_file():
+                time.sleep(0.25)
+            entry_results["open-dashboard"] = run_entry(root, "open-dashboard", "-Port", "0")
+            entry_results["status"] = run_entry(root, "status")
+            entry_results["stop"] = run_entry(root, "stop")
+            entry_results["stop_again"] = run_entry(root, "stop")
+        finally:
+            runtime.stop(root)
+        tick_receipt = json.loads(ticks.read_text(encoding="utf-8").splitlines()[-1]) if ticks.is_file() else None
         clean_uninstall_rc, clean_uninstall = run_script(root / "bin" / "uninstall.ps1")
         sentinel_after_clean = sentinel.read_text(encoding="utf-8") == "preserve"
         repeated_uninstall = installer.uninstall(root)
@@ -98,13 +138,19 @@ def main() -> int:
         sentinel_after_drift = sentinel.read_text(encoding="utf-8") == "preserve"
 
     live_after = {str(path): tree_hash(path) for path in live_skills}
+    product_tasks_after = product_tasks()
     checks = {
         "manifest_hash_closure": closure,
-        "five_entrypoints_smoke": all(
-            result.get("status") in ("installed", "smoke_pass") or result.get("state") == "healthy"
-            for result in entry_results.values()
+        "five_entrypoints_real_lifecycle": (
+            entry_results["start"].get("status") == "running"
+            and entry_results["open-dashboard"].get("status") == "running"
+            and entry_results["status"].get("runtime", {}).get("task_registered")
+            and entry_results["status"].get("runtime", {}).get("dashboard", {}).get("live")
+            and entry_results["stop"].get("status") == "stopped"
+            and entry_results["stop_again"].get("status") == "stopped"
         ),
-        "status_explains_activation_boundary": bool(entry_results["status"].get("runtime_activation_boundary")),
+        "real_task_tick_receipt": bool(tick_receipt and tick_receipt.get("outcome") in ("nothing_due", "no_agent_configured")),
+        "product_task_baseline_unchanged": product_tasks_before == product_tasks_after,
         "setup_entry_succeeded": setup_rc == 0 and setup_repeat_rc == 0,
         "clean_uninstall": clean_uninstall_rc == 0 and clean_uninstall["status"] == "uninstalled",
         "uninstall_idempotent": repeated_uninstall["status"] == "already_absent",
@@ -112,19 +158,25 @@ def main() -> int:
         "drift_refused_with_nonzero_exit": drift_uninstall_rc != 0 and drift_uninstall["status"] == "conflict" and drift_relative.as_posix() in drift_uninstall["conflicts"],
         "drifted_file_preserved": drift_preserved,
         "live_skills_unchanged": live_before == live_after,
-        "runtime_activation_not_claimed": all(
-            not entry_results[name].get("runtime_activation_performed", False)
+        "runtime_activation_verified": all(
+            entry_results[name].get("runtime_activation_performed", False)
             for name in ("start", "stop", "open-dashboard")
         ),
     }
+    replacements = (
+        (str(root), "<isolated-install>"),
+        (str(REPO), "<repo-root>"),
+        (str(Path(sys.executable)), "<python-executable>"),
+    )
     receipt = {
         "schema": "weilan_install_ownership_acceptance_receipt_v0.1",
         "time": datetime.now().astimezone().isoformat(timespec="seconds"),
-        "verdict": "PASS_WITH_RUNTIME_BOUNDARY" if all(checks.values()) else "FAIL",
-        "source_manifest": str(HERE / "install-manifest.json"),
+        "verdict": "PASS" if all(checks.values()) else "FAIL",
+        "source_manifest": "proposals/public-release-consolidation-v0.1/install-manifest.json",
         "owned_file_count": installed["owned_file_count"],
         "checks": checks,
-        "entry_results": entry_results,
+        "entry_results": redact_paths(entry_results, replacements),
+        "tick_receipt": tick_receipt,
         "drift_conflicts": drift_uninstall["conflicts"],
         "live_skills_before": live_before,
         "live_skills_after": live_after,
@@ -132,14 +184,14 @@ def main() -> int:
             "configured": bool(live_skills),
             "source": "WEILAN_LIVE_SKILL_PATHS",
         },
-        "boundary": "Ownership/install/uninstall and five-entry smoke are closed. Real scheduler/dashboard activation is intentionally refused until machine-specific runtime paths are removed and independently reviewed.",
+        "boundary": "Current-host isolated lifecycle evidence only; clean-machine timing, adoption, deployment, publication, and R15 independent final audit remain open.",
         "signature": None,
         "adopted": False,
         "deployed": False,
     }
     OUTPUT.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(receipt, ensure_ascii=False, indent=2))
-    return 0 if receipt["verdict"] == "PASS_WITH_RUNTIME_BOUNDARY" else 1
+    return 0 if receipt["verdict"] == "PASS" else 1
 
 
 if __name__ == "__main__":

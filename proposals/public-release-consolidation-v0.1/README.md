@@ -5,15 +5,18 @@ It provides a bounded installer proposal and documentation for an isolated local
 rehearsal. It does not authorize deployment, adoption, publication, or a license
 choice.
 
-## Current boundary
+## Current runtime
 
 - `install`, `status`, and `uninstall` operate on an explicitly selected install
   directory.
-- `start`, `stop`, and `open-dashboard` currently support only `-Smoke`. The
-  smoke path checks the installed entry points without starting a scheduler,
-  dashboard, or autonomous loop.
-- Calling those three entries without `-Smoke` is expected to refuse activation
-  with exit code `3` while machine-specific runtime wiring remains unresolved.
+- `start -TickOnly` registers one per-user Scheduled Task with an observable
+  tick receipt. Without `-TickOnly`, `data/runtime/runtime.json` must contain a
+  nonempty `agent_command` argv array; silent heartbeat-only activation is
+  refused.
+- `open-dashboard` starts a GET-only viewer on `127.0.0.1`. A non-loopback
+  bind requires both `-Bind` and `-AcknowledgeNetworkExposure`.
+- `status`, `stop`, and `uninstall` use the task/pid ownership receipts. They
+  never search by a broad task-name pattern when deleting.
 - The outward license and notices are still pending independent approval. No
   license is selected or activated by this candidate documentation.
 
@@ -47,9 +50,10 @@ python .\proposals\public-release-consolidation-v0.1\clean_home_rehearsal.py
 ```
 
 The rehearsal creates a temporary `HOME`, `USERPROFILE`, `CODEX_HOME`,
-`WEILAN_METHOD_HOME`, and install root; exercises install, status, the three
-non-activating smoke entries, and uninstall; then removes the temporary tree.
-It never connects a real Task Scheduler task or dashboard.
+`WEILAN_METHOD_HOME`, and install root; exercises the non-activating smoke
+surface and uninstall; then removes the temporary tree. The separate portable
+runtime acceptance uses a test-unique `WeilanReleaseTest-*` task and removes it
+in the same test.
 
 **This is a clean-HOME rehearsal on the current machine. It is not evidence of
 a genuinely clean Windows account or clean machine, and it cannot close the
@@ -57,4 +61,3 @@ clean-machine/time acceptance gate.**
 
 For recovery and exit-code meanings, see
 [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
-

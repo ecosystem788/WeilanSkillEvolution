@@ -13,8 +13,11 @@ reviewer to audit a failure.
 | install exit `2`, `preflight_failed` | A required command, manifest, repository root, or payload is missing/invalid | Follow each JSON `hint`; no target files should have been written |
 | install exit `2`, `conflict` | The target already contains a different file at an owned path | Choose a new empty install directory or preserve and inspect the conflicting file |
 | status exit `2`, `state: drifted` | An installed owned file is missing or changed | Review `missing` and `drifted`; do not overwrite evidence blindly |
-| entry exit `2`, `installation_not_healthy` | Smoke was attempted on an absent or drifted install | Restore/reinstall into an empty target, then rerun status |
-| entry exit `3`, `activation_refused` | Real runtime activation is intentionally unavailable | Use `-Smoke`; do not wire a real scheduler/dashboard under this candidate |
+| entry exit `2`, `installation_not_healthy` | Runtime action was attempted on an absent or drifted install | Restore/reinstall into an empty target, then rerun status |
+| start exit `1`, missing `agent_command` | Agent mode was requested without an explicit argv configuration | Add `data/runtime/runtime.json`, or use `-TickOnly` for an observable no-agent task |
+| start exit `1`, invalid `-TaskName` | Test task injection did not use `WeilanReleaseTest-` | Omit `-TaskName` in product use; harnesses must use a unique admitted name |
+| dashboard exit `1`, acknowledgement required | A non-loopback bind was requested without the second exposure acknowledgement | Prefer loopback; otherwise review exposure and pass `-AcknowledgeNetworkExposure` explicitly |
+| uninstall exit `2`, `runtime_residue` | The exact owned task or dashboard process could not be proven stopped | Preserve task/pid receipts and inspect the reported residue; do not delete by name pattern |
 | uninstall exit `2`, `conflict` | At least one owned path changed after install | The changed path is preserved; save it, review it, then remove it manually only if intended |
 | uninstall `already_absent` | No ownership receipt exists | The installer has no verified ownership set to remove; inspect the target manually if the receipt may have been deleted |
 
@@ -33,6 +36,6 @@ clean-machine acceptance result.
 ## Escalation boundaries
 
 Stop and obtain the required independent approval before changing or merging
-scheduler/wake/dashboard contracts, installing real host tasks, selecting the
-outward license, adopting the deployed Skill, or pushing/tagging/publishing a
-release.
+scheduler/wake/dashboard contracts, selecting the outward license, adopting
+the deployed Skill, or pushing/tagging/publishing a release. The signed v0.7
+contract authorizes only the receipt-owned portable runtime described here.

@@ -1,13 +1,14 @@
 {
   "schema": "weilan_install_ownership_acceptance_receipt_v0.1",
-  "time": "2026-07-16T13:33:05+09:00",
-  "verdict": "PASS_WITH_RUNTIME_BOUNDARY",
-  "source_manifest": "D:\\WeilanSkillEvolution\\proposals\\public-release-consolidation-v0.1\\install-manifest.json",
-  "owned_file_count": 55,
+  "time": "2026-07-17T18:16:43+09:00",
+  "verdict": "PASS",
+  "source_manifest": "proposals/public-release-consolidation-v0.1/install-manifest.json",
+  "owned_file_count": 61,
   "checks": {
     "manifest_hash_closure": true,
-    "five_entrypoints_smoke": true,
-    "status_explains_activation_boundary": true,
+    "five_entrypoints_real_lifecycle": true,
+    "real_task_tick_receipt": true,
+    "product_task_baseline_unchanged": true,
     "setup_entry_succeeded": true,
     "clean_uninstall": true,
     "uninstall_idempotent": true,
@@ -15,14 +16,14 @@
     "drift_refused_with_nonzero_exit": true,
     "drifted_file_preserved": true,
     "live_skills_unchanged": true,
-    "runtime_activation_not_claimed": true
+    "runtime_activation_verified": true
   },
   "entry_results": {
     "install": {
       "schema": "weilan_release_install_receipt_v0.1",
       "status": "installed",
-      "repo_root": "D:\\WeilanSkillEvolution",
-      "install_root": "C:\\Users\\zy\\AppData\\Local\\Temp\\tmpp9_sjg1j\\fake-home",
+      "repo_root": "<repo-root>",
+      "install_root": "<isolated-install>",
       "manifest_sha256": "a90650300d97497499c863bfa52b912e70ed4b134911b268166f113f19ff4f66",
       "owned_files": [
         {
@@ -31,11 +32,11 @@
         },
         {
           "path": "bin/open-dashboard.ps1",
-          "sha256": "ecdd9acd0438ff2e72520f4e9464f29c06f7f5c5a7816d0656ccc45f1f2f4fbb"
+          "sha256": "9db91ab5327b61edf8aafe0baa40d3e830b693b56abaf2d3773d3cebb8c2001c"
         },
         {
           "path": "bin/start.ps1",
-          "sha256": "971f1ddd2f89aa79baaebf5632049b846de9b529832e22066c4d399936e64c2d"
+          "sha256": "b0199f6e77bbf0d35f65037d1c79cee89d02f65953104c50e436180691f701ff"
         },
         {
           "path": "bin/status.ps1",
@@ -55,11 +56,15 @@
         },
         {
           "path": "lib/release_installer.py",
-          "sha256": "526e2ddd8cf983f6d2b5aceeeb7e093904cec0cfa04cb5bf0fecd810f1636545"
+          "sha256": "bb68b81366b4db4ab70597e619e40a670019cd3922d9b031b7e95a7970581772"
+        },
+        {
+          "path": "skills/solve-with-weilan/LICENSE",
+          "sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1"
         },
         {
           "path": "skills/solve-with-weilan/README.md",
-          "sha256": "827014152a068338e06461298e1f2fb04c91d8e9271495741f80b9c933397703"
+          "sha256": "1dcb0d078c166c439f755e0dfce05ad418ab2c16c3875841d39c93d626e59380"
         },
         {
           "path": "skills/solve-with-weilan/SKILL.md",
@@ -112,6 +117,26 @@
         {
           "path": "skills/solve-with-weilan/references/transition-planner-system.md",
           "sha256": "bd9a17b0922535729f47c8781502e363c0859c8f37212bcad26093e4d18349c7"
+        },
+        {
+          "path": "skills/solve-with-weilan/runtime/__init__.py",
+          "sha256": "1202ac0ce583a83c893afbd4c81cb2504243300cde0103fde4a888aa188697b0"
+        },
+        {
+          "path": "skills/solve-with-weilan/runtime/bounded_scheduler.py",
+          "sha256": "7496f14e9ef90d4b9d306879e0d8b7e4d3f602907a00cf323dae53b660dacf85"
+        },
+        {
+          "path": "skills/solve-with-weilan/runtime/dashboard.py",
+          "sha256": "6cffe1a42b9f5f4fda01e74ad32a93405bb6221141a1c55265d55ed969be8f8f"
+        },
+        {
+          "path": "skills/solve-with-weilan/runtime/lifecycle.py",
+          "sha256": "e2bdc004f0389bd6dc702af062b1c87498cd1952a7c780359ba9d51e4c441e0d"
+        },
+        {
+          "path": "skills/solve-with-weilan/runtime/scheduler_cli.py",
+          "sha256": "e8ab114acef61f777e8601442159343f662578915450da68eb7a854dcc0d936b"
         },
         {
           "path": "skills/solve-with-weilan/scripts/governance.py",
@@ -239,45 +264,125 @@
         },
         {
           "path": "skills/solve-with-weilan/scripts/wake_brief.py",
-          "sha256": "17f9576fc0930138dc86171aea05cf8ed6fd68441964acc23147979fa22bdd7c"
+          "sha256": "b765d34abd282f6a0376c3c873ef0f6522e5566f7d958848484d2c1b2e491d36"
         },
         {
           "path": "skills/solve-with-weilan/scripts/weilan_trace.py",
           "sha256": "33bfe8e7d8770200919e131c92bfaa638067b7f016fa0dfda38d0496c8cba290"
         }
       ],
-      "owned_file_count": 55,
-      "runtime_activation_ready": false,
-      "runtime_activation_boundary": "scheduler/dashboard sources still contain machine-specific paths; real start/stop/open-dashboard refuse activation"
+      "owned_file_count": 61,
+      "install_id": "7b1844d6d431",
+      "runtime_activation_ready": true,
+      "runtime_activation_boundary": null
     },
     "start": {
       "entry": "start",
-      "status": "smoke_pass",
-      "runtime_activation_performed": false,
-      "boundary": "scheduler/dashboard sources still contain machine-specific paths; real start/stop/open-dashboard refuse activation"
+      "status": "running",
+      "task": {
+        "execute": "<python-executable>",
+        "next_run": "2026-07-17T18:21:16.0000000+09:00",
+        "arguments_display_string": "<isolated-install>\\skills\\solve-with-weilan\\runtime\\scheduler_cli.py tick --install-root <isolated-install> --tick-only",
+        "working_directory": "<isolated-install>",
+        "last_run": "1999-11-30T00:00:00.0000000+09:00"
+      },
+      "registration": {
+        "task_name": "WeilanReleaseTest-569a0835bfd34275b6da2ab173709b79",
+        "action": {
+          "execute": "<python-executable>",
+          "arguments": [
+            "<isolated-install>\\skills\\solve-with-weilan\\runtime\\scheduler_cli.py",
+            "tick",
+            "--install-root",
+            "<isolated-install>",
+            "--tick-only"
+          ],
+          "working_directory": "<isolated-install>"
+        },
+        "action_sha256": "0b63cff49c0c24e2c91f9b541ab7d829df47a0288ba7e57b80171d9f7253f933",
+        "arguments_display_string": "<isolated-install>\\skills\\solve-with-weilan\\runtime\\scheduler_cli.py tick --install-root <isolated-install> --tick-only",
+        "registered_utc": "2026-07-17T09:16:15+00:00",
+        "tick_only": true
+      },
+      "runtime_activation_performed": true
     },
-    "stop": {
-      "entry": "stop",
-      "status": "smoke_pass",
-      "runtime_activation_performed": false,
-      "boundary": "scheduler/dashboard sources still contain machine-specific paths; real start/stop/open-dashboard refuse activation"
+    "open-dashboard": {
+      "entry": "open-dashboard",
+      "status": "running",
+      "url": "http://127.0.0.1:49674/",
+      "dashboard": {
+        "live": true,
+        "pid": 20436,
+        "port": 49674,
+        "http_200": true
+      },
+      "runtime_activation_performed": true
     },
     "status": {
       "schema": "weilan_release_status_v0.1",
       "state": "healthy",
       "ok": true,
-      "owned_file_count": 55,
+      "owned_file_count": 61,
       "missing": [],
       "drifted": [],
-      "runtime_activation_ready": false,
-      "runtime_activation_boundary": "scheduler/dashboard sources still contain machine-specific paths; real start/stop/open-dashboard refuse activation"
+      "runtime_activation_ready": true,
+      "runtime_activation_boundary": null,
+      "runtime": {
+        "task_registered": true,
+        "task": {
+          "execute": "<python-executable>",
+          "next_run": "2026-07-17T18:21:16.0000000+09:00",
+          "arguments_display_string": "<isolated-install>\\skills\\solve-with-weilan\\runtime\\scheduler_cli.py tick --install-root <isolated-install> --tick-only",
+          "working_directory": "<isolated-install>",
+          "last_run": "2026-07-17T18:16:19.0000000+09:00"
+        },
+        "registration": {
+          "task_name": "WeilanReleaseTest-569a0835bfd34275b6da2ab173709b79",
+          "action": {
+            "execute": "<python-executable>",
+            "arguments": [
+              "<isolated-install>\\skills\\solve-with-weilan\\runtime\\scheduler_cli.py",
+              "tick",
+              "--install-root",
+              "<isolated-install>",
+              "--tick-only"
+            ],
+            "working_directory": "<isolated-install>"
+          },
+          "action_sha256": "0b63cff49c0c24e2c91f9b541ab7d829df47a0288ba7e57b80171d9f7253f933",
+          "arguments_display_string": "<isolated-install>\\skills\\solve-with-weilan\\runtime\\scheduler_cli.py tick --install-root <isolated-install> --tick-only",
+          "registered_utc": "2026-07-17T09:16:15+00:00",
+          "tick_only": true
+        },
+        "last_tick_age_seconds": 6.038978815078735,
+        "dashboard": {
+          "live": true,
+          "pid": 20436,
+          "port": 49674,
+          "http_200": true
+        }
+      }
     },
-    "open-dashboard": {
-      "entry": "open-dashboard",
-      "status": "smoke_pass",
-      "runtime_activation_performed": false,
-      "boundary": "scheduler/dashboard sources still contain machine-specific paths; real start/stop/open-dashboard refuse activation"
+    "stop": {
+      "entry": "stop",
+      "status": "stopped",
+      "task_name": "WeilanReleaseTest-569a0835bfd34275b6da2ab173709b79",
+      "runtime_activation_performed": true
+    },
+    "stop_again": {
+      "entry": "stop",
+      "status": "stopped",
+      "task_name": null,
+      "runtime_activation_performed": true
     }
+  },
+  "tick_receipt": {
+    "config_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "episode_stop_reason": "quiescent",
+    "outcome": "no_agent_configured",
+    "schema": "weilan_portable_scheduler_tick_v0.1",
+    "tick_only": true,
+    "time_utc": "2026-07-17T09:16:20+00:00"
   },
   "drift_conflicts": [
     "bin/install.ps1"
@@ -288,7 +393,7 @@
     "configured": false,
     "source": "WEILAN_LIVE_SKILL_PATHS"
   },
-  "boundary": "Ownership/install/uninstall and five-entry smoke are closed. Real scheduler/dashboard activation is intentionally refused until machine-specific runtime paths are removed and independently reviewed.",
+  "boundary": "Current-host isolated lifecycle evidence only; clean-machine timing, adoption, deployment, publication, and R15 independent final audit remain open.",
   "signature": null,
   "adopted": false,
   "deployed": false

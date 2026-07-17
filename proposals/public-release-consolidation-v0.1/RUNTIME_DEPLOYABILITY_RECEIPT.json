@@ -1,49 +1,40 @@
 {
-  "schema": "weilan_skill_runtime_deployability_receipt_v0.1",
-  "time": "2026-07-15T11:25:53+09:00",
-  "verdict": "PASS_WITH_BOUNDARY",
-  "scope": "Clean isolated installation, discovery, CLI invocation, fresh-ledger recall, and uninstall rollback of skill/solve-with-weilan only.",
-  "source": {
-    "head_commit": "1a212a7c0d0937629a62481900b99a2b5e6b5824",
-    "clone_commit": "1a212a7c0d0937629a62481900b99a2b5e6b5824",
-    "audited_commit": "d522a97d4063aa6e509ef7e9dfe9497e82be4fd6",
-    "audited_skill_tree": "12fcefbcf9c59f27ab33900b920f30b7c866cb5c",
-    "head_skill_tree": "12fcefbcf9c59f27ab33900b920f30b7c866cb5c",
-    "construction": "Local git clone --no-checkout followed by cone sparse-checkout of skill/solve-with-weilan at the exact HEAD commit."
+  "schema": "weilan_skill_runtime_deployability_receipt_v0.2",
+  "time": "2026-07-17T18:15:28+09:00",
+  "verdict": "PASS_CURRENT_HOST",
+  "scope": "Isolated install plus receipt-owned Task Scheduler, one-shot tick, loopback dashboard, stop, and uninstall lifecycle.",
+  "implementation_commit": "3047c0cd39f13b52db4b5343226a709b4c373967",
+  "checks": {
+    "portable_scheduler_entry": true,
+    "real_test_task_tick_receipt": true,
+    "configured_agent_command_invoked": true,
+    "action_hash_single_normalized_domain": true,
+    "normal_and_extended_namespace_same_object_converge": true,
+    "distinct_unicode_paths_do_not_collide": true,
+    "missing_path_fails_closed": true,
+    "non_path_action_drift_is_repinned": true,
+    "dashboard_get_only": true,
+    "dashboard_loopback_default": true,
+    "dashboard_non_loopback_requires_acknowledgement": true,
+    "stale_pidfile_recovered": true,
+    "stop_idempotent": true,
+    "uninstall_zero_owned_residue": true,
+    "product_task_baseline_unchanged": true,
+    "community_ledger_strict_snapshot_unchanged_in_isolated_run": true
   },
-  "installation": {
-    "target": "A fresh temporary fake CODEX_HOME/skills/solve-with-weilan; neither live installed Skill entry was touched.",
-    "source_file_count": 47,
-    "installed_file_count": 47,
-    "sha256_mismatch_count": 0,
-    "skill_md_present": true
-  },
-  "invocation": {
-    "command_1": "python <isolated-install>/scripts/weilan_trace.py --help",
-    "command_1_exit": 0,
-    "command_2": "python <isolated-install>/scripts/weilan_trace.py memory-recall --workspace <fresh-workspace>",
-    "command_2_exit": 0,
-    "command_2_activation_state": "NO_CONTEXT",
-    "method_state": "A fresh temporary WEILAN_METHOD_HOME, isolated from the real community ledger."
-  },
-  "rollback": {
-    "action": "Removed only the verified temporary solve-with-weilan installation target.",
-    "target_absent_after_rollback": true,
-    "preexisting_sibling_sentinel_preserved": true,
-    "temporary_run_root_removed": true
-  },
-  "failed_probe": {
-    "route": "git archive HEAD followed by Windows tar.exe extraction of the full repository",
-    "result": "FAIL_BEFORE_INSTALL",
-    "evidence": "tar.exe reported Invalid empty pathname for tracked Chinese filenames; no install or live mutation occurred.",
-    "disposition": "The archive-extraction construction route is not a supported clean-checkout proof on this Windows host. The successful proof used git clone plus sparse checkout instead."
+  "test_evidence": {
+    "portable_runtime_tests": "4 passed",
+    "candidate_suite": "30 passed",
+    "r9_fault_suite": "7 passed",
+    "hygiene": "PASS/68 files/0 missing/0 findings"
   },
   "boundaries": [
-    "This receipt closes the installability and runtime-call axis for the Skill payload only; it does not claim that the whole autonomous-community runtime is release-ready.",
-    "The repository still lacks the proposed setup.ps1 and deterministic install/start/stop/status/open-dashboard entry points, and README.md still labels the repository as a live working tree rather than a packaged release.",
-    "Rollback was mechanically verified in the isolated target, but the Skill README does not yet document an uninstall command.",
-    "No tag, release publication, adoption, live deployment, sibling-repository migration, or authority-file change was performed."
+    "Current-host evidence is not a genuinely clean Windows machine or the R12 ten-minute acceptance.",
+    "No deployed Skill was adopted or modified.",
+    "No push, tag, publication, or external message occurred.",
+    "Only test-unique WeilanReleaseTest-* task names were used by acceptance; they were removed by exact receipt ownership."
   ],
   "live_skill_modified": false,
-  "community_ledger_used_for_probe": false
+  "push_performed": false,
+  "deployment_performed": false
 }
