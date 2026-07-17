@@ -1,4 +1,4 @@
-# R4/R8 portable runtime wiring — spec v0.4 (PROPOSAL, pending dual-sign)
+# R4/R8 portable runtime wiring — spec v0.5 (PROPOSAL, pending dual-sign)
 
 Status: spec only. This file has zero authority until a tearoom【提案】/【同意】
 pair covers the implementation. Writing this file changes no frozen bytes: it is
@@ -74,6 +74,27 @@ v0.3 text and closed by this revision:
    shell) so invocation semantics never depend on cmd-vs-PowerShell string
    interpretation.
 
+v0.5 same day, revising after Codex's fourth【反对】(peer-chat 2026-07-17
+16:11:34), which confirmed the two v0.3 conflicts closed but found one
+remaining load-bearing hash-domain conflict inside v0.4's §D2b; verified by
+independent reproduction (a minimal triple hashes to `50882ab4...` raw and
+`41aa00e6...` after casefold+normpath — different byte domains can never
+share a SHA-256) and closed by this revision:
+
+8. v0.4 §D2b hashed the RAW absolute-path triple at registration time
+   (canonical JSON → `action_sha256`) while instructing live verification
+   to rebuild the triple only AFTER case-folding + `normpath`, then require
+   that hash to equal the receipt's `action_sha256`. Any path containing an
+   uppercase character (e.g. every stock `C:\Python...` interpreter) makes
+   verification fail unconditionally, and equivalent Windows paths that
+   differ only in case can never match. → closed by the rewritten §D2b: one
+   documented `action_normalize(triple)` (normpath then casefold, applied
+   to exactly the four path-bearing positions; every other token byte-
+   exact) runs at ALL three hash sites — registration receipt, freshly
+   recomputed expected value, and live-task verification — before the one
+   canonical JSON serialization. The raw triple remains what is actually
+   registered and displayed, but it is never hashed.
+
 ## Problem
 
 R4 (BOUNDARY), R8 (PARTIAL), and R12 (BOUNDARY) are all blocked by the same
@@ -141,26 +162,43 @@ without narrowing their meaning, which the R9 task already prohibited.
    PATH), `arguments` (an argv array: absolute path of the installed
    `scheduler_cli.py`, `tick`, `--install-root`, `<install_root>`, plus
    `--tick-only` when applicable), `working_directory` (the install root).
-   Canonical serialization: the JSON object `{"arguments": [...],
-   "execute": "...", "working_directory": "..."}` encoded UTF-8 with
-   sorted keys, `(",", ":")` separators, and no trailing newline; its
-   SHA-256 is `action_sha256`. Registration derives the Task Scheduler
-   fields from the triple — Execute = interpreter; Arguments = the argv
-   tail joined by the one documented quoting function (an element is
-   double-quoted iff it contains whitespace or quotes, embedded quotes
-   escaped per Windows argv rules); WorkingDirectory = install root — and
-   writes `<install_root>/data/runtime/task-registration.json` —
-   `{task_name, action: {execute, arguments, working_directory},
-   action_sha256, arguments_display_string, registered_utc}` — before
-   `start` reports success. Verification never compares shell strings:
-   re-entrant `start` queries the live task, extracts the three fields,
-   parses the live Arguments back into an argv array under the same
-   documented Windows rules, normalizes paths (case-folded,
-   `os.path.normpath`), rebuilds the canonical triple, and checks its
-   SHA-256 against BOTH the receipt's `action_sha256` and a freshly
-   recomputed expected triple; any mismatch is re-pinned and logged, never
-   silently accepted. If the resolved interpreter or script path does not
-   exist at registration time, `start` refuses.
+
+   *One hash domain (v0.5).* A single documented function
+   `action_normalize(triple)` defines the ONLY byte domain that is ever
+   hashed. It applies `os.path.normpath` followed by `str.casefold` to
+   exactly the path-bearing positions — `execute`, `arguments[0]` (the
+   installed script path), the element immediately following
+   `--install-root`, and `working_directory` — and leaves every other
+   token byte-identical (non-path tokens such as `tick`, `--install-root`,
+   `--tick-only` are compared exactly, never normalized). Canonical
+   serialization: the NORMALIZED triple encoded as the JSON object
+   `{"arguments": [...], "execute": "...", "working_directory": "..."}`
+   UTF-8 with sorted keys, `(",", ":")` separators, and no trailing
+   newline; its SHA-256 is `action_sha256`. The raw (un-normalized) triple
+   is what is actually registered and displayed; it is never hashed. All
+   three hash sites — the registration receipt, the freshly recomputed
+   expected value, and live-task verification — call the same
+   `action_normalize` before serializing, so every comparison happens
+   inside one byte domain.
+
+   Registration derives the Task Scheduler fields from the RAW triple —
+   Execute = interpreter; Arguments = the argv tail joined by the one
+   documented quoting function (an element is double-quoted iff it
+   contains whitespace or quotes, embedded quotes escaped per Windows argv
+   rules); WorkingDirectory = install root — and writes
+   `<install_root>/data/runtime/task-registration.json` — `{task_name,
+   action: {execute, arguments, working_directory}` (raw, for
+   registration/display), `action_sha256` (SHA-256 of the normalized
+   triple), `arguments_display_string, registered_utc}` — before `start`
+   reports success. Verification never compares shell strings: re-entrant
+   `start` queries the live task, extracts the three fields, parses the
+   live Arguments back into an argv array under the same documented
+   Windows rules, applies `action_normalize`, rebuilds the canonical
+   triple, and checks its SHA-256 against BOTH the receipt's
+   `action_sha256` and the `action_normalize`d freshly recomputed expected
+   triple; any mismatch is re-pinned and logged, never silently accepted.
+   If the resolved interpreter or script path does not exist at
+   registration time, `start` refuses.
 3. **Read-only dashboard (`dashboard.py`).** New shipped file; a view-only
    derivation of observe.py's report layer. Parameters (no baked defaults):
    `--repo-root`, `--method-home`, `--port` (env overrides `WEILAN_REPO_ROOT`,
@@ -243,18 +281,26 @@ without narrowing their meaning, which the R9 task already prohibited.
   (test-local script), assert outcome `agent_invoked` and the stub's
   side-effect file exists.
 - **Action contract proof (§D2b)**: query the registered task, extract
-  Execute/Arguments/WorkingDirectory, normalize per §D2b's documented rules,
-  rebuild the canonical triple, and assert its SHA-256 equals
-  `task-registration.json`'s `action_sha256`; assert the recorded
-  interpreter and script paths are absolute and exist. Reproduction runs by
-  argv, no shell: spawn `[execute] + arguments` with
+  Execute/Arguments/WorkingDirectory, parse Arguments back into argv, apply
+  `action_normalize`, rebuild the canonical triple, and assert its SHA-256
+  equals `task-registration.json`'s `action_sha256` AND the hash of the
+  `action_normalize`d freshly recomputed expected triple; assert the
+  recorded raw interpreter and script paths are absolute and exist.
+  Domain probes (both directions): (a) re-run verification against a
+  case-variant rendering of the live path fields (e.g. upper-cased drive
+  letter) and assert it still matches — path case must be invisible inside
+  the normalized domain; (b) negative control: assert the SHA-256 of the
+  RAW triple's canonical JSON does NOT equal `action_sha256` whenever any
+  path-bearing field changes under `action_normalize` — guards the
+  implementation against silently hashing the wrong domain. Reproduction
+  runs by argv, no shell: spawn `[execute] + arguments` with
   `cwd=working_directory` exactly as Task Scheduler would, from a parent
   process whose own working directory is NOT the install root and whose
   PATH contains no `python`, and assert a new tick receipt appears (proves
   no PATH/parent-cwd dependence without betting on cmd-vs-PowerShell string
-  semantics). Then corrupt the live task's Arguments in place, re-run
-  `start`, and assert it detects the field-level mismatch, re-pins, and
-  logs.
+  semantics). Then corrupt a NON-path token of the live task's Arguments in
+  place (e.g. `tick` → `tock`), re-run `start`, and assert it detects the
+  field-level mismatch, re-pins, and logs.
 - **Task-name guard (§D2a)**: `start --task-name Foo` (non-prefixed) refuses
   with exit non-zero and registers nothing. Ownership, not host-global
   emptiness: before the run, snapshot the set of existing task names
