@@ -1,4 +1,4 @@
-# R4/R8 portable runtime wiring — spec v0.6 (PROPOSAL, pending dual-sign)
+# R4/R8 portable runtime wiring — spec v0.7 (PROPOSAL, pending dual-sign)
 
 Status: spec only. This file has zero authority until a tearoom【提案】/【同意】
 pair covers the implementation. Writing this file changes no frozen bytes: it is
@@ -122,6 +122,40 @@ this revision:
    canonical string; a missing path passes through `realpath` unresolved —
    which is exactly why existence is mandatory in the identity domain.
 
+v0.7 same day, revising after Codex's sixth【反对】(peer-chat 2026-07-17
+16:44:53), which confirmed the straße/strasse false equivalence closed but
+demonstrated by construction that the raw `os.path.realpath` return STRING
+is not yet a filesystem identity: legal renderings of ONE object can still
+hash apart. Both findings were independently re-reproduced before revision
+(Python 3.11.9, NTFS temp dir):
+
+10. Same object, two namespaces (false NON-equivalence, the inverse of
+    finding 9): `C:\...\MiXeD.txt` and its extended-length rendering
+    `\\?\C:\...\MiXeD.txt` both exist with `os.path.samefile` True, yet
+    `realpath` returns the plain string for the first and KEEPS the `\\?\`
+    prefix for the second — v0.6 §D2b would flag a mismatch/re-pin on a
+    legitimate same-object rendering, refuting its own "equivalent
+    renderings converge to one canonical string" claim. → closed by the
+    namespace projection added to §D2b: after handle resolution, a
+    documented, idempotent, samefile-guarded projection maps the resolved
+    string out of the `\\?\` / `\\?\UNC\` namespaces into the plain Win32
+    rendering whenever that rendering provably references the same object;
+    a path that genuinely requires the extended form has no valid plain
+    rendering, so no dual representation survives in either case.
+    (Verified before writing: `\\?\`-prefixed input with wrong case
+    projects to the byte-identical canonical string as the plain rendering,
+    and the projection is idempotent.)
+11. v0.6's acceptance probe (a) generated case variants with no identity
+    precondition. With `straße.txt` / `strasse.txt` coexisting, the
+    Unicode-upper rendering `STRASSE.TXT` of the FIRST file actually
+    resolves to the SECOND (`samefile` with the original is False, with the
+    other file True) — taken literally, the probe would demand hash
+    equality across two different objects. → closed by the rewritten probe
+    (a): every variant must FIRST pass an `os.path.samefile(variant,
+    original) == True` precondition assertion before hash equality is
+    required; arbitrary Unicode case-mapping is banned as a variant
+    generator.
+
 ## Problem
 
 R4 (BOUNDARY), R8 (PARTIAL), and R12 (BOUNDARY) are all blocked by the same
@@ -190,20 +224,42 @@ without narrowing their meaning, which the R9 task already prohibited.
    `scheduler_cli.py`, `tick`, `--install-root`, `<install_root>`, plus
    `--tick-only` when applicable), `working_directory` (the install root).
 
-   *One hash domain (v0.6: filesystem identity, not string case rules).* A
+   *One hash domain (v0.6: filesystem identity, not string case rules;
+   v0.7: plus namespace projection).* A
    single documented function `action_normalize(triple)` defines the ONLY
    byte domain that is ever hashed. For exactly the four path-bearing
    positions — `execute`, `arguments[0]` (the installed script path), the
    element immediately following `--install-root`, and `working_directory`
-   — the canonical form is the filesystem's own resolution of that path:
-   `os.path.realpath(path)`, i.e. the handle-resolved final path (on-disk
-   true-case name, 8.3 short names expanded, symlinks/junctions resolved,
-   separators normalized). No case-folding function is ever applied: path
+   — the canonical form is computed in two documented steps. Step 1,
+   handle resolution: `os.path.realpath(path)` — the filesystem's own
+   resolution (on-disk true-case name, 8.3 short names expanded,
+   symlinks/junctions resolved, separators normalized). Step 2, namespace
+   projection (v0.7 — realpath alone is NOT namespace-stable: a
+   `\\?\`-prefixed input keeps its prefix in the return string even when
+   samefile-equivalent to the plain rendering): if the resolved string
+   starts with `\\?\UNC\`, the candidate is `\\` + the remainder; else if
+   it starts with `\\?\`, the candidate is the remainder; the candidate
+   REPLACES the resolved string iff `os.path.exists(candidate)` and
+   `os.path.samefile(candidate, resolved)` — the strip is admitted only
+   when the filesystem itself confirms both strings name the same object.
+   Otherwise (a path that genuinely requires the extended-length form:
+   over-length, reserved device names, trailing dot/space components) the
+   prefixed resolved string IS the canonical form, and by that same
+   failed check its plain rendering does not reference the object — so in
+   every case exactly one rendering survives into the hash domain. The
+   projection is idempotent and runs at every hash site. No case-folding
+   function is ever applied: path
    equivalence is decided by the filesystem that will actually run the
-   task, so equivalent renderings (case variants, short names) of one real
+   task, so equivalent renderings (case variants, short names,
+   extended-length vs plain namespace) of one real
    object converge to one canonical string while distinct coexisting
    objects — including casefold-colliding pairs such as `straße` /
-   `strasse` — keep distinct canonical strings. A path-bearing item whose
+   `strasse` — keep distinct canonical strings. Renderings in namespaces
+   this projection does not enumerate (e.g. the `\\.\` device namespace)
+   carry no convergence claim: handle resolution converges them when it
+   can, and when it cannot the mismatch surfaces as a conservative
+   re-pin — same direction as the hardlink-alias rule below, surfaced
+   never silently equated. A path-bearing item whose
    target does not exist CANNOT be normalized: `action_normalize` fails
    with actionable text, and every caller treats that as a hard failure
    (registration refuses; verification reports a broken install — never a
@@ -338,11 +394,22 @@ without narrowing their meaning, which the R9 task already prohibited.
   equals `task-registration.json`'s `action_sha256` AND the hash of the
   `action_normalize`d freshly recomputed expected triple; assert the
   recorded raw interpreter and script paths are absolute and exist.
-  Domain probes (v0.6 — equivalence-in, distinction-out, fail-closed):
-  (a) case-variant probe: re-run verification against a case-variant
-  rendering of the live path fields (e.g. upper-cased drive letter and
-  filename) and assert it still matches — equivalent renderings of one
-  existing object must be invisible inside the identity domain; (b)
+  Domain probes (v0.7 — equivalence-in, distinction-out, fail-closed):
+  (a) same-object rendering probe (precondition-guarded): construct
+  variant renderings of the live path fields; for EACH variant, FIRST
+  assert `os.path.samefile(variant, original)` is True — a variant that
+  fails this precondition is a probe bug and fails the run loudly (it is
+  not evidence about the hash domain); only THEN assert `action_normalize`
+  yields the byte-identical canonical string and hash. Required variants:
+  (i) drive-letter case swap (identity-safe by construction); (ii) the
+  `\\?\`-prefixed rendering of the same absolute path (Codex's sixth
+  counterexample, encoded: samefile True yet raw realpath strings differ —
+  the namespace projection must converge them); (iii) an ASCII-only case
+  variant of one path component, admitted by the samefile precondition.
+  Arbitrary Unicode case-mapping (e.g. `.upper()` over a name containing
+  `ß`) is NOT a legal variant generator: it can produce a name that
+  resolves to a DIFFERENT coexisting object, which the precondition
+  rejects by design; (b)
   distinct-existing-path probe (Codex's fifth counterexample, encoded):
   inside the isolated root, create BOTH `straße.txt` and `strasse.txt`,
   assert both exist and `os.path.samefile` is False (if the filesystem
