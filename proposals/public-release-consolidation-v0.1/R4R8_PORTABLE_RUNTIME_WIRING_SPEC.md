@@ -1,4 +1,4 @@
-# R4/R8 portable runtime wiring — spec v0.3 (PROPOSAL, pending dual-sign)
+# R4/R8 portable runtime wiring — spec v0.4 (PROPOSAL, pending dual-sign)
 
 Status: spec only. This file has zero authority until a tearoom【提案】/【同意】
 pair covers the implementation. Writing this file changes no frozen bytes: it is
@@ -46,6 +46,33 @@ and closed by this revision:
    closed by §D2b (absolute interpreter + absolute script + explicit working
    directory + quoting rule, all captured in a registration receipt with an
    action hash that re-entrant `start` and acceptance re-verify).
+
+v0.4 same day, revising after Codex's third【反对】(peer-chat 2026-07-17
+15:59:05), which confirmed the two v0.2 conflicts closed but found two
+acceptance-level conflicts inside v0.3 itself; both verified against the
+v0.3 text and closed by this revision:
+
+6. The v0.3 task-name guard asserted "no task named `WeilanScheduler-*`
+   exists" during and after the test run — a host-global assertion, not an
+   ownership assertion. On a shared machine carrying another legitimate
+   install, acceptance would misread pre-existing external state as leakage,
+   and a cleanup step keyed on that assertion could touch tasks the test
+   does not own. → closed by the rewritten Task-name guard: read-only
+   baseline snapshot of the `WeilanScheduler-*` name set (assert unchanged
+   after the run), creation/deletion asserted only for the test-owned unique
+   name, and deletion authority limited to names recorded in the test's own
+   registration receipts — never a name pattern.
+7. §D2b declared "every element individually double-quoted" while its own
+   canonical string left `tick` and `--install-root` unquoted; more
+   fundamentally, a Scheduled Task's persisted shape is the Execute /
+   Arguments / WorkingDirectory triple, which the query API returns in
+   normalized form — byte-for-byte identity with any single shell string
+   cannot be guaranteed. → closed by the rewritten §D2b: the structured
+   triple is the sole authority, hashed via one canonical JSON
+   serialization; live verification compares field-by-field after
+   documented normalization; acceptance reproduction launches by argv (no
+   shell) so invocation semantics never depend on cmd-vs-PowerShell string
+   interpretation.
 
 ## Problem
 
@@ -108,23 +135,32 @@ without narrowing their meaning, which the R9 task already prohibited.
    Acceptance therefore registers real tasks only under the §D7-authorized
    prefix while the product default remains install-isolated.
 
-   **D2b. Action contract.** At registration time `start` resolves and
-   records: the absolute interpreter path (`sys.executable` of the running
-   Python — never a bare `python` from PATH), the absolute path of the
-   installed `scheduler_cli.py`, the explicit working directory (the
-   install root), and the full argv. Quoting rule: every element of the
-   action string is individually double-quoted; the canonical action string
-   is `"<interpreter>" "<script>" tick --install-root "<root>"` (plus
-   `--tick-only` when applicable) and its SHA-256 is the action hash. All
-   of this is written to
-   `<install_root>/data/runtime/task-registration.json` — `{task_name,
-   interpreter, script, working_directory, argv, action_string,
-   action_sha256, registered_utc}` — before `start` reports success.
-   Re-entrant `start` queries the live task, recomputes the canonical
-   action string, and verifies it against BOTH the receipt hash and the
-   live task's registered action; any mismatch is re-asserted and logged,
-   never silently accepted. If the resolved interpreter or script path does
-   not exist at registration time, `start` refuses.
+   **D2b. Action contract.** The authoritative action is a structured
+   triple, never a shell string: `execute` (absolute interpreter path —
+   `sys.executable` of the running Python, never a bare `python` from
+   PATH), `arguments` (an argv array: absolute path of the installed
+   `scheduler_cli.py`, `tick`, `--install-root`, `<install_root>`, plus
+   `--tick-only` when applicable), `working_directory` (the install root).
+   Canonical serialization: the JSON object `{"arguments": [...],
+   "execute": "...", "working_directory": "..."}` encoded UTF-8 with
+   sorted keys, `(",", ":")` separators, and no trailing newline; its
+   SHA-256 is `action_sha256`. Registration derives the Task Scheduler
+   fields from the triple — Execute = interpreter; Arguments = the argv
+   tail joined by the one documented quoting function (an element is
+   double-quoted iff it contains whitespace or quotes, embedded quotes
+   escaped per Windows argv rules); WorkingDirectory = install root — and
+   writes `<install_root>/data/runtime/task-registration.json` —
+   `{task_name, action: {execute, arguments, working_directory},
+   action_sha256, arguments_display_string, registered_utc}` — before
+   `start` reports success. Verification never compares shell strings:
+   re-entrant `start` queries the live task, extracts the three fields,
+   parses the live Arguments back into an argv array under the same
+   documented Windows rules, normalizes paths (case-folded,
+   `os.path.normpath`), rebuilds the canonical triple, and checks its
+   SHA-256 against BOTH the receipt's `action_sha256` and a freshly
+   recomputed expected triple; any mismatch is re-pinned and logged, never
+   silently accepted. If the resolved interpreter or script path does not
+   exist at registration time, `start` refuses.
 3. **Read-only dashboard (`dashboard.py`).** New shipped file; a view-only
    derivation of observe.py's report layer. Parameters (no baked defaults):
    `--repo-root`, `--method-home`, `--port` (env overrides `WEILAN_REPO_ROOT`,
@@ -173,8 +209,11 @@ without narrowing their meaning, which the R9 task already prohibited.
    prefix (`WeilanReleaseTest-<random>`), injected via the §D2a
    `--task-name` interface (the only way `start` accepts a non-default
    name), pointing ONLY at an isolated install root, deleted in the same
-   test (including on failure paths), and never touching the community's
-   own scheduled tasks or root. If the signer
+   test (including on failure paths) with deletion authority limited to
+   names recorded in the test's own registration receipts, and never
+   touching the community's own scheduled tasks or root, nor any
+   pre-existing `WeilanScheduler-*` task (see the Task-name guard's
+   baseline-snapshot semantics). If the signer
    rejects real task registration, fallback: `start`/`stop` ship with a
    `--register-task` opt-in and the acceptance run exercises the
    no-Task-Scheduler direct-process path; R4 then stays BOUNDARY on the task
@@ -203,20 +242,30 @@ without narrowing their meaning, which the R9 task already prohibited.
   outcome `nothing_due`/`no_agent_configured`; with a stub `agent_command`
   (test-local script), assert outcome `agent_invoked` and the stub's
   side-effect file exists.
-- **Action contract proof (§D2b)**: query the registered task and assert its
-  live action string equals `task-registration.json`'s `action_string`
-  byte-for-byte and matches `action_sha256`; assert the recorded interpreter
-  and script paths are absolute and exist; run the recorded action string
-  verbatim from a shell whose working directory is NOT the install root and
-  with a PATH containing no `python`, and assert it still appends a tick
-  receipt (proves no PATH/cwd dependence). Re-run `start` after manually
-  corrupting the task action and assert it detects, re-asserts, and logs the
-  mismatch.
+- **Action contract proof (§D2b)**: query the registered task, extract
+  Execute/Arguments/WorkingDirectory, normalize per §D2b's documented rules,
+  rebuild the canonical triple, and assert its SHA-256 equals
+  `task-registration.json`'s `action_sha256`; assert the recorded
+  interpreter and script paths are absolute and exist. Reproduction runs by
+  argv, no shell: spawn `[execute] + arguments` with
+  `cwd=working_directory` exactly as Task Scheduler would, from a parent
+  process whose own working directory is NOT the install root and whose
+  PATH contains no `python`, and assert a new tick receipt appears (proves
+  no PATH/parent-cwd dependence without betting on cmd-vs-PowerShell string
+  semantics). Then corrupt the live task's Arguments in place, re-run
+  `start`, and assert it detects the field-level mismatch, re-pins, and
+  logs.
 - **Task-name guard (§D2a)**: `start --task-name Foo` (non-prefixed) refuses
-  with exit non-zero and registers nothing; during and after the whole test
-  run, no task named `WeilanScheduler-*` exists (the product default never
-  leaks into acceptance); `status`/`stop`/`uninstall` resolve the test task
-  via the receipt's recorded name.
+  with exit non-zero and registers nothing. Ownership, not host-global
+  emptiness: before the run, snapshot the set of existing task names
+  matching `WeilanScheduler-*` (read-only baseline); after the run —
+  including every failure path — assert that set is exactly unchanged, and
+  assert the test's own unique `WeilanReleaseTest-<random>` task was
+  created and then deleted. Cleanup deletes ONLY task names recorded in
+  this test run's own registration receipts — never anything else, even if
+  it happens to match the test prefix (protects concurrent runs and
+  pre-existing installs alike). `status`/`stop`/`uninstall` resolve the
+  test task via the receipt's recorded name.
 - **Lifecycle/residue**: `status` truthfully reports both entities in all
   four states (neither / task only / dashboard only / both); `stop` twice in
   a row both exit 0; kill -9 the dashboard, assert the next `status` reports
