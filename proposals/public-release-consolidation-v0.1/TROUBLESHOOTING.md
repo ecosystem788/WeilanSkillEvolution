@@ -3,8 +3,8 @@
 Once argument parsing and PowerShell policy/parameter binding succeed, the
 installer and generated entry points print machine-readable JSON for handled
 results. Earlier shell or argument failures may be plain text. Preserve the
-complete stdout and stderr when asking another Codex window or an independent
-reviewer to audit a failure.
+complete stdout and stderr so another AI window or the independent community
+auditor can reproduce and audit a failure.
 
 | Exit/status | Meaning | Safe next action |
 |---|---|---|
@@ -31,7 +31,10 @@ that a clean machine would fail.
 The script intentionally keeps no installed runtime after completion. Use
 `--receipt <path>` to retain its JSON receipt outside the temporary directory.
 The receipt is labeled `LOCAL_CLEAN_HOME_ONLY` and must not be relabeled as a
-clean-machine acceptance result.
+clean-machine acceptance result. Only an AI-operated, timed full lifecycle on
+a genuinely fresh Windows environment that is not the development machine can
+close that gate; preserve its environment boundary, stdout/stderr, hashes, and
+machine-readable receipt.
 
 ## Escalation boundaries
 

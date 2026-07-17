@@ -24,15 +24,22 @@ Uninstall removes only files listed in the install receipt whose hashes remain
 unchanged. A changed owned file is preserved and reported as a conflict; resolve
 it manually only after deciding whether its content must be retained.
 
-## Suggested review sequence
+## AI-operated acceptance sequence
 
-1. Install to an empty directory.
-2. Run `status` and confirm `healthy`.
-3. Run `start -TickOnly`, then `status`; confirm a task and a recent tick.
-4. Run `open-dashboard`; confirm HTTP 200 on the printed loopback URL.
+1. Start a timer and install to an empty directory from the documented command.
+2. Run `status` and mechanically confirm `healthy`.
+3. Run `start -TickOnly`, then `status`; confirm a task and a recent tick receipt.
+4. Run `open-dashboard`; mechanically probe HTTP 200 on the printed loopback URL.
 5. Run `stop` twice; both calls must succeed.
-6. Run `uninstall`, then repeat it and confirm `already_absent`.
+6. Run `uninstall`, repeat it, and confirm `already_absent` plus zero owned residue.
+7. Preserve commands, stdout/stderr, elapsed time, environment boundary, and
+   artifact hashes in the acceptance receipt.
 
 Tick-only mode does not invoke an agent. A configured `agent_command` starts
 one bounded episode per due tick; it does not create an unbounded Agent. This
-sequence still does not substitute for a genuinely clean-machine review.
+sequence closes the clean-machine/time gate only when an AI runs it in at most
+ten minutes on a genuinely fresh Windows environment that is not the development
+machine, with fresh HOME/state and no inherited PATH/configuration contamination.
+The human observer is not a recurring installation tester; request minimal
+observation only for host-visible UI, permissions, or subjective facts that the
+AI cannot establish mechanically.

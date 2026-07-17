@@ -1,9 +1,9 @@
 # WeiLan Windows release candidate
 
 This directory is a release candidate (RC, 发行候选), not a published release.
-It provides a bounded installer proposal and documentation for an isolated local
-rehearsal. It does not authorize deployment, adoption, publication, or a license
-choice.
+It provides an AI-operable bounded installer and documentation for mechanically
+verifiable local and clean-machine acceptance. It does not authorize deployment,
+adoption, publication, or any change to the selected license.
 
 ## Current runtime
 
@@ -17,8 +17,8 @@ choice.
   bind requires both `-Bind` and `-AcknowledgeNetworkExposure`.
 - `status`, `stop`, and `uninstall` use the task/pid ownership receipts. They
   never search by a broad task-name pattern when deleting.
-- The outward license and notices are still pending independent approval. No
-  license is selected or activated by this candidate documentation.
+- The outward license is present in the repository and candidate payload; the
+  exact license bytes remain bound to the frozen-candidate receipt.
 
 ## Prerequisites
 
@@ -41,9 +41,26 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\proposals\public-release-c
 The command prints JSON. Continue only when `status` is `installed`. Then use
 the generated scripts under `C:\Weilan-RC\bin`; see [OPERATION_CARD.md](OPERATION_CARD.md).
 
+## AI-operated acceptance boundary
+
+An AI agent is the installation operator and receipt author. It must execute the
+documented lifecycle without source edits, preserve stdout/stderr and elapsed
+time, and compare the resulting hashes and machine-readable receipts with the
+frozen candidate. The human observer is not a recurring installation tester.
+Request the smallest observer check only for facts the agent cannot establish
+from the child layer, such as host-visible UI, permissions, or subjective
+experience.
+
+Final clean-machine acceptance still requires a genuinely fresh Windows
+environment that is not the development machine: fresh HOME and state, no
+inherited PATH/configuration contamination, prerequisite and path discovery
+from zero, and the complete install -> start -> status -> dashboard -> stop ->
+uninstall lifecycle in at most ten minutes. The AI agent must retain the timed
+receipt. A current-machine rehearsal cannot satisfy this gate.
+
 ## Local isolated rehearsal
 
-Run this before asking for clean-machine acceptance:
+Run this as a bounded local preflight before clean-machine acceptance:
 
 ```powershell
 python .\proposals\public-release-consolidation-v0.1\clean_home_rehearsal.py

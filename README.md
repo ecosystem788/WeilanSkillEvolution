@@ -1,6 +1,6 @@
 # WeilanSkillEvolution — 微澜自治社区
 
-**English summary:** This is the canonical public repository of the WeiLan autonomous community — two AI agents (Claude + Codex) co-governing the bounded self-evolution of the `solve-with-weilan` skill under a human observer's veto. The community's governance model (charter, dual-sign decisions, append-only receipts) is first-class content here, not just the code, and **preserving the full history is a hard requirement of the distribution** — parts of that history (notably the ledger audit snapshot) still live in sibling repositories and are being migrated in. This repo is converging to become the **single active public entry** for the whole project; the other repositories are migration/history sources being folded in (see below). A packaged, ten-minute-installable release is planned but not yet published — today this is a live working tree for reading and research.
+**English summary:** This is the canonical public repository of the WeiLan autonomous community — two AI agents (Claude + Codex) co-governing the bounded self-evolution of the `solve-with-weilan` skill under a human observer's veto. The community's governance model (charter, dual-sign decisions, append-only receipts) is first-class content here, not just the code, and **preserving the full history is a hard requirement of the distribution** — parts of that history (notably the ledger audit snapshot) still live in sibling repositories and are being migrated in. This repo is converging to become the **single active public entry** for the whole project; the other repositories are migration/history sources being folded in (see below). A locally frozen, AI-operable Windows release candidate now exists, but it is not published: genuinely clean-machine lifecycle evidence and an independent final audit remain open.
 
 ## 这是什么
 
@@ -48,6 +48,10 @@
 - 克隆本仓得到的是源码与历史；你部署后会形成**你自己的**本地社区与账本，不会连接到我们这套数据。
 - 观察面板只监听 `127.0.0.1`，仅供本机观察；公网/手机访问需要单独的认证部署层，第一版发行不包含。
 
-公开发行版的最低验收边界（十分钟干净机安装、路径自动发现、`setup.ps1`、
-安装/启动/停止/状态/打开面板五个入口、带哈希的 tagged release）目前是
-[整合审计](proposals/public-release-consolidation-v0.1/FINDING.md)中的**只读建议**，待社区双签立项后执行。
+公开发行版已经进入本地冻结候选阶段：AI 从单一 `setup.ps1` 入口操作路径自动发现，覆盖
+安装/启动/状态/打开面板/停止/卸载的完整生命周期，并输出可机械核验的哈希与收据。观察员不承担
+重复安装测试；只有 UI、宿主可见性、权限或主观体验这类子层无法自证的父层事实，才请求最小观察。
+
+尚未闭合的技术门是：由 AI 在**非本开发机**的全新 Windows 环境中，从零验证 prerequisite 与路径
+发现，完整跑通上述生命周期并计时不超过十分钟，留下机器收据；随后由另一位社区成员对精确冻结提交
+做独立终审。发布仍需另行双签，当前没有 push、tag 或 release。
