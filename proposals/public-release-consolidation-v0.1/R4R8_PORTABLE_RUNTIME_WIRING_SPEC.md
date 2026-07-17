@@ -1,4 +1,4 @@
-# R4/R8 portable runtime wiring — spec v0.2 (PROPOSAL, pending dual-sign)
+# R4/R8 portable runtime wiring — spec v0.3 (PROPOSAL, pending dual-sign)
 
 Status: spec only. This file has zero authority until a tearoom【提案】/【同意】
 pair covers the implementation. Writing this file changes no frozen bytes: it is
@@ -25,6 +25,27 @@ re-verified at source and are closed by this revision:
    dashboard background process; the five-entry lifecycle could not prove
    zero residue. → closed by §D4 (pidfile ownership, idempotent stop, crash
    recovery, uninstall residue assertions).
+
+v0.3 same day, revising after Codex's second【反对】(peer-chat 2026-07-17
+15:40:11), which confirmed the three v0.1 counterexamples closed but raised
+two new load-bearing conflicts inside v0.2 itself; both verified at source
+and closed by this revision:
+
+4. §D2 pinned the product task name `WeilanScheduler-<install_id>` while §D7
+   authorized acceptance to register ONLY `WeilanReleaseTest-<random>` — the
+   `start --tick-only` acceptance path had no compliant task name available,
+   so any test run had to violate one of the two clauses. → closed by §D2a
+   (constrained `--task-name` injection: refuses any value not prefixed
+   `WeilanReleaseTest-`; all lifecycle entries operate on the recorded name,
+   never a recomputed default).
+5. §D2's task action was `python scheduler_cli.py tick --install-root <root>`
+   — bare interpreter from PATH plus a relative script path. A Scheduled Task
+   runs non-interactively with its own PATH and working directory, so the
+   task could register successfully yet never produce a tick receipt: exactly
+   the "task exists but nothing runs" failure this spec exists to kill. →
+   closed by §D2b (absolute interpreter + absolute script + explicit working
+   directory + quoting rule, all captured in a registration receipt with an
+   action hash that re-entrant `start` and acceptance re-verify).
 
 ## Problem
 
@@ -72,10 +93,38 @@ without narrowing their meaning, which the R9 task already prohibited.
    text** unless `agent_command` is configured or `--tick-only` is passed
    explicitly; tick-only mode is named in the task action and in every
    receipt, so a heartbeat-without-agent is an explicit, observable state —
-   never a silent fake. `start` registers a per-user Scheduled Task named
+   never a silent fake. `start` registers a per-user Scheduled Task; its
+   name and action are pinned by §D2a/§D2b below.
+
+   **D2a. Task name contract.** Product default:
    `WeilanScheduler-<install_id>` (install id from the local install
-   receipt; never the community task name) whose action is
-   `python scheduler_cli.py tick --install-root <root>`.
+   receipt; never the community task name). `start` additionally accepts
+   `--task-name <name>` for test harnesses ONLY: any value not prefixed
+   `WeilanReleaseTest-` is refused with actionable text (exit non-zero,
+   nothing registered). The chosen name — default or injected — is written
+   to the registration receipt (§D2b), and `status`/`stop`/`uninstall`
+   operate exclusively on the receipt's recorded name, never a recomputed
+   default, so the full lifecycle works identically under a test name.
+   Acceptance therefore registers real tasks only under the §D7-authorized
+   prefix while the product default remains install-isolated.
+
+   **D2b. Action contract.** At registration time `start` resolves and
+   records: the absolute interpreter path (`sys.executable` of the running
+   Python — never a bare `python` from PATH), the absolute path of the
+   installed `scheduler_cli.py`, the explicit working directory (the
+   install root), and the full argv. Quoting rule: every element of the
+   action string is individually double-quoted; the canonical action string
+   is `"<interpreter>" "<script>" tick --install-root "<root>"` (plus
+   `--tick-only` when applicable) and its SHA-256 is the action hash. All
+   of this is written to
+   `<install_root>/data/runtime/task-registration.json` — `{task_name,
+   interpreter, script, working_directory, argv, action_string,
+   action_sha256, registered_utc}` — before `start` reports success.
+   Re-entrant `start` queries the live task, recomputes the canonical
+   action string, and verifies it against BOTH the receipt hash and the
+   live task's registered action; any mismatch is re-asserted and logged,
+   never silently accepted. If the resolved interpreter or script path does
+   not exist at registration time, `start` refuses.
 3. **Read-only dashboard (`dashboard.py`).** New shipped file; a view-only
    derivation of observe.py's report layer. Parameters (no baked defaults):
    `--repo-root`, `--method-home`, `--port` (env overrides `WEILAN_REPO_ROOT`,
@@ -119,11 +168,13 @@ without narrowing their meaning, which the R9 task already prohibited.
    second explicit acknowledgement flag; docs state the exposure. Acceptance
    asserts the real socket's local address is loopback (netstat/psutil), not
    just the config string.
-7. **Host-task authorization (narrow, unchanged from v0.1).** Acceptance
+7. **Host-task authorization (narrow; interface added in v0.3).** Acceptance
    tests may register a real Scheduled Task ONLY with a test-unique name
-   prefix (`WeilanReleaseTest-<random>`), pointing ONLY at an isolated
-   install root, deleted in the same test (including on failure paths), and
-   never touching the community's own scheduled tasks or root. If the signer
+   prefix (`WeilanReleaseTest-<random>`), injected via the §D2a
+   `--task-name` interface (the only way `start` accepts a non-default
+   name), pointing ONLY at an isolated install root, deleted in the same
+   test (including on failure paths), and never touching the community's
+   own scheduled tasks or root. If the signer
    rejects real task registration, fallback: `start`/`stop` ship with a
    `--register-task` opt-in and the acceptance run exercises the
    no-Task-Scheduler direct-process path; R4 then stays BOUNDARY on the task
@@ -146,11 +197,26 @@ without narrowing their meaning, which the R9 task already prohibited.
   prerequisite, busy root, drifted install, unconfigured `agent_command`
   without `--tick-only`) produces actionable text; uninstall leaves nothing
   owned behind.
-- **Real-runtime proof (anti-"task exists")**: after `start --tick-only` in
-  the isolated root, trigger the task once and assert a new receipt line in
-  `scheduler-ticks.jsonl` with outcome `nothing_due`/`no_agent_configured`;
-  with a stub `agent_command` (test-local script), assert outcome
-  `agent_invoked` and the stub's side-effect file exists.
+- **Real-runtime proof (anti-"task exists")**: after `start --tick-only
+  --task-name WeilanReleaseTest-<random>` in the isolated root, trigger the
+  task once and assert a new receipt line in `scheduler-ticks.jsonl` with
+  outcome `nothing_due`/`no_agent_configured`; with a stub `agent_command`
+  (test-local script), assert outcome `agent_invoked` and the stub's
+  side-effect file exists.
+- **Action contract proof (§D2b)**: query the registered task and assert its
+  live action string equals `task-registration.json`'s `action_string`
+  byte-for-byte and matches `action_sha256`; assert the recorded interpreter
+  and script paths are absolute and exist; run the recorded action string
+  verbatim from a shell whose working directory is NOT the install root and
+  with a PATH containing no `python`, and assert it still appends a tick
+  receipt (proves no PATH/cwd dependence). Re-run `start` after manually
+  corrupting the task action and assert it detects, re-asserts, and logs the
+  mismatch.
+- **Task-name guard (§D2a)**: `start --task-name Foo` (non-prefixed) refuses
+  with exit non-zero and registers nothing; during and after the whole test
+  run, no task named `WeilanScheduler-*` exists (the product default never
+  leaks into acceptance); `status`/`stop`/`uninstall` resolve the test task
+  via the receipt's recorded name.
 - **Lifecycle/residue**: `status` truthfully reports both entities in all
   four states (neither / task only / dashboard only / both); `stop` twice in
   a row both exit 0; kill -9 the dashboard, assert the next `status` reports
