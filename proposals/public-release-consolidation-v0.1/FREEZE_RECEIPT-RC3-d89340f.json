@@ -1,0 +1,64 @@
+{
+  "schema": "weilan_rc_freeze_receipt_v0.2",
+  "release_candidate": "RC3-portable-runtime",
+  "freeze_commit": "d89340f36e2346284a1fbabefea91dd4c8833b86",
+  "freeze_git_tree": "c6098a93565357d904fdcce69d23f4077f3ba911",
+  "hygiene_tree_sha256": "9e6220fca2d05cfca7ee5cec2e99f1e4b7e48f2203c628045d82df9308dc05b8",
+  "candidate_file_count": 68,
+  "missing_count": 0,
+  "finding_count": 0,
+  "license_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1",
+  "test_summary": {
+    "main_worktree": "30 candidate tests passed; 7 R9 fault-injection tests passed",
+    "frozen_worktree": "30 candidate tests passed; 7 R9 fault-injection tests passed",
+    "portable_runtime": "real test-owned Scheduled Task, tick receipt, action pinning, loopback GET-only dashboard, stale-pid recovery, idempotent stop, and zero-residue uninstall passed"
+  },
+  "runtime_contract_probes": {
+    "normal_vs_extended_same_object": "samefile true and identical normalized hash",
+    "ascii_case_variant": "samefile precondition true and identical normalized hash",
+    "unicode_distinct_pair": "straße/strasse coexist, samefile false, distinct normalized hashes",
+    "namespace_projection_idempotent": true,
+    "missing_path_fail_closed": true,
+    "non_path_token_drift_repinned": true,
+    "parent_cwd_and_path_independent": true,
+    "product_task_baseline_unchanged": true,
+    "test_task_residue_count": 0,
+    "community_ledger_strict_snapshot_unchanged_in_isolated_run": true
+  },
+  "eol_verification": {
+    "signed_path_count": 73,
+    "main_all_lf": true,
+    "frozen_all_lf": true
+  },
+  "verification_worktree": {
+    "commit": "d89340f36e2346284a1fbabefea91dd4c8833b86",
+    "removed_after_verification": true,
+    "evidence_paths": [
+      "proposals/public-release-consolidation-v0.1/test_portable_runtime.py",
+      "proposals/public-release-consolidation-v0.1/test_release_installer.py",
+      "proposals/public-release-consolidation-v0.1/test_release_candidate_hygiene.py",
+      "proposals/public-release-consolidation-v0.1/test_clean_home_rehearsal.py",
+      "proposals/public-release-r9-fault-injection-v0.1/test_release_installer_r9_faults.py",
+      "LICENSE",
+      "skill/solve-with-weilan/LICENSE"
+    ]
+  },
+  "normalization": {
+    "path": "proposals/public-release-consolidation-v0.1/INSTALL_OWNERSHIP_RECEIPT.json",
+    "index_blob_before_after": "bd9023c045503e0da4f7b20fabf41bcd32f3031f",
+    "final_worktree_eol": "lf",
+    "final_target_status_clean": true
+  },
+  "previous_freeze_receipt": "FREEZE_RECEIPT.json",
+  "dual_sign": {
+    "proposal_time": "2026-07-17 17:34:48",
+    "proposal_from": "claude",
+    "consent_time": "2026-07-17 17:38:16",
+    "consent_from": "codex"
+  },
+  "executed_at": "2026-07-17T18:22:06+09:00",
+  "push_performed": false,
+  "tag_performed": false,
+  "deployment_performed": false,
+  "live_skill_modified": false
+}
