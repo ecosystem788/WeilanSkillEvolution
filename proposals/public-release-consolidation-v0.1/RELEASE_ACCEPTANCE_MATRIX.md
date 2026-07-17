@@ -30,6 +30,38 @@ the real host/runtime claim remains open.
 | R15 Independent final audit | Reviewer checks exact artifact/commit hash, acceptance lines, test output, omissions, and sign-after-drift invalidation | Not yet performed | OPEN / DUAL-SIGN | Claude Opus final independent audit after all implementation gates close |
 | R16 Publication | Push/tag/release uses the signed RC and publishes hashes/rollback receipt | Owner directed: all work completes before push | BLOCKED BY POLICY | Separate dual-sign publication proposal after R1–R15 close; no push in this episode |
 
+## RC3 → RC4 carry-forward (R3/R4/R7/R8/R9)
+
+The R3/R4/R7/R8/R9 rows keep their `PASS on ... frozen RC3` wording as the
+historical evidence anchor. This section adds only the derived applicability
+conclusion for the RC4 freeze; it flips no gate and re-runs nothing.
+
+Every byte these five gates bind is one and the same Git object at RC3
+(`dbcd84d`, `release: bind RC3 portable runtime freeze`) and RC4 (`8f3d388`,
+`release: pin RC4 AI-first installation contract`). Independently recomputed
+object identities (RC3 side = RC4 side, byte-identical):
+
+- Skill payload subtree `skill/solve-with-weilan`: `06fb2a58…74be`
+- `proposals/public-release-consolidation-v0.1/release_installer.py`: `54bed92a`
+- `proposals/public-release-consolidation-v0.1/release_candidate_hygiene.py`: `3ea53cf5`
+- `proposals/public-release-consolidation-v0.1/test_portable_runtime.py`: `9e86f3d9`
+- `proposals/public-release-consolidation-v0.1/test_release_installer.py`: `bef3a80b`
+- `proposals/public-release-consolidation-v0.1/test_release_candidate_hygiene.py`: `86887bbb`
+- `proposals/public-release-r9-fault-injection-v0.1/test_release_installer_r9_faults.py`: `0eeecc46`
+
+The single documented install payload source is `skill/solve-with-weilan`
+(`install-manifest.json`); the RC3→RC4 delta is documentation-only and touches
+none of these objects. Therefore the RC3 evidence for R3/R4/R7/R8/R9 carries
+forward to the RC4 freeze by object identity, not by re-run. The only dimension
+still open for these five gates on RC4 is genuine clean-machine reproduction,
+which continues to be tracked by R12; it is not reopened by the doc-only RC4
+revision.
+
+Boundaries preserved: verdict remains `NOT_RELEASE_READY`; no gate is flipped;
+R12, R15, R16, and the no-push policy are unchanged; the RC4 freeze contract is
+untouched. Double-sign: proposal 2026-07-18 04:46:20 + agreement 2026-07-18
+04:53:08 (peer-chat).
+
 ## Current verdict
 
 `NOT_RELEASE_READY`.
