@@ -1,3 +1,4 @@
+import hashlib
 import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -54,6 +55,20 @@ def reverse_fixture(root: Path, *, claude_time="2026-07-16 16:00:00", heartbeat_
     codex_runs.mkdir(parents=True)
     for hour in range(17, 17 + heartbeat_count):
         (codex_runs / f"2026-07-16T{hour:02d}-00-00.jsonl").write_text("", encoding="utf-8")
+
+
+def malformed_chat(root: Path, *, time="2026-07-13 18:22:40", suffix="") -> str:
+    raw = f'{{"from":"claude","time":"{time}","text":"D:\\bad\\escape{suffix}"}}'
+    with (root / "peer-chat.jsonl").open("a", encoding="utf-8", newline="\n") as stream:
+        stream.write(raw + "\n")
+    return raw
+
+
+def correction(root: Path, *, corrects: str, before_hash: str) -> None:
+    append(
+        root / "peer-chat.corrections.jsonl",
+        {"corrects": corrects, "before_hash": before_hash, "corrected_json": {"time": corrects}},
+    )
 
 
 def test_terminal_same_parent_streak_raises_orphan_alert_with_evidence(tmp_path):
@@ -167,6 +182,79 @@ def test_malformed_json_row_is_visible_without_discarding_good_anchor(tmp_path):
     assert result.parse_errors[0]["source"] == (tmp_path / "peer-chat.jsonl").as_posix()
     assert result.parse_errors[0]["line"] == 2
     assert result.parse_errors[0]["reason_code"] == "invalid_json"
+    assert result.known_corrected == []
+
+
+def test_exact_time_and_legacy_no_lf_hash_routes_to_known_corrected(tmp_path):
+    fixture(tmp_path)
+    raw = malformed_chat(tmp_path)
+    correction(tmp_path, corrects="2026-07-13 18:22:40", before_hash=hashlib.sha256(raw.encode()).hexdigest())
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert result.parse_errors == []
+    assert len(result.known_corrected) == 1
+    assert result.known_corrected[0]["line"] == 2
+    assert result.known_corrected[0]["corrects"] == "2026-07-13 18:22:40"
+    assert "no line terminator" in result.known_corrected[0]["matched_convention"]
+
+
+def test_same_time_with_wrong_hash_remains_parse_error(tmp_path):
+    fixture(tmp_path)
+    malformed_chat(tmp_path)
+    correction(tmp_path, corrects="2026-07-13 18:22:40", before_hash="0" * 64)
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert len(result.parse_errors) == 1
+    assert result.known_corrected == []
+
+
+def test_known_correction_does_not_hide_a_second_bad_line(tmp_path):
+    fixture(tmp_path)
+    raw = malformed_chat(tmp_path)
+    malformed_chat(tmp_path, time="2026-07-13 18:22:41", suffix="-new")
+    correction(tmp_path, corrects="2026-07-13 18:22:40", before_hash=hashlib.sha256(raw.encode()).hexdigest())
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert len(result.known_corrected) == 1
+    assert len(result.parse_errors) == 1
+    assert result.parse_errors[0]["line"] == 3
+
+
+def test_malformed_correction_remains_visible_and_cannot_cover_bad_chat(tmp_path):
+    fixture(tmp_path)
+    malformed_chat(tmp_path)
+    (tmp_path / "peer-chat.corrections.jsonl").write_text('{"corrects":"broken"\n', encoding="utf-8")
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert result.known_corrected == []
+    assert len(result.parse_errors) == 2
+    assert {Path(error["source"]).name for error in result.parse_errors} == {
+        "peer-chat.corrections.jsonl",
+        "peer-chat.jsonl",
+    }
+
+
+def test_sentinel_equivalent_hash_routes_in_reverse_without_changing_anchor(tmp_path):
+    reverse_fixture(tmp_path)
+    raw = malformed_chat(tmp_path)
+    append(
+        tmp_path / "peer-chat.corrections.jsonl",
+        {
+            "corrects": "2026-07-13 18:22:40",
+            "sentinel_equiv_hash": hashlib.sha256((raw + "\n").encode()).hexdigest(),
+        },
+    )
+
+    result = run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc))
+
+    assert result.parse_errors == []
+    assert len(result.known_corrected) == 1
+    assert result.activity_anchor["source_ref"].startswith("wake-agent-runs/")
+    assert len(result) == 1
 
 
 def test_whole_file_read_failure_is_visible_in_cli(tmp_path, monkeypatch, capsys):

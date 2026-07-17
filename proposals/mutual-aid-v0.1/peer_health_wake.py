@@ -27,6 +27,8 @@ CODEX_HEARTBEAT_RUNS = "wake-codex-runs"
 ORPHAN_STREAK_MINIMUM = 10
 _STALE_HEAD = re.compile(r'(?:stage=|"stage"\s*:\s*")frame_open_stale_head')
 _ATTEMPTED_PARENT = re.compile(r'(?:attempted_parent=|"attempted_parent"\s*:\s*")(?P<parent>wf-[0-9A-Za-z-]+)')
+_RAW_TIME = re.compile(r'"time"\s*:\s*"(?P<time>[^"\\]*(?:\\.[^"\\]*)*)"')
+_SHA256 = re.compile(r"[0-9a-f]{64}")
 
 
 class CheckResult(list[dict]):
@@ -37,16 +39,73 @@ class CheckResult(list[dict]):
         appended=(),
         *,
         parse_errors: list[dict] | None = None,
+        known_corrected: list[dict] | None = None,
         skipped: dict | None = None,
         activity_anchor: dict | None = None,
     ) -> None:
         super().__init__(appended)
         self.parse_errors = parse_errors or []
+        self.known_corrected = known_corrected or []
         self.skipped = skipped
         self.activity_anchor = activity_anchor
 
 
-def _rows(path: Path, *, parse_errors: list[dict] | None = None) -> list[tuple[int, dict]]:
+def _known_correction(
+    *,
+    text: str,
+    diagnostic: dict,
+    corrections: list[tuple[int, dict]],
+    corrections_path: Path,
+) -> dict | None:
+    """Return a zero-authority summary only for an exact time+physical-hash match."""
+    time_match = _RAW_TIME.search(text)
+    if time_match is None:
+        return None
+    try:
+        record_time = json.loads(f'"{time_match.group("time")}"')
+    except json.JSONDecodeError:
+        return None
+
+    payload_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    physical_hash = str(diagnostic.get("raw_bytes_sha256", ""))
+    for correction_line, correction in corrections:
+        if correction.get("corrects") != record_time:
+            continue
+        before_hash = correction.get("before_hash")
+        sentinel_hash = correction.get("sentinel_equiv_hash")
+        if isinstance(before_hash, str) and _SHA256.fullmatch(before_hash) and before_hash == payload_hash:
+            matched_convention = "before_hash=sha256(physical line payload bytes, no line terminator)"
+            matched_hash = before_hash
+        elif (
+            isinstance(sentinel_hash, str)
+            and _SHA256.fullmatch(sentinel_hash)
+            and sentinel_hash == physical_hash
+        ):
+            matched_convention = "sentinel_equiv_hash=sha256(physical record bytes, including line terminator)"
+            matched_hash = sentinel_hash
+        else:
+            continue
+        return {
+            "source": diagnostic["source"],
+            "line": diagnostic["line"],
+            "raw_bytes_sha256": physical_hash,
+            "matched_hash": matched_hash,
+            "matched_convention": matched_convention,
+            "corrects": record_time,
+            "correction_ref": f"{corrections_path.as_posix()}:{correction_line}",
+            "authority": "none",
+        }
+    return None
+
+
+def _rows(
+    path: Path,
+    *,
+    parse_errors: list[dict] | None = None,
+    corrections: list[tuple[int, dict]] | None = None,
+    corrections_path: Path | None = None,
+    known_corrected: list[dict] | None = None,
+) -> list[tuple[int, dict]]:
     if not path.exists():
         return []
     result = []
@@ -71,11 +130,21 @@ def _rows(path: Path, *, parse_errors: list[dict] | None = None) -> list[tuple[i
         except json.JSONDecodeError as exc:
             if parse_errors is None:
                 raise
-            parse_errors.append(
-                parse_diagnostic(
-                    path, number, "invalid_json", f"{type(exc).__name__}: {exc}", record_bytes, byte_offset
-                )
+            diagnostic = parse_diagnostic(
+                path, number, "invalid_json", f"{type(exc).__name__}: {exc}", record_bytes, byte_offset
             )
+            correction = None
+            if corrections is not None and corrections_path is not None and known_corrected is not None:
+                correction = _known_correction(
+                    text=text,
+                    diagnostic=diagnostic,
+                    corrections=corrections,
+                    corrections_path=corrections_path,
+                )
+            if correction is None:
+                parse_errors.append(diagnostic)
+            else:
+                known_corrected.append(correction)
             continue
         if not isinstance(row, dict):
             exc = TypeError("JSONL row must be an object")
@@ -103,9 +172,21 @@ def _run_stamp_as_utc(path: Path) -> datetime:
     return parsed.replace(tzinfo=LOCAL_TZ).astimezone(timezone.utc)
 
 
-def _claude_activity_anchor(root: Path, parse_errors: list[dict]) -> tuple[datetime, str] | None:
+def _claude_activity_anchor(
+    root: Path,
+    parse_errors: list[dict],
+    known_corrected: list[dict],
+    corrections: list[tuple[int, dict]],
+    corrections_path: Path,
+) -> tuple[datetime, str] | None:
     activities: list[tuple[datetime, str]] = []
-    for line_number, row in _rows(root / "peer-chat.jsonl", parse_errors=parse_errors):
+    for line_number, row in _rows(
+        root / "peer-chat.jsonl",
+        parse_errors=parse_errors,
+        corrections=corrections,
+        corrections_path=corrections_path,
+        known_corrected=known_corrected,
+    ):
         if row.get("from") == "claude":
             stamp = _local_time_as_utc(row.get("time"))
             activities.append((stamp, f"peer-chat.jsonl:{line_number}@{row['time']} (claude activity)"))
@@ -138,19 +219,28 @@ def run_reverse_check(
         raise ValueError("threshold_hours and min_heartbeats must be positive")
 
     parse_errors: list[dict] = []
+    known_corrected: list[dict] = []
+    corrections_path = root / "peer-chat.corrections.jsonl"
+    corrections = _rows(corrections_path, parse_errors=parse_errors)
     try:
-        anchor = _claude_activity_anchor(root, parse_errors)
+        anchor = _claude_activity_anchor(root, parse_errors, known_corrected, corrections, corrections_path)
         if anchor is None:
-            return CheckResult(parse_errors=parse_errors)
+            return CheckResult(parse_errors=parse_errors, known_corrected=known_corrected)
         last_activity, source_ref = anchor
         heartbeats = _codex_heartbeats_after(root, last_activity)
     except (OSError, UnicodeError, ValueError, TypeError) as exc:
-        return CheckResult(parse_errors=parse_errors, skipped={"reason": f"{type(exc).__name__}: {exc}"})
+        return CheckResult(
+            parse_errors=parse_errors,
+            known_corrected=known_corrected,
+            skipped={"reason": f"{type(exc).__name__}: {exc}"},
+        )
 
     activity_anchor = {"time_utc": last_activity.isoformat(), "source_ref": source_ref}
     silence_hours = (now.astimezone(timezone.utc) - last_activity).total_seconds() / 3600
     if silence_hours < threshold_hours or len(heartbeats) < min_heartbeats:
-        return CheckResult(parse_errors=parse_errors, activity_anchor=activity_anchor)
+        return CheckResult(
+            parse_errors=parse_errors, known_corrected=known_corrected, activity_anchor=activity_anchor
+        )
 
     incident_suffix = hashlib.sha256(last_activity.isoformat().encode("utf-8")).hexdigest()[:12]
     incident_key = f"claude_silence:{incident_suffix}"
@@ -161,7 +251,9 @@ def run_reverse_check(
             and row.get("incident_key") == incident_key
             and row.get("event") in {"raised", "reopened"}
         ):
-            return CheckResult(parse_errors=parse_errors, activity_anchor=activity_anchor)
+            return CheckResult(
+                parse_errors=parse_errors, known_corrected=known_corrected, activity_anchor=activity_anchor
+            )
 
     event = {
         "id": uuid.uuid4().hex[:12],
@@ -190,7 +282,12 @@ def run_reverse_check(
     alerts_path.parent.mkdir(parents=True, exist_ok=True)
     with alerts_path.open("a", encoding="utf-8", newline="\n") as stream:
         stream.write(json.dumps(event, ensure_ascii=False, separators=(",", ":")) + "\n")
-    return CheckResult([event], parse_errors=parse_errors, activity_anchor=activity_anchor)
+    return CheckResult(
+        [event],
+        parse_errors=parse_errors,
+        known_corrected=known_corrected,
+        activity_anchor=activity_anchor,
+    )
 
 
 def _orphan_frame_alert(*, root: Path, now: datetime) -> list[dict]:
@@ -254,11 +351,21 @@ def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float
     orphan_alerts = _orphan_frame_alert(root=root, now=now)
 
     parse_errors: list[dict] = []
+    known_corrected: list[dict] = []
+    corrections_path = root / "peer-chat.corrections.jsonl"
+    corrections = _rows(corrections_path, parse_errors=parse_errors)
     activities: list[tuple[datetime, str]] = []
     try:
         for name in ACTIVITY_FILES:
             path = root / name
-            for line_number, row in _rows(path, parse_errors=parse_errors):
+            row_options = {}
+            if name == "peer-chat.jsonl":
+                row_options = {
+                    "corrections": corrections,
+                    "corrections_path": corrections_path,
+                    "known_corrected": known_corrected,
+                }
+            for line_number, row in _rows(path, parse_errors=parse_errors, **row_options):
                 if row.get("from") != "codex":
                     continue
                 stamp = _local_time_as_utc(row.get("time"))
@@ -267,17 +374,22 @@ def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float
         return CheckResult(
             orphan_alerts,
             parse_errors=parse_errors,
+            known_corrected=known_corrected,
             skipped={
                 "reason": f"{type(exc).__name__}: {exc}",
                 "source": path.name,
             },
         )
     except (ValueError, TypeError):
-        return CheckResult(orphan_alerts, parse_errors=parse_errors)
+        return CheckResult(
+            orphan_alerts, parse_errors=parse_errors, known_corrected=known_corrected
+        )
 
     # With no trustworthy activity anchor, silence cannot be measured.
     if not activities:
-        return CheckResult(orphan_alerts, parse_errors=parse_errors)
+        return CheckResult(
+            orphan_alerts, parse_errors=parse_errors, known_corrected=known_corrected
+        )
     last_activity, activity_source_ref = max(activities, key=lambda item: item[0])
     activity_anchor = {
         "time_utc": last_activity.isoformat(),
@@ -299,6 +411,7 @@ def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float
         return CheckResult(
             orphan_alerts,
             parse_errors=parse_errors,
+            known_corrected=known_corrected,
             skipped={
                 "reason": f"{type(exc).__name__}: {exc}",
                 "source": "codex-inbox.jsonl/codex-inbox-replies.jsonl",
@@ -306,7 +419,12 @@ def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float
             activity_anchor=activity_anchor,
         )
     except TypeError:
-        return CheckResult(orphan_alerts, parse_errors=parse_errors, activity_anchor=activity_anchor)
+        return CheckResult(
+            orphan_alerts,
+            parse_errors=parse_errors,
+            known_corrected=known_corrected,
+            activity_anchor=activity_anchor,
+        )
 
     pending = sorted(inbox_ids - replied_ids)
     return CheckResult(
@@ -322,6 +440,7 @@ def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float
             backlog_source_ref="codex-inbox.jsonl ids minus codex-inbox-replies.jsonl reply_to ids",
         ),
         parse_errors=parse_errors,
+        known_corrected=known_corrected,
         activity_anchor=activity_anchor,
     )
 
@@ -353,6 +472,7 @@ def main(argv: list[str] | None = None) -> int:
                 "check": "skipped" if appended.skipped else "completed",
                 "appended": list(appended),
                 "parse_errors": appended.parse_errors,
+                "known_corrected": appended.known_corrected,
                 "skipped": appended.skipped,
                 "activity_anchor": appended.activity_anchor,
             },
