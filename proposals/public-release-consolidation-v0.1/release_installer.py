@@ -14,6 +14,7 @@ import os
 import shutil
 import stat
 import tempfile
+import types
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Callable, Iterable
 
@@ -304,6 +305,23 @@ def _wrapper(name: str) -> bytes:
             + "& python $manager uninstall --install-root $root --receipt $receipt\n"
             + "exit $LASTEXITCODE\n"
         )
+    elif name == "start":
+        body = (
+            "param([switch]$Smoke,[switch]$TickOnly,[string]$TaskName)\n" + common
+            + "$argsList = @('entry', '--name', 'start', '--install-root', $root, '--receipt', $receipt)\n"
+            + "if ($Smoke) { $argsList += '--smoke' }\n"
+            + "if ($TickOnly) { $argsList += '--tick-only' }\n"
+            + "if ($TaskName) { $argsList += @('--task-name', $TaskName) }\n"
+            + "& python $manager @argsList\nexit $LASTEXITCODE\n"
+        )
+    elif name == "open-dashboard":
+        body = (
+            "param([switch]$Smoke,[int]$Port=8765,[string]$Bind='127.0.0.1',[switch]$AcknowledgeNetworkExposure)\n" + common
+            + "$argsList = @('entry', '--name', 'open-dashboard', '--install-root', $root, '--receipt', $receipt, '--port', [string]$Port, '--bind', $Bind)\n"
+            + "if ($Smoke) { $argsList += '--smoke' }\n"
+            + "if ($AcknowledgeNetworkExposure) { $argsList += '--acknowledge-network-exposure' }\n"
+            + "& python $manager @argsList\nexit $LASTEXITCODE\n"
+        )
     else:
         body = (
             "param([switch]$Smoke)\n" + common
@@ -467,8 +485,9 @@ def _install_locked(
         "manifest_sha256": sha256_file(manifest_path),
         "owned_files": owned,
         "owned_file_count": len(owned),
-        "runtime_activation_ready": False,
-        "runtime_activation_boundary": "scheduler/dashboard sources still contain machine-specific paths; real start/stop/open-dashboard refuse activation",
+        "install_id": hashlib.sha256(str(install_root).encode("utf-8")).hexdigest()[:12],
+        "runtime_activation_ready": True,
+        "runtime_activation_boundary": None,
     }
     try:
         receipt_relative = receipt_path.relative_to(install_root).as_posix()
@@ -527,6 +546,17 @@ def load_receipt(install_root: Path, receipt: Path | None = None) -> tuple[Path,
     return path, json.loads(path.read_text(encoding="utf-8"))
 
 
+def _runtime_module(install_root: Path):
+    path = install_root / "skills" / "solve-with-weilan" / "runtime" / "lifecycle.py"
+    if not path.is_file():
+        raise FileNotFoundError(f"portable runtime lifecycle missing: {path}")
+    name = f"weilan_runtime_lifecycle_{hashlib.sha256(str(path).encode()).hexdigest()[:12]}"
+    module = types.ModuleType(name)
+    module.__file__ = str(path)
+    exec(compile(path.read_bytes(), str(path), "exec"), module.__dict__)
+    return module
+
+
 def status(install_root: Path, receipt: Path | None = None) -> dict:
     install_root = install_root.resolve()
     _, data = load_receipt(install_root, receipt)
@@ -541,7 +571,7 @@ def status(install_root: Path, receipt: Path | None = None) -> dict:
         elif sha256_file(target) != owned["sha256"]:
             drifted.append(owned["path"])
     state = "healthy" if not missing and not drifted else "drifted"
-    return {
+    result = {
         "schema": "weilan_release_status_v0.1",
         "state": state,
         "ok": state == "healthy",
@@ -551,6 +581,9 @@ def status(install_root: Path, receipt: Path | None = None) -> dict:
         "runtime_activation_ready": bool(data.get("runtime_activation_ready", False)),
         "runtime_activation_boundary": data.get("runtime_activation_boundary"),
     }
+    if state == "healthy" and data.get("runtime_activation_ready"):
+        result["runtime"] = _runtime_module(install_root).status(install_root)
+    return result
 
 
 def _uninstall_locked(install_root: Path, receipt: Path | None = None) -> dict:
@@ -558,6 +591,16 @@ def _uninstall_locked(install_root: Path, receipt: Path | None = None) -> dict:
     receipt_path, data = load_receipt(install_root, receipt)
     if data is None:
         return {"schema": "weilan_release_uninstall_result_v0.1", "status": "already_absent", "conflicts": []}
+    if data.get("runtime_activation_ready"):
+        runtime = _runtime_module(install_root)
+        try:
+            runtime.stop(install_root)
+            runtime_state = runtime.status(install_root)
+            if runtime_state.get("task_registered") or runtime_state.get("dashboard", {}).get("live"):
+                return {"schema": "weilan_release_uninstall_result_v0.1", "status": "conflict", "conflicts": ["runtime_residue"]}
+            runtime.remove_runtime_residue(install_root)
+        except (OSError, RuntimeError, ValueError, json.JSONDecodeError) as exc:
+            return {"schema": "weilan_release_uninstall_result_v0.1", "status": "conflict", "conflicts": ["runtime_residue"], "error": str(exc)}
     conflicts, removed = [], []
     for owned in reversed(data.get("owned_files", [])):
         relative = _safe_relative(owned["path"])
@@ -596,23 +639,43 @@ def uninstall(install_root: Path, receipt: Path | None = None) -> dict:
         return _busy_result("weilan_release_uninstall_result_v0.1", error)
 
 
-def entry(name: str, install_root: Path, receipt: Path | None, smoke: bool) -> tuple[int, dict]:
+def entry(
+    name: str,
+    install_root: Path,
+    receipt: Path | None,
+    smoke: bool,
+    *,
+    tick_only: bool = False,
+    task_name: str | None = None,
+    port: int = 8765,
+    bind: str = "127.0.0.1",
+    acknowledge_network_exposure: bool = False,
+) -> tuple[int, dict]:
     report = status(install_root, receipt)
-    if not report["ok"] or report["state"] != "healthy":
+    if (not report["ok"] or report["state"] != "healthy") and name != "stop":
         return 2, {"entry": name, "status": "installation_not_healthy", "installation": report}
     if smoke:
         return 0, {
             "entry": name,
             "status": "smoke_pass",
             "runtime_activation_performed": False,
-            "boundary": report["runtime_activation_boundary"],
+            "boundary": report.get("runtime_activation_boundary"),
         }
-    return 3, {
-        "entry": name,
-        "status": "activation_refused",
-        "runtime_activation_performed": False,
-        "boundary": report["runtime_activation_boundary"],
-    }
+    _, receipt_data = load_receipt(install_root, receipt)
+    if receipt_data is None:
+        return 2, {"entry": name, "status": "installation_absent"}
+    runtime = _runtime_module(install_root.resolve())
+    if name == "start":
+        result = runtime.start(install_root, receipt_data, tick_only=tick_only, task_name=task_name)
+    elif name == "stop":
+        result = runtime.stop(install_root)
+    else:
+        result = runtime.open_dashboard(
+            install_root, receipt_data, port=port, bind=bind,
+            acknowledge=acknowledge_network_exposure,
+        )
+    result["runtime_activation_performed"] = True
+    return 0, result
 
 
 def _print(data: dict) -> None:
@@ -636,6 +699,11 @@ def main(argv: list[str] | None = None) -> int:
     p_entry.add_argument("--install-root", type=Path, required=True)
     p_entry.add_argument("--receipt", type=Path)
     p_entry.add_argument("--smoke", action="store_true")
+    p_entry.add_argument("--tick-only", action="store_true")
+    p_entry.add_argument("--task-name")
+    p_entry.add_argument("--port", type=int, default=8765)
+    p_entry.add_argument("--bind", default="127.0.0.1")
+    p_entry.add_argument("--acknowledge-network-exposure", action="store_true")
     args = parser.parse_args(argv)
     try:
         if args.command == "install":
@@ -650,7 +718,11 @@ def main(argv: list[str] | None = None) -> int:
             result = uninstall(args.install_root, args.receipt)
             _print(result)
             return 0 if result["status"] in ("uninstalled", "already_absent") else 2
-        code, result = entry(args.name, args.install_root, args.receipt, args.smoke)
+        code, result = entry(
+            args.name, args.install_root, args.receipt, args.smoke,
+            tick_only=args.tick_only, task_name=args.task_name, port=args.port,
+            bind=args.bind, acknowledge_network_exposure=args.acknowledge_network_exposure,
+        )
         _print(result)
         return code
     except (OSError, ValueError, json.JSONDecodeError) as exc:

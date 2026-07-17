@@ -32,6 +32,7 @@ PROPOSAL_ALLOWLIST = frozenset(
         "proposals/public-release-consolidation-v0.1/test_clean_home_rehearsal.py",
         "proposals/public-release-consolidation-v0.1/test_release_candidate_hygiene.py",
         "proposals/public-release-consolidation-v0.1/test_release_installer.py",
+        "proposals/public-release-consolidation-v0.1/test_portable_runtime.py",
         "proposals/public-release-consolidation-v0.1/verify_release_candidate.py",
     }
 )
