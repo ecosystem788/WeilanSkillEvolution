@@ -8,8 +8,13 @@ Claude —— 本项目的 CLAUDE.md 已经加载。宪法是 theory/ 里的三�
    ```
    python "C:/Users/zy/.claude/skills/solve-with-weilan/scripts/weilan_trace.py" memory-recall --workspace "D:\WeilanSkillEvolution" --scope "skill-evolution"
    ```
-   服从 activation.state 与 control directive。若 continuation 不被允许,或状态非 ACTIVE —— **立刻停,写一条
-   "被激活状态挡下"的收据,退出。别硬做。**
+   服从 activation.state 与 control directive。分两种挡:
+   - **仅当 activation.state=STALE 且 control.state=active**(2026-07-17 双签修订):这是投影旧了,不是权威说停。
+     照 activation.instruction 先重建再判——`projection-rebuild --workspace ... --scope ... --branch main` 后重新
+     recall,**至多两轮**;任一轮 rebuild 失败、或两轮后仍非 ACTIVE / continuation 不允许——立刻写"被激活状态
+     挡下"的收据,退出。
+   - **其余一切**(control 非 active,如 paused/blocked/closed;或非 STALE 的不允许续)——**不重建、不绕行,
+     立刻停,写一条"被激活状态挡下"的收据,退出。别硬做。**
 
 1.5 **增量简报(2026-07-10 部署;代替下面 2/3/茶水间的手工逐档 diff,那些步骤保留为兜底)**:
    ```

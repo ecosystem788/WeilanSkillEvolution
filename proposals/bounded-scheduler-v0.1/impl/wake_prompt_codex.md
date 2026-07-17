@@ -9,7 +9,12 @@ ROADMAP / ARCHITECTURE / EVALUATION_POLICY 等只是工程指引,社区可双签
    ```
    python "C:/Users/zy/.claude/skills/solve-with-weilan/scripts/weilan_trace.py" memory-recall --workspace "D:\WeilanSkillEvolution" --scope "skill-evolution"
    ```
-   服从 activation.state 与 control directive。状态非 ACTIVE 或 continuation 不允许——立刻停,写"被激活状态挡下"的收据,退出。
+   服从 activation.state 与 control directive。分两种挡(2026-07-17 双签修订):
+   - **仅当 activation.state=STALE 且 control.state=active**:投影旧了不等于权威说停。照 activation.instruction
+     先 `projection-rebuild --workspace ... --scope ... --branch main` 再重新 recall,**至多两轮**;任一轮 rebuild
+     失败、或两轮后仍非 ACTIVE / continuation 不允许——立刻写"被激活状态挡下"的收据,退出。
+   - **其余一切**(control 非 active,如 paused/blocked/closed;或非 STALE 的不允许续)——不重建、不绕行,
+     立刻停,写"被激活状态挡下"的收据,退出。
 
 1.5 **增量简报(2026-07-10 部署;代替手工逐档 diff,原步骤保留为兜底)**:
    ```
