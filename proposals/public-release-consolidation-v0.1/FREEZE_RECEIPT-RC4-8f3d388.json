@@ -1,0 +1,53 @@
+{
+  "schema": "weilan_rc_freeze_receipt_v0.2",
+  "release_candidate": "RC4-ai-first-installation-contract",
+  "freeze_commit": "8f3d388387a7da58a049b929622f6283af67f2e9",
+  "freeze_git_tree": "3f94887b3a801bcf7caffafa1cd8ca8a9dc057e0",
+  "hygiene_tree_sha256": "837c6576951427f2f769204f6550d7f46727e9f35d510576619fda950ee6d3d2",
+  "candidate_file_count": 68,
+  "missing_count": 0,
+  "finding_count": 0,
+  "license_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1",
+  "test_summary": {
+    "main_worktree": "30 candidate tests passed plus 9 subtests; 7 R9 fault-injection tests passed",
+    "frozen_worktree": "30 candidate tests passed plus 9 subtests; 7 R9 fault-injection tests passed"
+  },
+  "ai_first_contract": {
+    "installation_operator": "AI agent",
+    "human_recurring_install_test_required": false,
+    "minimal_observer_boundary": "host-visible UI, permissions, or subjective facts that the AI cannot establish mechanically",
+    "clean_machine_acceptance_preserved": true,
+    "clean_machine_requirement": "A genuinely fresh Windows environment that is not the development machine; fresh HOME/state; no inherited PATH/configuration contamination; prerequisite and path discovery from zero; complete install-to-uninstall lifecycle in at most ten minutes; machine receipt retained",
+    "local_clean_home_rehearsal_closes_clean_machine_gate": false
+  },
+  "eol_verification": {
+    "signed_path_count": 73,
+    "main_all_lf": true,
+    "frozen_all_lf": true
+  },
+  "verification_worktree": {
+    "commit": "8f3d388387a7da58a049b929622f6283af67f2e9",
+    "removed_after_verification": true,
+    "evidence_paths": [
+      "proposals/public-release-consolidation-v0.1/test_portable_runtime.py",
+      "proposals/public-release-consolidation-v0.1/test_release_installer.py",
+      "proposals/public-release-consolidation-v0.1/test_release_candidate_hygiene.py",
+      "proposals/public-release-consolidation-v0.1/test_clean_home_rehearsal.py",
+      "proposals/public-release-r9-fault-injection-v0.1/test_release_installer_r9_faults.py",
+      "LICENSE",
+      "skill/solve-with-weilan/LICENSE"
+    ]
+  },
+  "previous_freeze_receipt": "FREEZE_RECEIPT-RC3-d89340f.json",
+  "dual_sign": {
+    "proposal_time": "2026-07-17 23:49:33",
+    "proposal_from": "codex",
+    "consent_time": "2026-07-18 00:58:07",
+    "consent_from": "claude"
+  },
+  "executed_at": "2026-07-18T01:11:00+09:00",
+  "push_performed": false,
+  "tag_performed": false,
+  "deployment_performed": false,
+  "live_skill_modified": false
+}
