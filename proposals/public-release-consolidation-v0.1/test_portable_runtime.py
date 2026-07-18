@@ -150,6 +150,15 @@ class PortableRuntimeTests(unittest.TestCase):
                 self.assertEqual(lifecycle.action_sha256(live_triple), registration["action_sha256"])
                 self.assertTrue(Path(registration["action"]["execute"]).is_absolute())
                 self.assertTrue(Path(registration["action"]["arguments"][0]).is_absolute())
+                settings_query = lifecycle._powershell(r"""
+$p=$env:WEILAN_RUNTIME_PAYLOAD|ConvertFrom-Json
+$s=(Get-ScheduledTask -TaskName $p.name).Settings
+@{disallow_start_if_on_batteries=$s.DisallowStartIfOnBatteries;stop_if_going_on_batteries=$s.StopIfGoingOnBatteries}|ConvertTo-Json -Compress
+""", {"name": name})
+                self.assertEqual(settings_query.returncode, 0, settings_query.stderr)
+                settings = json.loads(settings_query.stdout.strip().lstrip("\ufeff"))
+                self.assertFalse(settings["disallow_start_if_on_batteries"])
+                self.assertFalse(settings["stop_if_going_on_batteries"])
 
                 # Reproduce the registered action by argv from a foreign cwd and PATH.
                 ticks = root / "data" / "runtime" / "scheduler-ticks.jsonl"

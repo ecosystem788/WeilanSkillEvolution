@@ -146,7 +146,8 @@ $p=$env:WEILAN_RUNTIME_PAYLOAD|ConvertFrom-Json
 $a=New-ScheduledTaskAction -Execute $p.execute -Argument $p.arguments -WorkingDirectory $p.working_directory
 $t=New-ScheduledTaskTrigger -Once -At ((Get-Date).AddMinutes(5))
 $t.Repetition.Interval='PT5M';$t.Repetition.Duration='P1D'
-Register-ScheduledTask -TaskName $p.name -Action $a -Trigger $t -Description 'WeiLan portable bounded scheduler' -Force | Out-Null
+$s=New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
+Register-ScheduledTask -TaskName $p.name -Action $a -Trigger $t -Settings $s -Description 'WeiLan portable bounded scheduler' -Force | Out-Null
 """
     completed = _powershell(script, {
         "name": name, "execute": triple["execute"], "arguments": display,
