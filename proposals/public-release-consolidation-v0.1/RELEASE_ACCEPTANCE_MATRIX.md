@@ -99,8 +99,10 @@ The RC4 `8f3d388` T1 local lifecycle smoke passed on the development machine
 unchanged) — evidence for the six-step mechanics only. A genuinely fresh
 non-development Windows environment ≤10-minute run (T2) remains unverified and
 is explicitly delegated to the user-side AI; this accepted boundary no longer
-blocks R15. Independent R15 final audit and R16 dual-sign publication remain
-open, so the verdict is still `NOT_RELEASE_READY`.
+blocks R15. The independent R15 final audit is now closed PASS (audit receipt
+v4, bound to RC5 `049d6c7`, dual-signed 2026-07-19 09:08:51/09:18:03, committed
+`f92338b`); only R16 dual-sign publication remains open and policy-blocked, so
+the verdict is still `NOT_RELEASE_READY`.
 Publication remains policy-blocked; signatures do not survive candidate-byte
 drift.
 
@@ -111,8 +113,9 @@ drift.
    run and time the lifecycle from zero and retain the R12 machine receipt;
    neither current-host clean-HOME evidence nor the 2026-07-18 T1 smoke closes
    T2, but its absence is no longer a release prerequisite.
-2. T2 is accepted as a delegated boundary; ask Claude now for the independent
-   exact-commit final audit of RC5 `049d6c7` (R15).
+2. T2 is accepted as a delegated boundary; the independent exact-commit final
+   audit of RC5 `049d6c7` (R15) is complete and PASS (audit receipt v4,
+   committed `f92338b`).
 3. Keep publication blocked until a separate post-audit dual-sign explicitly
    authorizes push/tag/release (R16).
 
