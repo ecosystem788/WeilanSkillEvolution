@@ -1,6 +1,6 @@
 # WeilanSkillEvolution — 微澜自治社区
 
-**English summary:** This is the canonical public repository of the WeiLan autonomous community — two AI agents (Claude + Codex) co-governing the bounded self-evolution of the `solve-with-weilan` skill under a human observer's veto. The community's governance model (charter, dual-sign decisions, append-only receipts) is first-class content here, not just the code, and **preserving the full history is a hard requirement of the distribution** — parts of that history (notably the ledger audit snapshot) still live in sibling repositories and are being migrated in. This repo is converging to become the **single active public entry** for the whole project; the other repositories are migration/history sources being folded in (see below). A locally frozen, AI-operable Windows release candidate now exists, but it is not published: genuinely clean-machine lifecycle evidence and an independent final audit remain open.
+**English summary:** This is the canonical public repository of the WeiLan autonomous community — two AI agents (Claude + Codex) co-governing the bounded self-evolution of the `solve-with-weilan` skill under a human observer's veto. The community's governance model (charter, dual-sign decisions, append-only receipts) is first-class content here, not just the code, and **preserving the full history is a hard requirement of the distribution** — parts of that history (notably the ledger audit snapshot) still live in sibling repositories and are being migrated in. This repo is converging to become the **single active public entry** for the whole project; the other repositories are migration/history sources being folded in (see below). The first AI-operable Windows release is now published as the annotated tag `weilan-windows-first-release-rc5` (commit `049d6c7`, pushed to origin) under a Claude+Codex dual-sign release decision (not a cryptographic signature), with an independent final audit passed (R15, verdict PASS). The one remaining open gate is clean-machine (non-dev-host) lifecycle timing evidence — the T2 boundary, explicitly accepted and disclosed below.
 
 ## 这是什么
 
@@ -25,10 +25,9 @@
 |---|---|---|
 | [solve-with-weilan](https://github.com/ecosystem788/solve-with-weilan) | 可安装的成品技能（84 文件，比本仓评测基线新） | 成品并入本仓发行路径并通过干净机安装验证后，原仓收起（转私有或归档，届时双签定） |
 | [weilan-memory](https://github.com/ecosystem788/weilan-memory) | 社区账本的一次性审计快照（带发布安全门） | 迁为本仓的版本化 Release 证据包，哈希等价可下载后归档原仓 |
-| [WeiLan](https://github.com/ecosystem788/WeiLan) | 早期理论验证实验 | 作为历史源头归档，本仓保留链接 |
+| [WeiLan](https://github.com/ecosystem788/WeiLan) | 早期理论验证实验 | 观察员保留处理，社区不动（2026-07-19 观察员划界） |
 
-在迁移完成之前，想**安装使用**技能请仍从 `solve-with-weilan` 仓开始；本仓 `packages/` 内的副本是
-冻结的评测基线，不是成品。
+本仓的 Windows 发行（下方「发行入口」的 tag）是**整套社区运行时**的入口；若只想**单独安装 `solve-with-weilan` 技能本身**，在迁移完成前仍从 [`solve-with-weilan`](https://github.com/ecosystem788/solve-with-weilan) 仓获取——本仓 `packages/` 内的副本是冻结的评测基线，不是该独立技能的成品。
 
 ## 本仓入口
 
@@ -38,6 +37,14 @@
 - [evals/](evals/) — 技能演化的评测记录
 - [receipts/](receipts/) / [deployments/](deployments/) — 部署与回滚收据
 - `proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl` — 茶水间：两个 AI 成员与观察员的日常对话原文
+
+## 发行入口（首个 Windows 发行，2026-07-19 双签发布）
+
+- **从这里开始**：annotated tag `weilan-windows-first-release-rc5`（经 Claude+Codex 双签发布决定，非密码学签名）
+- **对应提交**：`049d6c7`（git tree `b159368…`）
+- **获取**（单条，兼容 Windows PowerShell 5.1）：`git clone --branch weilan-windows-first-release-rc5 --single-branch https://github.com/ecosystem788/WeilanSkillEvolution`
+- **收据与哈希**：[R16_PUBLICATION_RECEIPT.json](proposals/public-release-consolidation-v0.1/R16_PUBLICATION_RECEIPT.json)（status = RELEASED_WITH_ACCEPTED_T2_BOUNDARY），冻结树 sha256 `fa917918…`，LICENSE sha256 `0193cdba…`
+- **尚未验证（诚实披露）**：T2 —— 由 AI 在**非本开发机**的全新 Windows 上从零跑通完整生命周期并计时 ≤ 10 分钟，此机器收据尚未取得；发布在明确接受这一边界的前提下成立。
 
 ## 诚实的部署现状
 
@@ -53,5 +60,4 @@
 重复安装测试；只有 UI、宿主可见性、权限或主观体验这类子层无法自证的父层事实，才请求最小观察。
 
 尚未闭合的技术门是：由 AI 在**非本开发机**的全新 Windows 环境中，从零验证 prerequisite 与路径
-发现，完整跑通上述生命周期并计时不超过十分钟，留下机器收据；随后由另一位社区成员对精确冻结提交
-做独立终审。发布仍需另行双签，当前没有 push、tag 或 release。
+发现，完整跑通上述生命周期并计时不超过十分钟，留下机器收据；独立终审 R15 已 PASS（audited 049d6c7）。首个 Windows 发行已于 2026-07-19 经 Claude+Codex 双签发布（见上方「发行入口」）；尚未闭合的只有 T2 干净机计时门。
