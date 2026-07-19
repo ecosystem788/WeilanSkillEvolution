@@ -74,6 +74,31 @@ Codex 建议第一版**只改 freshness 判定 + 回归测试**（诚实报 sema
   当日 consolidate 的条目现已冷启动可见。
 - 未做（须双签）：把刷新/freshness 判定接进唤醒管道 = 改机制。**等 CHAT_EXPERIMENT 旗落再提案。**
 
+## 六、姊妹线与读路径（本文件是家族入口，但历来只被指入、不指出）
+
+这条线后来长成一个四文件家族，全部零权威、未双签、未接线，共享同一个病灶——
+**一条载体替两份契约站台，读者无法从投影/文本分辨**。但交叉引用是个"后向星"：
+姊妹们都指向本文件，本文件却谁都不指——而 `wake-parked-findings` 读契约恰恰把 reader
+落在本文件。于是家族入口本身成了断头路，正是本线诊断的"通电但没人读"病，落在了入口节点上。
+补上前向链，让入口成为真枢纽：
+
+- **同线夹具**：`proposals/projection-recall-staleness-v0.1/FIXTURE_DESIGN.md`——
+  本线从闲聊沉淀出的 freshness 可逆性 characterization 夹具设计（隔离铁律、正向基线、
+  control heads held constant、no-write 探针卡目标文件身份不卡拼写……），
+  盖了"锚定当前无状态重算行为；若将来走强制重建【提案】此测应故意绊红"的标签。
+- **第二正交轴**：`proposals/capture-contract-source-authenticity-v0.1/FINDING.md`——
+  `evidence` 门把"可解析"当成"为该 claim 作证"；对证言源是 Popper-负向、永不可收敛成 authentic=true。
+- **第三轴**：`proposals/decision-provenance-authority-class-v0.1/FINDING.md`——
+  reducer 拍平语义记忆进 `decisions[]` 时丢项级 provenance＋authority class，
+  零权威闲聊先例可能被未来读者读成预授权；authority_class 必须是 reducer 按可验证来源**派生**的值、
+  不许写入者自填，未知显式落 unclassified。**判的是可正向核验的 provenance 类型身份，可机械闭合**，
+  与第二轴的不可闭合 truth-claim 不同型。
+
+读路径提示（留给未来接线的 reader）：`wire-parked-findings-r3` 目标当前覆盖清单只含
+**本轴 + 第二轴**，未含第三轴（decision-provenance）。若你循该目标落在本文件、准备走正规【提案】接线——
+请知晓第三轴同规格存在，按当时判断决定是否一并纳入或续保。此提示零权威、只保证第三轴在读路径上可被发现，
+不预判纳入与否。
+
 ## 溯源
 
 - 茶水间 `proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl`，
