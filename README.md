@@ -23,11 +23,11 @@
 
 | 仓库 | 现状 | 去向 |
 |---|---|---|
-| [solve-with-weilan](https://github.com/ecosystem788/solve-with-weilan) | 可安装的成品技能（84 文件，比本仓评测基线新） | 成品并入本仓发行路径并通过干净机安装验证后，原仓收起（转私有或归档，届时双签定） |
-| [weilan-memory](https://github.com/ecosystem788/weilan-memory) | 社区账本的一次性审计快照（带发布安全门） | 迁为本仓的版本化 Release 证据包，哈希等价可下载后归档原仓 |
+| [solve-with-weilan](https://github.com/ecosystem788/solve-with-weilan) | 公开只读的历史入口；canonical 成品已并入本仓 [`skill/solve-with-weilan/`](skill/solve-with-weilan/) | T1、R15、R16 已闭合；T2 仍为 `OPEN_DELEGATED_ACCEPTED_NONBLOCKING`、尚未验证，本次归档复用观察员已接受且曾双签放行 rc5 的同一边界，**不表示 T2 PASS**（见第 3 行英文披露与第 46–47 行发行入口） |
+| [weilan-memory](https://github.com/ecosystem788/weilan-memory) | 社区账本的公开只读历史入口（带发布安全门） | 本仓 `weilan-windows-first-release-rc5` tag / clone 保留 canonical LF 字节（sha256 `9f204972fd1cc1d2b9e789336a438df79584b1be8ee0e3fd147699e554e39e87`，345126 B）；旧仓 Release asset 保留 CRLF 原字节（sha256 `9329fe79582414ae1b108b9106b8f5447adb97451b8bc59af57cf7324cafdc87`，352524 B）。二者**非字节哈希等价**、仅 EOL 表示不同，CRLF→LF 后逐字节内容等价；不新增 Evolution Release |
 | [WeiLan](https://github.com/ecosystem788/WeiLan) | 早期理论验证实验 | 观察员保留处理，社区不动（2026-07-19 观察员划界） |
 
-本仓的 Windows 发行（下方「发行入口」的 tag）是**整套社区运行时**的入口；若只想**单独安装 `solve-with-weilan` 技能本身**，在迁移完成前仍从 [`solve-with-weilan`](https://github.com/ecosystem788/solve-with-weilan) 仓获取——本仓 `packages/` 内的副本是冻结的评测基线，不是该独立技能的成品。
+本仓的 Windows 发行 tag [`weilan-windows-first-release-rc5`](https://github.com/ecosystem788/WeilanSkillEvolution/tree/weilan-windows-first-release-rc5)（见下方第 43–47 行命令、哈希与 T2 披露）是**整套社区运行时**的发行入口，canonical 独立技能源在 [`skill/solve-with-weilan/`](skill/solve-with-weilan/)（rc5 tag tree commit `049d6c7` 内实指，53 个 git 跟踪文件）；已归档的旧 `solve-with-weilan` 仓仅是公开只读历史入口，不再是活跃安装源。本仓 `packages/` 内 27 文件的副本是冻结评测基线，与 canonical 成品源分开。
 
 ## 本仓入口
 
