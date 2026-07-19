@@ -1,0 +1,176 @@
+{
+  "schema": "weilan_r15_final_audit_receipt_v0.1",
+  "receipt_version": "v3",
+  "consent_disposition": {
+    "status": "NOT_A_PASS_NOT_ROUTED_TO_FLIP",
+    "reason": "This v3 audit ran the LITERAL revised step-4 command (dual-signed protocol revision: proposal 2026-07-19 06:31:56 + consent 06:35:18 — the four candidate test files test_release_installer/test_release_candidate_hygiene/test_clean_home_rehearsal/test_portable_runtime + the R9 fault-injection harness, no hard-coded count). The widened command surfaced a step-4 test FAILURE that the prior narrow 3-file command structurally could not have produced: test_portable_runtime.py::PortableRuntimeTests::test_isolated_real_lifecycle_and_ownership_guards FAILS reproducibly on the current host (2 consecutive runs) with 'real task produced no tick receipt'. Measured 36 passed + 1 failed (= 29/30 candidate + 7/7 R9), which does NOT equal $RECEIPT.test_summary (30 candidate + 7 R9 all pass). Per protocol, step 4 not matching => this audit is NOT a PASS. This receipt is a FAIL audit record, not a consent-ready proposal; matrix R15 stays OPEN.",
+    "matrix_r15_row": "stays OPEN / DUAL-SIGN; overall verdict stays NOT_RELEASE_READY; retained as FAIL audit-trail record.",
+    "supersedes_disposition": "Prior R15_AUDIT_RECEIPT.json (v2, 2026-07-18 21:01) was NOT_CONSENTED because the then-narrow protocol step-4 command named only 3 files while the receipt silently ran 4+R9. That protocol defect was fixed by the dual-signed step-4 revision. This v3 runs the fixed literal command — and it fails at step 4. The v2 disposition is thereby closed; the blocker is no longer protocol-text drift but a real reproducible test failure."
+  },
+  "audit_kind": "independent_final_audit",
+  "auditor": "claude",
+  "audited_at": "2026-07-19T00:00:00+09:00",
+  "audited_commit": "8f3d388387a7da58a049b929622f6283af67f2e9",
+  "audited_tree": "3f94887b3a801bcf7caffafa1cd8ca8a9dc057e0",
+  "release_candidate": "RC4-ai-first-installation-contract",
+  "protocol": "R15_AUDIT_PROTOCOL.md (2026-07-17 draft; R12 carve-out dual-signed 2026-07-18; v4 anchoring-uniqueness 2026-07-18; step-4 test-set parameterization dual-signed 2026-07-19 06:31:56 + 06:35:18)",
+  "freeze_receipt_of_record": {
+    "path": "proposals/public-release-consolidation-v0.1/FREEZE_RECEIPT-RC4-8f3d388.json",
+    "resolved_from": "RELEASE_ACCEPTANCE_MATRIX.md R2 binding row (unique explicit versioned freeze receipt named)",
+    "matrix_r2_line_sha256_recomputed": "0e840c71127a79d31fd31703fee1e743f571e026ba6743762064a9ce1ba2ab2b",
+    "matrix_r2_line_sha256_expected": "0e840c71127a79d31fd31703fee1e743f571e026ba6743762064a9ce1ba2ab2b",
+    "matrix_r2_line_hash_match": true,
+    "hash_convention": "sha256(RELEASE_ACCEPTANCE_MATRIX.md strict-UTF-8-decoded R2 physical Markdown line's UTF-8 payload bytes, no CR/LF line terminator)"
+  },
+  "matrix_named_receipt_uniqueness": "R2 binding row names exactly one versioned freeze receipt (FREEZE_RECEIPT-RC4-8f3d388.json). Precondition satisfied, not fail-closed.",
+  "independence_discipline": {
+    "re_derived_not_trusted": true,
+    "auditor_made_no_repairs": true,
+    "drift_invalidation_triggered": false,
+    "note": "Candidate bytes did NOT drift (frozen == main hygiene tree 837c6576). The failure is a test-execution outcome, not a byte drift. Auditor recorded and routed; made no repair to test, harness, or candidate."
+  },
+  "steps": [
+    {
+      "step": 1,
+      "name": "anchor frozen parameters from matrix-resolved $RECEIPT",
+      "receipt_used": "FREEZE_RECEIPT-RC4-8f3d388.json",
+      "transcribed": {
+        "freeze_commit": "8f3d388387a7da58a049b929622f6283af67f2e9",
+        "freeze_git_tree": "3f94887b3a801bcf7caffafa1cd8ca8a9dc057e0",
+        "hygiene_tree_sha256": "837c6576951427f2f769204f6550d7f46727e9f35d510576619fda950ee6d3d2",
+        "candidate_file_count": 68,
+        "license_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1",
+        "test_summary": "30 candidate tests passed plus 9 subtests; 7 R9 fault-injection tests passed (both worktrees)"
+      },
+      "dual_sign_fields_present": true,
+      "push_performed": false,
+      "tag_performed": false,
+      "deployment_performed": false,
+      "result": "pass"
+    },
+    {
+      "step": 2,
+      "name": "frozen commit present and tree consistent",
+      "git_cat_file_type": "commit",
+      "measured_tree": "3f94887b3a801bcf7caffafa1cd8ca8a9dc057e0",
+      "expected_tree": "3f94887b3a801bcf7caffafa1cd8ca8a9dc057e0",
+      "match": true,
+      "worktree": "..\\r15-audit @ 8f3d388 (detached)",
+      "result": "pass"
+    },
+    {
+      "step": 3,
+      "name": "re-run hygiene scan in frozen worktree",
+      "measured": { "verdict": "PASS", "file_count": 68, "finding_count": 0, "tree_sha256": "837c6576951427f2f769204f6550d7f46727e9f35d510576619fda950ee6d3d2" },
+      "expected": { "verdict": "PASS", "candidate_file_count": 68, "finding_count": 0, "hygiene_tree_sha256": "837c6576951427f2f769204f6550d7f46727e9f35d510576619fda950ee6d3d2" },
+      "match": true,
+      "result": "pass"
+    },
+    {
+      "step": 4,
+      "name": "re-run test suite in frozen worktree (LITERAL revised command: 4 candidate files + R9 harness)",
+      "command": "pytest ..\\r15-audit\\...\\test_release_installer.py test_release_candidate_hygiene.py test_clean_home_rehearsal.py test_portable_runtime.py + ..\\r15-audit\\proposals\\public-release-r9-fault-injection-v0.1\\test_release_installer_r9_faults.py",
+      "measured": "36 passed + 1 FAILED (125.59s). Failure: test_portable_runtime.py::PortableRuntimeTests::test_isolated_real_lifecycle_and_ownership_guards. Reproduced on a second isolated run (62.02s) — reproducible, not a one-off flake.",
+      "expected": "30 candidate tests passed plus 9 subtests; 7 R9 fault-injection tests passed",
+      "match": false,
+      "failure_detail": {
+        "assertion": "assertTrue(ticks.exists() and ticks.stat().st_size > before, 'real task produced no tick receipt') -> AssertionError: False is not true",
+        "location": "test_portable_runtime.py:180",
+        "mechanism": "lifecycle.trigger_task(name) issues 'Start-ScheduledTask' (async; returns 0 on request-accept, does NOT block on execution). The registered Windows scheduled task was accepted but did not execute->write a tick receipt within the 20s polling deadline. Earlier in the SAME test, a direct synchronous subprocess run of the identical executable+arguments DID produce a tick — so the action bytes are healthy; the gap is Task-Scheduler execution latency/host-state under load.",
+        "byte_status": "Frozen candidate tree unchanged (3f94887b) and hygiene tree unchanged (837c6576); this test passed at RC4 freeze time and at the v2 audit (2026-07-18 21:01). The failure is host-Task-Scheduler-execution-dependent, not a candidate-byte regression.",
+        "cosmetic_note": "3 x PytestUnhandledThreadExceptionWarning (UnicodeDecodeError 0xd4, GBK console under zh-CN locale) also present — these are the pre-existing F3 reader-thread warnings, NOT the cause of this failure (the failure is the explicit tick-receipt assertion)."
+      },
+      "result": "fail"
+    },
+    {
+      "step": 5,
+      "name": "license byte identity",
+      "measured": { "root_LICENSE_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1", "payload_LICENSE_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1" },
+      "expected_license_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1",
+      "match": true,
+      "result": "pass"
+    },
+    {
+      "step": 6,
+      "name": "drift check (main vs frozen)",
+      "main_hygiene_tree_sha256": "837c6576951427f2f769204f6550d7f46727e9f35d510576619fda950ee6d3d2",
+      "frozen_hygiene_tree_sha256": "837c6576951427f2f769204f6550d7f46727e9f35d510576619fda950ee6d3d2",
+      "drift_detected": false,
+      "result": "pass"
+    },
+    {
+      "step": 7,
+      "name": "per-gate closure + evidence adjudication",
+      "result": "see gate_adjudications; R11 and R14 evidence layers FAIL because the closure test suite does not currently all-pass on this host."
+    },
+    {
+      "step": 8,
+      "name": "omission review",
+      "findings": [],
+      "result": "not_reached_as_decisive — no over-claim found in docs, but overall verdict already FAIL at step 4"
+    },
+    {
+      "step": 9,
+      "name": "issue receipt",
+      "result": "this FAIL receipt; NOT routed to a flip proposal; finding F5 routed to Codex/implementer; worktree removed"
+    }
+  ],
+  "gate_adjudications": [
+    { "gate": "R1", "adjudication": "pass", "evidence_refs": ["README.md"], "note": "Disclosure role intact." },
+    { "gate": "R2", "adjudication": "pass", "evidence_refs": ["FREEZE_RECEIPT-RC4-8f3d388.json"], "note": "68-file allowlist / hygiene tree 837c6576 re-derived valid; $RECEIPT of record." },
+    { "gate": "R3", "adjudication": "pass", "evidence_refs": ["INSTALL_OWNERSHIP_RECEIPT.json", "RC3->RC4 carry-forward"], "note": "Byte-identity carry-forward unchanged this run." },
+    { "gate": "R4", "adjudication": "pass", "evidence_refs": ["RC3->RC4 carry-forward"], "note": "Unchanged." },
+    { "gate": "R5", "adjudication": "pass", "evidence_refs": ["test_release_installer suite"], "note": "Preflight-rejection tests passed within the run; F4 stale '26' prose note carried." },
+    { "gate": "R6", "adjudication": "pass", "evidence_refs": ["hygiene tree 837c6576"], "note": "No machine-specific paths." },
+    { "gate": "R7", "adjudication": "pass", "evidence_refs": ["RC3->RC4 carry-forward"], "note": "State isolation carry-forward unchanged." },
+    { "gate": "R8", "adjudication": "pass", "evidence_refs": ["docs + carry-forward"], "note": "Loopback boundary unchanged." },
+    { "gate": "R9", "adjudication": "pass", "evidence_refs": ["test_release_installer_r9_faults.py (7 passed)"], "note": "All 7 R9 fault-injection tests passed in this run." },
+    { "gate": "R10", "adjudication": "pass", "evidence_refs": ["frozen hygiene PASS/68/0"], "note": "0 findings." },
+    { "gate": "R11", "adjudication": "fail", "evidence_refs": ["test_portable_runtime.py (1 FAILED)"], "note": "R11 closure evidence cites the full candidate+R9 suite passing. The suite does NOT all-pass on this host: test_isolated_real_lifecycle_and_ownership_guards fails reproducibly. Evidence layer fails => gate non-closed." },
+    { "gate": "R12", "adjudication": "pass", "evidence_refs": ["R12 carve-out"], "note": "BOUNDARY (T1 PASS, T2 OPEN/DELEGATED) closed for R15 via dual-signed carve-out; unaffected by step-4 failure." },
+    { "gate": "R13", "adjudication": "pass", "evidence_refs": ["LICENSE sha256 0193cdba"], "note": "Byte-identical." },
+    { "gate": "R14", "adjudication": "fail", "evidence_refs": ["frozen test suite: 36 passed + 1 FAILED"], "note": "R14 requires every step re-derived and matched, including the full test suite. Step 4 does not match $RECEIPT.test_summary (30 candidate all-pass) — one candidate test fails. Gate non-closed." }
+  ],
+  "findings": [
+    {
+      "id": "F5",
+      "severity": "GATING",
+      "gates_gated": ["R11", "R14"],
+      "summary": "test_portable_runtime.py::test_isolated_real_lifecycle_and_ownership_guards fails reproducibly (2/2 runs) on the current host: after lifecycle.trigger_task() (Start-ScheduledTask, async) the registered Windows scheduled task does not execute->write a tick receipt within the 20s polling deadline. The direct synchronous subprocess run of the identical action DOES produce a tick, and the frozen candidate bytes are unchanged, so this is Task-Scheduler execution-latency/host-state sensitivity — possibly compounded by a too-tight 20s deadline — not a candidate-byte regression.",
+      "open_question_for_implementer": "Is this (a) a genuine RC portability defect — the scheduler-triggered runtime does not reliably fire on a real host, which a released user could hit — or (b) test fragility needing an adaptive/longer deadline or an explicit environment gate for the real-Task-Scheduler path? Distinguishing (a) vs (b) requires implementer investigation (e.g., query the task's LastRunTime/LastTaskResult after trigger; test on a less-loaded host; instrument Start-ScheduledTask -> execution latency).",
+      "routed_to": "Codex (implementer) — NOT repaired by auditor per independence discipline. Until resolved, R15 cannot reach a clean PASS; the release push line remains blocked at R11/R14.",
+      "auditor_recommendation_non_binding": "Do NOT relax the gate to force a PASS. Either fix the reliability (if the scheduler-trigger runtime is genuinely flaky, users are affected) or, if it is proven to be pure test-harness timing fragility, revise the test with a justified deadline/environment gate via a dual-signed change — then re-freeze/re-audit. Auditor holds no authority to choose; recording the fact and routing it is the audit's job."
+    },
+    {
+      "id": "F1",
+      "severity": "note",
+      "gates_gated": [],
+      "summary": "Generic FREEZE_RECEIPT.json remains RC2-stale; non-authoritative per v4 anchoring-uniqueness. Non-gating.",
+      "routed_to": "Codex — optional housekeeping."
+    },
+    {
+      "id": "F3",
+      "severity": "note",
+      "gates_gated": [],
+      "summary": "3x PytestUnhandledThreadExceptionWarning (GBK 0xd4 reader-thread UnicodeDecodeError, zh-CN locale). Cosmetic; not the cause of F5. Non-gating.",
+      "routed_to": "Codex — optional: force UTF-8/errors=replace on subprocess capture."
+    },
+    {
+      "id": "F4",
+      "severity": "note",
+      "gates_gated": [],
+      "summary": "R5 Current-evidence prose still says '26 tests' while current candidate suite is 30. Intra-matrix prose staleness. Non-gating.",
+      "routed_to": "Codex/implementer — optional doc refresh."
+    }
+  ],
+  "verdict": "FAIL",
+  "verdict_basis": "Step 4 (re-run test suite per the literal revised protocol command) does NOT match $RECEIPT.test_summary: 36 passed + 1 reproducibly FAILED (test_portable_runtime real-Task-Scheduler tick test). Gates R11 and R14 evidence layers are therefore non-closed. Per protocol, any gate fail => overall verdict FAIL, and verdict=PASS requires all 14 adjudications pass. The audit did its job: the dual-signed step-4 widening exposed a real reproducible failure the prior narrow command structurally could not surface. Candidate bytes did not drift; the failure is host-Task-Scheduler-execution-dependent and is routed to the implementer (F5) as a genuine open question (portability defect vs test fragility).",
+  "scope_and_boundaries": {
+    "this_receipt_is_a_proposal": false,
+    "matrix_r15_row_not_flipped_by_auditor": true,
+    "matrix_r15_stays": "OPEN / DUAL-SIGN",
+    "r16_publication_still_blocked_by_policy": true,
+    "overall_release_verdict": "NOT_RELEASE_READY — R15 FAILS this audit at step 4; blocker F5 routed to implementer",
+    "t2_clean_machine": "remains open and owner-delegated; independent of this failure"
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "schema": "weilan_r15_final_audit_receipt_v0.1",
+  "receipt_version": "v4",
+  "consent_disposition": {
+    "status": "PASS_READY_TO_ROUTE_TO_FLIP",
+    "reason": "This v4 audit independently re-derived the RC5 candidate (049d6c7) per the literal revised protocol (step-4 four candidate files + R9 harness, dual-signed revision 2026-07-19 06:31:56 + 06:35:18). All nine steps pass and all 14 gate adjudications are pass. The prior-run gating failure (v3 F5: test_portable_runtime real-lifecycle tick test) is RESOLVED at RC5: lifecycle.py now registers the scheduled task with New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries (the F5 root cause was Windows' default DisallowStartIfOnBatteries blocking the triggered task on a host running on battery), and test_portable_runtime.py adds a regression assertion that both battery-block settings are false. Step 4 measured 37 passed + 9 subtests passed (= 30 candidate + 7 R9), matching $RECEIPT.test_summary; the exact crux test test_isolated_real_lifecycle_and_ownership_guards passed on 2 consecutive runs (mirroring v3's reproducibility discipline, which had confirmed the failure on 2 runs). Per protocol, verdict=PASS requires all 14 adjudications pass — satisfied. This receipt is proposal-ready: the auditor routes it to a peer-chat flip proposal; the matrix R15 row is NOT flipped by the auditor.",
+    "matrix_r15_row": "stays OPEN / DUAL-SIGN until a peer-chat flip proposal is consented by Codex; this PASS receipt is the evidence for that proposal.",
+    "supersedes_disposition": "Supersedes R15_AUDIT_RECEIPT-v3-RC4-8f3d388-FAIL.json (v3, RC4 8f3d388, verdict FAIL at step 4 on F5). v3's F5 blocker was routed to the implementer as 'portability defect vs test fragility'; RC5 resolved it as a genuine portability fix (battery-safe scheduler settings) plus a regression assertion — not by relaxing the gate. The v3 FAIL record is retained as an archived audit-trail file."
+  },
+  "audit_kind": "independent_final_audit",
+  "auditor": "claude",
+  "audited_at": "2026-07-19T09:05:25+09:00",
+  "audited_commit": "049d6c79e683b829bd8fa0b9a5491f5a3796a0bb",
+  "audited_tree": "b159368309de399587f5d768d6680674ee54277b",
+  "matrix_and_receipt_source_head": "69eafe3ec83249a4d8e484dc63707a7a41c02075",
+  "release_candidate": "RC5-battery-safe-scheduler-settings",
+  "protocol": "R15_AUDIT_PROTOCOL.md (2026-07-17 draft; R12 carve-out dual-signed 2026-07-18; v4 anchoring-uniqueness 2026-07-18; step-4 test-set parameterization dual-signed 2026-07-19 06:31:56 + 06:35:18)",
+  "freeze_receipt_of_record": {
+    "path": "proposals/public-release-consolidation-v0.1/FREEZE_RECEIPT-RC5-049d6c7.json",
+    "resolved_from": "RELEASE_ACCEPTANCE_MATRIX.md R2 binding row (unique explicit versioned freeze receipt named)",
+    "matrix_r2_line_sha256_recomputed": "da43448b985f5da09399f8655efc6e25da7c43e79b8c5582775380a9118185ce",
+    "matrix_r2_line_hash_convention": "sha256(RELEASE_ACCEPTANCE_MATRIX.md strict-UTF-8-decoded R2 physical Markdown line's UTF-8 payload bytes, no CR/LF line terminator)",
+    "matrix_r2_line_preview": "| R2 Skill payload closure | Adopted Skill payload is fully accounted for; ... FREEZE_RECEIPT-RC5-049d6c7.json ... 049d6c7 ... fa917918 | PASS for frozen RC5 |"
+  },
+  "matrix_named_receipt_uniqueness": "R2 binding row names exactly one versioned freeze receipt (FREEZE_RECEIPT-RC5-049d6c7.json); historical RC1-RC4 anchors are named only as unchanged prose, not as the current $RECEIPT. Precondition satisfied, not fail-closed.",
+  "independence_discipline": {
+    "re_derived_not_trusted": true,
+    "auditor_made_no_repairs": true,
+    "drift_invalidation_triggered": false,
+    "note": "Every hash and test result was recomputed in a clean detached worktree (D:/r15-audit @ 049d6c7). Candidate bytes did NOT drift (frozen hygiene tree fa917918 == main hygiene tree fa917918). The auditor made no repair to candidate, test, or harness; the F5 resolution was authored by the implementer (Codex) in RC5, not by the auditor."
+  },
+  "steps": [
+    {
+      "step": 1,
+      "name": "anchor frozen parameters from matrix-resolved $RECEIPT",
+      "receipt_used": "FREEZE_RECEIPT-RC5-049d6c7.json",
+      "transcribed": {
+        "freeze_commit": "049d6c79e683b829bd8fa0b9a5491f5a3796a0bb",
+        "freeze_git_tree": "b159368309de399587f5d768d6680674ee54277b",
+        "hygiene_tree_sha256": "fa917918d3598a1063f851322e4a6bc22fe32f41a2966fa2dd608766cbe56013",
+        "candidate_file_count": 68,
+        "license_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1",
+        "test_summary": "30 candidate tests passed plus 9 subtests; 7 R9 fault-injection tests passed (both worktrees)"
+      },
+      "dual_sign_fields_present": true,
+      "dual_sign": {
+        "proposal_time": "2026-07-19 08:18:41",
+        "proposal_from": "codex",
+        "consent_time": "2026-07-19 08:31:15",
+        "consent_from": "claude"
+      },
+      "push_performed": false,
+      "tag_performed": false,
+      "deployment_performed": false,
+      "result": "pass"
+    },
+    {
+      "step": 2,
+      "name": "frozen commit present and tree consistent",
+      "git_cat_file_type": "commit",
+      "measured_tree": "b159368309de399587f5d768d6680674ee54277b",
+      "expected_tree": "b159368309de399587f5d768d6680674ee54277b",
+      "match": true,
+      "worktree": "..\\r15-audit @ 049d6c7 (detached)",
+      "result": "pass"
+    },
+    {
+      "step": 3,
+      "name": "re-run hygiene scan in frozen worktree",
+      "measured": { "verdict": "PASS", "file_count": 68, "allowlist": 68, "missing": 0, "finding_count": 0, "tree_sha256": "fa917918d3598a1063f851322e4a6bc22fe32f41a2966fa2dd608766cbe56013" },
+      "expected": { "verdict": "PASS", "candidate_file_count": 68, "finding_count": 0, "hygiene_tree_sha256": "fa917918d3598a1063f851322e4a6bc22fe32f41a2966fa2dd608766cbe56013" },
+      "match": true,
+      "result": "pass"
+    },
+    {
+      "step": 4,
+      "name": "re-run test suite in frozen worktree (LITERAL revised command: 4 candidate files + R9 harness)",
+      "command": "pytest ..\\r15-audit\\...\\test_release_installer.py test_release_candidate_hygiene.py test_clean_home_rehearsal.py test_portable_runtime.py + ..\\r15-audit\\proposals\\public-release-r9-fault-injection-v0.1\\test_release_installer_r9_faults.py",
+      "measured": "37 passed + 9 subtests passed (68.64s). = 30 candidate tests + 7 R9 fault-injection tests, plus 9 subtests. Crux test test_portable_runtime.py::PortableRuntimeTests::test_isolated_real_lifecycle_and_ownership_guards PASSED; re-run in isolation a 2nd time (32.02s) also PASSED — stable, not a one-off.",
+      "expected": "30 candidate tests passed plus 9 subtests; 7 R9 fault-injection tests passed",
+      "match": true,
+      "f5_resolution_detail": {
+        "prior_failure": "v3 (RC4): test_isolated_real_lifecycle_and_ownership_guards failed reproducibly (2/2) — Start-ScheduledTask accepted but the task did not execute->write a tick receipt within the 20s deadline.",
+        "rc5_fix": "lifecycle.py: Register-ScheduledTask now passes -Settings (New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries). Root cause was Windows' default DisallowStartIfOnBatteries=true blocking the triggered task while the host ran on battery.",
+        "rc5_regression_guard": "test_portable_runtime.py adds a settings-query assertion that DisallowStartIfOnBatteries=false and StopIfGoingOnBatteries=false after registration. No test file added/removed => no step-4 structural change; candidate test count stays 30.",
+        "verified": "Both consecutive frozen-worktree runs at 049d6c7 pass; the fix is at the candidate byte level and is causally explained, not coincidental."
+      },
+      "cosmetic_note": "3 x PytestUnhandledThreadExceptionWarning (GBK 0xd4 UnicodeDecodeError, zh-CN console reader thread) — the pre-existing F3 warnings, non-gating; the test's explicit tick-receipt assertion passed.",
+      "result": "pass"
+    },
+    {
+      "step": 5,
+      "name": "license byte identity",
+      "measured": { "root_LICENSE_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1", "payload_LICENSE_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1" },
+      "expected_license_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1",
+      "match": true,
+      "result": "pass"
+    },
+    {
+      "step": 6,
+      "name": "drift check (main vs frozen)",
+      "main_hygiene_tree_sha256": "fa917918d3598a1063f851322e4a6bc22fe32f41a2966fa2dd608766cbe56013",
+      "frozen_hygiene_tree_sha256": "fa917918d3598a1063f851322e4a6bc22fe32f41a2966fa2dd608766cbe56013",
+      "drift_detected": false,
+      "result": "pass"
+    },
+    {
+      "step": 7,
+      "name": "per-gate closure + evidence adjudication",
+      "result": "see gate_adjudications; all 14 gates pass (R11 and R14 recovered vs v3 because the full candidate+R9 suite now all-passes at RC5)."
+    },
+    {
+      "step": 8,
+      "name": "omission review",
+      "findings": [],
+      "result": "pass — README/OPERATION_CARD/TROUBLESHOOTING consistently frame the artifact as an unpublished release candidate, scope the dashboard to 127.0.0.1 (non-loopback requires explicit acknowledgement), and make no LAN/public, non-Windows, or upgrade/migration claim; no over-claim beyond evidence."
+    },
+    {
+      "step": 9,
+      "name": "issue receipt",
+      "result": "this PASS receipt; routed to a peer-chat flip proposal (auditor does NOT flip the matrix); v3 FAIL record archived; worktree removed after write."
+    }
+  ],
+  "gate_adjudications": [
+    { "gate": "R1", "adjudication": "pass", "evidence_refs": ["README.md", "FINDING.md"], "note": "Disclosure role intact; README states 'not a published release'." },
+    { "gate": "R2", "adjudication": "pass", "evidence_refs": ["FREEZE_RECEIPT-RC5-049d6c7.json"], "note": "68-file allowlist / hygiene tree fa917918 re-derived valid; unique $RECEIPT of record; matrix R2 line hash da43448b recomputed and bound." },
+    { "gate": "R3", "adjudication": "pass", "evidence_refs": ["INSTALL_OWNERSHIP_RECEIPT.json (verdict PASS, 61 owned, adopted=false, deployed=false)", "RC3 anchor + RC4 T1 smoke"], "note": "Historical RC3 anchor adjudicated by its own limiting language, not rebound to RC5; carry-forward unchanged." },
+    { "gate": "R4", "adjudication": "pass", "evidence_refs": ["RC3 anchor + RC4 T1 smoke"], "note": "Five entry points; RUNTIME_DEPLOYABILITY_RECEIPT verdict PASS_CURRENT_HOST, deployment_performed=false. Unchanged carry-forward." },
+    { "gate": "R5", "adjudication": "pass", "evidence_refs": ["test_release_installer suite (passed in run)"], "note": "Preflight-rejection tests passed; F4 stale '26 tests' prose in matrix carried as non-gating note (candidate suite is 30)." },
+    { "gate": "R6", "adjudication": "pass", "evidence_refs": ["hygiene tree fa917918"], "note": "No user/machine-specific absolute paths in the frozen candidate." },
+    { "gate": "R7", "adjudication": "pass", "evidence_refs": ["RC3 anchor + RC4 T1 smoke (shared method-state before=after)"], "note": "Fresh-ledger isolation carry-forward unchanged." },
+    { "gate": "R8", "adjudication": "pass", "evidence_refs": ["docs + carry-forward + T1 smoke (200/405/non-loopback-refused)"], "note": "Loopback dashboard boundary unchanged." },
+    { "gate": "R9", "adjudication": "pass", "evidence_refs": ["test_release_installer_r9_faults.py (7 passed this run)"], "note": "All 7 R9 fault-injection tests passed in the frozen worktree." },
+    { "gate": "R10", "adjudication": "pass", "evidence_refs": ["frozen hygiene PASS/68/0, tree fa917918"], "note": "0 findings, 0 missing over the 68-file RC5 surface; main and frozen match." },
+    { "gate": "R11", "adjudication": "pass", "evidence_refs": ["README/OPERATION_CARD/TROUBLESHOOTING", "frozen suite 30 candidate + 9 subtests + 7 R9 all pass"], "note": "RECOVERED vs v3: the full candidate+R9 suite now all-passes on this host; AI-operable contract evidence intact." },
+    { "gate": "R12", "adjudication": "pass", "evidence_refs": ["R12 carve-out (dual-signed 2026-07-18)", "clean_home_rehearsal (clean_machine_acceptance=false)", "T1 smoke (site=development_machine)"], "note": "BOUNDARY (T1 PASS, T2 OPEN/DELEGATED) closed for R15 via carve-out only; T2 clean-machine remains unverified and owner-delegated — recorded, not repaired, not rewritten to PASS." },
+    { "gate": "R13", "adjudication": "pass", "evidence_refs": ["LICENSE sha256 0193cdba (root + payload)"], "note": "Byte-identical, bound to freeze commit 049d6c7." },
+    { "gate": "R14", "adjudication": "pass", "evidence_refs": ["frozen suite 37 passed + 9 subtests; hygiene PASS/68/0; tree fa917918; LICENSE match"], "note": "RECOVERED vs v3: step 4 now matches $RECEIPT.test_summary (30 candidate all-pass + 7 R9); RC5 tree b1593683 and hygiene tree fa917918 re-derived; every step re-derived and matched." }
+  ],
+  "findings": [
+    {
+      "id": "F5",
+      "severity": "resolved",
+      "gates_gated": [],
+      "summary": "The v3 gating failure (test_portable_runtime real-Task-Scheduler tick test) is RESOLVED at RC5. Root cause was a genuine portability defect (scheduled task blocked on battery by Windows default DisallowStartIfOnBatteries), fixed at the candidate level in lifecycle.py (-AllowStartIfOnBatteries -DontStopIfGoingOnBatteries) with a matching regression assertion in test_portable_runtime.py. Verified passing 2/2 consecutive runs in the frozen worktree.",
+      "routed_to": "closed — implementer fixed it in RC5 as a real portability fix, not a gate relaxation; auditor verified independently."
+    },
+    {
+      "id": "F1",
+      "severity": "note",
+      "gates_gated": [],
+      "summary": "Generic FREEZE_RECEIPT.json remains RC-stale; non-authoritative per v4 anchoring-uniqueness (terminal audit never reads it). Non-gating.",
+      "routed_to": "Codex — optional housekeeping."
+    },
+    {
+      "id": "F3",
+      "severity": "note",
+      "gates_gated": [],
+      "summary": "3x PytestUnhandledThreadExceptionWarning (GBK 0xd4 reader-thread UnicodeDecodeError under zh-CN console). Cosmetic; test assertions pass. Non-gating.",
+      "routed_to": "Codex — optional: force UTF-8/errors=replace on subprocess capture."
+    },
+    {
+      "id": "F4",
+      "severity": "note",
+      "gates_gated": [],
+      "summary": "R5 Current-evidence prose in the matrix still says 'the combined candidate suite passes 26 tests' while the current candidate suite is 30. Intra-matrix prose staleness. Non-gating.",
+      "routed_to": "Codex/implementer — optional doc refresh."
+    }
+  ],
+  "verdict": "PASS",
+  "verdict_basis": "All nine protocol steps pass and all 14 gate adjudications are pass: RC5 commit 049d6c7 present with tree b1593683; frozen hygiene PASS/68/0/fa917918; step 4 test suite 37 passed + 9 subtests matching $RECEIPT.test_summary with the v3 crux test now passing 2/2 runs; LICENSE byte-identical 0193cdba; no drift (main tree == frozen tree fa917918); evidence layers cohere; no omission over-claim. The v3 gating failure F5 was resolved by the implementer at the candidate byte level (battery-safe scheduler settings), not by relaxing any gate. Per protocol, verdict=PASS is warranted because all 14 adjudications pass. This receipt is proposal-ready; the auditor does not flip the matrix.",
+  "scope_and_boundaries": {
+    "this_receipt_is_a_proposal": false,
+    "this_receipt_is_proposal_ready": true,
+    "matrix_r15_row_not_flipped_by_auditor": true,
+    "matrix_r15_stays_until_dual_sign": "OPEN / DUAL-SIGN — flips only after a peer-chat proposal citing this receipt is consented by Codex",
+    "r16_publication_still_blocked_by_policy": true,
+    "overall_release_verdict_after_r15_pass": "R15 audit passes for RC5; overall release remains NOT_RELEASE_READY until the R15 matrix row is dual-sign flipped and R16 publication is separately authorized",
+    "t2_clean_machine": "remains open and owner-delegated; independent of this audit, which does not and cannot verify T2"
+  }
+}
