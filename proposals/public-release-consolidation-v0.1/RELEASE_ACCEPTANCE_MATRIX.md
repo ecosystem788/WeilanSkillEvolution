@@ -35,7 +35,7 @@ or publication.
 | R13 License | Exact release contents have a clear, compatible license and notices | Root and payload `LICENSE` remain byte-identical at sha256 `0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1`; main and detached RC5 verification each passed 30 candidate tests plus 9 subtests, 7 R9 tests, and 68-file hygiene | PASS (bound to freeze commit `049d6c79e683b829bd8fa0b9a5491f5a3796a0bb`) | Any payload byte drift or new notice obligation reopens R13 |
 | R14 RC integrity | Every included file is allowlisted and hashed; tests and scans bind to the same immutable RC tree | RC5 commit `049d6c79e683b829bd8fa0b9a5491f5a3796a0bb` (Git tree `b159368309de399587f5d768d6680674ee54277b`) and a fresh detached checkout produced hygiene `PASS/68/0/0`, tree `fa917918d3598a1063f851322e4a6bc22fe32f41a2966fa2dd608766cbe56013`, 73/73 signed paths at LF, 30 candidate tests plus 9 subtests, 7 R9 tests, and matching LICENSE hashes | PASS for frozen RC5 | Any change to the 68-file surface invalidates this receipt; independent final audit remains R15 |
 | R15 Independent final audit | Reviewer checks exact artifact/commit hash, acceptance lines, test output, omissions, and sign-after-drift invalidation | `R15_AUDIT_RECEIPT.json` v4 independently re-derived exact RC5 `049d6c79e683b829bd8fa0b9a5491f5a3796a0bb`: 9/9 protocol steps and 14/14 gate adjudications pass; frozen and main hygiene both `PASS/68/0/0` at tree `fa917918d3598a1063f851322e4a6bc22fe32f41a2966fa2dd608766cbe56013`; step 4 measured 37 passed plus 9 subtests; the F5 real-scheduler crux passed twice for Claude and once independently for Codex after the RC5 battery-safe settings fix | PASS (bound to RC5 `049d6c7`, audit receipt v4) | Any candidate-byte drift or audit-protocol structural change reopens R15; R16 publication remains separately dual-sign gated |
-| R16 Publication | Push/tag/release uses the signed RC and publishes hashes/rollback receipt | 2026-07-19: under the owner's 10:11:57 direct authorization ("可以推送"), the branch was git-pushed to `fd483ef` (local HEAD = origin tracking = GitHub advertised ref, ahead/behind 0/0; `049d6c7..fd483ef` is zero-payload against the RC5 68-file surface, so candidate bytes did not drift; no tag/release/deploy). This git push executed before any R16 community-release dual-sign and does not by itself close the publication gate | BLOCKED BY POLICY | A separate R16 dual-sign publication proposal (and lifting the self-imposed no-publish policy) is still required; the 2026-07-19 push closed no publication gate. Restate double-sign: proposal 2026-07-19 10:20:11 + agreement 10:34:34 |
+| R16 Publication | Push/tag/release uses the signed RC and publishes hashes/rollback receipt | Annotated tag `weilan-windows-first-release-rc5` points to the exact signed RC5 commit `049d6c79e683b829bd8fa0b9a5491f5a3796a0bb` (Git tree `b159368309de399587f5d768d6680674ee54277b`), whose fresh detached hygiene is `PASS/68/0/0` at tree `fa917918d3598a1063f851322e4a6bc22fe32f41a2966fa2dd608766cbe56013`; `R16_PUBLICATION_RECEIPT.json` publishes the hashes, R15 v4 PASS reference, governance signatures, accepted T2 boundary, and executable rollback commands | PASS — RELEASED (Windows first release; T2 remains an accepted open/delegated boundary) | Owner authorization 2026-07-19 10:41:26; R16 double-sign: proposal 10:46:20 + agreement 10:54:41. Any tag-target drift or candidate-byte drift invalidates R16; rollback cannot recall a tag already fetched by a third party |
 
 ## RC3 → RC4 carry-forward (R3/R4/R7/R8/R9)
 
@@ -82,7 +82,8 @@ agreement 16:40:02 (peer-chat).
 
 ## Current verdict
 
-`NOT_RELEASE_READY`.
+`RELEASED` — Windows first release, with the R12 T2 clean-machine result
+explicitly retained as an accepted open/delegated boundary.
 
 The principal method/runtime payload and isolated ownership mechanics are real
 progress, not placeholders: R3/R4/R7/R8/R9 now have real current-host evidence,
@@ -101,10 +102,12 @@ non-development Windows environment ≤10-minute run (T2) remains unverified and
 is explicitly delegated to the user-side AI; this accepted boundary no longer
 blocks R15. The independent R15 final audit is now closed PASS (audit receipt
 v4, bound to RC5 `049d6c7`, dual-signed 2026-07-19 09:08:51/09:18:03, committed
-`f92338b`); only R16 dual-sign publication remains open and policy-blocked, so
-the verdict is still `NOT_RELEASE_READY`.
-Publication remains policy-blocked; signatures do not survive candidate-byte
-drift.
+`f92338b`). R16 is now closed PASS by the annotated
+`weilan-windows-first-release-rc5` tag and
+`R16_PUBLICATION_RECEIPT.json`, under owner authorization 2026-07-19 10:41:26
+and community double-sign 10:46:20/10:54:41. The release verdict is therefore
+`RELEASED`; T2 remains visibly unverified, open/delegated, and nonblocking.
+Signatures do not survive candidate-byte drift.
 
 ## Remaining work after RC5
 
@@ -116,11 +119,10 @@ drift.
 2. T2 is accepted as a delegated boundary; the independent exact-commit final
    audit of RC5 `049d6c7` (R15) is complete and PASS (audit receipt v4,
    committed `f92338b`).
-3. Keep publication blocked until a separate R16 dual-sign explicitly
-   authorizes it. Note: on 2026-07-19 the branch was already git-pushed to
-   `fd483ef` under the owner's direct authorization, but that push executed
-   before any R16 dual-sign; a git push is not R16 governance closure, so R16
-   remains `BLOCKED BY POLICY` and the verdict stays `NOT_RELEASE_READY`.
+3. R16 publication is complete: preserve the exact RC5 tag target and the
+   published rollback receipt. Any candidate-byte or tag-target drift reopens
+   the gate; deleting the remote tag cannot recall copies already fetched by a
+   third party.
 
 Stop and route through a new narrow dual-sign proposal before changing the
 frozen scheduler/dashboard contract, selecting a different outward license,

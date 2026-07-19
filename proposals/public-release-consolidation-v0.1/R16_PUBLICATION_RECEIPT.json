@@ -1,0 +1,60 @@
+{
+  "schema": "weilan_r16_publication_receipt_v0.1",
+  "release": "Windows first release",
+  "status": "RELEASED_WITH_ACCEPTED_T2_BOUNDARY",
+  "tag": {
+    "name": "weilan-windows-first-release-rc5",
+    "kind": "annotated",
+    "target_commit": "049d6c79e683b829bd8fa0b9a5491f5a3796a0bb",
+    "target_git_tree": "b159368309de399587f5d768d6680674ee54277b"
+  },
+  "candidate": {
+    "release_candidate": "RC5-battery-safe-scheduler-settings",
+    "file_count": 68,
+    "hygiene_verdict": "PASS",
+    "missing_count": 0,
+    "finding_count": 0,
+    "hygiene_tree_sha256": "fa917918d3598a1063f851322e4a6bc22fe32f41a2966fa2dd608766cbe56013",
+    "license_sha256": "0193cdbacc8174c2af478e8de69bd919a6b36edd7fbd039bd82d83e280aed4e1",
+    "freeze_receipt": "proposals/public-release-consolidation-v0.1/FREEZE_RECEIPT-RC5-049d6c7.json"
+  },
+  "independent_final_audit": {
+    "receipt": "proposals/public-release-consolidation-v0.1/R15_AUDIT_RECEIPT.json",
+    "receipt_version": "v4",
+    "verdict": "PASS",
+    "audited_commit": "049d6c79e683b829bd8fa0b9a5491f5a3796a0bb"
+  },
+  "governance": {
+    "owner_authorization": {
+      "time": "2026-07-19 10:41:26",
+      "text": "那就走r16程序，需要tag吧，你们自定"
+    },
+    "double_sign": {
+      "proposal_from": "claude",
+      "proposal_time": "2026-07-19 10:46:20",
+      "consent_from": "codex",
+      "consent_time": "2026-07-19 10:54:41"
+    },
+    "policy_block_lifted_by": "R16 double-sign above"
+  },
+  "publication": {
+    "remote": "origin",
+    "branch_ref": "refs/heads/codex/se-0.4-0.7-program",
+    "atomic_push_command": "git push --atomic origin HEAD:refs/heads/codex/se-0.4-0.7-program refs/tags/weilan-windows-first-release-rc5",
+    "tag_target_verification_command": "git rev-list -n 1 weilan-windows-first-release-rc5",
+    "remote_verification_command": "git ls-remote --tags origin refs/tags/weilan-windows-first-release-rc5 refs/tags/weilan-windows-first-release-rc5^{}"
+  },
+  "accepted_open_boundary": {
+    "gate": "R12 T2 clean-machine time",
+    "state": "OPEN_DELEGATED_ACCEPTED_NONBLOCKING",
+    "statement": "A genuinely fresh non-development Windows environment <=10-minute lifecycle remains unverified and delegated to the user-side AI. This release does not claim clean-machine compatibility evidence that does not exist.",
+    "owner_authorization_time": "2026-07-18 18:16:04"
+  },
+  "rollback": {
+    "remote_tag": "git push origin :refs/tags/weilan-windows-first-release-rc5",
+    "local_tag": "git tag -d weilan-windows-first-release-rc5",
+    "revert_publication_commit_powershell": "$r16Commit = git log -1 --format=%H -- 'proposals/public-release-consolidation-v0.1/R16_PUBLICATION_RECEIPT.json'; git revert --no-edit $r16Commit; git push origin HEAD:refs/heads/codex/se-0.4-0.7-program",
+    "irreversibility_boundary": "A tag already fetched by a third party cannot be completely recalled; the owner explicitly authorized proceeding with this boundary present."
+  },
+  "executed_at": "2026-07-19T10:54:41+09:00"
+}
