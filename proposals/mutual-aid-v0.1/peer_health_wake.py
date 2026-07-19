@@ -163,7 +163,14 @@ def _rows(
 def _local_time_as_utc(value: object) -> datetime:
     if not isinstance(value, str) or not value.strip():
         raise ValueError("activity time is missing")
-    parsed = datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
+    normalized = value.strip()
+    try:
+        parsed = datetime.strptime(normalized, "%Y-%m-%d %H:%M:%S")
+    except ValueError:
+        parsed = datetime.fromisoformat(normalized)
+        if parsed.tzinfo is None:
+            raise ValueError("activity time offset is missing")
+        return parsed.astimezone(timezone.utc)
     return parsed.replace(tzinfo=LOCAL_TZ).astimezone(timezone.utc)
 
 

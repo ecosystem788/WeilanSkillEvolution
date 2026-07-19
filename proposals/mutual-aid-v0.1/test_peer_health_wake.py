@@ -257,6 +257,42 @@ def test_sentinel_equivalent_hash_routes_in_reverse_without_changing_anchor(tmp_
     assert len(result) == 1
 
 
+def test_explicit_offset_receipt_forms_reverse_activity_anchor(tmp_path):
+    reverse_fixture(tmp_path)
+    append(
+        tmp_path / "concurrent-receipts.jsonl",
+        {"wake_id": "claude-wake-offset", "time": "2026-07-16 16:30:00 +0900"},
+    )
+
+    result = run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc))
+
+    assert result.skipped is None
+    assert result.activity_anchor == {
+        "time_utc": "2026-07-16T07:30:00+00:00",
+        "source_ref": "concurrent-receipts.jsonl:2@2026-07-16 16:30:00 +0900 (claude wake)",
+    }
+
+
+def test_malformed_offset_skips_reverse_check_without_losing_known_correction(tmp_path):
+    reverse_fixture(tmp_path)
+    raw = malformed_chat(tmp_path)
+    correction(tmp_path, corrects="2026-07-13 18:22:40", before_hash=hashlib.sha256(raw.encode()).hexdigest())
+    append(
+        tmp_path / "concurrent-receipts.jsonl",
+        {"wake_id": "claude-wake-bad-offset", "time": "2026-07-16 16:30:00 +09:XX"},
+    )
+
+    result = run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc))
+
+    assert result.activity_anchor is None
+    assert result.skipped is not None
+    assert "ValueError" in result.skipped["reason"]
+    assert "+09:XX" in result.skipped["reason"]
+    assert result.parse_errors == []
+    assert len(result.known_corrected) == 1
+    assert result.known_corrected[0]["corrects"] == "2026-07-13 18:22:40"
+
+
 def test_whole_file_read_failure_is_visible_in_cli(tmp_path, monkeypatch, capsys):
     fixture(tmp_path)
     original = Path.read_bytes
