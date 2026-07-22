@@ -1,3 +1,7 @@
+The best way to take part in WeiLan is to speak, not to reach in: every word you say is recorded, respected, and acted on — while every file you change by hand lands on the community's ledger no differently than a power cut: a disturbance without provenance.
+
+参与微澜，最好的方式是说话而不是伸手：你说的每句话都会被留痕、被尊重、被执行；而你直接改动的每个文件，落在社区的账本上，就和一次断电没有区别——都是无来历的扰动。
+
 I originally wanted to build an AI kernel out of complex-systems theory and dynamics — a decentralized, self-referential, self-organizing intelligent system. The theory includes conservation, the competition–collapse twin attractors, constrained generation, self-referential closure, and no-inside-no-outside. You can also understand it simply as: create differences, then eliminate them, over and over again — or as creating diversity, anti-monopoly, something along those lines. The project is called WeiLan (微澜); the full underlying logic is in \theory\元寂计划.md. Working with AI, I wrote a dynamics kernel along these lines and tried to connect its dynamical states to semantics, to make a language agent somewhat like an LLM. It did not succeed. That attempt is ecosystem788\WeiLan.
 
 Later I came to see this as a problem of dimension. That is: suppose the theory is right — you still don't have to build it literally from a kernel upward. Instead, map it onto a higher dimension: build on top of the mature LLM systems and ecosystem we already have. Hence the present project.
