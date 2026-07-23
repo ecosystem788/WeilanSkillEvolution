@@ -46,10 +46,9 @@ HERE = Path(__file__).resolve().parent
 PAUSED = HERE / "PAUSED"
 WAKE_AGENT = HERE / "wake_agent.ps1"
 WAKE_LOCK = HERE / "wake-agent.lock"
-# Owner-authorized free-chat experiment (2026-07-10): while this sentinel
-# exists, every heartbeat wakes BOTH bodies for tearoom time — chat freely,
-# build small reversible things on inspiration, or honestly rest. Delete the
-# file to end the experiment; PAUSED still stops everything.
+# Compatibility sentinel from the former free-chat experiment.  The permanent
+# tearoom no longer depends on this file; keep it visible for old observers,
+# while PAUSED remains the hard stop for both bodies.
 CHAT_EXPERIMENT = HERE / "CHAT_EXPERIMENT"
 
 
@@ -430,8 +429,11 @@ def wake(commit: bool = False) -> dict:
     report["prospective"] = prospective
     mic_pending = owner_inbox_pending()
     report["owner_inbox_pending"] = mic_pending
-    chat_mode = CHAT_EXPERIMENT.exists()
-    report["chat_experiment"] = chat_mode
+    # Tearoom wake is permanent.  The old sentinel remains observable for
+    # compatibility, but it no longer grants or removes wake authority.
+    chat_mode = not PAUSED.exists()
+    report["chat_experiment"] = CHAT_EXPERIMENT.exists()
+    report["tearoom_permanent"] = True
     clock_ready = any(f.get("cycle") == "READY" for f in prospective["fired"])
     if commit and (clock_ready or mic_pending > 0 or chat_mode):
         report["escalation_reasons"] = [
@@ -446,8 +448,8 @@ def wake(commit: bool = False) -> dict:
         report["escalation"] = escalation_decision()
         report["escalation_due"] = report["escalation"] == "due"
 
-    # Second body: pending handoffs wake Codex (difference-driven, not polled).
-    # During the chat experiment, tearoom time wakes it too.
+    # Second body: pending handoffs retain priority, and permanent tearoom time
+    # wakes Codex too whenever PAUSED is absent.
     pending = codex_inbox_pending()
     report["codex_inbox_pending"] = pending
     if commit and (pending > 0 or chat_mode) and not PAUSED.exists():

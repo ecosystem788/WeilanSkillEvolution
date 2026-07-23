@@ -28,16 +28,20 @@ def _trace_error(message="branch-head conflict"):
     )
 
 
-def _wake_with_reasons(monkeypatch, tmp_path, *, fired=None, owner=0, handoffs=0):
+def _wake_with_reasons(
+    monkeypatch, tmp_path, *, fired=None, owner=0, handoffs=0, paused=False
+):
     receipt = SimpleNamespace(
         crossed_irreversible_gate=True,
         to_json=lambda: json.dumps({"crossed_irreversible_gate": True}),
         receipt_hash=lambda: "b" * 64,
     )
     chat = tmp_path / "CHAT_EXPERIMENT"
-    chat.touch()
     monkeypatch.setattr(wake, "CHAT_EXPERIMENT", chat)
-    monkeypatch.setattr(wake, "PAUSED", tmp_path / "PAUSED")
+    paused_path = tmp_path / "PAUSED"
+    if paused:
+        paused_path.touch()
+    monkeypatch.setattr(wake, "PAUSED", paused_path)
     monkeypatch.setattr(wake, "read_ledger_state", lambda: {})
     monkeypatch.setattr(wake, "briefing", lambda recall: {"continuation_allowed": True})
     monkeypatch.setattr(wake, "build_wake_brief", lambda recall: {})
@@ -52,21 +56,44 @@ def _wake_with_reasons(monkeypatch, tmp_path, *, fired=None, owner=0, handoffs=0
     return wake.wake(commit=True)
 
 
-def test_escalation_reasons_chat_only(monkeypatch, tmp_path):
+def test_permanent_tearoom_wakes_both_bodies_without_legacy_flag(monkeypatch, tmp_path):
     report = _wake_with_reasons(monkeypatch, tmp_path)
+    assert report["chat_experiment"] is False
+    assert report["tearoom_permanent"] is True
     assert report["escalation_reasons"] == ["chat"]
+    assert report["codex_wake_reasons"] == ["chat"]
+    assert report["codex_due"] is True
 
 
 def test_escalation_reasons_preserve_clock_and_chat(monkeypatch, tmp_path):
     report = _wake_with_reasons(
-        monkeypatch, tmp_path, fired=[{"cycle": "READY"}]
+        monkeypatch, tmp_path, fired=[{"cycle": "READY"}], owner=1
     )
-    assert report["escalation_reasons"] == ["clock", "chat"]
+    assert report["escalation_reasons"] == ["clock", "owner_inbox", "chat"]
 
 
-def test_codex_wake_reasons_chat_without_handoffs(monkeypatch, tmp_path):
-    report = _wake_with_reasons(monkeypatch, tmp_path, handoffs=0)
-    assert report["codex_wake_reasons"] == ["chat"]
+def test_codex_handoff_priority_is_preserved(monkeypatch, tmp_path):
+    report = _wake_with_reasons(monkeypatch, tmp_path, handoffs=1)
+    assert report["codex_wake_reasons"] == ["handoffs", "chat"]
+
+
+def test_paused_remains_a_hard_stop_for_codex(monkeypatch, tmp_path):
+    report = _wake_with_reasons(monkeypatch, tmp_path, paused=True)
+    assert "codex_due" not in report
+    assert "codex_wake_reasons" not in report
+
+
+@pytest.mark.parametrize("prompt_name", ["wake_prompt.md", "wake_prompt_codex.md"])
+def test_prompts_describe_permanent_tearoom_with_layered_authority(prompt_name):
+    text = (HERE / prompt_name).read_text(encoding="utf-8")
+    assert "常态茶水间" in text
+    assert "不由 `impl\\CHAT_EXPERIMENT` 旗文件开关" in text
+    assert "具名证据或判断" in text
+    assert "发言本身不自动授权行动" in text
+    assert "行动授权只来自【提案】+【同意】的双签或观察员指令" in text
+    assert "闲聊实验" not in text
+    assert "等旗落" not in text
+    assert "没有工作任务" not in text
 
 
 def test_trace_rejects_nonzero_and_non_json(monkeypatch):
@@ -257,3 +284,5 @@ $null = $text | ConvertFrom-Json
     assert not raw.startswith((b"\xff\xfe", b"\xfe\xff"))
     parsed = json.loads(raw.decode("utf-8", errors="strict"))
     assert parsed["result"].startswith("方向：微澜态势感知")
+
+
