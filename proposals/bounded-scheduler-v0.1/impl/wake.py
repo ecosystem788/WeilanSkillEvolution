@@ -46,6 +46,7 @@ HERE = Path(__file__).resolve().parent
 PAUSED = HERE / "PAUSED"
 WAKE_AGENT = HERE / "wake_agent.ps1"
 WAKE_LOCK = HERE / "wake-agent.lock"
+PEER_HEALTH_ALERTS = HERE / "peer-health-alerts.jsonl"
 # Compatibility sentinel from the former free-chat experiment.  The permanent
 # tearoom no longer depends on this file; keep it visible for old observers,
 # while PAUSED remains the hard stop for both bodies.
@@ -303,14 +304,43 @@ def owner_inbox_pending() -> int:
     return len(inbox - done)
 
 
-def escalation_decision() -> str:
+def _active_orphan_rescue_context() -> dict | None:
+    """Carry one correlated active orphan incident to the final guard."""
+    try:
+        head = _current_head()
+        latest: dict[str, dict] = {}
+        for raw in PEER_HEALTH_ALERTS.read_text(encoding="utf-8").splitlines():
+            if not raw.strip():
+                continue
+            row = json.loads(raw)
+            incident = row.get("incident_key")
+            if isinstance(incident, str) and incident:
+                latest[incident] = row
+    except (OSError, UnicodeError, json.JSONDecodeError, TypeError):
+        return None
+
+    for incident, row in reversed(tuple(latest.items())):
+        if (
+            row.get("kind") == "orphan_frame"
+            and row.get("event") in {"raised", "reopened"}
+            and row.get("parent_frame_id") == head
+        ):
+            return {"orphan_head_frame_id": head, "incident_key": incident}
+    return None
+
+
+def escalation_decision(rescue_context: dict | None = None) -> str:
     """Decide whether a model episode SHOULD run. This heartbeat never spawns:
     under Task Scheduler a child dies with the task's job object, so acting on
     the decision belongs to the caller (run_wake_cron.ps1 invokes wake_agent.ps1
     synchronously; wake_agent self-guards with PAUSED + its own lock)."""
     if PAUSED.exists():
         return "due_but_paused"
-    if WAKE_LOCK.exists() and (time.time() - WAKE_LOCK.stat().st_mtime) < 1800:
+    if (
+        WAKE_LOCK.exists()
+        and (time.time() - WAKE_LOCK.stat().st_mtime) < 1800
+        and rescue_context is None
+    ):
         return "due_but_episode_running"
     if not WAKE_AGENT.exists():
         return "due_but_no_agent_script"
@@ -436,16 +466,20 @@ def wake(commit: bool = False) -> dict:
     report["tearoom_permanent"] = True
     clock_ready = any(f.get("cycle") == "READY" for f in prospective["fired"])
     if commit and (clock_ready or mic_pending > 0 or chat_mode):
+        rescue_context = _active_orphan_rescue_context()
         report["escalation_reasons"] = [
             reason
             for active, reason in (
+                (rescue_context is not None, "orphan_rescue"),
                 (clock_ready, "clock"),
                 (mic_pending > 0, "owner_inbox"),
                 (chat_mode, "chat"),
             )
             if active
         ]
-        report["escalation"] = escalation_decision()
+        if rescue_context is not None:
+            report["rescue_context"] = rescue_context
+        report["escalation"] = escalation_decision(rescue_context)
         report["escalation_due"] = report["escalation"] == "due"
 
     # Second body: pending handoffs retain priority, and permanent tearoom time

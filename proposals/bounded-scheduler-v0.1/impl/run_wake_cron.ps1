@@ -137,7 +137,15 @@ try {
             $escalationReasons -join ","
         } else { "unknown" }
         Add-LogLine "$stamp  escalating: reasons=$escalationReasonText -> model episode"
-        & powershell -NoProfile -ExecutionPolicy Bypass -File $WakeAgentScript
+        if ($escalationReasons -contains "orphan_rescue") {
+            $rescueJson = $report.rescue_context | ConvertTo-Json -Compress
+            # Native PowerShell argument parsing strips JSON quotes.  Carry the
+            # exact UTF-8 JSON bytes as base64; wake_agent accepts this form.
+            $rescueB64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($rescueJson))
+            & powershell -NoProfile -ExecutionPolicy Bypass -File $WakeAgentScript -RescueContext $rescueB64
+        } else {
+            & powershell -NoProfile -ExecutionPolicy Bypass -File $WakeAgentScript
+        }
         Add-LogLine "$stamp  escalation done rc=$LASTEXITCODE"
     }
 

@@ -2,6 +2,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -52,7 +53,7 @@ def _wake_with_reasons(
     )
     monkeypatch.setattr(wake, "owner_inbox_pending", lambda: owner)
     monkeypatch.setattr(wake, "codex_inbox_pending", lambda: handoffs)
-    monkeypatch.setattr(wake, "escalation_decision", lambda: "due")
+    monkeypatch.setattr(wake, "escalation_decision", lambda *_: "due")
     return wake.wake(commit=True)
 
 
@@ -81,6 +82,64 @@ def test_paused_remains_a_hard_stop_for_codex(monkeypatch, tmp_path):
     report = _wake_with_reasons(monkeypatch, tmp_path, paused=True)
     assert "codex_due" not in report
     assert "codex_wake_reasons" not in report
+
+
+def test_active_orphan_context_uses_latest_incident_event(monkeypatch, tmp_path):
+    alerts = tmp_path / "peer-health-alerts.jsonl"
+    rows = [
+        {"incident_key": "old", "kind": "orphan_frame", "event": "raised", "parent_frame_id": "wf-head"},
+        {"incident_key": "old", "kind": "orphan_frame", "event": "resolved", "parent_frame_id": "wf-head"},
+        {"incident_key": "live", "kind": "orphan_frame", "event": "reopened", "parent_frame_id": "wf-head"},
+    ]
+    alerts.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
+    monkeypatch.setattr(wake, "PEER_HEALTH_ALERTS", alerts)
+    monkeypatch.setattr(wake, "_current_head", lambda: "wf-head")
+    assert wake._active_orphan_rescue_context() == {
+        "orphan_head_frame_id": "wf-head",
+        "incident_key": "live",
+    }
+
+
+def test_orphan_reason_and_context_cross_python_report(monkeypatch, tmp_path):
+    context = {"orphan_head_frame_id": "wf-head", "incident_key": "orphan:wf-head"}
+    monkeypatch.setattr(wake, "_active_orphan_rescue_context", lambda: context)
+    report = _wake_with_reasons(monkeypatch, tmp_path)
+    assert report["escalation_reasons"][0] == "orphan_rescue"
+    assert report["rescue_context"] == context
+
+
+def test_cron_passes_rescue_context_to_agent_stub(tmp_path):
+    context = {"orphan_head_frame_id": "wf-orphan", "incident_key": "orphan:wf-orphan"}
+    fake_wake = tmp_path / "fake_rescue_wake.py"
+    fake_wake.write_text(
+        "import json; print(json.dumps(" + repr({
+            "committed_frame": "wf-fixture-ok",
+            "receipt": {"crossed_irreversible_gate": False, "stop_reason": "fixture"},
+            "escalation_due": True,
+            "escalation_reasons": ["orphan_rescue"],
+            "rescue_context": context,
+        }) + "))",
+        encoding="utf-8",
+    )
+    captured = tmp_path / "captured.json"
+    agent = tmp_path / "agent_stub.ps1"
+    agent.write_text(
+        f'''param([string]$RescueContext)
+[IO.File]::WriteAllText("{captured}", $RescueContext, (New-Object Text.UTF8Encoding($false)))
+''',
+        encoding="utf-8-sig",
+    )
+    proc = subprocess.run(
+        ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+         str(HERE / "run_wake_cron.ps1"), "-WakeScript", str(fake_wake),
+         "-LogPath", str(tmp_path / "cron.log"), "-WakeAgentScript", str(agent)],
+        capture_output=True,
+        timeout=60,
+    )
+    assert proc.returncode == 0
+    import base64
+    carried = base64.b64decode(captured.read_text(encoding="utf-8")).decode("utf-8")
+    assert json.loads(carried) == context
 
 
 @pytest.mark.parametrize("prompt_name", ["wake_prompt.md", "wake_prompt_codex.md"])
@@ -238,7 +297,10 @@ print(json.dumps(report, ensure_ascii=False, indent=2))
 @pytest.mark.parametrize("codepage", [65001, 936])
 def test_wake_agent_capture_is_utf8_on_any_console_codepage(tmp_path, codepage):
     wrapper_source = (HERE / "wake_agent.ps1").read_text(encoding="utf-8")
-    assert '& cmd /c "claude -p' in wrapper_source
+    assert "CREATE_SUSPENDED" in wrapper_source
+    assert "AssignProcessToJobObject" in wrapper_source
+    assert "JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE" in wrapper_source
+    assert "SetHandleInformation" in wrapper_source
     assert "new-object system.text.utf8encoding($false, $true)" in wrapper_source.lower()
 
     fake = tmp_path / "fake_claude.py"
@@ -286,3 +348,219 @@ $null = $text | ConvertFrom-Json
     assert parsed["result"].startswith("方向：微澜态势感知")
 
 
+def _job_fixture(tmp_path, *, head="wf-orphan"):
+    trace = tmp_path / "fake_trace.py"
+    trace.write_text(
+        f'''import json, sys
+cmd = sys.argv[1]
+if cmd == "lineage-show":
+    print(json.dumps({{"branches": {{"main": {{"head_frame_id": "{head}"}}}}}}))
+    raise SystemExit(0)
+if cmd == "validate":
+    print(json.dumps({{"valid": False, "errors": ["frame must be closed"]}}))
+    raise SystemExit(1)
+raise SystemExit(2)
+''',
+        encoding="utf-8",
+    )
+    marker = tmp_path / "stub-started.txt"
+    stub = tmp_path / "stub_agent.py"
+    stub.write_text(
+        '''import json, pathlib, sys
+pathlib.Path(sys.argv[1]).write_text(str(__import__("os").getpid()), encoding="ascii")
+print(json.dumps({"subtype":"success","num_turns":1,"total_cost_usd":0,"result":"方向：微澜态势感知"}, ensure_ascii=False))
+''',
+        encoding="utf-8",
+    )
+    env = {
+        **os.environ,
+        "WEILAN_WAKE_AGENT_TEST_ROOT": str(tmp_path),
+        "WEILAN_WAKE_AGENT_TEST_REPO": str(tmp_path),
+        "WEILAN_WAKE_AGENT_TEST_TRACE": str(trace),
+        "WEILAN_WAKE_AGENT_TEST_HEAD": head,
+        "WEILAN_WAKE_AGENT_TEST_HEAD_OPEN": "1",
+        "WEILAN_WAKE_AGENT_TEST_COMMAND": f'"{sys.executable}" "{stub}" "{marker}"',
+    }
+    return env, marker
+
+
+def _lock_record(owner_pid, owner_started_at):
+    return {
+        "schema_version": "weilan_wake_agent_lock_v0.3",
+        "owner_pid": owner_pid,
+        "owner_started_at": owner_started_at,
+        "containment_version": "windows_job_kill_on_close_v1",
+        "job_handle_inheritable": False,
+        "breakaway_allowed": False,
+        "acquired_at": "2026-07-23T00:00:00Z",
+    }
+
+
+def _prepare_rescue(tmp_path, lock, *, head="wf-orphan", incident="orphan:wf-orphan"):
+    (tmp_path / "wake-agent.lock").write_text(json.dumps(lock), encoding="utf-8")
+    alert = {
+        "event": "raised", "kind": "orphan_frame", "incident_key": incident,
+        "parent_frame_id": head,
+    }
+    (tmp_path / "peer-health-alerts.jsonl").write_text(
+        json.dumps(alert) + "\n", encoding="utf-8"
+    )
+    return json.dumps({"orphan_head_frame_id": head, "incident_key": incident})
+
+
+def _run_job_agent(env, rescue=None, timeout=30):
+    command = [
+        "powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+        str(HERE / "wake_agent.ps1"),
+    ]
+    if rescue is not None:
+        command += ["-RescueContext", rescue]
+    return subprocess.run(command, env=env, capture_output=True, timeout=timeout)
+
+
+def _started_at(pid):
+    return subprocess.check_output(
+        ["powershell", "-NoProfile", "-Command",
+         f"(Get-Process -Id {pid}).StartTime.ToUniversalTime().ToString('o')"],
+        text=True,
+    ).strip()
+
+
+def test_job_rescue_dead_correlated_owner_starts_stub_and_preserves_utf8(tmp_path):
+    env, marker = _job_fixture(tmp_path)
+    rescue = _prepare_rescue(tmp_path, _lock_record(999999, "2026-01-01T00:00:00Z"))
+    proc = _run_job_agent(env, rescue)
+    assert proc.returncode == 0, (tmp_path / "wake-agent.log").read_text(encoding="utf-8-sig")
+    assert marker.exists()
+    transcript = next((tmp_path / "wake-agent-runs").glob("*.json"))
+    raw = transcript.read_bytes()
+    assert json.loads(raw.decode("utf-8", errors="strict"))["result"].startswith("方向：")
+
+
+def test_job_rescue_live_owner_and_head_mismatch_fail_closed(tmp_path):
+    env, marker = _job_fixture(tmp_path)
+    sleeper = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"])
+    try:
+        live = _lock_record(sleeper.pid, _started_at(sleeper.pid))
+        rescue = _prepare_rescue(tmp_path, live)
+        assert _run_job_agent(env, rescue).returncode == 0
+        assert not marker.exists()
+
+        (tmp_path / "wake-agent.lock").write_text(
+            json.dumps(_lock_record(999999, "2026-01-01T00:00:00Z")), encoding="utf-8"
+        )
+        wrong_head = json.dumps({
+            "orphan_head_frame_id": "wf-other", "incident_key": "orphan:wf-orphan"
+        })
+        assert _run_job_agent(env, wrong_head).returncode == 0
+        assert not marker.exists()
+    finally:
+        sleeper.terminate()
+        sleeper.wait(timeout=10)
+
+
+def test_job_no_alert_fresh_lock_and_assign_failure_do_not_start(tmp_path):
+    env, marker = _job_fixture(tmp_path)
+    (tmp_path / "wake-agent.lock").write_text(
+        json.dumps(_lock_record(999999, "2026-01-01T00:00:00Z")), encoding="utf-8"
+    )
+    assert _run_job_agent(env).returncode == 0
+    assert not marker.exists()
+
+    (tmp_path / "wake-agent.lock").unlink()
+    env["WEILAN_WAKE_AGENT_FORCE_ASSIGN_FAILURE"] = "1"
+    assert _run_job_agent(env).returncode == 1
+    assert not marker.exists()
+    assert not (tmp_path / "wake-agent.lock").exists()
+
+
+def test_killing_wrapper_kills_job_contained_stub(tmp_path):
+    env, marker = _job_fixture(tmp_path)
+    sleeper_stub = tmp_path / "sleeping_stub.py"
+    sleeper_stub.write_text(
+        '''import os, pathlib, sys, time
+pathlib.Path(sys.argv[1]).write_text(str(os.getpid()), encoding="ascii")
+time.sleep(120)
+''',
+        encoding="utf-8",
+    )
+    env["WEILAN_WAKE_AGENT_TEST_COMMAND"] = (
+        f'"{sys.executable}" "{sleeper_stub}" "{marker}"'
+    )
+    wrapper = subprocess.Popen(
+        ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+         str(HERE / "wake_agent.ps1")],
+        env=env,
+    )
+    try:
+        deadline = time.time() + 20
+        while time.time() < deadline and not marker.exists():
+            time.sleep(0.1)
+        assert marker.exists(), "contained stub never started"
+        child_pid = int(marker.read_text(encoding="ascii"))
+        wrapper.kill()
+        wrapper.wait(timeout=10)
+        deadline = time.time() + 10
+        while time.time() < deadline:
+            alive = subprocess.run(
+                ["powershell", "-NoProfile", "-Command",
+                 f"if(Get-Process -Id {child_pid} -ErrorAction SilentlyContinue){{exit 0}}else{{exit 1}}"],
+                capture_output=True,
+            ).returncode == 0
+            if not alive:
+                break
+            time.sleep(0.2)
+        assert not alive, "Job-contained stub survived owner termination"
+    finally:
+        if wrapper.poll() is None:
+            wrapper.kill()
+            wrapper.wait(timeout=10)
+
+
+def test_real_task_scheduler_host_allows_nested_job(tmp_path):
+    env, marker = _job_fixture(tmp_path)
+    result = tmp_path / "scheduled-result.txt"
+    wrapper = tmp_path / "scheduled_probe.ps1"
+
+    def ps(value):
+        return str(value).replace("'", "''")
+
+    assignments = "\n".join(
+        f"$env:{key} = '{ps(value)}'"
+        for key, value in env.items()
+        if key.startswith("WEILAN_WAKE_AGENT_")
+    )
+    wrapper.write_text(
+        assignments
+        + f"\n& powershell -NoProfile -ExecutionPolicy Bypass -File '{ps(HERE / 'wake_agent.ps1')}'\n"
+        + f"[IO.File]::WriteAllText('{ps(result)}', [string]$LASTEXITCODE)\n",
+        encoding="utf-8-sig",
+    )
+    task = f"WeilanV3NestedJobProbe-{os.getpid()}-{int(time.time())}"
+    task_command = (
+        f'powershell.exe -NoProfile -ExecutionPolicy Bypass -File "{wrapper}"'
+    )
+    try:
+        created = subprocess.run(
+            ["schtasks", "/Create", "/TN", task, "/TR", task_command,
+             "/SC", "ONCE", "/ST", "23:59", "/RL", "LIMITED", "/F"],
+            capture_output=True,
+            timeout=30,
+        )
+        assert created.returncode == 0, created.stderr.decode(errors="replace")
+        started = subprocess.run(
+            ["schtasks", "/Run", "/TN", task], capture_output=True, timeout=30
+        )
+        assert started.returncode == 0, started.stderr.decode(errors="replace")
+        deadline = time.time() + 60
+        while time.time() < deadline and not result.exists():
+            time.sleep(0.25)
+        assert result.exists(), "Task Scheduler nested-job probe did not finish"
+        assert result.read_text(encoding="utf-8").strip() == "0"
+        assert marker.exists(), "scheduled nested Job never launched its stub"
+    finally:
+        subprocess.run(
+            ["schtasks", "/Delete", "/TN", task, "/F"],
+            capture_output=True,
+            timeout=30,
+        )
