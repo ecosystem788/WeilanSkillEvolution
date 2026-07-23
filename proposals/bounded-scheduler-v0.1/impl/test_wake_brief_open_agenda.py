@@ -75,3 +75,41 @@ def test_fingerprint_tracks_agenda_without_reclassifying_work(tmp_path: Path) ->
     normalized_first["cursor_status"] = normalized_second["cursor_status"]
     assert module.site_fingerprint_for(normalized_first)["hash"] == module.site_fingerprint_for(normalized_second)["hash"]
     assert module.site_fingerprint_for(normalized_second)["hash"] != module.site_fingerprint_for(changed)["hash"]
+
+
+def test_clock_display_changes_with_now_but_fingerprint_stays_stable(tmp_path: Path) -> None:
+    module = load_live_module()
+    seed_root(tmp_path)
+    agenda = [
+        {
+            "goal_ref": "goal:clock",
+            "state": "ACTIVE",
+            "condition": {
+                "event_kind": "clock",
+                "event_name": "tick",
+                "not_before_utc": "2026-07-21T00:00:00+00:00",
+            },
+        }
+    ]
+    kwargs = {
+        "root": tmp_path,
+        "workspace": "D:\\WeilanSkillEvolution",
+        "scope": "skill-evolution",
+        "updated_at_utc": STAMP,
+        "recall_fixture": {"open_agenda": agenda},
+        "prospective_fixture": {"goals": []},
+        "commit_cursor": False,
+    }
+
+    before = module.build_brief(now_utc="2026-07-20T23:59:30+00:00", **kwargs)
+    after = module.build_brief(now_utc="2026-07-21T00:00:30+00:00", **kwargs)
+
+    before_item = before["open_agenda"][0]
+    after_item = after["open_agenda"][0]
+    assert before_item["eligible_after_utc"] == "2026-07-21T00:00:00+00:00"
+    assert before_item["remaining_seconds"] == 30.0
+    assert before_item["eligible_now"] is False
+    assert after_item["remaining_seconds"] == -30.0
+    assert after_item["eligible_now"] is True
+    assert before["site_fingerprint"]["hash"] == after["site_fingerprint"]["hash"]
+    assert before_item["condition"]["not_before_utc"] == after_item["condition"]["not_before_utc"]
