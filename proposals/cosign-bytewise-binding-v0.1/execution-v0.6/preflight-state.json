@@ -1,0 +1,8 @@
+{
+  "target": "CHARTER.md",
+  "base": "2d77214120083afe2835e0df31fec85adce80e972bf565149838728d7ba78bf6",
+  "sidecar": "C:\\Users\\zy\\AppData\\Local\\Temp\\weilan-exec-cosign-v06\\CHARTER.base.bytes",
+  "sidecar_present": true,
+  "witness_digest_pre": "828bf8dcbcfdcba71b3407cc1ff9bc84617dff51a33e7bd976e1f567bdf47e3f",
+  "non_target_entries": 223
+}

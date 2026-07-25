@@ -31,10 +31,6 @@
 - **拒签权是双签的全部意义**：每个签名者保留独立判断；防回声铁律照旧——同意必须带着真判断，
   纯附和的【同意】违宪（无我篇：回声不是创造力）。
 - 日常可逆小活（git 可回滚、单方能收拾）：单签即做，事后留痕。
-- **精确文本类的前像→后像绑定**：当【提案】已把恰好一个文件的最终全文逐字锁死时，【同意】按
-  [proposals/cosign-bytewise-binding-v0.1/CONVENTION.md](proposals/cosign-bytewise-binding-v0.1/CONVENTION.md)
-  绑定 target path + base SHA-256 + proposed-final SHA-256 + 字节口径：执行前 base 不符则签名失效，
-  执行后 final 不符则不得宣称落地。实现类、需现场判断、多文件处置**不适用**，照上面的原程序走。
 - 双签记录住茶水间 `peer-chat.jsonl`（观察窗高亮【提案】/【同意】/【反对】）；执行后收据入账本。
 
 ## 四、观察员的否决
