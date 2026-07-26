@@ -42,12 +42,14 @@ class CheckResult(list[dict]):
         known_corrected: list[dict] | None = None,
         skipped: dict | None = None,
         activity_anchor: dict | None = None,
+        clock_anomaly: dict | None = None,
     ) -> None:
         super().__init__(appended)
         self.parse_errors = parse_errors or []
         self.known_corrected = known_corrected or []
         self.skipped = skipped
         self.activity_anchor = activity_anchor
+        self.clock_anomaly = clock_anomaly
 
 
 def _known_correction(
@@ -185,8 +187,10 @@ def _claude_activity_anchor(
     known_corrected: list[dict],
     corrections: list[tuple[int, dict]],
     corrections_path: Path,
+    now_utc: datetime,
 ) -> tuple[datetime, str] | None:
     activities: list[tuple[datetime, str]] = []
+    peer_chat_head: tuple[int, dict] | None = None
     for line_number, row in _rows(
         root / "peer-chat.jsonl",
         parse_errors=parse_errors,
@@ -195,15 +199,33 @@ def _claude_activity_anchor(
         known_corrected=known_corrected,
     ):
         if row.get("from") == "claude":
-            stamp = _local_time_as_utc(row.get("time"))
-            activities.append((stamp, f"peer-chat.jsonl:{line_number}@{row['time']} (claude activity)"))
+            peer_chat_head = (line_number, row)
+    if peer_chat_head is not None:
+        line_number, row = peer_chat_head
+        stamp = _local_time_as_utc(row.get("time"))
+        if row.get("time_authority") == "clock" or stamp <= now_utc:
+            activities.append(
+                (stamp, f"peer-chat.jsonl:{line_number}@{row['time']} (claude activity)")
+            )
+
+    receipt_head: tuple[int, dict] | None = None
     for line_number, row in _rows(root / "concurrent-receipts.jsonl", parse_errors=parse_errors):
         if str(row.get("wake_id", "")).startswith("claude-"):
-            stamp = _local_time_as_utc(row.get("time"))
-            activities.append((stamp, f"concurrent-receipts.jsonl:{line_number}@{row['time']} (claude wake)"))
-    for path in (root / CLAUDE_ACTIVITY_RUNS).glob("*.json"):
-        stamp = _run_stamp_as_utc(path)
-        activities.append((stamp, f"{CLAUDE_ACTIVITY_RUNS}/{path.name} (claude wake run)"))
+            receipt_head = (line_number, row)
+    if receipt_head is not None:
+        line_number, row = receipt_head
+        stamp = _local_time_as_utc(row.get("time"))
+        if row.get("time_authority") == "clock" or stamp <= now_utc:
+            activities.append(
+                (stamp, f"concurrent-receipts.jsonl:{line_number}@{row['time']} (claude wake)")
+            )
+
+    run_activities = [
+        (_run_stamp_as_utc(path), f"{CLAUDE_ACTIVITY_RUNS}/{path.name} (claude wake run)")
+        for path in (root / CLAUDE_ACTIVITY_RUNS).glob("*.json")
+    ]
+    if run_activities:
+        activities.append(max(run_activities, key=lambda item: item[0]))
     return max(activities, key=lambda item: item[0]) if activities else None
 
 
@@ -225,16 +247,23 @@ def run_reverse_check(
     if threshold_hours <= 0 or min_heartbeats < 1:
         raise ValueError("threshold_hours and min_heartbeats must be positive")
 
+    now_utc = now.astimezone(timezone.utc)
     parse_errors: list[dict] = []
     known_corrected: list[dict] = []
     corrections_path = root / "peer-chat.corrections.jsonl"
     corrections = _rows(corrections_path, parse_errors=parse_errors)
     try:
-        anchor = _claude_activity_anchor(root, parse_errors, known_corrected, corrections, corrections_path)
+        anchor = _claude_activity_anchor(
+            root,
+            parse_errors,
+            known_corrected,
+            corrections,
+            corrections_path,
+            now_utc,
+        )
         if anchor is None:
             return CheckResult(parse_errors=parse_errors, known_corrected=known_corrected)
         last_activity, source_ref = anchor
-        heartbeats = _codex_heartbeats_after(root, last_activity)
     except (OSError, UnicodeError, ValueError, TypeError) as exc:
         return CheckResult(
             parse_errors=parse_errors,
@@ -243,7 +272,22 @@ def run_reverse_check(
         )
 
     activity_anchor = {"time_utc": last_activity.isoformat(), "source_ref": source_ref}
-    silence_hours = (now.astimezone(timezone.utc) - last_activity).total_seconds() / 3600
+    if last_activity > now_utc:
+        return CheckResult(
+            parse_errors=parse_errors,
+            known_corrected=known_corrected,
+            activity_anchor=activity_anchor,
+            clock_anomaly={
+                "anchor_time_utc": last_activity.isoformat(),
+                "now_utc": now_utc.isoformat(),
+                "future_delta_hours": round((last_activity - now_utc).total_seconds() / 3600, 3),
+                "source_ref": source_ref,
+                "authority": "none",
+            },
+        )
+
+    heartbeats = _codex_heartbeats_after(root, last_activity)
+    silence_hours = (now_utc - last_activity).total_seconds() / 3600
     if silence_hours < threshold_hours or len(heartbeats) < min_heartbeats:
         return CheckResult(
             parse_errors=parse_errors, known_corrected=known_corrected, activity_anchor=activity_anchor
@@ -355,6 +399,7 @@ def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float
     if now.tzinfo is None:
         raise ValueError("now must be timezone-aware")
 
+    now_utc = now.astimezone(timezone.utc)
     orphan_alerts = _orphan_frame_alert(root=root, now=now)
 
     parse_errors: list[dict] = []
@@ -372,11 +417,26 @@ def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float
                     "corrections_path": corrections_path,
                     "known_corrected": known_corrected,
                 }
+            source_head: tuple[int, dict] | None = None
             for line_number, row in _rows(path, parse_errors=parse_errors, **row_options):
-                if row.get("from") != "codex":
-                    continue
+                if row.get("from") == "codex":
+                    source_head = (line_number, row)
+            if source_head is not None:
+                line_number, row = source_head
                 stamp = _local_time_as_utc(row.get("time"))
-                activities.append((stamp, f"{name}:{line_number}@{row['time']} (codex activity)"))
+                # An authored/unknown stamp claiming the future is a guess, not evidence:
+                # drop the candidate so a tool-generated anchor can still measure silence.
+                if row.get("time_authority") == "clock" or stamp <= now_utc:
+                    activities.append(
+                        (stamp, f"{name}:{line_number}@{row['time']} (codex activity)")
+                    )
+        path = root / CODEX_HEARTBEAT_RUNS  # keeps a read failure here honestly attributed
+        run_activities = [
+            (_run_stamp_as_utc(run_path), f"{CODEX_HEARTBEAT_RUNS}/{run_path.name} (codex wake run)")
+            for run_path in path.glob("*.jsonl")
+        ]
+        if run_activities:
+            activities.append(max(run_activities, key=lambda item: item[0]))
     except (OSError, UnicodeError) as exc:
         return CheckResult(
             orphan_alerts,
@@ -402,6 +462,22 @@ def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float
         "time_utc": last_activity.isoformat(),
         "source_ref": activity_source_ref,
     }
+    # Only a clock-authority or tool-generated anchor can still be in the future here;
+    # that is a real host-clock anomaly and must stay visible rather than be swallowed.
+    if last_activity > now_utc:
+        return CheckResult(
+            orphan_alerts,
+            parse_errors=parse_errors,
+            known_corrected=known_corrected,
+            activity_anchor=activity_anchor,
+            clock_anomaly={
+                "anchor_time_utc": last_activity.isoformat(),
+                "now_utc": now_utc.isoformat(),
+                "future_delta_hours": round((last_activity - now_utc).total_seconds() / 3600, 3),
+                "source_ref": activity_source_ref,
+                "authority": "none",
+            },
+        )
 
     try:
         inbox_ids = {
@@ -439,7 +515,7 @@ def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float
             alerts_path=root / "peer-health-alerts.jsonl",
             peer="codex",
             raised_by="claude",
-            now=now.astimezone(timezone.utc),
+            now=now_utc,
             last_activity_utc=last_activity,
             activity_source_ref=activity_source_ref,
             threshold_hours=threshold_hours,
@@ -476,12 +552,19 @@ def main(argv: list[str] | None = None) -> int:
     print(
         json.dumps(
             {
-                "check": "skipped" if appended.skipped else "completed",
+                "check": (
+                    "skipped"
+                    if appended.skipped
+                    else "clock_anomaly"
+                    if appended.clock_anomaly
+                    else "completed"
+                ),
                 "appended": list(appended),
                 "parse_errors": appended.parse_errors,
                 "known_corrected": appended.known_corrected,
                 "skipped": appended.skipped,
                 "activity_anchor": appended.activity_anchor,
+                "clock_anomaly": appended.clock_anomaly,
             },
             ensure_ascii=False,
         )

@@ -3,6 +3,7 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+import peer_health_wake
 from peer_health_wake import main, run_check, run_reverse_check
 
 
@@ -23,6 +24,14 @@ def fixture(root: Path, activity_time="2026-07-12 10:55:00", replied=False):
             root / "codex-inbox-replies.jsonl",
             {"reply_to": "job-a", "from": "codex", "time": activity_time, "text": "done"},
         )
+
+
+def codex_runs(root: Path, *stamps: str) -> None:
+    """Tool-generated Codex wake-run filenames: the forward side's trustworthy anchor."""
+    runs = root / "wake-codex-runs"
+    runs.mkdir(parents=True, exist_ok=True)
+    for stamp in stamps:
+        (runs / f"{stamp.replace(' ', 'T').replace(':', '-')}.jsonl").write_text("", encoding="utf-8")
 
 
 def alerts(root):
@@ -121,13 +130,184 @@ def test_real_shape_fresh_activity_does_not_raise(tmp_path):
     assert alerts(tmp_path) == []
 
 
-def test_small_future_activity_is_fresh_end_to_end(tmp_path):
+def test_forward_future_authored_activity_falls_back_to_run_anchor_and_still_judges(tmp_path):
+    # Rewrites test_small_future_activity_reports_clock_anomaly_end_to_end: that test pinned
+    # "a future authored stamp aborts the whole round with a clock_anomaly", which let one
+    # hand-typed number silence the sentinel. Under the cosigned v0.2 the authored candidate is
+    # dropped and the tool anchor still carries the threshold + backlog judgement.
     future_local = (NOW + timedelta(minutes=5)).astimezone(
         timezone(timedelta(hours=9))
     ).strftime("%Y-%m-%d %H:%M:%S")
     fixture(tmp_path, activity_time=future_local)
-    assert run_check(root=tmp_path, now=NOW) == []
+    codex_runs(tmp_path, "2026-07-11 19:00:00")
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert result.clock_anomaly is None
+    assert result.skipped is None
+    assert len(result) == 1 and result[0]["event"] == "raised"
+    assert result.activity_anchor == {
+        "time_utc": "2026-07-11T10:00:00+00:00",
+        "source_ref": "wake-codex-runs/2026-07-11T19-00-00.jsonl (codex wake run)",
+    }
+    assert result[0]["silence"]["silence_hours"] == 16
+    assert result[0]["backlog"]["items"] == ["job-a"]
+
+
+def test_forward_future_authored_activity_without_run_anchor_measures_nothing(tmp_path):
+    future_local = (NOW + timedelta(minutes=5)).astimezone(
+        timezone(timedelta(hours=9))
+    ).strftime("%Y-%m-%d %H:%M:%S")
+    fixture(tmp_path, activity_time=future_local)
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert result == []
+    assert result.clock_anomaly is None
+    assert result.activity_anchor is None
     assert alerts(tmp_path) == []
+
+
+def test_forward_backfilled_authored_append_cannot_displace_run_anchor(tmp_path):
+    fixture(tmp_path, activity_time="2026-07-12 01:55:00")  # backfilled nine hours
+    codex_runs(tmp_path, "2026-07-12 10:55:00")
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert result == []
+    assert result.clock_anomaly is None
+    assert result.activity_anchor == {
+        "time_utc": "2026-07-12T01:55:00+00:00",
+        "source_ref": "wake-codex-runs/2026-07-12T10-55-00.jsonl (codex wake run)",
+    }
+    assert alerts(tmp_path) == []
+
+
+def test_forward_future_clock_authority_append_remains_a_visible_clock_anomaly(tmp_path):
+    fixture(tmp_path)
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {
+            "from": "codex",
+            "time": "2026-07-12T13:30:00+09:00",
+            "time_authority": "clock",
+            "text": "trusted future append",
+        },
+    )
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert result == []
+    assert result.clock_anomaly == {
+        "anchor_time_utc": "2026-07-12T04:30:00+00:00",
+        "now_utc": "2026-07-12T02:00:00+00:00",
+        "future_delta_hours": 2.5,
+        "source_ref": "peer-chat.jsonl:2@2026-07-12T13:30:00+09:00 (codex activity)",
+        "authority": "none",
+    }
+    assert alerts(tmp_path) == []
+
+
+def test_forward_later_valid_append_displaces_earlier_future_timestamp_in_cli(
+    tmp_path, monkeypatch, capsys
+):
+    fixture(tmp_path, activity_time="2026-07-12 20:30:00")
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {"from": "codex", "time": "2026-07-12 10:59:00", "text": "honest later append"},
+    )
+
+    class FixedDatetime(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return NOW if tz is not None else NOW.replace(tzinfo=None)
+
+    monkeypatch.setattr(peer_health_wake, "datetime", FixedDatetime)
+    assert main(["--root", str(tmp_path)]) == 0
+    report = json.loads(capsys.readouterr().out)
+
+    assert report["check"] == "completed"
+    # This fixture has no orphan streak; the sibling tests cover that independent signal.
+    assert report["appended"] == []
+    assert report["clock_anomaly"] is None
+    assert report["activity_anchor"] == {
+        "time_utc": "2026-07-12T01:59:00+00:00",
+        "source_ref": "peer-chat.jsonl:2@2026-07-12 10:59:00 (codex activity)",
+    }
+    assert alerts(tmp_path) == []
+
+
+def test_forward_last_past_append_raises_despite_earlier_future_timestamp(tmp_path):
+    fixture(tmp_path, activity_time="2026-07-12 20:30:00")
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {"from": "codex", "time": "2026-07-12 01:00:00", "text": "past-coordinate append"},
+    )
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert result.clock_anomaly is None
+    assert len(result) == 1 and result[0]["event"] == "raised"
+    assert result.activity_anchor["source_ref"].startswith("peer-chat.jsonl:2@")
+
+
+def test_forward_orphan_alert_is_independent_of_every_anchor_outcome(tmp_path):
+    # Rewrites test_forward_future_anchor_preserves_independent_orphan_alert, which reached the
+    # orphan branch only through the authored-stamp clock_anomaly that v0.2 removes. The
+    # invariant under test is unchanged: orphan_frame never depends on the activity anchor.
+    for index, extra in enumerate(
+        (
+            None,  # future authored codex stamp: candidate dropped, no anchor at all
+            {
+                "from": "codex",
+                "time": "2026-07-12T13:30:00+09:00",
+                "time_authority": "clock",
+                "text": "trusted future append",
+            },  # genuine host-clock anomaly: whole round returns early
+        )
+    ):
+        root = tmp_path / str(index)
+        fixture(root, activity_time="2026-07-12 20:30:00")
+        if extra is not None:
+            append(root / "peer-chat.jsonl", extra)
+        write_cron(root, [cron_line(f"2026-07-16T18:{minute:02d}:58", "wf-parent-a") for minute in range(10)])
+
+        result = run_check(root=root, now=NOW)
+
+        assert (result.clock_anomaly is not None) is (extra is not None)
+        assert [event["kind"] for event in result] == ["orphan_frame"]
+        assert [event["kind"] for event in alerts(root)] == ["orphan_frame"]
+
+
+def test_forward_future_clock_anchor_with_orphan_is_explicit_in_cli(tmp_path, monkeypatch, capsys):
+    # Rewrites test_forward_future_anchor_with_orphan_is_explicit_in_cli: same CLI invariant
+    # (both signals visible at once), now driven by a clock-authority stamp rather than an
+    # authored one, because only a real host-clock anomaly still aborts the round.
+    fixture(tmp_path)
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {
+            "from": "codex",
+            "time": "2026-07-12T13:30:00+09:00",
+            "time_authority": "clock",
+            "text": "trusted future append",
+        },
+    )
+    write_cron(tmp_path, [cron_line(f"2026-07-16T18:{minute:02d}:58", "wf-parent-a") for minute in range(10)])
+
+    class FixedDatetime(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return NOW if tz is not None else NOW.replace(tzinfo=None)
+
+    monkeypatch.setattr(peer_health_wake, "datetime", FixedDatetime)
+    assert main(["--root", str(tmp_path)]) == 0
+    report = json.loads(capsys.readouterr().out)
+
+    assert report["check"] == "clock_anomaly"
+    assert [event["kind"] for event in report["appended"]] == ["orphan_frame"]
+    assert report["clock_anomaly"] is not None
+    assert [event["kind"] for event in alerts(tmp_path)] == ["orphan_frame"]
 
 
 def test_silent_pending_raises_once_and_is_idempotent(tmp_path):
@@ -164,6 +344,32 @@ def test_malformed_or_missing_relevant_time_fails_safe_whole_round(tmp_path):
     )
     assert run_check(root=tmp_path, now=NOW) == []
     assert alerts(tmp_path) == []
+
+
+def test_malformed_or_missing_non_anchor_time_is_ignored_after_valid_append(tmp_path):
+    bad_rows = (
+        {"from": "codex", "time": "not-a-time", "text": "older malformed coordinate"},
+        {"from": "codex", "text": "older missing coordinate"},
+    )
+    for index, bad_row in enumerate(bad_rows):
+        root = tmp_path / str(index)
+        fixture(root, activity_time="2026-07-12 01:00:00")
+        append(root / "peer-chat.jsonl", bad_row)
+        append(
+            root / "peer-chat.jsonl",
+            {"from": "codex", "time": "2026-07-12 10:59:00", "text": "valid source-local anchor"},
+        )
+
+        result = run_check(root=root, now=NOW)
+
+        assert result == []
+        assert result.skipped is None
+        assert result.clock_anomaly is None
+        assert result.activity_anchor == {
+            "time_utc": "2026-07-12T01:59:00+00:00",
+            "source_ref": "peer-chat.jsonl:3@2026-07-12 10:59:00 (codex activity)",
+        }
+        assert alerts(root) == []
 
 
 def test_malformed_json_row_is_visible_without_discarding_good_anchor(tmp_path):
@@ -338,6 +544,102 @@ def test_reverse_fresh_claude_does_not_alert(tmp_path):
     reverse_fixture(tmp_path, claude_time="2026-07-16 20:00:00")
     assert run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc)) == []
     assert not (tmp_path / "peer-health-alerts.jsonl").exists()
+
+
+def test_reverse_latest_future_authored_append_falls_back_to_run_anchor(tmp_path):
+    reverse_fixture(tmp_path)
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {"from": "claude", "time": "2026-07-16 23:30:00", "text": "latest future append"},
+    )
+
+    result = run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc))
+
+    assert result.clock_anomaly is None
+    assert len(result) == 1 and result[0]["event"] == "raised"
+    assert result.activity_anchor == {
+        "time_utc": "2026-07-16T07:00:00+00:00",
+        "source_ref": "wake-agent-runs/2026-07-16T16-00-00.json (claude wake run)",
+    }
+
+
+def test_reverse_future_clock_append_remains_a_visible_clock_anomaly(tmp_path):
+    reverse_fixture(tmp_path)
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {
+            "from": "claude",
+            "time": "2026-07-16T23:30:00+09:00",
+            "time_authority": "clock",
+            "text": "trusted future append",
+        },
+    )
+
+    result = run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc))
+
+    assert result == []
+    assert result.clock_anomaly == {
+        "anchor_time_utc": "2026-07-16T14:30:00+00:00",
+        "now_utc": "2026-07-16T12:00:00+00:00",
+        "future_delta_hours": 2.5,
+        "source_ref": "peer-chat.jsonl:2@2026-07-16T23:30:00+09:00 (claude activity)",
+        "authority": "none",
+    }
+    assert not (tmp_path / "peer-health-alerts.jsonl").exists()
+
+
+def test_reverse_backfilled_authored_append_cannot_displace_run_anchor(tmp_path):
+    reverse_fixture(tmp_path)
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {"from": "claude", "time": "2026-07-16 07:00:00", "text": "backfilled by nine hours"},
+    )
+
+    result = run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc))
+
+    assert result.clock_anomaly is None
+    assert len(result) == 1 and result[0]["event"] == "raised"
+    assert result.activity_anchor["source_ref"].startswith("wake-agent-runs/")
+
+
+def test_reverse_later_valid_append_displaces_earlier_future_timestamp(tmp_path):
+    reverse_fixture(tmp_path, claude_time="2026-07-16 20:00:00")
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {"from": "claude", "time": "2026-07-16 23:30:00", "text": "future-coordinate append"},
+    )
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {"from": "claude", "time": "2026-07-16 20:30:00", "text": "honest later append"},
+    )
+
+    result = run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc))
+
+    assert result == []
+    assert result.clock_anomaly is None
+    assert result.activity_anchor == {
+        "time_utc": "2026-07-16T11:30:00+00:00",
+        "source_ref": "peer-chat.jsonl:3@2026-07-16 20:30:00 (claude activity)",
+    }
+    assert not (tmp_path / "peer-health-alerts.jsonl").exists()
+
+
+def test_reverse_last_past_append_raises_despite_earlier_future_timestamp(tmp_path):
+    reverse_fixture(tmp_path)
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {"from": "claude", "time": "2026-07-16 23:30:00", "text": "future-coordinate append"},
+    )
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {"from": "claude", "time": "2026-07-16 16:30:00", "text": "past-coordinate append"},
+    )
+
+    result = run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc))
+
+    assert result.clock_anomaly is None
+    assert len(result) == 1 and result[0]["event"] == "raised"
+    assert result.activity_anchor["source_ref"].startswith("peer-chat.jsonl:3@")
 
 
 def test_reverse_unresolved_same_anchor_is_reported_once(tmp_path):
