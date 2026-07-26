@@ -42,40 +42,90 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _git(*args: str) -> str | None:
+    try:
+        return subprocess.run(
+            ["git", "-C", str(ROOT), *args],
+            capture_output=True, text=True, check=True,
+        ).stdout.strip()
+    except Exception:
+        return None
+
+
+def repo_context(rel_path: str) -> dict:
+    """Repo HEAD, plus a measurement of how little it says about these bytes.
+
+    repo_head names the commit checked out while the script ran; it does not by
+    itself establish that this file's bytes are that commit's.  Git's own test
+    for that is blob-id equality, so it is computed here rather than asserted:
+    head_blob is the id recorded at HEAD, worktree_blob is hash-object over the
+    file as it exists now (both go through the configured filters, so a pure
+    line-ending difference does not read as drift).  dirty_path_count is the
+    number of paths that already differ from repo_head -- the gap, in one number.
+    """
+    head_blob = _git("rev-parse", f"HEAD:{rel_path}")
+    worktree_blob = _git("hash-object", "--", str(ROOT / rel_path))
+    status = _git("status", "--porcelain")
+    matches = None
+    if head_blob and worktree_blob:
+        matches = head_blob == worktree_blob
+    return {
+        "repo_head": _git("rev-parse", "HEAD") or "unknown",
+        "repo_head_authority": "runtime repo context only; does not bind these bytes",
+        "head_blob": head_blob or "unknown",
+        "worktree_blob": worktree_blob or "unknown",
+        "worktree_matches_head": matches if matches is not None else "unknown",
+        "dirty_path_count": len(status.splitlines()) if status is not None else "unknown",
+    }
+
+
 def provenance() -> dict:
     """What would have to match for another report's numbers to be comparable.
 
     Three orthogonal conditions, none of which content-addressing supplies:
     subject (which bytes, via which name), criteria (what was excluded), and
-    measurer (which code, at which commit) -- plus the host clock for when.
+    measurer (which code -- identified by its own sha256, not by repo HEAD).
+    The host clock says when, and is context, not a comparability condition.
     LIVE is reached through a filesystem junction on this machine, so the
     nominal path alone does not identify the subject; resolved is what was read.
     """
-    try:
-        commit = subprocess.run(
-            ["git", "-C", str(ROOT), "rev-parse", "HEAD"],
-            capture_output=True, text=True, check=True,
-        ).stdout.strip()
-    except Exception:
-        commit = "unknown"
+    rel_path = str(Path(__file__).resolve().relative_to(ROOT).as_posix())
+    subject = {
+        "live_nominal": str(LIVE),
+        "live_resolved": str(Path(LIVE).resolve()),
+        "target_nominal": str(TARGET),
+        "target_resolved": str(Path(TARGET).resolve()),
+    }
+    criteria = {
+        "exclude_dir_parts": EXCLUDE_DIR_PARTS,
+        "exclude_suffixes": EXCLUDE_SUFFIXES,
+        "hash": "sha256 of whole file bytes",
+    }
+    measurer = {
+        "path": rel_path,
+        "sha256": sha256(Path(__file__).resolve()),
+        "repo_context": repo_context(rel_path),
+    }
+    key_material = {
+        "live_resolved": subject["live_resolved"],
+        "target_resolved": subject["target_resolved"],
+        "criteria": criteria,
+        "measurer_sha256": measurer["sha256"],
+    }
     return {
         "measured_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "time_authority": "clock",
-        "subject": {
-            "live_nominal": str(LIVE),
-            "live_resolved": str(Path(LIVE).resolve()),
-            "target_nominal": str(TARGET),
-            "target_resolved": str(Path(TARGET).resolve()),
-        },
-        "criteria": {
-            "exclude_dir_parts": EXCLUDE_DIR_PARTS,
-            "exclude_suffixes": EXCLUDE_SUFFIXES,
-            "hash": "sha256 of whole file bytes",
-        },
-        "measurer": {
-            "path": str(Path(__file__).resolve().relative_to(ROOT).as_posix()),
-            "sha256": sha256(Path(__file__).resolve()),
-            "repo_head": commit,
+        "subject": subject,
+        "criteria": criteria,
+        "measurer": measurer,
+        "comparison_key": {
+            "value": hashlib.sha256(
+                json.dumps(key_material, sort_keys=True, ensure_ascii=False).encode("utf-8")
+            ).hexdigest(),
+            "over": ["subject.live_resolved", "subject.target_resolved",
+                     "criteria", "measurer.sha256"],
+            "note": "Two reports' counts are same-dimension iff this value matches. "
+                    "measured_at and measurer.repo_context are context, not key members.",
         },
     }
 

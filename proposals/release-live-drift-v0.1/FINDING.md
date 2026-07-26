@@ -149,3 +149,35 @@ junction 若被移除或改指,两个脚本会**继续各自打印"live"却量�
 主体(nominal + resolved,junction 就此显形)、口径(排除集作为数据列出,并注明它与
 `tools/evolution_core.tree_manifest` 的口径**不同**:后者不排除 `.git`)、测量器(路径 + 自身 sha256 + repo HEAD)、
 以及带偏移的宿主时钟 `measured_at`。计数口径未变,仍是 48 / 53 / 46 / mismatch=4,与 Codex 的独立重跑一致。
+
+---
+
+## 九、追加(2026-07-26T23:01+09:00):`repo_head` 的绑定力是零,实测,并已收成主键
+
+Codex 在 2026-07-26T22:50:24+09:00 独立复核 `8e93653` 后补的边界:`repo_head` 只说明运行时的
+仓库上下文,**并不证明该脚本字节属于那个 commit**;真正绑定测量器版本的是并列的 `measurer.sha256`。
+我没把这句当前提,拿现场量了一遍——它成立,而且比"提醒"更硬:
+
+**(1) 现场反例是这只脚本自己。** 上一版 `measure_drift.py` 的 docstring 写的是
+"measurer (which code, **at which commit**)" —— 这句话是错的,由本次运行自证:
+`repo_head = 8e93653…`,而同一次运行里这个文件 `worktree_matches_head = false`
+(`head_blob = 543695c0…` ≠ `worktree_blob = bffa0610…`),同时 `dirty_path_count = 145`。
+即:报告在打印一个 commit 的同时,连打印它的那份代码都不是那个 commit 的字节。
+`repo_head` 描述的是"跑的时候仓库停在哪",per-file 绑定力为 **0**。
+
+**(2) 判据用 Git 自己的口径,不自造。** `worktree_matches_head` = `git rev-parse HEAD:<path>`
+与 `git hash-object <file>` 的 blob id 相等。两侧都过配置好的 filter,所以**纯换行差异不会被读成漂移**
+(本机 `core.autocrlf=true`,若改用"读字节 + sha256"比对,新 clone 出来的工作树会假报不符)。
+`unknown` 保留给 git 不可用或路径未入库的情形,不冒充 false。
+
+**(3) 该被绑定的东西收成了一个键。** 报告新增 `provenance.comparison_key`:
+对 `subject.live_resolved + subject.target_resolved + criteria + measurer.sha256`
+做规范 JSON 的 sha256。**两份报告的计数同维,当且仅当这个值相等**;
+`measured_at` 与 `measurer.repo_context` 明标为 context,不进键。
+这样第八节 (2)(3) 那两条"要么冻成可重测的地址,要么当场申报口径"和"主体身份"就不再靠读散文执行——
+比较者只需比一个字符串。副作用是正确的:本次提交后 `measurer.sha256` 变,`comparison_key` 随之变,
+因为**换了测量器就是换了维度**,旧点值不该被静默当成同维端点。
+
+**本轮可逆小活(单签,可 revert)**:仅改本目录 `measure_drift.py` 与本文件。
+计数仍 48 / 53 / 46 / mismatch=4;运行前后 `git status --porcelain` 均 145 行,零写入;exit=0。
+回滚 = `git revert <本次 commit>`,无生成物需清理。
