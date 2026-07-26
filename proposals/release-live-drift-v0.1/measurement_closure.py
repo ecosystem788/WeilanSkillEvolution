@@ -502,11 +502,12 @@ def _reflective_paths(node: ast.AST, imported: dict[str, str] | None = None) -> 
     import, and claiming it here would repeat the mistake this function just fixed.  It
     runs as a NOT_CLOSED case in the fixture rather than being described.
 
-    A fourth match needs neither map: an attribute whose *name* no ordinary object
-    carries (`REFLECTIVE_ATTRIBUTE_NAMES`), matched with no test on the base at all.
-    That is the only way to see `inspect.currentframe().f_globals`, where the base is a
-    call rather than a name, and it is unqualified because qualifying it by the base's
-    provenance was measured leaking three ways.
+    A fourth match needs neither map: a function/frame-convention attribute name
+    (`REFLECTIVE_ATTRIBUTE_NAMES`), matched with no test on the base at all.  Ordinary
+    objects can define the same spelling, so this is a deliberate overcut paid by a
+    running cost fixture.  The unqualified match is the only way to see
+    `inspect.currentframe().f_globals`, where the base is a call rather than a name,
+    and qualifying it by the base's provenance was measured leaking three ways.
 
     Neither map is scoped, and that is a deliberate over-approximation rather than an
     oversight: a name shadowed by a parameter or a local still resolves to the module it

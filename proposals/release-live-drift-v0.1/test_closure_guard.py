@@ -208,9 +208,11 @@ CASES = [
         '    import sys as s\n    return s.modules[__name__].hidden()\n',
         True,
     ),
-    # The four below are the other axis of the attribute channel: an attribute name no
-    # ordinary object carries, matched with no test on the base.  All four ran as
-    # equal-known misses before it existed, and the first two were NOT_CLOSED cases.
+    # The four below are the other axis of the attribute channel: a function/frame-
+    # convention attribute name matched with no test on the base.  Ordinary objects can
+    # define the same spelling, so the unqualified match is a paid overcut rather than
+    # a fact about Python.  All four ran as equal-known misses before it existed, and
+    # the first two were NOT_CLOSED cases.
     (
         "reflection_via_function_globals",
         'def hidden():\n    return 2\ndef root():\n    return root.__globals__["hidden"]()\n',
