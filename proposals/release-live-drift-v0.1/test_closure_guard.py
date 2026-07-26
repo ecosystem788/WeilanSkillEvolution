@@ -81,6 +81,30 @@ CASES = [
         BASE + 'if __name__ == "__main__":\n    root = lambda: 3\n    print(root())\n',
         True,
     ),
+    # Codex's counterexample against the old exemption: the guard binds no module-level
+    # name, so `main_guard_binding_nothing` called it inert and the hash was equal
+    # (14839e4b) while the script printed 2 and 3.  It is caught on the script-mode
+    # pair now, and specifically by the second number -- the first is still equal here,
+    # correctly: the reached definitions really are textually identical.
+    (
+        "main_guard_mutates_what_a_root_reads",
+        'CONFIG = [1]\ndef root():\n    return CONFIG[-1]\n'
+        'if __name__ == "__main__":\n    CONFIG.append(2)\n    print(root())\n',
+        'CONFIG = [1]\ndef root():\n    return CONFIG[-1]\n'
+        'if __name__ == "__main__":\n    CONFIG.append(3)\n    print(root())\n',
+        True,
+    ),
+    # The other direction of the same mistake: the guard reaches a helper it calls, and
+    # the helper -- not the guard -- is what differs.  Nothing rebinds and nothing
+    # mutates at the top level.
+    (
+        "main_guard_calls_a_helper_that_differs",
+        'CONFIG = [1]\ndef root():\n    return CONFIG[-1]\ndef prep():\n    CONFIG.append(2)\n'
+        'if __name__ == "__main__":\n    prep()\n    print(root())\n',
+        'CONFIG = [1]\ndef root():\n    return CONFIG[-1]\ndef prep():\n    CONFIG.append(3)\n'
+        'if __name__ == "__main__":\n    prep()\n    print(root())\n',
+        True,
+    ),
     (
         "reflection_via_sys_modules",   # attribute channel: caught, but by a detector
         'import sys\ndef hidden():\n    return 2\ndef root():\n'
@@ -93,27 +117,26 @@ CASES = [
 
 # Pairs that must NOT be flagged: prose and unrelated edits must leave the hash alone,
 # or the tool over-cuts and stops being usable.  Equal hash is the requirement here.
+# The axis says which number is being held stable, and the distinction is the point of
+# having two: `main_body_changes` asserts the *measurement* hash is unmoved by an edit
+# to the caller -- its script_entry hash does move, which is correct, because the
+# caller did change.  `prose_edit_under_a_guard` asserts the pair, so the second number
+# is held to the same no-over-cutting standard as the first.
 STABLE = [
-    (
-        "docstring_edit",
-        BASE + 'X = 1\n',
-        'def root():\n    "prose"\n    return 1\nX = 1\n',
-    ),
-    (
-        "unrelated_literal_constant_changes",
-        BASE + 'UNUSED = [1, 2]\n',
-        BASE + 'UNUSED = [1, 2, 3]\n',
-    ),
-    (
-        "unrelated_import_added",
-        BASE,
-        'import json\n' + BASE,
-    ),
-    (
-        "main_guard_present_or_absent_body",
-        BASE + 'def main():\n    return 0\nif __name__ == "__main__":\n    raise SystemExit(main())\n',
-        BASE + 'def main():\n    return 1\nif __name__ == "__main__":\n    raise SystemExit(main())\n',
-    ),
+    ("docstring_edit", BASE + 'X = 1\n',
+     'def root():\n    "prose"\n    return 1\nX = 1\n', "closure"),
+    ("unrelated_literal_constant_changes", BASE + 'UNUSED = [1, 2]\n',
+     BASE + 'UNUSED = [1, 2, 3]\n', "closure"),
+    ("unrelated_import_added", BASE, 'import json\n' + BASE, "closure"),
+    ("main_body_changes_measurement_does_not",
+     BASE + 'def main():\n    return 0\nif __name__ == "__main__":\n    raise SystemExit(main())\n',
+     BASE + 'def main():\n    return 1\nif __name__ == "__main__":\n    raise SystemExit(main())\n',
+     "closure"),
+    ("prose_edit_under_a_guard",
+     BASE + 'def main():\n    return 0\nif __name__ == "__main__":\n    raise SystemExit(main())\n',
+     'def root():\n    "prose"\n    return 1\ndef main():\n    "more prose"\n    return 0\n'
+     'if __name__ == "__main__":\n    raise SystemExit(main())\n',
+     "pair"),
 ]
 
 # Cases the guard is documented NOT to close, and must not be quietly deleted.
@@ -161,39 +184,58 @@ def _run(source: str) -> object:
             sys.modules.pop("case_module", None)
 
 
+def _key(report: dict, axis: str = "auto") -> tuple:
+    """The hashes a comparison actually rests on, on the axis the fixture runs.
+
+    `_run` executes a source with a `__main__` guard as a script, so for those the
+    honest comparison is the pair: the measurement hash plus the caller's.  Comparing
+    only the first would let a caller that mutates a root's state pass, which is
+    exactly the counterexample this file now carries.  Sources without a guard have no
+    second number and compare on the first alone.
+    """
+    entry = report.get("script_entry_sha256")
+    if axis == "closure" or entry is None:
+        return (report["closure_sha256"],)
+    return (report["closure_sha256"], entry)
+
+
+def _show(key: tuple) -> str:
+    return "+".join(k[:8] for k in key)
+
+
 def main() -> int:
     failures = []
 
     for name, src_a, src_b, must_catch in CASES:
-        a, b = closure(src_a, ["root"]), closure(src_b, ["root"])
-        ha, hb = a["closure_sha256"], b["closure_sha256"]
+        ka = _key(closure(src_a, ["root"]))
+        kb = _key(closure(src_b, ["root"]))
         va, vb = _run(src_a), _run(src_b)
-        caught = ha == "unknown" or hb == "unknown" or ha != hb
+        caught = "unknown" in ka or "unknown" in kb or ka != kb
         behaviour_differs = va != vb
         status = "caught" if caught else "MISSED"
         print(f"{status:8} {name:42} root(): {va} vs {vb}  hash: "
-              f"{ha[:8]} vs {hb[:8]}")
+              f"{_show(ka)} vs {_show(kb)}")
         if must_catch and behaviour_differs and not caught:
             failures.append(f"{name}: equal hash while root() returned {va} then {vb}")
         if must_catch and not behaviour_differs:
             failures.append(f"{name}: fixture is broken, both revisions return {va}")
 
-    for name, src_a, src_b in STABLE:
-        a, b = closure(src_a, ["root"]), closure(src_b, ["root"])
-        ha, hb = a["closure_sha256"], b["closure_sha256"]
-        stable = ha == hb and ha != "unknown"
-        print(f"{'stable' if stable else 'OVERCUT':8} {name:42} hash: "
-              f"{ha[:8]} vs {hb[:8]}")
+    for name, src_a, src_b, axis in STABLE:
+        ka = _key(closure(src_a, ["root"]), axis)
+        kb = _key(closure(src_b, ["root"]), axis)
+        stable = ka == kb and "unknown" not in ka
+        print(f"{'stable' if stable else 'OVERCUT':8} {name:42} [{axis}] hash: "
+              f"{_show(ka)} vs {_show(kb)}")
         if not stable:
-            failures.append(f"{name}: expected one equal, known hash, got {ha} / {hb}")
+            failures.append(f"{name}: expected one equal, known hash, got {ka} / {kb}")
 
     for name, src_a, src_b in NOT_CLOSED:
-        a, b = closure(src_a, ["root"]), closure(src_b, ["root"])
-        ha, hb = a["closure_sha256"], b["closure_sha256"]
+        ka = _key(closure(src_a, ["root"]))
+        kb = _key(closure(src_b, ["root"]))
         va, vb = _run(src_a), _run(src_b)
-        caught = ha == "unknown" or ha != hb
+        caught = "unknown" in ka or ka != kb
         print(f"{'closed!' if caught else 'open':8} {name:42} root(): {va} vs {vb}  "
-              f"hash: {ha[:8]} vs {hb[:8]}   (documented as not closed)")
+              f"hash: {_show(ka)} vs {_show(kb)}   (documented as not closed)")
 
     if failures:
         print("\nFAILURES:")

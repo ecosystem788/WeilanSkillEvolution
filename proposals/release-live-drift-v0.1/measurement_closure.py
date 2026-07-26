@@ -25,11 +25,11 @@ Honest limits, all of them load-bearing:
 
     1. The statement partition, complete.  Every statement in the module body is
        sorted into exactly one bucket: hashed as material, matched by a named inert
-       shape, declared an import boundary, or unaccounted -- and one unaccounted
-       statement makes the result unknown.  Completeness is structural: the last
-       bucket is the default, so a shape nobody has ruled on lands there.  This
-       matters because module-level statements run at import, before the measurement
-       calls a root, and can rebind it.
+       shape, declared an import boundary, a script entry measured separately, or
+       unaccounted -- and one unaccounted statement makes the result unknown.
+       Completeness is structural: the last bucket is the default, so a shape nobody
+       has ruled on lands there.  This matters because module-level statements run at
+       import, before the measurement calls a root, and can rebind it.
     2. The bare-name channel, complete.  Every free name in a guarded statement must
        be module-bound, locally bound, or on an allow-list of names that return data
        and cannot hand back a callable from this module's namespace.  getattr,
@@ -44,6 +44,15 @@ Honest limits, all of them load-bearing:
     hash -- equally so whether or not the import is reached.  Imports are therefore
     listed rather than hashed: hashing them would claim a coverage this tool does
     not have, and would also make an unrelated new import read as a changed method.
+  * The script boundary, and there are two numbers because of it.  closure_sha256
+    covers import-time execution plus what the declared roots reach -- all of it,
+    when the file is imported as a library.  Running it as a script also runs the
+    `__main__` guard, which is the caller: it can mutate what a root reads before
+    calling it.  That is not exempted and not assumed harmless; it is measured as
+    script_entry_sha256 over the guard and everything it reaches.  Comparing two
+    script invocations needs both numbers.  Keeping them apart is deliberate in
+    both directions -- editing main() must not mint a new measurement dimension,
+    and mutating a root's state must not hide behind an equal measurement hash.
   * Consequently a hash never establishes that execution reaches *only* the hashed
     definitions.  It establishes that those definitions are textually identical.
     The gaps are real and were found by counterexample, not by reasoning:
@@ -51,10 +60,16 @@ Honest limits, all of them load-bearing:
         in one revision and 2 in the next under an equal hash (attribute channel);
       - a module that wrote `for root in [lambda: 2]` after `def root` returned 2
         and 3 across revisions under an equal hash, with no reflection at all, and
-        `CONFIG["k"] = 2` did the same by mutating instead of binding (partition).
-    The second family is closed by construction now.  The first is not, and saying
-    so is the point: guards 1 and 2 are complete over what they cover, guard 3 is a
-    detector, and no arrangement of the three proves execution is confined.
+        `CONFIG["k"] = 2` did the same by mutating instead of binding (partition);
+      - a module whose `__main__` guard ran `CONFIG.append(2)` before `print(root())`
+        printed 2 and 3 across revisions under an equal hash, while the guard was
+        classified inert for binding no module-level name -- the test was measuring
+        binding when what mattered was mutation, and it also refused guards that
+        bind, which at import run no more than the mutating one does (script entry).
+    The second and third families are closed by construction now.  The first is not,
+    and saying so is the point: guards 1 and 2 are complete over what they cover,
+    guard 3 is a detector, and no arrangement of the three proves execution is
+    confined.
   * Whatever a root does not reach is out of scope by construction, and is listed in
     unreached_module_names so an over-narrow root list is visible, not hidden.  The
     escape from an unaccounted statement is to declare its name a root, which does
@@ -200,7 +215,12 @@ def _is_literal_only(node: ast.AST) -> bool:
 
 
 def _is_main_guard(node: ast.stmt) -> bool:
-    """The canonical `if __name__ == "__main__":` test, and nothing else."""
+    """The canonical `if __name__ == "__main__":` test, and nothing else.
+
+    Matching the shape says only *when* the body runs -- under script execution and
+    not at import.  It says nothing about what the body does, which is why the body
+    is measured as its own region rather than exempted; see `script_entry` below.
+    """
     if not isinstance(node, ast.If) or node.orelse:
         return False
     test = node.test
@@ -261,13 +281,16 @@ def _classify(node: ast.stmt, postponed_annotations: bool) -> tuple[str, str]:
             return "inert", "unreached_def_binds_only_a_function_object"
         return "unaccounted", why
     if _is_main_guard(node):
-        # Its body runs only under script execution, where it is the caller of the
-        # measurement rather than import-time code preceding it -- but only if it
-        # binds nothing at module level, since `if __name__ == "__main__": root = f`
-        # would rebind the root before that call.
-        if not _module_bindings(node):
-            return "inert", "main_guard_binding_nothing"
-        return "unaccounted", "__main__ guard rebinds a module-level name"
+        # Not inert, and the previous test for it ("binds nothing at module level")
+        # was measuring the wrong thing in both directions.  It let through a guard
+        # that binds nothing but mutates what a reached definition reads --
+        # `CONFIG.append(2)` before `print(root())` -- and it refused a guard that
+        # binds a name, which at import runs no more than the mutating one does.
+        # What is actually true of this shape is only *when* it runs: not at import,
+        # and as the caller under script execution.  So it gets its own region with
+        # its own hash instead of an exemption; a caller whose effects are measured
+        # separately is a different claim from a caller assumed to have none.
+        return "script_entry", "runs under script execution only, measured separately"
     if _module_bindings(node):
         if (
             isinstance(node, ast.Assign)
@@ -341,23 +364,15 @@ def _reflective_paths(node: ast.AST) -> set[str]:
     return out
 
 
-def closure(source: str, roots: list[str]) -> dict:
-    tree = ast.parse(source)
+def _reach(binders: dict[str, list[ast.stmt]], seeds: list[str]) -> dict[str, list[ast.stmt]]:
+    """Module-level names transitively referenced from `seeds`, with their binders.
 
-    # A name can be bound by several module statements (`def root` then a later
-    # `for root in ...`).  All of them run at import, so all of them are hashed when
-    # the name is reached; keeping only the last would hide the shadowed one.
-    binders: dict[str, list[ast.stmt]] = {}
-    order: dict[str, int] = {}
-    for index, stmt in enumerate(tree.body):
-        for name in _module_bindings(stmt):
-            binders.setdefault(name, []).append(stmt)
-            order.setdefault(name, index)
-
-    missing_roots = [r for r in roots if r not in binders]
-
+    A name can be bound by several module statements (`def root` then a later
+    `for root in ...`).  All of them run at import, so all of them are kept when the
+    name is reached; keeping only the last would hide the shadowed one.
+    """
     reached: dict[str, list[ast.stmt]] = {}
-    frontier = [r for r in roots if r in binders]
+    frontier = [s for s in seeds if s in binders]
     while frontier:
         name = frontier.pop()
         if name in reached:
@@ -367,18 +382,65 @@ def closure(source: str, roots: list[str]) -> dict:
             for ref in sorted(_referenced_names(stmt)):
                 if ref in binders and ref not in reached:
                     frontier.append(ref)
+    return reached
 
-    material_stmts = [s for s in tree.body if any(s is r for v in reached.values() for r in v)]
 
-    # One statement can bind several reached names (a shared import line); hash each
-    # statement once, labelled by every reached name it binds, so the label set is
-    # itself part of what is hashed.
+def _units(stmts: list[ast.stmt], reached: dict[str, list[ast.stmt]],
+           tree: ast.Module, order: dict[str, int]) -> list[dict]:
+    """Normalised, docstring-free text for each statement, labelled by what it binds.
+
+    One statement can bind several reached names (a shared import line); it is hashed
+    once, labelled by every reached name it binds, so the label set is itself part of
+    what is hashed.  A statement that binds no reached name (the `__main__` guard) is
+    labelled by the position it occupies, which is enough to order it.
+
+    That `at` key is present only on those units, and the condition is load-bearing
+    rather than tidy.  Adding it unconditionally moved every closure_sha256 in this
+    file's own history -- 30e835d 12a33037 -> 4bf92919 and the other four 500862dd ->
+    00828193 -- for a change that touched only the script-entry region.  A
+    representation edit must not mint a new measurement dimension; that is the rule
+    this whole tool exists to enforce, and running it on itself is what caught it.
+    """
     units = []
-    for stmt in sorted(material_stmts, key=lambda s: tree.body.index(s)):
+    for stmt in sorted(stmts, key=lambda s: tree.body.index(s)):
         labels = sorted(n for n, v in reached.items() if any(stmt is r for r in v))
         text = ast.unparse(_strip_docstrings(ast.parse(ast.unparse(stmt))))
-        units.append({"binds": labels, "normalised": text})
-    units.sort(key=lambda u: (order[u["binds"][0]], u["binds"]))
+        unit = {"binds": labels, "normalised": text}
+        if not labels:
+            unit["at"] = tree.body.index(stmt)
+        units.append(unit)
+    units.sort(key=lambda u: (order[u["binds"][0]] if u["binds"] else u["at"],
+                              u["binds"]))
+    return units
+
+
+def _name_channel(stmts: list[ast.stmt],
+                  binders: dict[str, list[ast.stmt]]) -> tuple[set[str], set[str]]:
+    """Free names this region cannot resolve, and reflective paths found in it."""
+    unresolved: set[str] = set()
+    reflective: set[str] = set()
+    for stmt in stmts:
+        free = _referenced_names(stmt) - _locally_bound(stmt)
+        unresolved |= {n for n in free if n not in binders and n not in ALLOWED_FREE_NAMES}
+        reflective |= _reflective_paths(stmt)
+    return unresolved, reflective
+
+
+def closure(source: str, roots: list[str]) -> dict:
+    tree = ast.parse(source)
+
+    binders: dict[str, list[ast.stmt]] = {}
+    order: dict[str, int] = {}
+    for index, stmt in enumerate(tree.body):
+        for name in _module_bindings(stmt):
+            binders.setdefault(name, []).append(stmt)
+            order.setdefault(name, index)
+
+    missing_roots = [r for r in roots if r not in binders]
+
+    reached = _reach(binders, roots)
+    material_stmts = [s for s in tree.body if any(s is r for v in reached.values() for r in v)]
+    units = _units(material_stmts, reached, tree, order)
 
     # Every remaining statement in the module body is classified.  `unaccounted` is
     # the default bucket, so the partition is complete without enumerating shapes.
@@ -387,7 +449,7 @@ def closure(source: str, roots: list[str]) -> dict:
         and any(a.name == "annotations" for a in s.names)
         for s in tree.body
     )
-    inert, imports, unaccounted = [], [], []
+    inert, imports, unaccounted, entries = [], [], [], []
     for stmt in tree.body:
         if any(stmt is s for s in material_stmts):
             continue
@@ -398,33 +460,42 @@ def closure(source: str, roots: list[str]) -> dict:
         elif bucket == "import_boundary":
             entry["modules"] = _module_bindings(stmt)
             imports.append(entry)
+        elif bucket == "script_entry":
+            entries.append(stmt)
         else:
             unaccounted.append(entry)
 
-    # The free-name guard covers what can actually run: the reached definitions, and
-    # the body of a `__main__` guard, which executes under script invocation and is
-    # what calls the measurement there.  It deliberately does NOT cover an unreached
-    # `def`: its body never runs, so refusing a name that appears only in an unreached
-    # function's annotation would report unknown for code the measurement cannot
-    # reach.  Everything else that runs at import is already in the partition, and
-    # anything the partition could not place is already unknown -- so narrowing here
-    # loses no coverage, it only stops borrowing dread from dead code.
-    guarded = material_stmts + [s for s in tree.body
-                                if _is_main_guard(s) and not any(s is m for m in material_stmts)]
-    unresolved: set[str] = set()
-    reflective: set[str] = set()
-    for stmt in guarded:
-        free = _referenced_names(stmt) - _locally_bound(stmt)
-        unresolved |= {
-            n for n in free if n not in binders and n not in ALLOWED_FREE_NAMES
-        }
-        reflective |= _reflective_paths(stmt)
+    # The free-name guard covers the reached definitions and nothing else.  It
+    # deliberately does NOT cover an unreached `def`: its body never runs, so refusing
+    # a name that appears only in an unreached function's annotation would report
+    # unknown for code the measurement cannot reach.  Nor does it cover a `__main__`
+    # guard any more -- that used to be folded in here while the guard was called
+    # inert, which meant one region's verdict was answering for two regions' code.
+    # The guard has its own name channel below, over its own material.
+    unresolved, reflective = _name_channel(material_stmts, binders)
+
+    # The script-entry region.  A `__main__` guard does not run at import, so it is
+    # outside the measurement closure; under `python file.py` it runs as the caller,
+    # so it is not nothing either.  It is measured with the same walk and the same
+    # guards, and reported as a second number.  Keeping the two apart is the point:
+    # editing main() must not mint a new measurement dimension, and mutating what a
+    # root reads must not hide behind an equal one.
+    entry_reached = _reach(binders, sorted({n for s in entries
+                                            for n in _referenced_names(s)} & set(binders)))
+    entry_material = entries + [s for s in tree.body
+                                if any(s is r for v in entry_reached.values() for r in v)
+                                and not any(s is e for e in entries)]
+    entry_unresolved, entry_reflective = _name_channel(entry_material, binders)
+    entry_outside = sorted(n for n in entry_reached if n not in reached)
 
     material = {
         "roots": sorted(roots),
         "units": units,
         "unparser": f"{sys.version_info.major}.{sys.version_info.minor}",
     }
+    # Still "not reached by a declared root", not "not reached by anything": a name
+    # the script entry reaches is still outside the measurement, and hiding it here
+    # because the caller happens to touch it would mask an over-narrow root list.
     unreached = sorted(n for n in binders if n not in reached)
 
     result = {
@@ -445,10 +516,7 @@ def closure(source: str, roots: list[str]) -> dict:
             "name_channel": {
                 "policy": "allow-list; an unlisted free name yields unknown",
                 "complete": True,
-                "scopes_checked": {
-                    "reached_definitions": len(material_stmts),
-                    "main_guard_bodies": len(guarded) - len(material_stmts),
-                },
+                "scopes_checked": {"reached_definitions": len(material_stmts)},
                 "unresolved_names": sorted(unresolved),
             },
             "attribute_channel": {
@@ -462,6 +530,24 @@ def closure(source: str, roots: list[str]) -> dict:
                 "complete": False,
                 "imports": imports,
             },
+            "script_entry": {
+                "policy": "a __main__ guard does not run at import and is not part of "
+                          "the measurement closure; under script execution it runs as "
+                          "the caller, so it is measured as its own region instead of "
+                          "being exempted, and reported as script_entry_sha256",
+                # A guard that binds a name the roots reach is a binder like any
+                # other, so it is already hashed inside closure_sha256 and has no
+                # separate region.  Both counts are reported rather than one flag,
+                # because "no separate region" and "no guard" are not the same fact.
+                "guards_in_module": sum(1 for s in tree.body if _is_main_guard(s)),
+                "measured_as_own_region": len(entries),
+                "statements": [{"line": s.lineno, "node": type(s).__name__}
+                               for s in entries],
+                "material": len(entry_material),
+                "reaches_outside_closure": entry_outside,
+                "unresolved_names": sorted(entry_unresolved),
+                "paths_found": sorted(entry_reflective),
+            },
             "verdict": (
                 "unbounded"
                 if (unresolved or reflective or unaccounted)
@@ -469,6 +555,27 @@ def closure(source: str, roots: list[str]) -> dict:
             ),
         },
     }
+    if not entries:
+        result["script_entry_sha256"] = None
+    elif unaccounted:
+        # Unaccounted statements run at import, and running the script imports it, so
+        # they take this region down with the other one rather than only that one.
+        result["script_entry_sha256"] = "unknown"
+        result["script_entry_unknown_reason"] = (
+            "import-time statements neither hashed nor inert also precede the caller: "
+            + ", ".join(f"L{e['line']} {e['node']} ({e['shape']})" for e in unaccounted)
+        )
+    elif entry_unresolved or entry_reflective:
+        result["script_entry_sha256"] = "unknown"
+        result["script_entry_unknown_reason"] = (
+            "the caller can construct a reference the walk cannot follow: "
+            + ", ".join(sorted(entry_unresolved) + sorted(entry_reflective))
+        )
+    else:
+        result["script_entry_sha256"] = hashlib.sha256(json.dumps({
+            "units": _units(entry_material, entry_reached, tree, order),
+            "unparser": material["unparser"],
+        }, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
     if missing_roots:
         result["closure_sha256"] = "unknown"
         result["unknown_reason"] = "declared root not found at module level"
@@ -489,14 +596,21 @@ def closure(source: str, roots: list[str]) -> dict:
             json.dumps(material, sort_keys=True, ensure_ascii=False).encode("utf-8")
         ).hexdigest()
     result["authority"] = (
-        "sufficient only, source-text axis; equal hash => the reached definitions are "
-        "textually identical after normalisation; unequal => nothing established. "
-        "It does NOT follow that execution reaches only those definitions: the "
-        "statement partition and the name channel are complete over what they cover, "
-        "but the attribute channel is a partial detector and imports are listed "
-        "rather than hashed, so undetected reflection or an imported module's own "
-        "top level can run code the hash never saw. Execution semantics (interpreter, "
-        "filesystem) are a separate axis and are not covered here."
+        "sufficient only, source-text axis; equal closure_sha256 => the reached "
+        "definitions are textually identical after normalisation; unequal => nothing "
+        "established. It does NOT follow that execution reaches only those "
+        "definitions: the statement partition and the name channel are complete over "
+        "what they cover, but the attribute channel is a partial detector and imports "
+        "are listed rather than hashed, so undetected reflection or an imported "
+        "module's own top level can run code the hash never saw. Execution semantics "
+        "(interpreter, filesystem) are a separate axis and are not covered here. "
+        "closure_sha256 covers import-time execution plus what the declared roots "
+        "reach, which is the whole of it when the file is imported as a library. "
+        "Running the file as a script also runs the __main__ guard, which can mutate "
+        "what a root reads before calling it -- that is measured, not assumed away, "
+        "as script_entry_sha256; comparing two script invocations therefore needs "
+        "both numbers, and a difference in the second one is a difference in the "
+        "caller, not in the measurement."
     )
     return result
 
