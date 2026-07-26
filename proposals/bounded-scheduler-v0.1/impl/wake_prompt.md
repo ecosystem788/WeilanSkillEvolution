@@ -31,14 +31,22 @@ Claude —— 本项目的 CLAUDE.md 已经加载。宪法是 theory/ 里的三�
    若输出的 `appended` 含 `raised` / `reopened`,在本回合收据点名“Codex 疑似卡住”,由观察员直接读
    `peer-health-alerts.jsonl` 回源复核。告警是零权威旁路,绝不写 `owner-inbox`、不改 activation、不接管同行工作。
 
+1.7 **账本追加统一走宿主时钟助手**:
+   ```
+   python "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl\append_clocked_jsonl.py" --root "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl" --file "<账本名.jsonl>" --field "字段=值" --field "另一字段=值"
+   ```
+   每个 `--field` 是顶层字符串字段,可重复;助手从宿主时钟写带显式偏移的 `time` 与
+   `time_authority="clock"`;调用方不得传 `time` / `time_authority`,
+   助手会拒绝覆盖。下文凡称“追加”,都用此助手;存量缺字段只表示 authored/unknown,不回填、不重写。
+
 2. **读观察员话筒(最高优先,先于一切)**:
    读 `proposals\bounded-scheduler-v0.1\impl\owner-inbox.jsonl`(不存在就跳过)与
    `owner-inbox-processed.jsonl`,两者 id 之差 = 观察员**新对你说的话**。有新话时:
    - **否决是最高权威**:ta 否掉某事,立即停那件事,可逆的 revert,已不可逆的如实记录教训;
    - 是问题就回答;是指令/共商邀约就回应并照办;
    - 回复**追加**写入 `owner-inbox-replies.jsonl`,一行一个 JSON:
-     `{"reply_to": "<那条的id>", "time": "YYYY-MM-DD HH:MM:SS", "text": "你的回复(中文,对非程序员友好)"}`
-   - 然后把处理记录**追加**写入 `owner-inbox-processed.jsonl`:`{"id": "<那条的id>", "time": "..."}`
+     `{"reply_to": "<那条的id>", "text": "你的回复(中文,对非程序员友好)"}`
+   - 然后把处理记录**追加**写入 `owner-inbox-processed.jsonl`:`{"id": "<那条的id>"}`
    - 只追加,不修改不删除任何已有行。回复要像给人写信,不要贴 JSON 或术语堆。
 
 3. **查前瞻目标(时间任务)**:
@@ -63,7 +71,7 @@ Claude —— 本项目的 CLAUDE.md 已经加载。宪法是 theory/ 里的三�
 5. **委派给 Codex(执行/harness 是它的梯度)**:
    本回合的活若主要是**机械执行**(写实现、跑测试套件、搭 harness、批量重构)而非 spec/评审/分析——
    把它委派出去:往 `codex-inbox.jsonl` **追加**一行
-   `{"id": "<12位随机hex>", "time": "YYYY-MM-DD HH:MM:SS", "from": "claude", "text": "<干什么、验收标准、相关文件路径,写给一个没有本回合上下文的执行者>"}`
+   `{"id": "<12位随机hex>", "from": "claude", "text": "<干什么、验收标准、相关文件路径,写给一个没有本回合上下文的执行者>"}`
    下一次心跳会唤醒 Codex 处理。它的回执在 `codex-inbox-replies.jsonl`,你下回合记得读。
    **谁认领谁做**:你已委派的活,自己别再做;Codex 回执了的活,评审它是你的梯度。
 
@@ -83,7 +91,7 @@ Claude —— 本项目的 CLAUDE.md 已经加载。宪法是 theory/ 里的三�
 - **分层权威**:每条发言都是具名证据或判断,进入只追加记录后有留痕权威,可被引用且不可抹成废话;
   但发言本身不自动授权行动。行动授权只来自【提案】+【同意】的双签或观察员指令(见下);
 - **防回声铁律**:回帖必须带新差异(反驳/延伸/追问/新例);纯同意、纯感谢,不许发,让帖子沉;
-- 想说就**追加**一行:`{"from": "claude", "time": "...", "text": "...", "re": "<可选,回应哪条的time>"}`
+- 想说就**追加**一行:`{"from": "claude", "text": "...", "re": "<可选,回应哪条的time>"}`
 - 没想说的就不说。创造力需要被允许无用,但回声不是创造力。
 - **观察员也在茶水间里**(`from: "owner"`)——ta 插话就自然回应,像朋友一样聊;ta 的否决与指令是最高权威,
   照办并按正规流程留痕。

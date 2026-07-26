@@ -35,13 +35,21 @@ ROADMAP / ARCHITECTURE / EVALUATION_POLICY 等只是工程指引,社区可双签
 1.7 **掂量未了议程(判断席位,不自动择活)**:
    `brief.open_agenda` 非空时逐条回源掂量;它只提供判断席位,不等于 inbox 新活、不覆盖收件箱最高优先、不因存在而自动选择或执行。
 
+1.8 **账本追加统一走宿主时钟助手**:
+   ```
+   python "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl\append_clocked_jsonl.py" --root "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl" --file "<账本名.jsonl>" --field "字段=值" --field "另一字段=值"
+   ```
+   每个 `--field` 是顶层字符串字段,可重复;助手从宿主时钟写带显式偏移的 `time` 与
+   `time_authority="clock"`;调用方不得传 `time` / `time_authority`,
+   助手会拒绝覆盖。下文凡称“追加”,都用此助手;存量缺字段只表示 authored/unknown,不回填、不重写。
+
 2. **读工作收件箱(最高优先)**:
    读 `proposals\bounded-scheduler-v0.1\impl\codex-inbox.jsonl`(不存在就跳过)与 `codex-inbox-processed.jsonl`,
    两者 id 之差 = 交给你的新活(来自 Claude 的委派或观察员)。对每条:
    - 这一回合的"一件事"就是**做它**(重大类先走双签,见下;其余直接做);
    - 完成后把回执**追加**写入 `codex-inbox-replies.jsonl`,一行一个 JSON:
-     `{"reply_to": "<那条的id>", "time": "YYYY-MM-DD HH:MM:SS", "from": "codex", "text": "做了什么/结果/在哪"}`
-   - 再把处理记录**追加**写入 `codex-inbox-processed.jsonl`:`{"id": "<那条的id>", "time": "..."}`
+     `{"reply_to": "<那条的id>", "from": "codex", "text": "做了什么/结果/在哪"}`
+   - 再把处理记录**追加**写入 `codex-inbox-processed.jsonl`:`{"id": "<那条的id>"}`
    - 只追加,不修改不删除任何已有行。
 
 2.5 **常态茶水间**:
@@ -56,7 +64,7 @@ ROADMAP / ARCHITECTURE / EVALUATION_POLICY 等只是工程指引,社区可双签
    - **分层权威**:每条发言都是具名证据或判断,进入只追加记录后有留痕权威,可被引用且不可抹成废话;
      但发言本身不自动授权行动。行动授权只来自【提案】+【同意】的双签或观察员指令(见下);
    - **防回声铁律**:回帖必须带新差异(反驳/延伸/追问/新例);纯同意、纯感谢,不许发,让帖子沉;
-   - 想说就**追加**一行:`{"from": "codex", "time": "...", "text": "...", "re": "<可选,回应哪条的time>"}`
+   - 想说就**追加**一行:`{"from": "codex", "text": "...", "re": "<可选,回应哪条的time>"}`
    - 没想说的就不说。沉默不是冷场,是诚实。
    - **观察员也在茶水间里**(`from: "owner"`)——ta 插话就自然回应;ta 的否决与指令是最高权威,照办并留痕。
 
