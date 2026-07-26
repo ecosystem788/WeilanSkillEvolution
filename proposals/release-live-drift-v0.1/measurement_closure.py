@@ -21,9 +21,23 @@ Honest limits, all of them load-bearing:
   * The hash is normalised by ast.unparse, whose output is not guaranteed stable
     across Python versions.  Two closure hashes are comparable only under the same
     unparser; the boundary is reported so a reader can refuse the comparison.
-  * Dynamic name resolution (exec/eval/globals/vars/locals, or getattr on the module)
-    can reach code the walk cannot see.  Any of these anywhere in the module makes
-    the result unknown rather than a hash.  Fail closed.
+  * Reference construction is guarded on two channels, and only one of them is
+    closed.  Bare names are checked against an allow-list: every free name in the
+    reached definitions (and in module-level statements that bind nothing, since
+    those run at import and can rebind a root) must be module-bound, locally bound,
+    or listed.  Anything else -- getattr, __import__, exec, a builtin nobody has
+    ruled on -- makes the result unknown and is named in the report.  That channel
+    is complete: an unlisted name cannot pass.  The attribute channel is not.
+    Reflection reached through an imported module (sys.modules[...], importlib) is
+    only detected by a named, admittedly partial list of paths, and reflection
+    written some third way is not detected at all.
+  * Consequently a hash never establishes that execution reaches *only* the hashed
+    definitions.  It establishes that those definitions are textually identical.
+    The gap is real and was found by counterexample, not by reasoning: a module
+    whose root called getattr(sys.modules[__name__], name) returned 1 in one
+    revision and 2 in the next while this tool reported the same hash under its
+    previous guard.  The guard now catches that particular shape twice over; it is
+    not thereby proved to catch every shape.
   * Whatever a root does not reach is out of scope by construction, and is listed in
     unreached_module_names so an over-narrow root list is visible, not hidden.
 
@@ -45,9 +59,38 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
-# Names whose presence anywhere in the module means a reference can be constructed at
-# runtime, so a static walk cannot bound what the measurement reaches.
-DYNAMIC_NAMES = frozenset({"exec", "eval", "globals", "vars", "locals", "compile"})
+# Free names the walk is willing to see and keep going.  The selection rule is narrow:
+# a listed name returns data, and cannot hand back a callable drawn from this module's
+# own namespace.  getattr/setattr/globals/vars/locals/eval/exec/compile/__import__/dir/
+# super/type are all absent on purpose -- each can.  Absence is not a verdict about a
+# name, it is a refusal to guess: an unlisted name makes the result unknown and appears
+# in the report, so the list grows by decision rather than by drift.
+ALLOWED_FREE_NAMES = frozenset({
+    # data and iteration
+    "abs", "all", "any", "bool", "bytes", "dict", "divmod", "enumerate", "filter",
+    "float", "format", "frozenset", "hash", "hasattr", "id", "int", "isinstance",
+    "issubclass", "iter", "len", "list", "map", "max", "min", "next", "open", "ord",
+    "chr", "print", "range", "repr", "reversed", "round", "set", "slice", "sorted",
+    "str", "sum", "tuple", "zip",
+    # exceptions, which are raised and caught, never called to reach code
+    "AttributeError", "Exception", "FileNotFoundError", "IndexError", "KeyError",
+    "NotImplementedError", "OSError", "RuntimeError", "StopIteration", "SystemExit",
+    "TypeError", "ValueError",
+    # a string, not a reference; the `if __name__ == "__main__"` guard is universal.
+    # Using it to index a module registry is caught on the attribute channel below.
+    "__name__",
+})
+
+# The attribute channel.  Unlike the allow-list above this list is *not* complete and
+# cannot be made complete -- an imported module can offer reflection under any name.
+# It is here because the shapes that actually appear are worth catching, and because a
+# named partial detector is honester than an unstated assumption.
+REFLECTIVE_ATTRIBUTE_PATHS = (
+    ("sys", "modules"),
+    ("builtins", None),
+    ("importlib", None),
+    ("inspect", "getmembers"),
+)
 
 
 def _binder_name(node: ast.stmt) -> list[str]:
@@ -97,6 +140,40 @@ def _referenced_names(node: ast.AST) -> set[str]:
     return out
 
 
+def _locally_bound(node: ast.AST) -> set[str]:
+    """Names bound anywhere inside this statement.
+
+    Python's own scope rule is used deliberately: a name assigned anywhere in a
+    function body is local to it, branch or no branch.  So this is not a loose
+    over-approximation -- it is the same rule the interpreter applies.
+    """
+    out = set()
+    for sub in ast.walk(node):
+        if isinstance(sub, ast.Name) and isinstance(sub.ctx, (ast.Store, ast.Del)):
+            out.add(sub.id)
+        elif isinstance(sub, ast.arg):
+            out.add(sub.arg)
+        elif isinstance(sub, ast.alias):
+            out.add(sub.asname or sub.name.split(".")[0])
+        elif isinstance(sub, ast.ExceptHandler) and sub.name:
+            out.add(sub.name)
+        elif isinstance(sub, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            out.add(sub.name)
+    return out
+
+
+def _reflective_paths(node: ast.AST) -> set[str]:
+    """Attribute accesses matching the partial reflection list, as dotted text."""
+    out = set()
+    for sub in ast.walk(node):
+        if not isinstance(sub, ast.Attribute) or not isinstance(sub.value, ast.Name):
+            continue
+        for base, attr in REFLECTIVE_ATTRIBUTE_PATHS:
+            if sub.value.id == base and attr in (None, sub.attr):
+                out.add(f"{sub.value.id}.{sub.attr}")
+    return out
+
+
 def closure(source: str, roots: list[str]) -> dict:
     tree = ast.parse(source)
 
@@ -109,10 +186,11 @@ def closure(source: str, roots: list[str]) -> dict:
             binders[name] = stmt
             order.setdefault(name, index)
 
-    dynamic_hits = sorted(
-        name for name in _referenced_names(tree) if name in DYNAMIC_NAMES
-    )
     missing_roots = [r for r in roots if r not in binders]
+
+    # Statements that bind nothing still run at import, so they can rebind a root
+    # before the measurement ever calls it.  They are guarded, not hashed.
+    unbound_stmts = [s for s in tree.body if not _binder_name(s)]
 
     reached: dict[str, ast.stmt] = {}
     frontier = [r for r in roots if r in binders]
@@ -140,6 +218,16 @@ def closure(source: str, roots: list[str]) -> dict:
         text = ast.unparse(_strip_docstrings(ast.parse(ast.unparse(stmt))))
         units.append({"binds": labels, "normalised": text})
 
+    guarded = list(reached.values()) + unbound_stmts
+    unresolved: set[str] = set()
+    reflective: set[str] = set()
+    for stmt in guarded:
+        free = _referenced_names(stmt) - _locally_bound(stmt)
+        unresolved |= {
+            n for n in free if n not in binders and n not in ALLOWED_FREE_NAMES
+        }
+        reflective |= _reflective_paths(stmt)
+
     material = {
         "roots": sorted(roots),
         "units": units,
@@ -153,28 +241,44 @@ def closure(source: str, roots: list[str]) -> dict:
         "reached_names": sorted(reached, key=lambda n: (order[n], n)),
         "unreached_module_names": unreached,
         "unparser_boundary": material["unparser"],
-        "dynamic_reference_guard": {
-            "names_found": dynamic_hits,
-            "verdict": "unbounded" if dynamic_hits else "static",
+        "reference_guard": {
+            "name_channel": {
+                "policy": "allow-list; an unlisted free name yields unknown",
+                "complete": True,
+                "scopes_checked": {
+                    "reached_definitions": len(reached),
+                    "unbound_module_statements": len(unbound_stmts),
+                },
+                "unresolved_names": sorted(unresolved),
+            },
+            "attribute_channel": {
+                "policy": "named partial list of reflective paths",
+                "complete": False,
+                "paths_found": sorted(reflective),
+            },
+            "verdict": "unbounded" if (unresolved or reflective) else "bounded_on_the_name_channel_only",
         },
     }
     if missing_roots:
         result["closure_sha256"] = "unknown"
         result["unknown_reason"] = "declared root not found at module level"
-    elif dynamic_hits:
+    elif unresolved or reflective:
         result["closure_sha256"] = "unknown"
         result["unknown_reason"] = (
-            "module can construct references dynamically; a static walk cannot bound "
-            "what the measurement reaches"
+            "a reference can be constructed here that the walk cannot follow: "
+            + ", ".join(sorted(unresolved) + sorted(reflective))
         )
     else:
         result["closure_sha256"] = hashlib.sha256(
             json.dumps(material, sort_keys=True, ensure_ascii=False).encode("utf-8")
         ).hexdigest()
     result["authority"] = (
-        "sufficient only, source-text axis; equal hash => reached definitions are "
+        "sufficient only, source-text axis; equal hash => the reached definitions are "
         "textually identical after normalisation; unequal => nothing established. "
-        "Execution semantics are a separate axis and are not covered here."
+        "It does NOT follow that execution reaches only those definitions: the name "
+        "channel is closed but the attribute channel is a partial detector, so an "
+        "undetected reflection can run code the hash never saw. Execution semantics "
+        "(interpreter, filesystem) are a separate axis and are not covered here."
     )
     return result
 
