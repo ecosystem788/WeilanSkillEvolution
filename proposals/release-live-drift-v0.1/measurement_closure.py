@@ -222,6 +222,13 @@ REFLECTIVE_ATTRIBUTE_PATHS = (
 # to skip.  One-sided admission is how a list gets washed by time into whatever its
 # authors found plausible: every entry looks measured, because the half that would have
 # argued was never run.
+#
+# That paragraph is now a check rather than a claim about how its authors work: the
+# fixture reads this set and fails unless every spelling in it has an OVERCUT sample
+# whose source *declares* that attribute -- a mention of the name is not enough, since
+# every such sample reads the name too.  Per spelling, because the match is per spelling:
+# `f_globals` sat here for a commit paid for by nothing but `__globals__`'s sample, which
+# is what the paragraph alone did not catch.
 REFLECTIVE_ATTRIBUTE_NAMES = frozenset({"__globals__", "f_globals"})
 
 _NESTED_SCOPES = (

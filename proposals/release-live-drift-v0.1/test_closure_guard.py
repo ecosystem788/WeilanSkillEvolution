@@ -29,6 +29,7 @@ Run: python test_closure_guard.py       (exit 0 = every case as documented)
 
 from __future__ import annotations
 
+import ast
 import importlib.util
 import subprocess
 import sys
@@ -36,7 +37,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from measurement_closure import closure  # noqa: E402
+from measurement_closure import REFLECTIVE_ATTRIBUTE_NAMES, closure  # noqa: E402
 
 BASE = 'def root():\n    return 1\n'
 
@@ -399,6 +400,22 @@ OVERCUT = [
         '    return Box().__globals__["value"]\nUNUSED = [1, 2]\n',
         "convention_reflective_names_are_refused_unqualified",
     ),
+    (
+        # The same cost for the other spelling, and it is a separate sample because the
+        # match is per spelling.  `REFLECTIVE_ATTRIBUTE_NAMES` is tested with `sub.attr
+        # in ...`, so admitting `f_globals` refuses every read of that word on its own
+        # account; the sample above prices `__globals__` and pays nothing toward this.
+        # Codex's per-name probe on a346769 found the gap -- the membership rule said
+        # every admitted name owes a cost run, and one of the two names had never had
+        # one.  A rule owed per name and paid per policy is a rule that stops being
+        # checked the moment a second name joins the first.
+        "ordinary_object_declaring_the_frame_convention_name",
+        'def root():\n    class Box:\n        f_globals = {"value": 1}\n'
+        '    return Box().f_globals["value"]\nUNUSED = [1]\n',
+        'def root():\n    class Box:\n        f_globals = {"value": 1}\n'
+        '    return Box().f_globals["value"]\nUNUSED = [1, 2]\n',
+        "convention_reflective_names_are_refused_unqualified",
+    ),
 ]
 
 # The rule the section above is held to: a retained cost is a *policy*, and a policy
@@ -542,6 +559,114 @@ AUDIT_SELFTEST = [
 ]
 
 
+def _declared_attribute_names(source: str) -> set[str]:
+    """Attribute names an ordinary object in this source is made to *carry*.
+
+    Bindings only, never reads, and that distinction is the whole load: the cost sample
+    for `__globals__` also contains `Box().__globals__["value"]`, so a check that
+    accepted a mention would pass on a sample that prices nothing -- the exact failure
+    the per-name audit exists to catch.  What counts is a name bound in a class body
+    (assignment, annotated assignment with a value, or a def), an assignment to
+    `something.name`, and `setattr(x, "name", ...)` spelled with a literal.  A module- or
+    function-level variable that happens to be called `f_globals` is not an attribute of
+    anything and does not count.
+
+    Undercounts deliberately: a name reached through a computed string is invisible here,
+    and should be.  The audit's demand is that a sample *show* the declaration, and a
+    sample that hides the spelling in a variable shows a reader nothing either.  Purely
+    syntactic -- it does not run the source and cannot tell whether the class is ever
+    instantiated; the OVERCUT loop's own `root()` comparison is what checks that.
+    """
+    declared: set[str] = set()
+
+    def bound_targets(stmt) -> list:
+        if isinstance(stmt, ast.Assign):
+            return list(stmt.targets)
+        if isinstance(stmt, (ast.AnnAssign, ast.AugAssign)):
+            return [stmt.target] if stmt.value is not None else []
+        return []
+
+    for node in ast.walk(ast.parse(source)):
+        if isinstance(node, ast.ClassDef):
+            for stmt in node.body:
+                declared |= {t.id for t in bound_targets(stmt) if isinstance(t, ast.Name)}
+                if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    declared.add(stmt.name)
+        declared |= {t.attr for t in bound_targets(node) if isinstance(t, ast.Attribute)}
+        if (isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+                and node.func.id == "setattr" and len(node.args) >= 2
+                and isinstance(node.args[1], ast.Constant)
+                and isinstance(node.args[1].value, str)):
+            declared.add(node.args[1].value)
+
+    return declared
+
+
+def _audit_reflective_name_costs(names, charged) -> list:
+    """The membership rule for REFLECTIVE_ATTRIBUTE_NAMES, run instead of read.
+
+    That rule says a name is admitted on two runs, not one: the escape it closes and the
+    ordinary same-named attribute it will now refuse.  The second half was prose until
+    here, and prose is what it had already been wrong as, twice on this axis.
+
+    Per name, because the match is per spelling.  `names` is the set as the tool holds
+    it; `charged` is (sample name, the attribute names that sample's source declares)
+    for every OVERCUT entry.  Returns one finding per name as
+    (verdict, name, samples, failure), `failure` None exactly on "priced".  Reads no
+    sources and runs nothing: the caller supplies the facts, this decides what they mean.
+    """
+    findings = []
+    for name in sorted(names):
+        samples = sorted(sample for sample, declared in charged if name in declared)
+        if samples:
+            findings.append(("priced", name, samples, None))
+        else:
+            findings.append(("UNPRICED", name, [],
+                             f"{name}: admitted to REFLECTIVE_ATTRIBUTE_NAMES with no "
+                             f"OVERCUT sample declaring it -- this spelling is refused "
+                             f"on its own account and has never been paid for"))
+    return findings
+
+
+# Both halves above fail open the same way the policy audit does -- a scanner that
+# quietly stopped seeing class bodies would print `priced` beside a name nothing prices
+# -- so both are checked on facts nobody measured, every run.  Expected columns written
+# by hand: a table that derived them would be the same code agreeing with its own bug.
+_DECLARATION_SELFTEST = [
+    # (name, source, every attribute name the scanner should report)
+    ("class_body_assignment", 'class Box:\n    f_globals = {}\n', {"f_globals"}),
+    ("class_body_annotated_assignment",
+     'class Box:\n    f_globals: dict = {}\n', {"f_globals"}),
+    ("class_body_annotation_with_no_value", 'class Box:\n    f_globals: dict\n', set()),
+    ("class_body_def",
+     'class Box:\n    def f_globals(self):\n        return {}\n', {"f_globals"}),
+    ("instance_attribute_assignment", 'def f(obj):\n    obj.f_globals = {}\n', {"f_globals"}),
+    ("setattr_with_a_literal_name",
+     'def f(obj):\n    setattr(obj, "f_globals", {})\n', {"f_globals"}),
+    ("setattr_with_a_computed_name", 'def f(obj, k):\n    setattr(obj, k, {})\n', set()),
+    # The three that earn the scanner.  Each is a way a sample could look like it prices
+    # a spelling while declaring nothing an object carries.
+    ("only_a_read_of_the_name", 'def f(x):\n    return x.f_globals["v"]\n', set()),
+    ("module_level_variable_of_that_name", 'f_globals = {}\n', set()),
+    ("local_variable_of_that_name",
+     'def f():\n    f_globals = {}\n    return f_globals\n', set()),
+]
+
+_AUDIT_NAME_SELFTEST = [
+    # (name, names on the list, (sample, names it declares), expected verdicts in order)
+    ("every_name_has_a_sample_declaring_it",
+     {"a_name", "b_name"}, [("s_a", {"a_name"}), ("s_b", {"b_name"})],
+     ("priced", "priced")),
+    # The branch this check was written for: one spelling paying for two.
+    ("one_name_riding_on_its_neighbours_sample",
+     {"a_name", "b_name"}, [("s_a", {"a_name"})], ("priced", "UNPRICED")),
+    ("a_sample_that_declares_nothing",
+     {"a_name"}, [("s_a", set())], ("UNPRICED",)),
+    ("no_samples_at_all", {"a_name"}, [], ("UNPRICED",)),
+    ("nothing_on_the_list_to_check", set(), [("s_a", {"a_name"})], ()),
+]
+
+
 def _run(source: str) -> object:
     """What root() actually returns: by import, or by script if there is a guard.
 
@@ -654,6 +779,42 @@ def main() -> int:
             if not well_formed:
                 failures.append(f"audit self-test {name}: verdict {verdict} with "
                                 f"failure={failure!r}")
+
+    # The name audit checked before it is believed, likewise on made-up facts: first the
+    # scanner that turns a source into declared names, then the rule that reads them.
+    for name, source, expect in _DECLARATION_SELFTEST:
+        got = _declared_attribute_names(source)
+        print(f"{'declare' if got == expect else 'SELFTEST':8} {name:42} "
+              f"{' '.join(sorted(got)) or '(nothing)'}")
+        if got != expect:
+            failures.append(f"declaration scanner {name}: expected {sorted(expect)}, "
+                            f"got {sorted(got)}")
+
+    for name, names, charged, expect in _AUDIT_NAME_SELFTEST:
+        findings = _audit_reflective_name_costs(names, charged)
+        got = tuple(verdict for verdict, _, _, _ in findings)
+        print(f"{'names' if got == expect else 'SELFTEST':8} {name:42} "
+              f"{' '.join(got) or '(nothing)'}")
+        if got != expect:
+            failures.append(f"name audit self-test {name}: expected {expect}, got {got}")
+        for verdict, _, _, failure in findings:
+            well_formed = (failure is None if verdict == "priced"
+                           else isinstance(failure, str) and bool(failure.strip()))
+            if not well_formed:
+                failures.append(f"name audit self-test {name}: verdict {verdict} with "
+                                f"failure={failure!r}")
+
+    # The membership rule of REFLECTIVE_ATTRIBUTE_NAMES, held against the set the tool is
+    # actually running: every spelling on it owes a sample that declares it.  Read off
+    # the same OVERCUT sources printed above, so a sample cannot be edited into paying
+    # for a name it no longer declares without this saying so.
+    declaring = [(sample, _declared_attribute_names(src_a) | _declared_attribute_names(src_b))
+                 for sample, src_a, src_b, _ in OVERCUT]
+    for verdict, name, samples, failure in _audit_reflective_name_costs(
+            REFLECTIVE_ATTRIBUTE_NAMES, declaring):
+        print(f"{verdict:8} {name:42} priced by: {', '.join(samples) or '(nothing)'}")
+        if failure is not None:
+            failures.append(failure)
 
     # The policy audit: every cost still has a policy paying for it, and every policy is
     # still held up by kills that are still running and still killing.
