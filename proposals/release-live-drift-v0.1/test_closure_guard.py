@@ -451,8 +451,18 @@ def main() -> int:
         # A verdict that carries no failure is a verdict nothing acts on, and a `kills`
         # that carries one would fail a fixture that is fine.  Checked here rather than
         # spelled out per row: it is a property of every finding, not a fact about one.
+        #
+        # The failure text has to be non-empty, not merely present: STRAY / UNPAID /
+        # VACUOUS print no adjudication line, so the FAILURES section is the only place
+        # a reader ever meets them.  Codex's probe blanked every non-`kills` failure and
+        # the run still exited 0 saying every case was as documented -- the verdicts
+        # survived while the only thing anyone reads vanished.
         for verdict, _, _, _, failure in findings:
-            if (verdict == "kills") != (failure is None):
+            if verdict == "kills":
+                well_formed = failure is None
+            else:
+                well_formed = isinstance(failure, str) and bool(failure.strip())
+            if not well_formed:
                 failures.append(f"audit self-test {name}: verdict {verdict} with "
                                 f"failure={failure!r}")
 
