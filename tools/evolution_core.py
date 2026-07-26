@@ -57,7 +57,7 @@ def tree_manifest(root):
     root = Path(root).resolve()
     rows = []
     for path in sorted(root.rglob("*")):
-        if not path.is_file() or "__pycache__" in path.parts or path.suffix == ".pyc":
+        if not path.is_file() or "__pycache__" in path.parts or ".pytest_cache" in path.parts or path.suffix == ".pyc":
             continue
         rows.append(
             {
