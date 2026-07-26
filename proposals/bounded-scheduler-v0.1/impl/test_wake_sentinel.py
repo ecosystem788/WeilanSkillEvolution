@@ -478,6 +478,61 @@ print(json.dumps({'committed_frame': frame, 'receipt': {
     assert sum(" ALERT " in line for line in lines[last_ok + 1:]) == 0
 
 
+def _run_cron_rc_fixture(tmp_path, log, rc):
+    fake = tmp_path / "fake_wake_rc.py"
+    fake.write_text(
+        "import os, sys\n"
+        "print(f'fixture rc={os.environ[\"WAKE_FIXTURE_RC\"]}', file=sys.stderr)\n"
+        "raise SystemExit(int(os.environ['WAKE_FIXTURE_RC']))\n",
+        encoding="utf-8",
+    )
+    env = {**os.environ, "WAKE_FIXTURE_RC": str(rc)}
+    return subprocess.run(
+        [
+            "powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+            str(HERE / "run_wake_cron.ps1"), "-WakeScript", str(fake),
+            "-LogPath", str(log), "-NoEscalate",
+        ],
+        env=env, capture_output=True, text=True, timeout=30,
+    )
+
+
+def test_cron_wrapper_commit_lock_busy_is_healthy_skip_and_preserves_streak(tmp_path):
+    log = tmp_path / "cron.log"
+    log.write_text(
+        "2026-07-26T00:00:00  wake ok  stop=fixture frame=wf-fixture-ok\n"
+        "2026-07-26T00:00:01  ERROR rc=7 stage=native_exit diag_sha256=x stderr=a\n"
+        "2026-07-26T00:00:02  ERROR rc=7 stage=native_exit diag_sha256=y stderr=b\n",
+        encoding="utf-8",
+    )
+    before = log.read_text(encoding="utf-8-sig").splitlines()
+
+    skipped = _run_cron_rc_fixture(tmp_path, log, 4)
+
+    assert skipped.returncode == 0
+    after_skip = log.read_text(encoding="utf-8-sig").splitlines()
+    added = after_skip[len(before):]
+    assert len(added) == 1
+    assert "wake skipped reason=commit_lock_busy" in added[0]
+    assert " ERROR " not in added[0]
+    assert " wake ok " not in added[0]
+    last_ok = max(i for i, line in enumerate(after_skip) if " wake ok " in line)
+    assert sum(" ERROR " in line for line in after_skip[last_ok + 1:]) == 2
+
+    assert _run_cron_rc_fixture(tmp_path, log, 7).returncode == 7
+    assert log.read_text(encoding="utf-8-sig").count(" ALERT ") == 1
+
+
+def test_cron_wrapper_commit_lock_busy_between_two_errors_does_not_alert(tmp_path):
+    log = tmp_path / "cron.log"
+
+    assert _run_cron_rc_fixture(tmp_path, log, 7).returncode == 7
+    _run_cron_rc_fixture(tmp_path, log, 4)
+    assert _run_cron_rc_fixture(tmp_path, log, 7).returncode == 7
+
+    assert " ALERT " not in log.read_text(encoding="utf-8-sig")
+
+
 @pytest.mark.parametrize("codepage", [65001, 936])
 def test_cron_wrapper_survives_cjk_report_on_any_console_codepage(tmp_path, codepage):
     # Live incident 2026-07-14T14:00:58: wake.py exited 0 with a valid UTF-8

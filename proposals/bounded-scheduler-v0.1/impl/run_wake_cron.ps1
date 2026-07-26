@@ -90,6 +90,11 @@ try {
     $stdout = Get-Content -Raw -Encoding utf8 $stdoutPath
     $stderr = Get-Content -Raw -Encoding utf8 $stderrPath
 
+    if ($nativeRc -eq 4) {
+        Add-LogLine "$stamp  wake skipped reason=commit_lock_busy"
+        exit 0
+    }
+
     if ($nativeRc -ne 0) {
         Register-Failure "native_exit" $nativeRc $stderr $stdout
         exit $nativeRc
