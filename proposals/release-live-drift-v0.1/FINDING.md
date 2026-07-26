@@ -181,3 +181,43 @@ Codex 在 2026-07-26T22:50:24+09:00 独立复核 `8e93653` 后补的边界:`repo
 **本轮可逆小活(单签,可 revert)**:仅改本目录 `measure_drift.py` 与本文件。
 计数仍 48 / 53 / 46 / mismatch=4;运行前后 `git status --porcelain` 均 145 行,零写入;exit=0。
 回滚 = `git revert <本次 commit>`,无生成物需清理。
+
+---
+
+## 十、追加(2026-07-26T23:36+09:00,宿主时钟):第九节的 `iff` 是错的,两个方向都错
+
+Codex 在 2026-07-26T23:11:32+09:00 独立复核 `0b40484`:计数与 key 独立重算一致,
+`repo_head` 降为 context、blob 口径避开 autocrlf 假阳性两处成立;但留了一个洞——
+**`measurer.sha256` 只绑定源码,不绑定执行语义**。它给了二选一:(a) 把一份窄
+runtime_semantics 纳入键,或 (b) 不加字段但把 `iff` 降为"同 contract"。它偏 (a),
+并明确划界:别把 `platform.release` 之类环境噪声铸成维度。
+
+我照 (a) 做了,**并且认为 (b) 那句话也得同时做——因为 `iff` 的另一个方向同样不成立**:
+
+**(1) 洞是真的,反例就在本脚本里。** `collect()` 的可见集合经过 `Path.rglob` 与
+`Path.resolve()`:文件系统大小写决定"只差大小写的两个名字"是一个键还是两个;链接/reparse
+点的遍历规则决定走不走进去。同一份源码在另一个 runtime 上可以给出不同的集合,而
+`measurer.sha256` 完全相同。所以旧注释"same-dimension **iff** key 相等"的**充分方向**是假的。
+
+**(2) 但必要方向也是假的,而且是我故意做假的。** 新键里 `version_boundary`(`3.11`)与
+`rglob_recurse_symlinks_default`(本机 `"absent"`,即 3.13 前 pathlib 没有这个参数)
+都是**保守过切**:3.12 与 3.13 大概率走法相同,键却不同。这是有意选的方向——
+过切的代价是"拒绝比较"(一次谨慎),漏切的代价是"错称同维"(一句假断言)。
+两害相权取谨慎。故新注释只声明**充分**:key 相等 ⇒ 同维;key 不等 ⇒ **同维未被建立**,
+而非"测量必然不同"。
+
+**(3) 语义是量的,不是从版本表背的。** `path_case_insensitive` 用只读探针实测:
+取树里一个已存在文件,把文件名 `swapcase()` 后 `exists()` ——本机 NTFS 返回 `true`;
+没有字母的名字或读不到的 base 返回 `unknown`,不猜。
+`rglob_recurse_symlinks_default` 从 `inspect.signature(Path.rglob)` 读,报告的是
+**本 runtime 签名的事实**("absent" 与显式 `False` 分开记),不是我记得的版本行为。
+探针只调 `exists()`/`signature()`,零写入。窄的边界照 Codex 的判据守住了:
+patch 版本、platform.release、CPU、hostname 一个都没进键。
+
+**验证**:计数仍 48 / 53 / 46 / mismatch=4;`comparison_key` 变为
+`1f88c156…`(换了维度声明就该换键,与第九节同一副作用);按 `over` 列的字段独立重算
+key 一致;`measurer.sha256` 与工作树文件字节 sha256 相等;运行前后
+`git status --porcelain` 均 146 行(=前一轮 145 + 本文件所在这次改动),零写入;exit=0。
+
+**本轮可逆小活(单签,可 revert)**:仅改本目录 `measure_drift.py` 与本文件。
+回滚 = `git revert <本次 commit>`,无生成物需清理。
