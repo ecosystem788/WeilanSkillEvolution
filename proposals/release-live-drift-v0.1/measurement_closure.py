@@ -38,12 +38,18 @@ Honest limits, all of them load-bearing:
     3. The attribute channel, NOT complete and not completable.  Reflection through
        an imported module (sys.modules[...], importlib) is caught by a named partial
        list; reflection written some third way is not caught at all.  The list is
-       matched against what a name was *imported from*, not against how the file
-       spells it, so `import sys as s` and `from sys import modules` are the listed
-       shape and not an escape from it.  Partial is the stated limit; evadable by
-       rebinding was a false claim, and was live until this was written.  An alias
-       made by assignment rather than import (`s = sys`) still evades, and runs as a
-       NOT_CLOSED case rather than being left to a reader to discover.
+       matched against what a name was *imported from* as well as against how the
+       file spells it, so `import sys as s` and `from sys import modules` are the
+       listed shape and not an escape from it.  Partial is the stated limit; evadable
+       by rebinding was a false claim, and was live until this was written.
+       Two things bound the resolution, in opposite directions, and both run rather
+       than being described.  An alias made by assignment rather than import
+       (`s = sys`) still evades: that is a miss, and a NOT_CLOSED case.  And the
+       import map is read per module and per statement but not per scope, so a
+       parameter or local reusing an imported name -- `def root(s)` after `import sys
+       as s` -- resolves to the module and is refused although it is not one: that is
+       a cost, not a miss, and an OVERCUT case with the kill that keeps it.  The two
+       must not be filed together; the sections differ in what they assert.
 
   * The import boundary, stated because it was previously silent.  An import runs
     the imported module's top level, which is outside this file and outside this
@@ -137,6 +143,14 @@ ALLOWED_FREE_NAMES = frozenset({
 # partial is a stated limit; being evadable by rebinding is a false claim, which is
 # worse.  `_import_bindings` below resolves what a local name was imported from, so the
 # list means the module regardless of what the file calls it.
+#
+# What it does not do is ask which binding is live where the name is used: the map is
+# built per module and per statement, never per scope.  So `def root(s)` after `import
+# sys as s` reads its own parameter as sys and the result is unknown.  That direction is
+# refusal rather than escape, and it is not free -- dropping the resolution for a locally
+# bound base loses `reflection_via_an_alias_imported_inside_the_function`, where the base
+# is locally bound *by an import* and genuinely is sys.  Measured, both ways, and the
+# price is charged in OVERCUT rather than carried as a claim.
 REFLECTIVE_ATTRIBUTE_PATHS = (
     ("sys", "modules"),
     ("builtins", None),
@@ -421,6 +435,14 @@ def _reflective_paths(node: ast.AST, imported: dict[str, str] | None = None) -> 
     resolved is an alias made by assignment (`s = sys`): that is dataflow, not an
     import, and claiming it here would repeat the mistake this function just fixed.  It
     runs as a NOT_CLOSED case in the fixture rather than being described.
+
+    Neither map is scoped, and that is a deliberate over-approximation rather than an
+    oversight: a name shadowed by a parameter or a local still resolves to the module it
+    was imported as, and the region is refused.  The cheap repair -- skip a base that
+    `_locally_bound` reports -- was run and rejected, because an alias imported inside
+    the function is locally bound by that very import, so the repair reopens a case this
+    file measured evading.  Both directions run as fixtures: the miss in NOT_CLOSED, the
+    cost in OVERCUT.
     """
     scoped = dict(imported or {})
     scoped.update(_import_bindings(ast.walk(node)))

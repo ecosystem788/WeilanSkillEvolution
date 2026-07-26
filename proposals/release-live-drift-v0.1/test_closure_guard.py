@@ -287,6 +287,16 @@ NOT_CLOSED = [
 # on the reader's side -- an unknown names the refused word, so a reader who knows the
 # annotation is inert can say so -- because that is a claim a reader can check, and an
 # exemption is one nobody could.
+#
+# The second shape is the other half of the import-resolution fix, found by Codex's
+# probe on the commit that landed it.  The import map is read per module and per
+# statement, never per scope, so a parameter or local reusing an imported name resolves
+# to the module: `def root(s)` after `import sys as s` is reported `s.modules
+# (sys.modules)` and the region is refused although no reflection is there.  It is filed
+# here and not in NOT_CLOSED on purpose, and the difference is not a label -- NOT_CLOSED
+# prints and asserts nothing, so a cost parked there would be a cost nobody is charged
+# for, which is exactly how a debt gets read as a limit later.  Here it is charged, and
+# the policy below has to keep proving the refusal is still load-bearing.
 OVERCUT = [
     (
         "forward_reference_under_postponed_annotations",
@@ -295,6 +305,14 @@ OVERCUT = [
         'from __future__ import annotations\n'
         'def root(x: Widget = None) -> Widget:\n    return 1\nUNUSED = [1, 2]\n',
         "annotation_names_are_refused_like_any_other",
+    ),
+    (
+        "imported_name_shadowed_by_a_local",
+        'import sys as s\nclass Box:\n    modules = 1\n'
+        'def root():\n    s = Box()\n    return s.modules\nUNUSED = [1]\n',
+        'import sys as s\nclass Box:\n    modules = 1\n'
+        'def root():\n    s = Box()\n    return s.modules\nUNUSED = [1, 2]\n',
+        "import_resolution_is_not_scoped",
     ),
 ]
 
@@ -318,6 +336,16 @@ OVERCUT_POLICIES = {
             "annotation_reaches_a_helper_under_postponed_annotations",
         "walk annotations but stop refusing their unresolved names":
             "annotation_smuggles_a_builtin_under_postponed_annotations",
+    },
+    # One relaxation, and it is the obvious one: a reader meeting the cost above will
+    # reach for `_locally_bound` immediately.  The kill is that an alias imported inside
+    # the function is locally bound *by that import*, so the repair that clears the
+    # shadowed parameter also clears the case where the base really is sys.  Run before
+    # the entry was written: under the relaxation that case returns a known, equal hash
+    # while root() returns 2 then 3.
+    "import_resolution_is_not_scoped": {
+        "skip the import resolution when the base name is locally bound":
+            "reflection_via_an_alias_imported_inside_the_function",
     },
 }
 
