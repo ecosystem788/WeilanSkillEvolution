@@ -12,6 +12,13 @@ a sentence in a docstring: they print an equal hash beside two different return
 values, every run.  One that starts being caught is good news; one that is silently
 removed is not.
 
+The `overcut` section is the mirror of that, and exists for the same reason.  These
+are pairs the guard refuses although nothing about them differs -- the cost of the
+refusal, printed beside the cases that justify it, so a relaxation is argued against
+running counterexamples rather than against a recollection of them.  Same reading
+rule: one that starts being accepted is good news, one that is silently removed is
+not.
+
 Run: python test_closure_guard.py       (exit 0 = every case as documented)
 """
 
@@ -105,6 +112,47 @@ CASES = [
         'if __name__ == "__main__":\n    prep()\n    print(root())\n',
         True,
     ),
+    # `from __future__ import annotations` turns an annotation into a string, which is
+    # the reason it looks exempt-able: nothing evaluates it at def time.  But a string
+    # in `__annotations__` is not dead -- typing.get_type_hints() evaluates it in this
+    # module's globals on demand, and hands back whatever it names.  Here `hidden` is
+    # named nowhere but in the annotation, and root() returns 2 then 3.  Caught by
+    # reachability: the walk reads names inside annotations, so `hidden` is reached and
+    # hashed.  A relaxation that stopped walking annotations would print an equal hash
+    # on this pair.
+    (
+        "annotation_reaches_a_helper_under_postponed_annotations",
+        'from __future__ import annotations\nimport typing\ndef hidden():\n    return 2\n'
+        'def root(x: hidden = None) -> int:\n'
+        '    return typing.get_type_hints(root)["x"]()\n',
+        'from __future__ import annotations\nimport typing\ndef hidden():\n    return 3\n'
+        'def root(x: hidden = None) -> int:\n'
+        '    return typing.get_type_hints(root)["x"]()\n',
+        True,
+    ),
+    # The narrower relaxation -- keep walking annotations, but stop *refusing* the free
+    # names in them that resolve to nothing at module level -- fails too, and this is
+    # the pair that decides it.  `getattr` is such a name: unbound here, and refused
+    # today only because the name channel does not exempt annotations.  Evaluated back
+    # out of the annotation string it is the builtin, and the builtin reaches `hidden`
+    # through root.__globals__ without ever naming it.  Note `hidden` is absent from
+    # reached_names on both revisions: only the refusal is holding this, so relaxing it
+    # yields an equal, *known* hash while root() returns 2 then 3.  Measured rather than
+    # argued: re-adding "getattr" to ALLOWED_FREE_NAMES -- which for this pair does
+    # exactly what exempting annotation names would do, the name occurring nowhere else
+    # -- gives both revisions fa72727f2d483787, known and equal.
+    (
+        "annotation_smuggles_a_builtin_under_postponed_annotations",
+        'from __future__ import annotations\nimport typing\ndef hidden():\n    return 2\n'
+        'def root(x: getattr = None) -> int:\n'
+        '    g = typing.get_type_hints(root)["x"]\n'
+        '    return g(root, "__globals__")["hidden"]()\n',
+        'from __future__ import annotations\nimport typing\ndef hidden():\n    return 3\n'
+        'def root(x: getattr = None) -> int:\n'
+        '    g = typing.get_type_hints(root)["x"]\n'
+        '    return g(root, "__globals__")["hidden"]()\n',
+        True,
+    ),
     (
         "reflection_via_sys_modules",   # attribute channel: caught, but by a detector
         'import sys\ndef hidden():\n    return 2\ndef root():\n'
@@ -154,6 +202,35 @@ NOT_CLOSED = [
         'def root():\n    return inspect.currentframe().f_globals["hidden"]()\n',
         'import inspect\ndef hidden():\n    return 3\n'
         'def root():\n    return inspect.currentframe().f_globals["hidden"]()\n',
+    ),
+]
+
+
+# What the guard costs: pairs it refuses although the two revisions are the same
+# program.  These are not failures and not aspirations -- they are the price of the
+# `annotation_*` cases above, kept running so the trade is re-read rather than
+# remembered.
+#
+# The shape below is ordinary modern typed code: a forward reference, or a name
+# imported only under `if TYPE_CHECKING`, in the annotation of a reached definition.
+# Under `from __future__ import annotations` it is never evaluated at def time and the
+# module runs; the walk still sees the bare name, cannot resolve it, and refuses -- so
+# an unrelated literal edit that should have compared as equal compares as unknown.
+#
+# It was tempting to exempt annotations for exactly this case, and the two
+# `annotation_*` counterexamples are why the exemption is not taken: the first kills
+# "stop walking annotations", the second kills "walk them but stop refusing their
+# unresolved names".  Both were run before the decision, not after.  The escape stays
+# on the reader's side -- an unknown names the refused word, so a reader who knows the
+# annotation is inert can say so -- because that is a claim a reader can check, and an
+# exemption is one nobody could.
+OVERCUT = [
+    (
+        "forward_reference_under_postponed_annotations",
+        'from __future__ import annotations\n'
+        'def root(x: Widget = None) -> Widget:\n    return 1\nUNUSED = [1]\n',
+        'from __future__ import annotations\n'
+        'def root(x: Widget = None) -> Widget:\n    return 1\nUNUSED = [1, 2]\n',
     ),
 ]
 
@@ -228,6 +305,18 @@ def main() -> int:
               f"{_show(ka)} vs {_show(kb)}")
         if not stable:
             failures.append(f"{name}: expected one equal, known hash, got {ka} / {kb}")
+
+    for name, src_a, src_b in OVERCUT:
+        ka = _key(closure(src_a, ["root"]))
+        kb = _key(closure(src_b, ["root"]))
+        va, vb = _run(src_a), _run(src_b)
+        accepted = "unknown" not in ka and "unknown" not in kb and ka == kb
+        print(f"{'accepted!' if accepted else 'refused':8} {name:42} root(): {va} vs {vb}  "
+              f"hash: {_show(ka)} vs {_show(kb)}   (documented cost of the guard)")
+        # A pair whose revisions do not behave the same is not an overcut case at all,
+        # so a broken fixture fails here rather than quietly widening what "cost" means.
+        if va != vb:
+            failures.append(f"{name}: fixture is broken, revisions return {va} then {vb}")
 
     for name, src_a, src_b in NOT_CLOSED:
         ka = _key(closure(src_a, ["root"]))
