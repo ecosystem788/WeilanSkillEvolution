@@ -232,28 +232,43 @@ STABLE = [
      'def root():\n    "prose"\n    return 1\ndef main():\n    "more prose"\n    return 0\n'
      'if __name__ == "__main__":\n    raise SystemExit(main())\n',
      "pair"),
+    # One cell of the reflective-capability grid.  This has the same attribute-read
+    # then subscript shape as the namespace cases below, but the object is an ordinary
+    # local instance.  Refusing every `__dict__` subscript would therefore over-cut a
+    # known, stable pair; the reflected object cannot be erased from the boundary.
+    ("ordinary_object_dunder_dict_is_not_module_reflection",
+     'def root():\n    class Box:\n        pass\n    obj = Box()\n'
+     '    obj.__dict__["value"] = 1\n    return obj.__dict__["value"]\nUNUSED = [1]\n',
+     'def root():\n    class Box:\n        pass\n    obj = Box()\n'
+     '    obj.__dict__["value"] = 1\n    return obj.__dict__["value"]\nUNUSED = [1, 2]\n',
+     "closure"),
 ]
 
 # Cases the guard is documented NOT to close, and must not be quietly deleted.
 #
-# The first draft of this section used `vars()["hidden"]()`, which the tool does catch
-# -- `vars` is not on the free-name allow-list.  It proved nothing about the attribute
-# channel and was replaced.  The case below reaches a definition through an imported
-# module's attribute that is not on the partial reflection list, so every guard passes
-# and the hash is equal while root() returns 2 in one revision and 3 in the other.
-# This is the gap the docstring claims exists; here it is, running.
+# The first two cases, together with the ordinary-object STABLE case and the import
+# shadowing OVERCUT case below, are a four-cell discriminator rather than a proposed
+# implementation.  `root.__globals__` and `frame.f_globals` both reach a module
+# namespace and then index/call through it; both currently escape.  The ordinary
+# `obj.__dict__` case has the same downstream index shape but must stay accepted, while
+# import shadowing has no reflective behaviour and is currently refused.  The measured
+# split says neither a bare attribute-name list nor downstream indexing alone is enough:
+# object/binding provenance remains part of the missing capability boundary.
 #
-# The second case is a narrower and less comfortable gap than the first.  The first is
-# an admitted limit of a list that cannot be completed.  The second is a *listed* module
-# reached under a name the file gave it by assignment rather than by import -- the
-# attribute channel now resolves import bindings, so `import sys as s` no longer evades,
-# but `import sys` followed by `s = sys` does.  Closing it means following assignments,
-# which is dataflow and a different tool; naming it in a docstring instead would be the
-# same unverifiable claim the import fix was written to remove.  So it runs here, where
-# it fails loudly if someone later believes the channel is spelling-proof.
+# The third case is a narrower and less comfortable gap.  It reaches a *listed* module
+# under a name assigned rather than imported.  Closing it means following assignments,
+# which is dataflow and a different tool; it stays running so nobody can mistake import
+# alias resolution for spelling-proof resolution.
 NOT_CLOSED = [
     (
-        "reflection_via_an_unlisted_module_attribute",
+        "reflection_via_function_globals",
+        'def hidden():\n    return 2\n'
+        'def root():\n    return root.__globals__["hidden"]()\n',
+        'def hidden():\n    return 3\n'
+        'def root():\n    return root.__globals__["hidden"]()\n',
+    ),
+    (
+        "reflection_via_frame_globals",
         'import inspect\ndef hidden():\n    return 2\n'
         'def root():\n    return inspect.currentframe().f_globals["hidden"]()\n',
         'import inspect\ndef hidden():\n    return 3\n'
