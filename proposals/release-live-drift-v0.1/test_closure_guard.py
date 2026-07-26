@@ -283,9 +283,20 @@ STABLE = [
     # and `f_globals`.  Same attribute-read-then-subscript shape as those, and the same
     # absence of any static handle on what the base is -- but ordinary objects carry
     # `__dict__`, so the name is not evidence and refusing it costs this known, stable
-    # pair.  That asymmetry is the membership rule of that list, running rather than
-    # asserted: the other two names are unshared, this one is shared, and no reading of
-    # the base can tell the cases apart.
+    # pair.
+    #
+    # The asymmetry that keeps one name off the list and the other two on it is not
+    # shared-versus-unshared: the OVERCUT sample below is an ordinary object carrying
+    # `__globals__`, so both spellings are shareable and the earlier wording here was the
+    # same refuted claim.  What separates them is the shape of the cost each one charges,
+    # and both shapes are running a few lines apart: the source below carries `__dict__`
+    # without ever naming it, because every object has one, while the cost sample for
+    # `__globals__` has to write `__globals__ = {...}` into a class body to carry it at
+    # all.  A name is admissible when an ordinary object must *declare* it; `__dict__`
+    # comes free with the object and so can never be that.  Note what is still only
+    # judged: that the declared shape is the rarer one in code people write.  Nothing
+    # here measures that, and it is the third time a sentence has stood in for a cost on
+    # this axis, so it is written as an admission rather than as a rule.
     ("ordinary_object_dunder_dict_is_not_module_reflection",
      'def root():\n    class Box:\n        pass\n    obj = Box()\n'
      '    obj.__dict__["value"] = 1\n    return obj.__dict__["value"]\nUNUSED = [1]\n',
@@ -378,14 +389,15 @@ OVERCUT = [
         # its members names *no ordinary object carries*; Codex's probe wrote an
         # ordinary object that carries one.  Both revisions are the same program and
         # root() returns 1 either way, and both are refused.  The `__dict__` STABLE
-        # cell above does not cover this: it only kills adding a *shared* name to the
-        # list, and prices nothing about refusing an unshared one unconditionally.
-        "ordinary_object_carrying_an_unshared_reflective_name",
+        # cell above does not cover this: it only kills adding a name that comes free
+        # with every object, and prices nothing about refusing a declared one
+        # unconditionally.
+        "ordinary_object_declaring_a_convention_reflective_name",
         'def root():\n    class Box:\n        __globals__ = {"value": 1}\n'
         '    return Box().__globals__["value"]\nUNUSED = [1]\n',
         'def root():\n    class Box:\n        __globals__ = {"value": 1}\n'
         '    return Box().__globals__["value"]\nUNUSED = [1, 2]\n',
-        "unshared_reflective_names_are_refused_unqualified",
+        "convention_reflective_names_are_refused_unqualified",
     ),
 ]
 
@@ -423,7 +435,7 @@ OVERCUT_POLICIES = {
     # Two relaxations, because a reader meeting this cost has two exits and they are not
     # the same repair.  The first narrows the rule; the second deletes it.  Both would
     # drop the cost, so the policy owes a kill to each.
-    "unshared_reflective_names_are_refused_unqualified": {
+    "convention_reflective_names_are_refused_unqualified": {
         # The narrowing: clear the match when the base is not function- or frame-shaped
         # -- here a call to a class defined two lines up.  Whatever static test stands in
         # for "function-shaped", a local lambda bound to a local name is on the same side
