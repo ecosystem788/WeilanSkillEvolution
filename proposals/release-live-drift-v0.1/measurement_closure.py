@@ -35,13 +35,16 @@ Honest limits, all of them load-bearing:
        and cannot hand back a callable from this module's namespace.  getattr,
        __import__, exec, and every builtin nobody has ruled on are absent on purpose;
        an unlisted name is not judged, it is refused, and it is named in the report.
-    3. The attribute channel, NOT complete and not completable.  Reflection through
-       an imported module (sys.modules[...], importlib) is caught by a named partial
-       list; reflection written some third way is not caught at all.  The list is
-       matched against what a name was *imported from* as well as against how the
-       file spells it, so `import sys as s` and `from sys import modules` are the
-       listed shape and not an escape from it.  Partial is the stated limit; evadable
-       by rebinding was a false claim, and was live until this was written.
+    3. The attribute channel, NOT complete and not completable.  It is two partial
+       detectors on different axes, and keeping them apart is what stops either from
+       being read as the whole.
+
+       By module: reflection through an imported module (sys.modules[...], importlib)
+       is caught by a named partial list, matched against what a name was *imported
+       from* as well as against how the file spells it, so `import sys as s` and
+       `from sys import modules` are the listed shape and not an escape from it.
+       Partial is the stated limit; evadable by rebinding was a false claim, and was
+       live until this was written.
        Two things bound the resolution, in opposite directions, and both run rather
        than being described.  An alias made by assignment rather than import
        (`s = sys`) still evades: that is a miss, and a NOT_CLOSED case.  And the
@@ -50,6 +53,18 @@ Honest limits, all of them load-bearing:
        as s` -- resolves to the module and is refused although it is not one: that is
        a cost, not a miss, and an OVERCUT case with the kill that keeps it.  The two
        must not be filed together; the sections differ in what they assert.
+
+       By attribute name: a name no ordinary object carries -- `__globals__`,
+       `f_globals` -- is refused wherever it is read, with no test on the base.  This
+       axis exists because the module list structurally could not reach these: the
+       base is a call (`inspect.currentframe().f_globals`), or the member is unlisted
+       on a listed module (`sys._getframe`).  It is unqualified because the qualifier
+       was measured: `X.__globals__` yields this module's namespace off a def, off an
+       assignment alias, off a local lambda and off a parameter alike, so a rule
+       keyed on the base's provenance catches one of four and looks principled doing
+       it.  What bounds this axis is the membership rule, not a judgement about which
+       names matter: `__dict__` is excluded because ordinary objects carry it, and
+       any name nobody has run a counterexample on is unlisted rather than cleared.
 
   * The import boundary, stated because it was previously silent.  An import runs
     the imported module's top level, which is outside this file and outside this
@@ -157,6 +172,38 @@ REFLECTIVE_ATTRIBUTE_PATHS = (
     ("importlib", None),
     ("inspect", "getmembers"),
 )
+
+# A second channel on a different axis, and the membership rule is the whole of it: an
+# attribute name that *no ordinary object carries*, so reading it is by itself evidence
+# that a namespace is being fetched.  Matched regardless of what the base is.
+#
+# Not a second spelling of the list above.  That one names modules and needs the base
+# resolved; this one needs no base at all, which is why it reaches shapes the other
+# cannot: `inspect.currentframe().f_globals` and `sys._getframe().f_globals` both hang
+# the attribute off a *call*, and `sys._getframe` is an unlisted member of a listed
+# module -- three escapes that lengthening the module list would have closed one at a
+# time, badly.
+#
+# Qualifying these by the base's provenance was the obvious next move and it was
+# measured and rejected, which is why the rule is unqualified.  `X.__globals__` hands
+# back this module's namespace whatever X is: measured escaping off a module-level def
+# (aa2c42aa), off a module-level assignment alias (8d7768d6), off a local lambda
+# (e722a126), and off a parameter (434dd25c) -- all four equal-known while root()
+# returned 2 then 3.  A rule keyed on "the base is bound at module level by a def"
+# would have caught the first and let the other three through while looking principled.
+#
+# `__dict__` is pointedly absent, and its absence is the reason this list can exist at
+# all: ordinary objects carry it, so reading it is not evidence of anything.  A local
+# instance's `obj.__dict__["value"]` runs as a STABLE pair, and every `__dict__` escape
+# that could be built -- injecting into a def's dict, reaching a subclass through a
+# class dict -- was already refused by the statement partition, since the definition
+# being reached that way is by construction unreached and therefore unaccounted.  That
+# is where that shape currently falls; it is not a claim that it always will.
+#
+# Absence is a refusal to guess here exactly as it is in ALLOWED_FREE_NAMES: `f_locals`,
+# `__closure__` and the rest are unlisted because nobody has run a counterexample on
+# them, not because they were judged safe.  The list grows by measurement.
+REFLECTIVE_ATTRIBUTE_NAMES = frozenset({"__globals__", "f_globals"})
 
 _NESTED_SCOPES = (
     ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Lambda,
@@ -436,6 +483,12 @@ def _reflective_paths(node: ast.AST, imported: dict[str, str] | None = None) -> 
     import, and claiming it here would repeat the mistake this function just fixed.  It
     runs as a NOT_CLOSED case in the fixture rather than being described.
 
+    A fourth match needs neither map: an attribute whose *name* no ordinary object
+    carries (`REFLECTIVE_ATTRIBUTE_NAMES`), matched with no test on the base at all.
+    That is the only way to see `inspect.currentframe().f_globals`, where the base is a
+    call rather than a name, and it is unqualified because qualifying it by the base's
+    provenance was measured leaking three ways.
+
     Neither map is scoped, and that is a deliberate over-approximation rather than an
     oversight: a name shadowed by a parameter or a local still resolves to the module it
     was imported as, and the region is refused.  The cheap repair -- skip a base that
@@ -452,6 +505,10 @@ def _reflective_paths(node: ast.AST, imported: dict[str, str] | None = None) -> 
         return scoped.get(name)
 
     for sub in ast.walk(node):
+        if isinstance(sub, ast.Attribute) and sub.attr in REFLECTIVE_ATTRIBUTE_NAMES:
+            # No base test on purpose; see REFLECTIVE_ATTRIBUTE_NAMES.  Reported as
+            # written so a reader can find it, base expression and all.
+            out.add(ast.unparse(sub))
         if isinstance(sub, ast.Attribute) and isinstance(sub.value, ast.Name):
             written = f"{sub.value.id}.{sub.attr}"
             target = resolve(sub.value.id)
@@ -634,8 +691,10 @@ def closure(source: str, roots: list[str]) -> dict:
                 "unresolved_names": sorted(unresolved),
             },
             "attribute_channel": {
-                "policy": "named partial list of reflective module members, matched "
-                          "through import bindings rather than spelling",
+                "policy": "two partial detectors: a named list of reflective module "
+                          "members, matched through import bindings rather than "
+                          "spelling; and a named list of attribute names no ordinary "
+                          "object carries, matched with no test on the base",
                 "complete": False,
                 "paths_found": sorted(reflective),
             },

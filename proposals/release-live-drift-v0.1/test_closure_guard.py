@@ -208,6 +208,51 @@ CASES = [
         '    import sys as s\n    return s.modules[__name__].hidden()\n',
         True,
     ),
+    # The four below are the other axis of the attribute channel: an attribute name no
+    # ordinary object carries, matched with no test on the base.  All four ran as
+    # equal-known misses before it existed, and the first two were NOT_CLOSED cases.
+    (
+        "reflection_via_function_globals",
+        'def hidden():\n    return 2\ndef root():\n    return root.__globals__["hidden"]()\n',
+        'def hidden():\n    return 3\ndef root():\n    return root.__globals__["hidden"]()\n',
+        True,
+    ),
+    (
+        # The base is a *call*, so no matcher keyed on the base name can see this --
+        # `inspect` is not on the module list under `currentframe`, and it does not
+        # need to be.
+        "reflection_via_frame_globals",
+        'import inspect\ndef hidden():\n    return 2\n'
+        'def root():\n    return inspect.currentframe().f_globals["hidden"]()\n',
+        'import inspect\ndef hidden():\n    return 3\n'
+        'def root():\n    return inspect.currentframe().f_globals["hidden"]()\n',
+        True,
+    ),
+    (
+        # Not a second spelling of the one above: `sys` *is* on the module list, under
+        # `modules` only.  This was measured escaping at 79d1825c and is the pair that
+        # says a listed module does not make its other members listed.
+        "reflection_via_an_unlisted_member_of_a_listed_module",
+        'import sys\ndef hidden():\n    return 2\n'
+        'def root():\n    return sys._getframe().f_globals["hidden"]()\n',
+        'import sys\ndef hidden():\n    return 3\n'
+        'def root():\n    return sys._getframe().f_globals["hidden"]()\n',
+        True,
+    ),
+    (
+        # The kill for qualifying the name match by the base's provenance -- the obvious
+        # narrowing, since `root.__globals__` above has a base bound at module level by
+        # a def.  Here the base is a local lambda bound nowhere at module level, and the
+        # namespace comes back all the same.  Measured escaping at e722a126; a
+        # module-level assignment alias (8d7768d6) and a parameter (434dd25c) do it too,
+        # and are not carried as separate samples of the one relaxation.
+        "function_globals_off_a_base_with_no_module_binding",
+        'def hidden():\n    return 2\n'
+        'def root():\n    f = lambda: 1\n    return f.__globals__["hidden"]()\n',
+        'def hidden():\n    return 3\n'
+        'def root():\n    f = lambda: 1\n    return f.__globals__["hidden"]()\n',
+        True,
+    ),
 ]
 
 # Pairs that must NOT be flagged: prose and unrelated edits must leave the hash alone,
@@ -232,10 +277,13 @@ STABLE = [
      'def root():\n    "prose"\n    return 1\ndef main():\n    "more prose"\n    return 0\n'
      'if __name__ == "__main__":\n    raise SystemExit(main())\n',
      "pair"),
-    # One cell of the reflective-capability grid.  This has the same attribute-read
-    # then subscript shape as the namespace cases below, but the object is an ordinary
-    # local instance.  Refusing every `__dict__` subscript would therefore over-cut a
-    # known, stable pair; the reflected object cannot be erased from the boundary.
+    # The kill for putting `__dict__` on REFLECTIVE_ATTRIBUTE_NAMES beside `__globals__`
+    # and `f_globals`.  Same attribute-read-then-subscript shape as those, and the same
+    # absence of any static handle on what the base is -- but ordinary objects carry
+    # `__dict__`, so the name is not evidence and refusing it costs this known, stable
+    # pair.  That asymmetry is the membership rule of that list, running rather than
+    # asserted: the other two names are unshared, this one is shared, and no reading of
+    # the base can tell the cases apart.
     ("ordinary_object_dunder_dict_is_not_module_reflection",
      'def root():\n    class Box:\n        pass\n    obj = Box()\n'
      '    obj.__dict__["value"] = 1\n    return obj.__dict__["value"]\nUNUSED = [1]\n',
@@ -246,34 +294,22 @@ STABLE = [
 
 # Cases the guard is documented NOT to close, and must not be quietly deleted.
 #
-# The first two cases, together with the ordinary-object STABLE case and the import
-# shadowing OVERCUT case below, are a four-cell discriminator rather than a proposed
-# implementation.  `root.__globals__` and `frame.f_globals` both reach a module
-# namespace and then index/call through it; both currently escape.  The ordinary
-# `obj.__dict__` case has the same downstream index shape but must stay accepted, while
-# import shadowing has no reflective behaviour and is currently refused.  The measured
-# split says neither a bare attribute-name list nor downstream indexing alone is enough:
-# object/binding provenance remains part of the missing capability boundary.
+# The four-cell discriminator that used to be described here has been run and spent, so
+# it is recorded rather than restated: `root.__globals__` and `frame.f_globals` moved
+# into CASES, the ordinary-object `obj.__dict__` cell stayed STABLE, and the import
+# shadowing cell stayed OVERCUT.  What the grid was expected to show -- that the
+# reflected object's identity was the discriminating axis -- is not what it showed.
+# Provenance turned out to be the leaky half: the module namespace comes back off a def,
+# an assignment alias, a local lambda and a parameter alike.  The half that held is the
+# attribute name, and only for names ordinary objects do not carry, which is why
+# `__dict__` is on the other side of the line and staying there.
 #
-# The third case is a narrower and less comfortable gap.  It reaches a *listed* module
-# under a name assigned rather than imported.  Closing it means following assignments,
-# which is dataflow and a different tool; it stays running so nobody can mistake import
-# alias resolution for spelling-proof resolution.
+# What remains open here is one gap, and it is narrower and less comfortable than the
+# ones that closed.  It reaches a *listed* module under a name assigned rather than
+# imported.  Closing it means following assignments, which is dataflow and a different
+# tool; it stays running so nobody can mistake import alias resolution for
+# spelling-proof resolution.
 NOT_CLOSED = [
-    (
-        "reflection_via_function_globals",
-        'def hidden():\n    return 2\n'
-        'def root():\n    return root.__globals__["hidden"]()\n',
-        'def hidden():\n    return 3\n'
-        'def root():\n    return root.__globals__["hidden"]()\n',
-    ),
-    (
-        "reflection_via_frame_globals",
-        'import inspect\ndef hidden():\n    return 2\n'
-        'def root():\n    return inspect.currentframe().f_globals["hidden"]()\n',
-        'import inspect\ndef hidden():\n    return 3\n'
-        'def root():\n    return inspect.currentframe().f_globals["hidden"]()\n',
-    ),
     (
         "reflection_via_a_listed_module_aliased_by_assignment",
         'import sys\ns = sys\ndef hidden():\n    return 2\n'
