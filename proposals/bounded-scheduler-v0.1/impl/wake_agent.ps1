@@ -314,7 +314,7 @@ try {
     } else {
         $wakeText = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String(
             "546w5Zyo6YaS5p2l77yM5omn6KGM6L+Z5LiA5Zue5ZCI55qE6Ieq5Li75bel5L2c44CC54Wn57O757uf5o+Q56S655qE57qq5b6L5p2l44CC"))
-        'claude -p "{0}" --append-system-prompt-file "{1}" --dangerously-skip-permissions --output-format json' -f $wakeText, $prompt
+        'claude -p "{0}" --append-system-prompt-file "{1}" --model claude-opus-5 --effort high --dangerously-skip-permissions --output-format json' -f $wakeText, $prompt
     }
     # cmd owns byte redirection; PowerShell 5.1 never decodes native output.
     $commandLine = ('"{0}" /d /s /c "{1} 1>"{2}" 2>"{3}""' -f

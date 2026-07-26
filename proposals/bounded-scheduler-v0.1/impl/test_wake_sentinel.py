@@ -820,6 +820,8 @@ def test_wake_agent_capture_is_utf8_on_any_console_codepage(tmp_path, codepage):
     assert "JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE" in wrapper_source
     assert "SetHandleInformation" in wrapper_source
     assert "new-object system.text.utf8encoding($false, $true)" in wrapper_source.lower()
+    assert "--model claude-opus-5" in wrapper_source
+    assert "--effort high" in wrapper_source
 
     fake = tmp_path / "fake_claude.py"
     fake.write_text(
