@@ -46,8 +46,49 @@ function Get-FailureStreak {
     } else { @() }
     return @{
         count = @($segment | Where-Object { $_ -match '\sERROR\s' }).Count
-        alerted = @($segment | Where-Object { $_ -match '\sALERT\s' }).Count -gt 0
+        alerted = @($segment | Where-Object { $_ -match '\sALERT sentinel_failure_streak=' }).Count -gt 0
     }
+}
+
+function Get-CommitLockSkipEpoch {
+    if (-not (Test-Path $LogPath)) { return 0 }
+    $tail = @(Get-Content -Path $LogPath -Tail 400 -Encoding utf8)
+    $slotPattern = '^(?<stamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})  '
+    $terminalPattern = $slotPattern + '(wake ok|ERROR |wake blocked|SKIPPED \(PAUSED|ALERT consecutive_commit_lock_skips=)'
+    $skipPattern = $slotPattern + 'wake skipped reason=commit_lock_busy$'
+    $events = @()
+
+    for ($i = 0; $i -lt $tail.Count; $i++) {
+        if ($tail[$i] -match $terminalPattern) {
+            $events += [pscustomobject]@{
+                Stamp = $Matches['stamp']
+                Position = $i
+                Kind = 'terminal'
+            }
+            continue
+        }
+        if ($tail[$i] -match $skipPattern) {
+            $events += [pscustomobject]@{
+                Stamp = $Matches['stamp']
+                Position = $i
+                Kind = 'skip'
+            }
+        }
+    }
+
+    $ordered = @($events | Sort-Object Stamp, Position)
+    $lastTerminal = -1
+    for ($i = 0; $i -lt $ordered.Count; $i++) {
+        if ($ordered[$i].Kind -eq 'terminal') { $lastTerminal = $i }
+    }
+
+    $skipStamps = @{}
+    for ($i = $lastTerminal + 1; $i -lt $ordered.Count; $i++) {
+        if ($ordered[$i].Kind -eq 'skip') {
+            $skipStamps[$ordered[$i].Stamp] = $true
+        }
+    }
+    return $skipStamps.Count
 }
 
 function Register-Failure([string]$Stage, [int]$NativeRc, [string]$Stderr, [string]$Stdout) {
@@ -92,6 +133,10 @@ try {
 
     if ($nativeRc -eq 4) {
         Add-LogLine "$stamp  wake skipped reason=commit_lock_busy"
+        $skipEpochCount = Get-CommitLockSkipEpoch
+        if ($skipEpochCount -ge 20) {
+            Add-LogLine "$stamp  ALERT consecutive_commit_lock_skips=$skipEpochCount action=log_only"
+        }
         exit 0
     }
 

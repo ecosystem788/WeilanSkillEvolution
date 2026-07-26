@@ -478,15 +478,28 @@ print(json.dumps({'committed_frame': frame, 'receipt': {
     assert sum(" ALERT " in line for line in lines[last_ok + 1:]) == 0
 
 
-def _run_cron_rc_fixture(tmp_path, log, rc):
+def _run_cron_rc_fixture(tmp_path, log, rc, mode="native"):
     fake = tmp_path / "fake_wake_rc.py"
     fake.write_text(
-        "import os, sys\n"
+        "import json, os, sys\n"
+        "mode = os.environ['WAKE_FIXTURE_MODE']\n"
+        "if mode == 'success':\n"
+        "    print(json.dumps({'committed_frame': 'wf-fixture-ok', 'receipt': "
+        "{'crossed_irreversible_gate': False, 'stop_reason': 'fixture'}}))\n"
+        "    raise SystemExit(0)\n"
+        "if mode == 'blocked':\n"
+        "    print(json.dumps({'aborted': 'continuation_not_allowed', "
+        "'briefing': {'activation_state': 'PAUSED'}}))\n"
+        "    raise SystemExit(0)\n"
         "print(f'fixture rc={os.environ[\"WAKE_FIXTURE_RC\"]}', file=sys.stderr)\n"
         "raise SystemExit(int(os.environ['WAKE_FIXTURE_RC']))\n",
         encoding="utf-8",
     )
-    env = {**os.environ, "WAKE_FIXTURE_RC": str(rc)}
+    env = {
+        **os.environ,
+        "WAKE_FIXTURE_RC": str(rc),
+        "WAKE_FIXTURE_MODE": mode,
+    }
     return subprocess.run(
         [
             "powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
@@ -494,6 +507,19 @@ def _run_cron_rc_fixture(tmp_path, log, rc):
             "-LogPath", str(log), "-NoEscalate",
         ],
         env=env, capture_output=True, text=True, timeout=30,
+    )
+
+
+def _cron_stamp(index):
+    hour, remainder = divmod(index, 3600)
+    minute, second = divmod(remainder, 60)
+    return f"2000-01-01T{hour:02d}:{minute:02d}:{second:02d}"
+
+
+def _write_cron_events(log, events):
+    log.write_text(
+        "".join(f"{_cron_stamp(index)}  {event}\n" for index, event in events),
+        encoding="utf-8",
     )
 
 
@@ -531,6 +557,228 @@ def test_cron_wrapper_commit_lock_busy_between_two_errors_does_not_alert(tmp_pat
     assert _run_cron_rc_fixture(tmp_path, log, 7).returncode == 7
 
     assert " ALERT " not in log.read_text(encoding="utf-8-sig")
+
+
+def test_commit_lock_nineteen_end_to_end_skips_do_not_alert(tmp_path):
+    log = tmp_path / "cron.log"
+
+    for _ in range(19):
+        assert _run_cron_rc_fixture(tmp_path, log, 4).returncode == 0
+
+    text = log.read_text(encoding="utf-8-sig")
+    assert text.count(" wake skipped reason=commit_lock_busy") == 19
+    assert " ALERT consecutive_commit_lock_skips=" not in text
+
+
+def test_commit_lock_twentieth_end_to_end_skip_alerts_log_only_once(tmp_path):
+    log = tmp_path / "cron.log"
+    _write_cron_events(
+        log,
+        [
+            (index, "wake skipped reason=commit_lock_busy")
+            for index in range(1, 20)
+        ],
+    )
+
+    assert _run_cron_rc_fixture(tmp_path, log, 4).returncode == 0
+
+    text = log.read_text(encoding="utf-8-sig")
+    assert text.count(" wake skipped reason=commit_lock_busy") == 20
+    assert text.count(
+        " ALERT consecutive_commit_lock_skips=20 action=log_only"
+    ) == 1
+    assert "alert wake_agent done" not in text
+
+
+def test_commit_lock_wake_ok_resets_epoch_before_nineteen_more_skips(tmp_path):
+    log = tmp_path / "cron.log"
+
+    for _ in range(19):
+        assert _run_cron_rc_fixture(tmp_path, log, 4).returncode == 0
+    assert _run_cron_rc_fixture(tmp_path, log, 0, mode="success").returncode == 0
+    for _ in range(19):
+        assert _run_cron_rc_fixture(tmp_path, log, 4).returncode == 0
+
+    text = log.read_text(encoding="utf-8-sig")
+    assert " wake ok " in text
+    assert " ALERT consecutive_commit_lock_skips=" not in text
+
+
+def test_commit_lock_true_error_resets_nineteen_skip_epoch(tmp_path):
+    log = tmp_path / "cron.log"
+
+    for _ in range(19):
+        assert _run_cron_rc_fixture(tmp_path, log, 4).returncode == 0
+    assert _run_cron_rc_fixture(tmp_path, log, 7).returncode == 7
+    assert _run_cron_rc_fixture(tmp_path, log, 4).returncode == 0
+
+    text = log.read_text(encoding="utf-8-sig")
+    assert " ERROR " in text
+    assert " ALERT consecutive_commit_lock_skips=" not in text
+
+
+def test_commit_lock_new_epoch_can_alert_after_true_error(tmp_path):
+    log = tmp_path / "cron.log"
+    events = [
+        (0, "ALERT consecutive_commit_lock_skips=20 action=log_only"),
+        (1, "ERROR rc=7 stage=native_exit diag_sha256=x stderr=fixture"),
+    ]
+    events.extend(
+        (index, "wake skipped reason=commit_lock_busy")
+        for index in range(2, 21)
+    )
+    _write_cron_events(log, events)
+
+    assert _run_cron_rc_fixture(tmp_path, log, 4).returncode == 0
+
+    text = log.read_text(encoding="utf-8-sig")
+    assert text.count(" ALERT consecutive_commit_lock_skips=") == 2
+    assert " ALERT consecutive_commit_lock_skips=20 action=log_only" in text
+
+
+def test_commit_lock_skip_is_not_terminal_but_paused_is(tmp_path):
+    skip_log = tmp_path / "skip.log"
+    _write_cron_events(
+        skip_log,
+        [
+            (index, "wake skipped reason=commit_lock_busy")
+            for index in range(1, 20)
+        ],
+    )
+    assert _run_cron_rc_fixture(tmp_path, skip_log, 4).returncode == 0
+    assert " ALERT consecutive_commit_lock_skips=20 action=log_only" in (
+        skip_log.read_text(encoding="utf-8-sig")
+    )
+
+    paused_log = tmp_path / "paused.log"
+    paused_events = [
+        (index, "wake skipped reason=commit_lock_busy")
+        for index in range(1, 20)
+    ]
+    paused_events.append((20, "SKIPPED (PAUSED sentinel present)"))
+    _write_cron_events(paused_log, paused_events)
+    assert _run_cron_rc_fixture(tmp_path, paused_log, 4).returncode == 0
+    assert " ALERT consecutive_commit_lock_skips=" not in (
+        paused_log.read_text(encoding="utf-8-sig")
+    )
+
+
+def test_commit_lock_alert_does_not_suppress_sentinel_failure_streak(tmp_path):
+    log = tmp_path / "cron.log"
+    log.write_text(
+        "2026-07-26T00:00:00  wake ok  stop=fixture frame=wf-fixture-ok\n"
+        "2026-07-26T00:00:01  ALERT consecutive_commit_lock_skips=20 action=log_only\n",
+        encoding="utf-8",
+    )
+
+    for _ in range(3):
+        assert _run_cron_rc_fixture(tmp_path, log, 7).returncode == 7
+
+    text = log.read_text(encoding="utf-8-sig")
+    assert text.count(" ALERT sentinel_failure_streak=") == 1
+
+
+def test_commit_lock_wake_blocked_terminates_epoch(tmp_path):
+    log = tmp_path / "cron.log"
+    _write_cron_events(
+        log,
+        [
+            (index, "wake skipped reason=commit_lock_busy")
+            for index in range(1, 20)
+        ],
+    )
+
+    assert _run_cron_rc_fixture(tmp_path, log, 0, mode="blocked").returncode == 0
+    assert _run_cron_rc_fixture(tmp_path, log, 4).returncode == 0
+
+    text = log.read_text(encoding="utf-8-sig")
+    assert " wake blocked " in text
+    assert " ALERT consecutive_commit_lock_skips=" not in text
+
+
+def test_commit_lock_alert_repeats_only_at_fortieth_skip(tmp_path):
+    log = tmp_path / "cron.log"
+    events = [(0, "ALERT consecutive_commit_lock_skips=20 action=log_only")]
+    events.extend(
+        (index, "wake skipped reason=commit_lock_busy")
+        for index in range(1, 20)
+    )
+    _write_cron_events(log, events)
+    assert log.read_text(encoding="utf-8-sig").count(
+        " ALERT consecutive_commit_lock_skips="
+    ) == 1
+
+    assert _run_cron_rc_fixture(tmp_path, log, 4).returncode == 0
+
+    text = log.read_text(encoding="utf-8-sig")
+    assert text.count(" ALERT consecutive_commit_lock_skips=") == 2
+    assert text.count(
+        " ALERT consecutive_commit_lock_skips=20 action=log_only"
+    ) == 2
+
+
+def test_commit_lock_slot_anchors_ignore_chatter_and_error_preview(tmp_path):
+    chatter_log = tmp_path / "chatter.log"
+    chatter_events = [
+        (index, "wake skipped reason=commit_lock_busy")
+        for index in range(10, 29)
+    ]
+    chatter_events.append((29, "waking codex: reasons=peer said wake ok yesterday"))
+    _write_cron_events(chatter_log, chatter_events)
+    assert _run_cron_rc_fixture(tmp_path, chatter_log, 4).returncode == 0
+    assert " ALERT consecutive_commit_lock_skips=20 action=log_only" in (
+        chatter_log.read_text(encoding="utf-8-sig")
+    )
+
+    error_log = tmp_path / "error.log"
+    error_events = [
+        (index, "wake skipped reason=commit_lock_busy")
+        for index in range(10, 29)
+    ]
+    error_events.append((
+        29,
+        "ERROR rc=1 stage=json_parse diag_sha256=x "
+        "stderr=saw wake skipped reason=commit_lock_busy",
+    ))
+    _write_cron_events(error_log, error_events)
+    assert _run_cron_rc_fixture(tmp_path, error_log, 4).returncode == 0
+    assert " ALERT consecutive_commit_lock_skips=" not in (
+        error_log.read_text(encoding="utf-8-sig")
+    )
+
+
+def test_commit_lock_epoch_orders_interleaved_events_by_stamp(tmp_path):
+    log = tmp_path / "cron.log"
+    events = [(0, "wake ok  stop=fixture frame=wf-fixture-ok")]
+    events.extend(
+        (index, "wake skipped reason=commit_lock_busy")
+        for index in range(10, 29)
+    )
+    events.append((5, "wake ok  stop=late frame=wf-fixture-old"))
+    _write_cron_events(log, events)
+
+    assert _run_cron_rc_fixture(tmp_path, log, 4).returncode == 0
+
+    assert " ALERT consecutive_commit_lock_skips=20 action=log_only" in (
+        log.read_text(encoding="utf-8-sig")
+    )
+
+
+def test_commit_lock_window_without_terminal_biases_toward_alert(tmp_path):
+    log = tmp_path / "cron.log"
+    _write_cron_events(
+        log,
+        [
+            (index, "wake skipped reason=commit_lock_busy")
+            for index in range(1, 20)
+        ],
+    )
+
+    assert _run_cron_rc_fixture(tmp_path, log, 4).returncode == 0
+
+    assert " ALERT consecutive_commit_lock_skips=20 action=log_only" in (
+        log.read_text(encoding="utf-8-sig")
+    )
 
 
 @pytest.mark.parametrize("codepage", [65001, 936])
