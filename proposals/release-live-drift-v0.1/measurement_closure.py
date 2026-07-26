@@ -21,25 +21,44 @@ Honest limits, all of them load-bearing:
   * The hash is normalised by ast.unparse, whose output is not guaranteed stable
     across Python versions.  Two closure hashes are comparable only under the same
     unparser; the boundary is reported so a reader can refuse the comparison.
-  * Reference construction is guarded on two channels, and only one of them is
-    closed.  Bare names are checked against an allow-list: every free name in the
-    reached definitions (and in module-level statements that bind nothing, since
-    those run at import and can rebind a root) must be module-bound, locally bound,
-    or listed.  Anything else -- getattr, __import__, exec, a builtin nobody has
-    ruled on -- makes the result unknown and is named in the report.  That channel
-    is complete: an unlisted name cannot pass.  The attribute channel is not.
-    Reflection reached through an imported module (sys.modules[...], importlib) is
-    only detected by a named, admittedly partial list of paths, and reflection
-    written some third way is not detected at all.
+  * Three guards run, and only two of them are complete.
+
+    1. The statement partition, complete.  Every statement in the module body is
+       sorted into exactly one bucket: hashed as material, matched by a named inert
+       shape, declared an import boundary, or unaccounted -- and one unaccounted
+       statement makes the result unknown.  Completeness is structural: the last
+       bucket is the default, so a shape nobody has ruled on lands there.  This
+       matters because module-level statements run at import, before the measurement
+       calls a root, and can rebind it.
+    2. The bare-name channel, complete.  Every free name in a guarded statement must
+       be module-bound, locally bound, or on an allow-list of names that return data
+       and cannot hand back a callable from this module's namespace.  getattr,
+       __import__, exec, and every builtin nobody has ruled on are absent on purpose;
+       an unlisted name is not judged, it is refused, and it is named in the report.
+    3. The attribute channel, NOT complete and not completable.  Reflection through
+       an imported module (sys.modules[...], importlib) is caught by a named partial
+       list; reflection written some third way is not caught at all.
+
+  * The import boundary, stated because it was previously silent.  An import runs
+    the imported module's top level, which is outside this file and outside this
+    hash -- equally so whether or not the import is reached.  Imports are therefore
+    listed rather than hashed: hashing them would claim a coverage this tool does
+    not have, and would also make an unrelated new import read as a changed method.
   * Consequently a hash never establishes that execution reaches *only* the hashed
     definitions.  It establishes that those definitions are textually identical.
-    The gap is real and was found by counterexample, not by reasoning: a module
-    whose root called getattr(sys.modules[__name__], name) returned 1 in one
-    revision and 2 in the next while this tool reported the same hash under its
-    previous guard.  The guard now catches that particular shape twice over; it is
-    not thereby proved to catch every shape.
+    The gaps are real and were found by counterexample, not by reasoning:
+      - a module whose root called getattr(sys.modules[__name__], name) returned 1
+        in one revision and 2 in the next under an equal hash (attribute channel);
+      - a module that wrote `for root in [lambda: 2]` after `def root` returned 2
+        and 3 across revisions under an equal hash, with no reflection at all, and
+        `CONFIG["k"] = 2` did the same by mutating instead of binding (partition).
+    The second family is closed by construction now.  The first is not, and saying
+    so is the point: guards 1 and 2 are complete over what they cover, guard 3 is a
+    detector, and no arrangement of the three proves execution is confined.
   * Whatever a root does not reach is out of scope by construction, and is listed in
-    unreached_module_names so an over-narrow root list is visible, not hidden.
+    unreached_module_names so an over-narrow root list is visible, not hidden.  The
+    escape from an unaccounted statement is to declare its name a root, which does
+    not excuse the statement -- it hashes it.
 
 Usage:
   python measurement_closure.py --source measure_drift.py --root collect --root sha256
@@ -76,9 +95,12 @@ ALLOWED_FREE_NAMES = frozenset({
     "AttributeError", "Exception", "FileNotFoundError", "IndexError", "KeyError",
     "NotImplementedError", "OSError", "RuntimeError", "StopIteration", "SystemExit",
     "TypeError", "ValueError",
-    # a string, not a reference; the `if __name__ == "__main__"` guard is universal.
-    # Using it to index a module registry is caught on the attribute channel below.
-    "__name__",
+    # strings, not references: __name__ for the universal `if __name__ == "__main__"`
+    # guard, __file__ for the universal `Path(__file__)`.  Using either to index a
+    # module registry is caught on the attribute channel below.  `object` is pointedly
+    # absent despite being a data-ish builtin: object.__subclasses__() hands back every
+    # class defined in this module, which is exactly what the rule excludes.
+    "__name__", "__file__",
 })
 
 # The attribute channel.  Unlike the allow-list above this list is *not* complete and
@@ -92,24 +114,169 @@ REFLECTIVE_ATTRIBUTE_PATHS = (
     ("inspect", "getmembers"),
 )
 
+_NESTED_SCOPES = (
+    ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Lambda,
+    ast.ListComp, ast.SetComp, ast.DictComp, ast.GeneratorExp,
+)
 
-def _binder_name(node: ast.stmt) -> list[str]:
-    """Module-level names this statement binds, or [] if it binds none."""
-    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-        return [node.name]
+
+def _binding_targets(target: ast.AST, out: list[str]) -> None:
+    """Names a store/delete target binds.  Attribute and Subscript targets bind none.
+
+    `CONFIG["k"] = 2` binds nothing, which is exactly why it must not be mistaken for
+    an inert statement: it mutates an object a reached definition reads.
+    """
+    if isinstance(target, ast.Name):
+        out.append(target.id)
+    elif isinstance(target, (ast.Tuple, ast.List)):
+        for element in target.elts:
+            _binding_targets(element, out)
+    elif isinstance(target, ast.Starred):
+        _binding_targets(target.value, out)
+
+
+def _module_bindings(node: ast.stmt) -> list[str]:
+    """Every module-level name this statement can bind, at any nesting of blocks.
+
+    The old version of this only understood def/class/import/assign at the top of the
+    statement, so `for root in [...]`, `with open(p) as root`, `if C: root = a`, and
+    `root += 1` all bound a name it never saw -- and a statement it thinks binds
+    nothing was neither hashed nor, until now, refused.  Block statements are walked;
+    nested function, class, lambda and comprehension scopes are not, since a name
+    bound there is not bound at module level (a `global` inside a function binds only
+    when that function is called, which requires reaching it).
+    """
+    out: list[str] = []
+
+    def walk(node: ast.AST) -> None:
+        if isinstance(node, _NESTED_SCOPES):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                out.append(node.name)
+            return
+        if isinstance(node, (ast.Import, ast.ImportFrom)):
+            out.extend(alias.asname or alias.name.split(".")[0] for alias in node.names)
+            return
+        if isinstance(node, ast.Assign):
+            for target in node.targets:
+                _binding_targets(target, out)
+        elif isinstance(node, (ast.AnnAssign, ast.AugAssign, ast.NamedExpr)):
+            _binding_targets(node.target, out)
+        elif isinstance(node, (ast.For, ast.AsyncFor)):
+            _binding_targets(node.target, out)
+        elif isinstance(node, ast.withitem):
+            if node.optional_vars is not None:
+                _binding_targets(node.optional_vars, out)
+        elif isinstance(node, ast.ExceptHandler):
+            if node.name:
+                out.append(node.name)
+        elif isinstance(node, ast.Delete):
+            for target in node.targets:
+                _binding_targets(target, out)
+        for child in ast.iter_child_nodes(node):
+            walk(child)
+
+    walk(node)
+    return sorted(set(out))
+
+
+def _is_literal_only(node: ast.AST) -> bool:
+    """True for an expression built from constants and constant containers alone.
+
+    No Call, no Attribute, no Subscript, no Name, no BinOp: each of those can run code
+    at import (`ROOT / "x"` calls __truediv__, `Path(...)` calls a constructor), and
+    running code is the whole risk being guarded against here.
+    """
+    if isinstance(node, ast.Constant):
+        return True
+    if isinstance(node, (ast.Tuple, ast.List, ast.Set)):
+        return all(_is_literal_only(e) for e in node.elts)
+    if isinstance(node, ast.Dict):
+        return all(k is not None and _is_literal_only(k) for k in node.keys) and all(
+            _is_literal_only(v) for v in node.values
+        )
+    if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
+        return _is_literal_only(node.operand)
+    return False
+
+
+def _is_main_guard(node: ast.stmt) -> bool:
+    """The canonical `if __name__ == "__main__":` test, and nothing else."""
+    if not isinstance(node, ast.If) or node.orelse:
+        return False
+    test = node.test
+    return (
+        isinstance(test, ast.Compare)
+        and len(test.ops) == 1
+        and isinstance(test.ops[0], ast.Eq)
+        and isinstance(test.left, ast.Name)
+        and test.left.id == "__name__"
+        and len(test.comparators) == 1
+        and isinstance(test.comparators[0], ast.Constant)
+        and test.comparators[0].value == "__main__"
+    )
+
+
+def _def_runs_code_at_import(node: ast.stmt, postponed_annotations: bool) -> str | None:
+    """Why an unreached `def` is not inert, or None if it only binds a function object.
+
+    Executing a `def` does not execute its body, which is why an unreached function is
+    harmless.  Three things in the header do run at import: decorators, default
+    argument expressions, and -- unless `from __future__ import annotations` made them
+    strings -- annotations.  A `class` is absent from this exemption on purpose: a
+    class body executes at import.
+    """
+    if node.decorator_list:
+        return "decorator runs code at import"
+    args = node.args
+    defaults = list(args.defaults) + [d for d in args.kw_defaults if d is not None]
+    if not all(_is_literal_only(d) for d in defaults):
+        return "default argument runs code at import"
+    if not postponed_annotations:
+        annotations = [a.annotation for a in (
+            args.args + args.posonlyargs + args.kwonlyargs
+            + [a for a in (args.vararg, args.kwarg) if a is not None]
+        ) if a.annotation is not None]
+        if node.returns is not None:
+            annotations.append(node.returns)
+        if not all(_is_literal_only(a) for a in annotations):
+            return "annotation is evaluated at import (no `from __future__ import annotations`)"
+    return None
+
+
+def _classify(node: ast.stmt, postponed_annotations: bool) -> tuple[str, str]:
+    """Sort one non-material module statement into a named bucket.
+
+    The bucket list is an allow-list of shapes, and `unaccounted` is the default, so
+    a shape nobody has ruled on lands in the refusing bucket rather than sliding past.
+    """
+    if isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant):
+        return "inert", "literal_expression_statement"
+    if isinstance(node, ast.Pass):
+        return "inert", "pass"
     if isinstance(node, (ast.Import, ast.ImportFrom)):
-        return [alias.asname or alias.name.split(".")[0] for alias in node.names]
-    if isinstance(node, ast.Assign):
-        names = []
-        for target in node.targets:
-            if isinstance(target, ast.Name):
-                names.append(target.id)
-            elif isinstance(target, (ast.Tuple, ast.List)):
-                names.extend(e.id for e in target.elts if isinstance(e, ast.Name))
-        return names
-    if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-        return [node.target.id]
-    return []
+        return "import_boundary", "import"
+    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+        why = _def_runs_code_at_import(node, postponed_annotations)
+        if why is None:
+            return "inert", "unreached_def_binds_only_a_function_object"
+        return "unaccounted", why
+    if _is_main_guard(node):
+        # Its body runs only under script execution, where it is the caller of the
+        # measurement rather than import-time code preceding it -- but only if it
+        # binds nothing at module level, since `if __name__ == "__main__": root = f`
+        # would rebind the root before that call.
+        if not _module_bindings(node):
+            return "inert", "main_guard_binding_nothing"
+        return "unaccounted", "__main__ guard rebinds a module-level name"
+    if _module_bindings(node):
+        if (
+            isinstance(node, ast.Assign)
+            and all(isinstance(t, ast.Name) for t in node.targets)
+            and _is_literal_only(node.value)
+        ):
+            return "inert", "literal_binder"
+        return "unaccounted", "binds an unreached name by running code at import"
+    return "unaccounted", "runs at import, binds nothing, and may mutate reached state"
 
 
 def _strip_docstrings(node: ast.AST) -> ast.AST:
@@ -177,48 +344,73 @@ def _reflective_paths(node: ast.AST) -> set[str]:
 def closure(source: str, roots: list[str]) -> dict:
     tree = ast.parse(source)
 
-    binders: dict[str, ast.stmt] = {}
+    # A name can be bound by several module statements (`def root` then a later
+    # `for root in ...`).  All of them run at import, so all of them are hashed when
+    # the name is reached; keeping only the last would hide the shadowed one.
+    binders: dict[str, list[ast.stmt]] = {}
     order: dict[str, int] = {}
     for index, stmt in enumerate(tree.body):
-        for name in _binder_name(stmt):
-            # A rebound name keeps its first slot but its latest statement, which is
-            # what the module would actually resolve to at import time.
-            binders[name] = stmt
+        for name in _module_bindings(stmt):
+            binders.setdefault(name, []).append(stmt)
             order.setdefault(name, index)
 
     missing_roots = [r for r in roots if r not in binders]
 
-    # Statements that bind nothing still run at import, so they can rebind a root
-    # before the measurement ever calls it.  They are guarded, not hashed.
-    unbound_stmts = [s for s in tree.body if not _binder_name(s)]
-
-    reached: dict[str, ast.stmt] = {}
+    reached: dict[str, list[ast.stmt]] = {}
     frontier = [r for r in roots if r in binders]
     while frontier:
         name = frontier.pop()
         if name in reached:
             continue
-        stmt = binders[name]
-        reached[name] = stmt
-        for ref in sorted(_referenced_names(stmt)):
-            if ref in binders and ref not in reached:
-                frontier.append(ref)
+        reached[name] = binders[name]
+        for stmt in binders[name]:
+            for ref in sorted(_referenced_names(stmt)):
+                if ref in binders and ref not in reached:
+                    frontier.append(ref)
+
+    material_stmts = [s for s in tree.body if any(s is r for v in reached.values() for r in v)]
 
     # One statement can bind several reached names (a shared import line); hash each
     # statement once, labelled by every reached name it binds, so the label set is
     # itself part of what is hashed.
     units = []
-    seen_stmts: list[ast.stmt] = []
-    for name in sorted(reached, key=lambda n: (order[n], n)):
-        stmt = reached[name]
-        if any(stmt is s for s in seen_stmts):
-            continue
-        seen_stmts.append(stmt)
-        labels = sorted(n for n in reached if reached[n] is stmt)
+    for stmt in sorted(material_stmts, key=lambda s: tree.body.index(s)):
+        labels = sorted(n for n, v in reached.items() if any(stmt is r for r in v))
         text = ast.unparse(_strip_docstrings(ast.parse(ast.unparse(stmt))))
         units.append({"binds": labels, "normalised": text})
+    units.sort(key=lambda u: (order[u["binds"][0]], u["binds"]))
 
-    guarded = list(reached.values()) + unbound_stmts
+    # Every remaining statement in the module body is classified.  `unaccounted` is
+    # the default bucket, so the partition is complete without enumerating shapes.
+    postponed_annotations = any(
+        isinstance(s, ast.ImportFrom) and s.module == "__future__"
+        and any(a.name == "annotations" for a in s.names)
+        for s in tree.body
+    )
+    inert, imports, unaccounted = [], [], []
+    for stmt in tree.body:
+        if any(stmt is s for s in material_stmts):
+            continue
+        bucket, why = _classify(stmt, postponed_annotations)
+        entry = {"line": stmt.lineno, "node": type(stmt).__name__, "shape": why}
+        if bucket == "inert":
+            inert.append(entry)
+        elif bucket == "import_boundary":
+            entry["modules"] = _module_bindings(stmt)
+            imports.append(entry)
+        else:
+            unaccounted.append(entry)
+
+    # The free-name guard covers what can actually run: the reached definitions, and
+    # the body of a `__main__` guard, which executes under script invocation and is
+    # what calls the measurement there.  It deliberately does NOT cover an unreached
+    # `def`: its body never runs, so refusing a name that appears only in an unreached
+    # function's annotation would report unknown for code the measurement cannot
+    # reach.  Everything else that runs at import is already in the partition, and
+    # anything the partition could not place is already unknown -- so narrowing here
+    # loses no coverage, it only stops borrowing dread from dead code.
+    guarded = material_stmts + [s for s in tree.body
+                                if _is_main_guard(s) and not any(s is m for m in material_stmts)]
     unresolved: set[str] = set()
     reflective: set[str] = set()
     for stmt in guarded:
@@ -242,12 +434,20 @@ def closure(source: str, roots: list[str]) -> dict:
         "unreached_module_names": unreached,
         "unparser_boundary": material["unparser"],
         "reference_guard": {
+            "statement_partition": {
+                "policy": "every module statement is material, inert, an import "
+                          "boundary, or unaccounted; unaccounted yields unknown",
+                "complete": True,
+                "material": len(material_stmts),
+                "inert": inert,
+                "unaccounted": unaccounted,
+            },
             "name_channel": {
                 "policy": "allow-list; an unlisted free name yields unknown",
                 "complete": True,
                 "scopes_checked": {
-                    "reached_definitions": len(reached),
-                    "unbound_module_statements": len(unbound_stmts),
+                    "reached_definitions": len(material_stmts),
+                    "main_guard_bodies": len(guarded) - len(material_stmts),
                 },
                 "unresolved_names": sorted(unresolved),
             },
@@ -256,12 +456,28 @@ def closure(source: str, roots: list[str]) -> dict:
                 "complete": False,
                 "paths_found": sorted(reflective),
             },
-            "verdict": "unbounded" if (unresolved or reflective) else "bounded_on_the_name_channel_only",
+            "import_boundary": {
+                "policy": "listed, not hashed; the imported module's top level runs "
+                          "outside this file and outside this hash",
+                "complete": False,
+                "imports": imports,
+            },
+            "verdict": (
+                "unbounded"
+                if (unresolved or reflective or unaccounted)
+                else "bounded_on_the_source_text_axis"
+            ),
         },
     }
     if missing_roots:
         result["closure_sha256"] = "unknown"
         result["unknown_reason"] = "declared root not found at module level"
+    elif unaccounted:
+        result["closure_sha256"] = "unknown"
+        result["unknown_reason"] = (
+            "module statements run at import that are neither hashed nor inert: "
+            + ", ".join(f"L{e['line']} {e['node']} ({e['shape']})" for e in unaccounted)
+        )
     elif unresolved or reflective:
         result["closure_sha256"] = "unknown"
         result["unknown_reason"] = (
@@ -275,10 +491,12 @@ def closure(source: str, roots: list[str]) -> dict:
     result["authority"] = (
         "sufficient only, source-text axis; equal hash => the reached definitions are "
         "textually identical after normalisation; unequal => nothing established. "
-        "It does NOT follow that execution reaches only those definitions: the name "
-        "channel is closed but the attribute channel is a partial detector, so an "
-        "undetected reflection can run code the hash never saw. Execution semantics "
-        "(interpreter, filesystem) are a separate axis and are not covered here."
+        "It does NOT follow that execution reaches only those definitions: the "
+        "statement partition and the name channel are complete over what they cover, "
+        "but the attribute channel is a partial detector and imports are listed "
+        "rather than hashed, so undetected reflection or an imported module's own "
+        "top level can run code the hash never saw. Execution semantics (interpreter, "
+        "filesystem) are a separate axis and are not covered here."
     )
     return result
 
