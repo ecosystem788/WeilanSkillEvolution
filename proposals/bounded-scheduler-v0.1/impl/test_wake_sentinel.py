@@ -13,6 +13,61 @@ sys.path.insert(0, str(HERE))
 import wake  # noqa: E402
 
 
+def _start_lock_owner(lock_path, ready_path, state_path=None):
+    script = r"""
+import json
+import sys
+import time
+from pathlib import Path
+
+sys.path.insert(0, sys.argv[1])
+import wake
+
+wake.WAKE_COMMIT_LOCK = Path(sys.argv[2])
+handle = wake._acquire_wake_commit_lock()
+if sys.argv[4] != "-":
+    Path(sys.argv[4]).write_text(json.dumps({
+        "frame_id": "wf-orphan",
+        "event_type": "frame_opened",
+        "workspace": wake.WORKSPACE,
+        "data": {
+            "problem": wake.RECEIPT_PROBLEM,
+            "success_criteria": "episode stop=quiescent structure=1",
+            "causal": {
+                "scope": wake.SCOPE,
+                "branch_id": wake.BRANCH,
+                "relation": "continue",
+            },
+        },
+    }), encoding="utf-8")
+Path(sys.argv[3]).write_text("ready", encoding="ascii")
+try:
+    time.sleep(300)
+finally:
+    wake._release_wake_commit_lock(handle)
+"""
+    proc = subprocess.Popen([
+        sys.executable,
+        "-c",
+        script,
+        str(HERE),
+        str(lock_path),
+        str(ready_path),
+        str(state_path) if state_path is not None else "-",
+    ])
+    deadline = time.monotonic() + 10
+    while not ready_path.exists() and proc.poll() is None and time.monotonic() < deadline:
+        time.sleep(0.01)
+    assert ready_path.exists(), f"lock owner did not become ready; rc={proc.poll()}"
+    return proc
+
+
+def _kill_process(proc):
+    if proc.poll() is None:
+        proc.kill()
+    proc.wait(timeout=10)
+
+
 def _receipt():
     return SimpleNamespace(
         stop_reason="queue_exhausted",
@@ -192,6 +247,19 @@ def test_receipt_open_refreshes_once_to_a_new_closed_head(monkeypatch):
 def test_receipt_does_not_retry_when_refreshed_head_is_open(monkeypatch):
     heads = iter(["wf-old", "wf-new"])
     monkeypatch.setattr(wake, "_current_head", lambda: next(heads))
+    monkeypatch.setattr(wake, "_trace_events", lambda frame_id: [{
+        "event_type": "frame_opened",
+        "frame_id": frame_id,
+        "workspace": wake.WORKSPACE,
+        "data": {
+            "problem": "a model-owned frame",
+            "causal": {
+                "scope": wake.SCOPE,
+                "branch_id": wake.BRANCH,
+                "relation": "continue",
+            },
+        },
+    }])
     opened = []
 
     def fake_trace(*args):
@@ -207,6 +275,153 @@ def test_receipt_does_not_retry_when_refreshed_head_is_open(monkeypatch):
         wake.emit_receipt_frame(_receipt(), {})
     assert failure.value.stage == "refreshed_head_not_closed"
     assert len(opened) == 1
+
+
+def test_receipt_recovers_exact_work_free_scheduler_orphan(monkeypatch):
+    heads = iter(["wf-orphan", "wf-orphan"])
+    monkeypatch.setattr(wake, "_current_head", lambda: next(heads))
+    monkeypatch.setattr(wake, "_trace_events", lambda frame_id: [{
+        "event_type": "frame_opened",
+        "frame_id": frame_id,
+        "workspace": wake.WORKSPACE,
+        "data": {
+            "problem": wake.RECEIPT_PROBLEM,
+            "success_criteria": "episode stop=quiescent structure=1",
+            "causal": {
+                "scope": wake.SCOPE,
+                "branch_id": wake.BRANCH,
+                "relation": "continue",
+            },
+        },
+    }])
+    calls = []
+    audit_completed = set()
+
+    def fake_trace(*args):
+        calls.append(args)
+        command = args[0]
+        if command == "open" and "wf-orphan" in args and not audit_completed:
+            raise _trace_error("causal parent must be closed")
+        if command == "open":
+            return {"frame_id": "wf-receipt"}
+        if command == "persistence-audit-show":
+            frame_id = args[-1]
+            completed = ["round_end"] if frame_id in audit_completed else []
+            return {"completed_triggers": completed}
+        if command == "persistence-audit":
+            audit_completed.add(args[args.index("--frame-id") + 1])
+            return {"saved": True}
+        return {"valid": True}
+
+    monkeypatch.setattr(wake, "_trace", fake_trace)
+    assert wake.emit_receipt_frame(_receipt(), {}) == "wf-receipt"
+    close_calls = [call for call in calls if call[0] == "close"]
+    orphan_close = next(call for call in close_calls if "wf-orphan" in call)
+    new_close = next(call for call in close_calls if "wf-receipt" in call)
+    assert orphan_close[orphan_close.index("--outcome") + 1] == "failed"
+    assert new_close[new_close.index("--outcome") + 1] == "success"
+    assert [call[0] for call in calls].count("open") == 2
+
+
+def test_receipt_finalize_retries_one_transient_audit_lock_timeout(monkeypatch):
+    calls = []
+    audit_completed = False
+
+    def fake_trace(*args):
+        nonlocal audit_completed
+        calls.append(args)
+        if args[0] == "persistence-audit-show":
+            return {"completed_triggers": ["round_end"] if audit_completed else []}
+        if args[0] == "persistence-audit" and not audit_completed:
+            if [call[0] for call in calls].count("persistence-audit") == 1:
+                raise _trace_error("lock timeout on .workspace-contract.lock")
+            audit_completed = True
+            return {"saved": True}
+        return {"valid": True}
+
+    monkeypatch.setattr(wake, "_trace", fake_trace)
+    monkeypatch.setattr(wake.time, "sleep", lambda seconds: None)
+    wake._finalize_receipt_frame("wf-receipt", "success", "ok")
+    assert [call[0] for call in calls].count("persistence-audit") == 2
+    assert any(call[0] == "close" for call in calls)
+
+
+def test_live_lock_owner_prevents_peer_from_entering_recovery(monkeypatch, tmp_path):
+    lock_path = tmp_path / ".wake-commit.lock"
+    ready_path = tmp_path / "ready"
+    owner = _start_lock_owner(lock_path, ready_path)
+    entered = []
+    monkeypatch.setattr(wake, "WAKE_COMMIT_LOCK", lock_path)
+    monkeypatch.setattr(wake, "_wake_once", lambda commit: entered.append(commit))
+    try:
+        with pytest.raises(wake.WakeCommitLockBusy):
+            wake.wake(commit=True)
+        assert entered == []
+    finally:
+        _kill_process(owner)
+
+
+def test_killed_lock_owner_releases_lock_and_next_wake_recovers_orphan(
+    monkeypatch, tmp_path
+):
+    lock_path = tmp_path / ".wake-commit.lock"
+    ready_path = tmp_path / "ready"
+    state_path = tmp_path / "opened-frame.json"
+    owner = _start_lock_owner(lock_path, ready_path, state_path)
+    _kill_process(owner)
+
+    opened = json.loads(state_path.read_text(encoding="utf-8"))
+    heads = iter(["wf-orphan", "wf-orphan"])
+    calls = []
+    audit_completed = set()
+    monkeypatch.setattr(wake, "WAKE_COMMIT_LOCK", lock_path)
+    monkeypatch.setattr(wake, "_current_head", lambda: next(heads))
+    monkeypatch.setattr(wake, "_trace_events", lambda frame_id: [opened])
+
+    def fake_trace(*args):
+        calls.append(args)
+        command = args[0]
+        if command == "open" and "wf-orphan" in args and not audit_completed:
+            raise _trace_error("causal parent must be closed")
+        if command == "open":
+            return {"frame_id": "wf-receipt"}
+        if command == "persistence-audit-show":
+            frame_id = args[-1]
+            return {
+                "completed_triggers": ["round_end"] if frame_id in audit_completed else []
+            }
+        if command == "persistence-audit":
+            audit_completed.add(args[args.index("--frame-id") + 1])
+            return {"saved": True}
+        return {"valid": True}
+
+    monkeypatch.setattr(wake, "_trace", fake_trace)
+    monkeypatch.setattr(
+        wake, "_wake_once", lambda commit: wake.emit_receipt_frame(_receipt(), {})
+    )
+    assert wake.wake(commit=True) == "wf-receipt"
+    close_calls = [call for call in calls if call[0] == "close"]
+    assert any("wf-orphan" in call for call in close_calls)
+    assert any("wf-receipt" in call for call in close_calls)
+
+
+def test_lock_loser_cli_exits_nonzero_before_any_ledger_access(tmp_path):
+    lock_path = wake.WAKE_COMMIT_LOCK
+    handle = wake._acquire_wake_commit_lock()
+    try:
+        proc = subprocess.run(
+            [sys.executable, str(HERE / "wake.py"), "--commit"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            timeout=30,
+        )
+    finally:
+        wake._release_wake_commit_lock(handle)
+    assert proc.returncode == 4
+    report = json.loads(proc.stdout)
+    assert report["wake_commit_lock_busy"]["reason"] == "busy"
+    assert report["wake_commit_lock_busy"]["path"] == str(lock_path)
 
 
 def test_main_prints_structured_failure_and_returns_nonzero(monkeypatch, capsys):

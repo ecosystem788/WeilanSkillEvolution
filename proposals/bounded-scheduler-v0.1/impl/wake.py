@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import msvcrt
 import subprocess
 import sys
 import time
@@ -46,11 +47,16 @@ HERE = Path(__file__).resolve().parent
 PAUSED = HERE / "PAUSED"
 WAKE_AGENT = HERE / "wake_agent.ps1"
 WAKE_LOCK = HERE / "wake-agent.lock"
+WAKE_COMMIT_LOCK = HERE / ".wake-commit.lock"
 PEER_HEALTH_ALERTS = HERE / "peer-health-alerts.jsonl"
 # Compatibility sentinel from the former free-chat experiment.  The permanent
 # tearoom no longer depends on this file; keep it visible for old observers,
 # while PAUSED remains the hard stop for both bodies.
 CHAT_EXPERIMENT = HERE / "CHAT_EXPERIMENT"
+RECEIPT_PROBLEM = "bounded-scheduler wake episode (auto, reversible zone)"
+RECEIPT_AUDIT_REASON = "wake receipt = ledger coordination; project truth = repo+ledger"
+FINALIZE_ATTEMPTS = 2
+FINALIZE_RETRY_DELAY_SECONDS = 0.25
 
 
 class TraceCommandError(RuntimeError):
@@ -74,8 +80,51 @@ class FrameCommitFailure(RuntimeError):
         return {"stage": self.stage, **self.detail}
 
 
-def _trace(*args) -> dict:
-    """Run a weilan_trace subcommand and parse its JSON stdout."""
+class WakeCommitLockBusy(RuntimeError):
+    """Another live wake owns the commit-to-receipt critical section."""
+
+    def __init__(self, path: Path, error: OSError):
+        super().__init__("wake commit lock is busy")
+        self.path = path
+        self.error = error
+
+    def as_dict(self) -> dict:
+        return {
+            "stage": "wake_commit_lock",
+            "reason": "busy",
+            "path": str(self.path),
+            "errno": self.error.errno,
+            "winerror": getattr(self.error, "winerror", None),
+        }
+
+
+def _acquire_wake_commit_lock():
+    """Acquire the process-owned, nonblocking byte lock for one commit wake."""
+    handle = WAKE_COMMIT_LOCK.open("a+b")
+    handle.seek(0, 2)
+    if handle.tell() == 0:
+        handle.write(b"\0")
+        handle.flush()
+    handle.seek(0)
+    try:
+        msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+    except OSError as exc:
+        handle.close()
+        raise WakeCommitLockBusy(WAKE_COMMIT_LOCK, exc) from exc
+    return handle
+
+
+def _release_wake_commit_lock(handle) -> None:
+    """Release the byte lock; file existence/content carries no liveness."""
+    try:
+        handle.seek(0)
+        msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+    finally:
+        handle.close()
+
+
+def _trace_payload(*args):
+    """Run a weilan_trace subcommand and return its parsed JSON payload."""
     import os
 
     env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
@@ -96,10 +145,26 @@ def _trace(*args) -> dict:
         parsed = json.loads(out)
     except json.JSONDecodeError:
         raise TraceCommandError(tuple(str(a) for a in args), result)
-    if proc.returncode != 0 or not isinstance(parsed, dict):
+    if proc.returncode != 0:
         if isinstance(parsed, dict):
             result["trace_error"] = parsed
         raise TraceCommandError(tuple(str(a) for a in args), result)
+    return parsed, result
+
+
+def _trace(*args) -> dict:
+    """Run a weilan_trace subcommand that must return one JSON object."""
+    parsed, result = _trace_payload(*args)
+    if not isinstance(parsed, dict):
+        raise TraceCommandError(tuple(str(a) for a in args), result)
+    return parsed
+
+
+def _trace_events(frame_id: str) -> list[dict]:
+    """Read one frame through the public trace CLI."""
+    parsed, result = _trace_payload("show", "--frame-id", frame_id)
+    if not isinstance(parsed, list) or any(not isinstance(row, dict) for row in parsed):
+        raise TraceCommandError(("show", "--frame-id", frame_id), result)
     return parsed
 
 
@@ -375,11 +440,87 @@ def _is_head_conflict(exc: TraceCommandError) -> bool:
     ))
 
 
+def _is_transient_lock_failure(exc: TraceCommandError) -> bool:
+    text = json.dumps(exc.result, ensure_ascii=False).lower()
+    return "lock timeout" in text
+
+
+def _round_end_audit_completed(frame_id: str) -> bool:
+    audit = _trace("persistence-audit-show", "--frame-id", frame_id)
+    return "round_end" in (audit.get("completed_triggers") or [])
+
+
+def _finalize_receipt_frame(frame_id: str, outcome: str, verdict: str) -> None:
+    """Complete an opened receipt with reconciliation and one bounded retry."""
+    last_error = None
+    for attempt in range(FINALIZE_ATTEMPTS):
+        try:
+            if not _round_end_audit_completed(frame_id):
+                try:
+                    _trace(
+                        "persistence-audit", "--frame-id", frame_id,
+                        "--trigger", "round_end", "--decision", "not_persisted",
+                        "--reason", RECEIPT_AUDIT_REASON,
+                    )
+                except TraceCommandError:
+                    # The writer may have committed before its caller lost the
+                    # result. Re-read the public audit view before retrying.
+                    if not _round_end_audit_completed(frame_id):
+                        raise
+            try:
+                _trace(
+                    "close", "--frame-id", frame_id, "--outcome", outcome,
+                    "--verdict", verdict,
+                )
+            except TraceCommandError:
+                # Likewise, a close may have landed before stdout was lost.
+                _trace("validate", "--frame-id", frame_id, "--require-closed")
+            return
+        except TraceCommandError as exc:
+            last_error = exc
+            if attempt + 1 >= FINALIZE_ATTEMPTS or not _is_transient_lock_failure(exc):
+                raise
+            time.sleep(FINALIZE_RETRY_DELAY_SECONDS)
+    raise last_error
+
+
+def _recover_interrupted_receipt_head(frame_id: str) -> bool:
+    """Close only an exact, work-free scheduler receipt orphan.
+
+    A model or human frame is never adopted here. The recoverable shape is one
+    scheduler-owned ``frame_opened`` event and no frame work at all.
+    """
+    events = _trace_events(frame_id)
+    if len(events) != 1:
+        return False
+    opened = events[0]
+    data = opened.get("data") or {}
+    causal = data.get("causal") or {}
+    if not (
+        opened.get("event_type") == "frame_opened"
+        and opened.get("frame_id") == frame_id
+        and opened.get("workspace") == WORKSPACE
+        and data.get("problem") == RECEIPT_PROBLEM
+        and str(data.get("success_criteria") or "").startswith("episode stop=")
+        and causal.get("scope") == SCOPE
+        and causal.get("branch_id") == BRANCH
+        and causal.get("relation") == "continue"
+    ):
+        return False
+    _finalize_receipt_frame(
+        frame_id,
+        "failed",
+        "Recovered interrupted scheduler receipt: finalization did not complete; "
+        "no model wake was authorized from this receipt.",
+    )
+    return True
+
+
 def emit_receipt_frame(receipt, brief: dict) -> str:
     head = _current_head()
     open_args = [
         "open", "--level", "L2", "--scope", SCOPE, "--workspace", WORKSPACE,
-        "--problem", "bounded-scheduler wake episode (auto, reversible zone)",
+        "--problem", RECEIPT_PROBLEM,
         "--success", f"episode stop={receipt.stop_reason} structure={receipt.structure_events}",
     ]
     if head:
@@ -390,11 +531,24 @@ def emit_receipt_frame(receipt, brief: dict) -> str:
         if not head or not _is_head_conflict(first_error):
             raise _commit_failure("frame_open", first_error, attempted_parent=head)
         refreshed_head = _current_head()
-        if not refreshed_head or refreshed_head == head:
+        if not refreshed_head:
             raise _commit_failure(
                 "frame_open_stale_head", first_error,
                 attempted_parent=head, refreshed_parent=refreshed_head,
             )
+        if refreshed_head == head:
+            try:
+                recovered = _recover_interrupted_receipt_head(refreshed_head)
+            except TraceCommandError as recovery_error:
+                raise _commit_failure(
+                    "interrupted_receipt_recovery", recovery_error,
+                    attempted_parent=head, orphan_frame_id=refreshed_head,
+                )
+            if not recovered:
+                raise _commit_failure(
+                    "frame_open_stale_head", first_error,
+                    attempted_parent=head, refreshed_parent=refreshed_head,
+                )
         try:
             _trace("validate", "--frame-id", refreshed_head, "--require-closed")
         except TraceCommandError as validate_error:
@@ -415,13 +569,13 @@ def emit_receipt_frame(receipt, brief: dict) -> str:
     if not fid:
         raise FrameCommitFailure("frame_open_result", {"reason": "missing frame_id"})
     try:
-        _trace("persistence-audit", "--frame-id", fid, "--trigger", "round_end",
-               "--decision", "not_persisted",
-               "--reason", "wake receipt = ledger coordination; project truth = repo+ledger")
-        _trace("close", "--frame-id", fid, "--outcome", "success",
-               "--verdict", f"wake receipt {receipt.receipt_hash()[:12]}: "
-                            f"stop={receipt.stop_reason}, structure={receipt.structure_events}, "
-                            f"queued={len(receipt.queued_for_owner)}")
+        _finalize_receipt_frame(
+            fid,
+            "success",
+            f"wake receipt {receipt.receipt_hash()[:12]}: "
+            f"stop={receipt.stop_reason}, structure={receipt.structure_events}, "
+            f"queued={len(receipt.queued_for_owner)}",
+        )
     except TraceCommandError as exc:
         raise _commit_failure("frame_finalize", exc, frame_id=fid)
     return fid
@@ -429,7 +583,7 @@ def emit_receipt_frame(receipt, brief: dict) -> str:
 
 # --- One wake --------------------------------------------------------------
 
-def wake(commit: bool = False) -> dict:
+def _wake_once(commit: bool) -> dict:
     recall = read_ledger_state()
     recall, projection_recovery = refresh_recall_if_stale(recall)
     brief = briefing(recall)
@@ -499,6 +653,16 @@ def wake(commit: bool = False) -> dict:
     return report
 
 
+def wake(commit: bool = False) -> dict:
+    if not commit:
+        return _wake_once(False)
+    commit_lock = _acquire_wake_commit_lock()
+    try:
+        return _wake_once(True)
+    finally:
+        _release_wake_commit_lock(commit_lock)
+
+
 def main() -> int:
     try:
         sys.stdout.reconfigure(encoding="utf-8")  # observability must be readable
@@ -512,6 +676,10 @@ def main() -> int:
 
     try:
         report = wake(commit=args.commit)
+    except WakeCommitLockBusy as exc:
+        report = {"wake_commit_lock_busy": exc.as_dict()}
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 4
     except FrameCommitFailure as exc:
         report = {"frame_commit_failure": exc.as_dict()}
         print(json.dumps(report, ensure_ascii=False, indent=2))
