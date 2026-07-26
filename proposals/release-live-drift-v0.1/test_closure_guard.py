@@ -17,7 +17,10 @@ are pairs the guard refuses although nothing about them differs -- the cost of t
 refusal, printed beside the cases that justify it, so a relaxation is argued against
 running counterexamples rather than against a recollection of them.  Same reading
 rule: one that starts being accepted is good news, one that is silently removed is
-not.
+not.  It is held to one rule the not-closed section is not: a cost is only kept while
+the relaxations that would remove it are still killed by cases still running here.
+An incompleteness we cannot fix is a fact; a refusal we chose is a decision, and a
+decision has to keep paying for itself.
 
 Run: python test_closure_guard.py       (exit 0 = every case as documented)
 """
@@ -231,8 +234,32 @@ OVERCUT = [
         'def root(x: Widget = None) -> Widget:\n    return 1\nUNUSED = [1]\n',
         'from __future__ import annotations\n'
         'def root(x: Widget = None) -> Widget:\n    return 1\nUNUSED = [1, 2]\n',
+        "annotation_names_are_refused_like_any_other",
     ),
 ]
+
+# The rule the section above is held to: a retained cost is a *policy*, and a policy
+# stays only while every relaxation that would drop it is still killed by a case still
+# running in CASES.  Per category, not per sample -- a policy may cost several shapes
+# and does not owe each of them its own kill; what it owes is that the refusal is still
+# load-bearing.  Without this, "printed, not judged" lets the cost set grow forever on
+# counterexamples nobody re-runs.
+#
+# The check is mechanical and deliberately shallow: the named kill must be present in
+# CASES, must still return different values across its two revisions, and must still be
+# caught.  It does not read the sources and does not try to decide whether a
+# counterexample "really" kills the relaxation named beside it -- that judgement is the
+# reviewer's, recorded here as a name they can check.  A script guessing it would be
+# wrong quietly, which is worse than a mapping that is wrong out loud.
+OVERCUT_POLICIES = {
+    # policy -> {relaxation it refuses: the case in CASES that kills that relaxation}
+    "annotation_names_are_refused_like_any_other": {
+        "stop walking annotations":
+            "annotation_reaches_a_helper_under_postponed_annotations",
+        "walk annotations but stop refusing their unresolved names":
+            "annotation_smuggles_a_builtin_under_postponed_annotations",
+    },
+}
 
 
 def _run(source: str) -> object:
@@ -282,6 +309,7 @@ def _show(key: tuple) -> str:
 
 def main() -> int:
     failures = []
+    case_results = {}
 
     for name, src_a, src_b, must_catch in CASES:
         ka = _key(closure(src_a, ["root"]))
@@ -290,6 +318,9 @@ def main() -> int:
         caught = "unknown" in ka or "unknown" in kb or ka != kb
         behaviour_differs = va != vb
         status = "caught" if caught else "MISSED"
+        # Recorded, not re-derived: a case cited as a kill below is audited on the same
+        # run that printed it, so the two cannot drift apart.
+        case_results[name] = (caught, behaviour_differs)
         print(f"{status:8} {name:42} root(): {va} vs {vb}  hash: "
               f"{_show(ka)} vs {_show(kb)}")
         if must_catch and behaviour_differs and not caught:
@@ -306,17 +337,49 @@ def main() -> int:
         if not stable:
             failures.append(f"{name}: expected one equal, known hash, got {ka} / {kb}")
 
-    for name, src_a, src_b in OVERCUT:
+    for name, src_a, src_b, policy in OVERCUT:
         ka = _key(closure(src_a, ["root"]))
         kb = _key(closure(src_b, ["root"]))
         va, vb = _run(src_a), _run(src_b)
         accepted = "unknown" not in ka and "unknown" not in kb and ka == kb
         print(f"{'accepted!' if accepted else 'refused':8} {name:42} root(): {va} vs {vb}  "
-              f"hash: {_show(ka)} vs {_show(kb)}   (documented cost of the guard)")
+              f"hash: {_show(ka)} vs {_show(kb)}   (cost of policy: {policy})")
         # A pair whose revisions do not behave the same is not an overcut case at all,
         # so a broken fixture fails here rather than quietly widening what "cost" means.
         if va != vb:
             failures.append(f"{name}: fixture is broken, revisions return {va} then {vb}")
+        if policy not in OVERCUT_POLICIES:
+            failures.append(f"{name}: cost charged to {policy!r}, which is not a policy "
+                            f"in OVERCUT_POLICIES")
+
+    # The policy audit: every cost still has a policy paying for it, and every policy is
+    # still held up by kills that are still running and still killing.
+    charged = {policy for _, _, _, policy in OVERCUT}
+    for policy, relaxations in OVERCUT_POLICIES.items():
+        if policy not in charged:
+            failures.append(f"{policy}: retained with no cost sample in OVERCUT -- either "
+                            f"the cost is no longer paid, or a sample was dropped")
+        if not relaxations:
+            failures.append(f"{policy}: retained without naming a single relaxation it "
+                            f"refuses, so nothing can be checked against it")
+        for relaxation, kill in sorted(relaxations.items()):
+            result = case_results.get(kill)
+            if result is None:
+                verdict = "MISSING"
+                failures.append(f"{policy}: kill case {kill!r} for {relaxation!r} is not "
+                                f"in the running fixture")
+            elif not result[1]:
+                verdict = "SAME"
+                failures.append(f"{policy}: kill case {kill!r} for {relaxation!r} no "
+                                f"longer behaves differently, so it kills nothing")
+            elif not result[0]:
+                verdict = "UNCAUGHT"
+                failures.append(f"{policy}: kill case {kill!r} for {relaxation!r} is no "
+                                f"longer caught, so the relaxation is no longer refuted")
+            else:
+                verdict = "kills"
+            print(f"{verdict:8} {policy:42} refuses: {relaxation}\n"
+                  f"{'':8} {'':42} killed by: {kill}")
 
     for name, src_a, src_b in NOT_CLOSED:
         ka = _key(closure(src_a, ["root"]))
