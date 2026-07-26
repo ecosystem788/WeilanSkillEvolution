@@ -37,7 +37,13 @@ Honest limits, all of them load-bearing:
        an unlisted name is not judged, it is refused, and it is named in the report.
     3. The attribute channel, NOT complete and not completable.  Reflection through
        an imported module (sys.modules[...], importlib) is caught by a named partial
-       list; reflection written some third way is not caught at all.
+       list; reflection written some third way is not caught at all.  The list is
+       matched against what a name was *imported from*, not against how the file
+       spells it, so `import sys as s` and `from sys import modules` are the listed
+       shape and not an escape from it.  Partial is the stated limit; evadable by
+       rebinding was a false claim, and was live until this was written.  An alias
+       made by assignment rather than import (`s = sys`) still evades, and runs as a
+       NOT_CLOSED case rather than being left to a reader to discover.
 
   * The import boundary, stated because it was previously silent.  An import runs
     the imported module's top level, which is outside this file and outside this
@@ -122,6 +128,15 @@ ALLOWED_FREE_NAMES = frozenset({
 # cannot be made complete -- an imported module can offer reflection under any name.
 # It is here because the shapes that actually appear are worth catching, and because a
 # named partial detector is honester than an unstated assumption.
+#
+# The entries name *modules and their members*, not identifiers appearing in the source.
+# That distinction is load-bearing and was not always honoured: the matcher used to
+# compare the written base against the string below, so `import sys as s` renamed the
+# channel out of existence -- `s.modules[__name__]` reached a definition, both revisions
+# hashed equal and known, and the tool went on claiming this shape was caught.  Being
+# partial is a stated limit; being evadable by rebinding is a false claim, which is
+# worse.  `_import_bindings` below resolves what a local name was imported from, so the
+# list means the module regardless of what the file calls it.
 REFLECTIVE_ATTRIBUTE_PATHS = (
     ("sys", "modules"),
     ("builtins", None),
@@ -352,15 +367,87 @@ def _locally_bound(node: ast.AST) -> set[str]:
     return out
 
 
-def _reflective_paths(node: ast.AST) -> set[str]:
-    """Attribute accesses matching the partial reflection list, as dotted text."""
+def _import_bindings(nodes) -> dict[str, str]:
+    """Bound name -> the dotted thing it was imported as, over the import statements
+    among `nodes`.
+
+    `import sys` and `import sys as s` both give "sys"; `import a.b` binds `a` to "a"
+    (the attribute path continues from there); `import a.b as c` gives c -> "a.b";
+    `from a import b [as c]` gives the bound name -> "a.b", so a member lifted out of a
+    module is still known to be that member.  Relative imports are skipped: `from .
+    import x` names a package this walk cannot resolve, and guessing would put a wrong
+    module behind a right-looking name.
+
+    The caller chooses the scope: `tree.body` for the module map, `ast.walk(stmt)` for
+    the imports a single statement performs inside itself.  Both are needed, and it was
+    measured which -- `def root(): import sys as s; ...` binds nothing at module level,
+    so a module-only map leaves that spelling evading the very list it names.
+    """
+    out: dict[str, str] = {}
+    for stmt in nodes:
+        if isinstance(stmt, ast.Import):
+            for alias in stmt.names:
+                if alias.asname:
+                    out[alias.asname] = alias.name
+                else:
+                    out[alias.name.split(".")[0]] = alias.name.split(".")[0]
+        elif isinstance(stmt, ast.ImportFrom):
+            if stmt.level or not stmt.module:
+                continue
+            for alias in stmt.names:
+                if alias.name == "*":
+                    continue
+                out[alias.asname or alias.name] = f"{stmt.module}.{alias.name}"
+    return out
+
+
+def _reflective_paths(node: ast.AST, imported: dict[str, str] | None = None) -> set[str]:
+    """Uses of the partial reflection list, however the file spells them.
+
+    Three matches, and the second and third are why this is not just a text compare:
+    an attribute on a name the file imported the module under (`s.modules` after
+    `import sys as s`), and a bare name the file imported the member under
+    (`import_module` after `from importlib import import_module`) -- the latter has no
+    attribute access at all, so a matcher that only walks `ast.Attribute` cannot see it.
+    The plain written form is still matched too, so this only ever adds: a base that is
+    not an import resolves to nothing and falls back to the spelling, and nothing that
+    was refused before is now allowed.
+
+    A finding is reported as written, with what it resolved to in parentheses when the
+    two differ, so a reader can both find it in the source and see why it counted.
+
+    Imports written *inside* this statement are folded in on top of the module map, so
+    a function that imports its own alias is resolved the same way.  What is still not
+    resolved is an alias made by assignment (`s = sys`): that is dataflow, not an
+    import, and claiming it here would repeat the mistake this function just fixed.  It
+    runs as a NOT_CLOSED case in the fixture rather than being described.
+    """
+    scoped = dict(imported or {})
+    scoped.update(_import_bindings(ast.walk(node)))
     out = set()
+
+    def resolve(name: str) -> str | None:
+        return scoped.get(name)
+
     for sub in ast.walk(node):
-        if not isinstance(sub, ast.Attribute) or not isinstance(sub.value, ast.Name):
-            continue
-        for base, attr in REFLECTIVE_ATTRIBUTE_PATHS:
-            if sub.value.id == base and attr in (None, sub.attr):
-                out.add(f"{sub.value.id}.{sub.attr}")
+        if isinstance(sub, ast.Attribute) and isinstance(sub.value, ast.Name):
+            written = f"{sub.value.id}.{sub.attr}"
+            target = resolve(sub.value.id)
+            for base, attr in REFLECTIVE_ATTRIBUTE_PATHS:
+                if attr not in (None, sub.attr):
+                    continue
+                if sub.value.id == base:
+                    out.add(written)
+                elif target == base:
+                    out.add(f"{written} ({base}.{sub.attr})")
+        elif isinstance(sub, ast.Name):
+            target = resolve(sub.id)
+            if not target or target == sub.id:
+                continue
+            for base, attr in REFLECTIVE_ATTRIBUTE_PATHS:
+                if target == f"{base}.{attr}" or (attr is None
+                                                  and target.startswith(f"{base}.")):
+                    out.add(f"{sub.id} ({target})")
     return out
 
 
@@ -414,20 +501,25 @@ def _units(stmts: list[ast.stmt], reached: dict[str, list[ast.stmt]],
     return units
 
 
-def _name_channel(stmts: list[ast.stmt],
-                  binders: dict[str, list[ast.stmt]]) -> tuple[set[str], set[str]]:
-    """Free names this region cannot resolve, and reflective paths found in it."""
+def _name_channel(stmts: list[ast.stmt], binders: dict[str, list[ast.stmt]],
+                  imported: dict[str, str]) -> tuple[set[str], set[str]]:
+    """Free names this region cannot resolve, and reflective paths found in it.
+
+    `imported` is the module-level import map, so the attribute channel matches the
+    module a name was imported from rather than the identifier the file happens to use.
+    """
     unresolved: set[str] = set()
     reflective: set[str] = set()
     for stmt in stmts:
         free = _referenced_names(stmt) - _locally_bound(stmt)
         unresolved |= {n for n in free if n not in binders and n not in ALLOWED_FREE_NAMES}
-        reflective |= _reflective_paths(stmt)
+        reflective |= _reflective_paths(stmt, imported)
     return unresolved, reflective
 
 
 def closure(source: str, roots: list[str]) -> dict:
     tree = ast.parse(source)
+    imported = _import_bindings(tree.body)
 
     binders: dict[str, list[ast.stmt]] = {}
     order: dict[str, int] = {}
@@ -472,7 +564,7 @@ def closure(source: str, roots: list[str]) -> dict:
     # guard any more -- that used to be folded in here while the guard was called
     # inert, which meant one region's verdict was answering for two regions' code.
     # The guard has its own name channel below, over its own material.
-    unresolved, reflective = _name_channel(material_stmts, binders)
+    unresolved, reflective = _name_channel(material_stmts, binders, imported)
 
     # The script-entry region.  A `__main__` guard does not run at import, so it is
     # outside the measurement closure; under `python file.py` it runs as the caller,
@@ -485,7 +577,7 @@ def closure(source: str, roots: list[str]) -> dict:
     entry_material = entries + [s for s in tree.body
                                 if any(s is r for v in entry_reached.values() for r in v)
                                 and not any(s is e for e in entries)]
-    entry_unresolved, entry_reflective = _name_channel(entry_material, binders)
+    entry_unresolved, entry_reflective = _name_channel(entry_material, binders, imported)
     entry_outside = sorted(n for n in entry_reached if n not in reached)
 
     material = {
@@ -520,7 +612,8 @@ def closure(source: str, roots: list[str]) -> dict:
                 "unresolved_names": sorted(unresolved),
             },
             "attribute_channel": {
-                "policy": "named partial list of reflective paths",
+                "policy": "named partial list of reflective module members, matched "
+                          "through import bindings rather than spelling",
                 "complete": False,
                 "paths_found": sorted(reflective),
             },

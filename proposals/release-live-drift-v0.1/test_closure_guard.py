@@ -166,6 +166,48 @@ CASES = [
         '    return getattr(sys.modules[__name__], "hidden")()\n',
         True,
     ),
+    # The three below are the same listed channel written under a different name.  Each
+    # was measured evading it before the matcher resolved imports: equal and *known*
+    # hash, root() returning 2 and 3.  The one above does not cover them -- it is also
+    # caught by `getattr` on the bare-name channel, so it would keep passing with the
+    # attribute channel switched off entirely.  These do not name getattr.
+    (
+        "reflection_via_sys_modules_under_an_import_alias",   # import X as y
+        'import sys as s\ndef hidden():\n    return 2\ndef root():\n'
+        '    return s.modules[__name__].hidden()\n',
+        'import sys as s\ndef hidden():\n    return 3\ndef root():\n'
+        '    return s.modules[__name__].hidden()\n',
+        True,
+    ),
+    (
+        "reflection_via_a_from_imported_module_member",   # from X import member
+        'from sys import modules\ndef hidden():\n    return 2\ndef root():\n'
+        '    return modules[__name__].hidden()\n',
+        'from sys import modules\ndef hidden():\n    return 3\ndef root():\n'
+        '    return modules[__name__].hidden()\n',
+        True,
+    ),
+    (
+        # No attribute access anywhere: the reflective thing is a bare call.  A matcher
+        # that only walks ast.Attribute cannot see this shape at all.
+        "reflection_via_a_from_imported_reflective_helper",
+        'from importlib import import_module\ndef hidden():\n    return 2\ndef root():\n'
+        '    return import_module(__name__).hidden()\n',
+        'from importlib import import_module\ndef hidden():\n    return 3\ndef root():\n'
+        '    return import_module(__name__).hidden()\n',
+        True,
+    ),
+    (
+        # Not a fourth spelling of the same fix: the alias is bound inside the function,
+        # so a module-level-only import map does not have it.  Measured evading after
+        # the first three were caught, which is why the map is also read per statement.
+        "reflection_via_an_alias_imported_inside_the_function",
+        'def hidden():\n    return 2\ndef root():\n'
+        '    import sys as s\n    return s.modules[__name__].hidden()\n',
+        'def hidden():\n    return 3\ndef root():\n'
+        '    import sys as s\n    return s.modules[__name__].hidden()\n',
+        True,
+    ),
 ]
 
 # Pairs that must NOT be flagged: prose and unrelated edits must leave the hash alone,
@@ -200,6 +242,15 @@ STABLE = [
 # module's attribute that is not on the partial reflection list, so every guard passes
 # and the hash is equal while root() returns 2 in one revision and 3 in the other.
 # This is the gap the docstring claims exists; here it is, running.
+#
+# The second case is a narrower and less comfortable gap than the first.  The first is
+# an admitted limit of a list that cannot be completed.  The second is a *listed* module
+# reached under a name the file gave it by assignment rather than by import -- the
+# attribute channel now resolves import bindings, so `import sys as s` no longer evades,
+# but `import sys` followed by `s = sys` does.  Closing it means following assignments,
+# which is dataflow and a different tool; naming it in a docstring instead would be the
+# same unverifiable claim the import fix was written to remove.  So it runs here, where
+# it fails loudly if someone later believes the channel is spelling-proof.
 NOT_CLOSED = [
     (
         "reflection_via_an_unlisted_module_attribute",
@@ -207,6 +258,13 @@ NOT_CLOSED = [
         'def root():\n    return inspect.currentframe().f_globals["hidden"]()\n',
         'import inspect\ndef hidden():\n    return 3\n'
         'def root():\n    return inspect.currentframe().f_globals["hidden"]()\n',
+    ),
+    (
+        "reflection_via_a_listed_module_aliased_by_assignment",
+        'import sys\ns = sys\ndef hidden():\n    return 2\n'
+        'def root():\n    return s.modules[__name__].hidden()\n',
+        'import sys\ns = sys\ndef hidden():\n    return 3\n'
+        'def root():\n    return s.modules[__name__].hidden()\n',
     ),
 ]
 
