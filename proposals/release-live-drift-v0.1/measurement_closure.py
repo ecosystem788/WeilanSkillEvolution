@@ -54,7 +54,7 @@ Honest limits, all of them load-bearing:
        a cost, not a miss, and an OVERCUT case with the kill that keeps it.  The two
        must not be filed together; the sections differ in what they assert.
 
-       By attribute name: a name no ordinary object carries -- `__globals__`,
+       By attribute name: a name that is a *function/frame convention* -- `__globals__`,
        `f_globals` -- is refused wherever it is read, with no test on the base.  This
        axis exists because the module list structurally could not reach these: the
        base is a call (`inspect.currentframe().f_globals`), or the member is unlisted
@@ -62,9 +62,13 @@ Honest limits, all of them load-bearing:
        was measured: `X.__globals__` yields this module's namespace off a def, off an
        assignment alias, off a local lambda and off a parameter alike, so a rule
        keyed on the base's provenance catches one of four and looks principled doing
-       it.  What bounds this axis is the membership rule, not a judgement about which
-       names matter: `__dict__` is excluded because ordinary objects carry it, and
-       any name nobody has run a counterexample on is unlisted rather than cleared.
+       it.  Convention is not exclusivity: an ordinary object may spell the same name,
+       and then the refusal is wrong.  That is a cost, it is charged as one, and the
+       claim it replaces -- "a name no ordinary object carries" -- read as a fact about
+       Python when it was a bet about how people write.  What bounds this axis is the
+       membership rule: `__dict__` is excluded because ordinary objects carry it
+       routinely, and any name nobody has run a counterexample on is unlisted rather
+       than cleared.
 
   * The import boundary, stated because it was previously silent.  An import runs
     the imported module's top level, which is outside this file and outside this
@@ -174,8 +178,15 @@ REFLECTIVE_ATTRIBUTE_PATHS = (
 )
 
 # A second channel on a different axis, and the membership rule is the whole of it: an
-# attribute name that *no ordinary object carries*, so reading it is by itself evidence
-# that a namespace is being fetched.  Matched regardless of what the base is.
+# attribute name that is a *function/frame convention*, so reading it is ordinarily
+# evidence that a namespace is being fetched.  Matched regardless of what the base is.
+#
+# "Ordinarily", and the gap in that word is charged rather than talked away.  The rule
+# first landed claiming these are names *no ordinary object carries*, which is a fact
+# about Python and is false: `class Box: __globals__ = {...}` compiles, and the guard
+# then refuses a pair whose two revisions are the same program.  Codex's probe on
+# 39164b2 found it; it runs as an OVERCUT cost sample rather than as a sentence, because
+# the version of it that was a sentence had already been wrong for a commit.
 #
 # Not a second spelling of the list above.  That one names modules and needs the base
 # resolved; this one needs no base at all, which is why it reaches shapes the other
@@ -201,8 +212,16 @@ REFLECTIVE_ATTRIBUTE_PATHS = (
 # is where that shape currently falls; it is not a claim that it always will.
 #
 # Absence is a refusal to guess here exactly as it is in ALLOWED_FREE_NAMES: `f_locals`,
-# `__closure__` and the rest are unlisted because nobody has run a counterexample on
-# them, not because they were judged safe.  The list grows by measurement.
+# `__closure__`, `__subclasses__` and the rest are unlisted because nobody has run a
+# counterexample on them, not because they were judged safe.
+#
+# The list grows by measurement, and after the probe above that means measurement on
+# both sides.  Admitting a name costs two runs, not one: the escape it closes, and the
+# ordinary same-named attribute it will now refuse -- registered as a cost sample if one
+# can be written, and if none can be, that is a finding worth stating rather than a step
+# to skip.  One-sided admission is how a list gets washed by time into whatever its
+# authors found plausible: every entry looks measured, because the half that would have
+# argued was never run.
 REFLECTIVE_ATTRIBUTE_NAMES = frozenset({"__globals__", "f_globals"})
 
 _NESTED_SCOPES = (

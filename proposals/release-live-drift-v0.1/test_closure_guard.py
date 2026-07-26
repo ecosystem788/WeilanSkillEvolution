@@ -348,6 +348,11 @@ NOT_CLOSED = [
 # prints and asserts nothing, so a cost parked there would be a cost nobody is charged
 # for, which is exactly how a debt gets read as a limit later.  Here it is charged, and
 # the policy below has to keep proving the refusal is still load-bearing.
+#
+# The third shape was found the same way one commit later, and the pattern in that is
+# worth more than either sample: both times a rule was landed with a sentence standing in
+# for the cost, and both times the sentence was the part that was wrong.  A refusal
+# justified in prose reads as free until someone writes the program it refuses.
 OVERCUT = [
     (
         "forward_reference_under_postponed_annotations",
@@ -364,6 +369,21 @@ OVERCUT = [
         'import sys as s\nclass Box:\n    modules = 1\n'
         'def root():\n    s = Box()\n    return s.modules\nUNUSED = [1, 2]\n',
         "import_resolution_is_not_scoped",
+    ),
+    (
+        # The third shape, and the one that says the second attribute axis is a bet
+        # rather than a fact.  `REFLECTIVE_ATTRIBUTE_NAMES` landed at 39164b2 calling
+        # its members names *no ordinary object carries*; Codex's probe wrote an
+        # ordinary object that carries one.  Both revisions are the same program and
+        # root() returns 1 either way, and both are refused.  The `__dict__` STABLE
+        # cell above does not cover this: it only kills adding a *shared* name to the
+        # list, and prices nothing about refusing an unshared one unconditionally.
+        "ordinary_object_carrying_an_unshared_reflective_name",
+        'def root():\n    class Box:\n        __globals__ = {"value": 1}\n'
+        '    return Box().__globals__["value"]\nUNUSED = [1]\n',
+        'def root():\n    class Box:\n        __globals__ = {"value": 1}\n'
+        '    return Box().__globals__["value"]\nUNUSED = [1, 2]\n',
+        "unshared_reflective_names_are_refused_unqualified",
     ),
 ]
 
@@ -397,6 +417,24 @@ OVERCUT_POLICIES = {
     "import_resolution_is_not_scoped": {
         "skip the import resolution when the base name is locally bound":
             "reflection_via_an_alias_imported_inside_the_function",
+    },
+    # Two relaxations, because a reader meeting this cost has two exits and they are not
+    # the same repair.  The first narrows the rule; the second deletes it.  Both would
+    # drop the cost, so the policy owes a kill to each.
+    "unshared_reflective_names_are_refused_unqualified": {
+        # The narrowing: clear the match when the base is not function- or frame-shaped
+        # -- here a call to a class defined two lines up.  Whatever static test stands in
+        # for "function-shaped", a local lambda bound to a local name is on the same side
+        # of it as `Box()` is, and the namespace comes back regardless.  This is the same
+        # kill that already refutes provenance-keyed narrowing, cited twice because the
+        # relaxations differ even though the counterexample does not.
+        "qualify the name match by what the base looks like":
+            "function_globals_off_a_base_with_no_module_binding",
+        # The deletion: drop the name axis and let the module list carry the attribute
+        # channel alone, which is what the file did before 39164b2.  The base here is a
+        # *call*, so no base-resolving matcher can see it however long the list gets.
+        "drop the name axis and leave the module list to cover it":
+            "reflection_via_frame_globals",
     },
 }
 
