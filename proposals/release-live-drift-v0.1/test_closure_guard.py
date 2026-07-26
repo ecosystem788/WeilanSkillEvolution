@@ -20,7 +20,9 @@ rule: one that starts being accepted is good news, one that is silently removed 
 not.  It is held to one rule the not-closed section is not: a cost is only kept while
 the relaxations that would remove it are still killed by cases still running here.
 An incompleteness we cannot fix is a fact; a refusal we chose is a decision, and a
-decision has to keep paying for itself.
+decision has to keep paying for itself.  That rule is enforced by the only check here
+whose subject is this file rather than the tool, so it is itself checked, on invented
+facts, every run -- see AUDIT_SELFTEST.
 
 Run: python test_closure_guard.py       (exit 0 = every case as documented)
 """
@@ -262,6 +264,95 @@ OVERCUT_POLICIES = {
 }
 
 
+def _audit_overcut_policies(case_results, charged, policies) -> list:
+    """The audit as a function of the facts alone, so it can be run on made-up facts.
+
+    `case_results` maps a case name to (caught, behaviour_differs); `charged` is the
+    (cost sample, policy) pairs OVERCUT declares; `policies` is the mapping above.
+    Returns one finding per thing checked, as
+    (verdict, policy, relaxation, kill, failure), where `failure` is None exactly when
+    the verdict is "kills".  Nothing here reads a source or runs a module: the caller
+    collects the facts, this decides what they mean.
+    """
+    findings = []
+    charged_policies = {policy for _, policy in charged}
+
+    for sample, policy in charged:
+        if policy not in policies:
+            findings.append(("STRAY", policy, None, None,
+                             f"{sample}: cost charged to {policy!r}, which is not a "
+                             f"policy in OVERCUT_POLICIES"))
+
+    for policy, relaxations in policies.items():
+        if policy not in charged_policies:
+            findings.append(("UNPAID", policy, None, None,
+                             f"{policy}: retained with no cost sample in OVERCUT -- "
+                             f"either the cost is no longer paid, or a sample was dropped"))
+        if not relaxations:
+            findings.append(("VACUOUS", policy, None, None,
+                             f"{policy}: retained without naming a single relaxation it "
+                             f"refuses, so nothing can be checked against it"))
+        for relaxation, kill in sorted(relaxations.items()):
+            result = case_results.get(kill)
+            if result is None:
+                findings.append(("MISSING", policy, relaxation, kill,
+                                 f"{policy}: kill case {kill!r} for {relaxation!r} is not "
+                                 f"in the running fixture"))
+            elif not result[1]:
+                findings.append(("SAME", policy, relaxation, kill,
+                                 f"{policy}: kill case {kill!r} for {relaxation!r} no "
+                                 f"longer behaves differently, so it kills nothing"))
+            elif not result[0]:
+                findings.append(("UNCAUGHT", policy, relaxation, kill,
+                                 f"{policy}: kill case {kill!r} for {relaxation!r} is no "
+                                 f"longer caught, so the relaxation is no longer refuted"))
+            else:
+                findings.append(("kills", policy, relaxation, kill, None))
+
+    return findings
+
+
+# The audit is the only check in this file whose subject is the file itself, and it fails
+# open: a bug in it keeps printing `kills` beside a policy nothing kills any more, and
+# nothing else in the run would object.  So it is checked on facts that are made up
+# rather than measured -- the one place here where a fixture is allowed to be fiction,
+# because the thing under test consumes facts and does not produce them.
+#
+# The expected column is written out by hand, not derived: a table that computed what to
+# expect would be the audit again, and would agree with any bug that was in both.  This
+# replaces a throwaway driver that produced six mutant *copies of the file* by string
+# substitution -- it proved the same six branches once and then stopped existing, and it
+# would have gone stale silently the first time a line it patched was reworded.
+_HOLDS = {"kill_one": (True, True), "kill_two": (True, True)}   # (caught, differs)
+_TWO_RELAXATIONS = {"a_policy": {"r1_relaxation": "kill_one",
+                                 "r2_relaxation": "kill_two"}}
+_ONE_COST = [("a_cost_sample", "a_policy")]
+
+AUDIT_SELFTEST = [
+    # (name, case_results, charged, policies, expected verdicts in order)
+    ("baseline_every_kill_still_kills",
+     _HOLDS, _ONE_COST, _TWO_RELAXATIONS, ("kills", "kills")),
+    ("kill_renamed_out_of_the_fixture",
+     {"kill_two": (True, True)}, _ONE_COST, _TWO_RELAXATIONS, ("MISSING", "kills")),
+    ("kill_no_longer_behaves_differently",
+     {"kill_one": (True, False), "kill_two": (True, True)},
+     _ONE_COST, _TWO_RELAXATIONS, ("SAME", "kills")),
+    # The branch that earns the section: a kill that stops being caught while sitting in
+    # CASES with must_catch=False is invisible to the CASES loop, and this is the only
+    # thing that objects.
+    ("kill_still_present_but_no_longer_caught",
+     {"kill_one": (False, True), "kill_two": (True, True)},
+     _ONE_COST, _TWO_RELAXATIONS, ("UNCAUGHT", "kills")),
+    ("policy_with_no_cost_sample_left",
+     _HOLDS, [], _TWO_RELAXATIONS, ("UNPAID", "kills", "kills")),
+    ("cost_charged_to_an_undeclared_policy",
+     _HOLDS, [("a_cost_sample", "a_policy_nobody_declared")], _TWO_RELAXATIONS,
+     ("STRAY", "UNPAID", "kills", "kills")),
+    ("policy_that_refuses_nothing",
+     _HOLDS, _ONE_COST, {"a_policy": {}}, ("VACUOUS",)),
+]
+
+
 def _run(source: str) -> object:
     """What root() actually returns: by import, or by script if there is a guard.
 
@@ -348,38 +439,33 @@ def main() -> int:
         # so a broken fixture fails here rather than quietly widening what "cost" means.
         if va != vb:
             failures.append(f"{name}: fixture is broken, revisions return {va} then {vb}")
-        if policy not in OVERCUT_POLICIES:
-            failures.append(f"{name}: cost charged to {policy!r}, which is not a policy "
-                            f"in OVERCUT_POLICIES")
+
+    # The audit checked before it is believed, on made-up facts.
+    for name, results, charged, policies, expect in AUDIT_SELFTEST:
+        findings = _audit_overcut_policies(results, charged, policies)
+        got = tuple(verdict for verdict, _, _, _, _ in findings)
+        print(f"{'audit' if got == expect else 'SELFTEST':8} {name:42} "
+              f"{' '.join(got) or '(nothing)'}")
+        if got != expect:
+            failures.append(f"audit self-test {name}: expected {expect}, got {got}")
+        # A verdict that carries no failure is a verdict nothing acts on, and a `kills`
+        # that carries one would fail a fixture that is fine.  Checked here rather than
+        # spelled out per row: it is a property of every finding, not a fact about one.
+        for verdict, _, _, _, failure in findings:
+            if (verdict == "kills") != (failure is None):
+                failures.append(f"audit self-test {name}: verdict {verdict} with "
+                                f"failure={failure!r}")
 
     # The policy audit: every cost still has a policy paying for it, and every policy is
     # still held up by kills that are still running and still killing.
-    charged = {policy for _, _, _, policy in OVERCUT}
-    for policy, relaxations in OVERCUT_POLICIES.items():
-        if policy not in charged:
-            failures.append(f"{policy}: retained with no cost sample in OVERCUT -- either "
-                            f"the cost is no longer paid, or a sample was dropped")
-        if not relaxations:
-            failures.append(f"{policy}: retained without naming a single relaxation it "
-                            f"refuses, so nothing can be checked against it")
-        for relaxation, kill in sorted(relaxations.items()):
-            result = case_results.get(kill)
-            if result is None:
-                verdict = "MISSING"
-                failures.append(f"{policy}: kill case {kill!r} for {relaxation!r} is not "
-                                f"in the running fixture")
-            elif not result[1]:
-                verdict = "SAME"
-                failures.append(f"{policy}: kill case {kill!r} for {relaxation!r} no "
-                                f"longer behaves differently, so it kills nothing")
-            elif not result[0]:
-                verdict = "UNCAUGHT"
-                failures.append(f"{policy}: kill case {kill!r} for {relaxation!r} is no "
-                                f"longer caught, so the relaxation is no longer refuted")
-            else:
-                verdict = "kills"
+    charged = [(name, policy) for name, _, _, policy in OVERCUT]
+    for verdict, policy, relaxation, kill, failure in _audit_overcut_policies(
+            case_results, charged, OVERCUT_POLICIES):
+        if relaxation is not None:
             print(f"{verdict:8} {policy:42} refuses: {relaxation}\n"
                   f"{'':8} {'':42} killed by: {kill}")
+        if failure is not None:
+            failures.append(failure)
 
     for name, src_a, src_b in NOT_CLOSED:
         ka = _key(closure(src_a, ["root"]))
