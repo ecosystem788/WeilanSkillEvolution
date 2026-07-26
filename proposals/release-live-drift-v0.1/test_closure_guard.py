@@ -37,6 +37,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import measurement_closure  # noqa: E402
 from measurement_closure import REFLECTIVE_ATTRIBUTE_NAMES, closure  # noqa: E402
 
 BASE = 'def root():\n    return 1\n'
@@ -667,6 +668,119 @@ _AUDIT_NAME_SELFTEST = [
 ]
 
 
+def _audit_name_causality(observations) -> list:
+    """Whether a cost sample is refused *because of* the spelling it is charged to.
+
+    The audit above counts a debt paid when some OVERCUT sample declares the name and
+    the pair comes back refused.  Those two facts sitting side by side are not the
+    proposition it is buying: `REFLECTIVE_ATTRIBUTE_NAMES` costs what it costs because
+    reading that word is by itself enough to refuse, and a sample that some *other* rule
+    would have refused anyway shows a declaration and a refusal that have nothing to do
+    with each other.  The books would still be green, and nothing would have been
+    measured -- which is the failure the per-name audit was written to end, one level
+    down.  Codex's judgement on b59360b, and the reason that commit was not frozen.
+
+    So each observation carries the pair run both ways:
+    (name, sample, refused_with, refused_without, same_behaviour), where
+    `refused_without` is the same pair under the live set minus this one spelling.
+    Returns (verdict, name, sample, failure), `failure` None exactly on "causal".
+
+    Strict per sample, not per name: a sample two rules refuse does not isolate this
+    name's cost even when a sibling sample does, and the repair is to write a sample
+    that isolates it rather than to let the sibling answer for both.  That leniency is
+    the exact shape of the bug being closed here, one register up.
+
+    Facts in, verdict out -- runs nothing, reads nothing.
+    """
+    findings = []
+    for name, sample, refused_with, refused_without, same_behaviour in observations:
+        if not same_behaviour:
+            findings.append(("BROKEN", name, sample,
+                             f"{sample}: revisions do not behave alike, so it is not a "
+                             f"cost sample and cannot price {name}"))
+        elif not refused_with:
+            findings.append(("UNREFUSED", name, sample,
+                             f"{sample}: counted as pricing {name} but the pair is "
+                             f"accepted -- there is no refusal here to charge"))
+        elif refused_without:
+            findings.append(("NONCAUSAL", name, sample,
+                             f"{sample}: still refused with {name} withheld from "
+                             f"REFLECTIVE_ATTRIBUTE_NAMES, so another rule is doing the "
+                             f"refusing and this sample prices nothing about {name}"))
+        else:
+            findings.append(("causal", name, sample, None))
+    return findings
+
+
+def _closure_without(name: str, source: str) -> dict:
+    """`closure` on one source with a single spelling withheld from the live set.
+
+    The detector is not edited and not copied: the set it reads is rebound on the module
+    for the length of one call and put back.  Everything else -- the match, the report,
+    the sources -- is the code that ships.
+
+    The withheld set has to be exactly one name smaller, and that is checked rather than
+    assumed: if a future revision snapshots the set somewhere this rebinding does not
+    reach, the probe would compare a pair against itself and call every refusal
+    non-causal.  That direction is loud (the live samples red), but the message would
+    point at the samples instead of at the probe.
+    """
+    live = measurement_closure.REFLECTIVE_ATTRIBUTE_NAMES
+    withheld = frozenset(live) - {name}
+    if len(withheld) != len(live) - 1:
+        raise AssertionError(f"withholding {name} did not remove exactly one spelling")
+    measurement_closure.REFLECTIVE_ATTRIBUTE_NAMES = withheld
+    try:
+        return closure(source, ["root"])
+    finally:
+        measurement_closure.REFLECTIVE_ATTRIBUTE_NAMES = live
+
+
+_CAUSALITY_SELFTEST = [
+    # (name, observations, expected verdicts in order)
+    ("refusal_goes_away_when_the_name_is_withheld",
+     [("a_name", "s_a", True, False, True)], ("causal",)),
+    # The branch this check exists for.
+    ("another_rule_refuses_the_same_pair",
+     [("a_name", "s_a", True, True, True)], ("NONCAUSAL",)),
+    ("a_sample_that_is_not_refused_at_all",
+     [("a_name", "s_a", False, False, True)], ("UNREFUSED",)),
+    ("revisions_that_do_not_behave_alike",
+     [("a_name", "s_a", True, False, False)], ("BROKEN",)),
+    ("no_sample_declares_the_name", [], ()),
+]
+
+# And the same two directions on real sources, because the table above is facts the
+# probe never produced.  A monkeypatch that silently stopped taking would report
+# NONCAUSAL for everything and a probe that never refused would report UNREFUSED for
+# everything; one row each means the failure names itself instead of arriving as a
+# confusing red beside the live samples.
+#
+# The second row is also the counterexample to the audit one level up: it declares
+# `f_globals` in a class body exactly as the OVERCUT sample does, so
+# `_audit_reflective_name_costs` would count it as paying the debt -- while the refusal
+# is `sys.modules`, present either way, and the spelling is charged nothing.  It is
+# deliberately not in OVERCUT: a cost sample that prices nothing is what this whole
+# check is for, so it lives here as the thing being detected.
+_CAUSALITY_LIVE_SELFTEST = [
+    # (name, spelling probed, source A, source B, expected verdict)
+    ("the_spelling_is_the_only_thing_refusing",
+     "f_globals",
+     'def root():\n    class Box:\n        f_globals = {"value": 1}\n'
+     '    return Box().f_globals["value"]\nUNUSED = [1]\n',
+     'def root():\n    class Box:\n        f_globals = {"value": 1}\n'
+     '    return Box().f_globals["value"]\nUNUSED = [1, 2]\n',
+     "causal"),
+    ("the_module_channel_refuses_it_either_way",
+     "f_globals",
+     'import sys\ndef root():\n    class Box:\n        f_globals = {"value": 1}\n'
+     '    _ = sys.modules\n    return Box().f_globals["value"]\nUNUSED = [1]\n',
+     'import sys\ndef root():\n    class Box:\n        f_globals = {"value": 1}\n'
+     '    _ = sys.modules\n    return Box().f_globals["value"]\nUNUSED = [1, 2]\n',
+     "NONCAUSAL"),
+]
+
+
 def _run(source: str) -> object:
     """What root() actually returns: by import, or by script if there is a guard.
 
@@ -813,6 +927,57 @@ def main() -> int:
     for verdict, name, samples, failure in _audit_reflective_name_costs(
             REFLECTIVE_ATTRIBUTE_NAMES, declaring):
         print(f"{verdict:8} {name:42} priced by: {', '.join(samples) or '(nothing)'}")
+        if failure is not None:
+            failures.append(failure)
+
+    # One level under that audit, and the reason b59360b was not frozen: a declaration
+    # and a refusal standing side by side are not yet the claim being bought.  What the
+    # membership rule prices is that reading the *spelling* is by itself enough to
+    # refuse, so each sample is run a second time with its spelling withheld from the
+    # live set and nothing else changed.  A refusal that survives that belongs to some
+    # other rule, and the sample was paying for a name it never cost.
+    #
+    # Verdict logic first, on facts nothing produced, then two live rows in both
+    # directions, then the samples the fixture actually charges.
+    for label, observations, expect in _CAUSALITY_SELFTEST:
+        findings = _audit_name_causality(observations)
+        got = tuple(verdict for verdict, _, _, _ in findings)
+        print(f"{'causal' if got == expect else 'SELFTEST':8} {label:42} "
+              f"{' '.join(got) or '(nothing)'}")
+        if got != expect:
+            failures.append(f"causality self-test {label}: expected {expect}, got {got}")
+        for verdict, _, _, failure in findings:
+            well_formed = (failure is None if verdict == "causal"
+                           else isinstance(failure, str) and bool(failure.strip()))
+            if not well_formed:
+                failures.append(f"causality self-test {label}: verdict {verdict} with "
+                                f"failure={failure!r}")
+
+    def probe(name, src_a, src_b):
+        """(refused with the spelling, refused without it, revisions behave alike)."""
+        with_a, with_b = _key(closure(src_a, ["root"])), _key(closure(src_b, ["root"]))
+        without_a = _key(_closure_without(name, src_a))
+        without_b = _key(_closure_without(name, src_b))
+        refused = lambda ka, kb: "unknown" in ka or "unknown" in kb or ka != kb
+        return (refused(with_a, with_b), refused(without_a, without_b),
+                _run(src_a) == _run(src_b))
+
+    for label, name, src_a, src_b, expect in _CAUSALITY_LIVE_SELFTEST:
+        (verdict, _, _, _), = _audit_name_causality(
+            [(name, label) + probe(name, src_a, src_b)])
+        print(f"{'causal' if verdict == expect else 'SELFTEST':8} {label:42} "
+              f"withholding {name}: {verdict}")
+        if verdict != expect:
+            failures.append(f"causality live self-test {label}: expected {expect}, "
+                            f"got {verdict}")
+
+    observed = [(name, sample) + probe(name, src_a, src_b)
+                for sample, src_a, src_b, _ in OVERCUT
+                for name in sorted(REFLECTIVE_ATTRIBUTE_NAMES
+                                   & (_declared_attribute_names(src_a)
+                                      | _declared_attribute_names(src_b)))]
+    for verdict, name, sample, failure in _audit_name_causality(observed):
+        print(f"{verdict:8} {name:42} refused by its own spelling in: {sample}")
         if failure is not None:
             failures.append(failure)
 
