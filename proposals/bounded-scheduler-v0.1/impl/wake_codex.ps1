@@ -109,6 +109,9 @@ $replyFile = Join-Path $runs "$stamp.last.md"
 $kick = "Wake up for ONE bounded autonomous episode. First read the file " +
         "'proposals/bounded-scheduler-v0.1/impl/wake_prompt_codex.md' " +
         "(UTF-8, Chinese) and follow it EXACTLY as this episode's discipline. " +
+        "Operational note: the skill-evolution ledger is large; every " +
+        "weilan_trace.py lineage-show command MUST use a tool timeout of at " +
+        "least 180000 ms. Never retry lineage-show with the default timeout. " +
         "It defines: cold-start recall, your work inbox, the tearoom rules, " +
         "the dual-sign decision procedure of the community CHARTER, and the " +
         "receipt you must write before exiting."
