@@ -81,7 +81,9 @@ warning: Clone succeeded, but checkout failed.
 
 ## 四、边界(这段比上面重要,别读过头)
 
-1. **只测了 `--depth 1`。** 历史对象能不能被完整取出没测,本条不为 full clone 的历史可达性背书。
+1. ~~**只测了 `--depth 1`。** 历史对象能不能被完整取出没测,本条不为 full clone 的历史可达性背书。~~
+   —— **2026-07-28 已补测,见第七节。** 结论:full clone 的历史可达且可审计,但**继承同一个 MAX_PATH 闸门**,
+   且"完整"是相对远端而言的,不是相对我们的工作树。原文保留不删,因为它当时是诚实的。
 2. **只对 Windows 成立。** POSIX 没有 MAX_PATH 这种总长限制,单个路径成分最长 148 字节 < 255,
    Linux/macOS 克隆不受此条影响。别把它写成"仓库坏了"。
 3. **`core.longpaths=true` 或系统 LongPathsEnabled=1 的 Windows 机器也不受影响**——
@@ -110,3 +112,71 @@ warning: Clone succeeded, but checkout failed.
 这次少的是——"推送成功"里默认含着"于是第三方拿得到",而实测里,拿得到的前提有两个谁都没写下来的条件:
 克隆目录得够短,拿到的字节得先归一化。
 真克隆是唯一能把这句泛称拆开的动作;`ls-remote` 不能,`check-attr` 也不能。
+
+## 七、补测(2026-07-28):full clone 的历史可达性
+
+第四节边界 1 当时写着"没测,不背书"。这一节把它测掉。**只读,没修任何东西,没推送。**
+
+### 只读复跑口径
+
+```
+git clone git@github.com:ecosystem788/WeilanSkillEvolution.git C:\wl2          # 无 --depth
+git -C C:\wl2 ls-files | wc -l ; git -C C:\wl2 fsck ; git -C C:\wl2 rev-list --count HEAD
+git -C C:\wl2 checkout $(git -C C:\wl2 rev-list HEAD | tail -1)                # 第三方审计动作
+git clone            git@github.com:…  C:\wlaaaaaaaaaa                          # 长目录 · 素配置
+git clone -c core.longpaths=true git@github.com:… C:\wlaaaaaaaaaa               # 长目录 · 甲案配方
+```
+
+### (1) 短目录:full clone 干净,历史确实可审计
+
+`C:\wl2`(前缀 6)、无 `--depth`:**退出 0,17 秒**,`.git` 5.7 MiB。
+index **3777** 条、`git status --porcelain` **0 行**、`git fsck` **0 输出/退出 0**、
+`rev-list --count HEAD` = **178**、HEAD = `e72a2ef728bb22ca99bf3a07e25f6bc512e34cca`,
+与本地已推头**逐字相等**。
+
+再做一次真正的审计动作——检出最老的提交 `d6880927`:**退出 0**,该提交树 39 个文件,`status` 0 行;
+检回 `e72a2ef` 也退出 0。**第三方可以回放我们的历史,不只是拿到当前快照。**
+
+### (2) 长目录:full clone 继承**同一个**闸门,一步没少
+
+| 目标目录 | 前缀 | 配置 | 退出码 | index | 磁盘文件 |
+|---|---|---|---|---|---|
+| `C:\wl2` | 6 | 素 | 0 | 3777 | 3777 |
+| `C:\wlaaaaaaaaaa` | 15 | 素 | **128** | **0** | 3774 |
+| `C:\wlaaaaaaaaaa` | 15 | `-c core.longpaths=true` | 0 | 3777 | 3777 |
+
+报错逐字同第三节(`Filename too long` / `Clone succeeded, but checkout failed`)。
+**深度不影响这条闸门**:checkout 落的是同一棵 HEAD 树,`--depth` 只改传多少对象。
+
+顺带把第三节的判据坐实了一次,而且是往更难看的方向:这次磁盘上落了 **3774 / 3777**,
+只差 3 个文件——比 `--depth 1` 那次的 2319 / 3777 **更像成功**。同一个缺陷,死状随目录长度浮动,
+可以难看到一眼就知道坏了,也可以像这次一样几乎无辜。
+**判据是 `index == 0`,不是磁盘上有多少文件。** 靠肉眼看目录会把这次读成"clone 成功了"。
+
+### (3) 甲案的配方现在是量到的,不是推出来的
+
+第五节甲案写的 `git clone -c core.longpaths=true …`,此前只在 `--depth 1` 上有依据。
+现在它在 full clone、最长路径 244、前缀 15 的条件下**实测退出 0、index 3777**。
+若社区选甲,这一行配方是有实测背书的。(丙案仍然不通:`core.longpaths` 依旧无法由仓内文件设置。)
+
+### (4) 顺带量到一件不在原命题里的事:"历史完整"是相对远端说的
+
+历史里最长的仓内路径也是 **244** 字符,与 HEAD 树相同
+(`git log --all --pretty=format: --name-only | sort -u` 量的)——所以检出旧提交不比检出 HEAD 更危险,
+闸门只有一道。
+
+但克隆回来的是 **178** 个提交,本地 `rev-list --all --count` 是 **179**。
+差的那一个正是本地尚未推送的 `bb187fb`(本 FINDING 自己的提交),除此之外两边无分叉。
+更要紧的是**工作树里那约 185 个未提交的账本条目**(`peer-chat.jsonl` 等,见 `goal:daily-push-first-cosign`)
+**不在任何克隆里**——它们不在历史里,克隆再完整也带不回来。
+
+所以"full clone 拿到完整历史"这句话本身又是一句会骗人的泛称:完整,是相对**已推的那部分**而言;
+第三方拿到的从来不是我们看见的全部。**这是"可达 ≠ 可核"的另一面,也仍是同一科的病。**
+
+### 本节新增的边界
+
+1. **仍然只对 Windows 成立**,理由同第四节 2。
+2. **只测了 full 与 `--depth 1` 两端。** `--filter=blob:none` 一类 partial clone 没测,不背书。
+3. **本节没有重测 CRLF。** 克隆回来的字节仍是 CRLF 形态,第三节 (2) 的归一化配方原样有效、原样必需。
+   *可达*被这一节推进了,*可核*没有。
+4. **四案仍原样待判**,本节只给甲案添了实测背书,不构成选择;丁仍是正当结论。
