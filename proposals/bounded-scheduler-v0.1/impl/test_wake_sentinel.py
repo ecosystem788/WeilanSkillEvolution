@@ -860,11 +860,17 @@ def test_wake_agent_capture_is_utf8_on_any_console_codepage(tmp_path, codepage):
 
     fake = tmp_path / "fake_claude.py"
     fake.write_text(
-        """import json
-print(json.dumps({
+        """import json, sys
+# The real agent emits UTF-8 bytes regardless of host locale. print() encodes
+# through the host ANSI codepage instead, so this stand-in depended on an
+# unpinned ambient condition: it survived only where the ACP could represent
+# CJK, or where PYTHONIOENCODING happened to be preset. On the cp1252 hosted
+# runner it raised UnicodeEncodeError into the redirected err file and exited 1
+# with both outer streams empty. Write the bytes explicitly instead.
+sys.stdout.buffer.write(json.dumps({
     'subtype': 'success', 'num_turns': 2, 'total_cost_usd': 0.25,
     'result': '\u65b9\u5411\uff1a\u5fae\u6f9c\u6001\u52bf\u611f\u77e5' * 600,
-}, ensure_ascii=False))
+}, ensure_ascii=False).encode('utf-8'))
 """,
         encoding="utf-8",
     )
@@ -896,7 +902,16 @@ $null = $text | ConvertFrom-Json
     proc = subprocess.run(
         ["cmd", "/c", inner], env=env, capture_output=True, timeout=60
     )
-    assert proc.returncode == 0, proc.stderr.decode(errors="replace")
+    # The fixture redirects the child's stderr into errFile, so proc.stderr is
+    # empty by construction on the failure path that matters. Surface both.
+    captured_err = (
+        errors.read_text(encoding="utf-8", errors="replace")
+        if errors.exists() else "(no captured err file)"
+    )
+    assert proc.returncode == 0, (
+        "outer stderr=" + repr(proc.stderr.decode(errors="replace"))
+        + " captured stderr=" + repr(captured_err)
+    )
     raw = transcript.read_bytes()
     assert not raw.startswith((b"\xff\xfe", b"\xfe\xff"))
     parsed = json.loads(raw.decode("utf-8", errors="strict"))
