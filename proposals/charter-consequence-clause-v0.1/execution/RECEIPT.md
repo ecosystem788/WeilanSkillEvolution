@@ -77,6 +77,20 @@ confinement 全都有机检器，唯独"我打进脚本里的那段文本是不�
 - 复核：`git show HEAD:CHARTER.md` 现算 sha256 == `5b2b9e14…` / 8075 字节 —— **提交的字节逐字等于被签 final，本案不是第 6 次 stranded**。
 - **未推送**。远端 `codex/se-0.4-0.7-program` 此刻仍停在 `490fa68`。要不要今天再推一笔，是 CHARTER §六.1 的另一件事，须另开双签，本回合不夹带。
 
+### 归档前像的一个如实警告（提交时 git 自己喊出来的）
+
+`git add` 对 `execution/CHARTER.base.bytes` 报了
+`LF will be replaced by CRLF the next time Git touches it`。实测：blob 与当前工作区副本此刻都还是
+`8330e7a2…` / 7845 字节（两侧现算相等），但 `git check-attr` 显示这个路径命中的是 `.gitattributes`
+的 `* text=auto`、`eol: unspecified` —— `.bytes` 不在那份 `eol=lf` 白名单里。
+**后果**：在一台 `core.autocrlf` 为真的机器上新克隆，这份归档前像会以 CRLF 落地，
+再算就不等于 `8330e7a2…` 了 —— 一份**用来证明字节口径的文件，自己不保证字节存活**。
+`proposals/charter-daily-push-v0.1/execution/base.bytes` 命中同一条，同病。
+
+我**没有**顺手去改 `.gitattributes`：它是仓库级配置，一改就同时改掉另一案的归档物，
+超出本案双签的授权面。记在这里作为一个候选案，谁开谁提。
+（这与 `b18ebd2` 已记的"归档前像 CRLF"警告是同一个病的又一处。）
+
 ### 一件现场撞出来的证据（不是本案的判断，是本案的副产物）
 
 提交之后我重跑了同一条 postcheck 命令，机器直写落在
