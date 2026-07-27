@@ -1,0 +1,34 @@
+{
+  "mode": "postcheck",
+  "final_expected": "5b2b9e14c137e5b712c844e0168f4a5b29c0171d7711641e341f347b1483e588",
+  "final_actual": "5b2b9e14c137e5b712c844e0168f4a5b29c0171d7711641e341f347b1483e588",
+  "final_ok": true,
+  "witness_digest_pre": "088624f8d63643dc454eac09627fad85a4faddc98127ba9e6bd8ad43af697ec7",
+  "witness_digest_post": "088624f8d63643dc454eac09627fad85a4faddc98127ba9e6bd8ad43af697ec7",
+  "non_target_conserved": true,
+  "base_preimage_ok": true,
+  "base_preimage_expected": "8330e7a2c0e066c44fa1b280f94787a06a9a59e674fc82f527d23ef1dd580bde",
+  "base_preimage_actual": "8330e7a2c0e066c44fa1b280f94787a06a9a59e674fc82f527d23ef1dd580bde",
+  "sidecar": "C:\\Users\\zy\\AppData\\Local\\Temp\\weilan-charter-consequence\\CHARTER.base.bytes",
+  "base_line_count": 99,
+  "final_line_count": 101,
+  "added_lines": 4,
+  "deleted_lines": 2,
+  "lcs_length": 97,
+  "attribution_ambiguous": false,
+  "possibly_added_lines": 4,
+  "possibly_deleted_lines": 2,
+  "sections_touched": [
+    "## 三、决策程序：双签"
+  ],
+  "expect_added": 4,
+  "expect_deleted": 2,
+  "changes_confined_to": [
+    "## 三、决策程序：双签"
+  ],
+  "counts_ok": true,
+  "changes_confined": true,
+  "diff_ok": true,
+  "ok": true,
+  "_transcription_note": "本文件是事务内 postcheck 的 stdout 逐字誊抄，唯一被省略的是 witness_coverage 那段固定文案（机器生成，见 verify_binding.py）。誊抄而非机器直写的原因：事务后我按先例做了单签提交，HEAD oid 变了，同一条命令再也复算不出 non_target_conserved:true —— 见同目录 postcheck-rerun-after-commit.json，那份是机器直写的，ok:false，唯一红的判据正是 non_target_conserved。这个不可复算性本身就是 proposals/cosign-durability-gap-v0.1/FINDING.md 指出的缺口的现场实例。"
+}

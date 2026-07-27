@@ -1,0 +1,62 @@
+{
+  "mode": "postcheck",
+  "final_expected": "5b2b9e14c137e5b712c844e0168f4a5b29c0171d7711641e341f347b1483e588",
+  "final_actual": "5b2b9e14c137e5b712c844e0168f4a5b29c0171d7711641e341f347b1483e588",
+  "final_ok": true,
+  "witness_digest_pre": "088624f8d63643dc454eac09627fad85a4faddc98127ba9e6bd8ad43af697ec7",
+  "witness_digest_post": "b20529e67004f1287f5dc02c54705e643a81675083e1e927762d1857a0c28d5f",
+  "non_target_conserved": false,
+  "witness_coverage": {
+    "covered": [
+      "status(-z -uall) 列出的每条非 target 路径：XY 两位状态字母",
+      "同上每条路径的工作区原始字节 sha256（不存在记 ABSENT）",
+      "同上每条路径的 index 条目：各 stage 的 mode,oid,stage（不在 index 记 ABSENT）",
+      "for-each-ref **列出的**每条引用（refname → objectname）",
+      "同上每条引用的符号目标（symbolic ref 记目标 refname，direct ref 记哨兵 DIRECT）",
+      "HEAD 的符号名与 oid（游离/未出生有哨兵值）"
+    ],
+    "not_covered": [
+      "被 .gitignore 命中的路径（不进 -uall；无界且高频抖动，见 CONVENTION §5.3.f）",
+      "refs/ 之外的伪引用（ORIG_HEAD/FETCH_HEAD/MERGE_HEAD 等；HEAD 除外，它由 H 腿单钉）——实测 for-each-ref 不列出它们",
+      "reflog（.git/logs/），以及 for-each-ref 不列出的悬空 symbolic ref——实测：symbolic ref 指向不存在的 ref 时该条整行不出现",
+      "object database 内部：gc/repack/prune、不可达对象",
+      ".git/ 下的配置与 hooks（config、hooks、worktrees 注册）",
+      "文件系统元数据：mtime、权限/ACL、扩展属性（index mode 位之外）",
+      "仓库根之外的一切（执行期制品按 §5.3.d 恰恰住在那里）",
+      "子模块内部状态（只见 gitlink oid）"
+    ]
+  },
+  "base_preimage_ok": true,
+  "base_preimage_expected": "8330e7a2c0e066c44fa1b280f94787a06a9a59e674fc82f527d23ef1dd580bde",
+  "base_preimage_actual": "8330e7a2c0e066c44fa1b280f94787a06a9a59e674fc82f527d23ef1dd580bde",
+  "sidecar": "C:\\Users\\zy\\AppData\\Local\\Temp\\weilan-charter-consequence\\CHARTER.base.bytes",
+  "base_line_count": 99,
+  "final_line_count": 101,
+  "added_lines": 4,
+  "deleted_lines": 2,
+  "lcs_length": 97,
+  "attribution_ambiguous": false,
+  "possibly_added_lines": 4,
+  "possibly_deleted_lines": 2,
+  "sections_touched": [
+    "## 三、决策程序：双签"
+  ],
+  "expect_added": 4,
+  "expect_deleted": 2,
+  "changes_confined_to": [
+    "## 三、决策程序：双签"
+  ],
+  "counts_ok": true,
+  "changes_confined": true,
+  "diff_ok": true,
+  "ok": false,
+  "drift": [
+    "+H\trefs/heads/codex/se-0.4-0.7-program\te9ef907d8edad8f1b9cefd72695f55bdc7953c5d",
+    "+R\trefs/heads/codex/se-0.4-0.7-program\te9ef907d8edad8f1b9cefd72695f55bdc7953c5d\tDIRECT",
+    "+S\t??\tproposals/charter-consequence-clause-v0.1/execution/postcheck-receipt.json\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\tABSENT",
+    "-H\trefs/heads/codex/se-0.4-0.7-program\t490fa6824b79903440c2548825ed725a54d73b1d",
+    "-R\trefs/heads/codex/se-0.4-0.7-program\t490fa6824b79903440c2548825ed725a54d73b1d\tDIRECT"
+  ],
+  "drift_truncated": false,
+  "reason": "见证覆盖面内的非 target 差量非零（S=状态/工作区字节/index 条目，R=引用，H=HEAD）→ 不得宣称落地，按 §5.2 写回 sidecar 回滚。并发导致的保守失败可接受；禁止清仓凑通过。"
+}
