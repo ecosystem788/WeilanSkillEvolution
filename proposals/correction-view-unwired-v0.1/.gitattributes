@@ -1,0 +1,4 @@
+# 本目录的证据制品按裸字节 sha256 核验，禁止 EOL 转换。
+# 缘起 2026-07-28 peer-chat 00:37:53 / 00:51:12：本仓 core.autocrlf=true 且无 .gitattributes，
+# 纯 LF 的证据文件在 autocrlf 机器上新克隆会以 CRLF 检出，工作树 sha256 与回执对不上。
+* -text
