@@ -10,7 +10,34 @@ param(
 
 $ErrorActionPreference = "Stop"
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$repo = "D:\WeilanSkillEvolution"
+
+function Resolve-CheckoutRoot([string]$ScriptDir) {
+    # Derive the checkout root from this script's own location instead of
+    # hardcoding one machine's path.  The hardcoded form made the wrapper die at
+    # Set-Location in every other clone -- including the hosted CI checkout under
+    # D:\a\<repo>\<repo> -- so the cron capture regression could not be brought
+    # within reach of CI at all (2026-07-27 coverage-debt finding, arm E).
+    # Require the ancestor to carry this repository's markers, so a wrong root
+    # fails loudly here rather than running the heartbeat from somewhere else.
+    $dir = (Resolve-Path -LiteralPath $ScriptDir).Path
+    while ($true) {
+        $charter = Join-Path $dir "CHARTER.md"
+        $impl = Join-Path $dir "proposals\bounded-scheduler-v0.1\impl"
+        if ((Test-Path -LiteralPath $charter -PathType Leaf) -and
+            (Test-Path -LiteralPath $impl -PathType Container)) {
+            return $dir
+        }
+        $parent = Split-Path -Parent $dir
+        if (-not $parent -or $parent -eq $dir) {
+            throw ("run_wake_cron.ps1: cannot derive the checkout root from " +
+                "'$ScriptDir' -- no ancestor carries CHARTER.md and " +
+                "proposals\bounded-scheduler-v0.1\impl")
+        }
+        $dir = $parent
+    }
+}
+
+$repo = Resolve-CheckoutRoot $here
 if (-not $WakeScript) { $WakeScript = Join-Path $here "wake.py" }
 if (-not $LogPath) { $LogPath = Join-Path $here "wake-cron.log" }
 if (-not $WakeAgentScript) { $WakeAgentScript = Join-Path $here "wake_agent.ps1" }
