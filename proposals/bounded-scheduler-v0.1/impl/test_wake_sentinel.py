@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -812,6 +813,28 @@ print(json.dumps(report, ensure_ascii=False, indent=2))
     assert " wake ok " in log_text and "静默" in log_text, log_text
 
 
+def _wake_agent_uses_single_cmd_owned_redirection(source):
+    assignments = re.findall(r"(?mi)^\s*\$commandLine\s*=", source)
+    blocks = list(re.finditer(
+        r'''(?ms)^\s*\$commandLine\s*=\s*\(\s*(['"])([^\r\n]*?)\1\s*-f\s*\r?\n'''
+        r'''\s*\$env:ComSpec,\s*\$agentPayload,\s*\$outFile,\s*\$errFile\s*\)''',
+        source,
+    ))
+    if len(assignments) != 1 or len(blocks) != 1:
+        return False
+    block = blocks[0]
+    template = block.group(2)
+    outside_block = source[:block.start()] + source[block.end():]
+    return (
+        '"{0}" /d /s /c ' in template
+        and '1>"{2}"' in template
+        and '2>"{3}"' in template
+        and template.count("1>") == 1
+        and template.count("2>") == 1
+        and not re.search(r"(?mi)^\s*&\s*claude\b[^\r\n]*[12]>", outside_block)
+    )
+
+
 @pytest.mark.parametrize("codepage", [65001, 936])
 def test_wake_agent_capture_is_utf8_on_any_console_codepage(tmp_path, codepage):
     wrapper_source = (HERE / "wake_agent.ps1").read_text(encoding="utf-8")
@@ -822,6 +845,18 @@ def test_wake_agent_capture_is_utf8_on_any_console_codepage(tmp_path, codepage):
     assert "new-object system.text.utf8encoding($false, $true)" in wrapper_source.lower()
     assert "--model claude-opus-5" in wrapper_source
     assert "--effort high" in wrapper_source
+    assert _wake_agent_uses_single_cmd_owned_redirection(wrapper_source)
+
+    cmd_owned_block = '''    $commandLine = ('"{0}" /d /s /c "{1} 1>"{2}" 2>"{3}""' -f
+        $env:ComSpec, $agentPayload, $outFile, $errFile)
+    $contained = Start-ContainedCommand $commandLine'''
+    powershell_owned_mutant = '''    $contained = $null
+    & claude -p $agentPayload 1> $outFile 2> $errFile
+    $rc = $LASTEXITCODE'''
+    assert cmd_owned_block in wrapper_source
+    mutant_source = wrapper_source.replace(cmd_owned_block, powershell_owned_mutant)
+    assert mutant_source != wrapper_source
+    assert not _wake_agent_uses_single_cmd_owned_redirection(mutant_source)
 
     fake = tmp_path / "fake_claude.py"
     fake.write_text(

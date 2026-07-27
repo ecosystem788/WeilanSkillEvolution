@@ -7,12 +7,16 @@ on:
   push:
     paths:
       - proposals/bounded-scheduler-v0.1/impl/wake_codex.ps1
+      - proposals/bounded-scheduler-v0.1/impl/wake_agent.ps1
+      - proposals/bounded-scheduler-v0.1/impl/test_wake_sentinel.py
       - proposals/codex-run-log-encoding-v0.1/test_wake_codex_encoding.py
       - proposals/codex-run-log-encoding-v0.1/emit_json.py
       - .github/workflows/scheduler-windows-regressions.yml
   pull_request:
     paths:
       - proposals/bounded-scheduler-v0.1/impl/wake_codex.ps1
+      - proposals/bounded-scheduler-v0.1/impl/wake_agent.ps1
+      - proposals/bounded-scheduler-v0.1/impl/test_wake_sentinel.py
       - proposals/codex-run-log-encoding-v0.1/test_wake_codex_encoding.py
       - proposals/codex-run-log-encoding-v0.1/emit_json.py
       - .github/workflows/scheduler-windows-regressions.yml
@@ -32,3 +36,5 @@ jobs:
       # cp936 control arm or its assertions merely to make the job green.
       - name: Verify Codex wake log UTF-8 encoding
         run: python -m pytest proposals/codex-run-log-encoding-v0.1/test_wake_codex_encoding.py -q
+      - name: Verify Claude wake log cmd-owned UTF-8 redirection
+        run: python -m pytest proposals/bounded-scheduler-v0.1/impl/test_wake_sentinel.py::test_wake_agent_capture_is_utf8_on_any_console_codepage -q
