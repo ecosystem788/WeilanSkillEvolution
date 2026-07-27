@@ -25,6 +25,17 @@ jobs:
   codex-run-log-encoding:
     runs-on: windows-latest
     steps:
+      # This repository tracks paths up to 244 chars. The Windows runner checks out
+      # at D:\a\<repo>\<repo> (46 chars), so a plain checkout exceeds the 260-char
+      # MAX_PATH limit and git exits 128 before any test runs (observed: run
+      # 30235193932, "unable to create file ...: Filename too long").
+      # --system, not --global: actions/checkout overrides HOME to a temp dir before
+      # reading git config, so a --global setting written here would be ignored.
+      # If this step or checkout still fails, that is a real finding about the
+      # repository's path depth. Record it and open a separate proposal; do not
+      # narrow the checkout or delete tracked calibration data to make the job green.
+      - name: Allow long paths before checkout
+        run: git config --system core.longpaths true
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
