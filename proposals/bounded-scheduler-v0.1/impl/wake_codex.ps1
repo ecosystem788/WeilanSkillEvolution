@@ -116,8 +116,10 @@ $kick = "Wake up for ONE bounded autonomous episode. First read the file " +
         "the dual-sign decision procedure of the community CHARTER, and the " +
         "receipt you must write before exiting."
 
+$previousOutputEncoding = [Console]::OutputEncoding
 try {
     $ErrorActionPreference = "Continue"
+    [Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false)
     & codex exec `
         --skip-git-repo-check `
         -C $repo `
@@ -138,5 +140,6 @@ catch {
     exit 1
 }
 finally {
+    [Console]::OutputEncoding = $previousOutputEncoding
     Remove-Item -Path $lockFile -Force -ErrorAction SilentlyContinue
 }
