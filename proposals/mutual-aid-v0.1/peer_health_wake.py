@@ -181,6 +181,111 @@ def _run_stamp_as_utc(path: Path) -> datetime:
     return parsed.replace(tzinfo=LOCAL_TZ).astimezone(timezone.utc)
 
 
+def _decode_codex_run(path: Path, parse_errors: list[dict]) -> str | None:
+    """Decode one Codex run by its BOM; unreadable runs are visible but never active."""
+    try:
+        raw = path.read_bytes()
+    except OSError as exc:
+        parse_errors.append(
+            parse_diagnostic(
+                path,
+                1,
+                "read_failure",
+                f"{type(exc).__name__}: {exc}",
+                b"",
+                0,
+            )
+        )
+        return None
+
+    if raw.startswith(b"\xff\xfe"):
+        encoding = "utf-16"
+    elif raw.startswith(b"\xef\xbb\xbf"):
+        encoding = "utf-8-sig"
+    else:
+        encoding = "utf-8"
+    try:
+        return raw.decode(encoding)
+    except UnicodeDecodeError as exc:
+        parse_errors.append(
+            parse_diagnostic(
+                path,
+                1,
+                "decode_failure",
+                f"{type(exc).__name__}: {exc}",
+                raw,
+                0,
+            )
+        )
+        return None
+
+
+def _codex_run_is_authentic(path: Path, parse_errors: list[dict]) -> bool:
+    """Require evidence that the model executed, rather than evidence that cron fired."""
+    text = _decode_codex_run(path, parse_errors)
+    if text is None:
+        return False
+
+    authentic = False
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError as exc:
+            parse_errors.append(
+                parse_diagnostic(
+                    path,
+                    line_number,
+                    "invalid_json",
+                    f"{type(exc).__name__}: {exc}",
+                    line.encode("utf-8", errors="replace"),
+                    0,
+                )
+            )
+            continue
+        if not isinstance(row, dict):
+            parse_errors.append(
+                parse_diagnostic(
+                    path,
+                    line_number,
+                    "not_object",
+                    "TypeError: JSONL row must be an object",
+                    line.encode("utf-8", errors="replace"),
+                    0,
+                )
+            )
+            continue
+        if row.get("type") == "turn.completed":
+            authentic = True
+            continue
+        if row.get("type") != "item.completed":
+            continue
+        item = row.get("item")
+        item_type = item.get("type") if isinstance(item, dict) else None
+        if isinstance(item_type, str) and item_type != "error":
+            authentic = True
+    return authentic
+
+
+def _newest_authentic_codex_run(
+    root: Path, parse_errors: list[dict]
+) -> tuple[datetime, str] | None:
+    """Open runs newest-to-oldest and stop at the newest model-executed run."""
+    runs = sorted(
+        (root / CODEX_HEARTBEAT_RUNS).glob("*.jsonl"),
+        key=_run_stamp_as_utc,
+        reverse=True,
+    )
+    for path in runs:
+        if _codex_run_is_authentic(path, parse_errors):
+            return (
+                _run_stamp_as_utc(path),
+                f"{CODEX_HEARTBEAT_RUNS}/{path.name} (codex executed run)",
+            )
+    return None
+
+
 def _claude_activity_anchor(
     root: Path,
     parse_errors: list[dict],
@@ -430,13 +535,10 @@ def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float
                     activities.append(
                         (stamp, f"{name}:{line_number}@{row['time']} (codex activity)")
                     )
-        path = root / CODEX_HEARTBEAT_RUNS  # keeps a read failure here honestly attributed
-        run_activities = [
-            (_run_stamp_as_utc(run_path), f"{CODEX_HEARTBEAT_RUNS}/{run_path.name} (codex wake run)")
-            for run_path in path.glob("*.jsonl")
-        ]
-        if run_activities:
-            activities.append(max(run_activities, key=lambda item: item[0]))
+        path = root / CODEX_HEARTBEAT_RUNS  # keeps a directory read failure honestly attributed
+        run_activity = _newest_authentic_codex_run(root, parse_errors)
+        if run_activity is not None:
+            activities.append(run_activity)
     except (OSError, UnicodeError) as exc:
         return CheckResult(
             orphan_alerts,

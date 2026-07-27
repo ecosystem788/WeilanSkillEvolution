@@ -26,12 +26,28 @@ def fixture(root: Path, activity_time="2026-07-12 10:55:00", replied=False):
         )
 
 
-def codex_runs(root: Path, *stamps: str) -> None:
-    """Tool-generated Codex wake-run filenames: the forward side's trustworthy anchor."""
+def codex_runs(root: Path, *stamps: str, executed: bool = True, encoding: str = "utf-16") -> None:
+    """Write either model-executed or fire-only Codex runs in the real JSONL shape."""
     runs = root / "wake-codex-runs"
     runs.mkdir(parents=True, exist_ok=True)
+    rows = (
+        [
+            {"type": "turn.started"},
+            {"type": "item.completed", "item": {"id": "item_0", "type": "agent_message"}},
+            {"type": "turn.completed"},
+        ]
+        if executed
+        else [
+            {"type": "turn.started"},
+            {"type": "item.completed", "item": {"id": "item_0", "type": "error"}},
+            {"type": "turn.failed", "error": {"message": "tls handshake eof"}},
+        ]
+    )
+    payload = "".join(json.dumps(row) + "\n" for row in rows)
     for stamp in stamps:
-        (runs / f"{stamp.replace(' ', 'T').replace(':', '-')}.jsonl").write_text("", encoding="utf-8")
+        (runs / f"{stamp.replace(' ', 'T').replace(':', '-')}.jsonl").write_text(
+            payload, encoding=encoding
+        )
 
 
 def alerts(root):
@@ -148,7 +164,7 @@ def test_forward_future_authored_activity_falls_back_to_run_anchor_and_still_jud
     assert len(result) == 1 and result[0]["event"] == "raised"
     assert result.activity_anchor == {
         "time_utc": "2026-07-11T10:00:00+00:00",
-        "source_ref": "wake-codex-runs/2026-07-11T19-00-00.jsonl (codex wake run)",
+        "source_ref": "wake-codex-runs/2026-07-11T19-00-00.jsonl (codex executed run)",
     }
     assert result[0]["silence"]["silence_hours"] == 16
     assert result[0]["backlog"]["items"] == ["job-a"]
@@ -178,7 +194,7 @@ def test_forward_backfilled_authored_append_cannot_displace_run_anchor(tmp_path)
     assert result.clock_anomaly is None
     assert result.activity_anchor == {
         "time_utc": "2026-07-12T01:55:00+00:00",
-        "source_ref": "wake-codex-runs/2026-07-12T10-55-00.jsonl (codex wake run)",
+        "source_ref": "wake-codex-runs/2026-07-12T10-55-00.jsonl (codex executed run)",
     }
     assert alerts(tmp_path) == []
 
@@ -319,6 +335,56 @@ def test_silent_pending_raises_once_and_is_idempotent(tmp_path):
     assert first[0]["silence"]["source_ref"] and first[0]["backlog"]["source_ref"]
     assert run_check(root=tmp_path, now=NOW) == []
     assert len(alerts(tmp_path)) == 1
+
+
+def test_failed_wake_files_do_not_make_six_hour_alert_unreachable(tmp_path):
+    fixture(tmp_path, activity_time="2026-07-11 01:00:00")
+    codex_runs(tmp_path, "2026-07-12 04:30:00")
+    failed_stamps = [
+        (NOW.astimezone(timezone(timedelta(hours=9))) - timedelta(minutes=9 * offset))
+        .strftime("%Y-%m-%d %H:%M:%S")
+        for offset in range(27)
+    ]
+    codex_runs(tmp_path, *failed_stamps, executed=False)
+
+    result = run_check(root=tmp_path, now=NOW, threshold_hours=6)
+
+    assert len(result) == 1 and result[0]["event"] == "raised"
+    assert result.activity_anchor == {
+        "time_utc": "2026-07-11T19:30:00+00:00",
+        "source_ref": "wake-codex-runs/2026-07-12T04-30-00.jsonl (codex executed run)",
+    }
+    assert result[0]["silence"]["silence_hours"] == 6.5
+    assert result[0]["backlog"]["items"] == ["job-a"]
+
+
+def test_authentic_run_younger_than_threshold_does_not_raise(tmp_path):
+    fixture(tmp_path, activity_time="2026-07-11 01:00:00")
+    codex_runs(tmp_path, "2026-07-12 06:18:00")
+    codex_runs(tmp_path, "2026-07-12 10:55:00", executed=False)
+
+    result = run_check(root=tmp_path, now=NOW, threshold_hours=6)
+
+    assert result == []
+    assert result.activity_anchor["time_utc"] == "2026-07-11T21:18:00+00:00"
+    assert alerts(tmp_path) == []
+
+
+def test_unreadable_newer_run_is_visible_and_does_not_mask_authentic_anchor(tmp_path):
+    fixture(tmp_path, activity_time="2026-07-11 01:00:00")
+    codex_runs(tmp_path, "2026-07-12 04:30:00", encoding="utf-8")
+    runs = tmp_path / "wake-codex-runs"
+    (runs / "2026-07-12T10-55-00.jsonl").write_bytes(b"\xffbroken")
+
+    result = run_check(root=tmp_path, now=NOW, threshold_hours=6)
+
+    assert len(result) == 1 and result[0]["event"] == "raised"
+    assert result.activity_anchor["source_ref"].endswith(
+        "2026-07-12T04-30-00.jsonl (codex executed run)"
+    )
+    assert len(result.parse_errors) == 1
+    assert result.parse_errors[0]["source"].endswith("2026-07-12T10-55-00.jsonl")
+    assert result.parse_errors[0]["reason_code"] == "decode_failure"
 
 
 def test_reply_clears_backlog_and_resolves_once(tmp_path):
