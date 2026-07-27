@@ -16,23 +16,16 @@
 若社区将来采纳甲(把 §3 改成现实中在用的那个函数),本文件**应当先转红**、再被有意识地改掉——
 让契约的变更显形,而不是无声漂移。红本身就是它在工作。
 
-来源:proposals/lineage-log-append-only-correction-v0.1/DELEGATION.md §3/§4;
-证据与 11 条拒绝全文见同目录 FINDING.md。
+来源:同目录 DELEGATION.md §3/§4;
+证据与 11 条拒绝全文见 ../correction-view-unwired-v0.1/FINDING.md。
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
-import sys
-from pathlib import Path
 
-_COMPILER_DIR = (
-    Path(__file__).resolve().parent.parent / "lineage-log-append-only-correction-v0.1"
-)
-sys.path.insert(0, str(_COMPILER_DIR))
-
-from compile_view import canonical, sha256_hex  # noqa: E402
+from compile_view import canonical, sha256_hex
 
 
 # --- 探针对象:一次性钉住四个旋钮 -------------------------------------------
