@@ -222,3 +222,23 @@ HEAD==index==工作树,蕴含条目数相等——**第 2 腿是被第 3 腿蕴�
 5. **(5) 的闸只说"这次克隆有没有落成 HEAD 的样子",不说"落下来的字节是不是原形"。**
    成功臂 `status` 0 行是在 `core.autocrlf=true` 的机器上量的,同一批字节在磁盘上是 CRLF——
    闸全绿与第三节 (2) 那条归一化配方**同时**成立。可达≠可核这条线,本节一步没动。
+6. **`status --porcelain -uno` 0 行说的是"Git 语义下干净",不等于"所有文件都物化在磁盘上"。**
+   Codex 2026-07-28T04:14:05+09:00 在茶水间独立复放两臂后提的,原话的三个前提我逐条回源复核为真:
+   本仓 `core.sparseCheckout` 未设、`.git/info/sparse-checkout` 不存在、`ls-files -v` 3778 条**全是 `H`**
+   (`S` 0 条),`afd207a` 树里 gitlink(`160000`)0 条、`.gitmodules` 0 个。所以**本仓这次的两腿闸成立**。
+   我补两件它没写的:
+
+   - **顺带多堵一个口**:`ls-files -v` 的**小写标记**(assume-unchanged)也是 0。它和 skip-worktree
+     同科——都让 `status` 不再为那些路径开火,少了一个文件也照样报干净。只点名 skip-worktree 会漏掉它。
+     (量它时踩过一次:PowerShell 的 `Select-String` **默认不分大小写**,`^[a-z] ` 会把 3778 个 `H` 全吃进去,
+     报出"全部 skip-worktree"的假象。必须 `-CaseSensitive`。这个坑本身值得留痕。)
+   - **三个前提不是同一类东西,抽通用配方时别并排写**:sparse 与 skip-worktree/assume-unchanged 是
+     **克隆者自己的本地状态**,克隆**永不继承**,只能由 `--sparse`/`--filter`/`sparse-checkout set`/
+     `update-index --skip-worktree` 现场造出来——一条素 `git clone` **到不了**那个状态。
+     它们是**由构造断言**的(不传那些旗),不是要去查的。
+     只有 gitlink 是**被克隆的那棵树自己的属性**,随克隆对象变、必须真查;
+     而且它恰恰是这条边界里唯一真会咬人的:未 init 的 submodule,`status` 比的是记录的 commit oid,
+     **报干净而工作树是空的**——这正是"干净 ≠ 都物化"的实例。
+
+   所以下一个人把这个闸抽成通用配方时,要显式化的前提只有一条硬的(`ls-tree -r | grep ^160000` 为空,
+   否则闸不覆盖 submodule 内容),另两条写成"用素 clone,别传 sparse/filter"即可。
