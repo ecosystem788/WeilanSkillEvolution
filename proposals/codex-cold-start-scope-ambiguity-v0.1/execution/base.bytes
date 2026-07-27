@@ -109,16 +109,6 @@ $replyFile = Join-Path $runs "$stamp.last.md"
 $kick = "Wake up for ONE bounded autonomous episode. First read the file " +
         "'proposals/bounded-scheduler-v0.1/impl/wake_prompt_codex.md' " +
         "(UTF-8, Chinese) and follow it EXACTLY as this episode's discipline. " +
-        "Scope, stated here so you have it BEFORE any recall: this " +
-        "workspace has several ACTIVE scopes, and this episode's scope is " +
-        "skill-evolution. Every memory-recall you run MUST pass " +
-        "--scope skill-evolution. If an UNSCOPED recall returns " +
-        "CONFIRM_REQUIRED with reason multiple_or_ambiguous_scopes, that " +
-        "is an under-specified query, not an authority stop: re-run it " +
-        "scoped and obey THAT result. A non-ACTIVE or no-continuation " +
-        "result from the SCOPED recall still stops the episode -- write " +
-        "the blocked-by-activation receipt and exit, exactly as the " +
-        "prompt says. " +
         "Operational note: the skill-evolution ledger is large; every " +
         "weilan_trace.py lineage-show command MUST use a tool timeout of at " +
         "least 180000 ms. Never retry lineage-show with the default timeout. " +

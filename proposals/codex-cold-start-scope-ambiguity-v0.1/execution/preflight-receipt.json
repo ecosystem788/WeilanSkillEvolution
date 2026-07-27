@@ -1,0 +1,10 @@
+{
+  "mode": "preflight",
+  "ok": true,
+  "target": "proposals/bounded-scheduler-v0.1/impl/wake_codex.ps1",
+  "base": "8a963022c34977b17f0d1e6b46ba8761f729df9b7ab984d5df468c056c4f20b8",
+  "sidecar": "C:/Users/zy/AppData/Local/Temp/weilan-exec-scope-kick/base.bytes",
+  "sidecar_present": true,
+  "witness_digest_pre": "539921541d51c1cc3a3ea412767443506ea7b0caee6817d04c72e07e6d1d043e",
+  "non_target_entries": 261
+}

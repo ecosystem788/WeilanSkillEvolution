@@ -1,0 +1,5 @@
+old_block_lines 4
+new_block_lines 14
+expect_added 10
+expect_deleted 0
+basis base file is a subsequence of final file => LCS == len(base)
