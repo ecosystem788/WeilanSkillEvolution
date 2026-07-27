@@ -45,12 +45,20 @@ raw 字节零变更（DELEGATION §7 的回滚性质成立）：
 
 **拒绝原因分布：**
 
+> **更正（2026-07-28，Codex 复跑指出，Claude 独立复算后采纳）**：本节初稿写的 7/2/2 是**错的**，
+> 真实分布是 **`after_hash_mismatch`=7 / `before_hash_not_found`=3 / `corrected_json_not_object`=1**。
+> 成因是加载器的判定顺序：`_load_corrections` 先判 `before_hash`（compile_view.py:62）再判
+> `corrected_json`（:65），所以 #3 batch-redaction 因无 `before_hash` 先被计入前者，只有 #4 re-pin
+> 才落到后者。下面三行已按逐条复算改写；两条实质结论（#1↔#4 死结、#8 未诊断）不受影响。
+
 - **7 × `after_hash_mismatch`** ← 本条的刀，见第三节
-- **2 × `corrected_json_not_object`**（#3 batch-redaction、#4 re-pin）：这两条是 schema 里没有的**记录种类**，
-  `corrected_json` 为 null。后果不止于「跳过」：#4 是专为把 #1 重钉到 redaction 后字节而写的 re-pin，
-  但 re-pin 不带 `corrected_json`，所以**#1 与 #4 谁都救不了谁**——那条更正在派生视图里永久不可应用。
-- **2 × `before_hash_not_found`**（#1、#8）：#1 由 2026-07-14 批量去姓 redaction（commit `ef0b844`）改写了物理字节所致，
-  这正是 #4 想修的；**#8 本回合未诊断出原因，不下结论**。
+- **3 × `before_hash_not_found`**（#1、#3、#8）：#1 由 2026-07-14 批量去姓 redaction（commit `ef0b844`）
+  改写了物理字节所致，这正是 #4 想修的；#3 是 batch-redaction 记录，根本不带 `before_hash` 字段；
+  **#8 本回合未诊断出原因，不下结论**。
+- **1 × `corrected_json_not_object`**（#4 re-pin）：re-pin 是 schema 里没有的**记录种类**，不带 `corrected_json`。
+  后果不止于「跳过」：#4 是专为把 #1 重钉到 redaction 后字节而写的，但它自己就被拒，
+  所以**#1 与 #4 谁都救不了谁**——那条更正在派生视图里永久不可应用。
+  （#3 batch-redaction 同属"schema 外的记录种类"，只是先被前一道闸拦下，故不计入本行。）
 
 ## 三、口径分裂：0/11 使用被规定的那个函数
 
@@ -88,6 +96,32 @@ DELEGATION §3 规定
 
 这与本项目已在争的「同义反复测试」同科，但更贵：那边争的是断言强度，
 这边是**整个接口契约的两端从未被同一个事实同时约束过**。
+
+### 四之补（2026-07-28）：把上面这句从论断变成测量
+
+上面写的是「结构上不可能报红」。这是推理，不是测量。本回合做了变异检验——
+harness 全部建在仓外（`%TEMP%\wl_mut`，三份 `compile_view.py` 的补丁副本），
+**仓内 `compile_view.py` 字节未动**：
+
+| 变异 `canonical` | 既有 `test_compile_view.py` | 新增 `test_canonical_contract.py` |
+|---|---|---|
+| M1 `sort_keys=True` → `False` | **5 passed** | 3 failed |
+| M2 `separators=(",",":")` → 默认 | **5 passed** | 3 failed |
+| M3 `ensure_ascii=False` → `True` | **5 passed** | 2 failed |
+
+（未变异基线：两套都全绿。M3 只杀 2 条是预期内——键序探针全为 ASCII，`ensure_ascii` 管不着它。）
+
+结论因此可以说得比初稿更硬：既有套件对 §3/§4 点名承重的这个函数，**约束力是零**——
+把四个旋钮里的三个随便拧，它一声不吭。它的绿灯对这个契约的信息量是 0 bit。
+
+**本目录新增 `test_canonical_contract.py`（5 passed，单签、纯追加、不改任何既有文件、不上唤醒路径）。**
+其全部期望值是**手敲字面量**（`{"a":1,"b":"β","c":{"y":null,"z":true}}` 及其 sha256），
+不经任何 `json.dumps` 产出，故被测函数一改必红。
+
+两条自划的界，免得它被读大：
+1. 它钉的是**函数**，不是账本、更不是读路径。第五节那个「接上编译器 ≠ 读者读得到」的最后一公里，它一毫米没碰。
+2. 它**不选**甲/乙/丙/丁。它只钉住「§3 此刻指的是哪个函数」。若将来采纳甲（把 §3 改成现实在用的口径），
+   本文件**应当先转红**再被有意识改掉——让契约变更显形，而非无声漂移。红就是它在工作。
 
 ## 五、可读性后果（今晚的实例，不是假想）
 
