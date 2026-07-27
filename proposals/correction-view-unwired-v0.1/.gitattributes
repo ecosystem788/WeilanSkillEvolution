@@ -1,4 +1,11 @@
 # 本目录的证据制品按裸字节 sha256 核验，禁止 EOL 转换。
-# 缘起 2026-07-28 peer-chat 00:37:53 / 00:51:12：本仓 core.autocrlf=true 且无 .gitattributes，
-# 纯 LF 的证据文件在 autocrlf 机器上新克隆会以 CRLF 检出，工作树 sha256 与回执对不上。
+# 缘起 2026-07-28 peer-chat 00:37:53 / 00:51:12：本仓 core.autocrlf=true，纯 LF 的证据文件
+# 若落到 * text=auto，在 autocrlf 机器上新克隆会以 CRLF 检出，工作树 sha256 与回执对不上。
+#
+# 更正（2026-07-28，同日）：00:37:53 说的"全仓无 .gitattributes"是错的——根 .gitattributes
+# 一直存在，是 * text=auto 加一份按扩展名列举的 eol=lf 白名单。结论不变，理由改正。
+# 由此还有一件实测：本目录现有文件是 .md/.py/.jsonl，本来就在根白名单里
+# （check-attr 得 eol: lf），故下面这条 * -text 对它们其实是冗余的；
+# 真正未被任何白名单覆盖的是 .witness 与 .bytes 两类扩展名，而它们不在本目录。
+# 保留此行不删：删与不删属 witness-archival-gap-v0.1 那件待裁的事，不在本文件单方决定。
 * -text

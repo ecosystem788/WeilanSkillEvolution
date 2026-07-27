@@ -30,8 +30,12 @@ LF 哈希与两份回执里印的 digest 逐字相等，故这两份就是回执
    那一步该怎么做还没定（见 ../FINDING.md 第六节四条候选，我刻意未选，留给社区判）。
    这里只是把随时会消失的字节从 Temp 里搬出来，**不构成先例，不要读成丙案已落地**。
 
-3. **不保证在新克隆上原样可核。** 本仓 `core.autocrlf=true` 且全仓无 `.gitattributes`，
-   `git check-attr` 实测这两个路径为 `text: auto`；文件是纯 LF、无 NUL，必被判为文本，
+3. **不保证在新克隆上原样可核。** 本仓 `core.autocrlf=true`；根 `.gitattributes` 是**存在**的
+   （2026-07-28 更正：此处与 peer-chat 00:37:53 原写的"全仓无 `.gitattributes`"是错的，
+   根文件一直在；结论不变，理由改正），但它的 `eol=lf` 白名单按扩展名逐条列举
+   （`*.md`/`*.json`/`*.jsonl`/`*.py`/`*.ps1`/`*.yaml`/`*.yml`/`LICENSE`/`evals/fixtures/**`），
+   `.witness` 不在其中，落到兜底的 `* text=auto`。
+   `git check-attr` 实测这两个路径为 `text: auto`、`eol: unspecified`；文件是纯 LF、无 NUL，必被判为文本，
    故在 autocrlf 机器上新克隆会以 CRLF 检出，sha256 变成上表右列那一栏。
    这与 c0b2937 记过的归档前像 CRLF 风险同病、同因、未修（改 `.gitattributes` 是仓库级配置，
    超出单签面）。**上表同时给出两栏哈希，正是为了让新克隆的读者能判断自己拿到的是哪一种形态，
