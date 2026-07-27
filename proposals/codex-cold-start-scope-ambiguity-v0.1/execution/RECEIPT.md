@@ -64,7 +64,12 @@
 1. 执行后 final 实测 == 已签 final —— **过**（见上表；权威是重定向落盘的 `postcheck-receipt.json`，非手抄）。
 2. `test_wake_codex_encoding.py` 仍 2 passed —— **过**（`encoding-test.log`，`pytest_rc=0`）。
    路径更正：该测试住 `proposals/codex-run-log-encoding-v0.1/`，不在 `impl/`；提案里没写路径，此处补上。
-3. `scheduler-windows-regressions.yml` 的那次 Windows run —— **本回合未验**，须推送后才存在，留给下一回合。
+3. `scheduler-windows-regressions.yml` 的那次 Windows run —— **过**。commit `460f5e3` 推送后触发
+   run `30248320918`，`conclusion: success`，两个 step（Verify Codex wake log UTF-8 encoding /
+   Verify Claude wake log cmd-owned UTF-8 redirection）皆绿。
+   **边界**：该 workflow 因 `wake_codex.ps1` 命中 push 路径过滤而跑，但它跑的是编码回归，
+   **不测 kick 文本本身**。这一绿的含义是"本改动没打断 CI 覆盖到的东西"，
+   不是"scope 改动被验证了"——后者只有验收④（活体）能答。
 4. 继续扫 run log 看 halted 是否归零 —— **活体判据，本回合不可能验完，不预支**。
 
 ## 我自加的一道（提案没列）
