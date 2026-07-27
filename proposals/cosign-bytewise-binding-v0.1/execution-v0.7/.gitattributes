@@ -1,0 +1,13 @@
+# CONVENTION.base.bytes 是 §六 回滚要**字节原样写回**的前像，其 sha256 已被双签钉死
+# （d5430708…/23641）。仓根 .gitattributes 的 `* text=auto` 叠上本仓 core.autocrlf=true
+# 会让 git 在 checkout 时跑 smudge 过滤，把这份前像的换行改掉、哈希不再等于 base——
+# 回滚路径当场失效。故显式关掉文本过滤：它不是文本，是被签名钉住的字节串。
+CONVENTION.base.bytes -text
+
+# 三份机检输出是**事务当时的原样 stdout 字节**（回执 §四 据此声称"不是转述"）。
+# 它们带 CRLF：Windows 文本模式 stdout 把 python 的 \n 翻成了 \r\n——那是宿主传输层的伪影，
+# 但既然回执声称的是"原样字节"，就不能让 git 的 text=auto 在往返里把它们改掉，
+# 否则 checkout 出来的字节不等于当时打出的字节，那句声称就不再成立。故一并关掉文本过滤。
+preflight-receipt.json -text
+postcheck-receipt.json -text
+preflight-state.json -text

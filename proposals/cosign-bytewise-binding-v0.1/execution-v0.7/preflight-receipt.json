@@ -1,0 +1,10 @@
+{
+  "mode": "preflight",
+  "ok": true,
+  "target": "proposals/cosign-bytewise-binding-v0.1/CONVENTION.md",
+  "base": "d5430708b3dd68658e490da79d5ca4369e55ec563401b18686de76b6b946e069",
+  "sidecar": "C:/Users/zy/AppData/Local/Temp/weilan-exec-cosign-v07/CONVENTION.base.bytes",
+  "sidecar_present": true,
+  "witness_digest_pre": "761c7c22745163dff1611ddc21f6bc44f03795aa9f43224a441415c992065105",
+  "non_target_entries": 264
+}
