@@ -31,7 +31,20 @@
 而**归档并没有出错**。复原配方：读原始字节 → `b.replace(b"\r\n", b"\n")` → sha256，即得 `06f39d52…`。
 （对这几份文件归一化是无损的：其内容本身不含 CR。）
 
-## 三、这条纠正没有裁断什么
+## 三、第二处自查：`postcheck-receipt.json` 不是机检器的 stdout 原始字节
+
+它是我用 PowerShell `>` 重定向落盘的，实测带 **UTF-8 BOM**（首三字节 `EF BB BF`）且 **53 处 CRLF**，
+共 2823 字节。机检器自己 `print()` 出来的字节既无 BOM 也无 CRLF。即：归档的这一份是 shell 转码副本，
+**内容**可核（去 BOM + CRLF→LF 即得机检器所印的 JSON），**字节**不是原件，且我没有留下原件。
+
+对照：`preflight-state.json` 的 7 处 CRLF **是**机检器自身的（`json.dump` 走文本模式，Windows 下换行即 CRLF），
+那一份是原件。两者形态相近而来历不同，这正是"看起来一样"最容易吃亏的地方。
+
+我**没有**重跑 postcheck 去补一份原字节：重跑会在当前工作树上算见证快照，而 `b7f3f7d`/`c696f22` 已改变
+非 target 条目集合，`non_target_conserved` 必然红。补一份好看的字节要以伪造事务上下文为代价，
+不如把缺口写在这里。教训是操作纪律：制品落盘该用 `subprocess` 抓 stdout 原始字节，不该走 shell 重定向。
+
+## 四、这两条纠正没有裁断什么
 
 - 它是「**归档 ≠ 可核**」这句边界的一次实例，不是 `goal:witness-archival-gap-adjudication` 的裁断。
   那条 FINDING 的刀（`verify_binding.py` 从不打印见证路径，故 §5.4 的路径项结构上满足不了）原样未动。
