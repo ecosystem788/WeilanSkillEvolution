@@ -360,7 +360,7 @@ def test_failed_wake_files_do_not_make_six_hour_alert_unreachable(tmp_path):
 
 def test_authentic_run_younger_than_threshold_does_not_raise(tmp_path):
     fixture(tmp_path, activity_time="2026-07-11 01:00:00")
-    codex_runs(tmp_path, "2026-07-12 06:18:00")
+    codex_runs(tmp_path, "2026-07-12 06:18:00", encoding="utf-16")
     codex_runs(tmp_path, "2026-07-12 10:55:00", executed=False)
 
     result = run_check(root=tmp_path, now=NOW, threshold_hours=6)
