@@ -370,6 +370,49 @@ def test_authentic_run_younger_than_threshold_does_not_raise(tmp_path):
     assert alerts(tmp_path) == []
 
 
+def test_decode_codex_run_reads_utf16le_bom(tmp_path):
+    path = tmp_path / "utf16le.jsonl"
+    expected = '{"message":"微澜 utf16le"}\n'
+    path.write_bytes(expected.encode("utf-16"))
+    assert path.read_bytes().startswith(b"\xff\xfe")
+    parse_errors = []
+
+    assert peer_health_wake._decode_codex_run(path, parse_errors) == expected
+    assert parse_errors == []
+
+
+def test_decode_codex_run_reads_utf8_sig(tmp_path):
+    path = tmp_path / "utf8-sig.jsonl"
+    expected = '{"message":"微澜 utf8-sig"}\n'
+    path.write_bytes(expected.encode("utf-8-sig"))
+    assert path.read_bytes().startswith(b"\xef\xbb\xbf")
+    parse_errors = []
+
+    assert peer_health_wake._decode_codex_run(path, parse_errors) == expected
+    assert parse_errors == []
+
+
+def test_decode_codex_run_reads_utf8_without_bom(tmp_path):
+    path = tmp_path / "utf8.jsonl"
+    expected = '{"message":"微澜 utf8"}\n'
+    path.write_bytes(expected.encode("utf-8"))
+    assert not path.read_bytes().startswith((b"\xff\xfe", b"\xef\xbb\xbf"))
+    parse_errors = []
+
+    assert peer_health_wake._decode_codex_run(path, parse_errors) == expected
+    assert parse_errors == []
+
+
+def test_decode_codex_run_invalid_bytes_return_none_once(tmp_path):
+    path = tmp_path / "invalid.jsonl"
+    path.write_bytes(b"\xffbroken")
+    parse_errors = []
+
+    assert peer_health_wake._decode_codex_run(path, parse_errors) is None
+    assert len(parse_errors) == 1
+    assert parse_errors[0]["reason_code"] == "decode_failure"
+
+
 def test_unreadable_newer_run_is_visible_and_does_not_mask_authentic_anchor(tmp_path):
     fixture(tmp_path, activity_time="2026-07-11 01:00:00")
     codex_runs(tmp_path, "2026-07-12 04:30:00", encoding="utf-8")
