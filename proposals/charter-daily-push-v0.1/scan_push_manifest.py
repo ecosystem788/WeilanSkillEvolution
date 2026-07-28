@@ -45,6 +45,32 @@ def git(*args, input=None):
     return out.stdout
 
 
+def repository_object_format():
+    """Return the repository's hash algorithm without assuming SHA-1."""
+    object_format = git("rev-parse", "--show-object-format").decode(
+        "ascii").strip()
+    try:
+        hashlib.new(object_format)
+    except ValueError as exc:
+        raise RuntimeError(
+            f"unsupported Git object format: {object_format}") from exc
+    return object_format
+
+
+def git_object_oid(object_type, payload, object_format):
+    """Hash one canonical Git object from its exact binary payload."""
+    header = (
+        object_type.encode("ascii")
+        + b" "
+        + str(len(payload)).encode("ascii")
+        + b"\0"
+    )
+    digest = hashlib.new(object_format)
+    digest.update(header)
+    digest.update(payload)
+    return digest.hexdigest()
+
+
 def reachable_objects(remote_ref):
     """Return stable object ids and non-authoritative path hints."""
     raw = git("rev-list", "--objects", "HEAD", "--not", remote_ref)
@@ -59,8 +85,8 @@ def reachable_objects(remote_ref):
             for object_id in sorted(hints)]
 
 
-def cat_file_batch(object_ids):
-    """Read Git objects in one plumbing call, preserving requested order."""
+def cat_file_batch(object_ids, object_format):
+    """Read and identity-check Git objects, preserving requested order."""
     if not object_ids:
         return []
     request = b"".join(
@@ -85,6 +111,12 @@ def cat_file_batch(object_ids):
         payload = stream.read(size)
         if len(payload) != size or stream.read(1) != b"\n":
             raise RuntimeError(f"truncated cat-file payload for {object_id}")
+        recomputed_id = git_object_oid(
+            object_type, payload, object_format)
+        if recomputed_id != expected_id:
+            raise RuntimeError(
+                f"object identity mismatch: expected {expected_id}, "
+                f"recomputed {recomputed_id} from {object_type} payload")
         objects.append((object_id, object_type, payload))
     if stream.read():
         raise RuntimeError("unexpected trailing data from git cat-file --batch")
@@ -121,9 +153,10 @@ def main(argv=None):
     commits = git("rev-list", "--reverse", f"{base}..{head}").decode().split()
     object_hints = reachable_objects(args.remote_ref)
     hints_by_id = dict(object_hints)
+    object_format = repository_object_format()
     entries, findings = [], []
     for object_id, object_type, payload in cat_file_batch(
-            [object_id for object_id, _ in object_hints]):
+            [object_id for object_id, _ in object_hints], object_format):
         entry = {
             "object_id": object_id,
             "object_type": object_type,
@@ -136,6 +169,11 @@ def main(argv=None):
         findings.extend(
             scan_object(object_id, object_type, payload, path_hints))
 
+    manifest_binding = {
+        "predicate_id": "M_repo",
+        "object_format": object_format,
+        "entries": entries,
+    }
     receipt = {
         "closure_semantics": (
             "objects reachable from HEAD and not remote_ref; conservative "
@@ -153,6 +191,21 @@ def main(argv=None):
             "payloads in this new reachable-object closure; it is not proof "
             "that the repository or published history contains no secret"
         ),
+        "object_identity_semantics": (
+            "M_repo means every manifest object's exact type and binary "
+            "payload read by this scan recomputed to its requested object id "
+            "using the repository object format at scan completion; this is "
+            "not proof of trusted content, pre-scan materialization, or "
+            "third-party F_ctx availability, and a partial clone may "
+            "lazy-fetch an absent object while scanning"
+        ),
+        "manifest_digest_semantics": (
+            "sha256 of canonical JSON over predicate_id, object_format, and "
+            "manifest entries; digests from the earlier entries-only schema "
+            "are not semantically comparable"
+        ),
+        "predicate_id": "M_repo",
+        "object_format": object_format,
         "remote_ref": args.remote_ref,
         "base_commit": base,
         "head_commit": head,
@@ -161,7 +214,7 @@ def main(argv=None):
         "manifest": entries,
         "manifest_digest": hashlib.sha256(
             json.dumps(
-                entries,
+                manifest_binding,
                 sort_keys=True,
                 ensure_ascii=False,
                 separators=(",", ":"),

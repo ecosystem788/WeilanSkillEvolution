@@ -3,15 +3,18 @@
 Run: python -m pytest test_scan_push_manifest.py -q
 """
 
+import hashlib
 import json
 import pathlib
+import stat
 import subprocess
 import sys
+import zlib
 
 import pytest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from scan_push_manifest import PATTERNS  # noqa: E402
+from scan_push_manifest import PATTERNS, git_object_oid  # noqa: E402
 
 SCANNER = pathlib.Path(__file__).with_name("scan_push_manifest.py")
 SOURCE_FILES = (SCANNER, pathlib.Path(__file__))
@@ -106,10 +109,10 @@ def commit(repo, message):
     git(repo, "commit", "-qm", message)
 
 
-def initialize_repo(tmp_path, base_text="base\n"):
+def initialize_repo(tmp_path, base_text="base\n", object_format="sha1"):
     repo = tmp_path / "repo"
     repo.mkdir()
-    git(repo, "init", "-q", ".")
+    git(repo, "init", "-q", f"--object-format={object_format}", ".")
     git(repo, "config", "user.email", "closure-test@local")
     git(repo, "config", "user.name", "closure-test")
     write(repo, "base.txt", base_text)
@@ -124,12 +127,16 @@ def synthetic_aws_key(fill):
     return prefix + fill * 16
 
 
-def run_scanner(repo, remote_ref):
-    proc = subprocess.run(
+def run_scanner_process(repo, remote_ref):
+    return subprocess.run(
         [sys.executable, str(SCANNER), "--remote-ref", remote_ref],
         cwd=repo,
         capture_output=True,
     )
+
+
+def run_scanner(repo, remote_ref):
+    proc = run_scanner_process(repo, remote_ref)
     return proc, json.loads(proc.stdout.decode("utf-8"))
 
 
@@ -138,6 +145,20 @@ def aws_findings(receipt):
         finding for finding in receipt["secret_findings"]
         if finding["pattern"] == "aws_access_key_id"
     ]
+
+
+def write_loose_object_at(repo, object_id, object_type, payload):
+    canonical = (
+        object_type.encode("ascii")
+        + b" "
+        + str(len(payload)).encode("ascii")
+        + b"\0"
+        + payload
+    )
+    path = repo / ".git" / "objects" / object_id[:2] / object_id[2:]
+    assert path.is_file(), f"expected loose object at {path}"
+    path.chmod(path.stat().st_mode | stat.S_IWRITE)
+    path.write_bytes(zlib.compress(canonical))
 
 
 def test_intermediate_blob_secret_is_detected_after_head_is_clean(tmp_path):
@@ -241,3 +262,64 @@ def test_receipt_and_manifest_digest_are_byte_stable(tmp_path):
         "not proof that the repository or published history contains no secret"
         in first["scan_semantics"]
     )
+    assert first["predicate_id"] == "M_repo"
+    assert first["object_format"] == "sha1"
+    assert "pre-scan materialization" in first["object_identity_semantics"]
+    assert "third-party F_ctx availability" in first[
+        "object_identity_semantics"
+    ]
+    assert "predicate_id, object_format" in first[
+        "manifest_digest_semantics"
+    ]
+
+
+@pytest.mark.parametrize("object_format", ["sha1", "sha256"])
+def test_equal_length_impostor_object_fails_closed(tmp_path, object_format):
+    repo, base = initialize_repo(tmp_path, object_format=object_format)
+    original = b"REAL-PAYLOAD\n"
+    impostor = b"IMPOSTOR-PAY\n"
+    assert len(original) == len(impostor)
+
+    payload_path = repo / "payload.bin"
+    payload_path.write_bytes(original)
+    commit(repo, f"add {object_format} payload")
+    object_id = git(repo, "hash-object", "payload.bin").decode().strip()
+
+    healthy_proc, healthy = run_scanner(repo, base)
+    assert healthy_proc.returncode == 0
+    assert healthy["clean"] is True
+    assert healthy["predicate_id"] == "M_repo"
+    assert healthy["object_format"] == object_format
+
+    write_loose_object_at(repo, object_id, "blob", impostor)
+    impostor_id = git_object_oid("blob", impostor, object_format)
+    assert impostor_id != object_id
+
+    corrupt_proc = run_scanner_process(repo, base)
+    assert corrupt_proc.returncode != 0
+    assert corrupt_proc.stdout == b""
+    stderr = corrupt_proc.stderr.decode("utf-8", "replace")
+    assert "object identity mismatch" in stderr
+    assert object_id in stderr
+    assert impostor_id in stderr
+
+
+@pytest.mark.parametrize("object_format", ["sha1", "sha256"])
+def test_object_oid_uses_exact_lf_binary_payload(object_format):
+    payload = b"line-one\nline-two\n\x00binary"
+    canonical = (
+        b"blob " + str(len(payload)).encode("ascii") + b"\0" + payload
+    )
+    expected = hashlib.new(object_format, canonical).hexdigest()
+
+    crlf_payload = payload.replace(b"\n", b"\r\n")
+    crlf_canonical = (
+        b"blob "
+        + str(len(crlf_payload)).encode("ascii")
+        + b"\0"
+        + crlf_payload
+    )
+    translated = hashlib.new(object_format, crlf_canonical).hexdigest()
+
+    assert git_object_oid("blob", payload, object_format) == expected
+    assert expected != translated
