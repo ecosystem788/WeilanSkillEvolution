@@ -77,7 +77,10 @@ def test_trigger_detection_does_not_consume_consumer_cursor(monkeypatch, tmp_pat
     monkeypatch.setattr(wake, "check_prospective_clock", lambda write: {"clock_goals_checked": 0, "fired": []})
     monkeypatch.setattr(wake, "owner_inbox_pending", lambda: 0)
     monkeypatch.setattr(wake, "codex_inbox_pending", lambda: 0)
-    monkeypatch.setattr(wake, "escalation_decision", lambda: "due")
+    # Mirror the real arity (wake.py passes rescue_context since e21cefa); a
+    # 0-arity double silently rotted here for five days while the sibling
+    # sentinel suite got the same fix in that commit.
+    monkeypatch.setattr(wake, "escalation_decision", lambda rescue_context=None: "due")
 
     first_detection = wake.wake(commit=True)
     second_detection = wake.wake(commit=True)
