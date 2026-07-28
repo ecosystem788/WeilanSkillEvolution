@@ -1,0 +1,100 @@
+{
+  "closure_semantics": "objects reachable from HEAD and not remote_ref; conservative publication boundary relative to remote_ref, not an exact network-transfer set",
+  "remote_ref_freshness": "caller must fetch before review; a stale remote-tracking ref is not directionally safe: it may enlarge this closure during append-only remote advancement or shrink it after remote history is rewritten",
+  "scan_semantics": "clean means configured secret shapes did not match object payloads in this new reachable-object closure; it is not proof that the repository or published history contains no secret",
+  "remote_ref": "origin/codex/se-0.4-0.7-program",
+  "base_commit": "702a91a562b904d289922f71795dae9cb0bb0344",
+  "head_commit": "bb3248852cabe0e84dc00efd3720755bd071cd2a",
+  "commits_to_publish": [
+    "138ca2d12e97a0b6c15f2f029c2bb9e0ebe7d277",
+    "bb3248852cabe0e84dc00efd3720755bd071cd2a"
+  ],
+  "closure_objects": 11,
+  "manifest": [
+    {
+      "object_id": "0472408ea1608c2204ba0c06ae2da678b96e9e60",
+      "object_type": "tree",
+      "bytes": 38,
+      "path_hints": [
+        "proposals/rescan-instrument-unreachable-v0.1"
+      ]
+    },
+    {
+      "object_id": "138ca2d12e97a0b6c15f2f029c2bb9e0ebe7d277",
+      "object_type": "commit",
+      "bytes": 2359
+    },
+    {
+      "object_id": "160f0d0a411b246ac7006b12d897e86837940046",
+      "object_type": "tree",
+      "bytes": 103,
+      "path_hints": [
+        "proposals/charter-daily-push-v0.1"
+      ]
+    },
+    {
+      "object_id": "3328273e92e4a653a6ed9a8f5d51b7210c5ebe94",
+      "object_type": "blob",
+      "bytes": 7951,
+      "path_hints": [
+        "proposals/charter-daily-push-v0.1/test_scan_push_manifest.py"
+      ]
+    },
+    {
+      "object_id": "56f223810fd062490fb57b51f48e236442aa03e9",
+      "object_type": "tree",
+      "bytes": 3898,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "640d453c37767bd3ce01327cd3dbe78c30cef578",
+      "object_type": "blob",
+      "bytes": 6998,
+      "path_hints": [
+        "proposals/charter-daily-push-v0.1/scan_push_manifest.py"
+      ]
+    },
+    {
+      "object_id": "64fb15d93e1add31dc13aa632defa0778fa34188",
+      "object_type": "blob",
+      "bytes": 8684,
+      "path_hints": [
+        "proposals/rescan-instrument-unreachable-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "8f88708b7d117dff6e1dc05b7a46f2c33a125de4",
+      "object_type": "tree",
+      "bytes": 3948,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "acb368247d19b47964b2ff4110971a79cf780a63",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "bb3248852cabe0e84dc00efd3720755bd071cd2a",
+      "object_type": "commit",
+      "bytes": 268
+    },
+    {
+      "object_id": "dcc282f0caba606b3814aa2fb79778d49d773367",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    }
+  ],
+  "manifest_digest": "c84759ccc66f354e8e78e890bbcf5e089c1e0a3bb24189234e1d59dc9a47af02",
+  "secret_findings": [],
+  "clean": true
+}

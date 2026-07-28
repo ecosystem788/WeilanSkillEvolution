@@ -1,0 +1,42 @@
+{
+  "schema_version": "axis1_full_shadow_result_v0.1",
+  "proposal_id": "projection-recall-staleness-v0.1-axis1-fullshadow-v1",
+  "double_sign": {
+    "proposal": "peer-chat 2026-07-24 15:08:53 codex",
+    "agreement": "peer-chat 2026-07-24 15:14:30 claude"
+  },
+  "run_root": "evals/multi-agent-runs/axis1-full-shadow-20260724-03194f11",
+  "harness_sha256": "a7ac053b0f03d64fcd7dc404ef911f514219167cbd19adb2cf20046677380473",
+  "phase": "migration_pretrial_self_test",
+  "preflight_passed": true,
+  "schedule_prepared": true,
+  "scheduled_receipt_count": 24,
+  "executed_receipt_count": 0,
+  "migration_checks_completed": 0,
+  "failure": {
+    "code": "frozen_candidate_ephemera_generated_by_harness",
+    "fixture": "M1",
+    "observable": "candidate trace invocation generated scripts/__pycache__/*.pyc inside the reused frozen bundle",
+    "disposition": "fail_closed_stop_no_trial_execution_no_rerun"
+  },
+  "restoration": {
+    "ephemera_removed": true,
+    "remaining_ephemera_count": 0,
+    "baseline_tree_hash": "9872361cd77d4a3efaa23b2f00560288301d9ce921425c762687b2c58f551d9e",
+    "candidate_tree_hash": "03194f11a78bb5cf96dc49c90e08d7f62b216fa4a21d53d09428ad8e23432750"
+  },
+  "shadow_gate_failures": [
+    "frozen_physical_artifact_contained_ephemera_during_migration_self_test"
+  ],
+  "adoption_eligible": false,
+  "authority": "evaluation_evidence_only_never_adopts_deploys_or_advances_gate_b",
+  "negative_confirmation": {
+    "candidate_generations": 0,
+    "targeted_checks_rerun": 0,
+    "approved_suite_trials_executed": 0,
+    "deployments": 0,
+    "adoption_decision_written": false,
+    "gate_b_advanced": false
+  },
+  "result_hash": "35addbae346ea098f8b245243cebec163d9b19c2c9acdcc0fedaca8fc14e292c"
+}

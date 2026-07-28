@@ -1,0 +1,37 @@
+== arm 1: derivation identity on the live clone ==
+       derived: OK=D:\WeilanSkillEvolution
+  [ok ] post-image derives the live checkout root: OK=D:\WeilanSkillEvolution (expected OK=D:\WeilanSkillEvolution)
+  [ok ] ...and it equals the value the pre-image hardcoded: True (expected True)
+
+== arm 2: marker validation is explicit ==
+  [ok ] marker-less directory throws: THROW (expected THROW)
+  [ok ] CHARTER.md alone is not enough: THROW (expected THROW)
+
+== arm 5: those two assertions are load-bearing (mutation) ==
+  [ok ] marker checks stripped -> marker-less directory no longer throws: OK (expected OK)
+  [ok ] impl check stripped -> CHARTER.md alone is accepted: OK (expected OK)
+
+== arm 3: current-clone-shaped clone ==
+       D:\WeilanExec\cron-portability-gate-postland\plain\WeilanSkillEvolution
+  [ok ] pre-image @ chcp 65001: pass (expected pass)
+  [ok ] pre-image @ chcp 936: pass (expected pass)
+  [ok ] post-image @ chcp 65001: pass (expected pass)
+  [ok ] post-image @ chcp 936: pass (expected pass)
+
+== arm 4: runner-shaped clone (a/<repo>/<repo>) ==
+       D:\WeilanExec\cron-portability-gate-postland\a\WeilanSkillEvolution\WeilanSkillEvolution
+  [ok ] post-image derives the runner-shaped root: OK=D:\WeilanExec\cron-portability-gate-postland\a\WeilanSkillEvolution\WeilanSkillEvolution (expected OK=D:\WeilanExec\cron-portability-gate-postland\a\WeilanSkillEvolution\WeilanSkillEvolution)
+  [ok ] post-image @ chcp 65001: pass (expected pass)
+  [ok ] post-image @ chcp 936: pass (expected pass)
+
+== arm 4b: which checkout does each image actually wake from? ==
+  [ok ] post-image wakes from the clone it was launched from: D:\WeilanExec\cron-portability-gate-postland\a\WeilanSkillEvolution\WeilanSkillEvolution (expected D:\WeilanExec\cron-portability-gate-postland\a\WeilanSkillEvolution\WeilanSkillEvolution)
+       pre-image, launched from D:\WeilanExec\cron-portability-gate-postland\a\WeilanSkillEvolution\WeilanSkillEvolution
+       ...actually woke from   D:\WeilanSkillEvolution
+  [ok ] pre-image silently wakes from the OTHER checkout: D:\WeilanSkillEvolution (expected D:\WeilanSkillEvolution)
+
+== arm 4c: hosted-runner condition (hardcoded root absent) ==
+  [ok ] pre-image, root absent @ chcp 65001: fail (expected fail)
+  [ok ] pre-image, root absent @ chcp 936: fail (expected fail)
+
+17/17 arms produced the expected verdict

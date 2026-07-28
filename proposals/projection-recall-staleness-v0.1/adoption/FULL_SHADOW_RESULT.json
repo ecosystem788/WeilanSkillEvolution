@@ -1,0 +1,72 @@
+{
+  "adoption_eligible": false,
+  "authority": "evaluation_evidence_only_never_adopts_deploys_or_advances_gate_b",
+  "double_sign": {
+    "agreement": "peer-chat 2026-07-24 17:05:00 claude",
+    "proposal": "peer-chat 2026-07-24 16:49:37 codex"
+  },
+  "evaluation_receipts_written": 0,
+  "executed_harness_sha256": "6cc09fe0312da71d1cbf34dff2705ce4f61faba4f41d02f2ff5e278d80a550da",
+  "executed_harness_snapshot": {
+    "path": "controller/executed-harness.py",
+    "provenance_claim": "recomputable launch-time byte snapshot, not instruction-level execution proof",
+    "sha256": "6cc09fe0312da71d1cbf34dff2705ce4f61faba4f41d02f2ff5e278d80a550da"
+  },
+  "executor_binding": {
+    "binding_rule": "windows_absolute_codex_cmd_only_no_ps1_no_extensionless_shim",
+    "path": "C:\\Users\\zy\\AppData\\Roaming\\npm\\codex.cmd",
+    "sha256": "c54db6755e710c39703f7c37512f9e35ed41042d8080558d2b84b8d2694323c3",
+    "version_probe": {
+      "argv": [
+        "C:\\Users\\zy\\AppData\\Roaming\\npm\\codex.cmd",
+        "--version"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "codex-cli 0.144.1"
+    }
+  },
+  "executor_records_written": 0,
+  "executor_verification_after_stop": {
+    "path": "C:\\Users\\zy\\AppData\\Roaming\\npm\\codex.cmd",
+    "sha256": "c54db6755e710c39703f7c37512f9e35ed41042d8080558d2b84b8d2694323c3"
+  },
+  "failure": {
+    "code": "executor_stdout_decode_failure",
+    "disposition": "fail_closed_stop_no_rerun_no_threshold_change",
+    "observable": "Python subprocess text readers used the Windows GBK locale for UTF-8 Codex JSON output; UnicodeDecodeError left stdout=None, so no trustworthy executor records or evaluation receipts could be produced"
+  },
+  "final_outputs_observed": 24,
+  "migration_checks_completed": 0,
+  "negative_confirmation": {
+    "adoption_decision_written": false,
+    "approved_suite_evaluation_receipts": 0,
+    "approved_suite_process_outputs": 24,
+    "candidate_generations": 0,
+    "deployments": 0,
+    "gate_b_advanced": false,
+    "targeted_checks_rerun": 0
+  },
+  "phase": "approved_suite_executor_output_capture",
+  "preflight_passed": true,
+  "previous_result": {
+    "path": "proposals/projection-recall-staleness-v0.1/adoption/FULL_SHADOW_RESULT.stop-c4d6303b1fa9.json",
+    "result_hash": "c4d6303b1fa96b8fcc601de26820452568fbd85f6b8cf91056e68561ca21d772"
+  },
+  "proposal_id": "projection-recall-staleness-v0.1-axis1-fullshadow-v1",
+  "receipt_writer_harness_sha256": "17dd1d3aa2a90d0107121d0eceebf8c8a5476e547d311f86b655335dc8dad21a",
+  "restoration": {
+    "baseline_tree_hash": "9872361cd77d4a3efaa23b2f00560288301d9ce921425c762687b2c58f551d9e",
+    "candidate_ephemera": [],
+    "candidate_tree_hash": "03194f11a78bb5cf96dc49c90e08d7f62b216fa4a21d53d09428ad8e23432750",
+    "stage": "runtime-failure:verified-stop"
+  },
+  "result_hash": "29f1e8b654151e62c99db6202156429f9b3d53de94cae4b18fdf998ac7048a5b",
+  "run_root": "evals\\multi-agent-runs\\axis1-full-shadow-20260725-03194f11-r3",
+  "schedule_prepared": true,
+  "scheduled_execution_count": 24,
+  "schema_version": "axis1_full_shadow_result_v0.1",
+  "shadow_gate_failures": [
+    "approved_suite_receipts_unavailable"
+  ]
+}

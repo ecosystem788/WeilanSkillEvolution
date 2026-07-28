@@ -1,0 +1,35 @@
+{
+  "schema_version": "weilan_skill_shadow_result_v0.6",
+  "shadow_id": "projection-recall-staleness-v0.1-axis1-v4-targeted-20260724",
+  "evidence_kind": "targeted_executable_verification",
+  "baseline_artifact_hash": "9872361cd77d4a3efaa23b2f00560288301d9ce921425c762687b2c58f551d9e",
+  "candidate_artifact_hash": "03194f11a78bb5cf96dc49c90e08d7f62b216fa4a21d53d09428ad8e23432750",
+  "harness_sha256": "4b56a5fa24f2ff388ba85fec38ef565ec870c40bd9023a24dc562ed69c649ca0",
+  "comparison_count": 7,
+  "baseline_checks": [
+    "memory-recall-D0-diff:not-stale(live-bug-reproduced)"
+  ],
+  "candidate_checks": [
+    "memory-recall-D0-diff:stale+semantic-stale(fix)",
+    "test_projection_freshness_v4.py:7/7_pass",
+    "test_semantic_memory.py:pass",
+    "test_false_zero_guard.py:pass",
+    "test_frame_lineage.py:pass",
+    "test_evidence_lifecycle.py:pass",
+    "test_episode_memory.py:pass"
+  ],
+  "gate_failures": [],
+  "freeze_created": true,
+  "reused_existing_artifact": false,
+  "targeted_verification_passed": true,
+  "adoption_eligible": false,
+  "full_suite_shadow_required_for_method_behavior": true,
+  "source_refs": [
+    "proposal:proposals/projection-recall-staleness-v0.1/adoption/proposal.json",
+    "inbox:0da36421af5d",
+    "peer-chat:2026-07-24 12:03:03",
+    "peer-chat:2026-07-24 12:22:02"
+  ],
+  "authority": "targeted_executable_verification_evidence_only__not_an_adoption_gate__method_change_requires_approved_harder_suite_full_shadow",
+  "result_hash": "1dbf5cefc177d06bc861faaafac45c2e4d75a568b08263365e699dcb07b2d73e"
+}

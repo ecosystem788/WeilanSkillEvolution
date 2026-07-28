@@ -1,0 +1,101 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "projection-recall-staleness-v0.1-axis1-fullshadow-v1",
+  "rationale": "Run one bounded approved-harder-suite (fusion-dogfood-v0.1) full shadow for the already double-signed axis-1 candidate, binding the complete evaluation authority tuple, 24 baseline-plus-candidate trial receipts, and a predeclared method-impact requirement. Reuse the existing targeted result and frozen candidate without rerunning targeted checks or generating a candidate. This proposal does not deploy, adopt, write a shadow result by itself, or advance the separate Gate B successive-evaluation count.",
+  "base_artifact_hash": "9872361cd77d4a3efaa23b2f00560288301d9ce921425c762687b2c58f551d9e",
+  "candidate_artifact_hash": "03194f11a78bb5cf96dc49c90e08d7f62b216fa4a21d53d09428ad8e23432750",
+  "changed_paths": [
+    "proposals/projection-recall-staleness-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py",
+    "proposals/projection-recall-staleness-v0.1/candidate/solve-with-weilan/scripts/test_semantic_memory.py",
+    "proposals/projection-recall-staleness-v0.1/candidate/solve-with-weilan/scripts/test_projection_freshness_v4.py"
+  ],
+  "budgets": {
+    "max_changed_files": 3,
+    "max_candidate_generations": 0,
+    "max_evaluation_trials": 24,
+    "max_deployments": 0,
+    "max_targeted_checks": 0,
+    "max_migration_checks": 2
+  },
+  "target_metrics": [
+    "deployed_reads_post_projection_new_active_entry_as_not_stale_live_bug",
+    "candidate_reads_same_fixture_as_stale_with_semantic_stale_reason_fix",
+    "all_six_regression_drivers_exit_zero_on_candidate",
+    "frozen_physical_artifact_contains_no_ephemera",
+    "method_impact_count_gt_0_on_approved_case_fusion_memory_scope_recovery",
+    "no_regression_on_unrelated_fixed_cases_in_fusion_dogfood_v0_1",
+    "no_safety_authorization_privacy_cross_workspace_regression",
+    "l0_l1_overhead_no_material_degradation",
+    "migration_m1_m2_converge_in_one_rebuild_no_stale_storm"
+  ],
+  "method_impact_requirement": {
+    "approved_case_id": "fusion-memory-scope-recovery",
+    "required_reproductions": 2,
+    "trial_count": 2,
+    "required_trace_fields": [
+      "gate",
+      "intended_action",
+      "observable_failure",
+      "cost"
+    ],
+    "migration_checks_count_as_approved_suite_method_impact": false
+  },
+  "shadow_gate_failures": [
+    "M1 or M2 migration fixture fails to converge to ACTIVE within a single rebuild (second recall still STALE or needs a second rebuild)",
+    "full-suite method_impact_count == 0 (fails Gate A(c)/ROADMAP:193; must not judge adoption_eligible=true)"
+  ],
+  "rollback_triggers": [
+    "candidate changed-path budget exceeds the three double-signed paths",
+    "deployed Skill or frozen authority changes without a separate decision",
+    "frozen physical artifact contains __pycache__, .pytest_cache, or .pyc",
+    "D0 difference is not reproduced because deployed is not not-stale or candidate is not stale",
+    "any regression driver exits nonzero",
+    "deployed or frozen-candidate tree hash changes between pre-run and post-run checks",
+    "an existing content-addressed target is not both canonically matching and physically free of ephemera",
+    "rollback attempts to delete a reused artifact for which candidate-freeze returned created=false"
+  ],
+  "evaluation_binding": {
+    "harder_suite_manifest": {
+      "path": "evals/fusion-dogfood-v0.1-manifest.json",
+      "sha256": "4f4cca49e1736803c8620321fdef9e590caa67119e228be232ae446e59006d44"
+    },
+    "case_set": {
+      "path": "evals/cases/fusion-dogfood-v0.1.json",
+      "canonical_hash": "355465c562cea211108095267d3dc659d0e6f72f59d7615eff2b3653b57c68d1",
+      "file_sha256": "045cb6e8119eb7e68d89edca013de2bce949221e799ff223c72ceab484ac17ac"
+    },
+    "configuration": {
+      "path": "evals/configurations/fusion-dogfood-v0.1-isolated.json",
+      "sha256": "05f86a57691404db1cf1b0effe80aa1ca54fd7e317b1501569218d5aea393663"
+    },
+    "evaluator_artifacts": {
+      "hidden_checks": {
+        "path": "evals/hidden/fusion-dogfood-v0.1/hidden-checks.json",
+        "sha256": "a11a7dc8457b67ce74882d621b4ea128b164be2b9a2619306bd0d0a731ff2d3c"
+      },
+      "evaluator_rubric": {
+        "path": "evals/hidden/fusion-dogfood-v0.1/evaluator-rubric.json",
+        "sha256": "e8f59038ae21881f462c125b70879a096800267c5cd7bd33c01c2441d8f1c743"
+      },
+      "source_hashes": {
+        "path": "evals/hidden/fusion-dogfood-v0.1/source-hashes.json",
+        "sha256": "02806dc334bbaa39aae219b65aeb60e4e1ddc31b2d3567a0da57808a3f12629c"
+      },
+      "redaction_policy": {
+        "path": "evals/hidden/fusion-dogfood-v0.1/redaction-policy.md",
+        "sha256": "8e86cd13767ca2c66cfe834d01bc28bdd53b0af1edcdff008d1c08b29ff14b2f"
+      },
+      "execution_config": {
+        "path": "evals/configurations/fusion-dogfood-v0.1-isolated.json",
+        "sha256": "05f86a57691404db1cf1b0effe80aa1ca54fd7e317b1501569218d5aea393663"
+      }
+    },
+    "base_artifact_hash": "9872361cd77d4a3efaa23b2f00560288301d9ce921425c762687b2c58f551d9e",
+    "candidate_artifact_hash": "03194f11a78bb5cf96dc49c90e08d7f62b216fa4a21d53d09428ad8e23432750",
+    "prior_targeted_result": {
+      "path": "proposals/projection-recall-staleness-v0.1/adoption/TARGETED_SHADOW_RESULT.json",
+      "result_hash": "1dbf5cefc177d06bc861faaafac45c2e4d75a568b08263365e699dcb07b2d73e"
+    }
+  },
+  "candidate_authority": "proposal_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}

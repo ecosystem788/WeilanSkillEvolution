@@ -1,0 +1,36 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "projection-recall-staleness-v0.1-axis1-v4-freeze",
+  "rationale": "Freeze and run bounded targeted executable verification for the double-signed axis-1 candidate. The candidate makes projection freshness depend on the canonical active-semantic-set inputs, surfaces freshness, adjudication, and branch-selection state orthogonally, and preserves contested and operational-stale boundaries without auto-rebuild or branch selection.",
+  "base_artifact_hash": "9872361cd77d4a3efaa23b2f00560288301d9ce921425c762687b2c58f551d9e",
+  "candidate_artifact_hash": "03194f11a78bb5cf96dc49c90e08d7f62b216fa4a21d53d09428ad8e23432750",
+  "changed_paths": [
+    "proposals/projection-recall-staleness-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py",
+    "proposals/projection-recall-staleness-v0.1/candidate/solve-with-weilan/scripts/test_semantic_memory.py",
+    "proposals/projection-recall-staleness-v0.1/candidate/solve-with-weilan/scripts/test_projection_freshness_v4.py"
+  ],
+  "budgets": {
+    "max_changed_files": 3,
+    "max_candidate_generations": 1,
+    "max_evaluation_trials": 0,
+    "max_deployments": 0,
+    "max_targeted_checks": 7
+  },
+  "target_metrics": [
+    "deployed_reads_post_projection_new_active_entry_as_not_stale_live_bug",
+    "candidate_reads_same_fixture_as_stale_with_semantic_stale_reason_fix",
+    "all_six_regression_drivers_exit_zero_on_candidate",
+    "frozen_physical_artifact_contains_no_ephemera"
+  ],
+  "rollback_triggers": [
+    "candidate changed-path budget exceeds the three double-signed paths",
+    "deployed Skill or frozen authority changes without a separate decision",
+    "frozen physical artifact contains __pycache__, .pytest_cache, or .pyc",
+    "D0 difference is not reproduced because deployed is not not-stale or candidate is not stale",
+    "any regression driver exits nonzero",
+    "deployed or frozen-candidate tree hash changes between pre-run and post-run checks",
+    "an existing content-addressed target is not both canonically matching and physically free of ephemera",
+    "rollback attempts to delete a reused artifact for which candidate-freeze returned created=false"
+  ],
+  "candidate_authority": "proposal_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}
