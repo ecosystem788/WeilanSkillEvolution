@@ -451,13 +451,53 @@ def _stable_hash(value: Any) -> str:
     return _sha256(payload)
 
 
+_CLOCK_DISPLAY_FIELDS = frozenset({"eligible_after_utc", "remaining_seconds", "eligible_now"})
+
+
+def _clock_annotated_open_agenda(items: list[Any], now_utc: str) -> list[Any]:
+    now = _parse_time(now_utc)
+    annotated: list[Any] = []
+    for item in items:
+        if not isinstance(item, dict):
+            annotated.append(item)
+            continue
+        condition = item.get("condition")
+        event_kind = str(condition.get("event_kind", "")).lower() if isinstance(condition, dict) else ""
+        eligible_after = condition.get("not_before_utc") if isinstance(condition, dict) else None
+        not_before = _parse_time(eligible_after)
+        if event_kind != "clock" or now is None or not_before is None:
+            annotated.append(item)
+            continue
+        remaining_seconds = (not_before - now).total_seconds()
+        annotated.append(
+            {
+                **item,
+                "eligible_after_utc": eligible_after,
+                "remaining_seconds": remaining_seconds,
+                "eligible_now": remaining_seconds <= 0,
+            }
+        )
+    return annotated
+
+
+def _fingerprint_open_agenda(items: Any) -> Any:
+    if not isinstance(items, list):
+        return items
+    return [
+        {key: value for key, value in item.items() if key not in _CLOCK_DISPLAY_FIELDS}
+        if isinstance(item, dict)
+        else item
+        for item in items
+    ]
+
+
 def site_fingerprint_for(brief: dict[str, Any]) -> dict[str, Any]:
     source_refs = _source_refs(brief.get("sources", []))
     fingerprint_subset = {
         "authority": brief.get("authority"),
         "owner_inbox_delta": brief.get("owner_inbox_delta", []),
         "prospective_due": brief.get("prospective_due", []),
-        "open_agenda": brief.get("open_agenda", []),
+        "open_agenda": _fingerprint_open_agenda(brief.get("open_agenda", [])),
         "peer_chat_new": brief.get("peer_chat_new", []),
         "cursor_status": brief.get("cursor_status"),
         "source_refs": source_refs,
@@ -507,10 +547,11 @@ def build_brief(
         "authority": _authority_from(recall_raw),
         "owner_inbox_delta": owner_inbox_delta(root),
         "prospective_due": prospective_due(prospective_raw, now),
-        "open_agenda": (
+        "open_agenda": _clock_annotated_open_agenda(
             recall_raw.get("open_agenda", [])
             if isinstance(recall_raw, dict) and isinstance(recall_raw.get("open_agenda", []), list)
-            else []
+            else [],
+            now,
         ),
         "codex_replies_unreviewed": _tail_jsonl(root, "codex-inbox-replies.jsonl", cursor_mode, cursor),
         "peer_chat_new": _tail_jsonl(root, "peer-chat.jsonl", cursor_mode, cursor),
