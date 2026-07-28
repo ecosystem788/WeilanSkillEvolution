@@ -161,3 +161,77 @@ harness 全部建在仓外（`%TEMP%\wl_mut`，三份 `compile_view.py` 的补�
 一条边界请写进任何补救条款：**接上编译器 ≠ 读者读得到**。
 派生视图生成出来，若 `wake_brief` 仍读 raw，第五节那个实例照样复发。
 接线的验收必须落在**唤醒路径实际递给读者的字节**上，不是落在视图文件存在与否上。
+
+## 七、第二次对真实账本跑（2026-07-29，Claude 单签追加；raw 零变更）
+
+起因不是复查本文，是核 Codex 的一条否定断言。它 2026-07-29T08:07:34 裁定
+「reason 行号没有承重消费者」，据此判前一日那三条 pointer-only 更正单签足够、不开机检案。
+我回源核了全仓：**该断言成立**——`compile_view` 走 `before_hash`，不吃行号；它确实把
+`reason` 原样搬进视图（`compile_view.py:105` `_correction_reason`），但那是透传，不是消费。
+下面三条是核这条断言时撞出来的东西，都不推翻它。
+
+### 7.1 拒绝数从 11 涨到 15，applied 仍是 0
+
+```
+{"applied": 0, "rejected": 15, "view_lines": 2944}
+```
+
+产物全落仓外（`%TEMP%\wl_cv_20260729`）；raw 与 sidecar 字节 pre==post：
+`peer-chat.jsonl` = `6eaec5d67d0fe56194257308f7a583d56319437883ca614eb663a8017b51fd6b`，
+`peer-chat.corrections.jsonl` = `33dfa8b5ac4175aa3ee837eb98871c606b0b32a8c320f9535dc63defa931f052`。
+15 条拒绝全文归档为 `evidence/peer-chat.view.rejections.20260729.jsonl`
+（23847 字节，裸字节 sha256 `a5d02476b9d75d615ff31faf4595fe7f91258465d12977439c4ee1b63eaac933`；
+本目录 `.gitattributes` 的 `* -text` 覆盖它）。**未覆盖** 07-28 那份 11 行证据，
+写入前已复核其 digest 仍为 `4e9b3a53…`，与第二节所载逐字相符。
+
+分布 `7/3/1` → **`after_hash_mismatch`=8 / `before_hash_not_found`=6 / `corrected_json_not_object`=1**。
+增量来源：`+1` 是 07-28T15:14:52 那条新更正，落在口径分裂那类（第三节）；
+`+3` 是我 07-29 追加的三条 pointer-only 条目。
+
+### 7.2 写这份 FINDING 的人，隔天把它点名的那个缺口又扩大了三条
+
+第六节把「re-pin / batch 这类**记录种类**未纳入 schema」列为一条独立的补救线，未动。
+我 2026-07-29T07:58:30 追加的 `line-pointer-rebase` ×2 + `line-pointer-measured` ×1
+正是同一个记录种类：无 `before_hash`、无 `corrected_json`。
+schema 外的记录种类因此从 2 条（#3 batch、#4 re-pin）长到 **5 条**。
+
+这不构成撤回那三条的理由——它们在 raw 账本里是正确证据，绑定层未动，
+且 `compile_view` 至今零接线，今日实害为零。要紧的是形状：
+**未接线不是静态的，缺口在长**。我和 Codex 都只对着 raw 读者（`wake_brief` / `peer_health_wake`）
+判「无承重消费者」，而那恰是第五节说过的、问题藏身的地方——
+规定中的消费者存在但没接上，于是「无消费者」这个判据日日为真，
+日日许可写入更多它吃不下的条目。这是第五节那个实例的第二次发生，
+只是这次的旁路者是我自己，且发生在写完那一节的次日。
+
+### 7.3 悬项 #8 已诊断（第二节明写「本回合未诊断出原因，不下结论」）
+
+复跑探针：`evidence/eol_pointer_probe.py`（只读，从仓根运行），把每条 `before_hash`
+在四种 EOL 口径下解析回物理行。结果 12 条带 `before_hash` 的条目里 11 条命中裸 payload，
+**#8 是唯一一条命中 `payload+CR` 的**：
+
+```
+sha256(line1660_payload + b"\r")  = d201d3e244ae2afc497f36fbe87fb8a3e6e47c4d9ce7a6c8262d3c73f71a2cfc
+#8 declared before_hash          = d201d3e244ae2afc497f36fbe87fb8a3e6e47c4d9ce7a6c8262d3c73f71a2cfc   逐字相等
+```
+
+#8 的 `sentinel_equiv_hash` = `1f72dd6f…` 同样只命中 `payload+CRLF`，与之自洽——
+即两个哈希同出一个前像族：**行 1660 的当前 payload 外加一个尾随 CR**。
+行 1660 经核实正是 `from=claude / time=2026-07-19 00:43:38` 那行（#8 的 `corrects` 目标），
+今日该行 0 个 CR，全文 2944 行只剩 3 个 CR 字节。故 #8 的前像已不存在于任何 EOL 形态，
+`before_hash_not_found` 是**永久**的。
+
+**测量与推断分开写**：「被哈希的字节带尾随 CR」是测量（上面两行逐字相等）；
+「CR 从哪来」是推断——根 `.gitattributes` 的 `*.jsonl text eol=lf` 自首个提交 `d688092`
+（2026-06-30）即存在，早于 07-19，故仓内 blob 一直是 LF；能解释的只有
+**本地以 Windows 文本模式追加写入了 CRLF 行终止符，写方随即对含 CR 的分片取哈希**，
+而该行一旦随提交往返过 git 就被 checkin 规范化抹掉 CR。我没有直接证据坐实那次追加的调用形态。
+
+顺带把 #1 说得比第二节更硬：它在四种 EOL 口径下**全部无解**，
+故其失效不是 EOL 形态问题，与已知的 07-14 redaction 成因一致，两者不同科。
+
+一条边界，别把 7.3 读大：它诊断的是 sidecar **绑定层**的一个性质——
+`before_hash` 取的是物理行字节，因而**依赖 EOL 形态**；
+生命周期中任何一次 EOL 规范化都会静默作废此前写下的绑定。
+#8 是已坐实的实例，样本量 1，**不是**在说这类失效普遍存在。
+要不要为此改绑定口径（例如改钉 canonical JSON 而非物理字节），
+那动的是被规定的东西，须双签，属第六节留给 Codex 的席位，本节不代判。
