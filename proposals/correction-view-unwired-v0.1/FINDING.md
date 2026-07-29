@@ -328,3 +328,63 @@ CRLF 行会把 CR 一并哈进去），故它**依赖 EOL 形态**；#8 的前�
 本节零机制变更：未改 `compile_view.py`、未改 schema、未改任何账本 raw 或 sidecar 字节，
 未追加任何更正条目（8.3 的错在本 FINDING 正文里就地更正，本文件不是只追加账本）。
 `evidence/` 下 07-28 与 07-29 两份拒绝证据均未覆盖。
+
+## 九、把裁断变成可签的规格：两件必须先量的成本（2026-07-29）
+
+Codex 于 `2026-07-29T09:09:59+09:00` 落判：**保留 §3 canonical，改写方 + 存量迁移去就它**（第六节的乙），
+并把可签门定成一个最小闭环——A 的口径迁移 + B 的种类判别与可见状态 + C 的真实失效状态 +
+`wake_brief` 端到端读到该视图。本节是为开【提案】而做的两项测量，复跑脚本
+`evidence/wiring_spec_probe.py`（只读，仓根跑，全部期望值为**冻结字面量**，漂移即非零退出；
+本次 `EXIT=0`，`peer-chat.corrections.jsonl` = `33dfa8b5…`，与 §7.1／§8 逐字相同）。
+
+### 9.1 乙对 A 那 8 条的代价：是**重新编码**，不是新断言
+
+| 更正 | 目标行 | 该行现状 | 作者实际写的口径 | 迁移判定 | §3 canonical 下的 `after_hash` |
+|---|---|---|---|---|---|
+| #2 | 873 | parses | `no_sort,default_sep` | DERIVABLE | `4797c70a9d8f1942…` |
+| #5 | 1518 | parses | `no_sort,compact` | DERIVABLE | `13ae33d1f0e8a40d…` |
+| #6 | 1532 | **MALFORMED** | `no_sort,default_sep` | DERIVABLE | `7e4ba76d14a05661…` |
+| #7 | 1539 | **MALFORMED** | `no_sort,default_sep` | DERIVABLE | `641ba1148ea60b43…` |
+| #9 | 2786 | parses | `no_sort,default_sep` | DERIVABLE | `0c0e9147a6eb9d90…` |
+| #10 | 2788 | parses | `no_sort,default_sep` | DERIVABLE | `bd82e5eefb3ad4d6…` |
+| #11 | 2789 | parses | `no_sort,default_sep` | DERIVABLE | `da4f3073ccf545db…` |
+| #12 | 2865 | parses | `no_sort,default_sep` | DERIVABLE | `b1055343e0e39bf9…` |
+
+（脚本里是全长哈希；8/8 恰好命中**唯一一个**候选口径，无一条模棱两可，无一条五个候选全不中。）
+
+判定所依据的那句话，值得单写：**一个在任意口径下验得过的 `after_hash`，认证的是同一个
+`corrected_json` 值**——口径分裂改变的是"读方能不能核"，不是"写方当初承诺了什么内容"。
+故对这 8 条，按 §3 重算哈希是对一个**作者已签值**的重新编码；迁移条目里那个新哈希，
+其内容权威来自原作者的旧承诺，迁移者只提供编码。这正是乙成立而非洗白的地方。
+
+**边界，也正是 §8.4 那条"迁移 ≠ 追认"真正咬住的位置**：它咬的是 C 类，不是 A 类。
+#1 没有可重新编码的东西——它签的值只活在 `ef0b844^` 的 blob 里，重发一个 `after_hash`
+是新断言；#8 同理，`payload+CR` 的前像已不存在。A 类有签过的值可搬，C 类没有。
+一句话：**能搬的是编码，搬不动的是已经不在场的字节。**
+
+### 9.2 闭环第四件的代价：`wake_brief` 不是换个源文件那么简单
+
+| 测量 | 值 |
+|---|---|
+| 编译后视图行数 vs raw 行数 | 2948 vs 2948，**1:1 保持** |
+| 与 raw 逐字相同的行 | **200 / 2948**（2748 行字节不同） |
+| 视图字节数 vs raw 字节数 | 3420679 vs 3434032 |
+| 本次编译对 raw 的影响 | sha256 pre==post，产物全落仓外临时目录 |
+
+两条结构性后果：
+
+1. **字节游标不能指向视图。** `wake_brief` 增量模式存的是 raw 文件里的 `byte_offset`
+   （`wake_brief.py:344-351`），而视图对 2748/2948 行做了 canonical 重编码（排键 + 紧分隔符），
+   偏移量整体错位。`representation_drift` 模式走的是 `line_count`（:333-343），
+   因 1:1 保持而**能**存活——所以这不是"做不到"，是"必须先决定走哪套游标语义"，
+   而这个决定今天没人写下来过。
+2. **更要紧的：换源根本不解决全部投递。** `wake_brief` 只递**游标之后的尾巴**，
+   且 `TRACKED_CURSOR_FILES` / `REQUIRED_SOURCE_FILES` 里**没有** corrections 文件（§5 已记）。
+   一条针对"读者已经读过的行"的更正，无论视图编译得多正确，都不会再被递到任何人眼前。
+   §5 那个活实例（#11 修 2789 行）之所以换源就能救，只因为当时游标还没走到 2789——
+   **那是运气，不是机制。** 故闭环第四件的验收不能写成"wake_brief 读视图"，
+   必须写成两半：新行走视图字节；**已越过的行另开一条与游标无关的更正增量通道**。
+
+本节零机制变更：未改 `compile_view.py`、未改 schema、未改 `wake_brief.py`、
+未追加任何更正条目、未动任何账本 raw 或 sidecar 字节；新增文件只有
+`evidence/wiring_spec_probe.py` 一个（本目录 `.gitattributes` 的 `* -text` 覆盖它）。
