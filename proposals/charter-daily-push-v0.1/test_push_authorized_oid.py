@@ -5,6 +5,7 @@ Every remote is a temporary file:// bare repository.
 
 import json
 import pathlib
+import runpy
 import subprocess
 import sys
 
@@ -94,9 +95,21 @@ def test_normal_fast_forward_push(tmp_path):
     assert receipt["ok"] is True
     assert receipt["status"] == "pushed_and_verified"
     assert receipt["push_performed"] is True
-    assert receipt["previous_remote_oid"] == base
+    assert receipt["preflight_remote_oid"] == base
     assert receipt["remote_oid"] == authorized_oid
     assert remote_head(remote) == authorized_oid
+
+
+def test_push_argv_binds_exact_preflight_base():
+    push_argv = runpy.run_path(str(TOOL))["push_argv"]
+
+    assert push_argv("origin", REF, "base", "authorized") == (
+        "push",
+        "--porcelain",
+        f"--force-with-lease={REF}:base",
+        "origin",
+        f"authorized:{REF}",
+    )
 
 
 def test_remote_base_drift_refuses_push(tmp_path):

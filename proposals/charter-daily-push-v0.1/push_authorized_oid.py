@@ -33,6 +33,16 @@ def git(*args):
     )
 
 
+def push_argv(origin, ref, base, authorized_oid):
+    return (
+        "push",
+        "--porcelain",
+        f"--force-with-lease={ref}:{base}",
+        origin,
+        f"{authorized_oid}:{ref}",
+    )
+
+
 def fail(reason, *, stage, returncode=None, **fields):
     receipt = {
         "ok": False,
@@ -157,12 +167,7 @@ def main(argv=None):
             authorized_oid=authorized_oid,
         )
 
-    push = git(
-        "push",
-        "--porcelain",
-        args.origin,
-        f"{authorized_oid}:{args.ref}",
-    )
+    push = git(*push_argv(args.origin, args.ref, base, authorized_oid))
     if push.returncode != 0:
         return fail(
             "git_push_failed",
@@ -192,7 +197,7 @@ def main(argv=None):
             "ref": args.ref,
             "base": base,
             "authorized_oid": authorized_oid,
-            "previous_remote_oid": remote_oid,
+            "preflight_remote_oid": remote_oid,
             "remote_oid": verified_oid,
             "push_performed": True,
         }
