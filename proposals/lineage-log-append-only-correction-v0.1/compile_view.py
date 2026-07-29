@@ -10,6 +10,61 @@ from pathlib import Path
 from typing import Any
 
 
+LEGACY_SIGNATURES = {
+    (
+        "after_hash",
+        "before_hash",
+        "corrected_json",
+        "corrects",
+        "reason",
+    ): "overlay",
+    (
+        "after_hash",
+        "before_hash",
+        "corrected_json",
+        "corrects",
+        "from",
+        "reason",
+        "time",
+    ): "overlay",
+    (
+        "after_hash",
+        "before_hash",
+        "before_hash_convention",
+        "corrected_json",
+        "corrects",
+        "from",
+        "reason",
+        "sentinel_equiv_convention",
+        "sentinel_equiv_hash",
+        "time",
+    ): "overlay",
+    (
+        "after_hash",
+        "after_hash_convention",
+        "before_hash",
+        "before_hash_convention",
+        "corrected_json",
+        "corrects",
+        "from",
+        "reason",
+        "time",
+        "time_authority",
+    ): "overlay",
+    (
+        "corrects",
+        "files",
+        "from",
+        "note",
+        "reason",
+        "time",
+    ): "batch-redaction",
+}
+EXPECTED_LEGACY_SIGNATURES_DIGEST = (
+    "b261880abc2a95931db652e35cef177948d7c34aba48b398e2733854271c9856"
+)
+
+
 def canonical(value: Any) -> bytes:
     return json.dumps(
         value, ensure_ascii=False, sort_keys=True, separators=(",", ":")
@@ -37,13 +92,43 @@ def _rejection(reason: str, correction_raw: str) -> dict[str, str]:
     return {"correction_raw": correction_raw, "reason": reason}
 
 
+def legacy_signatures_digest() -> str:
+    frozen = sorted([list(keys), kind] for keys, kind in LEGACY_SIGNATURES.items())
+    return sha256_hex(canonical(frozen))
+
+
+def record_kind(record: dict[str, Any]) -> tuple[str, str]:
+    kind = record.get("kind")
+    if isinstance(kind, str) and kind:
+        return kind, "explicit"
+    signature = tuple(sorted(record.keys()))
+    if signature in LEGACY_SIGNATURES:
+        return LEGACY_SIGNATURES[signature], "frozen_legacy_signature"
+    return "unknown_record_kind", "unmatched"
+
+
+def _meta_visible(
+    kind: str, basis: str, correction_raw: str
+) -> dict[str, str]:
+    return {
+        "basis": basis,
+        "correction_raw": correction_raw,
+        "kind": kind,
+    }
+
+
 def _load_corrections(
     path: Path, raw_hashes: set[str]
-) -> tuple[dict[str, dict[str, Any]], list[dict[str, str]]]:
+) -> tuple[
+    dict[str, dict[str, Any]],
+    list[dict[str, str]],
+    list[dict[str, str]],
+]:
     accepted: dict[str, dict[str, Any]] = {}
     rejected: list[dict[str, str]] = []
+    meta_visible: list[dict[str, str]] = []
     if not path.exists():
-        return accepted, rejected
+        return accepted, rejected, meta_visible
 
     for physical_line in path.read_bytes().splitlines(keepends=True):
         raw = line_without_lf(physical_line)
@@ -55,6 +140,10 @@ def _load_corrections(
             continue
         if not isinstance(record, dict):
             rejected.append(_rejection("correction_not_object", display))
+            continue
+        kind, basis = record_kind(record)
+        if kind != "overlay":
+            meta_visible.append(_meta_visible(kind, basis, display))
             continue
         before_hash = record.get("before_hash")
         corrected = record.get("corrected_json")
@@ -73,7 +162,7 @@ def _load_corrections(
             rejected.append(_rejection("duplicate_before_hash", display))
             continue
         accepted[before_hash] = record
-    return accepted, rejected
+    return accepted, rejected, meta_visible
 
 
 def compile_view(
@@ -90,7 +179,9 @@ def compile_view(
 
     raw_lines = raw_path.read_bytes().splitlines(keepends=True)
     hashes = [sha256_hex(line_without_lf(line)) for line in raw_lines]
-    corrections, rejected = _load_corrections(corrections_path, set(hashes))
+    corrections, rejected, meta_visible = _load_corrections(
+        corrections_path, set(hashes)
+    )
 
     output: list[bytes] = []
     applied = 0
@@ -121,7 +212,12 @@ def compile_view(
     view_path.write_bytes(b"".join(output))
     rejection_bytes = b"".join(canonical(item) + b"\n" for item in rejected)
     rejections_path.write_bytes(rejection_bytes)
-    return {"applied": applied, "rejected": len(rejected), "view_lines": len(output)}
+    return {
+        "applied": applied,
+        "meta_visible": len(meta_visible),
+        "rejected": len(rejected),
+        "view_lines": len(output),
+    }
 
 
 def main(argv: list[str] | None = None) -> int:

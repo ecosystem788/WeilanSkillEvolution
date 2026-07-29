@@ -11,11 +11,12 @@ reach one of three explicit outcomes --
 This probe measures which outcome each entry can reach and what must hold first.
 It decides nothing: where an outcome depends on an unmade decision it says so.
 
-Run from the repo root. Writes nothing; reads three files.
+Run from the repo root. Writes nothing; reads the compiler plus three evidence files.
 """
 
 from __future__ import annotations
 
+import importlib.util
 import hashlib
 import json
 from pathlib import Path
@@ -23,10 +24,19 @@ from pathlib import Path
 IMPL = Path("proposals/bounded-scheduler-v0.1/impl")
 RAW = IMPL / "peer-chat.jsonl"
 CORR = IMPL / "peer-chat.corrections.jsonl"
-ARCHIVED_REJECTIONS = Path(
-    "proposals/correction-view-unwired-v0.1/evidence"
-    "/peer-chat.view.rejections.20260729.jsonl"
+COMPILE_VIEW_PATH = Path(
+    "proposals/lineage-log-append-only-correction-v0.1/compile_view.py"
 )
+SPEC = importlib.util.spec_from_file_location("correction_view_compiler", COMPILE_VIEW_PATH)
+CV = importlib.util.module_from_spec(SPEC)
+assert SPEC.loader is not None
+SPEC.loader.exec_module(CV)
+
+EXPECTED_COMPILER_SUMMARY = {"applied": 0, "meta_visible": 5, "rejected": 10}
+EXPECTED_REJECTION_REASONS = {
+    "after_hash_mismatch": 8,
+    "before_hash_not_found": 2,
+}
 
 
 def sha(data: bytes) -> str:
@@ -76,21 +86,14 @@ def load_raw():
     return live, by_form
 
 
-def replicate_compile_view_reason(rec, live_hashes) -> str:
-    """Exact replication of _load_corrections' branch order (compile_view.py:59-75)."""
-    before = rec.get("before_hash")
-    corrected = rec.get("corrected_json")
-    if not isinstance(before, str) or before not in live_hashes:
-        return "before_hash_not_found"
-    if not isinstance(corrected, dict):
-        return "corrected_json_not_object"
-    if rec.get("after_hash") != sha(canonical_delegation(corrected)):
-        return "after_hash_mismatch"
-    return "accepted"
-
-
 def triage(rec, live_hashes, by_form):
     """Terminal outcome + the precondition that must hold to reach it."""
+    kind, basis = CV.record_kind(rec)
+    if kind != "overlay":
+        return "B", "META_VISIBLE", (
+            f"record_kind={kind} via {basis}; compiler visibly does not apply it"
+        )
+
     is_overlay = isinstance(rec.get("corrected_json"), dict)
     before = rec.get("before_hash")
 
@@ -160,19 +163,46 @@ def main() -> int:
     live_hashes, by_form = load_raw()
     records = []
     for n, physical in enumerate(CORR.read_bytes().splitlines(keepends=True), 1):
-        raw = physical[:-1] if physical.endswith(b"\n") else physical
-        records.append((n, json.loads(raw.decode("utf-8"))))
+        raw = CV.line_without_lf(physical)
+        records.append((n, raw.decode("utf-8"), json.loads(raw.decode("utf-8"))))
 
     print(f"raw   {RAW}  sha256={sha(RAW.read_bytes())}")
     print(f"corr  {CORR}  sha256={sha(CORR.read_bytes())}")
     print(f"entries={len(records)}  raw_lines={len(live_hashes)}\n")
 
+    accepted, rejected, meta_visible = CV._load_corrections(CORR, set(live_hashes))
+    rejected_by_raw = {item["correction_raw"]: item["reason"] for item in rejected}
+    meta_by_raw = {
+        item["correction_raw"]: f"META_VISIBLE:{item['kind']}:{item['basis']}"
+        for item in meta_visible
+    }
+    compiler_summary = {
+        "applied": len(accepted),
+        "meta_visible": len(meta_visible),
+        "rejected": len(rejected),
+    }
+    rejection_reasons: dict[str, int] = {}
+    for item in rejected:
+        reason = item["reason"]
+        rejection_reasons[reason] = rejection_reasons.get(reason, 0) + 1
+
+    failures = []
+    if compiler_summary != EXPECTED_COMPILER_SUMMARY:
+        failures.append(f"compiler summary drifted: {compiler_summary}")
+    if rejection_reasons != EXPECTED_REJECTION_REASONS:
+        failures.append(f"rejection reasons drifted: {rejection_reasons}")
+
     buckets: dict[str, list[int]] = {"A": [], "B": [], "C": []}
-    reasons: dict[str, int] = {}
     rows = []
-    for n, rec in records:
-        reason = replicate_compile_view_reason(rec, live_hashes)
-        reasons[reason] = reasons.get(reason, 0) + 1
+    for n, correction_raw, rec in records:
+        reason = rejected_by_raw.get(correction_raw) or meta_by_raw.get(correction_raw)
+        if reason is None:
+            before_hash = rec.get("before_hash")
+            if before_hash in accepted:
+                reason = "accepted"
+            else:
+                failures.append(f"entry #{n} was not accounted for by the compiler")
+                reason = "UNACCOUNTED"
         cls, name, precond = triage(rec, live_hashes, by_form)
         buckets[cls].append(n)
         rows.append((n, rec, reason, cls, name, precond))
@@ -197,18 +227,10 @@ def main() -> int:
     print("\n--- terminal buckets ---")
     for cls in "ABC":
         print(f"  {cls}: n={len(buckets[cls])}  entries={buckets[cls]}")
-    print(f"\n--- replicated reject distribution --- {reasons}")
-
-    # cross-check the replication against the archived run
-    archived = [json.loads(l) for l in
-                ARCHIVED_REJECTIONS.read_bytes().decode("utf-8").splitlines() if l.strip()]
-    arch_dist: dict[str, int] = {}
-    for item in archived:
-        arch_dist[item["reason"]] = arch_dist.get(item["reason"], 0) + 1
-    print(f"--- archived  reject distribution --- {arch_dist}")
-    agree = arch_dist == {k: v for k, v in reasons.items() if k != "accepted"}
-    print(f"replication agrees with archived run: {agree}")
-    return 0 if agree else 1
+    print(f"\n--- compiler summary --- {compiler_summary}")
+    print(f"--- compiler rejection distribution --- {rejection_reasons}")
+    print(f"--- failures --- {failures}")
+    return 1 if failures else 0
 
 
 if __name__ == "__main__":

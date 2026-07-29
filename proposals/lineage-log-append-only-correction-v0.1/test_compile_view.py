@@ -62,7 +62,12 @@ def test_golden_strict_view_raw_unchanged_and_placeholder_parseable(tmp_path):
     result = compile_view.compile_view(raw, corrections, view, rejections)
     rows = parsed_lines(view)  # strict json.loads for every derived line
 
-    assert result == {"applied": 2, "rejected": 0, "view_lines": 4}
+    assert result == {
+        "applied": 2,
+        "meta_visible": 0,
+        "rejected": 0,
+        "view_lines": 4,
+    }
     assert rows[1]["text"] == "fixed"
     assert rows[1]["_corrected_from"] == compile_view.sha256_hex(malformed_fixed)
     assert rows[3]["text"] == "new"
@@ -130,3 +135,70 @@ def test_malformed_correction_is_recorded_without_abort(tmp_path):
     assert result["rejected"] == 1
     assert parsed_lines(rejected)[0]["reason"] == "malformed_correction"
     assert len(parsed_lines(view)) == 4
+
+
+def test_explicit_non_overlay_is_meta_visible_before_binding_checks(tmp_path):
+    corrections = tmp_path / "corrections.jsonl"
+    record = {
+        "kind": "re-pin",
+        "before_hash": "not-live",
+        "corrected_json": "not-an-overlay",
+    }
+    corrections.write_bytes(compile_view.canonical(record) + b"\r\n")
+
+    accepted, rejected, meta_visible = compile_view._load_corrections(
+        corrections, set()
+    )
+
+    assert accepted == {}
+    assert rejected == []
+    assert meta_visible == [
+        {
+            "basis": "explicit",
+            "correction_raw": (
+                compile_view.canonical(record) + b"\r"
+            ).decode("utf-8"),
+            "kind": "re-pin",
+        }
+    ]
+
+
+def test_frozen_legacy_batch_redaction_signature_is_meta_visible(tmp_path):
+    corrections = tmp_path / "corrections.jsonl"
+    record = {
+        "corrects": "batch-redaction-20260714",
+        "files": ["peer-chat.jsonl"],
+        "from": "owner",
+        "note": "legacy metadata",
+        "reason": "redaction",
+        "time": "2026-07-14 00:00:00",
+    }
+    corrections.write_bytes(compile_view.canonical(record) + b"\n")
+
+    accepted, rejected, meta_visible = compile_view._load_corrections(
+        corrections, set()
+    )
+
+    assert accepted == {}
+    assert rejected == []
+    assert meta_visible[0]["kind"] == "batch-redaction"
+    assert meta_visible[0]["basis"] == "frozen_legacy_signature"
+    assert (
+        compile_view.legacy_signatures_digest()
+        == compile_view.EXPECTED_LEGACY_SIGNATURES_DIGEST
+    )
+
+
+def test_unmatched_legacy_record_is_unknown_meta_visible(tmp_path):
+    corrections = tmp_path / "corrections.jsonl"
+    record = {"corrects": "legacy", "unexpected": True}
+    corrections.write_bytes(compile_view.canonical(record) + b"\n")
+
+    accepted, rejected, meta_visible = compile_view._load_corrections(
+        corrections, set()
+    )
+
+    assert accepted == {}
+    assert rejected == []
+    assert meta_visible[0]["kind"] == "unknown_record_kind"
+    assert meta_visible[0]["basis"] == "unmatched"
