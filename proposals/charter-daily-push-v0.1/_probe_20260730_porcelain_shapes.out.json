@@ -1,0 +1,94 @@
+﻿{
+  "success": {
+    "returncode": 0,
+    "stdout_lines": [
+      {
+        "raw": "To file:///C:/Users/zy/AppData/Local/Temp/porcelain-probe-iyycrc_8/bare.git",
+        "tab_fields": [
+          "To file:///C:/Users/zy/AppData/Local/Temp/porcelain-probe-iyycrc_8/bare.git"
+        ],
+        "n_tab_fields": 1
+      },
+      {
+        "raw": " \t4da17085b18436806162a4253675a0da2d0581ef:refs/heads/main\t929b045..4da1708",
+        "tab_fields": [
+          " ",
+          "4da17085b18436806162a4253675a0da2d0581ef:refs/heads/main",
+          "929b045..4da1708"
+        ],
+        "n_tab_fields": 3
+      },
+      {
+        "raw": "Done",
+        "tab_fields": [
+          "Done"
+        ],
+        "n_tab_fields": 1
+      }
+    ],
+    "stderr": "",
+    "expected_source_field": "4da17085b18436806162a4253675a0da2d0581ef:refs/heads/main"
+  },
+  "stale_lease": {
+    "returncode": 1,
+    "stdout_lines": [
+      {
+        "raw": "To file:///C:/Users/zy/AppData/Local/Temp/porcelain-probe-iyycrc_8/bare.git",
+        "tab_fields": [
+          "To file:///C:/Users/zy/AppData/Local/Temp/porcelain-probe-iyycrc_8/bare.git"
+        ],
+        "n_tab_fields": 1
+      },
+      {
+        "raw": "!\t049fd66f70e8ef8fbc36c2a93edc53d93f26eba7:refs/heads/main\t[rejected] (stale info)",
+        "tab_fields": [
+          "!",
+          "049fd66f70e8ef8fbc36c2a93edc53d93f26eba7:refs/heads/main",
+          "[rejected] (stale info)"
+        ],
+        "n_tab_fields": 3
+      },
+      {
+        "raw": "Done",
+        "tab_fields": [
+          "Done"
+        ],
+        "n_tab_fields": 1
+      }
+    ],
+    "stderr": "error: failed to push some refs to 'file:///C:/Users/zy/AppData/Local/Temp/porcelain-probe-iyycrc_8/bare.git'\n",
+    "expected_source_field": "049fd66f70e8ef8fbc36c2a93edc53d93f26eba7:refs/heads/main",
+    "remote_after": "59cac9c1f706423f956c1cfb63a5ffe3320431a5\trefs/heads/main"
+  },
+  "already_up_to_date": {
+    "returncode": 0,
+    "stdout_lines": [
+      {
+        "raw": "To file:///C:/Users/zy/AppData/Local/Temp/porcelain-probe-iyycrc_8/bare.git",
+        "tab_fields": [
+          "To file:///C:/Users/zy/AppData/Local/Temp/porcelain-probe-iyycrc_8/bare.git"
+        ],
+        "n_tab_fields": 1
+      },
+      {
+        "raw": "=\t59cac9c1f706423f956c1cfb63a5ffe3320431a5:refs/heads/main\t[up to date]",
+        "tab_fields": [
+          "=",
+          "59cac9c1f706423f956c1cfb63a5ffe3320431a5:refs/heads/main",
+          "[up to date]"
+        ],
+        "n_tab_fields": 3
+      },
+      {
+        "raw": "Done",
+        "tab_fields": [
+          "Done"
+        ],
+        "n_tab_fields": 1
+      }
+    ],
+    "stderr": "",
+    "expected_source_field": "59cac9c1f706423f956c1cfb63a5ffe3320431a5:refs/heads/main"
+  },
+  "git_version": "git version 2.53.0.windows.2"
+}
