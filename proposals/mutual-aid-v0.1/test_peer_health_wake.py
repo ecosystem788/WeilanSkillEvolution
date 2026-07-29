@@ -1,8 +1,15 @@
 import hashlib
 import json
+import subprocess
+import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+COMPILE_VIEW_ROOT = Path(__file__).resolve().parents[1] / "lineage-log-append-only-correction-v0.1"
+if str(COMPILE_VIEW_ROOT) not in sys.path:
+    sys.path.insert(0, str(COMPILE_VIEW_ROOT))
+
+import compile_view
 import peer_health_wake
 from peer_health_wake import main, run_check, run_reverse_check
 
@@ -87,6 +94,18 @@ def malformed_chat(root: Path, *, time="2026-07-13 18:22:40", suffix="") -> str:
     with (root / "peer-chat.jsonl").open("a", encoding="utf-8", newline="\n") as stream:
         stream.write(raw + "\n")
     return raw
+
+
+def malformed_chat_bytes(
+    root: Path,
+    *,
+    terminator: bytes,
+    time: str = "2026-07-13 18:22:40",
+) -> bytes:
+    raw = f'{{"from":"claude","time":"{time}","text":"D:\\bad\\escape"}}'.encode()
+    with (root / "peer-chat.jsonl").open("ab") as stream:
+        stream.write(raw + terminator)
+    return raw + terminator
 
 
 def correction(root: Path, *, corrects: str, before_hash: str) -> None:
@@ -511,7 +530,88 @@ def test_exact_time_and_legacy_no_lf_hash_routes_to_known_corrected(tmp_path):
     assert len(result.known_corrected) == 1
     assert result.known_corrected[0]["line"] == 2
     assert result.known_corrected[0]["corrects"] == "2026-07-13 18:22:40"
-    assert "no line terminator" in result.known_corrected[0]["matched_convention"]
+    assert result.known_corrected[0]["matched_convention"] == (
+        "remove exactly one trailing LF byte; stored CR preserved"
+    )
+
+
+def test_current_record_minus_lf_v1_covers_all_physical_record_endings(tmp_path):
+    cases = (
+        (b"\n", b""),
+        (b"\r\n", b"\r"),
+        (b"", b""),
+        (b"\r", b"\r"),
+    )
+    for index, (terminator, retained_suffix) in enumerate(cases):
+        root = tmp_path / str(index)
+        fixture(root)
+        record = malformed_chat_bytes(root, terminator=terminator)
+        expected_preimage = record[: -len(terminator)] + retained_suffix if terminator else record
+        correction(
+            root,
+            corrects="2026-07-13 18:22:40",
+            before_hash=hashlib.sha256(expected_preimage).hexdigest(),
+        )
+
+        result = run_check(root=root, now=NOW)
+
+        assert result.parse_errors == []
+        assert len(result.known_corrected) == 1
+        assert result.known_corrected[0]["matched_hash"] == hashlib.sha256(
+            peer_health_wake._current_record_minus_lf_v1(record)
+        ).hexdigest()
+
+
+def test_crlf_fixture_matches_compile_view_and_peer_health_v1(tmp_path):
+    fixture(tmp_path)
+    record = malformed_chat_bytes(tmp_path, terminator=b"\r\n")
+    assert record.endswith(b"\r\n")
+    assert compile_view.line_without_lf(record).endswith(b"\r")
+    assert (
+        peer_health_wake._current_record_minus_lf_v1(record)
+        == compile_view.line_without_lf(record)
+    )
+    before_hash = hashlib.sha256(compile_view.line_without_lf(record)).hexdigest()
+    correction(
+        tmp_path,
+        corrects="2026-07-13 18:22:40",
+        before_hash=before_hash,
+    )
+
+    result = run_check(root=tmp_path, now=NOW)
+
+    assert result.parse_errors == []
+    assert len(result.known_corrected) == 1
+    assert result.known_corrected[0]["matched_hash"] == before_hash
+
+
+def test_named_commit_blob_line_hash_is_independently_recomputable(tmp_path):
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    subprocess.run(["git", "init", "-q"], cwd=repo, check=True)
+    subprocess.run(["git", "config", "user.name", "WeiLan Test"], cwd=repo, check=True)
+    subprocess.run(["git", "config", "user.email", "weilan-test@example.invalid"], cwd=repo, check=True)
+    subprocess.run(["git", "config", "core.autocrlf", "false"], cwd=repo, check=True)
+    ledger = repo / "ledger.jsonl"
+    ledger.write_bytes(b'{"id":1}\r\n{"id":2}\n')
+    subprocess.run(["git", "add", "ledger.jsonl"], cwd=repo, check=True)
+    subprocess.run(["git", "commit", "-q", "-m", "fixture"], cwd=repo, check=True)
+    commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo).decode().strip()
+    blob_oid = subprocess.check_output(
+        ["git", "rev-parse", f"{commit}:ledger.jsonl"], cwd=repo
+    ).decode().strip()
+    blob = subprocess.check_output(["git", "cat-file", "blob", blob_oid], cwd=repo)
+    first_record = blob[: blob.index(b"\n") + 1]
+
+    assert peer_health_wake._current_record_minus_lf_v1(first_record) == b'{"id":1}\r'
+    assert hashlib.sha256(
+        peer_health_wake._current_record_minus_lf_v1(first_record)
+    ).hexdigest() == hashlib.sha256(b'{"id":1}\r').hexdigest()
+
+    charter = (Path(__file__).resolve().parents[2] / "CHARTER.md").read_text(encoding="utf-8")
+    assert "`current-record-minus-LF-v1`" in charter
+    assert "具名 `<commit>:<账本路径>` 的 Git blob" in charter
+    assert "三域并存且不得以\"统一口径\"互相偷换" in charter
 
 
 def test_same_time_with_wrong_hash_remains_parse_error(tmp_path):

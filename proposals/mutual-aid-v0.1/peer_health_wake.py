@@ -52,9 +52,15 @@ class CheckResult(list[dict]):
         self.clock_anomaly = clock_anomaly
 
 
+def _current_record_minus_lf_v1(record_bytes: bytes) -> bytes:
+    """Remove exactly one trailing LF byte while preserving any stored CR."""
+    return record_bytes[:-1] if record_bytes.endswith(b"\n") else record_bytes
+
+
 def _known_correction(
     *,
     text: str,
+    record_bytes: bytes,
     diagnostic: dict,
     corrections: list[tuple[int, dict]],
     corrections_path: Path,
@@ -68,7 +74,7 @@ def _known_correction(
     except json.JSONDecodeError:
         return None
 
-    payload_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    payload_hash = hashlib.sha256(_current_record_minus_lf_v1(record_bytes)).hexdigest()
     physical_hash = str(diagnostic.get("raw_bytes_sha256", ""))
     for correction_line, correction in corrections:
         if correction.get("corrects") != record_time:
@@ -76,7 +82,7 @@ def _known_correction(
         before_hash = correction.get("before_hash")
         sentinel_hash = correction.get("sentinel_equiv_hash")
         if isinstance(before_hash, str) and _SHA256.fullmatch(before_hash) and before_hash == payload_hash:
-            matched_convention = "before_hash=sha256(physical line payload bytes, no line terminator)"
+            matched_convention = "remove exactly one trailing LF byte; stored CR preserved"
             matched_hash = before_hash
         elif (
             isinstance(sentinel_hash, str)
@@ -139,6 +145,7 @@ def _rows(
             if corrections is not None and corrections_path is not None and known_corrected is not None:
                 correction = _known_correction(
                     text=text,
+                    record_bytes=record_bytes,
                     diagnostic=diagnostic,
                     corrections=corrections,
                     corrections_path=corrections_path,
