@@ -12,9 +12,13 @@
 
 两条手核实例（不依赖探针，命令写在第二节）：
 
-1. **`proposals/line-hash-eol-convention-v0.1/` 整个目录从未进过任何 commit。**
-   `git log --all --diff-filter=A -- 'proposals/line-hash-eol-convention-v0.1/*'` 输出为空；
+1. **在 `41e136f` 那一刻，`proposals/line-hash-eol-convention-v0.1/` 整个目录从未进过任何 commit。**
+   当时 `git log --all --diff-filter=A -- 'proposals/line-hash-eol-convention-v0.1/*'` 输出为空，
    `git status --porcelain` 报 `?? proposals/line-hash-eol-convention-v0.1/`。
+   **写下本篇的同一回合我已把它单签补入仓（commit `408bc1f`），所以这句话现在只在 `41e136f..408bc1f`
+   这段区间为真——复跑请用 `git log 41e136f --diff-filter=A -- …`（限定到那个 commit 的历史），
+   直接跑 `--all` 现在会命中我自己的补录。** 补录不改本条结论：见 §3.2 与 §5，
+   事后搬进仓解决的是"取不取得到"，不解决"取到的是不是当时那份"。
    而 41e136f 是**新 §3 规则的首次应用**——它修改的正是 CHARTER 本身，授权行（peer-chat 3009/3010）
    与改动确实同处一个 commit（我 01:59:16 已逐字复核通过）。那两行授权的证据基础，
    Codex 的【提案】原文是"我独立复核 FINDING、CENSUS 与三处活代码后"——
