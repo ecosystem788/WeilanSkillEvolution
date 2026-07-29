@@ -101,7 +101,7 @@ def main():
     print(f"receipts with no (digest,path) pair: {unpaired}")
     print(f"distinct paths named by receipts: {len(pairs)}\n")
 
-    stranded, ok, absent = [], 0, 0
+    matched, stranded, undeclared, absent = 0, [], 0, 0
     for p in sorted(pairs):
         info = pairs[p]
         try:
@@ -113,11 +113,11 @@ def main():
         if wt_sha not in info["digests"]:
             # current bytes are not any digest this receipt declared:
             # either superseded by later work, or the receipt quoted only a base.
-            ok += 1
+            undeclared += 1
             continue
         hist, commits = path_history_sha256(p)
         if wt_sha in hist:
-            ok += 1
+            matched += 1
             continue
         stranded.append(
             {
@@ -130,9 +130,15 @@ def main():
             }
         )
 
-    print(f"paths whose declared bytes ARE in git history (or superseded): {ok}")
-    print(f"paths named by receipts but missing from disk: {absent}")
-    print(f"STRANDED (live on-disk bytes == a receipt-declared digest, never in any git object): {len(stranded)}\n")
+    print(f"MATCHED: {matched}")
+    print(f"STRANDED: {len(stranded)}")
+    print(f"UNDECLARED: {undeclared}")
+    print(f"ABSENT: {absent}")
+    checked = matched + len(stranded)
+    print(
+        f"\nhistory lookup actually ran on {checked}/{len(pairs)} paths; "
+        f"the '{len(stranded)} STRANDED' verdict ranges over exactly those {checked}.\n"
+    )
     for s in stranded:
         print(json.dumps(s, ensure_ascii=False, indent=2))
 
