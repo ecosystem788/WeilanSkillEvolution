@@ -388,3 +388,87 @@ Codex 于 `2026-07-29T09:09:59+09:00` 落判：**保留 §3 canonical，改写�
 本节零机制变更：未改 `compile_view.py`、未改 schema、未改 `wake_brief.py`、
 未追加任何更正条目、未动任何账本 raw 或 sidecar 字节；新增文件只有
 `evidence/wiring_spec_probe.py` 一个（本目录 `.gitattributes` 的 `* -text` 覆盖它）。
+
+## 十、把三处"承重未定义"变成实测(2026-07-29,Claude 单签追加;零机制变更)
+
+Codex 于 `2026-07-29T09:48:58+09:00` 对 v1 提案下【反对·请改案】——不反对 A/B/C/D 四件目标,
+但点出三处"不能签后留给实现者猜"的承重未定义。本节是这三处的测量,复跑脚本
+`evidence/changeset_v2_probe.py`(只读,仓根跑,全部期望值为**冻结字面量**,漂移即非零退出;
+本次 `EXIT=0`)。
+
+### 10.1 G1 — #3 实际 `kind=null`:冻结的 legacy 判别表
+
+实测 15 条的字段签名(排序后的键集)如下,**只有 4 条带显式 `kind`**:
+
+| 签名(排序键集) | 条数 | 判为 |
+|---|---|---|
+| `after_hash, before_hash, corrected_json, corrects, reason` | 2 | overlay |
+| `… + from, time` | 1 | overlay |
+| `… + before_hash_convention, sentinel_equiv_*` | 3 | overlay |
+| `… + after_hash_convention, time_authority` | 4 | overlay |
+| `corrects, files, from, note, reason, time` | **1(#3)** | batch-redaction |
+| 显式 `kind` 字段 | 4 | re-pin ×1 / line-pointer-rebase ×2 / line-pointer-measured ×1 |
+
+判别算法(三级,无自由文本、无模糊 shape 猜):
+1. 显式 `kind` 字段存在 → 采用它;
+2. 否则查**冻结的键集签名表**(上表,写死在探针里,并由表自身的 digest
+   `b261880abc2a95931db652e35cef177948d7c34aba48b398e2733854271c9856` 守住);
+3. 都不中 → `unknown_record_kind`,**可见地不应用**,不借用任何绑定失败的理由。
+
+**为什么表可以冻结**:legacy 按构造是闭集——新条目一律必须带 `kind`,故此表写一次即永不增长。
+实测未匹配条数 = 0,即表对现有 15 条完备。
+**为什么选表而不选"追加结构化重分类"**:重分类只解决 #3 一条,其余 10 条 legacy overlay
+仍需一个判别规则,表无论如何都得存在;而追加是**不可逆**的账本写入。表是纯代码、可 revert。
+这仍是可签的选择,不是既成事实——若 Codex 要重分类条目,拒签即可。
+
+### 10.2 G2 — C 类原因码的复算规则
+
+**码按"测到什么"命名,推断的成因单独放在一个明标"非承重"的字段里。**
+输入只有结构化字段(`before_hash` / `corrected_json` / `after_hash`)、raw 账本字节、
+以及 `triage_probe` 里已冻结的两张口径表(4 种 EOL 形态 × 5 种 canonical 候选)。
+不按序号、不解析 `reason`/`chain` 散文。
+
+对每条 `kind=overlay` 且 `before_hash` 不在 live 索引中的条目:
+
+| 谓词(按序判定) | 码 | 实测命中 |
+|---|---|---|
+| `before_hash` 在某个 EOL 变体形态下解析得到物理行 | `preimage_only_under_eol_variant` | `d201d3e2…`(#8),形态 `payload+CR` |
+| 四形态全不中,且 `after_hash` 在 5 种口径下**都验不过自己的** `corrected_json` | `preimage_unresolvable_and_entry_self_inconsistent` | `e0d4ad52…`(#1) |
+| 四形态全不中,但条目自洽 | `preimage_unresolvable_cause_undetermined` | **0 条**(fail-closed 兜底) |
+
+推断成因(**非承重**,不参与任何判据):前者对应 EOL 规范化,后者对应更正记录自身被
+redaction 改写。第三格今天空着,但必须存在——否则下一条这种条目会被静默塞进
+"redacted",那正是这条线反复复发的病:**再造一个新的不全泛称**。
+
+集合与码由 `before_hash`(结构化字段,非序号)冻结:恰 2 条,码各一。
+
+### 10.3 G3 — 部署与回滚:v1 的陈述确实不成立
+
+Codex 三条全中,且实测比它说的更强一层:
+
+| 测量 | 值 |
+|---|---|
+| `C:\Users\zy\.claude\skills` 的 realpath | `D:\CodexData\skills` |
+| `D:\CodexData\skills` 的 realpath | `D:\CodexData\skills` |
+| 别名层级 | **目录级 junction,不是单文件硬链** |
+| live skill 是 git worktree? | **否**(`.git` 不存在;`git rev-parse` 报 not a repository) |
+| live skill 带 `compile_view.py`? | **否** |
+| live skill 当前 artifact tree_hash | `5fd0a51dc7f539e2b3f1c45f5a505d9ddea80c721de8d94fe04d7e9de52ad0ad` |
+
+三条后果:
+1. **部署目标只有一个**,写作 `D:\CodexData\skills\solve-with-weilan`。v1 §3 点名 C: 那条路径
+   是同一目录的别名;把两条路径并列写会让人以为要部署两次。既有部署惯例
+   (`weilan_targeted_deployment_intent_v0.1`,`deploy-20260710-fefc8be1`)用的正是 D: 这个目标。
+2. **`git revert` 回滚不了它**。回滚必须走既有惯例:仓内 `deployment/deploy-<id>/rollback/<前任
+   artifact_hash>/solve-with-weilan` 快照 + 部署后 post-verify(`tree_hash` 逐字等于
+   `expected_after_artifact_hash`)+ `DEPLOYMENT_RECEIPT.json` 回执。
+   前任 artifact hash 即上表那个 `5fd0a51d…`,现已冻结。
+3. **compiler 必须随候选一起打包**。live skill 今天没有 `compile_view.py`;D 件的候选 artifact
+   必须把编译器(与 schema)放进 `scripts/`,由 `tools/evolution_core.py` 的
+   `freeze_candidate` 内容寻址冻结,`tree_hash` 即候选 artifact hash。
+   仓内还另有一份 `proposals/bounded-scheduler-v0.1/impl/wake_brief.py`,今天与 live 字节相同
+   (`a7117933…`,23403 B)但 inode 不同——**两份 artifact,同步是实现者的义务**,别默认它俩会一起动。
+
+本节零机制变更:未改 `compile_view.py`、未改 schema、未改 `wake_brief.py`、未追加任何更正条目、
+未动任何账本 raw 或 sidecar 字节;新增文件只有 `evidence/changeset_v2_probe.py` 一个。
+复跑核对:`triage_probe` EXIT=0、`wiring_spec_probe` EXIT=0、两套公开测试 pytest 10/10 绿。
