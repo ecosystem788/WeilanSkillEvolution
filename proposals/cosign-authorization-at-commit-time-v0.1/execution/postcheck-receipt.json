@@ -1,0 +1,53 @@
+{
+  "mode": "postcheck",
+  "final_expected": "6b1432fbc5333f7c1802f5fc4f2285be7bae6ade42a7c0e95a52ddffb42938a8",
+  "final_actual": "6b1432fbc5333f7c1802f5fc4f2285be7bae6ade42a7c0e95a52ddffb42938a8",
+  "final_ok": true,
+  "witness_digest_pre": "07ee7c8663fd05ffc444476a4b15e38fc22f28769425a68c114df7a6f343a331",
+  "witness_digest_post": "07ee7c8663fd05ffc444476a4b15e38fc22f28769425a68c114df7a6f343a331",
+  "non_target_conserved": true,
+  "witness_coverage": {
+    "covered": [
+      "status(-z -uall) 列出的每条非 target 路径：XY 两位状态字母",
+      "同上每条路径的工作区原始字节 sha256（不存在记 ABSENT）",
+      "同上每条路径的 index 条目：各 stage 的 mode,oid,stage（不在 index 记 ABSENT）",
+      "for-each-ref **列出的**每条引用（refname → objectname）",
+      "同上每条引用的符号目标（symbolic ref 记目标 refname，direct ref 记哨兵 DIRECT）",
+      "HEAD 的符号名与 oid（游离/未出生有哨兵值）"
+    ],
+    "not_covered": [
+      "被 .gitignore 命中的路径（不进 -uall；无界且高频抖动，见 CONVENTION §5.3.f）",
+      "refs/ 之外的伪引用（ORIG_HEAD/FETCH_HEAD/MERGE_HEAD 等；HEAD 除外，它由 H 腿单钉）——实测 for-each-ref 不列出它们",
+      "reflog（.git/logs/），以及 for-each-ref 不列出的悬空 symbolic ref——实测：symbolic ref 指向不存在的 ref 时该条整行不出现",
+      "object database 内部：gc/repack/prune、不可达对象",
+      ".git/ 下的配置与 hooks（config、hooks、worktrees 注册）",
+      "文件系统元数据：mtime、权限/ACL、扩展属性（index mode 位之外）",
+      "仓库根之外的一切（执行期制品按 §5.3.d 恰恰住在那里）",
+      "子模块内部状态（只见 gitlink oid）"
+    ]
+  },
+  "base_preimage_ok": true,
+  "base_preimage_expected": "9fdab08587d37db33906a4b4dcdfe47c5891dd4dbca1aae07153a8aa8c10dc35",
+  "base_preimage_actual": "9fdab08587d37db33906a4b4dcdfe47c5891dd4dbca1aae07153a8aa8c10dc35",
+  "sidecar": "C:\\Users\\zy\\AppData\\Local\\Temp/weilan-exec-authz-commit/CHARTER.base.bytes",
+  "base_line_count": 123,
+  "final_line_count": 138,
+  "added_lines": 15,
+  "deleted_lines": 0,
+  "lcs_length": 123,
+  "attribution_ambiguous": false,
+  "possibly_added_lines": 15,
+  "possibly_deleted_lines": 0,
+  "sections_touched": [
+    "## 三、决策程序：双签"
+  ],
+  "expect_added": 15,
+  "expect_deleted": 0,
+  "changes_confined_to": [
+    "## 三、决策程序：双签"
+  ],
+  "counts_ok": true,
+  "changes_confined": true,
+  "diff_ok": true,
+  "ok": true
+}

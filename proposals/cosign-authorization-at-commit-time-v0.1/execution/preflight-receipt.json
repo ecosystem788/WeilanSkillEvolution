@@ -1,0 +1,10 @@
+{
+  "mode": "preflight",
+  "ok": true,
+  "target": "CHARTER.md",
+  "base": "9fdab08587d37db33906a4b4dcdfe47c5891dd4dbca1aae07153a8aa8c10dc35",
+  "sidecar": "C:\\Users\\zy\\AppData\\Local\\Temp/weilan-exec-authz-commit/CHARTER.base.bytes",
+  "sidecar_present": true,
+  "witness_digest_pre": "07ee7c8663fd05ffc444476a4b15e38fc22f28769425a68c114df7a6f343a331",
+  "non_target_entries": 540
+}
