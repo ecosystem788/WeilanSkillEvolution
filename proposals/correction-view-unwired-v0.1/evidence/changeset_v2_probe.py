@@ -118,9 +118,9 @@ EXPECTED_TABLE_DIGEST = "b261880abc2a95931db652e35cef177948d7c34aba48b398e273385
 # ledger bytes plus the two frozen convention tables in triage_probe.  No ordinals,
 # no prose.  Codes are named after what is MEASURED; the diagnosed cause travels in
 # a separate, explicitly non-load-bearing field.
-CODE_EOL_VARIANT = "preimage_only_under_eol_variant"
-CODE_SELF_INCONSISTENT = "preimage_unresolvable_and_entry_self_inconsistent"
-CODE_UNDETERMINED = "preimage_unresolvable_cause_undetermined"
+CODE_EOL_VARIANT = T.CV.CODE_EOL_VARIANT
+CODE_SELF_INCONSISTENT = T.CV.CODE_SELF_INCONSISTENT
+CODE_UNDETERMINED = T.CV.CODE_UNDETERMINED
 
 DIAGNOSIS = {
     CODE_EOL_VARIANT: "preimage_eol_normalized (inference, not measurement)",
@@ -166,19 +166,7 @@ def invalid_reason_code(rec, live_hashes, by_form):
         return None
     if before in live_hashes:
         return None
-    hit_forms = sorted(f for f, idx in by_form.items() if before in idx)
-    if hit_forms:
-        return CODE_EOL_VARIANT, {"resolving_eol_forms": hit_forms}
-    corrected = rec.get("corrected_json")
-    if isinstance(corrected, dict):
-        self_ok = sorted(
-            name
-            for name, fn in T.AFTER_CONVENTIONS.items()
-            if rec.get("after_hash") == sha(fn(corrected))
-        )
-        if not self_ok:
-            return CODE_SELF_INCONSISTENT, {"after_hash_verifies_under": []}
-    return CODE_UNDETERMINED, {}
+    return T.CV.invalid_binding_code(rec, by_form)
 
 
 def main() -> int:

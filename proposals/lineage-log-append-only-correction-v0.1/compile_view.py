@@ -64,6 +64,11 @@ EXPECTED_LEGACY_SIGNATURES_DIGEST = (
     "b261880abc2a95931db652e35cef177948d7c34aba48b398e2733854271c9856"
 )
 
+CODE_EOL_VARIANT = "preimage_only_under_eol_variant"
+CODE_SELF_INCONSISTENT = "preimage_unresolvable_and_entry_self_inconsistent"
+CODE_UNDETERMINED = "preimage_unresolvable_cause_undetermined"
+CODE_BEFORE_HASH_MISSING = "before_hash_missing_or_not_string"
+
 
 def canonical(value: Any) -> bytes:
     return json.dumps(
@@ -79,6 +84,46 @@ def sha256_hex(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+AFTER_CONVENTIONS = {
+    "delegation(sort_keys,compact)": canonical,
+    "no_sort,default_sep": lambda x: json.dumps(x, ensure_ascii=False).encode("utf-8"),
+    "no_sort,compact": lambda x: json.dumps(
+        x, ensure_ascii=False, separators=(",", ":")
+    ).encode("utf-8"),
+    "ensure_ascii=True,sort_keys,compact": lambda x: json.dumps(
+        x, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8"),
+    "no_sort,compact+LF": lambda x: (
+        json.dumps(x, ensure_ascii=False, separators=(",", ":")) + "\n"
+    ).encode("utf-8"),
+}
+
+# line_without_lf keeps a stored CR attached. These four forms make that physical
+# distinction visible for diagnosis without widening the canonical acceptance path.
+EOL_FORMS = {
+    "payload": lambda p: p,
+    "payload+CR": lambda p: p + b"\r",
+    "payload+LF": lambda p: p + b"\n",
+    "payload+CRLF": lambda p: p + b"\r\n",
+}
+
+
+def build_line_index(
+    raw_lines: list[bytes],
+) -> tuple[dict[str, int], dict[str, dict[str, int]]]:
+    payloads = [line_without_lf(line) for line in raw_lines]
+    payloads = [payload[:-1] if payload.endswith(b"\r") else payload for payload in payloads]
+    by_form = {
+        name: {sha256_hex(form(payload)): number for number, payload in enumerate(payloads, 1)}
+        for name, form in EOL_FORMS.items()
+    }
+    live = {
+        sha256_hex(line_without_lf(line)): number
+        for number, line in enumerate(raw_lines, 1)
+    }
+    return live, by_form
+
+
 def default_paths(raw_path: Path) -> tuple[Path, Path, Path]:
     stem = raw_path.name.removesuffix(".jsonl")
     return (
@@ -88,8 +133,18 @@ def default_paths(raw_path: Path) -> tuple[Path, Path, Path]:
     )
 
 
-def _rejection(reason: str, correction_raw: str) -> dict[str, str]:
-    return {"correction_raw": correction_raw, "reason": reason}
+def _diagnosis(**details: Any) -> dict[str, Any]:
+    return {"load_bearing": False, **details}
+
+
+def _rejection(
+    reason: str, correction_raw: str, diagnosis: dict[str, Any] | None = None
+) -> dict[str, Any]:
+    return {
+        "correction_raw": correction_raw,
+        "diagnosis": diagnosis or _diagnosis(),
+        "reason": reason,
+    }
 
 
 def legacy_signatures_digest() -> str:
@@ -107,6 +162,37 @@ def record_kind(record: dict[str, Any]) -> tuple[str, str]:
     return "unknown_record_kind", "unmatched"
 
 
+def _after_hash_matches(record: dict[str, Any]) -> list[str]:
+    corrected = record.get("corrected_json")
+    expected_after = record.get("after_hash")
+    return sorted(
+        name
+        for name, convention in AFTER_CONVENTIONS.items()
+        if expected_after == sha256_hex(convention(corrected))
+    )
+
+
+def invalid_binding_code(
+    record: dict[str, Any], by_form: dict[str, dict[str, int]]
+) -> tuple[str, dict[str, Any]]:
+    """Classify a failed overlay pre-image without changing overlay acceptance."""
+    before_hash = record.get("before_hash")
+    if not isinstance(before_hash, str):
+        state = "missing" if "before_hash" not in record else type(before_hash).__name__
+        return CODE_BEFORE_HASH_MISSING, _diagnosis(before_hash_state=state)
+
+    hit_forms = sorted(name for name, index in by_form.items() if before_hash in index)
+    if hit_forms:
+        return CODE_EOL_VARIANT, _diagnosis(resolving_eol_forms=hit_forms)
+
+    matching_conventions = _after_hash_matches(record)
+    if not matching_conventions:
+        return CODE_SELF_INCONSISTENT, _diagnosis(after_hash_verifies_under=[])
+    return CODE_UNDETERMINED, _diagnosis(
+        after_hash_verifies_under=matching_conventions
+    )
+
+
 def _meta_visible(
     kind: str, basis: str, correction_raw: str
 ) -> dict[str, str]:
@@ -118,14 +204,16 @@ def _meta_visible(
 
 
 def _load_corrections(
-    path: Path, raw_hashes: set[str]
+    path: Path,
+    index: tuple[dict[str, int], dict[str, dict[str, int]]],
 ) -> tuple[
     dict[str, dict[str, Any]],
-    list[dict[str, str]],
+    list[dict[str, Any]],
     list[dict[str, str]],
 ]:
+    live_hashes, by_form = index
     accepted: dict[str, dict[str, Any]] = {}
-    rejected: list[dict[str, str]] = []
+    rejected: list[dict[str, Any]] = []
     meta_visible: list[dict[str, str]] = []
     if not path.exists():
         return accepted, rejected, meta_visible
@@ -136,10 +224,22 @@ def _load_corrections(
         try:
             record = json.loads(raw.decode("utf-8"))
         except (UnicodeDecodeError, json.JSONDecodeError):
-            rejected.append(_rejection("malformed_correction", display))
+            rejected.append(
+                _rejection(
+                    "malformed_correction",
+                    display,
+                    _diagnosis(observation="strict_utf8_or_json_parse_failed"),
+                )
+            )
             continue
         if not isinstance(record, dict):
-            rejected.append(_rejection("correction_not_object", display))
+            rejected.append(
+                _rejection(
+                    "correction_not_object",
+                    display,
+                    _diagnosis(observed_type=type(record).__name__),
+                )
+            )
             continue
         kind, basis = record_kind(record)
         if kind != "overlay":
@@ -148,18 +248,41 @@ def _load_corrections(
         before_hash = record.get("before_hash")
         corrected = record.get("corrected_json")
         expected_after = record.get("after_hash")
-        if not isinstance(before_hash, str) or before_hash not in raw_hashes:
-            rejected.append(_rejection("before_hash_not_found", display))
+        if not isinstance(before_hash, str):
+            reason, diagnosis = invalid_binding_code(record, by_form)
+            rejected.append(_rejection(reason, display, diagnosis))
+            continue
+        if before_hash not in live_hashes:
+            reason, diagnosis = invalid_binding_code(record, by_form)
+            rejected.append(_rejection(reason, display, diagnosis))
             continue
         if not isinstance(corrected, dict):
-            rejected.append(_rejection("corrected_json_not_object", display))
+            rejected.append(
+                _rejection(
+                    "corrected_json_not_object",
+                    display,
+                    _diagnosis(observed_type=type(corrected).__name__),
+                )
+            )
             continue
         actual_after = sha256_hex(canonical(corrected))
         if expected_after != actual_after:
-            rejected.append(_rejection("after_hash_mismatch", display))
+            rejected.append(
+                _rejection(
+                    "after_hash_mismatch",
+                    display,
+                    _diagnosis(after_hash_verifies_under=_after_hash_matches(record)),
+                )
+            )
             continue
         if before_hash in accepted:
-            rejected.append(_rejection("duplicate_before_hash", display))
+            rejected.append(
+                _rejection(
+                    "duplicate_before_hash",
+                    display,
+                    _diagnosis(duplicate_before_hash=before_hash),
+                )
+            )
             continue
         accepted[before_hash] = record
     return accepted, rejected, meta_visible
@@ -180,7 +303,7 @@ def compile_view(
     raw_lines = raw_path.read_bytes().splitlines(keepends=True)
     hashes = [sha256_hex(line_without_lf(line)) for line in raw_lines]
     corrections, rejected, meta_visible = _load_corrections(
-        corrections_path, set(hashes)
+        corrections_path, build_line_index(raw_lines)
     )
 
     output: list[bytes] = []

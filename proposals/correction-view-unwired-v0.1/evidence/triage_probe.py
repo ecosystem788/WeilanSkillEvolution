@@ -17,7 +17,6 @@ Run from the repo root. Writes nothing; reads the compiler plus three evidence f
 from __future__ import annotations
 
 import importlib.util
-import hashlib
 import json
 from pathlib import Path
 
@@ -35,55 +34,22 @@ SPEC.loader.exec_module(CV)
 EXPECTED_COMPILER_SUMMARY = {"applied": 0, "meta_visible": 5, "rejected": 10}
 EXPECTED_REJECTION_REASONS = {
     "after_hash_mismatch": 8,
-    "before_hash_not_found": 2,
+    "preimage_only_under_eol_variant": 1,
+    "preimage_unresolvable_and_entry_self_inconsistent": 1,
 }
 
 
 def sha(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+    return CV.sha256_hex(data)
 
 
-def canonical_delegation(value) -> bytes:
-    """DELEGATION section 3's specified function -- the one compile_view uses."""
-    return json.dumps(
-        value, ensure_ascii=False, sort_keys=True, separators=(",", ":")
-    ).encode("utf-8")
-
-
-AFTER_CONVENTIONS = {
-    "delegation(sort_keys,compact)": canonical_delegation,
-    "no_sort,default_sep": lambda x: json.dumps(x, ensure_ascii=False).encode("utf-8"),
-    "no_sort,compact": lambda x: json.dumps(
-        x, ensure_ascii=False, separators=(",", ":")
-    ).encode("utf-8"),
-    "ensure_ascii=True,sort_keys,compact": lambda x: json.dumps(
-        x, sort_keys=True, separators=(",", ":")
-    ).encode("utf-8"),
-    "no_sort,compact+LF": lambda x: (
-        json.dumps(x, ensure_ascii=False, separators=(",", ":")) + "\n"
-    ).encode("utf-8"),
-}
-
-# compile_view hashes line_without_lf(physical_line); a line stored CRLF therefore
-# hashes with its CR still attached. Section 7.3 measured #8 against exactly this set.
-EOL_FORMS = {
-    "payload": lambda p: p,
-    "payload+CR": lambda p: p + b"\r",
-    "payload+LF": lambda p: p + b"\n",
-    "payload+CRLF": lambda p: p + b"\r\n",
-}
+AFTER_CONVENTIONS = CV.AFTER_CONVENTIONS
+EOL_FORMS = CV.EOL_FORMS
 
 
 def load_raw():
     lines = RAW.read_bytes().splitlines(keepends=True)
-    payloads = [ln[:-1] if ln.endswith(b"\n") else ln for ln in lines]
-    payloads = [p[:-1] if p.endswith(b"\r") else p for p in payloads]
-    by_form = {}
-    for name, fn in EOL_FORMS.items():
-        by_form[name] = {sha(fn(p)): n for n, p in enumerate(payloads, 1)}
-    # what compile_view actually indexes: line_without_lf, CR left in place
-    live = {sha(ln[:-1] if ln.endswith(b"\n") else ln): n for n, ln in enumerate(lines, 1)}
-    return live, by_form
+    return CV.build_line_index(lines)
 
 
 def triage(rec, live_hashes, by_form):
@@ -105,17 +71,11 @@ def triage(rec, live_hashes, by_form):
 
     # overlay-shaped: does its binding still resolve to a physical line?
     if not isinstance(before, str):
-        return "C", "REJECTED_INVALID", "overlay entry carries no before_hash"
-    hit_forms = [f for f, idx in by_form.items() if before in idx]
+        code, diagnosis = CV.invalid_binding_code(rec, by_form)
+        return "C", "REJECTED_INVALID", f"{code}; diagnosis={diagnosis}"
     if before not in live_hashes:
-        if hit_forms:
-            return "C", "REJECTED_INVALID", (
-                f"pre-image is {'/'.join(hit_forms)}, which no longer exists on disk; "
-                "reachable only via a re-pin, i.e. depends on strand B"
-            )
-        return "C", "REJECTED_INVALID", (
-            "pre-image unresolvable under all four EOL forms; binding permanently dead"
-        )
+        code, diagnosis = CV.invalid_binding_code(rec, by_form)
+        return "C", "REJECTED_INVALID", f"{code}; diagnosis={diagnosis}"
 
     matched = [n for n, fn in AFTER_CONVENTIONS.items()
                if rec.get("after_hash") == sha(fn(rec["corrected_json"]))]
@@ -170,7 +130,9 @@ def main() -> int:
     print(f"corr  {CORR}  sha256={sha(CORR.read_bytes())}")
     print(f"entries={len(records)}  raw_lines={len(live_hashes)}\n")
 
-    accepted, rejected, meta_visible = CV._load_corrections(CORR, set(live_hashes))
+    accepted, rejected, meta_visible = CV._load_corrections(
+        CORR, (live_hashes, by_form)
+    )
     rejected_by_raw = {item["correction_raw"]: item["reason"] for item in rejected}
     meta_by_raw = {
         item["correction_raw"]: f"META_VISIBLE:{item['kind']}:{item['basis']}"

@@ -53,6 +53,10 @@ def parsed_lines(path: Path):
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
 
 
+def empty_index():
+    return {}, {name: {} for name in compile_view.EOL_FORMS}
+
+
 def test_golden_strict_view_raw_unchanged_and_placeholder_parseable(tmp_path):
     raw, corrections, malformed_fixed, malformed_open, semantic_raw = write_fixture(tmp_path)
     view = tmp_path / "peer-chat.view.jsonl"
@@ -82,7 +86,7 @@ def test_golden_strict_view_raw_unchanged_and_placeholder_parseable(tmp_path):
     assert digest(corrections) == corrections_before
 
 
-def test_before_hash_mismatch_is_rejected(tmp_path):
+def test_unresolvable_self_consistent_before_hash_is_undetermined(tmp_path):
     raw, corrections, _, _, _ = write_fixture(tmp_path)
     bad = correction(b"not a raw line", {"text": "never"})
     corrections.write_bytes(compile_view.canonical(bad) + b"\n")
@@ -92,7 +96,7 @@ def test_before_hash_mismatch_is_rejected(tmp_path):
     result = compile_view.compile_view(raw, corrections, view, rejected)
 
     assert result["applied"] == 0
-    assert parsed_lines(rejected)[0]["reason"] == "before_hash_not_found"
+    assert parsed_lines(rejected)[0]["reason"] == compile_view.CODE_UNDETERMINED
     assert parsed_lines(view)[1]["_lineage"] == "unparseable"
 
 
@@ -147,7 +151,7 @@ def test_explicit_non_overlay_is_meta_visible_before_binding_checks(tmp_path):
     corrections.write_bytes(compile_view.canonical(record) + b"\r\n")
 
     accepted, rejected, meta_visible = compile_view._load_corrections(
-        corrections, set()
+        corrections, empty_index()
     )
 
     assert accepted == {}
@@ -176,7 +180,7 @@ def test_frozen_legacy_batch_redaction_signature_is_meta_visible(tmp_path):
     corrections.write_bytes(compile_view.canonical(record) + b"\n")
 
     accepted, rejected, meta_visible = compile_view._load_corrections(
-        corrections, set()
+        corrections, empty_index()
     )
 
     assert accepted == {}
@@ -195,10 +199,82 @@ def test_unmatched_legacy_record_is_unknown_meta_visible(tmp_path):
     corrections.write_bytes(compile_view.canonical(record) + b"\n")
 
     accepted, rejected, meta_visible = compile_view._load_corrections(
-        corrections, set()
+        corrections, empty_index()
     )
 
     assert accepted == {}
     assert rejected == []
     assert meta_visible[0]["kind"] == "unknown_record_kind"
     assert meta_visible[0]["basis"] == "unmatched"
+
+
+def test_failed_preimage_only_under_eol_variant_gets_structured_code(tmp_path):
+    payload = compile_view.canonical({"from": "owner", "text": "hello"})
+    index = compile_view.build_line_index([payload + b"\n"])
+    record = correction(payload + b"\r", {"from": "owner", "text": "fixed"})
+    corrections = tmp_path / "corrections.jsonl"
+    corrections.write_bytes(compile_view.canonical(record) + b"\n")
+
+    accepted, rejected, meta_visible = compile_view._load_corrections(corrections, index)
+
+    assert accepted == {}
+    assert meta_visible == []
+    assert rejected[0]["reason"] == compile_view.CODE_EOL_VARIANT
+    assert "payload+CR" in rejected[0]["diagnosis"]["resolving_eol_forms"]
+    assert rejected[0]["diagnosis"]["load_bearing"] is False
+
+
+def test_unresolvable_self_inconsistent_entry_gets_structured_code(tmp_path):
+    record = correction(b"absent", {"text": "original"})
+    record["corrected_json"] = {"text": "rewritten"}
+    corrections = tmp_path / "corrections.jsonl"
+    corrections.write_bytes(compile_view.canonical(record) + b"\n")
+
+    _, rejected, _ = compile_view._load_corrections(corrections, empty_index())
+
+    assert rejected[0]["reason"] == compile_view.CODE_SELF_INCONSISTENT
+    assert rejected[0]["diagnosis"] == {
+        "after_hash_verifies_under": [],
+        "load_bearing": False,
+    }
+
+
+def test_missing_or_non_string_before_hash_has_distinct_code(tmp_path):
+    record = {
+        "after_hash": compile_view.sha256_hex(compile_view.canonical({"text": "fixed"})),
+        "before_hash": None,
+        "corrected_json": {"text": "fixed"},
+        "corrects": "missing binding",
+        "reason": "repair",
+    }
+    corrections = tmp_path / "corrections.jsonl"
+    corrections.write_bytes(compile_view.canonical(record) + b"\n")
+
+    _, rejected, _ = compile_view._load_corrections(corrections, empty_index())
+
+    assert rejected[0]["reason"] == compile_view.CODE_BEFORE_HASH_MISSING
+    assert rejected[0]["reason"] not in {
+        compile_view.CODE_EOL_VARIANT,
+        compile_view.CODE_SELF_INCONSISTENT,
+        compile_view.CODE_UNDETERMINED,
+    }
+
+
+def test_noncanonical_after_hash_never_widens_acceptance(tmp_path):
+    payload = compile_view.canonical({"from": "owner", "text": "hello"})
+    index = compile_view.build_line_index([payload + b"\n"])
+    corrected = {"z": 1, "a": 2}
+    record = correction(payload, corrected)
+    record["after_hash"] = compile_view.sha256_hex(
+        compile_view.AFTER_CONVENTIONS["no_sort,default_sep"](corrected)
+    )
+    corrections = tmp_path / "corrections.jsonl"
+    corrections.write_bytes(
+        compile_view.AFTER_CONVENTIONS["no_sort,compact"](record) + b"\n"
+    )
+
+    accepted, rejected, _ = compile_view._load_corrections(corrections, index)
+
+    assert accepted == {}
+    assert rejected[0]["reason"] == "after_hash_mismatch"
+    assert "no_sort,default_sep" in rejected[0]["diagnosis"]["after_hash_verifies_under"]
