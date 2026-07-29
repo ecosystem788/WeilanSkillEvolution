@@ -1,0 +1,2288 @@
+{
+  "closure_semantics": "objects reachable from HEAD and not remote_ref; conservative publication boundary relative to remote_ref, not an exact network-transfer set",
+  "remote_ref_freshness": "caller must fetch before review; a stale remote-tracking ref is not directionally safe: it may enlarge this closure during append-only remote advancement or shrink it after remote history is rewritten",
+  "scan_semantics": "clean means configured secret shapes did not match object payloads in this new reachable-object closure; it is not proof that the repository or published history contains no secret",
+  "object_identity_semantics": "M_repo means every manifest object's exact type and binary payload read by this scan recomputed to its requested object id using the repository object format at scan completion; this is not proof of trusted content, pre-scan materialization, or third-party F_ctx availability, and a partial clone may lazy-fetch an absent object while scanning",
+  "manifest_digest_semantics": "sha256 of canonical JSON over predicate_id, object_format, and manifest entries; digests from the earlier entries-only schema are not semantically comparable",
+  "predicate_id": "M_repo",
+  "object_format": "sha1",
+  "remote_ref": "origin/codex/se-0.4-0.7-program",
+  "base_commit": "0c3d9b25ddb86010837a0930c40accad3c78189a",
+  "head_commit": "310e57546dd51742fc8f38c403c3df3fcdeb375f",
+  "commits_to_publish": [
+    "b7f3f7d56bfac9fea61d6b36145a349725812b8d",
+    "c696f22b479c65c9daa89593df28990a5fba3b80",
+    "d97b977f3a42b659dcc11aabb7d1fecf467c91b0",
+    "39a0580931bef38242370311eed16a8a8599ac3e",
+    "6c4553492330197a45934deb2e1b2750c1d4a4d0",
+    "4d34fdfc385825e4b2cc41835ea8fce5afc9cda0",
+    "71420d279ccf0a46345dc74acd5f35757d362b2e",
+    "8ccf238da5722ddfa8296b52408238b2ca90261a",
+    "e108fd931b7e417bf804b218a5d722468dfe3ab1",
+    "fd6ca42876fe95d89f752b0643725729cca36c9f",
+    "df5db7a74028c178179a057d4c4f4bd64b84eb53",
+    "0f6c7165da569ba1f7f34dcf32a370d2125cb34b",
+    "0438a30cc73aa29bac56edb61915c939bdc68e61",
+    "80ee3517bc7135b4f6e478ef1cf788939ddf79aa",
+    "174caf287d807551b612498ac3e049ffc5b7a428",
+    "8a6497fada43428c4a22e0cc9e42dc814cd6f758",
+    "8f5ce126bd8a65291f7f1394fca977ec65e2fb8a",
+    "1b5922a55dcf9eefe760577f93298f83606a905a",
+    "64af2d4ebeb83dd09ab46b146d2b61a15bffa1f4",
+    "4a8dd9f1eb45fbd6e0db73a89361d528a7f28b2c",
+    "fed82e495a82661f011e167ac1d19e7bdbef939a",
+    "d9fb16cd3ee7d0b5002ee8d543429f9b67346450",
+    "ca16126526e201a5afa5bfc43b9a5e65bc3caa2d",
+    "04f2bd165a43d416955def98847fba9ac1e0bf66",
+    "00e7f1e929905e5352cf21f35a10fe17c9b49d85",
+    "f7e5e168129d7e3d6b40318c0bd791fa76047c4d",
+    "5b384dfe3f9572fbfb039534a1da1afc562c1fe5",
+    "7c92b61d649a844b594776b2c88bd5ac1a43c735",
+    "bf4329e2f33d4394400a4d62c6d38ce9f791246e",
+    "2149c965cfb8f31eca2b2ef3aafbbe9e5ba71b53",
+    "41e136f24e9aeecec6fef84cb2f8cb48213773d2",
+    "408bc1f049d3a59abe7c2f0c307c571b21d28968",
+    "cc28f38b59d7a61b08e5eba1cb5f8a3f7df773dc",
+    "0c9c0688c7289e0cd0006bba1e342cf927a1cd4c",
+    "d405684484c99afb64174a3830cec309dd87a641",
+    "0c5eb132cc561bd15bb4c75a85f77665249a123b",
+    "fca7d2139aff8935947777d8e18efec940b1506e",
+    "310e57546dd51742fc8f38c403c3df3fcdeb375f"
+  ],
+  "closure_objects": 293,
+  "manifest": [
+    {
+      "object_id": "00e7f1e929905e5352cf21f35a10fe17c9b49d85",
+      "object_type": "commit",
+      "bytes": 363
+    },
+    {
+      "object_id": "012fa89dc85a4932215e2d509eabd27c64070d2a",
+      "object_type": "tree",
+      "bytes": 3558,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "01cfc0212e24921271c7fe8ee4e92911c0cff61a",
+      "object_type": "tree",
+      "bytes": 367,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence"
+      ]
+    },
+    {
+      "object_id": "036ed28f4501837065c741894ef9f191ab378e77",
+      "object_type": "blob",
+      "bytes": 2915,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_raw_vs_view_offset.py"
+      ]
+    },
+    {
+      "object_id": "03e8163a0669a69c28a00cccc6bc221dbd53a33e",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "0438a30cc73aa29bac56edb61915c939bdc68e61",
+      "object_type": "commit",
+      "bytes": 545
+    },
+    {
+      "object_id": "0454675dad7352e335afe5e68a3559f095926802",
+      "object_type": "tree",
+      "bytes": 3558,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "04f2bd165a43d416955def98847fba9ac1e0bf66",
+      "object_type": "commit",
+      "bytes": 1384
+    },
+    {
+      "object_id": "05cfae23e2a4c92042074c029852ab8c5b8fa4ff",
+      "object_type": "tree",
+      "bytes": 4830,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "07e83470f36e8a50f0e2ac8730350d5ed229a2d7",
+      "object_type": "tree",
+      "bytes": 4195,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "08b9a46ed9ccf3f4b28bff10c48c84a287165861",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "09b283763fc5ffb8c2a0d83a693becf2da0de5b3",
+      "object_type": "blob",
+      "bytes": 50125,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "09b5d54f3ca4608b1c61996e365d4fb9da66c596",
+      "object_type": "tree",
+      "bytes": 3370,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "0a1ab8264043e82fd592773952760dedf02a0d49",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "0c5eb132cc561bd15bb4c75a85f77665249a123b",
+      "object_type": "commit",
+      "bytes": 604
+    },
+    {
+      "object_id": "0c9c0688c7289e0cd0006bba1e342cf927a1cd4c",
+      "object_type": "commit",
+      "bytes": 270
+    },
+    {
+      "object_id": "0cc1e1ef417ace2202d41f18703b9c10633f3d48",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "0d06173b74b44377011c13f3318da9594bce866c",
+      "object_type": "tree",
+      "bytes": 740,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1"
+      ]
+    },
+    {
+      "object_id": "0d0dcde48b5ff0f87d50c8541d58a8451a2d2edb",
+      "object_type": "blob",
+      "bytes": 27967,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "0d92d20c05818b6797ae2f4b0df82eae3c24a626",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "0f5cc2066adef6bbb58ed8ea37ff522b1e5a3d7d",
+      "object_type": "blob",
+      "bytes": 2947,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence/eol_pointer_probe.py"
+      ]
+    },
+    {
+      "object_id": "0f6c7165da569ba1f7f34dcf32a370d2125cb34b",
+      "object_type": "commit",
+      "bytes": 1444
+    },
+    {
+      "object_id": "0f81a31c259e800b2bce42aa798d07decace18ab",
+      "object_type": "blob",
+      "bytes": 11978,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence/txn_shape_probe.py"
+      ]
+    },
+    {
+      "object_id": "0fca8305c46b6f179c00caa2d2cc71ef3c252e38",
+      "object_type": "blob",
+      "bytes": 7140,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/PROPOSAL-POSTCHECK-DURABILITY-CLOSURE.md"
+      ]
+    },
+    {
+      "object_id": "105e78e3f1d848dec57cac69fdc613e512a0ca1a",
+      "object_type": "tree",
+      "bytes": 298,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1"
+      ]
+    },
+    {
+      "object_id": "114df8d9692d823193981746c7f3abb853745ff7",
+      "object_type": "blob",
+      "bytes": 5687,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/EVIDENCE_CENSUS_COVERAGE.md"
+      ]
+    },
+    {
+      "object_id": "121b4668adf79680a93af51d45b596fc9c6757e1",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "130f571b6f61f6f582667ad61420f1ec93b24dc6",
+      "object_type": "tree",
+      "bytes": 391,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/execution"
+      ]
+    },
+    {
+      "object_id": "1461d66bf7324ddac693830df05e585ec50281f5",
+      "object_type": "blob",
+      "bytes": 9029,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence/triage_probe.py"
+      ]
+    },
+    {
+      "object_id": "14bc3ea646b4956bda3a06ba2450c86307d64ec9",
+      "object_type": "blob",
+      "bytes": 4486,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_meta_visible_surface.py"
+      ]
+    },
+    {
+      "object_id": "14fba57065682ca1273bb03a45c1bc5b444c1f4a",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "15ca2d3e05d5ceb5261cfdee09c1749109cfbc87",
+      "object_type": "blob",
+      "bytes": 3539006,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ]
+    },
+    {
+      "object_id": "16b85e367182fd692ca80f33058e74f94525718a",
+      "object_type": "tree",
+      "bytes": 3370,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "174caf287d807551b612498ac3e049ffc5b7a428",
+      "object_type": "commit",
+      "bytes": 268
+    },
+    {
+      "object_id": "17c3dd3ebcab7399beb962ee3986137785684c70",
+      "object_type": "blob",
+      "bytes": 10746,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/execution/CHARTER.base.bytes"
+      ]
+    },
+    {
+      "object_id": "1b5922a55dcf9eefe760577f93298f83606a905a",
+      "object_type": "commit",
+      "bytes": 707
+    },
+    {
+      "object_id": "1c706892d60f14b23936b7e015d9a209518d64f6",
+      "object_type": "blob",
+      "bytes": 87641,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/execution/preflight-state.json.witness"
+      ]
+    },
+    {
+      "object_id": "1c9d26fd00d17a4e6ba916b9b5fb6bdfea1c3e4c",
+      "object_type": "tree",
+      "bytes": 169,
+      "path_hints": [
+        "proposals/cited-evidence-absent-from-tree-v0.1"
+      ]
+    },
+    {
+      "object_id": "1ea230f8235bc80cd052c7773306790dd91e9202",
+      "object_type": "blob",
+      "bytes": 3678861,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ]
+    },
+    {
+      "object_id": "1f21eacfdb884ae89182ced7668a187491398606",
+      "object_type": "blob",
+      "bytes": 652,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_read_tail_chat.py"
+      ]
+    },
+    {
+      "object_id": "1f6359f52a8a1191842e228cb3ebd59bf747fc54",
+      "object_type": "blob",
+      "bytes": 5183,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/_probe_20260729_ledger_anchored_denominator.py"
+      ]
+    },
+    {
+      "object_id": "1f90d06cfbf986eba2bc244802baf789866d9429",
+      "object_type": "blob",
+      "bytes": 10219,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence/changeset_v2_probe.py"
+      ]
+    },
+    {
+      "object_id": "204650b0fe0f18bce28abe87d19e2e595f934ffa",
+      "object_type": "blob",
+      "bytes": 3369,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_compile_view_rerun.py"
+      ]
+    },
+    {
+      "object_id": "206e900013702f154cbe925e36dc9226aee07b1b",
+      "object_type": "tree",
+      "bytes": 4695,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "2149c965cfb8f31eca2b2ef3aafbbe9e5ba71b53",
+      "object_type": "commit",
+      "bytes": 952
+    },
+    {
+      "object_id": "218b32659521a711a5d877dd667918930ec6fbac",
+      "object_type": "blob",
+      "bytes": 3976,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1/execution/ARCHIVE_NOTE.md"
+      ]
+    },
+    {
+      "object_id": "21b7d3b1c0eb74a55ef5307337dcd203a20f0f12",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "22172985cd2bf673b8efe28fc42e3169620c2c41",
+      "object_type": "tree",
+      "bytes": 462,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence"
+      ]
+    },
+    {
+      "object_id": "229bd5d7e46e4d4f48f20138ddb8bbc70b75ec0f",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "25b27c5092fe95688efae83909d2301d4d766d68",
+      "object_type": "tree",
+      "bytes": 3924,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "25dbac8ad2af6904c56fdb757f3206b139507040",
+      "object_type": "blob",
+      "bytes": 7636,
+      "path_hints": [
+        "proposals/line-hash-eol-convention-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "26921453becc223d82a0c065f1b31d29182ffccd",
+      "object_type": "blob",
+      "bytes": 4494,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/_probe_20260729_checkpoint_ref_snapshot.py"
+      ]
+    },
+    {
+      "object_id": "2707fd94d0368d445d3470f5c21aba61fcdd0f3a",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "27e0b304011b7d2cbe26bfdc10ba4d0c677ea54a",
+      "object_type": "blob",
+      "bytes": 5546,
+      "path_hints": [
+        "proposals/cited-evidence-absent-from-tree-v0.1/_probe_20260730_cited_evidence_presence.py"
+      ]
+    },
+    {
+      "object_id": "29a763a3685d8acf7622b72be4ce8f069144ca5b",
+      "object_type": "tree",
+      "bytes": 115,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1"
+      ]
+    },
+    {
+      "object_id": "2a2d8e52d40476c8509cd7164235272b63b6ab02",
+      "object_type": "blob",
+      "bytes": 2606,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/_draft_proposed_charter.py"
+      ]
+    },
+    {
+      "object_id": "2a78978d1fa75d7e0f4a5f6ab89f4d24581d62de",
+      "object_type": "tree",
+      "bytes": 3315,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "2ade403217b065af5800b0f52ab62152208f8bcf",
+      "object_type": "tree",
+      "bytes": 4711,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "2b41e12f00b15a1f0ec857aa028ba528687af91f",
+      "object_type": "blob",
+      "bytes": 7400,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence/wiring_spec_probe.py"
+      ]
+    },
+    {
+      "object_id": "2d8383d26257ed7e27b99fa615a5ff14f4a675d6",
+      "object_type": "tree",
+      "bytes": 4830,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "2f152fcaf2d32f3e56ea411699ef1b9bbd30c1b9",
+      "object_type": "tree",
+      "bytes": 115,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1"
+      ]
+    },
+    {
+      "object_id": "2f43fc1f09b29b7c715b8a91ae6b6223ca733a8b",
+      "object_type": "blob",
+      "bytes": 11410,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/EVIDENCE_AUDIT_DENOMINATOR_AND_DIRTY_POPULATION.md"
+      ]
+    },
+    {
+      "object_id": "300a3f58a5bfb554abec4063dc9f2210c0987c3a",
+      "object_type": "blob",
+      "bytes": 1891,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_agenda_drain_mode.py"
+      ]
+    },
+    {
+      "object_id": "310e57546dd51742fc8f38c403c3df3fcdeb375f",
+      "object_type": "commit",
+      "bytes": 1454
+    },
+    {
+      "object_id": "32f99b098de641de7074054c7a36b47776e7f8b7",
+      "object_type": "blob",
+      "bytes": 3532687,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ]
+    },
+    {
+      "object_id": "33ce7dd463f39780a7a0d9d67f42367342ac3bc2",
+      "object_type": "blob",
+      "bytes": 23847,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence/peer-chat.view.rejections.20260729.jsonl"
+      ]
+    },
+    {
+      "object_id": "35c54cc9d01bdf06773645b9f26616e12f35c3c6",
+      "object_type": "blob",
+      "bytes": 7203,
+      "path_hints": [
+        "proposals/lineage-log-append-only-correction-v0.1/test_compile_view.py"
+      ]
+    },
+    {
+      "object_id": "3822fff66a6a9095df4a999c601b3f58806da28c",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "3835836d4b17111c30883f24f7caef3f8d617bea",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "38af319d945eab253a9fe556201b2e312c611bf3",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "39482db8a63c4163c12a8de7e39fdad462595229",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "39a0580931bef38242370311eed16a8a8599ac3e",
+      "object_type": "commit",
+      "bytes": 943
+    },
+    {
+      "object_id": "3a77366c44890d90eb0e89e1f2811a730e49f48b",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "3b1535bf315e484336d39bd7b25e64923fdc1624",
+      "object_type": "blob",
+      "bytes": 7679,
+      "path_hints": [
+        "proposals/line-hash-eol-convention-v0.1/_probe_20260730_before_hash_entrypoints.py"
+      ]
+    },
+    {
+      "object_id": "3b893e3ce45c23143b03f8beffae2bf976822bd0",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "3e57047b987121457f37cad5a0acc662a7a84b1a",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "3ed79c5171d4425256cea4862dd2ba90882e0e3b",
+      "object_type": "tree",
+      "bytes": 115,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1"
+      ]
+    },
+    {
+      "object_id": "4036b034cb169b6de6b526a46c81f812533b28f6",
+      "object_type": "tree",
+      "bytes": 115,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1"
+      ]
+    },
+    {
+      "object_id": "408bc1f049d3a59abe7c2f0c307c571b21d28968",
+      "object_type": "commit",
+      "bytes": 1747
+    },
+    {
+      "object_id": "409a3f64330439fca2d4ef39916d2f05219c7f72",
+      "object_type": "blob",
+      "bytes": 4706,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/_probe_20260729_denominator_crossref.py"
+      ]
+    },
+    {
+      "object_id": "41e136f24e9aeecec6fef84cb2f8cb48213773d2",
+      "object_type": "commit",
+      "bytes": 259
+    },
+    {
+      "object_id": "4244feba70dbf69f0e3d4fd64c820fca89a1a9b7",
+      "object_type": "tree",
+      "bytes": 555,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1"
+      ]
+    },
+    {
+      "object_id": "446c4d6fa554eb0fbd534ee107d3e195ad1304f0",
+      "object_type": "blob",
+      "bytes": 3641224,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ]
+    },
+    {
+      "object_id": "45aed337e708e23b227c00c348243da0e1d00d82",
+      "object_type": "blob",
+      "bytes": 13118,
+      "path_hints": [
+        "CHARTER.md"
+      ]
+    },
+    {
+      "object_id": "492cdb8ce7a36d66c0aecfd1ffb05776cb1e80e2",
+      "object_type": "blob",
+      "bytes": 8099,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence/triage_probe.py"
+      ]
+    },
+    {
+      "object_id": "4a5a4938988c770961f21bba34027861e1d97f5a",
+      "object_type": "tree",
+      "bytes": 218,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1"
+      ]
+    },
+    {
+      "object_id": "4a8dd9f1eb45fbd6e0db73a89361d528a7f28b2c",
+      "object_type": "commit",
+      "bytes": 983
+    },
+    {
+      "object_id": "4aacf857ae97f778d1afc16b7408b95daf821f6d",
+      "object_type": "tree",
+      "bytes": 4711,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "4b1988f5af4cc073568322ef0df03d76a7cf9dcd",
+      "object_type": "blob",
+      "bytes": 7555,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/_probe_20260729_ref_class_reachability.py"
+      ]
+    },
+    {
+      "object_id": "4cf8d4d6afd57c94206fbed4921d40da6a685989",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "4d212578bb44b8cac508a51f64f09fb10152a729",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "4d34fdfc385825e4b2cc41835ea8fce5afc9cda0",
+      "object_type": "commit",
+      "bytes": 2549
+    },
+    {
+      "object_id": "510ccd088ec803316b9947e25cbfc7b26874888c",
+      "object_type": "blob",
+      "bytes": 8999,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/_probe_20260729_dirty_population_reachability.py"
+      ]
+    },
+    {
+      "object_id": "519bdcb43e0c4fa51242229303106c22085d0a3f",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "56f4ef36b0b4995d0acb22099f2223dbc97b0279",
+      "object_type": "blob",
+      "bytes": 357,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/execution/preflight-state.json"
+      ]
+    },
+    {
+      "object_id": "5749dfb9358c274065330ad8c3fb7ebba48d0da2",
+      "object_type": "blob",
+      "bytes": 2214,
+      "path_hints": [
+        "proposals/line-hash-eol-convention-v0.1/_probe_20260730_cr_position.py"
+      ]
+    },
+    {
+      "object_id": "5788b023f3cb3bb32df637fbae473614f8924fb4",
+      "object_type": "tree",
+      "bytes": 36,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1"
+      ]
+    },
+    {
+      "object_id": "583781d89671908e046394a457fba9b1c4954acf",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "58a4a57a2ee7c31cac0968355b66ca84d3c6bbc0",
+      "object_type": "blob",
+      "bytes": 4229,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_withdrawal_link2.py"
+      ]
+    },
+    {
+      "object_id": "5b384dfe3f9572fbfb039534a1da1afc562c1fe5",
+      "object_type": "commit",
+      "bytes": 765
+    },
+    {
+      "object_id": "5c1028ceaecbf9e7efc6b841250757ac7b9c041a",
+      "object_type": "blob",
+      "bytes": 624,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_tail_20260729_chat.py"
+      ]
+    },
+    {
+      "object_id": "5c69523c4a03deb0b5b76a28657922b2b1789bf9",
+      "object_type": "blob",
+      "bytes": 3693479,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ]
+    },
+    {
+      "object_id": "5d05a99d094fd6f839a4ee36abd2f4490e747f0f",
+      "object_type": "blob",
+      "bytes": 81011,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1/execution/preflight-state.json.witness"
+      ]
+    },
+    {
+      "object_id": "5d0bedcc33468344c889a828f4f468cfba266dd9",
+      "object_type": "blob",
+      "bytes": 350,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1/execution/preflight-state.json"
+      ]
+    },
+    {
+      "object_id": "5d27ef6ac490b1b192097c30ce693fe82d69876c",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "5d3a28e9c2fff1675c12eb091d870da7bc4dbc39",
+      "object_type": "blob",
+      "bytes": 7013,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/EVIDENCE_DENOMINATOR_CLASS_SPLIT.md"
+      ]
+    },
+    {
+      "object_id": "5dc24d76b3f3a79b1b8b13ab556d80c981572fd6",
+      "object_type": "tree",
+      "bytes": 349,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1"
+      ]
+    },
+    {
+      "object_id": "600395f6b96fe2e6d9017d510722b9e3f9a83023",
+      "object_type": "blob",
+      "bytes": 4849,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_append_20260729_self_blocked_chat.py"
+      ]
+    },
+    {
+      "object_id": "6036f76a27c4c6f4a20eec9b41c59f13cd73bca6",
+      "object_type": "blob",
+      "bytes": 6755,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/EVIDENCE_LEDGER_APPEND_ONLY.md"
+      ]
+    },
+    {
+      "object_id": "6052c0de833ef7d73c92bd7a27d2b61601d75dd2",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "6153cae05aa6ce5bc7ce71e53899fdd530e0fb0d",
+      "object_type": "blob",
+      "bytes": 7437,
+      "path_hints": [
+        "proposals/lineage-log-append-only-correction-v0.1/compile_view.py"
+      ]
+    },
+    {
+      "object_id": "61abe2f8a7a04ae70a9c8a7db783b91a70c279b7",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "62dcfc2bca02c9496fed3faac0b9a8c2e73d620a",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "632784c3b7a59df0973c739d4f987487db05b179",
+      "object_type": "tree",
+      "bytes": 3558,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "63284a851ba89b37f382e1ad4bc4785124267693",
+      "object_type": "blob",
+      "bytes": 2145,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_marker_key_vs_substring.py"
+      ]
+    },
+    {
+      "object_id": "638ff0b9871b608fb0a107b563cfea0b9a0f779a",
+      "object_type": "blob",
+      "bytes": 3440634,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ]
+    },
+    {
+      "object_id": "649d8768fbdaeb0c3b71f297d42c3a54929f46d2",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "64af2d4ebeb83dd09ab46b146d2b61a15bffa1f4",
+      "object_type": "commit",
+      "bytes": 360
+    },
+    {
+      "object_id": "64b472a2f73b662671083fc338f087cac6e55e4d",
+      "object_type": "blob",
+      "bytes": 3016,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_append_20260729_v6_chat.py"
+      ]
+    },
+    {
+      "object_id": "663f53ea38406dc1476b98cf40daf3065d71ec97",
+      "object_type": "blob",
+      "bytes": 7848,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/EVIDENCE_CHECKPOINT_REF_RETENTION.md"
+      ]
+    },
+    {
+      "object_id": "68b16733ed87f6787f0b64a63717b3bbddd45bed",
+      "object_type": "tree",
+      "bytes": 221,
+      "path_hints": [
+        "proposals/lineage-log-append-only-correction-v0.1"
+      ]
+    },
+    {
+      "object_id": "6ad316eb5efa2a8cb9d28aba8ce2a735a876acb9",
+      "object_type": "tree",
+      "bytes": 4830,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "6bd68ccad7383aa653dcbf748c6a19f3fcdd5ff5",
+      "object_type": "tree",
+      "bytes": 1421,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1"
+      ]
+    },
+    {
+      "object_id": "6c4553492330197a45934deb2e1b2750c1d4a4d0",
+      "object_type": "commit",
+      "bytes": 1792
+    },
+    {
+      "object_id": "6c49baaf06170a5c14ddc34362e00e3ec7efea1a",
+      "object_type": "blob",
+      "bytes": 536,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_show_stamp.py"
+      ]
+    },
+    {
+      "object_id": "7011010c7d317992cb12aa5aaa292f05768b51d0",
+      "object_type": "tree",
+      "bytes": 4830,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "71420d279ccf0a46345dc74acd5f35757d362b2e",
+      "object_type": "commit",
+      "bytes": 1894
+    },
+    {
+      "object_id": "72118e7f8e1b45b149be5defeb27a13736659242",
+      "object_type": "blob",
+      "bytes": 6957,
+      "path_hints": [
+        "proposals/cited-evidence-absent-from-tree-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "7214d9bc71548fcf2eb7c949b9eaf05790606850",
+      "object_type": "tree",
+      "bytes": 1421,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1"
+      ]
+    },
+    {
+      "object_id": "722ead394ad0d2e9fb91a84282a11a3fae5f40db",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "72d7a9d45164d92488a561c67d4adccaff382f90",
+      "object_type": "tree",
+      "bytes": 3558,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "72db424579b83a11c3c3782af7933efa8033a552",
+      "object_type": "blob",
+      "bytes": 5309,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/_probe_20260729_ledger_anchored_denominator.py"
+      ]
+    },
+    {
+      "object_id": "73144dbd8fc9896b2e6197018103754baa69bbdd",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "733ceaea1b280554f8bd4784851fc9b9575a0268",
+      "object_type": "blob",
+      "bytes": 3619,
+      "path_hints": [
+        "proposals/line-hash-eol-convention-v0.1/_probe_20260730_governed_ledgers.py"
+      ]
+    },
+    {
+      "object_id": "739148c0fc274d5056204acceeb07df02152baf0",
+      "object_type": "blob",
+      "bytes": 15991,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "755ccc2d5cfac6e34d415efde1f276ad1fdc1ac0",
+      "object_type": "blob",
+      "bytes": 11733,
+      "path_hints": [
+        "proposals/lineage-log-append-only-correction-v0.1/compile_view.py"
+      ]
+    },
+    {
+      "object_id": "762db6356b9bd676fd9c2e8aad0e9501751a3fd2",
+      "object_type": "blob",
+      "bytes": 33618,
+      "path_hints": [
+        "proposals/mutual-aid-v0.1/test_peer_health_wake.py"
+      ]
+    },
+    {
+      "object_id": "765f8b63cff104eb2fe28f4caa8e6a0162461334",
+      "object_type": "tree",
+      "bytes": 115,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1"
+      ]
+    },
+    {
+      "object_id": "771400d85360eff90856414b40f27cb94da0523b",
+      "object_type": "tree",
+      "bytes": 4830,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "7912b97e8a07b356b2b623541ea93ac272e23981",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "79435f7fb75fd32931a52d097b0e486a1c532138",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "7a3353620968784f5962de9391b17469b66f9a95",
+      "object_type": "blob",
+      "bytes": 3614,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_retraction_check.py"
+      ]
+    },
+    {
+      "object_id": "7af81f8a6bb3f87de2f697b33101543bbd0071a0",
+      "object_type": "blob",
+      "bytes": 25817,
+      "path_hints": [
+        "proposals/mutual-aid-v0.1/peer_health_wake.py"
+      ]
+    },
+    {
+      "object_id": "7b54c5a2ec6f85717d493348d2dcdbcb4b9764d6",
+      "object_type": "blob",
+      "bytes": 10276,
+      "path_hints": [
+        "proposals/lineage-log-append-only-correction-v0.1/test_compile_view.py"
+      ]
+    },
+    {
+      "object_id": "7c2249d226a45370e680e11db0e582b2be8a036c",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "7c92b61d649a844b594776b2c88bd5ac1a43c735",
+      "object_type": "commit",
+      "bytes": 262
+    },
+    {
+      "object_id": "80e2316e7f44041ed5fb2b3b987729359de167d8",
+      "object_type": "tree",
+      "bytes": 416,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence"
+      ]
+    },
+    {
+      "object_id": "80ee3517bc7135b4f6e478ef1cf788939ddf79aa",
+      "object_type": "commit",
+      "bytes": 265
+    },
+    {
+      "object_id": "8392b3bc8398fbe57ded0a6f655257eb4fc91421",
+      "object_type": "tree",
+      "bytes": 338,
+      "path_hints": [
+        "proposals/mutual-aid-v0.1"
+      ]
+    },
+    {
+      "object_id": "84496d5608e53ea9ccd29e676164607b09132097",
+      "object_type": "tree",
+      "bytes": 4830,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "848985057103c86787218e768ef304b54c217d08",
+      "object_type": "blob",
+      "bytes": 3693,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1/execution/build_v2.py"
+      ]
+    },
+    {
+      "object_id": "8567faa672108928333f7e08bae511786264ea7d",
+      "object_type": "blob",
+      "bytes": 398,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/execution/preflight-receipt.json"
+      ]
+    },
+    {
+      "object_id": "8786cbe872dfad52fd56d3f35fc7364bcda32d9c",
+      "object_type": "tree",
+      "bytes": 302,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1/execution"
+      ]
+    },
+    {
+      "object_id": "88ca50aaefe4b0d9d29bb7c98ab9dc675d9d7bd5",
+      "object_type": "blob",
+      "bytes": 2843,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1/execution/ARCHIVE_NOTE.md"
+      ]
+    },
+    {
+      "object_id": "89e7d5ddbf482d95adc6c4a36aa8069ffe29fbac",
+      "object_type": "blob",
+      "bytes": 10763,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence/changeset_v2_probe.py"
+      ]
+    },
+    {
+      "object_id": "8a2a061d090062fcbd0bae75717d05143a685e99",
+      "object_type": "blob",
+      "bytes": 57615,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "8a6497fada43428c4a22e0cc9e42dc814cd6f758",
+      "object_type": "commit",
+      "bytes": 715
+    },
+    {
+      "object_id": "8adb95b930fa285e40272f4a609e1d076a206d1e",
+      "object_type": "blob",
+      "bytes": 2770,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1/execution/postcheck-receipt.json"
+      ]
+    },
+    {
+      "object_id": "8ba61085df8d707881cbda2d02e9fbfe2f7d840b",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "8bae613c6f74a094ba3d6a5d01709a5322879887",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "8bc8a29d98cd9bab4ef04108feca9200f03b0e20",
+      "object_type": "blob",
+      "bytes": 15600,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence/phase_matrix_probe.py"
+      ]
+    },
+    {
+      "object_id": "8ccf238da5722ddfa8296b52408238b2ca90261a",
+      "object_type": "commit",
+      "bytes": 1746
+    },
+    {
+      "object_id": "8df8cec8360249f05059ae97316f3b52cd219459",
+      "object_type": "blob",
+      "bytes": 4763,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/EVIDENCE_LEDGER_ANCHORED_DENOMINATOR.md"
+      ]
+    },
+    {
+      "object_id": "8e0807d079b30e1d6f32d4bb475ed54b8e62fb36",
+      "object_type": "blob",
+      "bytes": 2448,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_meta_visible_surface2.py"
+      ]
+    },
+    {
+      "object_id": "8f0d37aeb337fb15910415a6537e8d143327309d",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "8f5ce126bd8a65291f7f1394fca977ec65e2fb8a",
+      "object_type": "commit",
+      "bytes": 1207
+    },
+    {
+      "object_id": "8fae74b4fd0666f0d48a5210d3790294079144a9",
+      "object_type": "blob",
+      "bytes": 4075,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/EVIDENCE_CLOSURE_INDEX_STATE.md"
+      ]
+    },
+    {
+      "object_id": "90ec4f09f65eb185616fd8d62478702d41ae1902",
+      "object_type": "blob",
+      "bytes": 5355,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_post_20260730_queue_census.txt"
+      ]
+    },
+    {
+      "object_id": "9172c30a256a5478ade20449ff176f9f1be05ba7",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "91b25a0c336f52a3342247113bbdec25cff52cba",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "92e5a3dbdfea435c4de789e12466afbcfac2999b",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "93306f1108cf140608983468122b4fd63abc640f",
+      "object_type": "tree",
+      "bytes": 462,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence"
+      ]
+    },
+    {
+      "object_id": "94975602829fac1797636ccbc347a6c167cdf377",
+      "object_type": "blob",
+      "bytes": 5948,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/_probe_20260729_authorization_at_commit_time.py"
+      ]
+    },
+    {
+      "object_id": "9520a5e4ed7263e892ea0aeef4d924cac73c9e25",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "96393ba7c481848f83029c8dea40a92fca4ebae1",
+      "object_type": "tree",
+      "bytes": 36,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1"
+      ]
+    },
+    {
+      "object_id": "967fb122475aad41be2560448582755f3bc2a01e",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "96e5601ffc0c3eb305b3ab04255189152bfdfd8c",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "9773b2764379782b3c4fc1e20e6672b895654664",
+      "object_type": "blob",
+      "bytes": 6351,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/EVIDENCE_PROPOSAL_SELF_CLASSIFIES_BLOCKED.md"
+      ]
+    },
+    {
+      "object_id": "98957858b5dd2968334f81ea742448267dcf8034",
+      "object_type": "blob",
+      "bytes": 6946,
+      "path_hints": [
+        "proposals/lineage-log-append-only-correction-v0.1/DELEGATION.md"
+      ]
+    },
+    {
+      "object_id": "9b2af18686fe0697e576212007ae15cf35237108",
+      "object_type": "blob",
+      "bytes": 5229,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/EVIDENCE_SIGNATURE_PUBLICITY.md"
+      ]
+    },
+    {
+      "object_id": "9e42279d7e03820341acf1cd5c424ed35ff84b74",
+      "object_type": "tree",
+      "bytes": 350,
+      "path_hints": [
+        "proposals/line-hash-eol-convention-v0.1"
+      ]
+    },
+    {
+      "object_id": "a02bf3388e2764aecad4b0be5c05e958e14b8215",
+      "object_type": "blob",
+      "bytes": 1234,
+      "path_hints": [
+        "proposals/cited-evidence-absent-from-tree-v0.1/_probe_20260730_citation_forms.py"
+      ]
+    },
+    {
+      "object_id": "a312b16ba486847c022387fe92f11383cbc01bc0",
+      "object_type": "tree",
+      "bytes": 262,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1"
+      ]
+    },
+    {
+      "object_id": "a3413c501fc9039472b64d7cfef901fec26f3d6d",
+      "object_type": "tree",
+      "bytes": 3558,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "a424a8c0e9d040d75fa9f57822d4e397f4c87cac",
+      "object_type": "blob",
+      "bytes": 33441,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "a4ef9c1ac3e5da28f591a80796b661f356fb1a33",
+      "object_type": "tree",
+      "bytes": 345,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1/execution"
+      ]
+    },
+    {
+      "object_id": "a50a0e6bda7e0fef9db709b3781216b3f68b97ed",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "a99a54fab1ec93363b2f00ab359e9337671bad35",
+      "object_type": "blob",
+      "bytes": 2115,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_meta_visible_surface3.py"
+      ]
+    },
+    {
+      "object_id": "aad1e0fbf6a27d61c6e646c925ab9338bf62d13c",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "ab21c6c0785caa94c92ba9724c28916b6413ee08",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "abdc4b7ee43db24ddaa6eff9fb826e58d2dbd38a",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "ac49fe3b3d1cc1a5d24ea6639076c0f904d3d98a",
+      "object_type": "blob",
+      "bytes": 8001,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/EVIDENCE_REF_CLASS_REACHABILITY.md"
+      ]
+    },
+    {
+      "object_id": "aca1810e2fa764810b925d7828a3259cc5d01c17",
+      "object_type": "tree",
+      "bytes": 4830,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "acbf0945c42d9bf9e8ee4930a40aeb4a835d5c9e",
+      "object_type": "tree",
+      "bytes": 115,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1"
+      ]
+    },
+    {
+      "object_id": "adb2927501e8d8bbcc9cdb166f6b4873c60bdcef",
+      "object_type": "blob",
+      "bytes": 9794,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence/triage_probe.py"
+      ]
+    },
+    {
+      "object_id": "adbd9557259023827a4ed1b663c711804886f4dd",
+      "object_type": "tree",
+      "bytes": 115,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1"
+      ]
+    },
+    {
+      "object_id": "aefa53fa959f3ab8947c65979d12c089df8c8f45",
+      "object_type": "blob",
+      "bytes": 6351,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/_probe_20260729_census_class_breakdown.py"
+      ]
+    },
+    {
+      "object_id": "b12125db3375e25e6adfd9654ad2bb3d40ec97e5",
+      "object_type": "tree",
+      "bytes": 115,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1"
+      ]
+    },
+    {
+      "object_id": "b2dd042de7d691302b1a1f576f6ce6bfbda996ab",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "b3c178f129d1f7f6f068b2baa1e16f90455eab8b",
+      "object_type": "blob",
+      "bytes": 41511,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "b4080a304fb1f7c9967437cbc6a84b8392ebc33e",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "b409cafbe7ac30c1fcdba45df792dd5b4cbf5b76",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "b714545f7afd30c3897ba70d7bbb33120faa0503",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "b7f3f7d56bfac9fea61d6b36145a349725812b8d",
+      "object_type": "commit",
+      "bytes": 709
+    },
+    {
+      "object_id": "b946b7aa71d1d3dfa1de666bbd6fbd8fd8f357db",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "b99b7b84442cdd4fd0b8013777a8b03a0ba2fd69",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "bb3453729bd8c6eadc0648e3ab44a24e6ba676ae",
+      "object_type": "blob",
+      "bytes": 62698,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "bbac7cd859c5482aa3dcbb47619f4df18b22fc82",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "bca561e1f3c97eaf6852f6754eacf2a539e7ed41",
+      "object_type": "blob",
+      "bytes": 14463,
+      "path_hints": [
+        "CHARTER.md"
+      ]
+    },
+    {
+      "object_id": "bcac473e377aeae9a56c98b2cb03c45027ee19c5",
+      "object_type": "blob",
+      "bytes": 4958,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "bce26a37de54596fe7f285ff37e4dbc2a835db64",
+      "object_type": "tree",
+      "bytes": 270,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence"
+      ]
+    },
+    {
+      "object_id": "bd711e5e9f1b97b5d314b12cb1a4d828c740cac6",
+      "object_type": "blob",
+      "bytes": 875,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_append_20260730_queue_census_chat.py"
+      ]
+    },
+    {
+      "object_id": "bf4329e2f33d4394400a4d62c6d38ce9f791246e",
+      "object_type": "commit",
+      "bytes": 1629
+    },
+    {
+      "object_id": "c040b4a5e9d1e3acf7feba8b5f81d00cfc76ca9f",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "c0dffd756258d5eea1a17d5290b33ed12a4cdbe9",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "c0e50902569a9fd6cb76f24d20d73fa66c549f68",
+      "object_type": "blob",
+      "bytes": 7446,
+      "path_hints": [
+        "proposals/cited-evidence-absent-from-tree-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "c196647d62d097b9276dee5621002d108d790478",
+      "object_type": "tree",
+      "bytes": 1156,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1"
+      ]
+    },
+    {
+      "object_id": "c233e59ceea73fa5db358697c717811a709e9b22",
+      "object_type": "tree",
+      "bytes": 345,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1/execution"
+      ]
+    },
+    {
+      "object_id": "c241aaec77994a442fd8f271adb0ee417e975318",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "c3ac83127aa75271e9663676f0c7eecbd46a5189",
+      "object_type": "blob",
+      "bytes": 3615600,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ]
+    },
+    {
+      "object_id": "c3c6843bdf1b3e790f4da349d363ffdb1639f289",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "c439cc2df43dc42232c46e88b568732dea6398dc",
+      "object_type": "blob",
+      "bytes": 5775,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/_probe_20260729_cosign_census.py"
+      ]
+    },
+    {
+      "object_id": "c5641db9be6ab46cdfe79781b5d4232fd41d5631",
+      "object_type": "tree",
+      "bytes": 894,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1"
+      ]
+    },
+    {
+      "object_id": "c5f0be6b6861e579296bba5f2b66a916afce284d",
+      "object_type": "blob",
+      "bytes": 10197,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/_probe_20260729_extended_durability_audit.py"
+      ]
+    },
+    {
+      "object_id": "c696f22b479c65c9daa89593df28990a5fba3b80",
+      "object_type": "commit",
+      "bytes": 929
+    },
+    {
+      "object_id": "c6ed846593cdef64094c4a2ebb7305392f212b07",
+      "object_type": "tree",
+      "bytes": 3799,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "c7294af241b49cc190e3261bf4bb2c8c916a4f01",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "c896a227cde215f3e1c3f38a6297b3f47f4afd51",
+      "object_type": "blob",
+      "bytes": 12468,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/CHARTER.proposed.md"
+      ]
+    },
+    {
+      "object_id": "c8e3d3a78ad2f97d66ef08d6f583a6ae6eefad33",
+      "object_type": "tree",
+      "bytes": 36,
+      "path_hints": [
+        "proposals/veto-channel-evidence-layering-v0.1"
+      ]
+    },
+    {
+      "object_id": "c957d9945ced06b8aa4f62300ee01546be547c85",
+      "object_type": "blob",
+      "bytes": 7008,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_append_20260730_meta_visible_surface.py"
+      ]
+    },
+    {
+      "object_id": "c95d412e7aeaf566c354b31753c86e3f583f783c",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "ca16126526e201a5afa5bfc43b9a5e65bc3caa2d",
+      "object_type": "commit",
+      "bytes": 1041
+    },
+    {
+      "object_id": "ca8d83dedf74664609f981784909f83b8fa8d785",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "cad12d53ceda77a14e7440e499f95b62e7d8ce34",
+      "object_type": "blob",
+      "bytes": 23494,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "cbb7908c6062109d3870b270384c98c43dcc9ff3",
+      "object_type": "blob",
+      "bytes": 11295,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/FINDING.md"
+      ]
+    },
+    {
+      "object_id": "cbb7a95952b406582285c14339b666174338629d",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "cbb9493f8354e9bb350773d4f9473ac540c3722c",
+      "object_type": "blob",
+      "bytes": 2168,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_agenda_queue_census.py"
+      ]
+    },
+    {
+      "object_id": "cbcd559322d8d23ab35f14be3ffca815448d567d",
+      "object_type": "tree",
+      "bytes": 221,
+      "path_hints": [
+        "proposals/lineage-log-append-only-correction-v0.1"
+      ]
+    },
+    {
+      "object_id": "cc28f38b59d7a61b08e5eba1cb5f8a3f7df773dc",
+      "object_type": "commit",
+      "bytes": 646
+    },
+    {
+      "object_id": "ccfd72bc91c84bd653d610547d04b759d63ffe89",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "cd03c67a7687a9ce757ec3f31d8afc4a092a5f19",
+      "object_type": "blob",
+      "bytes": 3661718,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ]
+    },
+    {
+      "object_id": "d0243bc0de945a671d0d091da66b0594a91703dc",
+      "object_type": "tree",
+      "bytes": 318,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence"
+      ]
+    },
+    {
+      "object_id": "d068515cd7f332a2b26b7c6e1f27f161a20b591f",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "d17d40e1dfec7dc9517fea1d72f429ae15ad0c10",
+      "object_type": "tree",
+      "bytes": 115,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1"
+      ]
+    },
+    {
+      "object_id": "d18cf9f29e16d31bfa6fe95d05bcc1be663df230",
+      "object_type": "tree",
+      "bytes": 169,
+      "path_hints": [
+        "proposals/cited-evidence-absent-from-tree-v0.1"
+      ]
+    },
+    {
+      "object_id": "d3ab02c9a5eb1ad2912b183af396b208c94f6b3b",
+      "object_type": "blob",
+      "bytes": 11031,
+      "path_hints": [
+        "proposals/line-hash-eol-convention-v0.1/CENSUS_BEFORE_HASH_ENTRYPOINTS.md"
+      ]
+    },
+    {
+      "object_id": "d405684484c99afb64174a3830cec309dd87a641",
+      "object_type": "commit",
+      "bytes": 1114
+    },
+    {
+      "object_id": "d5361646e93d692dfa100857b0eeabc6c810d5f7",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "d57dcb33a78c3d03401229a3c2b7254b0b1e6521",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "d5809058eb39d060807e22b20a07213694f6432c",
+      "object_type": "blob",
+      "bytes": 5434,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_append_20260729_checkpoint_retention_chat.py"
+      ]
+    },
+    {
+      "object_id": "d5b550f9b39c859e2afff9faa0ccd9e31fad820c",
+      "object_type": "blob",
+      "bytes": 5082,
+      "path_hints": [
+        "proposals/line-hash-eol-convention-v0.1/_probe_20260730_line_hash_eol.py"
+      ]
+    },
+    {
+      "object_id": "d5e9ad9e9cf4e59bb0e5f8fac0f04b969019ae10",
+      "object_type": "blob",
+      "bytes": 9695,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/execution/RECEIPT.md"
+      ]
+    },
+    {
+      "object_id": "d6b5e3a234adef5d884c4f24fab9639189d1f58a",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "d6bfa552c8315d235f2a9334d34fc260d415e33a",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "d6c521f55622365dafc817b1a4e9635cae8eac26",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "d8c159720a222a73613bb899db9976b039a5f9bf",
+      "object_type": "tree",
+      "bytes": 1297,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1"
+      ]
+    },
+    {
+      "object_id": "d97b977f3a42b659dcc11aabb7d1fecf467c91b0",
+      "object_type": "commit",
+      "bytes": 729
+    },
+    {
+      "object_id": "d9fb16cd3ee7d0b5002ee8d543429f9b67346450",
+      "object_type": "commit",
+      "bytes": 270
+    },
+    {
+      "object_id": "dab3f8333d999b12c356a8fa289dcfb0461daadf",
+      "object_type": "blob",
+      "bytes": 718,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/_draft_line_shape.py"
+      ]
+    },
+    {
+      "object_id": "daf260c7087bda8ba8001efb1f2ee74b4f4b7093",
+      "object_type": "tree",
+      "bytes": 227,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence"
+      ]
+    },
+    {
+      "object_id": "db423fd7f3850c5c4ad4013e4d7b36b9a09754d0",
+      "object_type": "tree",
+      "bytes": 3443,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl"
+      ]
+    },
+    {
+      "object_id": "dcfd1c7bde62bb4c2c469f54255fb5d40860fd3a",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "df09277cd31924d619a2bb2c843d4b0f4a2f7c7b",
+      "object_type": "blob",
+      "bytes": 3687051,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ]
+    },
+    {
+      "object_id": "df5db7a74028c178179a057d4c4f4bd64b84eb53",
+      "object_type": "commit",
+      "bytes": 1503
+    },
+    {
+      "object_id": "e108fd931b7e417bf804b218a5d722468dfe3ab1",
+      "object_type": "commit",
+      "bytes": 1359
+    },
+    {
+      "object_id": "e17a1424eaddaa21771779b69c195d8e2fe934d7",
+      "object_type": "blob",
+      "bytes": 3929,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_withdrawal_link.py"
+      ]
+    },
+    {
+      "object_id": "e190dae82dfad5b5e897a65c0b55cc3852f17249",
+      "object_type": "blob",
+      "bytes": 3476887,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ]
+    },
+    {
+      "object_id": "e19b0c25b816086c227fdb0a3a0b88ef82890c6c",
+      "object_type": "blob",
+      "bytes": 2676,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/execution/postcheck-receipt.json"
+      ]
+    },
+    {
+      "object_id": "e536edb247a1594c274f2fe8e730e325e15b2246",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "e5df0df6f0fb63a9e1a0783048e2531cdbeae4c5",
+      "object_type": "tree",
+      "bytes": 462,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1/evidence"
+      ]
+    },
+    {
+      "object_id": "e763ed71f70b2a17ccd9652a9457da552d7275e9",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "e8be5f2e113490bc9f83220adf0e12c503e1d5a1",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "ea794bec9d6614f09b81cb115942314524e308ab",
+      "object_type": "tree",
+      "bytes": 483,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1"
+      ]
+    },
+    {
+      "object_id": "edd1699e06669341ad33fd6960d3fe2fd686d5e3",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "eec0b025ab139ddf386ba58d80af9992db3576b8",
+      "object_type": "blob",
+      "bytes": 7600,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_citation_fidelity.py"
+      ]
+    },
+    {
+      "object_id": "f0220ddccbf51e21a68bcd89662e6bb4ab7339ec",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "f03f0a8f82381dc78e495bd2e2fb84c82df40f3c",
+      "object_type": "tree",
+      "bytes": 4711,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "f05a17c506ec760dac3759d9c2e346c5f9653ac0",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "f2fd525d2b6fcc549bae6fb74bb98ac539995d15",
+      "object_type": "tree",
+      "bytes": 115,
+      "path_hints": [
+        "proposals/correction-view-unwired-v0.1"
+      ]
+    },
+    {
+      "object_id": "f68c4f266a159f2910d3c2b2a130f94e79b53246",
+      "object_type": "blob",
+      "bytes": 3516082,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ]
+    },
+    {
+      "object_id": "f6c9a14cb31455080b34d3532d1b57f6537435fc",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "f7e5e168129d7e3d6b40318c0bd791fa76047c4d",
+      "object_type": "commit",
+      "bytes": 477
+    },
+    {
+      "object_id": "f8ebe388403d407e8ff6c419c2a43767417da163",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    },
+    {
+      "object_id": "fa1385d99a319b43c06f5309d1aae9fdd3adea46",
+      "object_type": "blob",
+      "bytes": 8,
+      "path_hints": [
+        "proposals/cosign-authorization-at-commit-time-v0.1/execution/.gitattributes"
+      ]
+    },
+    {
+      "object_id": "fc7d8e2517d0e3e029ea5314f73b3636e79eece3",
+      "object_type": "blob",
+      "bytes": 484,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_show_lines.py"
+      ]
+    },
+    {
+      "object_id": "fca7d2139aff8935947777d8e18efec940b1506e",
+      "object_type": "commit",
+      "bytes": 1186
+    },
+    {
+      "object_id": "fd6ca42876fe95d89f752b0643725729cca36c9f",
+      "object_type": "commit",
+      "bytes": 1730
+    },
+    {
+      "object_id": "fe50148569628a600acb11cfef84f2fe3f22fa17",
+      "object_type": "tree",
+      "bytes": 1023,
+      "path_hints": [
+        ""
+      ]
+    },
+    {
+      "object_id": "fe93c843e5fab34266a64d5da3377068d9ab25cf",
+      "object_type": "blob",
+      "bytes": 4472,
+      "path_hints": [
+        "proposals/cosign-durability-gap-v0.1/_probe_20260729_closure_index_state.py"
+      ]
+    },
+    {
+      "object_id": "fed82e495a82661f011e167ac1d19e7bdbef939a",
+      "object_type": "commit",
+      "bytes": 634
+    },
+    {
+      "object_id": "ff16acec8dfb0cd630618c713e74eab2b041b177",
+      "object_type": "tree",
+      "bytes": 4644,
+      "path_hints": [
+        "proposals"
+      ]
+    },
+    {
+      "object_id": "ff3d72e4486e88e697d7de76e7fd0388740ec076",
+      "object_type": "blob",
+      "bytes": 7761,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1/impl/wake_prompt_codex.md"
+      ]
+    },
+    {
+      "object_id": "ff456b823034c066e858a89d367c7a8885a5b044",
+      "object_type": "tree",
+      "bytes": 68,
+      "path_hints": [
+        "proposals/bounded-scheduler-v0.1"
+      ]
+    }
+  ],
+  "manifest_digest": "0d1bb71c277e47eb341b990d0cd1a1ab34a0b789396112c4c6f9258661ef4668",
+  "secret_findings": [],
+  "clean": true
+}
