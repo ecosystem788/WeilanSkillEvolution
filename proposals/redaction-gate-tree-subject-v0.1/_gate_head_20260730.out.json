@@ -1,0 +1,44 @@
+{
+ "commit": "HEAD",
+ "resolved_oid": "8b25d7c4ddb682e89d6b8fb947e6a80adb2b1108",
+ "entries_scanned": 4007,
+ "files_scanned": 4007,
+ "non_blob_entries": 0,
+ "pattern_count": 3,
+ "ruleset_digest": "51047b475e9e250bb8ddd3ff3bfe4a839da9015a5343442e7000987733f4eceb",
+ "stale_anchor_count": 0,
+ "occurrence_count": 2,
+ "unanchored_occurrence_count": 2,
+ "reason_codes": [
+  "unanchored_occurrence"
+ ],
+ "occurrences": [
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/codex-inbox.jsonl",
+   "pattern_index": 0,
+   "where": "content",
+   "line_hash": "dd9b46ea61e330369440c1f49b2d1bf6874ed2182dbccf405e6c2748dd6d1f45",
+   "occurrence_ordinal": 0,
+   "line_framing": "utf-8",
+   "line_number": 66,
+   "count": 1,
+   "ruleset_digest": "51047b475e9e250bb8ddd3ff3bfe4a839da9015a5343442e7000987733f4eceb",
+   "anchored": false,
+   "reason_code": "unanchored_occurrence"
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+   "pattern_index": 0,
+   "where": "content",
+   "line_hash": "d07af3bfea217f3ebaaa2226dc85937517d951a0d0467becf695c3caa951bd1b",
+   "occurrence_ordinal": 0,
+   "line_framing": "utf-8",
+   "line_number": 1008,
+   "count": 1,
+   "ruleset_digest": "51047b475e9e250bb8ddd3ff3bfe4a839da9015a5343442e7000987733f4eceb",
+   "anchored": false,
+   "reason_code": "unanchored_occurrence"
+  }
+ ],
+ "state": "NEW_MATCHES"
+}

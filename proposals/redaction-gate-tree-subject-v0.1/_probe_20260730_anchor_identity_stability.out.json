@@ -1,0 +1,116 @@
+{
+ "repo": "D:\\WeilanSkillEvolution",
+ "targets": [
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/codex-inbox.jsonl",
+   "line_number": 66,
+   "distinct_line_hashes": [
+    "dd9b46ea61e330369440c1f49b2d1bf6874ed2182dbccf405e6c2748dd6d1f45"
+   ],
+   "stable_across_sampled_commits": true,
+   "per_commit": {
+    "HEAD": {
+     "resolved": "8b25d7c4ddb682e89d6b8fb947e6a80adb2b1108",
+     "blob_oid": "8f7d20f1611aab1d27a8f724660c97038a1b1b45",
+     "blob_bytes": 105876,
+     "total_records": 72,
+     "record_bytes": 1304,
+     "has_stored_cr": false,
+     "line_hash": "dd9b46ea61e330369440c1f49b2d1bf6874ed2182dbccf405e6c2748dd6d1f45"
+    },
+    "8ef57756a7c5a31e0c73385e4dca02e08a6bcbeb": {
+     "resolved": "8ef57756a7c5a31e0c73385e4dca02e08a6bcbeb",
+     "blob_oid": "8f7d20f1611aab1d27a8f724660c97038a1b1b45",
+     "blob_bytes": 105876,
+     "total_records": 72,
+     "record_bytes": 1304,
+     "has_stored_cr": false,
+     "line_hash": "dd9b46ea61e330369440c1f49b2d1bf6874ed2182dbccf405e6c2748dd6d1f45"
+    },
+    "HEAD~10": {
+     "resolved": "225a0d09206836e1c53ca75639a00d36beadf4d1",
+     "blob_oid": "8f7d20f1611aab1d27a8f724660c97038a1b1b45",
+     "blob_bytes": 105876,
+     "total_records": 72,
+     "record_bytes": 1304,
+     "has_stored_cr": false,
+     "line_hash": "dd9b46ea61e330369440c1f49b2d1bf6874ed2182dbccf405e6c2748dd6d1f45"
+    },
+    "HEAD~40": {
+     "resolved": "bf4329e2f33d4394400a4d62c6d38ce9f791246e",
+     "blob_oid": "8f7d20f1611aab1d27a8f724660c97038a1b1b45",
+     "blob_bytes": 105876,
+     "total_records": 72,
+     "record_bytes": 1304,
+     "has_stored_cr": false,
+     "line_hash": "dd9b46ea61e330369440c1f49b2d1bf6874ed2182dbccf405e6c2748dd6d1f45"
+    },
+    "HEAD~120": {
+     "resolved": "39164b267f779e44ddfe87b27d7f7cf78675dc85",
+     "blob_oid": "8f7d20f1611aab1d27a8f724660c97038a1b1b45",
+     "blob_bytes": 105876,
+     "total_records": 72,
+     "record_bytes": 1304,
+     "has_stored_cr": false,
+     "line_hash": "dd9b46ea61e330369440c1f49b2d1bf6874ed2182dbccf405e6c2748dd6d1f45"
+    }
+   }
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+   "line_number": 1008,
+   "distinct_line_hashes": [
+    "d07af3bfea217f3ebaaa2226dc85937517d951a0d0467becf695c3caa951bd1b"
+   ],
+   "stable_across_sampled_commits": true,
+   "per_commit": {
+    "HEAD": {
+     "resolved": "8b25d7c4ddb682e89d6b8fb947e6a80adb2b1108",
+     "blob_oid": "f4d552d4c612c25d5d9e1a08139ca56446ccdc95",
+     "blob_bytes": 3862637,
+     "total_records": 3074,
+     "record_bytes": 877,
+     "has_stored_cr": false,
+     "line_hash": "d07af3bfea217f3ebaaa2226dc85937517d951a0d0467becf695c3caa951bd1b"
+    },
+    "8ef57756a7c5a31e0c73385e4dca02e08a6bcbeb": {
+     "resolved": "8ef57756a7c5a31e0c73385e4dca02e08a6bcbeb",
+     "blob_oid": "28977d9c58482fb7704b1c03accf535bfc125f4d",
+     "blob_bytes": 3846572,
+     "total_records": 3070,
+     "record_bytes": 877,
+     "has_stored_cr": false,
+     "line_hash": "d07af3bfea217f3ebaaa2226dc85937517d951a0d0467becf695c3caa951bd1b"
+    },
+    "HEAD~10": {
+     "resolved": "225a0d09206836e1c53ca75639a00d36beadf4d1",
+     "blob_oid": "cb2099fa539b82849928325f42356d8b1aea3c68",
+     "blob_bytes": 3785696,
+     "total_records": 3055,
+     "record_bytes": 877,
+     "has_stored_cr": false,
+     "line_hash": "d07af3bfea217f3ebaaa2226dc85937517d951a0d0467becf695c3caa951bd1b"
+    },
+    "HEAD~40": {
+     "resolved": "bf4329e2f33d4394400a4d62c6d38ce9f791246e",
+     "blob_oid": "c3ac83127aa75271e9663676f0c7eecbd46a5189",
+     "blob_bytes": 3615600,
+     "total_records": 3004,
+     "record_bytes": 877,
+     "has_stored_cr": false,
+     "line_hash": "d07af3bfea217f3ebaaa2226dc85937517d951a0d0467becf695c3caa951bd1b"
+    },
+    "HEAD~120": {
+     "resolved": "39164b267f779e44ddfe87b27d7f7cf78675dc85",
+     "blob_oid": "68061a40df5608ef55ee95a5deb5d5cb1e3a7aa6",
+     "blob_bytes": 1523789,
+     "total_records": 1759,
+     "record_bytes": 877,
+     "has_stored_cr": false,
+     "line_hash": "d07af3bfea217f3ebaaa2226dc85937517d951a0d0467becf695c3caa951bd1b"
+    }
+   }
+  }
+ ],
+ "identity_stable": true
+}
