@@ -1,0 +1,65 @@
+{
+  "probe": "live-artifact-identity",
+  "live_root": "D:\\CodexData\\skills\\solve-with-weilan",
+  "live_exists": true,
+  "live_tree_hash": "5fd0a51dc7f539e2b3f1c45f5a505d9ddea80c721de8d94fe04d7e9de52ad0ad",
+  "live_file_count": 48,
+  "matches_codex_claim": true,
+  "matches_receipt_after": false,
+  "bak_files": [
+    "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak"
+  ],
+  "archived_artifact_dirs_by_hash": {},
+  "cited_receipts": {
+    "1751ce140fe3cbdf0dc55ec0": {
+      "on_disk": true,
+      "tracked_in_HEAD_index": false,
+      "ever_added_on_any_branch": false,
+      "gitignored": false,
+      "after_artifact_hash": "9872361cd77d4a3efaa23b2f00560288301d9ce921425c762687b2c58f551d9e",
+      "before_artifact_hash": "c393bc3916a9276f2dddfda6973790d3738acd0bd756ec8259f4d87463c60d6c"
+    },
+    "a118135c1e1834e45cafac8c": {
+      "on_disk": true,
+      "tracked_in_HEAD_index": false,
+      "ever_added_on_any_branch": false,
+      "gitignored": false,
+      "after_artifact_hash": "c393bc3916a9276f2dddfda6973790d3738acd0bd756ec8259f4d87463c60d6c",
+      "before_artifact_hash": "8ba59927a09d132b10884a331766f0e15c782699572b64c1cd0d21ef09afb6fc"
+    }
+  },
+  "deployment_dirs_on_disk": [
+    "1751ce140fe3cbdf0dc55ec0",
+    "20260630T134857Z-se-0.2-se-0.3",
+    "2c539d0b9444a395e66ce4dd",
+    "2e3db4f5519f95f7d468",
+    "4554ee3e1f7d12354358588c",
+    "524d4931880d8b084fc2dd61",
+    "a118135c1e1834e45cafac8c",
+    "a1b0cd3db5aa630c9134cbb2",
+    "bc787ade263a82dc054d0d92",
+    "cbfe4af9af792d7bcf719113",
+    "cf8553304505c33eea63f3fe",
+    "dec8809e1d6b5dfc05c746e9",
+    "e82ce3f05acf0713a1941fe3",
+    "se-0.6-v0.1-successor-v0.9"
+  ],
+  "deployment_dirs_tracked": [
+    "20260630T134857Z-se-0.2-se-0.3",
+    "2c539d0b9444a395e66ce4dd",
+    "2e3db4f5519f95f7d468",
+    "4554ee3e1f7d12354358588c",
+    "524d4931880d8b084fc2dd61",
+    "a1b0cd3db5aa630c9134cbb2",
+    "bc787ade263a82dc054d0d92",
+    "cbfe4af9af792d7bcf719113",
+    "cf8553304505c33eea63f3fe",
+    "dec8809e1d6b5dfc05c746e9",
+    "e82ce3f05acf0713a1941fe3",
+    "se-0.6-v0.1-successor-v0.9"
+  ],
+  "deployment_dirs_untracked": [
+    "1751ce140fe3cbdf0dc55ec0",
+    "a118135c1e1834e45cafac8c"
+  ]
+}
