@@ -1,0 +1,159 @@
+{
+  "probe": "frame_gap_census",
+  "read_only": true,
+  "state_root": "C:\\Users\\zy\\.codex\\method-state",
+  "frames_scanned": 5893,
+  "events_scanned": 15804,
+  "unparsed": [],
+  "identity_bearing_top_level_keys": [
+    "bundle_hash",
+    "event_id",
+    "event_type",
+    "frame_id",
+    "intent_id",
+    "level",
+    "participant",
+    "payload",
+    "payload_hash",
+    "pending_event_id",
+    "scope",
+    "scope_key",
+    "timestamp_utc",
+    "transaction_id",
+    "visibility",
+    "workspace",
+    "workspace_key"
+  ],
+  "actor_identity_present": false,
+  "closed_frames": 5892,
+  "intra_frame_gaps_closed_frames": {
+    "count": 9911,
+    "max_seconds": 52908.0,
+    "p99_seconds": 575.0,
+    "p95_seconds": 152.0,
+    "median_seconds": 23.0,
+    "top10": [
+      {
+        "seconds": 52908.0,
+        "from": "frame_opened",
+        "to": "frame_closed",
+        "frame_id": "wf-20260724-090757-5341fc"
+      },
+      {
+        "seconds": 49629.0,
+        "from": "frame_blocked",
+        "to": "evidence_observed",
+        "frame_id": "wf-20260630-135900-3a253e"
+      },
+      {
+        "seconds": 27112.0,
+        "from": "candidate_admitted",
+        "to": "frame_closed",
+        "frame_id": "wf-20260730-153428-dff33a"
+      },
+      {
+        "seconds": 26251.0,
+        "from": "frame_opened",
+        "to": "frame_closed",
+        "frame_id": "wf-20260722-162354-4d82de"
+      },
+      {
+        "seconds": 12595.0,
+        "from": "frame_opened",
+        "to": "frame_closed",
+        "frame_id": "wf-20260716-063230-d1d8a9"
+      },
+      {
+        "seconds": 7801.0,
+        "from": "frame_opened",
+        "to": "frame_closed",
+        "frame_id": "wf-20260730-102159-d54176"
+      },
+      {
+        "seconds": 6843.0,
+        "from": "holder_selected",
+        "to": "evidence_observed",
+        "frame_id": "wf-20260724-233421-42edd4"
+      },
+      {
+        "seconds": 6508.0,
+        "from": "frame_opened",
+        "to": "trace_emitted",
+        "frame_id": "wf-20260705-110124-b3bac7"
+      },
+      {
+        "seconds": 5729.0,
+        "from": "frame_opened",
+        "to": "evidence_observed",
+        "frame_id": "wf-20260702-004836-9e7648"
+      },
+      {
+        "seconds": 4965.0,
+        "from": "holder_selected",
+        "to": "evidence_observed",
+        "frame_id": "wf-20260704-094942-e8221f"
+      }
+    ]
+  },
+  "longest_closed_frame_spans_top10": [
+    {
+      "seconds": 58295.0,
+      "frame_id": "wf-20260630-135900-3a253e",
+      "events": 23
+    },
+    {
+      "seconds": 52908.0,
+      "frame_id": "wf-20260724-090757-5341fc",
+      "events": 2
+    },
+    {
+      "seconds": 27417.0,
+      "frame_id": "wf-20260730-153428-dff33a",
+      "events": 5
+    },
+    {
+      "seconds": 26251.0,
+      "frame_id": "wf-20260722-162354-4d82de",
+      "events": 2
+    },
+    {
+      "seconds": 12595.0,
+      "frame_id": "wf-20260716-063230-d1d8a9",
+      "events": 2
+    },
+    {
+      "seconds": 7801.0,
+      "frame_id": "wf-20260730-102159-d54176",
+      "events": 2
+    },
+    {
+      "seconds": 7123.0,
+      "frame_id": "wf-20260702-004836-9e7648",
+      "events": 8
+    },
+    {
+      "seconds": 6999.0,
+      "frame_id": "wf-20260724-233421-42edd4",
+      "events": 6
+    },
+    {
+      "seconds": 6525.0,
+      "frame_id": "wf-20260705-110124-b3bac7",
+      "events": 5
+    },
+    {
+      "seconds": 5668.0,
+      "frame_id": "wf-20260702-105939-02a9cb",
+      "events": 5
+    }
+  ],
+  "non_closed_frames": [
+    {
+      "frame_id": "wf-20260729-045902-d6d19a",
+      "terminal_event_type": "frame_opened",
+      "event_count": 1,
+      "last_event_utc": "2026-07-29T04:59:02+00:00",
+      "span_seconds": 0.0
+    }
+  ]
+}

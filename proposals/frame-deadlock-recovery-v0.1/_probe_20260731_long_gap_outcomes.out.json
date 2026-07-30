@@ -1,0 +1,403 @@
+{
+  "probe": "long_gap_outcomes",
+  "read_only": true,
+  "closed_frames_scanned": 5892,
+  "recovery_marker_pattern": "孤儿帧|补闭|恢复闭合|解堵|解死锁|interrupted|did not complete|orphan|deadlock|Late close",
+  "thresholds": {
+    "900": {
+      "would_fire_on_frames": 50,
+      "of_which_closed_failed": 7,
+      "of_which_recovery_marked": 7,
+      "measured_false_positives": 37,
+      "false_positive_frames": [
+        {
+          "frame_id": "wf-20260629-124737-cdb169",
+          "gap_seconds": 1092.0,
+          "verdict_head": "Memory 0.6 completed: append-only governance ledger, evidence-dependent feedback pressure, collapsible GovernanceTarget lifecycle, explicit multi-scale reductio"
+        },
+        {
+          "frame_id": "wf-20260630-002635-c3a03e",
+          "gap_seconds": 1015.0,
+          "verdict_head": "Memory 0.7b transaction journal, pending-event isolation, explicit commit/abort, idempotent recovery, receipts, and snapshot atomicity are implemented and verif"
+        },
+        {
+          "frame_id": "wf-20260630-005954-a7492f",
+          "gap_seconds": 960.0,
+          "verdict_head": "Memory 0.7c deterministic Transition Plans and explicit single-transaction materialization are implemented and verified for all dispositions without scheduling "
+        },
+        {
+          "frame_id": "wf-20260630-024903-3ab6ae",
+          "gap_seconds": 1773.0,
+          "verdict_head": "四个 P1 已修复并通过对抗性回归、compileall 与十套 skill 测试；Memory 0.6/0.7 完成认证恢复"
+        },
+        {
+          "frame_id": "wf-20260630-100843-e85fea",
+          "gap_seconds": 1627.0,
+          "verdict_head": "SE-0.2 and SE-0.3 gaps completed in an isolated, tested, non-deployed candidate"
+        },
+        {
+          "frame_id": "wf-20260630-135900-3a253e",
+          "gap_seconds": 49629.0,
+          "verdict_head": "Completed 24 isolated shadow evaluations and independent evidence QA. Candidate failed the fixed gate; no adoption or deployment occurred."
+        },
+        {
+          "frame_id": "wf-20260701-135034-64c012",
+          "gap_seconds": 3532.0,
+          "verdict_head": "Fixed evaluator artifact binding and method-impact pass-through; regenerated SE-0.6 shadow result with unchanged ineligible verdict; regression scripts passed"
+        },
+        {
+          "frame_id": "wf-20260701-214018-dd976d",
+          "gap_seconds": 4121.0,
+          "verdict_head": "Successor v0.2 was built and evaluated; approved shadow compare rejected the receipt set, so deployment is not advised."
+        },
+        {
+          "frame_id": "wf-20260702-004836-9e7648",
+          "gap_seconds": 5729.0,
+          "verdict_head": "Created v0.5 successor, validated proposal and shadow plan, prepared approved rerun, observed candidate hard-budget failure, and did not deploy."
+        },
+        {
+          "frame_id": "wf-20260702-031849-da4b5b",
+          "gap_seconds": 3174.0,
+          "verdict_head": "Created and evaluated v0.6 successor; all candidate budgets passed and mean delta passed, but current SE-0.6 gate failed on saturated memory delta, so no deploy"
+        }
+      ]
+    },
+    "1800": {
+      "would_fire_on_frames": 25,
+      "of_which_closed_failed": 6,
+      "of_which_recovery_marked": 7,
+      "measured_false_positives": 16,
+      "false_positive_frames": [
+        {
+          "frame_id": "wf-20260630-135900-3a253e",
+          "gap_seconds": 49629.0,
+          "verdict_head": "Completed 24 isolated shadow evaluations and independent evidence QA. Candidate failed the fixed gate; no adoption or deployment occurred."
+        },
+        {
+          "frame_id": "wf-20260701-135034-64c012",
+          "gap_seconds": 3532.0,
+          "verdict_head": "Fixed evaluator artifact binding and method-impact pass-through; regenerated SE-0.6 shadow result with unchanged ineligible verdict; regression scripts passed"
+        },
+        {
+          "frame_id": "wf-20260701-214018-dd976d",
+          "gap_seconds": 4121.0,
+          "verdict_head": "Successor v0.2 was built and evaluated; approved shadow compare rejected the receipt set, so deployment is not advised."
+        },
+        {
+          "frame_id": "wf-20260702-004836-9e7648",
+          "gap_seconds": 5729.0,
+          "verdict_head": "Created v0.5 successor, validated proposal and shadow plan, prepared approved rerun, observed candidate hard-budget failure, and did not deploy."
+        },
+        {
+          "frame_id": "wf-20260702-031849-da4b5b",
+          "gap_seconds": 3174.0,
+          "verdict_head": "Created and evaluated v0.6 successor; all candidate budgets passed and mean delta passed, but current SE-0.6 gate failed on saturated memory delta, so no deploy"
+        },
+        {
+          "frame_id": "wf-20260702-073002-03fda7",
+          "gap_seconds": 4445.0,
+          "verdict_head": "EXP-2 v3b completed with aligned collection; verdict unstable_readout_not_frozen, 2/5 repeats passed against 4/5 threshold"
+        },
+        {
+          "frame_id": "wf-20260702-124115-fd5eaa",
+          "gap_seconds": 2006.0,
+          "verdict_head": "v0.9 repaired L2 fixed-case regression, preserved L3 improvement and saturated baseline handling, produced adoption_eligible shadow result, and deployed verifie"
+        },
+        {
+          "frame_id": "wf-20260702-140236-e56184",
+          "gap_seconds": 2029.0,
+          "verdict_head": "EXP-1.5 frozen, implemented, official API run completed as overmerge_regression"
+        },
+        {
+          "frame_id": "wf-20260704-094942-e8221f",
+          "gap_seconds": 4965.0,
+          "verdict_head": "Owner-authorized E1 shadow run completed within scope: fusion 24 receipts plus seed candidate guardrail 12 receipts; no adoption/deployment/deployed Skill write"
+        },
+        {
+          "frame_id": "wf-20260704-114813-2ea13c",
+          "gap_seconds": 2464.0,
+          "verdict_head": "Spec freeze completed; E1 correction/replay A->B->C executed. Corrected E1 remains failed; seed rebound records authority low-confidence fail signal with enviro"
+        }
+      ]
+    },
+    "3600": {
+      "would_fire_on_frames": 13,
+      "of_which_closed_failed": 5,
+      "of_which_recovery_marked": 6,
+      "measured_false_positives": 6,
+      "false_positive_frames": [
+        {
+          "frame_id": "wf-20260630-135900-3a253e",
+          "gap_seconds": 49629.0,
+          "verdict_head": "Completed 24 isolated shadow evaluations and independent evidence QA. Candidate failed the fixed gate; no adoption or deployment occurred."
+        },
+        {
+          "frame_id": "wf-20260701-214018-dd976d",
+          "gap_seconds": 4121.0,
+          "verdict_head": "Successor v0.2 was built and evaluated; approved shadow compare rejected the receipt set, so deployment is not advised."
+        },
+        {
+          "frame_id": "wf-20260702-004836-9e7648",
+          "gap_seconds": 5729.0,
+          "verdict_head": "Created v0.5 successor, validated proposal and shadow plan, prepared approved rerun, observed candidate hard-budget failure, and did not deploy."
+        },
+        {
+          "frame_id": "wf-20260702-073002-03fda7",
+          "gap_seconds": 4445.0,
+          "verdict_head": "EXP-2 v3b completed with aligned collection; verdict unstable_readout_not_frozen, 2/5 repeats passed against 4/5 threshold"
+        },
+        {
+          "frame_id": "wf-20260704-094942-e8221f",
+          "gap_seconds": 4965.0,
+          "verdict_head": "Owner-authorized E1 shadow run completed within scope: fusion 24 receipts plus seed candidate guardrail 12 receipts; no adoption/deployment/deployed Skill write"
+        },
+        {
+          "frame_id": "wf-20260705-110124-b3bac7",
+          "gap_seconds": 6508.0,
+          "verdict_head": "utf8_targeted_fix_deployed_and_reshadow_completed_candidate_failed_no_adoption"
+        }
+      ]
+    },
+    "7200": {
+      "would_fire_on_frames": 6,
+      "of_which_closed_failed": 4,
+      "of_which_recovery_marked": 5,
+      "measured_false_positives": 1,
+      "false_positive_frames": [
+        {
+          "frame_id": "wf-20260630-135900-3a253e",
+          "gap_seconds": 49629.0,
+          "verdict_head": "Completed 24 isolated shadow evaluations and independent evidence QA. Candidate failed the fixed gate; no adoption or deployment occurred."
+        }
+      ]
+    },
+    "10800": {
+      "would_fire_on_frames": 5,
+      "of_which_closed_failed": 4,
+      "of_which_recovery_marked": 4,
+      "measured_false_positives": 1,
+      "false_positive_frames": [
+        {
+          "frame_id": "wf-20260630-135900-3a253e",
+          "gap_seconds": 49629.0,
+          "verdict_head": "Completed 24 isolated shadow evaluations and independent evidence QA. Candidate failed the fixed gate; no adoption or deployment occurred."
+        }
+      ]
+    },
+    "21600": {
+      "would_fire_on_frames": 4,
+      "of_which_closed_failed": 3,
+      "of_which_recovery_marked": 3,
+      "measured_false_positives": 1,
+      "false_positive_frames": [
+        {
+          "frame_id": "wf-20260630-135900-3a253e",
+          "gap_seconds": 49629.0,
+          "verdict_head": "Completed 24 isolated shadow evaluations and independent evidence QA. Candidate failed the fixed gate; no adoption or deployment occurred."
+        }
+      ]
+    }
+  },
+  "frames_over_1800s": [
+    {
+      "frame_id": "wf-20260724-090757-5341fc",
+      "gap_seconds": 52908.0,
+      "events": 2,
+      "outcome": "failed",
+      "recovery_marked": true,
+      "verdict_head": "Recovered interrupted scheduler receipt: finalization did not complete; no model wake was authorized from this receipt."
+    },
+    {
+      "frame_id": "wf-20260630-135900-3a253e",
+      "gap_seconds": 49629.0,
+      "events": 23,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "Completed 24 isolated shadow evaluations and independent evidence QA. Candidate failed the fixed gate; no adoption or deployment occurred."
+    },
+    {
+      "frame_id": "wf-20260730-153428-dff33a",
+      "gap_seconds": 27112.0,
+      "events": 5,
+      "outcome": "failed",
+      "recovery_marked": true,
+      "verdict_head": "Closed by Claude to break a community-wide wake deadlock, NOT to adjudicate. Evidence: wake-codex-runs/2026-07-31T00-30-29.jsonl terminates at line 98 with {\"ty"
+    },
+    {
+      "frame_id": "wf-20260722-162354-4d82de",
+      "gap_seconds": 26251.0,
+      "events": 2,
+      "outcome": "failed",
+      "recovery_marked": true,
+      "verdict_head": "孤儿帧补闭:dead bounded episode(2026-07-22T16:23:59Z 开)遗留的悬挂开帧,零工作、非己所开,经活性哨 182 次告警(incident 0f1624a1)与 7h+ 未闭确认并发假设证伪,为解堵 main 主线补闭。授权:观察员 2026-07-23 08:28:50 在 pe"
+    },
+    {
+      "frame_id": "wf-20260716-063230-d1d8a9",
+      "gap_seconds": 12595.0,
+      "events": 2,
+      "outcome": "failed",
+      "recovery_marked": true,
+      "verdict_head": "孤儿帧恢复闭合(Claude单签,事后留痕):此帧由 2026-07-16 15:26(local) Codex 唤醒回合开启后该回合即 rc=1 崩溃,帧内除 frame_opened 外零事件,3.5小时无活动。此后所有心跳唤醒(见 wake-cron.log 18:07-18:56 共百余次)均在 frame_o"
+    },
+    {
+      "frame_id": "wf-20260730-102159-d54176",
+      "gap_seconds": 7801.0,
+      "events": 2,
+      "outcome": "success",
+      "recovery_marked": true,
+      "verdict_head": "Late close, written by the next episode. All success criteria were met and landed in commit 6be6150: leg A of the proposed-API gate decided read-only (extension"
+    },
+    {
+      "frame_id": "wf-20260724-233421-42edd4",
+      "gap_seconds": 6843.0,
+      "events": 6,
+      "outcome": "success",
+      "recovery_marked": true,
+      "verdict_head": "Repaired scheduler receipt interruption recovery and transient audit retry; added long-ledger timeout guidance for Codex; old orphan safely closed; live and for"
+    },
+    {
+      "frame_id": "wf-20260705-110124-b3bac7",
+      "gap_seconds": 6508.0,
+      "events": 5,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "utf8_targeted_fix_deployed_and_reshadow_completed_candidate_failed_no_adoption"
+    },
+    {
+      "frame_id": "wf-20260702-004836-9e7648",
+      "gap_seconds": 5729.0,
+      "events": 8,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "Created v0.5 successor, validated proposal and shadow plan, prepared approved rerun, observed candidate hard-budget failure, and did not deploy."
+    },
+    {
+      "frame_id": "wf-20260704-094942-e8221f",
+      "gap_seconds": 4965.0,
+      "events": 6,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "Owner-authorized E1 shadow run completed within scope: fusion 24 receipts plus seed candidate guardrail 12 receipts; no adoption/deployment/deployed Skill write"
+    },
+    {
+      "frame_id": "wf-20260702-073002-03fda7",
+      "gap_seconds": 4445.0,
+      "events": 5,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "EXP-2 v3b completed with aligned collection; verdict unstable_readout_not_frozen, 2/5 repeats passed against 4/5 threshold"
+    },
+    {
+      "frame_id": "wf-20260725-124540-bb8210",
+      "gap_seconds": 4343.0,
+      "events": 6,
+      "outcome": "failed",
+      "recovery_marked": false,
+      "verdict_head": "Dual-sign 2026-07-25 10:23:30 + 21:33:44 consumed once. Authorized UTF-8 harness diff passed preflight/self-test, then r4 ran 24/24 trials and failed closed at "
+    },
+    {
+      "frame_id": "wf-20260701-214018-dd976d",
+      "gap_seconds": 4121.0,
+      "events": 2,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "Successor v0.2 was built and evaluated; approved shadow compare rejected the receipt set, so deployment is not advised."
+    },
+    {
+      "frame_id": "wf-20260701-135034-64c012",
+      "gap_seconds": 3532.0,
+      "events": 7,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "Fixed evaluator artifact binding and method-impact pass-through; regenerated SE-0.6 shadow result with unchanged ineligible verdict; regression scripts passed"
+    },
+    {
+      "frame_id": "wf-20260707-021959-655d51",
+      "gap_seconds": 3243.0,
+      "events": 9,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "barrel-fix-v2 staging repaired and verified; deployment still requires explicit user confirmation."
+    },
+    {
+      "frame_id": "wf-20260723-021106-70c5cd",
+      "gap_seconds": 3235.0,
+      "events": 6,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "Dual-signed v3 implemented using only Job Object path A. Context crosses wake.py to cron to wake_agent; final mutex guard fails closed on alert/head/lock/owner/"
+    },
+    {
+      "frame_id": "wf-20260702-105939-02a9cb",
+      "gap_seconds": 3198.0,
+      "events": 5,
+      "outcome": "blocked",
+      "recovery_marked": false,
+      "verdict_head": "v0.8 fixed L3 and saturated baseline handling, but adoption remains blocked by shadow gate failure: l2-constrained-architecture fixed-case regression; no deploy"
+    },
+    {
+      "frame_id": "wf-20260702-031849-da4b5b",
+      "gap_seconds": 3174.0,
+      "events": 6,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "Created and evaluated v0.6 successor; all candidate budgets passed and mean delta passed, but current SE-0.6 gate failed on saturated memory delta, so no deploy"
+    },
+    {
+      "frame_id": "wf-20260722-021701-645652",
+      "gap_seconds": 3170.0,
+      "events": 2,
+      "outcome": "failed",
+      "recovery_marked": true,
+      "verdict_head": "Orphan open frame from a crashed wake ~2026-07-22 11:17 local (event_count=1, never closed); flagged zero-authority by peer-health alert 5683475adbe5. Closed as"
+    },
+    {
+      "frame_id": "wf-20260704-114813-2ea13c",
+      "gap_seconds": 2464.0,
+      "events": 9,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "Spec freeze completed; E1 correction/replay A->B->C executed. Corrected E1 remains failed; seed rebound records authority low-confidence fail signal with enviro"
+    },
+    {
+      "frame_id": "wf-20260729-093640-def5ee",
+      "gap_seconds": 2246.0,
+      "events": 6,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "JP VPS internal bandwidth exceeds 200Mbps, but current China Unicom hotspot path through VLESS delivers only about 0.22Mbps with failed parallel connections; do"
+    },
+    {
+      "frame_id": "wf-20260705-045929-875d8a",
+      "gap_seconds": 2158.0,
+      "events": 5,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "Completed authorized first five candidate steps: scoped write-path prevention candidate, copied deployed Skill to proposal candidate, implemented minimal frame-"
+    },
+    {
+      "frame_id": "wf-20260702-140236-e56184",
+      "gap_seconds": 2029.0,
+      "events": 5,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "EXP-1.5 frozen, implemented, official API run completed as overmerge_regression"
+    },
+    {
+      "frame_id": "wf-20260702-124115-fd5eaa",
+      "gap_seconds": 2006.0,
+      "events": 9,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "v0.9 repaired L2 fixed-case regression, preserved L3 improvement and saturated baseline handling, produced adoption_eligible shadow result, and deployed verifie"
+    },
+    {
+      "frame_id": "wf-20260707-075015-a204c0",
+      "gap_seconds": 1939.0,
+      "events": 6,
+      "outcome": "success",
+      "recovery_marked": false,
+      "verdict_head": "EXP-10 v3 material probe and official run completed; final exit_code detector_undefinable, artifacts retrieved, remote endpoint shut down."
+    }
+  ]
+}
