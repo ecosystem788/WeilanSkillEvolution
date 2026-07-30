@@ -8,6 +8,7 @@ stated ref transition.
 """
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -41,6 +42,41 @@ def push_argv(origin, ref, base, authorized_oid):
         origin,
         f"{authorized_oid}:{ref}",
     )
+
+
+def parse_push_porcelain(stdout, authorized_oid, ref):
+    """Return one bounded ref-status report, or None when it is not exact."""
+    status_lines = [
+        line for line in stdout.splitlines() if line.count("\t") == 2
+    ]
+    if len(status_lines) != 1:
+        return None
+    flag, source_destination, summary = status_lines[0].split("\t")
+    if len(flag) != 1:
+        return None
+    if source_destination != f"{authorized_oid}:{ref}":
+        return None
+    if len(summary.encode("utf-8")) > 512:
+        return None
+    return {
+        "flag": flag,
+        "source_oid": authorized_oid,
+        "destination_ref": ref,
+        "summary": summary,
+        "summary_authority": "git_process_self_report_not_remote_observation",
+    }
+
+
+def replacement_decoded_stdout_fingerprint(stdout):
+    """Describe the text returned by git(), not unavailable raw stdout bytes."""
+    encoded = stdout.encode("utf-8")
+    return {
+        "push_report_status": "unparseable",
+        "stdout_replacement_decoded_utf8_byte_count": len(encoded),
+        "stdout_replacement_decoded_utf8_sha256": hashlib.sha256(
+            encoded
+        ).hexdigest(),
+    }
 
 
 def fail(reason, *, stage, returncode=None, **fields):
@@ -168,7 +204,15 @@ def main(argv=None):
         )
 
     push = git(*push_argv(args.origin, args.ref, base, authorized_oid))
+    push_report = parse_push_porcelain(
+        push.stdout, authorized_oid, args.ref
+    )
     if push.returncode != 0:
+        push_evidence = (
+            {"push_report": push_report}
+            if push_report is not None
+            else replacement_decoded_stdout_fingerprint(push.stdout)
+        )
         return fail(
             "git_push_failed",
             stage="push",
@@ -176,18 +220,34 @@ def main(argv=None):
             ref=args.ref,
             base=base,
             authorized_oid=authorized_oid,
+            **push_evidence,
         )
 
     verified_oid, error = live_remote_oid(args.origin, args.ref)
     if error is not None:
         return error
     if verified_oid != authorized_oid:
+        push_evidence = (
+            {"push_report": push_report}
+            if push_report is not None
+            else replacement_decoded_stdout_fingerprint(push.stdout)
+        )
         return fail(
             "post_push_ref_mismatch",
             stage="post_verification",
             ref=args.ref,
             expected_authorized_oid=authorized_oid,
             observed_remote_oid=verified_oid,
+            **push_evidence,
+        )
+    if push_report is None:
+        return fail(
+            "push_porcelain_unparseable",
+            stage="post_verification",
+            ref=args.ref,
+            expected_authorized_oid=authorized_oid,
+            observed_remote_oid=verified_oid,
+            **replacement_decoded_stdout_fingerprint(push.stdout),
         )
 
     emit(
@@ -200,6 +260,7 @@ def main(argv=None):
             "preflight_remote_oid": remote_oid,
             "remote_oid": verified_oid,
             "push_performed": True,
+            "push_report": push_report,
         }
     )
     return 0

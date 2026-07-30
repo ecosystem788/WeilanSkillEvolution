@@ -4,6 +4,7 @@ Every remote is a temporary file:// bare repository.
 """
 
 import json
+import importlib.util
 import pathlib
 import runpy
 import subprocess
@@ -85,6 +86,15 @@ def remote_head(remote):
     return git(remote, "rev-parse", REF).decode().strip()
 
 
+def load_tool_module():
+    spec = importlib.util.spec_from_file_location(
+        "push_authorized_oid_under_test", TOOL
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_normal_fast_forward_push(tmp_path):
     source, remote, origin, base, authorized_oid = initialize(tmp_path)
 
@@ -97,6 +107,15 @@ def test_normal_fast_forward_push(tmp_path):
     assert receipt["push_performed"] is True
     assert receipt["preflight_remote_oid"] == base
     assert receipt["remote_oid"] == authorized_oid
+    assert receipt["push_report"] == {
+        "flag": " ",
+        "source_oid": authorized_oid,
+        "destination_ref": REF,
+        "summary": receipt["push_report"]["summary"],
+        "summary_authority": (
+            "git_process_self_report_not_remote_observation"
+        ),
+    }
     assert remote_head(remote) == authorized_oid
 
 
@@ -110,6 +129,175 @@ def test_push_argv_binds_exact_preflight_base():
         "origin",
         f"authorized:{REF}",
     )
+
+
+def test_parse_push_porcelain_accepts_exact_safe_status_shapes():
+    parse = runpy.run_path(str(TOOL))["parse_push_porcelain"]
+    oid = "a" * 40
+
+    success = parse(
+        f"To file://credential@example.invalid/repo\n"
+        f" \t{oid}:{REF}\t1234567..abcdef0\nDone\n",
+        oid,
+        REF,
+    )
+    rejected = parse(
+        f"!\t{oid}:{REF}\t[rejected] (stale info)\n", oid, REF
+    )
+
+    assert success == {
+        "flag": " ",
+        "source_oid": oid,
+        "destination_ref": REF,
+        "summary": "1234567..abcdef0",
+        "summary_authority": (
+            "git_process_self_report_not_remote_observation"
+        ),
+    }
+    assert "credential" not in json.dumps(success)
+    assert rejected["flag"] == "!"
+    assert rejected["summary"] == "[rejected] (stale info)"
+
+
+def test_parse_push_porcelain_rejects_missing_ambiguous_or_wrong_records():
+    parse = runpy.run_path(str(TOOL))["parse_push_porcelain"]
+    oid = "a" * 40
+    exact = f" \t{oid}:{REF}\told..new"
+
+    assert parse("To origin\nDone\n", oid, REF) is None
+    assert parse(f"{exact}\n{exact}\n", oid, REF) is None
+    assert parse(
+        f" \t{'b' * 40}:{REF}\told..new\n", oid, REF
+    ) is None
+    assert parse(
+        f" \t{oid}:refs/heads/other\told..new\n", oid, REF
+    ) is None
+
+
+def scripted_git(module, post_oid, push_stdout):
+    base = "a" * 40
+    authorized_oid = "b" * 40
+    calls = []
+
+    def fake_git(*args):
+        calls.append(args)
+        if args[:2] == ("rev-parse", "--verify"):
+            value = args[2].removesuffix("^{commit}")
+            return subprocess.CompletedProcess(args, 0, value + "\n", "")
+        if args[:2] == ("merge-base", "--is-ancestor"):
+            return subprocess.CompletedProcess(args, 0, "", "")
+        if args[0] == "ls-remote":
+            observed = base if len(
+                [call for call in calls if call[0] == "ls-remote"]
+            ) == 1 else post_oid
+            return subprocess.CompletedProcess(
+                args, 0, f"{observed}\t{REF}\n", ""
+            )
+        if args[0] == "push":
+            return subprocess.CompletedProcess(args, 0, push_stdout, "")
+        raise AssertionError(args)
+
+    module.git = fake_git
+    return base, authorized_oid, calls
+
+
+def test_post_mismatch_outranks_unparseable_push_report(capsys):
+    module = load_tool_module()
+    drift_oid = "c" * 40
+    base, authorized_oid, calls = scripted_git(
+        module, drift_oid, "To credential@example.invalid/repo\nDone\n"
+    )
+
+    returncode = module.main(
+        [
+            "--origin",
+            "redacted-origin",
+            "--ref",
+            REF,
+            "--base",
+            base,
+            "--authorized-oid",
+            authorized_oid,
+        ]
+    )
+    receipt = json.loads(capsys.readouterr().out)
+
+    assert returncode == 1
+    assert receipt["reason"] == "post_push_ref_mismatch"
+    assert receipt["observed_remote_oid"] == drift_oid
+    assert receipt["push_report_status"] == "unparseable"
+    assert "stdout_replacement_decoded_utf8_sha256" in receipt
+    assert "credential" not in json.dumps(receipt)
+    assert len([call for call in calls if call[0] == "ls-remote"]) == 2
+
+
+def test_post_mismatch_preserves_accepted_push_report(capsys):
+    module = load_tool_module()
+    drift_oid = "c" * 40
+    expected_authorized_oid = "b" * 40
+    push_stdout = (
+        f" \t{expected_authorized_oid}:{REF}\t1234567..abcdef0\n"
+    )
+    base, authorized_oid, calls = scripted_git(
+        module, drift_oid, push_stdout
+    )
+
+    returncode = module.main(
+        [
+            "--origin",
+            "redacted-origin",
+            "--ref",
+            REF,
+            "--base",
+            base,
+            "--authorized-oid",
+            authorized_oid,
+        ]
+    )
+    receipt = json.loads(capsys.readouterr().out)
+
+    assert returncode == 1
+    assert receipt["reason"] == "post_push_ref_mismatch"
+    assert receipt["observed_remote_oid"] == drift_oid
+    assert receipt["push_report"] == {
+        "flag": " ",
+        "source_oid": authorized_oid,
+        "destination_ref": REF,
+        "summary": "1234567..abcdef0",
+        "summary_authority": (
+            "git_process_self_report_not_remote_observation"
+        ),
+    }
+    assert "push_report_status" not in receipt
+    assert len([call for call in calls if call[0] == "ls-remote"]) == 2
+
+
+def test_unparseable_report_fails_after_matching_post_read(capsys):
+    module = load_tool_module()
+    authorized_oid = "b" * 40
+    base, authorized_oid, calls = scripted_git(
+        module, authorized_oid, "To redacted-origin\nDone\n"
+    )
+
+    returncode = module.main(
+        [
+            "--origin",
+            "redacted-origin",
+            "--ref",
+            REF,
+            "--base",
+            base,
+            "--authorized-oid",
+            authorized_oid,
+        ]
+    )
+    receipt = json.loads(capsys.readouterr().out)
+
+    assert returncode == 1
+    assert receipt["reason"] == "push_porcelain_unparseable"
+    assert receipt["observed_remote_oid"] == authorized_oid
+    assert receipt["push_report_status"] == "unparseable"
+    assert len([call for call in calls if call[0] == "ls-remote"]) == 2
 
 
 def test_remote_base_drift_refuses_push(tmp_path):
