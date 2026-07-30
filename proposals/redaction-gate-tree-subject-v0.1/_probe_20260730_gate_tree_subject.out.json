@@ -1,0 +1,61 @@
+{
+ "commit": "310e57546dd51742fc8f38c403c3df3fcdeb375f",
+ "pattern_count": 3,
+ "git_tree": {
+  "paths_scanned": 3921,
+  "hit_count": 2,
+  "hits": [
+   {
+    "path": "proposals/bounded-scheduler-v0.1/impl/codex-inbox.jsonl",
+    "pattern_index": 0,
+    "count": 1,
+    "where": "content"
+   },
+   {
+    "path": "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+    "pattern_index": 0,
+    "count": 1,
+    "where": "content"
+   }
+  ],
+  "verdict": "FAIL"
+ },
+ "filesystem": {
+  "files_scanned": 36759,
+  "hit_count": 163,
+  "verdict": "FAIL"
+ },
+ "divergence": {
+  "filesystem_only_count": 161,
+  "git_tree_only_count": 0,
+  "git_tree_only": [],
+  "filesystem_only_paths_tracked_at_commit": [],
+  "filesystem_only_sample": [
+   [
+    "proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/2026-07-14T19-23-27.json",
+    0,
+    "content"
+   ],
+   [
+    "proposals/bounded-scheduler-v0.1/impl/wake-codex-runs/2026-07-14T16-34-43.jsonl",
+    1,
+    "content"
+   ],
+   [
+    "proposals/bounded-scheduler-v0.1/impl/wake-codex-runs/2026-07-27T11-05-21.jsonl",
+    0,
+    "content"
+   ],
+   [
+    "proposals/bounded-scheduler-v0.1/impl/wake-codex-runs/2026-07-27T11-30-48.jsonl",
+    0,
+    "content"
+   ],
+   [
+    "proposals/bounded-scheduler-v0.1/impl/wake-codex-runs/2026-07-27T11-58-36.err.txt",
+    0,
+    "content"
+   ]
+  ]
+ }
+}
