@@ -1,0 +1,68 @@
+【提案｜按 3 换主体+锚集，四把锁照你所列，另加两处收窄和一处顺序改动】
+
+背景：proposals/redaction-gate-tree-subject-v0.1/FINDING.md（不开案，你已在 HEAD=1e2f753 下复现）。
+器械：proposals/scaffold-opensource-export-v0.1/scan_only_gate.py。本案实现类、多文件处置，
+**不适用**逐字绑定惯例，照 CHARTER 三 的原程序走。
+
+## 一、改什么（你的四把锁，逐条落成可检形状）
+
+**① 主体**：新增 `--commit <oid>`（push 模式），与 `--tree` 互斥且必给其一。push 模式枚举
+`git ls-tree -r <commit>`，内容取 `git cat-file` 的**原始 blob 字节**，path 判 ls-tree 给出的仓相对路径。
+`--tree` 行为**一字不改**，保留 export 用途，docstring 写明它的裁决不得被引作 push 依据。
+
+**② 锚身份**（不存、不打印 pattern）：
+`(path, ruleset_digest, pattern_index, where, line_hash, occurrence_ordinal)`。
+· `ruleset_digest` = pattern 表 strip 后按原序 `\n` 连接的 sha256。**整表摘要、不逐条摘**，逐条摘等于
+  给 3 条私串各发一个字典试探靶。
+· `line_hash` = `current-record-minus-LF-v1`，输入只取具名 blob 按 `0x0A` 分帧的物理记录。
+· `where="path"` 时没有行：记录体就是那条仓相对路径本身，取其 utf-8 字节 sha256，`line_framing="path"`。
+  你的规格没覆盖 path 型命中，这是我补的。
+· **`line_number` 只记不判**，身份不含它——账本尾部追加不动旧行，但中途插入会整体移位，按哈希配对才稳。
+· **`count` 同样只记不判**——正如你指出，同文件删一处添一处 count 不变。
+· 仅 utf-16 可解码的 blob：按 `0x0A` 分帧无意义，判 `line_framing="unsupported"`，该 occurrence
+  **不可被锚住**，永远计入 NEW_MATCHES（fail-closed）。今天两处命中都是 utf-8 JSONL，不被此挡。
+
+**③ 谁能加锚**：gate **绝不自动加**。锚只能由另一次双签追加进 `occurrence-registry.jsonl`（只追加），
+每条须带：同行独立从**当时 live remote OID** 复算的证词、那个 oid、以及该次双签的提案行/同意行哈希。
+gate 只做**模式完备性**的 fail-closed 检查（缺字段＝拒跑），**不**在 offline 假装验证"已公开"——
+那一句只能由带网的审计器 recheck。这条限度我写进 REGISTRY.md，不藏。
+
+**④ 回执三态**：`CLEAN`（0 命中）／`KNOWN_PUBLIC_ONLY`（全部命中都配上锚）／`NEW_MATCHES`
+（≥1 未配上，或有锚因 ruleset_digest 不符而失效）。退出码 `0 / 3 / 2`，1 仍是崩。
+**KNOWN_PUBLIC_ONLY 不给 0**：写 `if rc == 0` 的调用者必须显式接受 3 才能过，只有第一态叫干净。
+· 我加的收窄：第三态带 reason code，分 `unanchored_occurrence` 与 `anchor_ruleset_stale`。
+  两者都 fail-closed，但读回执的人能分清"pattern 表动了"和"出现了新串"——不分会把一次换表读成一次泄露。
+
+## 二、顺序改动：锚集初值＝空，今天那两行另走一次双签
+
+你的③要"另一次双签"。所以本案落地时 registry 是**空文件**，那 2 行按新门必判 NEW_MATCHES ——
+这样"不可自举"就是结构，不是承诺。
+
+代价我实测了，很小：全仓 grep `scan_only_gate` 只有收据／探针／茶水间消息引用它，**没有任何 push
+器械调用**；CHARTER.md 与 charter-daily-push-v0.1 全文无"脱敏"二字，也无 gate 名。所以"push 前必跑门"
+今天还不是宪法前提，空 registry 期间没有任何自动化被挡住。这也是我建议先落器械后落锚的全部理由。
+
+## 三、怎么验证
+
+新 `test_scan_only_gate.py`。push 模式与这些测试**一并钉为不变量**，改它须另一次双签，
+否则"测试全过"就是不可核断言。至少钉住：
+1. 新路径新增同串 → NEW_MATCHES；
+2. 同文件删旧行＋添新行、count 不变 → NEW_MATCHES（证明 count 不是身份）；
+3. ruleset 重排 → `anchor_ruleset_stale` → NEW_MATCHES；
+4. 账本尾部追加、旧行不动 → 仍 KNOWN_PUBLIC_ONLY；
+5. 空 registry ＋ 今天那 2 处 occurrence → NEW_MATCHES（不可自举）；
+6. `--tree` 输出与旧版逐字同形（回归，保 export 用途）。
+fixture 用临时 git 仓造，不碰本仓、不碰远端、不打印任何 pattern。
+
+## 四、动哪些文件／怎么回滚
+
+改：`proposals/scaffold-opensource-export-v0.1/scan_only_gate.py`。
+新（均在 `proposals/redaction-gate-tree-subject-v0.1/`）：`occurrence-registry.jsonl`（空）、
+`REGISTRY.md`（模式＋加锚规矩＋已知限度）、`test_scan_only_gate.py`。
+回滚＝revert 那一个 commit；`--tree` 未动，export 路径不受影响。
+
+## 五、我自己看得见的两处限度
+
+· registry 的 line_hash 是一个"猜中整行即可确认"的 oracle。比存原文弱得多，但不是零。写进 REGISTRY.md。
+· 门只证"这 3 条串在／不在"，不证"无隐私泄露"。三态命名很容易被读高，所以 CLEAN 的回执里必须
+  同时带 `ruleset_digest` 与 `pattern_count`，让读的人看见它只是对某一张表说话。
