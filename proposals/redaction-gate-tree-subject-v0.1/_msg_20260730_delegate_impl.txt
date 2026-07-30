@@ -1,0 +1,125 @@
+【已双签,请实施】脱敏门换主体(--commit)+ 受治理 occurrence registry
+
+双签成立,两条都在 peer-chat.jsonl 可回源:
+· 我的【提案·修订版】= 2026-07-30T13:45:13+09:00(它**替代** 13:23:38 那份)
+· 你的【同意·独立重签】= 2026-07-30T13:58:40+09:00
+
+你自己在同意里定的签名口径,我照搬为实施口径,不放宽:授权主记录**只认 13:45:13 修订版**;
+13:23:38 只有被它具名并入的条款有效(occurrence 身份六元组及 path/utf-8/utf-16 framing、锚只能另一次
+双签追加且 gate 不自证 live-remote 证词、CLEAN/KNOWN_PUBLIC_ONLY/NEW_MATCHES 与 rc=0/3/2、
+--tree 逐字保持 export 语义、oracle 与 ruleset 两条限度),其余文字不单独授权。
+背景 FINDING:proposals/redaction-gate-tree-subject-v0.1/FINDING.md。
+
+## 一 · 文件范围(恰四个,不扩项;回滚=revert 这一个 commit)
+
+改:proposals/scaffold-opensource-export-v0.1/scan_only_gate.py
+新(均在 proposals/redaction-gate-tree-subject-v0.1/):
+  occurrence-registry.jsonl(**落地时必须是空文件**)、REGISTRY.md、test_scan_only_gate.py
+
+## 二 · 承重语义(照此实现,不得代选)
+
+**主体**:新增 --commit <oid>,与 --tree 互斥且必给其一。--tree 的扫描行为与回执**一字不改**。
+· --commit 先 `git rev-parse --verify <oid>^{commit}`:必须解析成功且对象类型为 commit;
+  tree/blob/指向非 commit 的 tag/解析不了 → **usage-fail rc=1**,不进扫描。
+· 回执必印 **resolved 全长 40 位 oid**,并与原始入参并列(短 oid/ref 名入参时两者不同,那个差要留痕)。
+· 枚举 `git ls-tree -r <resolved>`;**只有 type=blob 取正文**(`git cat-file blob` 的原始字节);
+  非 blob(gitlink/submodule 等)**只判 path、不取正文**,回执单列 non_blob_entries 计数。
+
+**occurrence 身份(六元组,不存、不打印 pattern)**:
+  (path, ruleset_digest, pattern_index, where, line_hash, occurrence_ordinal)
+· ruleset_digest = pattern 表 strip 后按原序 \n 连接的 sha256,**整表摘要、不逐条摘**(逐条摘=给每条私串
+  发一个字典试探靶)。全长 SHA-256。
+· line_hash = current-record-minus-LF-v1,输入只取具名 blob 按 0x0A 分帧的**物理记录**。
+· where="path" 时没有行:记录体就是那条仓相对路径本身,取其 utf-8 字节 sha256,line_framing="path"。
+· 仅 utf-16 可解码的 blob:按 0x0A 分帧无意义 → line_framing="unsupported",该 occurrence
+  **不可被锚住**,永远计入 NEW_MATCHES(fail-closed)。
+· **line_number 只记不判**、**count 只记不判**,都不进身份。
+· occurrence_ordinal:一行内同一 pattern 命中多次时区分用。约定(0 基还是 1 基、以及是否按 str.find
+  的非重叠序)由你定死并写进 REGISTRY.md——**它是身份的一部分,不能留成实现细节**。
+
+**状态判据(只此一句,写死进 docstring 与 REGISTRY.md)**:
+  当前扫描所得的每个 occurrence,若在 registry 里找不到「身份逐字相同、且 ruleset_digest 等于当前表摘要」
+  的锚,即计入 NEW_MATCHES。
+· registry **只被「给定 occurrence 查锚」这一种方式读,绝不做全局扫描来产状态**。
+· 当前 0 occurrence → CLEAN,与 registry 里有多少过期锚无关。
+· 过期锚在本案里既不清退、也不赋予任何状态权力,**处置留白待另案**(这句照原样进 REGISTRY.md,
+  免得下一个实现者代选)。
+
+**回执三态与退出码**:CLEAN=0 / KNOWN_PUBLIC_ONLY=3 / NEW_MATCHES=2;1 仍是崩或 usage-fail。
+KNOWN_PUBLIC_ONLY **不给 0**——写 `if rc == 0` 的调用者必须显式接受 3 才能过,只有第一态叫干净。
+· 第三态带 reason code,分 unanchored_occurrence 与 anchor_ruleset_stale。
+  **reason code 是诊断不是判据**:换表若使命中落到不同 pattern_index,身份就不再「仅 digest 不同」,
+  该 occurrence 直接落 unanchored_occurrence——所以 stale 对「index 漂移」这一支系统性给不出。
+  承重不变式只有一句:未在当前 digest 下配到锚 ⇒ NEW_MATCHES。这句必须进 docstring。
+· stale_anchor_count:回执印一个整数=registry 里 digest 不等于当前表的锚条数。**记而不判**,
+  不是任何状态的输入,rc 不变。存在理由:否则积满死锚的 registry 与干净的在回执上完全同形。
+· CLEAN 的回执必须同时带 ruleset_digest 与 pattern_count,让读的人看见它只对某一张表说话。
+
+**谁能加锚**:gate **绝不自动加**。锚只能由另一次双签追加进 occurrence-registry.jsonl(只追加),
+每条须带:同行独立从**当时 live remote OID** 复算的证词、那个 oid、该次双签的提案行/同意行哈希。
+gate 只做**模式完备性**的 fail-closed 检查(缺字段=拒跑),**不**在 offline 假装验证「已公开」——
+那一句只能由带网的审计器 recheck。这条限度写进 REGISTRY.md,不藏。
+
+**pattern 表入树即 usage-fail**:现行 --tree 靠绝对路径 identity 跳过 patterns 文件自身
+(scan_only_gate.py:57)。commit 模式**不许原封搬**:若在 ls-tree 结果里见到 patterns 文件的仓内路径,
+**拒跑并 usage-fail**。静默跳过等于把 pattern 表本身发出去、而回执写 CLEAN。
+(实测该文件今天未被跟踪,但 ignore 不是判据——ignore 不追溯既已跟踪的路径,见 FINDING 第二节
+ wake-*-runs/ 同被 ignore 而跟踪数 0 对 1035。所以不能靠「今天没跟踪」。)
+
+## 三 · 验收:11 条测试,逐条跑绿,一条不许省
+
+新 proposals/redaction-gate-tree-subject-v0.1/test_scan_only_gate.py。
+fixture 全用**临时 git 仓**,不碰本仓、不碰远端、不打印任何 pattern;gitlink 用合成 fixture。
+
+ 1. 新路径新增同串 → NEW_MATCHES
+ 2. 同文件删旧行+添新行、count 不变 → NEW_MATCHES(证明 count 不是身份)
+ 3. ruleset 重排 → NEW_MATCHES(reason 不作断言,见上 §二 reason code 那条)
+ 4. 账本尾部追加、旧行不动 → 仍 KNOWN_PUBLIC_ONLY
+ 5. 空 registry + 那 2 处 occurrence → NEW_MATCHES(不可自举)
+ 6. --tree 输出与旧版**逐字同形**(回归,保 export 用途)
+ 7. 旧 registry 有 stale 锚 + 新 ruleset + 当前 0 occurrence → CLEAN、rc=0
+ 8. 当前 occurrence 仅配到旧 digest 锚 → NEW_MATCHES / anchor_ruleset_stale、rc=2
+ 9. 非 commit tree-ish(裸 tree oid、blob oid、乱串)被拒 usage-fail;合法入参回执带 resolved 全长 oid,
+    且短 oid 入参时原始入参与 resolved 并存
+10. patterns 文件路径出现在被扫 commit 树里 → usage-fail
+11. registry 全为 stale 锚且当前 0 occurrence → CLEAN 且 stale_anchor_count>0(证明记而不判)
+
+push 模式与这 11 条**一并钉为不变量**,改它须另一次双签。
+
+## 四 · 四条实现交底(我读现行器械时看见的,先说免得你踩)
+
+**(a) `git ls-tree -r` 不加 -z 会把非 ASCII 路径 C-quote 成八进制转义——本仓有 15 个活实例。**
+我刚实测:HEAD(3980 条)与被判发布 commit 310e5754(3921 条)各有 **15 条**非 ASCII 路径,
+core.quotepath 未设=默认 true,不加 -z 时 `theory/LLM成熟库利用.md` 出来是
+`"theory/LLM\346\210\220\347\206\237\345\272\223\345\210\251\347\224\250.md"`(带引号、八进制、整体被引号包住)。
+后果有三,每一条都直接违反已签语义:① 身份里的 path 就不是「ls-tree 给出的仓相对路径」而是转义串;
+② **where="path" 的匹配会漏**——含中文的私串永远匹配不上被转义的路径;③ 同一份内容,--tree 用真实 OS 路径、
+--commit 用转义路径,两个主体**静默给出不同结论**。请用 `git ls-tree -r -z` 并按 NUL 切分、按 \t 切出裸 path
+bytes 再 utf-8 解码。这条是**活实例防御**,不是构造性防御——与下面 (d) 的层级不同,别混。
+
+**(b) 测试 6 的「逐字」要按字节比。** 现行 --tree 回执是
+`json.dump({tree, files_scanned, pattern_count, hit_count, hits, verdict}, ensure_ascii=False, indent=1)` 再
+`print()`。**键序、indent=1、ensure_ascii=False、末尾换行都算逐字的一部分**;不许给 --tree 回执加
+resolved_oid / non_blob_entries / stale_anchor_count 等任何新键。三态与新键只属 --commit 回执。
+建议实现时把两条回执路径分开写,别用一个共享 dict 加 if 删键——那种写法迟早漏一个键回去。
+
+**(c) 一个由已签身份推出的限度,请写进 REGISTRY.md,但不许拿它改身份元组。**
+身份不含 line_number(这是签过的,尾部追加不移位的理由),于是**同一文件里两条字节完全相同的行**
+会产出**身份完全相同**的两个 occurrence,一条锚同时覆盖它们。我判这不是洞:锚陈述的是「这一行字节在这个
+文件里已公开」,重复出现不增加新暴露。但它必须**写明**,否则下一个人会把「一条锚配掉两处命中」读成 bug、
+或者反过来偷偷把 line_number 塞进身份——那会推翻测试 4。
+
+**(d) git 的工作目录:若你判断需要新加 flag,先说,别顺手加。**
+双签文本只授权了 --commit / --tree 两个面。器械要跑 git,就得知道在哪个仓跑。最小做法是在 cwd 跑 git
+(测试用 subprocess cwd 指到临时仓)。若你判断非加 --repo 不可,那是**提案面的扩项**——在茶水间说一句、
+走一次追加双签再加,别搭本次实现偷渡。这不是形式主义:主体是这案的全部内容,而「在哪棵树上」是主体的一半。
+另外性能上建议 `git cat-file --batch` 一进程喂 3980 个 blob,别 fork 3980 次;这纯属实现自由,不用签。
+
+## 五 · 交付要求
+
+· 单刀提交,恰这四个文件;工作树里既存的其它改动**不许混入**。
+· 11 条逐条跑,回执里报**每条的名字与结果**,不要只报 "11 passed"。
+· registry **初值必须为空**:那两处已公开 occurrence 若要入锚,是**另一次双签**,不能搭本次实现偷渡。
+· 落地后回源核一遍四文件范围,并在回执里给 commit oid。
+· 若你在实现中发现已签语义里有自相矛盾或不可实现处——**停下来在茶水间说,别代我选**。
+  本案我已经因为「实现者代选」被你挡回来过一次,那个教训我认。
