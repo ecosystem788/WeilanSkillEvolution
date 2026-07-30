@@ -1,0 +1,308 @@
+{
+  "probe": "qoder-channel-surface",
+  "read_only": true,
+  "P1_cli_chat_surface": {
+    "path": "C:\\Users\\zy\\AppData\\Local\\Programs\\QoderCN\\resources\\app\\out\\cli.js",
+    "exists": true,
+    "size": 226503,
+    "chat_description": "Pass in a prompt to run in a chat session in the current working directory.",
+    "chat_options_block_terminated": true,
+    "chat_option_names": [
+      "_",
+      "mode",
+      "add-file",
+      "maximize",
+      "reuse-window",
+      "new-window",
+      "profile",
+      "help"
+    ],
+    "chat_has_model_option": false,
+    "defining_build_module": "out-build/vs/platform/environment/node/argv.js",
+    "top_help_snippet": "const s=`${Y.applicationName}${V?\".exe\":\"\"}`,r=Y.productVersion||Y.version;console.log(dn(Y.nameLong,s,r,Zt))}else if(t.chat?.help){const s=`${Y.applicationName}${V?\".exe\":\"\"}`;console.log(dn(Y.nameLo",
+    "top_help_uses_productVersion": true,
+    "chat_help_snippet": "const s=`${Y.applicationName}${V?\".exe\":\"\"}`;console.log(dn(Y.nameLong,s,Y.version,Zt.chat.options,{isChat:!0}))}else if(t.version){const s=Y.productVersion||Y.version;console.log(v0(s,Y.commit))}else",
+    "chat_help_uses_bare_version": true,
+    "stdout_pipe_sites": [
+      {
+        "in_tunnel_or_serveweb_path": true,
+        "mentions_chat": false
+      }
+    ],
+    "stdout_pipe_count": 1,
+    "stdin_dash_becomes_add_file": true
+  },
+  "P2_versions": {
+    "package.json:version": "1.8.1",
+    "product.json:productVersion": "1.8.1",
+    "product.json:version": "1.106.3",
+    "product.json:nameLong": "Qoder CN"
+  },
+  "P3_config_surface": {
+    "user_settings": {
+      "exists": true,
+      "key_count": 40,
+      "keys_matching_model": []
+    },
+    "dotdir_settings": {
+      "exists": true,
+      "key_count": 3,
+      "keys_matching_model": []
+    }
+  },
+  "P4_model_catalog": {
+    "model_keys": [
+      "aicoding.modelConfigs.cache.assistant",
+      "aicoding.modelConfigs.cache.experts",
+      "aicoding.modelConfigs.cache.quest",
+      "aicoding.modelMap.enterprise.cache.<uuid-redacted>.personal",
+      "content.trust.model.key"
+    ],
+    "assistant": [
+      {
+        "name": "auto",
+        "displayName": "Auto",
+        "isDefault": true,
+        "enabled": true,
+        "priceFactor": 0.5,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "qmodel_preview",
+        "displayName": "Qwen3.8-Max-Preview",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.05,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "qmodel_latest",
+        "displayName": "Qwen3.7-Max",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.25,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "qmodel",
+        "displayName": "Qwen3.7-Plus",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.1,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "q36fmodel",
+        "displayName": "Qwen3.6-Flash",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.1,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "dmodel",
+        "displayName": "DeepSeek-V4-Pro",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.5,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "dfmodel",
+        "displayName": "DeepSeek-V4-Flash",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.1,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "gm51model",
+        "displayName": "GLM-5.2",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.6,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "kmodel",
+        "displayName": "Kimi-K2.7-Code",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.3,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "mmodel",
+        "displayName": "MiniMax-M2.7",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.2,
+        "format": "openai",
+        "source": "system"
+      }
+    ],
+    "quest": [
+      {
+        "name": "auto",
+        "displayName": "Auto",
+        "isDefault": true,
+        "enabled": true,
+        "priceFactor": 0.5,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "gm51model",
+        "displayName": "GLM-5.2",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.6,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "kmodel",
+        "displayName": "Kimi-K2.7-Code",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.3,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "qmodel_preview",
+        "displayName": "Qwen3.8-Max-Preview",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.05,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "qmodel_latest",
+        "displayName": "Qwen3.7-Max",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.25,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "qmodel",
+        "displayName": "Qwen3.7-Plus",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.1,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "q36fmodel",
+        "displayName": "Qwen3.6-Flash",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.1,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "dmodel",
+        "displayName": "DeepSeek-V4-Pro",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.5,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "dfmodel",
+        "displayName": "DeepSeek-V4-Flash",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.1,
+        "format": "openai",
+        "source": "system"
+      }
+    ],
+    "experts": [
+      {
+        "name": "auto",
+        "displayName": "Auto",
+        "isDefault": true,
+        "enabled": true,
+        "priceFactor": 0.5,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "qmodel_latest",
+        "displayName": "Qwen3.7-Max",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.25,
+        "format": "openai",
+        "source": "system"
+      },
+      {
+        "name": "gm51model",
+        "displayName": "GLM-5.2",
+        "isDefault": false,
+        "enabled": true,
+        "priceFactor": 0.6,
+        "format": "openai",
+        "source": "system"
+      }
+    ]
+  },
+  "P5_local_artifacts": {
+    "dotdir_projects_file_count": 0,
+    "globalStorage_agent_file_count": 0,
+    "chat_session_keys": 31,
+    "chat_session_value_lengths_distinct": [
+      83
+    ],
+    "chat_session_key_suffixes_distinct": [
+      ".state.hidden"
+    ]
+  },
+  "P6_extension_contributions": {
+    "contributes_keys": [
+      "chatParticipants",
+      "commands",
+      "icons",
+      "javaExtensions",
+      "keybindings",
+      "languageModelChatProviders",
+      "menus",
+      "submenus"
+    ],
+    "languageModelChatProviders": [
+      {
+        "vendor": "qodercn-edit-lm-vendor"
+      }
+    ],
+    "chatParticipant_ids": [
+      "qodercn.edit.participant",
+      "qodercn.editingSession.participant"
+    ],
+    "enabledApiProposals": [
+      "chatParticipantPrivate",
+      "chatParticipantAdditions",
+      "chatEditing",
+      "defaultChatParticipant",
+      "chatProvider",
+      "languageModelSystem",
+      "languageModelCapabilities",
+      "contribSourceControlInputBoxMenu"
+    ]
+  }
+}
