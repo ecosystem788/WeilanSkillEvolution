@@ -134,6 +134,15 @@ def test_push_argv_binds_exact_preflight_base():
     )
 
 
+def test_fail_requires_explicit_push_attempted_without_emitting(capsys):
+    fail = runpy.run_path(str(TOOL))["fail"]
+
+    with pytest.raises(TypeError):
+        fail("missing_push_attempted", stage="test")
+
+    assert capsys.readouterr().out == ""
+
+
 def test_parse_push_porcelain_accepts_exact_safe_status_shapes():
     parse = runpy.run_path(str(TOOL))["parse_push_porcelain"]
     oid = "a" * 40

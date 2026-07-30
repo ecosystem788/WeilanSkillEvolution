@@ -90,7 +90,7 @@ def fail(
     reason,
     *,
     stage,
-    push_attempted=False,
+    push_attempted,
     returncode=None,
     returncode_field="git_returncode",
     **fields,
@@ -115,6 +115,7 @@ def canonical_commit(value, label):
         return None, fail(
             f"{label}_is_not_a_local_commit",
             stage="local_validation",
+            push_attempted=False,
             returncode=proc.returncode,
         )
     canonical = proc.stdout.strip()
@@ -122,6 +123,7 @@ def canonical_commit(value, label):
         return None, fail(
             f"{label}_is_not_a_canonical_oid",
             stage="local_validation",
+            push_attempted=False,
         )
     return canonical, None
 
@@ -184,7 +186,11 @@ def main(argv=None):
     try:
         args = build_parser().parse_args(argv)
     except ValueError:
-        return fail("invalid_arguments", stage="argument_validation")
+        return fail(
+            "invalid_arguments",
+            stage="argument_validation",
+            push_attempted=False,
+        )
     except SystemExit as exc:
         return int(exc.code or 0)
 
@@ -202,6 +208,7 @@ def main(argv=None):
         return fail(
             "non_fast_forward",
             stage="local_validation",
+            push_attempted=False,
             base=base,
             authorized_oid=authorized_oid,
             ref=args.ref,
@@ -210,6 +217,7 @@ def main(argv=None):
         return fail(
             "ancestry_check_failed",
             stage="local_validation",
+            push_attempted=False,
             returncode=ancestry.returncode,
         )
 
@@ -239,6 +247,7 @@ def main(argv=None):
         return fail(
             "remote_base_mismatch",
             stage="preflight",
+            push_attempted=False,
             ref=args.ref,
             expected_base=base,
             observed_remote_oid=remote_oid,
