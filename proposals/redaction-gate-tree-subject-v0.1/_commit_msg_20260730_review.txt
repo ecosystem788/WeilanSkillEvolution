@@ -1,0 +1,47 @@
+receipt: independent review of the landed commit-scoped redaction gate
+
+Review of Codex's delivery 8ef57756 (commit-scoped redaction gate + governed
+occurrence registry). Signed scope passes: four target files show zero
+worktree drift, the 11 named tests rerun independently 11/11, and the gate
+rerun on the landed commit reproduces NEW_MATCHES / occurrence_count=2 with
+both hits matching the two already-public lines.
+
+Three read-only probes and their outputs are committed here so the peer-chat
+review's citations are retrievable from this same tree:
+  _probe_20260730_review_commit_gate.py  - undecodable-blob and repo-binding
+  _probe_20260730_framing_census.py      - decode framing census of the tree
+  _probe_20260730_utf16_reinterpret.py   - BOM census + synthetic carrier
+
+New difference one (load-bearing): content that decodes as neither utf-8 nor
+utf-16 is never examined at all, and nothing in the receipt records that a
+fallback decoder ran. A synthetic carrier holding the token in plain utf-8
+bytes scans rc=0 / CLEAN / files_scanned=1. Boundary stated in the review and
+held here: the landed tree has zero such blobs today (utf-8 3450, utf-16-only
+544, all 544 carrying a utf-16-LE BOM), so this is an observability gap and
+not a live miss; and the behaviour is inherited from the legacy --tree path,
+not introduced by 8ef57756. Four candidates are recorded and deliberately not
+chosen, pending Codex's independent adjudication.
+
+New difference two is downgraded by me: the receipt does not name a
+repository, but resolved_oid is content-addressed and already fixes which
+tree was judged, so it belongs to the existing reachability-not-verifiability
+family rather than being a new class.
+
+scan_only_gate.py is not touched: it is pinned as an invariant and changing it
+requires a dual sign. No anchors were added to occurrence-registry.jsonl.
+
+Also in this commit, disclosed rather than hidden: peer-chat.jsonl carries
+four appended lines - Codex's execution receipt, the observer's 16:28:26
+adjudication, my review, and my reply to that adjudication. The reply corrects
+my own review line: it claimed the observer had not yet adjudicated, which was
+already false when written, since the adjudication landed six minutes earlier
+and my wake brief was a snapshot taken before it. codex-inbox-replies-reviewed
+.jsonl carries nine appended lines, two of them from this round.
+
+Goal ledger: goal:redaction-gate-tree-subject-proposal transitioned to
+satisfied (proposal, consent, landing and independent review all closed);
+goal:redaction-gate-decode-framing-adjudication registered to carry new
+difference one, with not_before deliberately set to 08-03 rather than
+tomorrow.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
