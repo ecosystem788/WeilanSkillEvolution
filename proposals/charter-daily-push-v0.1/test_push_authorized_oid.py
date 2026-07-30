@@ -10,6 +10,8 @@ import runpy
 import subprocess
 import sys
 
+import pytest
+
 
 TOOL = pathlib.Path(__file__).with_name("push_authorized_oid.py")
 REF = "refs/heads/main"
@@ -104,6 +106,7 @@ def test_normal_fast_forward_push(tmp_path):
     assert proc.stderr == ""
     assert receipt["ok"] is True
     assert receipt["status"] == "pushed_and_verified"
+    assert receipt["push_attempted"] is True
     assert receipt["push_performed"] is True
     assert receipt["preflight_remote_oid"] == base
     assert receipt["remote_oid"] == authorized_oid
@@ -201,6 +204,146 @@ def scripted_git(module, post_oid, push_stdout):
     return base, authorized_oid, calls
 
 
+def scripted_receipt(
+    module,
+    capsys,
+    ls_remote_outputs,
+    *,
+    push_returncode=0,
+    push_stdout="",
+):
+    base = "a" * 40
+    authorized_oid = "b" * 40
+    calls = []
+
+    def fake_git(*args):
+        calls.append(args)
+        if args[:2] == ("rev-parse", "--verify"):
+            value = args[2].removesuffix("^{commit}")
+            return subprocess.CompletedProcess(args, 0, value + "\n", "")
+        if args[:2] == ("merge-base", "--is-ancestor"):
+            return subprocess.CompletedProcess(args, 0, "", "")
+        if args[0] == "ls-remote":
+            index = len(
+                [call for call in calls if call[0] == "ls-remote"]
+            ) - 1
+            returncode, stdout = ls_remote_outputs[index]
+            return subprocess.CompletedProcess(
+                args, returncode, stdout, ""
+            )
+        if args[0] == "push":
+            return subprocess.CompletedProcess(
+                args, push_returncode, push_stdout, ""
+            )
+        raise AssertionError(args)
+
+    module.git = fake_git
+    returncode = module.main(
+        [
+            "--origin",
+            "redacted-origin",
+            "--ref",
+            REF,
+            "--base",
+            base,
+            "--authorized-oid",
+            authorized_oid,
+        ]
+    )
+    receipt = json.loads(capsys.readouterr().out)
+    return returncode, receipt, calls, base, authorized_oid
+
+
+def test_preflight_remote_read_failure_is_before_push(capsys):
+    module = load_tool_module()
+
+    returncode, receipt, calls, _, _ = scripted_receipt(
+        module, capsys, [(128, "")]
+    )
+
+    assert returncode == 1
+    assert receipt["reason"] == "ls_remote_failed"
+    assert receipt["stage"] == "preflight_remote_read"
+    assert receipt["push_attempted"] is False
+    assert receipt["remote_read_returncode"] == 128
+    assert "git_returncode" not in receipt
+    assert "push_performed" not in receipt
+    assert not [call for call in calls if call[0] == "push"]
+
+
+@pytest.mark.parametrize(
+    ("reason", "post_returncode", "post_stdout"),
+    [
+        ("ls_remote_failed", 128, ""),
+        ("remote_ref_missing", 0, ""),
+        (
+            "remote_ref_ambiguous",
+            0,
+            f"{'a' * 40}\t{REF}\n{'b' * 40}\t{REF}\n",
+        ),
+    ],
+)
+def test_post_push_remote_read_failures_preserve_push_context(
+    capsys, reason, post_returncode, post_stdout
+):
+    accepted_push = f" \t{'b' * 40}:{REF}\t1234567..abcdef0\n"
+
+    pre_module = load_tool_module()
+    _, pre_receipt, _, base, authorized_oid = scripted_receipt(
+        pre_module, capsys, [(post_returncode, post_stdout)]
+    )
+    post_module = load_tool_module()
+    returncode, receipt, calls, _, _ = scripted_receipt(
+        post_module,
+        capsys,
+        [
+            (0, f"{base}\t{REF}\n"),
+            (post_returncode, post_stdout),
+        ],
+        push_stdout=accepted_push,
+    )
+
+    assert returncode == 1
+    assert receipt["reason"] == reason
+    assert receipt["stage"] == "post_push_remote_read"
+    assert receipt["push_attempted"] is True
+    assert receipt["preflight_remote_oid"] == base
+    assert receipt["authorized_oid"] == authorized_oid
+    assert receipt["push_returncode"] == 0
+    assert receipt["push_report"]["source_oid"] == authorized_oid
+    assert "push_performed" not in receipt
+    assert receipt != pre_receipt
+    assert len([call for call in calls if call[0] == "push"]) == 1
+    if reason == "ls_remote_failed":
+        assert receipt["remote_read_returncode"] == 128
+        assert "git_returncode" not in receipt
+    if reason == "remote_ref_ambiguous":
+        assert receipt["match_count"] == 2
+
+
+def test_git_push_failure_records_attempt_and_preflight(capsys):
+    module = load_tool_module()
+    rejected_push = f"!\t{'b' * 40}:{REF}\t[rejected] (stale info)\n"
+
+    returncode, receipt, calls, base, _ = scripted_receipt(
+        module,
+        capsys,
+        [(0, f"{'a' * 40}\t{REF}\n")],
+        push_returncode=1,
+        push_stdout=rejected_push,
+    )
+
+    assert returncode == 1
+    assert receipt["reason"] == "git_push_failed"
+    assert receipt["stage"] == "push"
+    assert receipt["push_attempted"] is True
+    assert receipt["preflight_remote_oid"] == base
+    assert receipt["push_returncode"] == 1
+    assert receipt["git_returncode"] == 1
+    assert "push_performed" not in receipt
+    assert len([call for call in calls if call[0] == "push"]) == 1
+
+
 def test_post_mismatch_outranks_unparseable_push_report(capsys):
     module = load_tool_module()
     drift_oid = "c" * 40
@@ -224,6 +367,10 @@ def test_post_mismatch_outranks_unparseable_push_report(capsys):
 
     assert returncode == 1
     assert receipt["reason"] == "post_push_ref_mismatch"
+    assert receipt["push_attempted"] is True
+    assert receipt["preflight_remote_oid"] == base
+    assert receipt["push_returncode"] == 0
+    assert "push_performed" not in receipt
     assert receipt["observed_remote_oid"] == drift_oid
     assert receipt["push_report_status"] == "unparseable"
     assert "stdout_replacement_decoded_utf8_sha256" in receipt
@@ -258,6 +405,10 @@ def test_post_mismatch_preserves_accepted_push_report(capsys):
 
     assert returncode == 1
     assert receipt["reason"] == "post_push_ref_mismatch"
+    assert receipt["push_attempted"] is True
+    assert receipt["preflight_remote_oid"] == base
+    assert receipt["push_returncode"] == 0
+    assert "push_performed" not in receipt
     assert receipt["observed_remote_oid"] == drift_oid
     assert receipt["push_report"] == {
         "flag": " ",
@@ -295,6 +446,10 @@ def test_unparseable_report_fails_after_matching_post_read(capsys):
 
     assert returncode == 1
     assert receipt["reason"] == "push_porcelain_unparseable"
+    assert receipt["push_attempted"] is True
+    assert receipt["preflight_remote_oid"] == base
+    assert receipt["push_returncode"] == 0
+    assert "push_performed" not in receipt
     assert receipt["observed_remote_oid"] == authorized_oid
     assert receipt["push_report_status"] == "unparseable"
     assert len([call for call in calls if call[0] == "ls-remote"]) == 2
@@ -314,6 +469,8 @@ def test_remote_base_drift_refuses_push(tmp_path):
     assert proc.returncode == 1
     assert receipt["ok"] is False
     assert receipt["reason"] == "remote_base_mismatch"
+    assert receipt["push_attempted"] is False
+    assert "push_performed" not in receipt
     assert receipt["observed_remote_oid"] == drift_oid
     assert remote_head(remote) == drift_oid
 
@@ -334,6 +491,7 @@ def test_repeat_call_is_idempotent(tmp_path):
     assert second_proc.stderr == ""
     assert second_receipt["ok"] is True
     assert second_receipt["status"] == "already_at_authorized_head"
+    assert second_receipt["push_attempted"] is False
     assert second_receipt["push_performed"] is False
     assert second_receipt["remote_oid"] == authorized_oid
     assert remote_head(remote) == authorized_oid
@@ -354,6 +512,8 @@ def test_non_fast_forward_refuses_push(tmp_path):
     assert proc.returncode == 1
     assert receipt["ok"] is False
     assert receipt["reason"] == "non_fast_forward"
+    assert receipt["push_attempted"] is False
+    assert "push_performed" not in receipt
     assert receipt["base"] == base
     assert receipt["authorized_oid"] == sibling_oid
     assert remote_head(remote) == base
