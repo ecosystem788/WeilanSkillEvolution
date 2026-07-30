@@ -1,0 +1,380 @@
+{
+ "probe": "live-artifact-recoverability",
+ "live_root": "D:\\CodexData\\skills\\solve-with-weilan",
+ "live_tree_hash": "5fd0a51dc7f539e2b3f1c45f5a505d9ddea80c721de8d94fe04d7e9de52ad0ad",
+ "live_file_count": 48,
+ "hashed": 48,
+ "reachable_object_count": 4481,
+ "covered_count": 47,
+ "orphan_count": 1,
+ "orphan_paths": [
+  {
+   "path": "scripts/weilan_trace.py",
+   "oid": "bc7c837f534004cc1be37efe731f2c21539ae675"
+  }
+ ],
+ "orphans_present_under_all_refs": {
+  "scripts/weilan_trace.py": false
+ },
+ "disk_snapshots": [
+  {
+   "path": "deployments/1751ce140fe3cbdf0dc55ec0/rollback/solve-with-weilan",
+   "tree_hash": "c393bc3916a9276f2dddfda6973790d3738acd0bd756ec8259f4d87463c60d6c",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/20260630T134857Z-se-0.2-se-0.3/rollback/solve-with-weilan",
+   "tree_hash": "b4c27551ab2e2be48e3015f45bc7f759caaeab7c1fe353edcbe4360aa5ea5873",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/2c539d0b9444a395e66ce4dd/candidate/solve-with-weilan",
+   "tree_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "deployments/2c539d0b9444a395e66ce4dd/rollback/solve-with-weilan",
+   "tree_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/2e3db4f5519f95f7d468/candidate/solve-with-weilan",
+   "tree_hash": "2e3db4f5519f95f7d468442864336ca72b6b58851c3f6dea62018df872791b47",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "deployments/2e3db4f5519f95f7d468/rollback/solve-with-weilan",
+   "tree_hash": "4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/4554ee3e1f7d12354358588c/candidate/solve-with-weilan",
+   "tree_hash": "4554ee3e1f7d12354358588cb83a79b342f0c6f3f77ccf35842bed5f4ed6e43f",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "deployments/4554ee3e1f7d12354358588c/rollback/solve-with-weilan",
+   "tree_hash": "bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/524d4931880d8b084fc2dd61/rollback/solve-with-weilan",
+   "tree_hash": "8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/a118135c1e1834e45cafac8c/rollback/solve-with-weilan",
+   "tree_hash": "8ba59927a09d132b10884a331766f0e15c782699572b64c1cd0d21ef09afb6fc",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/a1b0cd3db5aa630c9134cbb2/candidate/solve-with-weilan",
+   "tree_hash": "a1b0cd3db5aa630c9134cbb2cd5e25bbaf7e5105645b89a809a052d5ed15962d",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "deployments/a1b0cd3db5aa630c9134cbb2/rollback/solve-with-weilan",
+   "tree_hash": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/bc787ade263a82dc054d0d92/candidate/solve-with-weilan",
+   "tree_hash": "bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "deployments/bc787ade263a82dc054d0d92/rollback/solve-with-weilan",
+   "tree_hash": "cf8553304505c33eea63f3febb310542d392fcb27657c7bd40581876c38da847",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/cbfe4af9af792d7bcf719113/candidate/solve-with-weilan",
+   "tree_hash": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "deployments/cbfe4af9af792d7bcf719113/rollback/solve-with-weilan",
+   "tree_hash": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/cf8553304505c33eea63f3fe/candidate/solve-with-weilan",
+   "tree_hash": "cf8553304505c33eea63f3febb310542d392fcb27657c7bd40581876c38da847",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "deployments/cf8553304505c33eea63f3fe/rollback/solve-with-weilan",
+   "tree_hash": "a1b0cd3db5aa630c9134cbb2cd5e25bbaf7e5105645b89a809a052d5ed15962d",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/dec8809e1d6b5dfc05c746e9/rollback/solve-with-weilan",
+   "tree_hash": "a40521f88e93b61262c6e24edd52c636efc02a732dacee3e7e2edccf16659170",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "deployments/e82ce3f05acf0713a1941fe3/candidate/solve-with-weilan",
+   "tree_hash": "e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "deployments/e82ce3f05acf0713a1941fe3/rollback/solve-with-weilan",
+   "tree_hash": "2e3db4f5519f95f7d468442864336ca72b6b58851c3f6dea62018df872791b47",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/capture-contract-source-authenticity-v0.1/candidate/solve-with-weilan",
+   "tree_hash": "c393bc3916a9276f2dddfda6973790d3738acd0bd756ec8259f4d87463c60d6c",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/conservation-boundary-settlement-probe-v0.1/candidate/solve-with-weilan",
+   "tree_hash": "ac334da450526c814b8d74c53bacac37e93d3813f5de2f64c2a741035a48d617",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/conversation-claude-transcript-support/artifacts/49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe/solve-with-weilan",
+   "tree_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/conversation-claude-transcript-support/candidate/solve-with-weilan",
+   "tree_hash": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/false-zero-guard-v0.1/candidate/solve-with-weilan",
+   "tree_hash": "e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/lower-the-floor-tooth-v0.1/artifacts/9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9/solve-with-weilan",
+   "tree_hash": "9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/lower-the-floor-tooth-v0.1/artifacts/afb39a74ad0f299441a4441d028d16f171da6671f4e684ca2f7adf10c1cecb7f/solve-with-weilan",
+   "tree_hash": "afb39a74ad0f299441a4441d028d16f171da6671f4e684ca2f7adf10c1cecb7f",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/lower-the-floor-tooth-v0.1/candidate/solve-with-weilan",
+   "tree_hash": "9b2130988817076de547dffe3627d31501d4f62e584a2d00daf979c8db36a3c9",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/lower-the-floor-tooth-v0.1/deployment/deploy-20260708-9b213098/rollback/e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32/solve-with-weilan",
+   "tree_hash": "e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/method-state-atomic-replace-retry-v0.1/artifacts/fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1/solve-with-weilan",
+   "tree_hash": "fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/method-state-atomic-replace-retry-v0.1/candidate/solve-with-weilan",
+   "tree_hash": "fefc8be133103844ab1987ff756c3d8b96fe685e7bb8d0356fb2c605adf70ff1",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/method-state-atomic-replace-retry-v0.1/deployment/deploy-20260710-fefc8be1/rollback/847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74/solve-with-weilan",
+   "tree_hash": "847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/method-state-atomic-replace-retry-v0.2/candidate/solve-with-weilan",
+   "tree_hash": "05f3b61031a812485c8a7402a6c6da10252d2d2de855ef7ff1960222d7d92480",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/method-state-lineage-poison-metabolism/artifacts/203b8c1f37ad54abf9e3cdc011ea122a5f8961b26cfd1dea8138549bb997b32c/solve-with-weilan",
+   "tree_hash": "203b8c1f37ad54abf9e3cdc011ea122a5f8961b26cfd1dea8138549bb997b32c",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/method-state-lineage-poison-metabolism/candidate/solve-with-weilan",
+   "tree_hash": "203b8c1f37ad54abf9e3cdc011ea122a5f8961b26cfd1dea8138549bb997b32c",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/projection-recall-staleness-v0.1/adoption/frozen/03194f11a78bb5cf96dc49c90e08d7f62b216fa4a21d53d09428ad8e23432750/solve-with-weilan",
+   "tree_hash": "03194f11a78bb5cf96dc49c90e08d7f62b216fa4a21d53d09428ad8e23432750",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/projection-recall-staleness-v0.1/candidate/solve-with-weilan",
+   "tree_hash": "03194f11a78bb5cf96dc49c90e08d7f62b216fa4a21d53d09428ad8e23432750",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/prospective-causal-ref-integrity-v0.1/candidate/solve-with-weilan",
+   "tree_hash": "faa8132eda9484bf4e57c93541017f2041541aaa44808c9a37c26fa05f1e5c73",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/se-0.2-se-0.3-completion/candidate/solve-with-weilan",
+   "tree_hash": "a40521f88e93b61262c6e24edd52c636efc02a732dacee3e7e2edccf16659170",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/se-0.4-se-0.7-program/candidate/solve-with-weilan",
+   "tree_hash": "2d9d5bb178fface547c12da488b189a3801ed219b5dd05922447b9ceb9a41874",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/se-0.4-se-0.7-successor-v0.2/candidate/solve-with-weilan",
+   "tree_hash": "6b6ba0d20d3f760bbb876ca92cab0be262b3e2d75e3afe558c18ccdd3d74e427",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/se-0.4-se-0.7-successor-v0.3/candidate/solve-with-weilan",
+   "tree_hash": "817622a3d99805e7ddc28fcea6f30e55469f57163ca82d7d1c7df8625232ba5f",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/se-0.4-se-0.7-successor-v0.4/candidate/solve-with-weilan",
+   "tree_hash": "e1fd08f2cf980e99b5f7147be6abce9cde123f1797601b4daa0ba30b6b66675a",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/se-0.4-se-0.7-successor-v0.5/artifacts/40fad7acd65abb499419143bd35f6ab829873200c68311a582fc89fcb20e153d/solve-with-weilan",
+   "tree_hash": "40fad7acd65abb499419143bd35f6ab829873200c68311a582fc89fcb20e153d",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/se-0.4-se-0.7-successor-v0.5/candidate/solve-with-weilan",
+   "tree_hash": "40fad7acd65abb499419143bd35f6ab829873200c68311a582fc89fcb20e153d",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/se-0.4-se-0.7-successor-v0.6/artifacts/40fad7acd65abb499419143bd35f6ab829873200c68311a582fc89fcb20e153d/solve-with-weilan",
+   "tree_hash": "40fad7acd65abb499419143bd35f6ab829873200c68311a582fc89fcb20e153d",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/se-0.4-se-0.7-successor-v0.6/artifacts/ad19915ca0f41ecd4bd1980597a5e75fa93c6308d531c60584201413aaa0f270/solve-with-weilan",
+   "tree_hash": "ad19915ca0f41ecd4bd1980597a5e75fa93c6308d531c60584201413aaa0f270",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/se-0.4-se-0.7-successor-v0.6/candidate/solve-with-weilan",
+   "tree_hash": "8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/se-0.7-fusion-successor-v0.1/artifacts/2ae80d515f009f38afae281ae9d9a4ce17b6500f25bbc3c668b35cc9e07d9dc7/solve-with-weilan",
+   "tree_hash": "2ae80d515f009f38afae281ae9d9a4ce17b6500f25bbc3c668b35cc9e07d9dc7",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/se-0.7-fusion-successor-v0.1/artifacts/7eac4ed242a3e09db4dc7e1381d2c02baf1e029aafd983dda1bf6c50b9083962/solve-with-weilan",
+   "tree_hash": "7eac4ed242a3e09db4dc7e1381d2c02baf1e029aafd983dda1bf6c50b9083962",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/se-0.7-fusion-successor-v0.1/candidate/solve-with-weilan",
+   "tree_hash": "2ae80d515f009f38afae281ae9d9a4ce17b6500f25bbc3c668b35cc9e07d9dc7",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/weilan-dynamics-firstcut-v0.1/artifacts/f28bc2b678d28d6b09caae31f29587e9bb882823acacad4619083848db7ff097/solve-with-weilan",
+   "tree_hash": "f28bc2b678d28d6b09caae31f29587e9bb882823acacad4619083848db7ff097",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/weilan-dynamics-firstcut-v0.1/artifacts/f4195c6613b40d640eaecb653b0afb679d97249e99dffc4d40b20b5db7d289dc/solve-with-weilan",
+   "tree_hash": "f4195c6613b40d640eaecb653b0afb679d97249e99dffc4d40b20b5db7d289dc",
+   "matches_live": false,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/weilan-dynamics-firstcut-v0.1/candidate/solve-with-weilan",
+   "tree_hash": "f28bc2b678d28d6b09caae31f29587e9bb882823acacad4619083848db7ff097",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/weilan-trace-utf8-output/candidate/solve-with-weilan",
+   "tree_hash": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+   "matches_live": false,
+   "tracked_in_git": true
+  },
+  {
+   "path": "skill/solve-with-weilan",
+   "tree_hash": "f772f750ae9a602b0b93f026c0e2b2f5dabe3bb0e69826bfcd87d0b055046467",
+   "matches_live": false,
+   "tracked_in_git": true
+  }
+ ],
+ "walk_error_count": 3,
+ "walk_errors_sample": [
+  {
+   "path": "D:\\WeilanSkillEvolution\\proposals\\fusion-dogfood-extension-v0.3\\case-flow\\calibration\\real-baseline-2c539d0b-20260705\\trials\\fusion-v03-cross-window-recall-gap-method-baseline-trial-1\\method-home\\memory\\metabolism\\fences\\workspaces\\3e3771ae49cba165\\scopes\\4021485a3ecc",
+   "error": "[WinError 3] 系统找不到指定的路径。: 'D:\\\\WeilanSkillEvolution\\\\proposals\\\\fusion-dogfood-extension-v0.3\\\\case-flow\\\\calibration\\\\real-baseline-2c539d0b-20260705\\\\trials\\\\fusion-v03-cross-window-recall-gap-method-baseline-trial-1\\\\method-home\\\\memory\\\\metabolism\\\\fences\\\\workspaces\\\\3e3771ae49cba165\\\\scopes\\\\4021485a3ecc'"
+  },
+  {
+   "path": "D:\\WeilanSkillEvolution\\proposals\\fusion-dogfood-extension-v0.3\\case-flow\\calibration\\real-baseline-2c539d0b-20260705\\trials\\fusion-v03-cross-window-recall-gap-method-baseline-trial-1\\method-home\\memory\\metabolism\\fences\\workspaces\\3e3771ae49cba165\\scopes\\91ab8cedd721",
+   "error": "[WinError 3] 系统找不到指定的路径。: 'D:\\\\WeilanSkillEvolution\\\\proposals\\\\fusion-dogfood-extension-v0.3\\\\case-flow\\\\calibration\\\\real-baseline-2c539d0b-20260705\\\\trials\\\\fusion-v03-cross-window-recall-gap-method-baseline-trial-1\\\\method-home\\\\memory\\\\metabolism\\\\fences\\\\workspaces\\\\3e3771ae49cba165\\\\scopes\\\\91ab8cedd721'"
+  },
+  {
+   "path": "D:\\WeilanSkillEvolution\\proposals\\fusion-dogfood-extension-v0.3\\case-flow\\calibration\\real-baseline-2c539d0b-20260705\\trials\\fusion-v03-stale-holder-collapse-method-baseline-trial-1\\method-home\\memory\\metabolism\\fences\\workspaces\\24163958380be22a\\scopes\\7dc07a9433b8",
+   "error": "[WinError 3] 系统找不到指定的路径。: 'D:\\\\WeilanSkillEvolution\\\\proposals\\\\fusion-dogfood-extension-v0.3\\\\case-flow\\\\calibration\\\\real-baseline-2c539d0b-20260705\\\\trials\\\\fusion-v03-stale-holder-collapse-method-baseline-trial-1\\\\method-home\\\\memory\\\\metabolism\\\\fences\\\\workspaces\\\\24163958380be22a\\\\scopes\\\\7dc07a9433b8'"
+  }
+ ],
+ "live_tree_has_archived_snapshot": false,
+ "live_tree_has_tracked_snapshot": false
+}

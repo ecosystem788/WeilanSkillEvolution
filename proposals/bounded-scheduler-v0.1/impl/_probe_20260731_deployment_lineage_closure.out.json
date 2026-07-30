@@ -1,0 +1,231 @@
+{
+ "probe": "deployment-lineage-closure",
+ "repo": "D:\\WeilanSkillEvolution",
+ "live_exists": true,
+ "live_tree_hash": "5fd0a51dc7f539e2b3f1c45f5a505d9ddea80c721de8d94fe04d7e9de52ad0ad",
+ "live_file_count": 48,
+ "receipt_count_on_disk": 13,
+ "receipt_count_history_only": 0,
+ "receipts": [
+  {
+   "path": "deployments/1751ce140fe3cbdf0dc55ec0/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "1751ce140fe3cbdf0dc55ec0",
+   "schema_version": "weilan_skill_deployment_receipt_v0.6",
+   "before": "c393bc3916a9276f2dddfda6973790d3738acd0bd756ec8259f4d87463c60d6c",
+   "after": "9872361cd77d4a3efaa23b2f00560288301d9ce921425c762687b2c58f551d9e",
+   "authority_source": "community dual-sign proposal peer-chat 2026-07-20 17:42:30 and independent consent 2026-07-21 02:38:25; execution delegation codex-inbox da2f036f4260",
+   "changed_live_paths": [
+    "scripts/wake_brief.py"
+   ],
+   "target": "D:\\CodexData\\skills\\solve-with-weilan",
+   "tracked_in_git": false,
+   "added_in_commits": []
+  },
+  {
+   "path": "deployments/20260630T134857Z-se-0.2-se-0.3/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "20260630T134857Z-se-0.2-se-0.3",
+   "schema_version": "weilan_skill_monitored_deployment_v0.1",
+   "before": null,
+   "after": null,
+   "authority_source": null,
+   "changed_live_paths": null,
+   "target": null,
+   "tracked_in_git": true,
+   "added_in_commits": [
+    "3e6339b33696"
+   ]
+  },
+  {
+   "path": "deployments/2c539d0b9444a395e66ce4dd/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "2c539d0b9444a395e66ce4dd",
+   "schema_version": "weilan_skill_deployment_receipt_v0.6-targeted",
+   "before": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+   "after": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+   "authority_source": "conversation:2026-07-05-user-authorized-lineage-head-bounded-repair-and-retrospective-targeted-deployment",
+   "changed_live_paths": null,
+   "target": "D:\\CodexData\\skills\\solve-with-weilan",
+   "tracked_in_git": true,
+   "added_in_commits": [
+    "3c196d673b57"
+   ]
+  },
+  {
+   "path": "deployments/2e3db4f5519f95f7d468/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "2e3db4f5519f95f7d468",
+   "schema_version": "weilan_deployment_receipt_v0.2",
+   "before": null,
+   "after": null,
+   "authority_source": null,
+   "changed_live_paths": null,
+   "target": null,
+   "tracked_in_git": true,
+   "added_in_commits": [
+    "3c196d673b57"
+   ]
+  },
+  {
+   "path": "deployments/4554ee3e1f7d12354358588c/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "4554ee3e1f7d12354358588c",
+   "schema_version": "weilan_deployment_receipt_v0.2",
+   "before": null,
+   "after": null,
+   "authority_source": null,
+   "changed_live_paths": null,
+   "target": null,
+   "tracked_in_git": true,
+   "added_in_commits": [
+    "3c196d673b57"
+   ]
+  },
+  {
+   "path": "deployments/524d4931880d8b084fc2dd61/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "524d4931880d8b084fc2dd61",
+   "schema_version": "weilan_skill_deployment_receipt_v0.6-targeted",
+   "before": "8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb",
+   "after": "49e656d2aa0fdd6e6b48989f30975a9e06f7bda11a57e143869698f5d2c5dcfe",
+   "authority_source": "conversation:2026-07-03-user-corrected-previous-message-and-authorized-deploy",
+   "changed_live_paths": null,
+   "target": "D:\\CodexData\\skills\\solve-with-weilan",
+   "tracked_in_git": true,
+   "added_in_commits": [
+    "3c196d673b57"
+   ]
+  },
+  {
+   "path": "deployments/a118135c1e1834e45cafac8c/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "a118135c1e1834e45cafac8c",
+   "schema_version": "weilan_skill_deployment_receipt_v0.6",
+   "before": "8ba59927a09d132b10884a331766f0e15c782699572b64c1cd0d21ef09afb6fc",
+   "after": "c393bc3916a9276f2dddfda6973790d3738acd0bd756ec8259f4d87463c60d6c",
+   "authority_source": "owner peer-chat 2026-07-20 22:00:36 plus community dual-sign proposal 2026-07-20 22:21:12 and independent consent 2026-07-20 23:04:00",
+   "changed_live_paths": null,
+   "target": "D:\\CodexData\\skills\\solve-with-weilan",
+   "tracked_in_git": false,
+   "added_in_commits": []
+  },
+  {
+   "path": "deployments/a1b0cd3db5aa630c9134cbb2/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "a1b0cd3db5aa630c9134cbb2",
+   "schema_version": "weilan_skill_deployment_receipt_v0.6-targeted",
+   "before": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+   "after": "a1b0cd3db5aa630c9134cbb2cd5e25bbaf7e5105645b89a809a052d5ed15962d",
+   "authority_source": "conversation:2026-07-07-user-authorized-barrel-fix-v1-direct-deployment",
+   "changed_live_paths": null,
+   "target": null,
+   "tracked_in_git": true,
+   "added_in_commits": [
+    "3c196d673b57"
+   ]
+  },
+  {
+   "path": "deployments/bc787ade263a82dc054d0d92/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "bc787ade263a82dc054d0d92",
+   "schema_version": "weilan_skill_deployment_receipt_v0.6-targeted",
+   "before": "cf8553304505c33eea63f3febb310542d392fcb27657c7bd40581876c38da847",
+   "after": "bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85",
+   "authority_source": "conversation:2026-07-07-user-authorized-barrel-fix-v3-review-then-deploy",
+   "changed_live_paths": null,
+   "target": null,
+   "tracked_in_git": true,
+   "added_in_commits": [
+    "3c196d673b57"
+   ]
+  },
+  {
+   "path": "deployments/cbfe4af9af792d7bcf719113/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "cbfe4af9af792d7bcf719113",
+   "schema_version": "weilan_skill_deployment_receipt_v0.6-targeted",
+   "before": "2c539d0b9444a395e66ce4ddaad1412f0ea5c4f0541112f63d3365c65d2bcf4f",
+   "after": "cbfe4af9af792d7bcf719113aaf95d1f04a5b12cd946b0bfde3f9d4e5320215c",
+   "authority_source": "conversation:2026-07-05-user-authorized-weilan-trace-utf8-output-targeted-deployment-and-reshadow",
+   "changed_live_paths": null,
+   "target": "D:\\CodexData\\skills\\solve-with-weilan",
+   "tracked_in_git": true,
+   "added_in_commits": [
+    "3c196d673b57"
+   ]
+  },
+  {
+   "path": "deployments/cf8553304505c33eea63f3fe/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "cf8553304505c33eea63f3fe",
+   "schema_version": "weilan_skill_deployment_receipt_v0.6-targeted",
+   "before": "a1b0cd3db5aa630c9134cbb2cd5e25bbaf7e5105645b89a809a052d5ed15962d",
+   "after": "cf8553304505c33eea63f3febb310542d392fcb27657c7bd40581876c38da847",
+   "authority_source": "conversation:2026-07-07-user-authorized-barrel-fix-v2-direct-deployment",
+   "changed_live_paths": null,
+   "target": null,
+   "tracked_in_git": true,
+   "added_in_commits": [
+    "3c196d673b57"
+   ]
+  },
+  {
+   "path": "deployments/dec8809e1d6b5dfc05c746e9/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "dec8809e1d6b5dfc05c746e9",
+   "schema_version": "weilan_skill_deployment_receipt_v0.6",
+   "before": "f73a6d8187b5191d8b944be461af5197a5193c7ca951af6bef72ebf9b2c8b446",
+   "after": "8e9c75555f0059f41a1f9b11f7c5c7fdc9f0e28d6be514bc920984e679ebd4cb",
+   "authority_source": "conversation:2026-07-02-user-authorized-deploy-if-clean-and-confirmed-run-full-shadow",
+   "changed_live_paths": null,
+   "target": "D:\\CodexData\\skills\\solve-with-weilan",
+   "tracked_in_git": true,
+   "added_in_commits": [
+    "8ac98e45f876"
+   ]
+  },
+  {
+   "path": "deployments/e82ce3f05acf0713a1941fe3/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "e82ce3f05acf0713a1941fe3",
+   "schema_version": "weilan_deployment_receipt_v0.2",
+   "before": null,
+   "after": null,
+   "authority_source": null,
+   "changed_live_paths": null,
+   "target": null,
+   "tracked_in_git": true,
+   "added_in_commits": [
+    "3c196d673b57"
+   ]
+  }
+ ],
+ "live_hash_is_some_receipt_after": false,
+ "live_hash_matching_receipt": null,
+ "terminal_after_hashes": [
+  {
+   "after": "9872361cd77d4a3efaa23b2f00560288301d9ce921425c762687b2c58f551d9e",
+   "path": "deployments/1751ce140fe3cbdf0dc55ec0/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "1751ce140fe3cbdf0dc55ec0"
+  },
+  {
+   "after": "bc787ade263a82dc054d0d92724b4ecc106c3b2c949fb62588a97fee70704c85",
+   "path": "deployments/bc787ade263a82dc054d0d92/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "bc787ade263a82dc054d0d92"
+  }
+ ],
+ "before_hashes_with_no_producing_receipt": [
+  {
+   "before": "8ba59927a09d132b10884a331766f0e15c782699572b64c1cd0d21ef09afb6fc",
+   "path": "deployments/a118135c1e1834e45cafac8c/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "a118135c1e1834e45cafac8c"
+  },
+  {
+   "before": "f73a6d8187b5191d8b944be461af5197a5193c7ca951af6bef72ebf9b2c8b446",
+   "path": "deployments/dec8809e1d6b5dfc05c746e9/DEPLOYMENT_RECEIPT.json",
+   "deployment_id": "dec8809e1d6b5dfc05c746e9"
+  }
+ ],
+ "live_hash_grep_tracked_hits": [
+  "proposals/bounded-scheduler-v0.1/impl/_append_20260731_v3_live_identity.py",
+  "proposals/bounded-scheduler-v0.1/impl/_probe_20260731_live_artifact_identity.out.json",
+  "proposals/bounded-scheduler-v0.1/impl/_probe_20260731_live_artifact_identity.py",
+  "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+  "proposals/correction-view-unwired-v0.1/FINDING.md",
+  "proposals/correction-view-unwired-v0.1/evidence/changeset_v2_probe.py"
+ ],
+ "live_hash_history_hits": [
+  "031ad1f probe: the deployment receipts we both cited were never in the tree",
+  "0438a30 chat(peer): today's correction-view v1..v6 exchange, through the v6 revision",
+  "8ccf238 revise(correction-view): close Codex's three load-bearing gaps by measurement",
+  "ba513e4 review(object-identity): probe the premise before cosigning the recompute proposal"
+ ]
+}

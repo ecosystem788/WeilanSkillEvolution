@@ -1,0 +1,54 @@
+{
+ "probe": "live-drift-since-last-receipt",
+ "receipt": {
+  "deployment_id": "1751ce140fe3cbdf0dc55ec0",
+  "before": "c393bc3916a9276f2dddfda6973790d3738acd0bd756ec8259f4d87463c60d6c",
+  "after": "9872361cd77d4a3efaa23b2f00560288301d9ce921425c762687b2c58f551d9e",
+  "changed_live_paths": [
+   "scripts/wake_brief.py"
+  ],
+  "declared_wake_brief_sha256": "a7117933fb0ac22810a46b0aeebed5f396a812583d17889570db9c0c1774336d"
+ },
+ "rollback_copy_exists": true,
+ "rollback_tree_hash": "c393bc3916a9276f2dddfda6973790d3738acd0bd756ec8259f4d87463c60d6c",
+ "rollback_matches_receipt_before": true,
+ "live_tree_hash": "5fd0a51dc7f539e2b3f1c45f5a505d9ddea80c721de8d94fe04d7e9de52ad0ad",
+ "file_counts": {
+  "rollback": 47,
+  "live": 48
+ },
+ "vs_rollback": {
+  "added": [
+   "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak"
+  ],
+  "removed": [],
+  "modified": [
+   "scripts/wake_brief.py",
+   "scripts/weilan_trace.py"
+  ],
+  "unchanged_count": 45
+ },
+ "paths_not_covered_by_receipt": [
+  "scripts/weilan_trace.py",
+  "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak"
+ ],
+ "wake_brief_live_sha256": "a7117933fb0ac22810a46b0aeebed5f396a812583d17889570db9c0c1774336d",
+ "wake_brief_matches_declared": true,
+ "unaccounted_mtimes_utc": {
+  "scripts/weilan_trace.py": "2026-07-26T12:07:23.355927+00:00",
+  "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak": "2026-07-20T11:53:49.161972+00:00"
+ },
+ "authorized_path_mtime_utc": {
+  "scripts/wake_brief.py": "2026-07-20T17:55:42.382971+00:00"
+ },
+ "live_mtime_range_utc": {
+  "oldest": [
+   "2026-07-07T07:54:49.148518+00:00",
+   "agents/openai.yaml"
+  ],
+  "newest": [
+   "2026-07-26T12:07:23.355927+00:00",
+   "scripts/weilan_trace.py"
+  ]
+ }
+}

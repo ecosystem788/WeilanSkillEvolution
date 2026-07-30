@@ -1,0 +1,4 @@
+# These files are byte-exact rescues of an artifact that exists nowhere else.
+# Git's eol normalization would silently rewrite them and destroy the only
+# property that makes them evidence, so text handling is off for this directory.
+* -text -diff
