@@ -1,0 +1,54 @@
+﻿{
+ "landed_commit": "8ef57756a7c5a31e0c73385e4dca02e08a6bcbeb",
+ "blob_count": 3994,
+ "framing_counts": {
+  "utf8": 3450,
+  "utf16_only": 544,
+  "silent": 0
+ },
+ "non_utf8_blobs": 544,
+ "odd_length_non_utf8_blobs": 0,
+ "utf16_only_sample": [
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/2026-07-10T10-33-56.err.txt",
+   "bytes": 1084
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/2026-07-10T10-33-56.json",
+   "bytes": 10006
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/2026-07-10T11-22-21.err.txt",
+   "bytes": 1084
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/2026-07-10T11-22-21.json",
+   "bytes": 6000
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/2026-07-10T13-29-02.json",
+   "bytes": 1548
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/2026-07-10T14-29-09.json",
+   "bytes": 5392
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/2026-07-10T15-29-04.json",
+   "bytes": 6748
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/2026-07-10T15-35-58.err.txt",
+   "bytes": 1084
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/2026-07-10T15-35-58.json",
+   "bytes": 5486
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake-agent-runs/2026-07-10T15-49-05.json",
+   "bytes": 6250
+  }
+ ],
+ "note": "silent==0 today because the tree carries no blob that fails both decoders; utf-16 accepts nearly any even-length byte string, so the silent class is narrow but not closed"
+}

@@ -1,0 +1,50 @@
+﻿{
+ "gate_path": "D:\\WeilanSkillEvolution\\proposals\\scaffold-opensource-export-v0.1\\scan_only_gate.py",
+ "gate_sha256": "d80014fde3ad058332791ea4781b9e990b883004ed627fde7791f87fa17e773a",
+ "landed_commit": "8ef57756a7c5a31e0c73385e4dca02e08a6bcbeb",
+ "q1_undecodable_blobs_in_landed_tree": {
+  "tree_entries": 3994,
+  "blob_count": 3994,
+  "total_blob_bytes": 48093239,
+  "undecodable_blob_count": 0,
+  "undecodable_bytes": 0,
+  "undecodable_share_of_bytes": 0.0,
+  "sample_paths": [],
+  "receipt_has_field_for_this": false
+ },
+ "q1b_synthetic_undecodable_carrier": {
+  "undecodable_carrier_rc": 0,
+  "undecodable_carrier_state": "CLEAN",
+  "undecodable_carrier_occurrences": 0,
+  "undecodable_carrier_files_scanned": 1,
+  "utf8_control_rc": 2,
+  "utf8_control_state": "NEW_MATCHES",
+  "utf8_control_occurrences": 1
+ },
+ "q2_repository_binding": {
+  "foreign_repo_rc": 0,
+  "foreign_repo_state": "CLEAN",
+  "foreign_repo_resolved_oid": "19c8f4ff2885550d826bb8bea952beadf8c4cae0",
+  "foreign_repo_entries_scanned": 1,
+  "foreign_repo_used_home_registry": "D:\\WeilanSkillEvolution\\proposals\\redaction-gate-tree-subject-v0.1\\occurrence-registry.jsonl",
+  "foreign_repo_used_home_patterns": "D:\\WeilanSkillEvolution\\proposals\\scaffold-opensource-export-v0.1\\redaction-private-strings.local.txt",
+  "receipt_fields": [
+   "commit",
+   "entries_scanned",
+   "files_scanned",
+   "non_blob_entries",
+   "occurrence_count",
+   "occurrences",
+   "pattern_count",
+   "reason_codes",
+   "resolved_oid",
+   "ruleset_digest",
+   "stale_anchor_count",
+   "state",
+   "unanchored_occurrence_count"
+  ],
+  "receipt_names_a_repository": false,
+  "landed_oid_resolves_in_foreign_repo_rc": 128,
+  "stderr": ""
+ }
+}

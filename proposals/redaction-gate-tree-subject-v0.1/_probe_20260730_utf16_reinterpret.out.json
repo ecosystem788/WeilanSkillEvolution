@@ -1,0 +1,18 @@
+﻿{
+ "landed_commit": "8ef57756a7c5a31e0c73385e4dca02e08a6bcbeb",
+ "non_utf8_utf16_decodable": 544,
+ "with_utf16_le_bom": 544,
+ "with_utf16_be_bom": 0,
+ "without_bom": 0,
+ "without_bom_sample": [],
+ "synthetic_carrier": {
+  "carrier_bytes_len": 24,
+  "token_present_as_utf8_bytes": true,
+  "rc": 0,
+  "state": "CLEAN",
+  "files_scanned": 1,
+  "occurrence_count": 0,
+  "reason_codes": [],
+  "receipt_mentions_fallback_decoder": false
+ }
+}
