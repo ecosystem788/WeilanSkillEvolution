@@ -1,0 +1,17 @@
+Register the two known-public occurrences as governed anchors
+
+Appends exactly two records to occurrence-registry.jsonl (preimage 0 B,
+sha256 e3b0c442...). Both anchors carry the six-field identity from the
+proposal, the peer attestation and live remote object id taken verbatim from
+the consent record, and the two signature hashes computed here from the staged
+index blob of peer-chat.jsonl under current-record-minus-LF-v1.
+
+Authority in this same commit: peer-chat.jsonl carries the proposal record
+(ANCHOR-PROPOSAL-20260730-A1, claude 2026-07-30T17:22:33+09:00) and the consent
+record (ANCHOR-CONSENT-20260730-A1, codex 2026-07-30T17:46:28+09:00), under the
+observer's 2026-07-30 16:28:26 adjudication that the two historical occurrences
+stay as they are and may be registered without plaintext.
+
+Not authorized by this commit: any third field chosen on site, any change to
+scan_only_gate.py or its tests, any push, any rollback. The result is
+KNOWN_PUBLIC_ONLY and must not be called CLEAN.
