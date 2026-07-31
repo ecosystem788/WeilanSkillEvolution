@@ -1,0 +1,75 @@
+{
+  "authority": "read_only_report",
+  "boundary": "counts citations as the gate's own regex sees them; non-ASCII paths are invisible to that regex and are not counted here either",
+  "citation_status_counts": {
+    "check_error:invalid_path": 1,
+    "history_only": 1,
+    "ignored": 2,
+    "missing": 54,
+    "tracked_head": 595
+  },
+  "distinct_path_status_counts": {
+    "check_error:invalid_path": 1,
+    "history_only": 1,
+    "ignored": 2,
+    "missing": 20,
+    "tracked_head": 266
+  },
+  "distinct_paths": 290,
+  "ledger_rows": 3221,
+  "messages_warning_zero_but_quiet_unreachable": 2,
+  "parse_error_count": 3,
+  "per_class_examples": {
+    "check_error:invalid_path": [
+      "proposals/fusion-dogfood-extension-v0.3/.../wf-20260705-085147-66482d.jsonl"
+    ],
+    "history_only": [
+      "proposals/correction-view-unwired-v0.1/test_canonical_contract.py"
+    ],
+    "ignored": [
+      "proposals/bounded-scheduler-v0.1/impl/tmp/probe_rglob_junction.py",
+      "deployments/e8b13605f294164740ac93f3/rollback/solve-with-weilan/scripts/wake_brief.py"
+    ],
+    "missing": [
+      "scripts/prospective.py",
+      "scripts/test_event_atomic_replace_retry.py",
+      "proposals/scaffold-opensource-export-v0.1/export-manifest-v1.DRAFT.md",
+      "proposals/lineage-log-append-only-correction-v0.1/impl/compile_view.py",
+      "scripts/wake_brief.py",
+      "scripts/test_conversation_evidence.py"
+    ],
+    "tracked_head": [
+      "proposals/machine-antimonopoly-audit-v0.1/bridge-vs-church-decision-procedure.md",
+      "proposals/machine-antimonopoly-audit-v0.1/witness-id-nursery-product.md",
+      "proposals/cold-start-tidy-v0.1/cold-start-diagnostic-v0.1.md",
+      "proposals/cold-start-tidy-v0.1/wake-brief-build-spec-v0.1.md",
+      "proposals/bounded-scheduler-v0.1/impl/wake_brief.py",
+      "proposals/bounded-scheduler-v0.1/impl/test_bounded_scheduler.py"
+    ]
+  },
+  "probe": "status_class_census",
+  "silent_hit_examples": [
+    {
+      "from": "claude",
+      "physical_line": 1218,
+      "quiet_paths": [
+        "proposals/bounded-scheduler-v0.1/impl/tmp/probe_rglob_junction.py"
+      ],
+      "quiet_statuses": [
+        "ignored"
+      ],
+      "time": "2026-07-16 13:11:04"
+    },
+    {
+      "from": "claude",
+      "physical_line": 2793,
+      "quiet_paths": [
+        "proposals/correction-view-unwired-v0.1/test_canonical_contract.py"
+      ],
+      "quiet_statuses": [
+        "history_only"
+      ],
+      "time": "2026-07-28T01:42:49+09:00"
+    }
+  ]
+}

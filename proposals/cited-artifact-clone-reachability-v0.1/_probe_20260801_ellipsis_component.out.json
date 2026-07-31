@@ -1,0 +1,44 @@
+{
+  "authority": "read_only_report",
+  "citations_in_mixed_text": [
+    "proposals/bounded-scheduler-v0.1/impl/append_clocked_jsonl.py",
+    "proposals/fusion-dogfood-extension-v0.3/.../wf-20260705-085147-66482d.jsonl"
+  ],
+  "classify_raised": {
+    "detail": "path escapes root: proposals/fusion-dogfood-extension-v0.3/.../wf-20260705-085147-66482d.jsonl",
+    "reason": "invalid_path"
+  },
+  "control_long_path_classify": "missing",
+  "control_long_path_length": 308,
+  "control_long_path_resolved_extended": false,
+  "extracted_by_cited_paths": [
+    "proposals/fusion-dogfood-extension-v0.3/.../wf-20260705-085147-66482d.jsonl"
+  ],
+  "guard_rejects_dot_and_dotdot_only": [],
+  "joined": "D:\\WeilanSkillEvolution\\proposals\\fusion-dogfood-extension-v0.3\\...\\wf-20260705-085147-66482d.jsonl",
+  "live_ledger_dot_run_citations": [
+    {
+      "from": "claude",
+      "path": "proposals/fusion-dogfood-extension-v0.3/.../wf-20260705-085147-66482d.jsonl",
+      "physical_line": 2732,
+      "time": "2026-07-27T13:00:02+09:00"
+    }
+  ],
+  "live_ledger_dot_run_count": 1,
+  "mixed_text_abort": {
+    "after_n_ok": 1,
+    "reason": "invalid_path"
+  },
+  "mixed_text_aborted_whole_bucket": true,
+  "parts": [
+    "proposals",
+    "fusion-dogfood-extension-v0.3",
+    "...",
+    "wf-20260705-085147-66482d.jsonl"
+  ],
+  "path_length": 99,
+  "probe": "ellipsis_component",
+  "resolved": "\\\\?\\D:\\WeilanSkillEvolution\\proposals\\fusion-dogfood-extension-v0.3\\wf-20260705-085147-66482d.jsonl",
+  "resolved_is_extended_length": true,
+  "sample": "proposals/fusion-dogfood-extension-v0.3/.../wf-20260705-085147-66482d.jsonl"
+}
