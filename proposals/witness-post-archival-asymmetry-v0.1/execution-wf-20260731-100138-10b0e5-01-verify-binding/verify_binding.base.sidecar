@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""前像→后像绑定 v0.8 的机检器（CONVENTION §5）。
+"""前像→后像绑定 v0.6 的机检器（CONVENTION §5）。
 
 三个模式：
   selftest  —— 不改任何东西，连取两次见证快照，报 witness-digest 是否稳定。
@@ -8,11 +8,6 @@
   postcheck —— 校验 final；重取见证快照比对 digest；以 sidecar 原始字节为前像做行级增删计数
                与改动章节归属，与 --expect-added / --expect-deleted / --changes-confined-to 逐项比对。
                三组判据全过才 ok:true。
-
-v0.8：两份见证明细的路径（witness_path_pre / witness_path_post）进 JSON 输出。守恒判据
-`post == pre` 是等式，两个操作数都只以 64 位十六进制出现在回执里；明细文件的 sha256 就是
-digest 本身，故明细可定位则 digest 可被第三方重算，明细隐身则它只是执行方的自陈值。
-（CONVENTION §5.3.e。归档进仓是执行者的义务，仓外制品在覆盖面外，机检器看不见。）
 
 字节口径固定为工作区原始字节流（CONVENTION §3）：不做编码转换、不归一化换行、不动 BOM、末尾换行计入。
 
@@ -408,13 +403,9 @@ def cmd_preflight(args):
             fh.write(raw)
 
     digest, lines = witness(args.repo, tgt)
-    # 明细路径必须进输出（v0.8）：它此前只在这里由 args.state 内部派生，不出现在任何字段里，
-    # 而两次普查都撞到同一件事——唯一不被打印路径的制品，正是那个不被归档的制品。
-    witness_path_pre = args.state + ".witness"
-    dump_lines(witness_path_pre, lines)
+    dump_lines(args.state + ".witness", lines)
     state = {"target": args.target, "base": actual, "sidecar": args.sidecar,
              "sidecar_present": raw is not None, "witness_digest_pre": digest,
-             "witness_path_pre": witness_path_pre,
              "non_target_entries": sum(1 for l in lines if l.startswith(b"S\t"))}
     with open(args.state, "w", encoding="utf-8") as fh:
         json.dump(state, fh, ensure_ascii=False, indent=2)
@@ -436,11 +427,7 @@ def cmd_postcheck(args):
     final_ok = actual == args.final
 
     digest, lines = witness(args.repo, tgt)
-    # pre 路径优先取状态文件里记下的那条；v0.8 之前写的状态文件没有该字段，派生式相同，
-    # 故回退到同一个派生式而不是 fail——旧状态文件不该因为多了一个字段而验不了。
-    witness_path_pre = state.get("witness_path_pre") or (args.state + ".witness")
-    witness_path_post = args.state + ".witness.post"
-    dump_lines(witness_path_post, lines)
+    dump_lines(args.state + ".witness.post", lines)
     conserved = digest == state["witness_digest_pre"]
 
     # 行级差量：前像只认 sidecar 原始字节，且必须重算 == 已签 base。
@@ -469,7 +456,6 @@ def cmd_postcheck(args):
     out = {"mode": "postcheck", "final_expected": args.final, "final_actual": actual,
            "final_ok": final_ok, "witness_digest_pre": state["witness_digest_pre"],
            "witness_digest_post": digest, "non_target_conserved": conserved,
-           "witness_path_pre": witness_path_pre, "witness_path_post": witness_path_post,
            "witness_coverage": WITNESS_COVERAGE,
            "base_preimage_ok": base_preimage_ok, "base_preimage_expected": state["base"],
            "base_preimage_actual": pre_hash, "sidecar": state["sidecar"],
@@ -485,7 +471,7 @@ def cmd_postcheck(args):
             "行级差量与签名钉住的形状不符 → 不得宣称落地，按 §5.2 写回 sidecar 回滚。"
             "（哈希只证明后像是那一个；本项证明的是它由前像**怎样**变过来的。）")
     if not conserved:
-        pre = set(open(witness_path_pre, "rb").read().splitlines(keepends=True))
+        pre = set(open(args.state + ".witness", "rb").read().splitlines(keepends=True))
         post = set(lines)
         drift = [b"-" + l for l in pre - post] + [b"+" + l for l in post - pre]
         out["drift"] = sorted(

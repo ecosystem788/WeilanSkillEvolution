@@ -1,0 +1,52 @@
+{
+  "mode": "postcheck",
+  "final_expected": "2b97b0ff09700be1da8c1515ecb850572c281022728d59adb0b300e9511e7eae",
+  "final_actual": "2b97b0ff09700be1da8c1515ecb850572c281022728d59adb0b300e9511e7eae",
+  "final_ok": true,
+  "witness_digest_pre": "d4befea42ee209e9ed1a1db306de11803e2e6f61a25181351c4004424d80ef6a",
+  "witness_digest_post": "d4befea42ee209e9ed1a1db306de11803e2e6f61a25181351c4004424d80ef6a",
+  "non_target_conserved": true,
+  "witness_coverage": {
+    "covered": [
+      "status(-z -uall) 列出的每条非 target 路径：XY 两位状态字母",
+      "同上每条路径的工作区原始字节 sha256（不存在记 ABSENT）",
+      "同上每条路径的 index 条目：各 stage 的 mode,oid,stage（不在 index 记 ABSENT）",
+      "for-each-ref **列出的**每条引用（refname → objectname）",
+      "同上每条引用的符号目标（symbolic ref 记目标 refname，direct ref 记哨兵 DIRECT）",
+      "HEAD 的符号名与 oid（游离/未出生有哨兵值）"
+    ],
+    "not_covered": [
+      "被 .gitignore 命中的路径（不进 -uall；无界且高频抖动，见 CONVENTION §5.3.f）",
+      "refs/ 之外的伪引用（ORIG_HEAD/FETCH_HEAD/MERGE_HEAD 等；HEAD 除外，它由 H 腿单钉）——实测 for-each-ref 不列出它们",
+      "reflog（.git/logs/），以及 for-each-ref 不列出的悬空 symbolic ref——实测：symbolic ref 指向不存在的 ref 时该条整行不出现",
+      "object database 内部：gc/repack/prune、不可达对象",
+      ".git/ 下的配置与 hooks（config、hooks、worktrees 注册）",
+      "文件系统元数据：mtime、权限/ACL、扩展属性（index mode 位之外）",
+      "仓库根之外的一切（执行期制品按 §5.3.d 恰恰住在那里）",
+      "子模块内部状态（只见 gitlink oid）"
+    ]
+  },
+  "base_preimage_ok": true,
+  "base_preimage_expected": "977d4b3df052ca985c7f10aad1bb62e7778be0fae55c4110e5b968edcbf6e06c",
+  "base_preimage_actual": "977d4b3df052ca985c7f10aad1bb62e7778be0fae55c4110e5b968edcbf6e06c",
+  "sidecar": "C:\\Users\\zy\\AppData\\Local\\Temp\\weilan-v08-wf-20260731-100138-10b0e5\\01-verify-binding\\verify_binding.base.sidecar",
+  "base_line_count": 521,
+  "final_line_count": 535,
+  "added_lines": 18,
+  "deleted_lines": 4,
+  "lcs_length": 517,
+  "attribution_ambiguous": true,
+  "possibly_added_lines": 19,
+  "possibly_deleted_lines": 4,
+  "sections_touched": [
+    "# 读者会把它读成\"什么都没动\"；把边界跟结论印在同一个 JSON 里，泛称就没有落脚处。",
+    "<无标题前言>"
+  ],
+  "expect_added": 18,
+  "expect_deleted": 4,
+  "changes_confined_to": [],
+  "counts_ok": true,
+  "changes_confined": true,
+  "diff_ok": true,
+  "ok": true
+}
