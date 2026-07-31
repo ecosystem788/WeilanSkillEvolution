@@ -1,0 +1,56 @@
+{
+  "pytest_version": "pytest 9.1.1",
+  "harness_sha256": "b8ad7f9ab8924cdc8ea7d6b4e9be3d6170ea19209c54bcf6c4075c72046bd490",
+  "wake_brief_proposed_sha256": "b0d815eb81aa0c079f73a2f15aeec5f554c932b55e31930144e4e3ba1f8b3764",
+  "cases": {
+    "A_explicit_file_path": {
+      "rc": 0,
+      "no_tests_collected": false,
+      "collected_lines": [
+        "7 tests collected in 0.20s"
+      ],
+      "test_nodes": [
+        "proposals/wake-entrypoint-ergonomics-v0.1/_probe_20260731_wake_peek_prelanding_harness.py::test_peek_library_level_does_not_commit",
+        "proposals/wake-entrypoint-ergonomics-v0.1/_probe_20260731_wake_peek_prelanding_harness.py::test_peek_cli_reaches_the_library_switch",
+        "proposals/wake-entrypoint-ergonomics-v0.1/_probe_20260731_wake_peek_prelanding_harness.py::test_negative_control_base_cli_cannot_reach_it",
+        "proposals/wake-entrypoint-ergonomics-v0.1/_probe_20260731_wake_peek_prelanding_harness.py::test_cursor_before_is_the_stamp_this_call_read",
+        "proposals/wake-entrypoint-ergonomics-v0.1/_probe_20260731_wake_peek_prelanding_harness.py::test_quiet_wake_vs_already_burned_becomes_distinguishable",
+        "proposals/wake-entrypoint-ergonomics-v0.1/_probe_20260731_wake_peek_prelanding_harness.py::test_absent_and_unreadable_cursor_are_reported_honestly",
+        "proposals/wake-entrypoint-ergonomics-v0.1/_probe_20260731_wake_peek_prelanding_harness.py::test_site_fingerprint_is_not_perturbed"
+      ],
+      "tail": [
+        "proposals/wake-entrypoint-ergonomics-v0.1/_probe_20260731_wake_peek_prelanding_harness.py::test_absent_and_unreadable_cursor_are_reported_honestly",
+        "proposals/wake-entrypoint-ergonomics-v0.1/_probe_20260731_wake_peek_prelanding_harness.py::test_site_fingerprint_is_not_perturbed",
+        "7 tests collected in 0.20s"
+      ]
+    },
+    "B_directory_discovery": {
+      "rc": 5,
+      "no_tests_collected": true,
+      "collected_lines": [
+        "no tests collected in 0.01s"
+      ],
+      "test_nodes": [],
+      "tail": [
+        "no tests collected in 0.01s"
+      ]
+    },
+    "C_rootdir_discovery": {
+      "rc": 5,
+      "no_tests_collected": true,
+      "collected_lines": [
+        "no tests collected in 0.02s"
+      ],
+      "test_nodes": [],
+      "tail": [
+        "no tests collected in 0.02s"
+      ]
+    }
+  },
+  "verdict": {
+    "explicit_path_collects_tests": true,
+    "explicit_path_rc": 0,
+    "directory_discovery_rc": 5,
+    "revision2_bearing_sentence_holds": false
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "pytest_version": "pytest 9.1.1",
+  "harness_sha256": "b8ad7f9ab8924cdc8ea7d6b4e9be3d6170ea19209c54bcf6c4075c72046bd490",
+  "test_proposed_sha256": "42cba022c74fb3c95ad757feea2b13abf7dc5f303acde9c2fe31efb2a63e060a",
+  "test_proposed_bytes": 20724,
+  "cases": {
+    "S1_dir_no_test_proposed": {
+      "rc": 5,
+      "no_tests_collected": true,
+      "harness_nodes": [],
+      "errors": [],
+      "tail": [
+        "no tests collected in 0.02s"
+      ]
+    },
+    "S2_dir_with_test_proposed": {
+      "rc": 2,
+      "no_tests_collected": true,
+      "harness_nodes": [],
+      "errors": [
+        "ERROR proposals/wake-entrypoint-ergonomics-v0.1/test_wake_brief.proposed-final.py"
+      ],
+      "tail": [
+        "!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!",
+        "no tests collected, 1 error in 0.92s"
+      ]
+    },
+    "S2_dir_ignore_glob_as_path": {
+      "rc": 2,
+      "no_tests_collected": true,
+      "harness_nodes": [],
+      "errors": [
+        "ERROR proposals/wake-entrypoint-ergonomics-v0.1/test_wake_brief.proposed-final.py"
+      ],
+      "tail": [
+        "!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!",
+        "no tests collected, 1 error in 0.85s"
+      ]
+    },
+    "S2_dir_ignore_glob_proper": {
+      "rc": 5,
+      "no_tests_collected": true,
+      "harness_nodes": [],
+      "errors": [],
+      "tail": [
+        "no tests collected in 0.02s"
+      ]
+    }
+  },
+  "verdict": {
+    "plain_dir_discovery_rc5_in_real_landing_shape": false,
+    "ignore_as_path_form_works": false,
+    "ignore_glob_form_works": true,
+    "harness_nodes_ever_collected_by_dir_discovery": false
+  }
+}

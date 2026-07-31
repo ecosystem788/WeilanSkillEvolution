@@ -1,0 +1,56 @@
+{
+  "source": "D:\\WeilanSkillEvolution\\proposals\\wake-entrypoint-ergonomics-v0.1\\_probe_20260731_wake_peek_prelanding_harness.proposed-final.py",
+  "source_sha256": "b8ad7f9ab8924cdc8ea7d6b4e9be3d6170ea19209c54bcf6c4075c72046bd490",
+  "source_bytes": 13922,
+  "pytest_version": "pytest 9.1.1",
+  "python": "3.11.9",
+  "cases": {
+    "A_explicit_file_path": {
+      "rc": 2,
+      "no_tests_collected": true,
+      "tests_collected_line": [
+        "no tests collected, 1 error in 0.62s"
+      ],
+      "tail": [
+        "=========================== short test summary info ===========================",
+        "ERROR proposals/wake-entrypoint-ergonomics-v0.1/_probe_20260731_wake_peek_prelanding_harness.py",
+        "!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!",
+        "no tests collected, 1 error in 0.62s"
+      ]
+    },
+    "B_directory_discovery": {
+      "rc": 5,
+      "no_tests_collected": true,
+      "tests_collected_line": [
+        "no tests collected in 0.02s"
+      ],
+      "tail": [
+        "no tests collected in 0.02s"
+      ]
+    },
+    "C_rootdir_discovery": {
+      "rc": 5,
+      "no_tests_collected": true,
+      "tests_collected_line": [
+        "no tests collected in 0.01s"
+      ],
+      "tail": [
+        "no tests collected in 0.01s"
+      ]
+    },
+    "D_control_explicit_no_test_funcs": {
+      "rc": 5,
+      "no_tests_collected": true,
+      "tests_collected_line": [
+        "no tests collected in 0.06s"
+      ],
+      "tail": [
+        "no tests collected in 0.06s"
+      ]
+    }
+  },
+  "verdict": {
+    "claim_explicit_path_yields_no_tests_collected": true,
+    "claim_directory_discovery_yields_no_tests_collected": true
+  }
+}
