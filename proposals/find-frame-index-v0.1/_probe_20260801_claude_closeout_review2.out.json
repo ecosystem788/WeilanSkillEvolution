@@ -1,0 +1,43 @@
+{
+ "probe": "claude_closeout_review2",
+ "audited_by": "claude (reviewer, not implementer)",
+ "subject": "Codex 2026-08-01 closeout fix (option 乙) to README.md and proposal.json",
+ "readme_sha256": "b5804fd0e02e77babe8798dcd91e07f053608d58f9d8592cd24dd1902e82ff85",
+ "proposal_json_sha256": "fd58b0ba955b75200cc0db568b1b206578f43bad7f6ad10f5ab5425916a48364",
+ "perf_artifact_sha256": "127eca3cce3efcd218d67d1724cef326d144a479c052062c1b1d317b5fb08331",
+ "q1_is_the_named_contaminant_surfaced_where_it_now_loads": {
+  "sole_load_bearing_perf_artifact": "_probe_20260801_claude_revision_perf.out.json",
+  "codex_arm_demoted_to_unarchived": true,
+  "contamination_tokens_in_revision_review": {
+   "后台 grep": true,
+   "抢 I/O": true
+  },
+  "contamination_tokens_in_readme": {
+   "后台 grep": false,
+   "抢 I/O": false
+  },
+  "generic_load_caveat_in_readme": {
+   "宿主负载不受控": true
+  },
+  "readme_cites_revision_review_by_filename": false,
+  "intra_arm_spread_candidate_x": 2.1991,
+  "reading": "README carries the generic 'host load is uncontrolled' caveat but neither names the specific competing full-repo grep recorded in the revision review nor cites that file. Before 乙 the README also showed the Codex arm, whose intra-arm spread was ~1.03x; demoting it removed the only in-README signal that this arm's spread is abnormal. The fact is in the tree and is not lost -- it is unsurfaced at the point where it is now solely load-bearing."
+ },
+ "q2_does_the_metric_name_survive_its_own_data": {
+  "floor_metric_strings": [
+   "revised_frozen_candidate_lineage_show_stdout_is_byte_identical_and_minimum_run_speedup_is_at_least_2_0x"
+  ],
+  "target_metrics_references_in_evolution_core": [
+   "if not proposal.get(\"target_metrics\"):",
+   "issues.append(\"proposal requires target_metrics\")"
+  ],
+  "target_metrics_is_only_checked_non_empty": true,
+  "readme_quotes_the_metric_name": false,
+  "readme_defines_the_pairing": true,
+  "reported_min_run_speedup_x": 2.54,
+  "smallest_observed_pairing": 1.1528,
+  "floor_reading_holds_at_2_0x": false,
+  "reading": "The metric name asserts a floor. The smallest pairing actually observed in the archived data is below 2.0x, so the floor reading of the name is false on this data. README now defines the pairing correctly, but never quotes the metric name, and nothing parses these strings -- evolution_core only checks that target_metrics is non-empty. The two surfaces do not touch."
+ },
+ "boundary": "Neither question challenges the fix. 乙 was the right call -- provenance beats cleanliness, and every claim Codex made in its reply recomputes. Writing the pairing down also does not give the measurement resolution: with two samples per arm and intra-arm spread comparable to the claimed effect, 2.5x and 2.0x remain undiscriminated by this data. Honest description is not statistical power."
+}

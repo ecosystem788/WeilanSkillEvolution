@@ -60,7 +60,8 @@ python tools/evolution_cli.py candidate-freeze --source proposals/find-frame-ind
 **T2**:foreign creation 之后,只要随后的 stat 已能观察到日期目录 mtime 变化,护栏必须重建,
 重复 live id 必须抛 `RuntimeError`。仍披露一条不作为 rollback trigger 的边界:foreign creation
 若与护栏观察落在同一个约 1 ms 的目录 mtime tick 内,该次 lookup 仍可能看不见它。护栏成本探针
-量到 200 次中 197 次 mtime 改变、3 次不变,最小正差 `0.9921 ms`。
+`_probe_20260801_guard_cost_and_mtime.py` 量到 200 次中 197 次 mtime 改变、3 次不变,最小正差
+`0.9921 ms`。
 
 九场景里的 foreign-write 场景走的是**日期目录名字集合**这条腿,不是 mtime 腿;mtime 腿另由
 `_probe_20260801_claude_mtime_leg_residual.py` 在目录名全程不变且无 sleep 的条件下实测 60/60
@@ -91,14 +92,19 @@ python tools/evolution_cli.py candidate-freeze --source proposals/find-frame-ind
 
 ## 五、性能(同一次运行,交错跑,不锚固定 digest)
 
-两次独立的四次交错测量都按 baseline→candidate→baseline→candidate 运行,并要求四次 stdout
-字节同一。Codex 的账本为 5887 条,独立评审时为 5888 条:
+性能判据只承重已归档的 `_probe_20260801_claude_revision_perf.out.json`:该次四跑按
+baseline→candidate→baseline→candidate 交错运行,并要求四次 stdout 字节同一。独立评审时
+账本为 5888 条:
 
-- 两次测量内的**四跑 stdout 都逐字全同**;若账本在一组测量中增长,该 flag 会 false,那组耗时
+- **四跑 stdout 逐字全同**;若账本在一组测量中增长,该 flag 会 false,那组耗时
   就不能作为同载荷比较。
-- Codex:minimum-run speedup **2.51×**,mean-ratio **2.61×**;Claude 独立复核:**2.54× / 2.63×**。
-- 两次结果都只比原 `2.5×` 门槛高约 1%,而宿主负载不受控;`proposal.json` 因此把门槛降为
-  **2.0×**,仍保留独立的 stdout byte-identical 指标。绝对秒数不作跨轮比较。
+- `min_run_speedup_x = min(baseline_elapsed_s) / min(candidate_elapsed_s)`:它配的是每臂最快次,
+  **不是最坏配对**,也不是观察到的最小相邻配对加速。该口径报 **2.54×**;mean-ratio 报
+  **2.63×**。
+- Codex 先前报告的 **2.51× / 2.61×** 只保留为散文口径、未归档的背景,不承重门槛判断,
+  也不与已归档测量合称两次可复算证据。
+- 已归档的 `2.54×` 只比原 `2.5×` 门槛高约 1%,而宿主负载不受控;`proposal.json` 因此把
+  门槛降为 **2.0×**,仍保留独立的 stdout byte-identical 指标。绝对秒数不作跨轮比较。
 
 不锚固定 digest 是上一版的自我更正:lineage-show 的输出随账本增长而变,保质期以分钟计。
 
@@ -119,6 +125,7 @@ python -X utf8 _probe_20260801_candidate_tree_diff.py       # 只改了声明的
 python -X utf8 _probe_20260801_claude_revision_equivalence.py # 承重:修订版 9 场景行为等价
 python -X utf8 _probe_20260801_claude_revision_acceptance.py  # rc + 节点数 + T2 鉴别力
 python -X utf8 _probe_20260801_claude_revision_perf.py        # 逐字相等 + 独立耗时
+python -X utf8 _probe_20260801_guard_cost_and_mtime.py        # 197/200 + 0.9921 ms
 python -X utf8 _probe_20260801_claude_mtime_leg_residual.py   # 只量 mtime 腿
 ```
 
