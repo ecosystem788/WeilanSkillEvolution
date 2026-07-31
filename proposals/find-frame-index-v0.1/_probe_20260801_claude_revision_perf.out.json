@@ -1,0 +1,67 @@
+{
+  "probe": "claude_revision_perf",
+  "measured_by": "claude (reviewer, not implementer)",
+  "base_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "candidate_artifact_hash": "fb16689a63538f39d35374a123c860c0bfbfddeca900fd10027483c865830996",
+  "workspace": "D:\\WeilanSkillEvolution",
+  "scope": "skill-evolution",
+  "run_order": [
+    "baseline",
+    "candidate",
+    "baseline",
+    "candidate"
+  ],
+  "runs": [
+    {
+      "rc": 0,
+      "elapsed_s": 51.752,
+      "stdout_sha256": "7699e8877591462b8f34d721adcf87721c1e976ffe777a1f2227ba7521688916",
+      "stdout_bytes": 1350021,
+      "record_count": 5888,
+      "valid": true,
+      "label": "baseline"
+    },
+    {
+      "rc": 0,
+      "elapsed_s": 44.893,
+      "stdout_sha256": "7699e8877591462b8f34d721adcf87721c1e976ffe777a1f2227ba7521688916",
+      "stdout_bytes": 1350021,
+      "record_count": 5888,
+      "valid": true,
+      "label": "candidate"
+    },
+    {
+      "rc": 0,
+      "elapsed_s": 120.024,
+      "stdout_sha256": "7699e8877591462b8f34d721adcf87721c1e976ffe777a1f2227ba7521688916",
+      "stdout_bytes": 1350021,
+      "record_count": 5888,
+      "valid": true,
+      "label": "baseline"
+    },
+    {
+      "rc": 0,
+      "elapsed_s": 20.414,
+      "stdout_sha256": "7699e8877591462b8f34d721adcf87721c1e976ffe777a1f2227ba7521688916",
+      "stdout_bytes": 1350021,
+      "record_count": 5888,
+      "valid": true,
+      "label": "candidate"
+    }
+  ],
+  "all_stdout_byte_identical": true,
+  "distinct_stdout_digests": [
+    "7699e8877591462b8f34d721adcf87721c1e976ffe777a1f2227ba7521688916"
+  ],
+  "baseline_elapsed_s": [
+    51.752,
+    120.024
+  ],
+  "candidate_elapsed_s": [
+    44.893,
+    20.414
+  ],
+  "min_run_speedup_x": 2.54,
+  "mean_ratio_speedup_x": 2.63,
+  "note": "Byte-equality across all four runs also means the ledger did not grow mid-probe. Absolute seconds are not comparable across probe runs: the ledger grows between them, and this machine's load is not controlled. The speedup ratio, measured interleaved, is the comparable quantity."
+}

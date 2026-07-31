@@ -1,0 +1,350 @@
+{
+  "probe": "claude_revision_equivalence",
+  "measured_by": "claude (reviewer, not implementer)",
+  "base_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "candidate_artifact_hash": "fb16689a63538f39d35374a123c860c0bfbfddeca900fd10027483c865830996",
+  "scenario_count": 9,
+  "equivalent_count": 9,
+  "divergent_scenarios": [],
+  "race_scenario_repeats": {
+    "scenario": "foreign_second_file_after_first_lookup",
+    "repeats": 25,
+    "equivalent_to_baseline": 25,
+    "divergent_from_baseline": 0,
+    "note": "Divergences here are not defects: they are the disclosed same-mtime-tick residual showing up at its natural rate under back-to-back writes. What would be a defect is the reverse -- the guard never firing.",
+    "outcomes": [
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      },
+      {
+        "equivalent": true,
+        "candidate_second_lookup": {
+          "outcome": "RuntimeError"
+        }
+      }
+    ]
+  },
+  "rows": [
+    {
+      "scenario": "plain_hit",
+      "baseline": [
+        {
+          "outcome": "path",
+          "path": "2026-07-21/wf-b.jsonl"
+        },
+        {
+          "outcome": "path",
+          "path": "2026-07-20/wf-a.jsonl"
+        }
+      ],
+      "candidate": [
+        {
+          "outcome": "path",
+          "path": "2026-07-21/wf-b.jsonl"
+        },
+        {
+          "outcome": "path",
+          "path": "2026-07-20/wf-a.jsonl"
+        }
+      ],
+      "equivalent": true
+    },
+    {
+      "scenario": "missing_id",
+      "baseline": [
+        {
+          "outcome": "FileNotFoundError"
+        },
+        {
+          "outcome": "FileNotFoundError"
+        }
+      ],
+      "candidate": [
+        {
+          "outcome": "FileNotFoundError"
+        },
+        {
+          "outcome": "FileNotFoundError"
+        }
+      ],
+      "equivalent": true
+    },
+    {
+      "scenario": "duplicate_id",
+      "baseline": [
+        {
+          "outcome": "RuntimeError"
+        }
+      ],
+      "candidate": [
+        {
+          "outcome": "RuntimeError"
+        }
+      ],
+      "equivalent": true
+    },
+    {
+      "scenario": "empty_frame_file_only",
+      "baseline": [
+        {
+          "outcome": "FileNotFoundError"
+        }
+      ],
+      "candidate": [
+        {
+          "outcome": "FileNotFoundError"
+        }
+      ],
+      "equivalent": true
+    },
+    {
+      "scenario": "empty_and_live_same_id",
+      "baseline": [
+        {
+          "outcome": "path",
+          "path": "2026-07-21/wf-mixed.jsonl"
+        }
+      ],
+      "candidate": [
+        {
+          "outcome": "path",
+          "path": "2026-07-21/wf-mixed.jsonl"
+        }
+      ],
+      "equivalent": true
+    },
+    {
+      "scenario": "moved_after_first_lookup",
+      "baseline": [
+        {
+          "outcome": "path",
+          "path": "2026-07-20/wf-moved.jsonl"
+        },
+        {
+          "outcome": "path",
+          "path": "2026-07-21/wf-moved.jsonl"
+        }
+      ],
+      "candidate": [
+        {
+          "outcome": "path",
+          "path": "2026-07-20/wf-moved.jsonl"
+        },
+        {
+          "outcome": "path",
+          "path": "2026-07-21/wf-moved.jsonl"
+        }
+      ],
+      "equivalent": true
+    },
+    {
+      "scenario": "deleted_after_first_lookup",
+      "baseline": [
+        {
+          "outcome": "path",
+          "path": "2026-07-20/wf-gone.jsonl"
+        },
+        {
+          "outcome": "FileNotFoundError"
+        }
+      ],
+      "candidate": [
+        {
+          "outcome": "path",
+          "path": "2026-07-20/wf-gone.jsonl"
+        },
+        {
+          "outcome": "FileNotFoundError"
+        }
+      ],
+      "equivalent": true
+    },
+    {
+      "scenario": "appended_by_this_process_after_first_lookup",
+      "baseline": [
+        {
+          "outcome": "path",
+          "path": "2026-07-20/wf-old.jsonl"
+        },
+        {
+          "outcome": "path",
+          "path": "2026-07-21/wf-fresh.jsonl"
+        }
+      ],
+      "candidate": [
+        {
+          "outcome": "path",
+          "path": "2026-07-20/wf-old.jsonl"
+        },
+        {
+          "outcome": "path",
+          "path": "2026-07-21/wf-fresh.jsonl"
+        }
+      ],
+      "equivalent": true
+    },
+    {
+      "scenario": "foreign_second_file_after_first_lookup",
+      "baseline": [
+        {
+          "outcome": "path",
+          "path": "2026-07-20/wf-race.jsonl"
+        },
+        {
+          "outcome": "RuntimeError"
+        }
+      ],
+      "candidate": [
+        {
+          "outcome": "path",
+          "path": "2026-07-20/wf-race.jsonl"
+        },
+        {
+          "outcome": "RuntimeError"
+        }
+      ],
+      "equivalent": true
+    }
+  ]
+}

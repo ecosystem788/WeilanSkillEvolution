@@ -1,0 +1,81 @@
+{
+  "probe": "claude_revision_structure",
+  "checked_by": "claude (reviewer, not implementer)",
+  "q1_declared_scope": {
+    "base_file_count": 49,
+    "candidate_file_count": 50,
+    "changed": [
+      {
+        "path": "scripts/weilan_trace.py",
+        "base_sha256": "e6f11e11cdb670a093f9ae5a9e7b0f6769e9affe9b9ebc4698d2550918782f5e",
+        "candidate_sha256": "3e6e60157816be5c6ad62ce2a07259dd77f20d4ce026f9e32368a11d96f63ab1"
+      }
+    ],
+    "added": [
+      {
+        "path": "scripts/test_find_frame_index.py",
+        "candidate_sha256": "322dc9725efe22575650af84ab0332655fb5c2282bf08355c1ed0b228fc01e14"
+      }
+    ],
+    "removed": [],
+    "changed_path_count": 2
+  },
+  "q2_frozen_tree_equals_in_repo_candidate": {
+    "differing_paths": [],
+    "identical": true
+  },
+  "q3_recomputed_content_address": {
+    "declared": "fb16689a63538f39d35374a123c860c0bfbfddeca900fd10027483c865830996",
+    "recomputed": "fb16689a63538f39d35374a123c860c0bfbfddeca900fd10027483c865830996",
+    "matches": true,
+    "baseline_declared": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+    "baseline_recomputed": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+    "baseline_matches": true
+  },
+  "q4_probe_artifacts_in_this_directory": [
+    {
+      "file": "_probe_20260801_candidate_tree_diff.out.json",
+      "mentions_revised_candidate": false,
+      "mentions_superseded_candidate": true
+    },
+    {
+      "file": "_probe_20260801_claude_revision_perf.out.json",
+      "mentions_revised_candidate": true,
+      "mentions_superseded_candidate": false
+    },
+    {
+      "file": "_probe_20260801_claude_revision_structure.out.json",
+      "mentions_revised_candidate": false,
+      "mentions_superseded_candidate": false
+    },
+    {
+      "file": "_probe_20260801_find_frame_equivalence.out.json",
+      "mentions_revised_candidate": false,
+      "mentions_superseded_candidate": true
+    },
+    {
+      "file": "_probe_20260801_frozen_tree_perf.out.json",
+      "mentions_revised_candidate": false,
+      "mentions_superseded_candidate": true
+    },
+    {
+      "file": "_probe_20260801_guard_cost_and_mtime.out.json",
+      "mentions_revised_candidate": false,
+      "mentions_superseded_candidate": false
+    },
+    {
+      "file": "_probe_20260801_suite_acceptance.out.json",
+      "mentions_revised_candidate": false,
+      "mentions_superseded_candidate": true
+    },
+    {
+      "file": "_probe_20260801_test_discriminates.out.json",
+      "mentions_revised_candidate": false,
+      "mentions_superseded_candidate": false
+    }
+  ],
+  "q5_readme": {
+    "mentions_revised_candidate": false,
+    "mentions_superseded_candidate": true
+  }
+}

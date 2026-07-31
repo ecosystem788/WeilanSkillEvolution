@@ -225,43 +225,64 @@ def parse_fields(items):
 # disk, never a new file format. It replaces one glob per looked-up frame id with one
 # scandir pass over the date directories under frames/.
 #
-# Correctness contract: every call must return what the same-moment glob would have
-# returned. Three obligations enforce it, and one residual difference is disclosed.
+# Correctness contract: an indexed path is returned only while it is still a live
+# match, and observable changes to the date-directory set or mtimes rebuild the
+# table before lookup. Four obligations enforce it, with one bounded residual.
 #   (a) an indexed hit is re-checked for existence; a vanished path falls back to glob
 #       for that id, so a deletion between build and lookup cannot yield a stale path.
 #   (b) any append under frames/ in this process invalidates the table, so a frame
 #       written by this process is visible to the next lookup.
 #   (c) multiple live matches still raise RuntimeError, and no live match still raises
 #       FileNotFoundError; read_events() still filters empty frame files.
-# Residual difference, accepted and disclosed for v1: if *another* process creates a
-# second file for an already-indexed id after the table was built, glob would raise
-# RuntimeError while the table may return the single path it knows. The glob version
-# does not make that guarantee either -- it is a race, not a regression -- and (a)
-# does not close it because the indexed path still exists.
+#   (d) every lookup compares the complete {date_dir_name: st_mtime_ns} map and
+#       rebuilds the table when a foreign directory change is observable.
+# Residual: a foreign creation in the same roughly 1 ms directory-mtime tick as the
+# guard's observation can remain invisible for that lookup. The proposal records the
+# measured boundary; it is not claimed away as same-moment glob equivalence.
 _FRAME_INDEX = None
 _FRAME_INDEX_ROOT = None
+_FRAME_INDEX_DIR_MTIMES = None
 
 
 def invalidate_frame_index():
     """Drop the process-local find_frame table (obligation (b))."""
-    global _FRAME_INDEX, _FRAME_INDEX_ROOT
+    global _FRAME_INDEX, _FRAME_INDEX_ROOT, _FRAME_INDEX_DIR_MTIMES
     _FRAME_INDEX = None
     _FRAME_INDEX_ROOT = None
+    _FRAME_INDEX_DIR_MTIMES = None
+
+
+def _scan_frame_date_dirs(frames_root):
+    """Return live date-directory entries and their directly observed mtimes."""
+    try:
+        entries = list(os.scandir(frames_root))
+    except OSError:
+        entries = []
+    date_dirs = []
+    dir_mtimes = {}
+    for entry in entries:
+        try:
+            if not entry.is_dir():
+                continue
+            dir_mtimes[entry.name] = entry.stat().st_mtime_ns
+        except OSError:
+            continue
+        date_dirs.append(entry)
+    return date_dirs, dir_mtimes
 
 
 def _frame_index(frames_root):
-    global _FRAME_INDEX, _FRAME_INDEX_ROOT
+    global _FRAME_INDEX, _FRAME_INDEX_ROOT, _FRAME_INDEX_DIR_MTIMES
     root_key = str(frames_root)
-    if _FRAME_INDEX is not None and _FRAME_INDEX_ROOT == root_key:
+    date_dirs, dir_mtimes = _scan_frame_date_dirs(frames_root)
+    if (
+        _FRAME_INDEX is not None
+        and _FRAME_INDEX_ROOT == root_key
+        and _FRAME_INDEX_DIR_MTIMES == dir_mtimes
+    ):
         return _FRAME_INDEX
     index = {}
-    try:
-        date_dirs = list(os.scandir(frames_root))
-    except OSError:
-        date_dirs = []
     for date_entry in date_dirs:
-        if not date_entry.is_dir():
-            continue
         try:
             entries = list(os.scandir(date_entry.path))
         except OSError:
@@ -273,6 +294,7 @@ def _frame_index(frames_root):
             index.setdefault(name[: -len(".jsonl")], []).append(Path(entry.path))
     _FRAME_INDEX = index
     _FRAME_INDEX_ROOT = root_key
+    _FRAME_INDEX_DIR_MTIMES = dir_mtimes
     return index
 
 

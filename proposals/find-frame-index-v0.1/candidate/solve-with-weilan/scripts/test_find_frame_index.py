@@ -1,17 +1,13 @@
 """Regression tests for the process-local find_frame id -> path table.
 
-The table is an optimisation only: every call must return what the same-moment
-glob would have returned. These tests pin the three obligations that make that
-true -- (a) vanished indexed path falls back to glob, (b) a frame written by
-this process invalidates the table, (c) multiple live matches still raise --
-plus the two pre-existing behaviours the table must not change (empty frame
-files are still filtered, a missing id still raises FileNotFoundError).
-
-They also pin the one residual difference we accept and disclose for v1, so
-that it is a recorded decision rather than an undetected divergence.
+The table is an optimisation only. These tests pin vanished-path fallback,
+in-process invalidation, duplicate detection, and the full date-directory mtime
+guard for observable foreign changes, plus the pre-existing empty/missing
+behaviours. The remaining same-mtime-tick hole is bounded in the proposal.
 """
 
 import os
+import time
 from pathlib import Path
 
 import pytest
@@ -164,28 +160,41 @@ def test_missing_id_still_raises_file_not_found(frames):
         weilan_trace.find_frame("wf-absent")
 
 
-def test_disclosed_residual_race_is_pinned_not_hidden(frames):
-    """The one accepted v1 difference, pinned so it cannot drift unnoticed.
-
-    If another process creates a second file for an already-indexed id after the
-    table was built, glob raises RuntimeError while the table returns its single
-    known path. Obligation (a) does not close this: the indexed path still
-    exists. This test asserts the divergence rather than the fix, so that a
-    later implementation which does close it fails here and gets re-adjudicated.
-    """
+def test_foreign_second_file_rebuilds_after_observable_mtime_change(frames):
+    """T2: an observable foreign directory-mtime change rebuilds the table."""
     first = write_frame(frames, "2026-07-20", "wf-race")
+    write_frame(frames, "2026-07-21", "wf-anchor")
     assert weilan_trace.find_frame("wf-race") == first
+    date_dir = frames / "2026-07-21"
+    indexed_mtime = date_dir.stat().st_mtime_ns
 
-    # Simulate a foreign process: create the second file without touching this
-    # process's append path, so nothing invalidates the table.
-    write_frame(frames, "2026-07-21", "wf-race")
+    # Cross the measured roughly 1 ms timestamp grain before the foreign write,
+    # then wait again before lookup. The explicit inequality pins T2's premise.
+    time.sleep(0.005)
+    write_frame(frames, date_dir.name, "wf-race")
+    time.sleep(0.005)
+    assert date_dir.stat().st_mtime_ns != indexed_mtime
 
-    assert weilan_trace.find_frame("wf-race") == first
+    with pytest.raises(RuntimeError):
+        weilan_trace.find_frame("wf-race")
     with pytest.raises(RuntimeError):
         glob_find(frames, "wf-race")
 
-    # And it is a staleness window, not a permanent blindness: once the table is
-    # rebuilt, the duplicate is reported exactly as glob reports it.
-    weilan_trace.invalidate_frame_index()
+
+def test_same_mtime_tick_residual_is_pinned_not_hidden(frames, monkeypatch):
+    """An unobservable same-tick foreign write remains an explicit boundary."""
+    first = write_frame(frames, "2026-07-20", "wf-same-tick")
+    write_frame(frames, "2026-07-21", "wf-anchor")
+    assert weilan_trace.find_frame("wf-same-tick") == first
+    guard_snapshot = dict(weilan_trace._FRAME_INDEX_DIR_MTIMES)
+
+    write_frame(frames, "2026-07-21", "wf-same-tick")
+    monkeypatch.setattr(
+        weilan_trace,
+        "_scan_frame_date_dirs",
+        lambda _frames_root: ([], guard_snapshot),
+    )
+
+    assert weilan_trace.find_frame("wf-same-tick") == first
     with pytest.raises(RuntimeError):
-        weilan_trace.find_frame("wf-race")
+        glob_find(frames, "wf-same-tick")

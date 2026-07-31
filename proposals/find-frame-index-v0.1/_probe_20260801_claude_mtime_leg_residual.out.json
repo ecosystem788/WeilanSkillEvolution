@@ -1,0 +1,314 @@
+{
+  "probe": "claude_mtime_leg_residual",
+  "measured_by": "claude (reviewer, not implementer)",
+  "candidate_artifact_hash": "fb16689a63538f39d35374a123c860c0bfbfddeca900fd10027483c865830996",
+  "shape": "anchor frame pre-creates the second date directory, so the date-directory name set never changes and only the mtime comparison can catch the foreign write; no sleep anywhere",
+  "repeats": 60,
+  "guard_fired_runtime_error": 60,
+  "guard_missed_returned_single_path": 0,
+  "other": [],
+  "miss_fraction": 0.0,
+  "reading": "A nonzero miss count is the disclosed residual at its natural rate, not a defect. A zero FIRED count would be the defect. Do not generalise this rate: it is one filesystem, one machine, one write pattern.",
+  "outcomes": [
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    },
+    {
+      "stage": "second_lookup",
+      "outcome": "RuntimeError",
+      "guard_fired": true
+    }
+  ]
+}

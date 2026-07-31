@@ -1,9 +1,9 @@
 {
   "schema_version": "weilan_skill_change_proposal_v0.5",
   "proposal_id": "find-frame-index-v0.1",
-  "rationale": "Replace find_frame's per-id glob over frames/*/<id>.jsonl with one process-local id -> path table built by a single scandir pass, keeping the returned value identical to what the same-moment glob would return. On the live ledger (5881 frames) lineage-show spends most of its time in find_frame; the table takes the warm run from 32.4 s to 11.4 s with byte-identical stdout. Three obligations preserve the contract: a vanished indexed path falls back to glob, any append under frames/ in this process invalidates the table, and multiple live matches still raise. One residual difference is disclosed rather than hidden: a second file created for an already-indexed id by another process is not seen until the table is rebuilt.",
+  "rationale": "Replace find_frame's per-id glob over frames/*/<id>.jsonl with one process-local id -> path table guarded on every lookup by a complete {date_dir_name: st_mtime_ns} map from os.scandir(frames_root). Any directory-name or mtime difference rebuilds the table. T1 is strict: a returned path must be a live match for that id at return time. T2 is strict and measurable: when a stat issued after a foreign creation can observe the directory mtime change, the guard must rebuild and duplicate live ids must raise RuntimeError. The prior three obligations remain: a vanished indexed path falls back to glob, any append under frames/ in this process invalidates the table, and multiple live matches still raise. The residual is explicit and is not a rollback trigger: a foreign creation within the same roughly 1 ms directory-mtime tick as the guard observation can remain invisible for that lookup. The supporting probe observed 197/200 creation-time mtime changes, 3/200 unchanged, and a 0.9921 ms smallest positive delta (proposals/find-frame-index-v0.1/_probe_20260801_guard_cost_and_mtime.out.json). On the revised frozen candidate fb16689a63538f39d35374a123c860c0bfbfddeca900fd10027483c865830996, four interleaved lineage-show runs over 5887 records produced byte-identical stdout: baseline 32.155 s and 35.056 s; candidate 12.821 s and 12.928 s; minimum-run speedup 2.51x and mean-ratio speedup 2.61x.",
   "base_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
-  "candidate_artifact_hash": "794022d90d8a173468ea67a9bb98f69176f603ef9ba2dc032088d7c8d0a7ad5b",
+  "candidate_artifact_hash": "fb16689a63538f39d35374a123c860c0bfbfddeca900fd10027483c865830996",
   "changed_paths": [
     "proposals/find-frame-index-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py",
     "proposals/find-frame-index-v0.1/candidate/solve-with-weilan/scripts/test_find_frame_index.py"
@@ -16,8 +16,8 @@
   },
   "target_metrics": [
     "frozen_candidate_differs_from_frozen_baseline_in_exactly_the_two_declared_paths",
-    "find_frame_outcome_equivalent_to_baseline_on_eight_of_nine_scenarios",
-    "the_single_divergent_scenario_is_exactly_the_disclosed_foreign_second_file_race",
+    "foreign_second_file_after_first_lookup_raises_runtime_error_after_at_least_5ms_when_the_directory_mtime_change_is_observable",
+    "same_mtime_tick_foreign_write_residual_is_disclosed_and_pinned_without_being_claimed_away",
     "vanished_indexed_path_falls_back_to_glob_and_returns_the_moved_file",
     "vanished_indexed_path_with_no_replacement_still_raises_file_not_found",
     "frame_written_by_this_process_is_visible_to_the_next_lookup",
@@ -26,17 +26,18 @@
     "empty_frame_files_are_still_filtered_by_read_events",
     "second_lookup_of_a_cached_id_performs_no_glob",
     "lineage_show_stdout_byte_identical_across_interleaved_baseline_and_candidate_runs",
-    "candidate_pytest_node_count_equals_baseline_node_count_plus_the_ten_new_nodes",
+    "candidate_pytest_node_count_equals_baseline_node_count_plus_the_eleven_new_nodes",
+    "revised_frozen_candidate_lineage_show_stdout_is_byte_identical_and_minimum_run_speedup_is_at_least_2_5x",
     "candidate_introduces_no_test_failure_absent_from_the_baseline"
   ],
   "rollback_triggers": [
     "candidate changes any file outside the two declared candidate paths",
-    "find_frame returns a path the same-moment glob would not have returned",
+    "T1: find_frame returns a path that is not a live match for that id at the return time",
+    "T2: after a foreign creation, a subsequent stat can observe the directory mtime change but the guard does not rebuild and lookup does not raise RuntimeError for duplicate live ids",
     "a frame opened by the running process becomes invisible to a later lookup in that process",
     "the duplicate-id RuntimeError or the missing-id FileNotFoundError stops being raised",
     "lineage-show stdout stops being byte-identical between baseline and candidate on the same ledger",
     "any test passing on the baseline fails on the candidate",
-    "the disclosed foreign-second-file race widens beyond a single already-indexed id",
     "installed Skill, evaluation authority, adoption state, or deployment state changes without an independent cosigned adoption decision"
   ],
   "candidate_authority": "proposal_only_never_evaluation_adoption_deployment_or_rollback_authority"
