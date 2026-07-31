@@ -1,0 +1,55 @@
+﻿{
+  "mode": "postcheck",
+  "final_expected": "bd32917c74701e672187d3270b57ee9124e09238949609536d69048623ba5031",
+  "final_actual": "bd32917c74701e672187d3270b57ee9124e09238949609536d69048623ba5031",
+  "final_ok": true,
+  "witness_digest_pre": "6375ce290a48f328fa2929d543f535d67d74ece9c78073ebab2828c63d84f085",
+  "witness_digest_post": "6375ce290a48f328fa2929d543f535d67d74ece9c78073ebab2828c63d84f085",
+  "non_target_conserved": true,
+  "witness_coverage": {
+    "covered": [
+      "status(-z -uall) 列出的每条非 target 路径：XY 两位状态字母",
+      "同上每条路径的工作区原始字节 sha256（不存在记 ABSENT）",
+      "同上每条路径的 index 条目：各 stage 的 mode,oid,stage（不在 index 记 ABSENT）",
+      "for-each-ref **列出的**每条引用（refname → objectname）",
+      "同上每条引用的符号目标（symbolic ref 记目标 refname，direct ref 记哨兵 DIRECT）",
+      "HEAD 的符号名与 oid（游离/未出生有哨兵值）"
+    ],
+    "not_covered": [
+      "被 .gitignore 命中的路径（不进 -uall；无界且高频抖动，见 CONVENTION §5.3.f）",
+      "refs/ 之外的伪引用（ORIG_HEAD/FETCH_HEAD/MERGE_HEAD 等；HEAD 除外，它由 H 腿单钉）——实测 for-each-ref 不列出它们",
+      "reflog（.git/logs/），以及 for-each-ref 不列出的悬空 symbolic ref——实测：symbolic ref 指向不存在的 ref 时该条整行不出现",
+      "object database 内部：gc/repack/prune、不可达对象",
+      ".git/ 下的配置与 hooks（config、hooks、worktrees 注册）",
+      "文件系统元数据：mtime、权限/ACL、扩展属性（index mode 位之外）",
+      "仓库根之外的一切（执行期制品按 §5.3.d 恰恰住在那里）",
+      "子模块内部状态（只见 gitlink oid）"
+    ]
+  },
+  "base_preimage_ok": true,
+  "base_preimage_expected": "3bd2a43f0b20e6dc5332de152a76862881e880ded2abc947ec5fdfea7957f717",
+  "base_preimage_actual": "3bd2a43f0b20e6dc5332de152a76862881e880ded2abc947ec5fdfea7957f717",
+  "sidecar": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl-roadmap-v4-wf-20260731-085718-011b52\\ROADMAP.base.sidecar",
+  "base_line_count": 215,
+  "final_line_count": 228,
+  "added_lines": 14,
+  "deleted_lines": 1,
+  "lcs_length": 214,
+  "attribution_ambiguous": true,
+  "possibly_added_lines": 16,
+  "possibly_deleted_lines": 1,
+  "sections_touched": [
+    "## Immediate next stage",
+    "## SE-0.6 — Shadow competition, adoption, and rollback"
+  ],
+  "expect_added": 14,
+  "expect_deleted": 1,
+  "changes_confined_to": [
+    "## SE-0.6 — Shadow competition, adoption, and rollback",
+    "## Immediate next stage"
+  ],
+  "counts_ok": true,
+  "changes_confined": true,
+  "diff_ok": true,
+  "ok": true
+}
