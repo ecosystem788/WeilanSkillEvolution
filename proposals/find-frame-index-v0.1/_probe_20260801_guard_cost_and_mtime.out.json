@@ -1,0 +1,27 @@
+{
+  "probe": "guard_cost_and_mtime",
+  "read_only_under_live_frames": true,
+  "q1_dir_mtime": {
+    "filesystem_of": "C:",
+    "creations": 200,
+    "dir_mtime_changed": 197,
+    "dir_mtime_unchanged": 3,
+    "missed_fraction": 0.015,
+    "smallest_observed_positive_delta_ns": 992100,
+    "verdict": "creation sometimes left the dir mtime unchanged -> same-tick hole is real"
+  },
+  "q2_cost": {
+    "date_dirs": 33,
+    "sample_lookups_per_rep": 40,
+    "reps": 40,
+    "median_s_per_rep": {
+      "baseline_glob": 0.140527,
+      "guard_all_dirs_scandir": 0.006386,
+      "guard_two_stats": 0.00922
+    },
+    "guard_cost_as_fraction_of_glob": {
+      "guard_all_dirs_scandir": 0.0454,
+      "guard_two_stats": 0.0656
+    }
+  }
+}
