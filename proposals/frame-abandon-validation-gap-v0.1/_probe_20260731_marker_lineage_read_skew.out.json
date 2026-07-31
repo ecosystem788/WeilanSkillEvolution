@@ -1,0 +1,31 @@
+{
+  "probe": "marker reuse is keyed by branch_id, not by head_frame_id",
+  "live_weilan_trace_sha256": "dc5eb30b05a85da3574ab5887c17f5aa1b10b3cd6d6cf0cdb48779079e8f143f",
+  "frame_a_abandoned_with_marker": "wf-20260731-040904-8d40f3",
+  "frame_b_live_head_no_marker": "wf-20260731-040907-3670b9",
+  "part_one_disk_read_census": {
+    "lineage_ledger_disk_reads_in_one_contract_call": 2,
+    "head_frame_disk_reads_in_one_contract_call": 1,
+    "reading": "frame events are memoized per path across the projection and the contract; the lineage ledger is not, so the two derivations see two independent snapshots of who the head is",
+    "quiet_moment_head_frame_id": "wf-20260731-040907-3670b9",
+    "quiet_moment_markers": [],
+    "quiet_moment_contract_hash": "40cb5fb5ed689a6969e0758921023c6abf53b805aecb7185a820a75bff037679"
+  },
+  "part_two_head_moved_between_reads": {
+    "lineage_loader_calls": 2,
+    "head_frame_id_reported": "wf-20260731-040907-3670b9",
+    "head_frame_id_is_b": true,
+    "head_abandoned_reported": false,
+    "markers_reported": [
+      {
+        "code": "frame_abandoned_v2_obligations_unrecorded",
+        "recorded_basis": null,
+        "current_basis": "weilan_frame_abandon_unmet_obligations_v1"
+      }
+    ],
+    "markers_belong_to_frame": "A",
+    "missing_key_fallback_fired": false,
+    "contract_hash": "96cebef39a7c955df3a55a5d8704a0e9233c748c6797310c5304f97d91adfcb3",
+    "reading": "the branch key is present in both snapshots, so the documented [] fallback never fires; the body pairs B's head_frame_id and disposition flags with A's markers and says nothing about it"
+  }
+}
