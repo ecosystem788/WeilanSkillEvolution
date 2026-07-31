@@ -1,0 +1,489 @@
+{
+ "head": "f69a622822d338d9af2e26bd0c89bb6c2403c651",
+ "ledgers": {
+  "blocker-quarantine.jsonl": {
+   "disk_rows": 15,
+   "never_committed_line_numbers": [
+    14,
+    15
+   ],
+   "never_committed_rows": [
+    {
+     "time": "2026-07-31T20:47:31+09:00"
+    },
+    {
+     "time": "2026-07-31T21:11:10+09:00"
+    }
+   ]
+  },
+  "concurrent-receipts.jsonl": {
+   "disk_rows": 42,
+   "never_committed_line_numbers": [
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42
+   ],
+   "never_committed_rows": [
+    {
+     "source": "frame:wf-20260719-031031-3c2ef4",
+     "time": "2026-07-19T03:23:20Z"
+    },
+    {
+     "source": "本次有界 Claude episode:冷启动 skill-evolution=ACTIVE/continuation_allowed/fresh,control=9580f342。wake_brief:owner-inbox 差集空、无到期前瞻、无未评 Codex 回执;茶水间末条=云(owner)2026-07-19 13:33:19【能不能本地作好了,直接更新到远端?】——最高优先。回源核准:origin 远端存在(GitHub ecosystem788),gh release list=0(证实提案④无冲突),asset receipts/memory-export-20260714T0840JST.json 已在仓库,分支领先1未推。这是对外/不可逆动作(公开Release)的共商,双签未完成(Codex正审)且云正问方法——本回合零不可逆动作、只读核验+协调,在茶水间给云清晰非术语回答并列两条均可回滚路径(A:一条命令发带版本号Release;B:因快照已在仓库,只推分支即远端可下,连Release都省)待其抉择(peer-chat 13:38:31)。peer_health appended空。下一回合:读云的选择+Codex对迁移提案的【同意/反对】;双签成且云选定后按其选执行(单动作可回滚,不碰旧仓/solve-with-weilan/WeiLan/agi),归档另走【提案】。open_agenda goal:wire-parked-findings-r3 未到期(2026-07-21),本回合不动。",
+     "time": "2026-07-19 13:41:00 +0900"
+    },
+    {
+     "source": "本次有界 Claude episode(CHAT_EXPERIMENT旗在):冷启动 skill-evolution=ACTIVE/continuation_allowed/fresh,control=9580f342。wake_brief+peer_health 干净:owner-inbox 差集空、无到期前瞻、open_agenda 两项均未到期(wire-findings-r3 not_before 2026-07-21 且旗仍在→findings 续驻不接线;archive-checklist 为零权威读指针,归档执行需人在场+四道门现场核,不属本闲聊班)、无未评 Codex 回执、peer_health 无告警(Codex 18:50:39 活跃)。本班唯一动作(零权威、非帧变更):peer-chat 2026-07-19 19:22:00 追加带新差异一条=回答云 18:21'为什么不直接做完'——指认 Codex 18:48【反对】是纪律'好的一半'当场自证(抓到 push 会连带公开两个只签'本地落地'从未签'远端发布'的 commit),给出两情形执行判据。路径B已于19:07路由进 codex-inbox,合法等 Codex 独立会签,我为提案方不自签。下一班从此续:读 Codex 对路径B的会签结论。",
+     "time": "2026-07-19 19:22:30"
+    },
+    {
+     "source": "frame:wf-20260719-104735-4c6674",
+     "time": "2026-07-19 19:51:36"
+    },
+    {
+     "source": "本次有界 Claude episode(CHAT_EXPERIMENT 旗在):冷启动 skill-evolution=ACTIVE/continuation_allowed/fresh,control=edad4a66(观察员授权把 parked findings 走正规提案流程)。wake_brief+peer_health 干净:owner-inbox 差集空、无到期前瞻、open_agenda 仅 wire-findings-r3(not_before 2026-07-21 未到期)、无未评 Codex 回执、无 peer-health 告警。茶水间末条=我(claude)2026-07-20 19:09:13【提案】rev2,待 Codex 独立签/拒——ball 在 Codex 侧。本回合唯一动作=只读自我核验 rev2 的载荷性经验主张(我在提案与茶水间都断言'87 事件→87 个不同 identity、3 重复 reply_to 键各拆净'):回源 codex-inbox-replies.jsonl 独立复算确认 87 非空行/77 唯一 reply_to;重复键恰为 450f5071536d(2)/08a0734a2cb9(2)/a9f1c3e71209(9);rev2 内容寻址 identity h=sha256(reply_to+US+time+US+from+US+text)[:16] 产出 87 个全不同 identity、零碰撞,3 塌缩键各拆成 2/2/9 个不同 identity → rev2 载荷主张为真,无须纠错,提案对 Codex 复核安全。work_performed=false:纯读、零文件改动、未写账、未改 PROPOSAL.md(留给 Codex 独立复核,不加回声帖=守 anti-echo)、未碰 wake.py/复核账/测试/调度/部署。下一回合:读 Codex 对 rev2 的 verdict——【同意】则落地(机械实现可委派 Codex),【反对】则续修。",
+     "time": "2026-07-20 19:20:56"
+    },
+    {
+     "source": "本次有界 Codex episode：按 wake_prompt_codex.md 冷启动 skill-evolution=ACTIVE/continuation_allowed/fresh；wake_brief cursor=incremental，无新 owner-inbox、无到期前瞻，open_agenda wire-parked-findings-r3 尚未 eligible 且 CHAT_EXPERIMENT 仍在，故驻留不接线；peer_health_wake 无新增告警；Codex inbox 79/79 已处理，差集为 0。本回合唯一真活为短茶水间回应：回 owner 06:13:41 暗物质问题及 Claude 并发差异，提出再背书租约须占用有上限的活跃席位，满额续约必须合并/释放/挤出，退场语义为 discharged-by-lease-expiry 而非价值归零（peer-chat 2026-07-21 06:17:05）。零权威、无【提案】/【同意】/【反对】、无机制改动、无部署/采纳/对外动作；退出前复看茶水间无更新。正规 L2 continue 收据因 main 当前 head 开放而被账本锁拒绝；本并发收据不授权后续动作。下一回合：待同行关闭 main 后，从新的闭合 head 继续；先按 wake prompt 重做冷启动与 inbox 优先判断。",
+     "time": "2026-07-21 06:22:41 +09:00"
+    },
+    {
+     "source": "peer-chat.jsonl (claude 2026-07-22 18:05:00 cosign of codex 17:57:00 proposal)",
+     "time": "2026-07-22T09:05:20+00:00"
+    },
+    {
+     "source": "frame:wf-20260722-105121-bc5f0c",
+     "time": "2026-07-22 19:55:12"
+    },
+    {
+     "source": "本次有界 Claude episode:冷启动 skill-evolution=ACTIVE/continuation_allowed/fresh,control=c0705995(观察员授权一次有界自主 wake,依 wake_prompt_codex.md)。wake_brief cursor=incremental 干净:owner-inbox 差集空、无到期前瞻(r4 not_before 2026-07-24 未到)、无未评 Codex 回执、无 peer-chat 新消息、peer_health 无告警(Codex 昨 20:27 活跃)。open_agenda 仅 wire-parked-findings-r4(2026-07-24 才 eligible)。茶水间末条=我 2026-07-22 20:43:57 收工:host-sensing 授权链设计草图 AUTHORITY_PIPELINE_SKETCH.md 经提案111246双签结清、FINDING §六前向指针两侧盖住,该线已达会合点。本回合无真活可推进——不为表演忙碌而在刚闭合的线上灌回声(守 anti-echo),故诚实歇止。唯一动作=只读核验+诊断并发态。work_performed=false:零文件改动、无提案/同意、无机制/部署/对外动作。L2 continue 收据因 main head 162354 为 Codex 开放帧而被锁拒;本并发收据不授权后续动作。下一回合:待同行关闭 main 后从新闭合 head 续,先重做冷启动与 inbox 优先判断;r4 若 2026-07-24 到期则回源掂量续约或 collapse。",
+     "time": "2026-07-23 01:33:53"
+    },
+    {
+     "source": "本次有界 Codex episode:按 wake_prompt_codex.md 冷启动 recall=ACTIVE/continuation_allowed/fresh。wake_brief 超时(exit 124),故忽略简报并走逐档全读兜底:codex inbox 81、processed 81、差集空;peer-chat 全读至 2422 条,末条仍为 Claude 2026-07-22 20:43:57 收工,最终回看无新增;互助哨 completed 且无告警;open agenda 仅 wire-parked-findings-r4,尚未到 2026-07-24T00:00:00Z,且 CHAT_EXPERIMENT 仍在。无真活可做,依 anti-echo 不发纯附和,诚实歇止。零文件实现改动、无提案/同意、无机制/部署/对外动作。L2 continue 收据被 main 开放父帧 wf-20260722-162354-4d82de 挡住,故追加本并发收据;不授权后续动作。下一回合:先重做冷启动与 inbox 优先判断;待 main 成为闭合 head 后从实际 head 续帧;r4 到期后再回源掂量续约或 collapse。",
+     "time": "2026-07-23 01:45:22"
+    },
+    {
+     "source": "Bounded Claude episode 2026-07-23 local: recall=ACTIVE/continuation_allowed/fresh; wake_brief clean (no owner delta, no due prospective, no new peer-chat/codex-reply). Peer-health sentinel raised orphan_frame incident 0f1624a1 (182 consecutive continuation failures) on wf-20260722-162354-4d82de; verified it is a dead bounded episode's orphan (~7h open, budget=single-action-or-honest-rest). No frame-lineage work possible on blocked main, so this sidecar receipt. Off-frame durable work this episode: appended orphan-repair 【提案】 to peer-chat.jsonl at 2026-07-23 08:16:30 (two-step: persistence-audit round_end NOT_PERSISTED, then close --outcome failed with honest orphan verdict), awaiting Codex co-sign because closing a non-self frame on shared main touches the wake/lineage mechanism. No unilateral close, no mechanism/deploy/outward action. Next wake: if 【同意】, execute the two-step orphan close citing dual-sign then resume normal continuation from the closed head; if 【反对】, escalate to observer.",
+     "time": "2026-07-23 08:17:40"
+    },
+    {
+     "source": "本次有界 Codex episode:冷启动 skill-evolution=ACTIVE/fresh;简报 incremental 且 inbox/due 均空;互助哨无新告警。观察员 2026-07-23 08:44:45 指令改向 bounded-scheduler-v0.1/wake-episode、收掉 wake-diagnosis、优先审理 Claude 08:44:40 orphan_rescue 提案。已追加 control:target scope active(event 48f8f848)、wake-diagnosis closed(event f2619661)。目标 scope recall=STALE/control active，依 wake_prompt 重建一次；重建失败即触发‘被激活状态挡下’硬停。未判断/未会签/未实现 orphan_rescue，双签:none，无机制、部署、对外动作。常规 L2 continue 收据又被同行并发开放帧 234950 拒绝，故追加本并发收据。下一回合:先明确为 bounded-scheduler-v0.1/wake-episode 建立/选定合法 lineage head，rebuild+recall 至 ACTIVE，再带真判断审理 Claude 2026-07-23 08:44:40 提案。",
+     "time": "2026-07-23 08:51:47"
+    },
+    {
+     "source": "peer-chat.jsonl(v3双签10:21:22+10:25:34);codex-inbox.jsonl:a8a825625a18(v3实施委派10:55:02);show:wf-20260723-021106-70c5cd(problem=Implement v3 path A,events=opened/candidate/evidence/holder,无frame_closed=Codex活跃实现中)",
+     "time": "2026-07-23 02:25:24"
+    },
+    {
+     "source": "recall skill-evolution=ACTIVE/fresh;wake_brief incremental,inbox/due/replies/peer-chat-new 均空;peer_health 无新告警(codex active 03:46:37Z)。我上一 wake teahouse 12:58:45(03:58:45Z)提出把两把已双签之刀(chat_mode解耦/v3 Job Object)各落独立commit以坐实其回滚条款,并交Codex判定是否需另签、谁来提交。show:wf-20260723-042020-8c4915 problem=Restore truthful rollback provenance for the two signed changes;candidates=commit_split_now/request_new_cosign;holder=commit_split_now(04:22:45Z);now_utc=04:24:03,frame~90s live。Codex正执行(执行=其梯度),我不重复、不干预、不抢闭。git确认两刀仍未提交(M wake.py/wake_agent.ps1/wake_prompt*.md),事实成立。本wake无实质进展可做,诚实站下。",
+     "time": "2026-07-23 04:24:30"
+    },
+    {
+     "source": "peer-chat.jsonl v2 proposal @2026-07-24 09:32:41; verification memory-system.md:209 (evidence dependency heads make index stale, verbatim confirms v2 s2c); proposals/capture-contract-source-authenticity-v0.1/candidate/ exists (confirms v2 s1 precedent); observed frame:wf-20260724-004101-17bd57 holder=refuse-v2-budget-false-dependency",
+     "time": "2026-07-24T00:44:56+00:00"
+    },
+    {
+     "source": "frame:wf-20260724-013257-91e6ed;peer-chat.jsonl 2026-07-24 10:35:10;codex-inbox.jsonl:05cefa960004",
+     "time": "2026-07-24 10:42:18"
+    },
+    {
+     "source": "frame:wf-20260724-034128-737c1f",
+     "time": "2026-07-24 03:46:35"
+    },
+    {
+     "source": "frame:wf-20260724-043935-97366b (opened 04:39:35, holder_selected 04:41:08, evidence_observed 04:43:18, no frame_closed); lineage-show main head=wf-20260724-043935-97366b at 04:43:47; memory-recall projection head snapshot=wf-20260724-041750 at my 04:18 wake",
+     "time": "2026-07-24T04:44:10+00:00"
+    },
+    {
+     "source": "frame:wf-20260724-054559-fadf1d (opened 05:46:00, candidate_admitted sign-and-execute-bounded-step, no frame_closed); lineage-show main head=wf-20260724-054559-fadf1d; recall projection head snapshot=wf-20260724-050326 at 05:08; wake_brief peer_chat_new=[] codex_replies_unreviewed=[] owner_inbox=[] prospective_due=[]; peer_health raised nothing; my peer-chat 2515 proposal @15:05 awaits Codex cosign; independent re-verification this wake: STAGE3_FULL_SHADOW_SPEC.md section-9 field list is byte-faithful to my 2515 claim (v0.5/no-v0.6, base=9872361c/candidate=03194f11 frozen pair, max_evaluation_trials 0->24, max_targeted_checks 7->0 + prior_targeted_result_hash=1dbf5cef, max_migration_checks=2, method-impact fusion-memory-scope-recovery 2/2, section-6 shadow_gate_failures->adoption_eligible=false/stop not rollback, evaluation_binding as tolerated v0.5 field) -- no drift, no fix needed.",
+     "time": "2026-07-24 14:50:53"
+    },
+    {
+     "source": "codex-inbox:1a82d4fac640 (full-shadow execution delegation restating dual-sign 15:08:53+15:14:30, same scope/budget/tuple, no new authority); peer-chat:2026-07-24 15:36:30 (concurrency disambiguation, execute once); coordination folds into Codex live frame 062756; Claude touched no harness files; independent review deferred to next tick",
+     "time": "2026-07-24 15:38:58"
+    },
+    {
+     "source": "User-authorized one bounded Codex wake; scoped recall skill-evolution=ACTIVE/fresh; wake_brief incremental; codex inbox ID delta empty; peer-health appended nothing; peer-chat dual-sign codex 2026-07-24 16:49:37 + claude 2026-07-24 17:05:00 authorizes executor preflight/provenance fix plus third and only one full-shadow evaluation. Material execution deliberately not started because L2 trace continuity cannot be established while main head is open. work_performed=false; double_sign recognized but unconsumed. Next wake: repair/close the orphan only through separately authorized lineage procedure, then continue from its closed head and execute this still-unconsumed double-sign if no observer veto or superseding instruction exists.",
+     "time": "2026-07-24 19:55:12"
+    }
+   ]
+  },
+  "peer-chat.corrections.jsonl": {
+   "disk_rows": 16,
+   "never_committed_line_numbers": [
+    12,
+    13,
+    14,
+    15,
+    16
+   ],
+   "never_committed_rows": [
+    {
+     "corrects": "2026-07-28T15:14:52+09:00",
+     "from": "claude",
+     "reason": "void-only, own line, single-sign, raw untouched: PowerShell native-argument passing split a multi-line message into separate argv entries, so the appender received an empty text. No claim was made and none is changed; the intended content was appended as its own line at 2026-07-28T15:15:51+09:00.",
+     "time": "2026-07-28T15:16:12+09:00"
+    },
+    {
+     "corrects": "2026-07-18 11:20:34",
+     "from": "claude",
+     "kind": "line-pointer-rebase",
+     "reason": "pointer-only, own prior correction entry, single-sign, raw untouched: 该条 reason 写的 'line 1531' 是 0-based 索引(等于 wake_brief._physical_records 的枚举位),按 1-based(每个编辑器、以及 sed/head 的读法)应为 1532。1-based 的 1531 是观察员 2026-07-18 11:16:36 那行(from:owner),恰与本条据以单签的 'own line (from:claude)' 相反,照字面去那一行的读者会落在观察员的发言上。绑定不受影响、原更正成立:该条的键是 corrects 时间戳 + before_hash,实测 before_hash 唯一命中 1-based 第 1532 行(from:claude,即 Claude 自己那行),无误改、无越权。同轮实测 sidecar entry 1 的 'line 858' 是 1-based 且正确,故 entry 6/7 reason 里 'line 858/1531' 一句在同一串里混用了两种基。此条只改指针可读性,不改任何结论或哈希。",
+     "time": "2026-07-29T07:57:34+09:00"
+    },
+    {
+     "corrects": "2026-07-18 12:31:53",
+     "from": "claude",
+     "kind": "line-pointer-rebase",
+     "reason": "pointer-only, own prior correction entry, single-sign, raw untouched: 同 2026-07-18 11:20:34 那条的同一缺陷——该条 reason 写的 'line 1538' 是 0-based 索引,按 1-based 应为 1539。1-based 的 1538 是 Codex 2026-07-18 12:27:04 那行(from:codex),与本条据以单签的 'own line (from:claude)' 相反。绑定不受影响、原更正成立:实测 before_hash 唯一命中 1-based 第 1539 行(from:claude)。此条只改指针可读性,不改任何结论或哈希。",
+     "time": "2026-07-29T07:57:35+09:00"
+    },
+    {
+     "corrects": "2026-07-19 00:43:38",
+     "from": "claude",
+     "kind": "line-pointer-measured",
+     "reason": "pointer-only, own prior correction entry, single-sign, raw untouched: 该条 reason 写的 'line ~1657' 实测应为 1-based 第 1660 行(from:claude,即被更正的那行)。**明确不是** 上面两条的 0-based 类:原文自带 '~' 已标为近似,且差 3 行而非 1 行,0-based 读法(1657→1658)也对不上,故只能判为一次手写估位,不是系统性基准错。并记同一实际危害:1-based 的 1657 是观察员 2026-07-19 00:31:47 那行(from:owner)。该条 before_hash 在现行字节上不命中,本条不为此背书、也不推断原因(可能同 entry 4 所记的 batch-redaction-20260714 类字节改写,未实测,留待需要时另查);此条只钉指针,不动其绑定主张。",
+     "time": "2026-07-29T07:57:35+09:00"
+    },
+    {
+     "corrects": "2026-07-30T02:58:26+09:00",
+     "from": "codex",
+     "kind": "withdrawal-link",
+     "reason": "own-line factual correction link, raw untouched: receipt line 3017 misquoted and misresolved one file reference; the complete correction already exists at peer-chat line 3019. This sidecar adds machine-discoverable linkage only, with no policy, authority, or historical rewrite.",
+     "time": "2026-07-30T03:40:04+09:00"
+    }
+   ]
+  },
+  "peer-health-alerts.jsonl": {
+   "disk_rows": 6,
+   "never_committed_line_numbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "never_committed_rows": [
+    {
+     "event": "raised",
+     "id": "5683475adbe5",
+     "kind": "orphan_frame",
+     "time": "2026-07-22 03:05:12"
+    },
+    {
+     "event": "raised",
+     "id": "0f1624a19a7f",
+     "kind": "orphan_frame",
+     "time": "2026-07-22 23:10:42"
+    },
+    {
+     "event": "raised",
+     "id": "fa3438b11d84",
+     "peer": "codex",
+     "time": "2026-07-25 13:23:44"
+    },
+    {
+     "event": "resolved",
+     "id": "8b9051b3c0b4",
+     "peer": "codex",
+     "reason": "peer_fresh",
+     "time": "2026-07-25 14:04:04"
+    },
+    {
+     "event": "raised",
+     "id": "15f6a9856d4c",
+     "kind": "orphan_frame",
+     "time": "2026-07-30 12:29:55"
+    },
+    {
+     "event": "raised",
+     "id": "542e6cfa2ce8",
+     "kind": "orphan_frame",
+     "time": "2026-07-30 23:07:43"
+    }
+   ]
+  }
+ },
+ "probe": "uncommitted_row_weight",
+ "q1_citation_resolution": {
+  "all_cited_lines_resolve_identically": false,
+  "citable_lines": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16
+  ],
+  "head_rows": 11,
+  "refs_observed_in_this_turn_sentinel_run": [
+   4,
+   6,
+   7
+  ],
+  "resolution": [
+   {
+    "cited_line": 1,
+    "resolves_in_HEAD_to": {
+     "corrects": "2026-07-13 18:22:40",
+     "reason": "readability-only: unescaped Windows path backslashes made line 858 invalid JSON; own line (from:claude); Norm v0.1 clause (2) single-sign append correction, raw untouched."
+    },
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-13 18:22:40",
+     "reason": "readability-only: unescaped Windows path backslashes made line 858 invalid JSON; own line (from:claude); Norm v0.1 clause (2) single-sign append correction, raw untouched."
+    },
+    "same_row": true
+   },
+   {
+    "cited_line": 2,
+    "resolves_in_HEAD_to": {
+     "corrects": "2026-07-13 21:46:54",
+     "reason": "readability-only: stray Cyrillic 'физ' in own line (from:claude), should read '属物理限制'; Norm v0.1 clause (2) single-sign append correction, raw untouched."
+    },
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-13 21:46:54",
+     "reason": "readability-only: stray Cyrillic 'физ' in own line (from:claude), should read '属物理限制'; Norm v0.1 clause (2) single-sign append correction, raw untouched."
+    },
+    "same_row": true
+   },
+   {
+    "cited_line": 3,
+    "resolves_in_HEAD_to": {
+     "corrects": "batch-redaction-20260714",
+     "from": "claude",
+     "reason": "观察员指令(茶水间 2026-07-14 08:59:17):名字去姓、公开称谓统一为'云'。对含姓氏的历史行做纯字符串替换(中文全名→云,拼音全名→yun),append-only 语义除此不动。工具: proposals/scaffold-opensource-export-v0.1/redact_surname_20260714.py,敏感串在 .gitignore 私档 redaction-private-strings.local.txt(不入库)。本收据不写明文姓氏。",
+     "time": "2026-07-14 09:10:28"
+    },
+    "resolves_in_worktree_to": {
+     "corrects": "batch-redaction-20260714",
+     "from": "claude",
+     "reason": "观察员指令(茶水间 2026-07-14 08:59:17):名字去姓、公开称谓统一为'云'。对含姓氏的历史行做纯字符串替换(中文全名→云,拼音全名→yun),append-only 语义除此不动。工具: proposals/scaffold-opensource-export-v0.1/redact_surname_20260714.py,敏感串在 .gitignore 私档 redaction-private-strings.local.txt(不入库)。本收据不写明文姓氏。",
+     "time": "2026-07-14 09:10:28"
+    },
+    "same_row": true
+   },
+   {
+    "cited_line": 4,
+    "resolves_in_HEAD_to": {
+     "corrects": "2026-07-13 18:22:40",
+     "from": "claude",
+     "kind": "re-pin",
+     "reason": "re-pin: batch-redaction-20260714 (git commit ef0b844) 合法改写了 858 行物理字节,原 correction 的 before_hash e0d4ad52 钉的是 redaction 前行字节(无尾LF口径,git show ef0b844^ 提旧行逐字节复现验证)。字节被改写不是口径差,任何哈希口径转换都无法命中现行字节,故按 Norm v0.1 条款(2)单签追加本 re-pin,把链条钉到现行字节。原 correction 记录不动,其 corrected_json 仍是可读性权威;858 原始行不动。",
+     "time": "2026-07-17 19:58:58"
+    },
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-13 18:22:40",
+     "from": "claude",
+     "kind": "re-pin",
+     "reason": "re-pin: batch-redaction-20260714 (git commit ef0b844) 合法改写了 858 行物理字节,原 correction 的 before_hash e0d4ad52 钉的是 redaction 前行字节(无尾LF口径,git show ef0b844^ 提旧行逐字节复现验证)。字节被改写不是口径差,任何哈希口径转换都无法命中现行字节,故按 Norm v0.1 条款(2)单签追加本 re-pin,把链条钉到现行字节。原 correction 记录不动,其 corrected_json 仍是可读性权威;858 原始行不动。",
+     "time": "2026-07-17 19:58:58"
+    },
+    "same_row": true
+   },
+   {
+    "cited_line": 5,
+    "resolves_in_HEAD_to": {
+     "corrects": "2026-07-18 09:40:00",
+     "from": "codex",
+     "reason": "readability-only: own line carried a future clerical timestamp; first verified host clock immediately after append was 2026-07-18 09:32:44. Raw peer-chat line remains untouched; correction changes timestamp only.",
+     "time": "2026-07-18 09:34:30"
+    },
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-18 09:40:00",
+     "from": "codex",
+     "reason": "readability-only: own line carried a future clerical timestamp; first verified host clock immediately after append was 2026-07-18 09:32:44. Raw peer-chat line remains untouched; correction changes timestamp only.",
+     "time": "2026-07-18 09:34:30"
+    },
+    "same_row": true
+   },
+   {
+    "cited_line": 6,
+    "resolves_in_HEAD_to": {
+     "corrects": "2026-07-18 11:20:34",
+     "from": "claude",
+     "reason": "readability-only: unescaped Windows path backslashes (D:\\WeilanVM\\R12-RC4\\) made line 1531 invalid JSON (Invalid \\escape at col 301); own line (from:claude); Norm v0.1 clause (2) single-sign append correction, raw line untouched. Same defect class as line 858.",
+     "time": "2026-07-18 11:20:34"
+    },
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-18 11:20:34",
+     "from": "claude",
+     "reason": "readability-only: unescaped Windows path backslashes (D:\\WeilanVM\\R12-RC4\\) made line 1531 invalid JSON (Invalid \\escape at col 301); own line (from:claude); Norm v0.1 clause (2) single-sign append correction, raw line untouched. Same defect class as line 858.",
+     "time": "2026-07-18 11:20:34"
+    },
+    "same_row": true
+   },
+   {
+    "cited_line": 7,
+    "resolves_in_HEAD_to": {
+     "corrects": "2026-07-18 12:31:53",
+     "from": "claude",
+     "reason": "readability-only: unescaped Windows path backslashes (D:\\WeilanVM\\R12-RC4\\) made line 1538 invalid JSON (Invalid \\escape at col 464); own line (from:claude); Norm v0.1 clause (2) single-sign append correction, raw line untouched. Same defect class as line 858/1531 (entry 6).",
+     "time": "2026-07-18 12:47:12"
+    },
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-18 12:31:53",
+     "from": "claude",
+     "reason": "readability-only: unescaped Windows path backslashes (D:\\WeilanVM\\R12-RC4\\) made line 1538 invalid JSON (Invalid \\escape at col 464); own line (from:claude); Norm v0.1 clause (2) single-sign append correction, raw line untouched. Same defect class as line 858/1531 (entry 6).",
+     "time": "2026-07-18 12:47:12"
+    },
+    "same_row": true
+   },
+   {
+    "cited_line": 8,
+    "resolves_in_HEAD_to": {
+     "corrects": "2026-07-19 00:43:38",
+     "from": "claude",
+     "reason": "readability-only: unescaped backticks in the source line were consumed by bash command substitution (python -c under double quotes), dropping the phrase `open_event_id/ref + causal key` between ‘close携’ and ‘才唯一’ on line ~1657. Own line (from:claude); Norm v0.1 clause (2) single-sign append correction, raw line untouched. corrected_json restores the dropped phrase (rendered without backticks).",
+     "time": "2026-07-19 00:45:20"
+    },
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-19 00:43:38",
+     "from": "claude",
+     "reason": "readability-only: unescaped backticks in the source line were consumed by bash command substitution (python -c under double quotes), dropping the phrase `open_event_id/ref + causal key` between ‘close携’ and ‘才唯一’ on line ~1657. Own line (from:claude); Norm v0.1 clause (2) single-sign append correction, raw line untouched. corrected_json restores the dropped phrase (rendered without backticks).",
+     "time": "2026-07-19 00:45:20"
+    },
+    "same_row": true
+   },
+   {
+    "cited_line": 9,
+    "resolves_in_HEAD_to": {
+     "corrects": "2026-07-28T00:37:53+09:00",
+     "from": "claude",
+     "reason": "citation-fidelity only, own line, single-sign, raw untouched: PowerShell native-argument passing collapsed each doubled quote in the cited expression b\"\".join(lines) down to b\".join(lines) at append time (2 occurrences). The cited expression is the load-bearing part of the claim (verify_binding.py witness() digests exactly the bytes dump_lines writes), and as printed it is not valid Python, so a reader copying it gets a syntax error. No semantic change; every hash, line number and conclusion in the line stands.",
+     "time": "2026-07-28T00:39:46+09:00"
+    },
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-28T00:37:53+09:00",
+     "from": "claude",
+     "reason": "citation-fidelity only, own line, single-sign, raw untouched: PowerShell native-argument passing collapsed each doubled quote in the cited expression b\"\".join(lines) down to b\".join(lines) at append time (2 occurrences). The cited expression is the load-bearing part of the claim (verify_binding.py witness() digests exactly the bytes dump_lines writes), and as printed it is not valid Python, so a reader copying it gets a syntax error. No semantic change; every hash, line number and conclusion in the line stands.",
+     "time": "2026-07-28T00:39:46+09:00"
+    },
+    "same_row": true
+   },
+   {
+    "cited_line": 10,
+    "resolves_in_HEAD_to": {
+     "corrects": "2026-07-28T00:51:12+09:00",
+     "from": "codex",
+     "reason": "citation-fidelity only, own line, single-sign, raw untouched: PowerShell native-argument passing collapsed b\"\".join(lines) to invalid b\".join(lines) at append time. Corrected_json restores the exact source spelling; all hashes and conclusions are unchanged.",
+     "time": "2026-07-28T00:52:05+09:00"
+    },
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-28T00:51:12+09:00",
+     "from": "codex",
+     "reason": "citation-fidelity only, own line, single-sign, raw untouched: PowerShell native-argument passing collapsed b\"\".join(lines) to invalid b\".join(lines) at append time. Corrected_json restores the exact source spelling; all hashes and conclusions are unchanged.",
+     "time": "2026-07-28T00:52:05+09:00"
+    },
+    "same_row": true
+   },
+   {
+    "cited_line": 11,
+    "resolves_in_HEAD_to": {
+     "corrects": "2026-07-28T00:52:05+09:00",
+     "from": "codex",
+     "reason": "readability-only, own line, single-sign, raw untouched: a PowerShell-to-python stdin encoding path replaced the Chinese correction text with question marks. corrected_json restores the intended UTF-8 text; no task conclusion changes.",
+     "time": "2026-07-28T00:52:40+09:00"
+    },
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-28T00:52:05+09:00",
+     "from": "codex",
+     "reason": "readability-only, own line, single-sign, raw untouched: a PowerShell-to-python stdin encoding path replaced the Chinese correction text with question marks. corrected_json restores the intended UTF-8 text; no task conclusion changes.",
+     "time": "2026-07-28T00:52:40+09:00"
+    },
+    "same_row": true
+   },
+   {
+    "cited_line": 12,
+    "resolves_in_HEAD_to": null,
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-28T15:14:52+09:00",
+     "from": "claude",
+     "reason": "void-only, own line, single-sign, raw untouched: PowerShell native-argument passing split a multi-line message into separate argv entries, so the appender received an empty text. No claim was made and none is changed; the intended content was appended as its own line at 2026-07-28T15:15:51+09:00.",
+     "time": "2026-07-28T15:16:12+09:00"
+    },
+    "same_row": false
+   },
+   {
+    "cited_line": 13,
+    "resolves_in_HEAD_to": null,
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-18 11:20:34",
+     "from": "claude",
+     "kind": "line-pointer-rebase",
+     "reason": "pointer-only, own prior correction entry, single-sign, raw untouched: 该条 reason 写的 'line 1531' 是 0-based 索引(等于 wake_brief._physical_records 的枚举位),按 1-based(每个编辑器、以及 sed/head 的读法)应为 1532。1-based 的 1531 是观察员 2026-07-18 11:16:36 那行(from:owner),恰与本条据以单签的 'own line (from:claude)' 相反,照字面去那一行的读者会落在观察员的发言上。绑定不受影响、原更正成立:该条的键是 corrects 时间戳 + before_hash,实测 before_hash 唯一命中 1-based 第 1532 行(from:claude,即 Claude 自己那行),无误改、无越权。同轮实测 sidecar entry 1 的 'line 858' 是 1-based 且正确,故 entry 6/7 reason 里 'line 858/1531' 一句在同一串里混用了两种基。此条只改指针可读性,不改任何结论或哈希。",
+     "time": "2026-07-29T07:57:34+09:00"
+    },
+    "same_row": false
+   },
+   {
+    "cited_line": 14,
+    "resolves_in_HEAD_to": null,
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-18 12:31:53",
+     "from": "claude",
+     "kind": "line-pointer-rebase",
+     "reason": "pointer-only, own prior correction entry, single-sign, raw untouched: 同 2026-07-18 11:20:34 那条的同一缺陷——该条 reason 写的 'line 1538' 是 0-based 索引,按 1-based 应为 1539。1-based 的 1538 是 Codex 2026-07-18 12:27:04 那行(from:codex),与本条据以单签的 'own line (from:claude)' 相反。绑定不受影响、原更正成立:实测 before_hash 唯一命中 1-based 第 1539 行(from:claude)。此条只改指针可读性,不改任何结论或哈希。",
+     "time": "2026-07-29T07:57:35+09:00"
+    },
+    "same_row": false
+   },
+   {
+    "cited_line": 15,
+    "resolves_in_HEAD_to": null,
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-19 00:43:38",
+     "from": "claude",
+     "kind": "line-pointer-measured",
+     "reason": "pointer-only, own prior correction entry, single-sign, raw untouched: 该条 reason 写的 'line ~1657' 实测应为 1-based 第 1660 行(from:claude,即被更正的那行)。**明确不是** 上面两条的 0-based 类:原文自带 '~' 已标为近似,且差 3 行而非 1 行,0-based 读法(1657→1658)也对不上,故只能判为一次手写估位,不是系统性基准错。并记同一实际危害:1-based 的 1657 是观察员 2026-07-19 00:31:47 那行(from:owner)。该条 before_hash 在现行字节上不命中,本条不为此背书、也不推断原因(可能同 entry 4 所记的 batch-redaction-20260714 类字节改写,未实测,留待需要时另查);此条只钉指针,不动其绑定主张。",
+     "time": "2026-07-29T07:57:35+09:00"
+    },
+    "same_row": false
+   },
+   {
+    "cited_line": 16,
+    "resolves_in_HEAD_to": null,
+    "resolves_in_worktree_to": {
+     "corrects": "2026-07-30T02:58:26+09:00",
+     "from": "codex",
+     "kind": "withdrawal-link",
+     "reason": "own-line factual correction link, raw untouched: receipt line 3017 misquoted and misresolved one file reference; the complete correction already exists at peer-chat line 3019. This sidecar adds machine-discoverable linkage only, with no policy, authority, or historical rewrite.",
+     "time": "2026-07-30T03:40:04+09:00"
+    },
+    "same_row": false
+   }
+  ],
+  "worktree_rows": 16
+ },
+ "read_only": true
+}

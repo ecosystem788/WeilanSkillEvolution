@@ -1,0 +1,363 @@
+{
+ "head": "f69a622822d338d9af2e26bd0c89bb6c2403c651",
+ "head_commit_count": 313,
+ "impl_dir": "proposals/bounded-scheduler-v0.1/impl",
+ "ledgers": [
+  {
+   "commits_on_head_since_last_touch": 28,
+   "disk_rows": 15,
+   "head_rows": 13,
+   "last_commit_touching": "bed06a4c5aea",
+   "path": "proposals/bounded-scheduler-v0.1/impl/blocker-quarantine.jsonl",
+   "rows_absent_from_head": 2,
+   "rows_in_no_commit_at_all": 2,
+   "sample_never_committed": [
+    {
+     "attempted_parent": "wf-20260731-114026-3d2c45",
+     "attempted_relation": "continue",
+     "authority_basis": "本回合治理=wake_prompt 有界自主回合。memory-recall:activation ACTIVE / continuation_allowed=true;control state=active(event af4e4c8d,观察员 07-30 19:06:26 IDE/下载/测试预授权——本回合未动用,且它明文不覆盖部署与 CHARTER 修订)。话筒 owner_inbox_delta 空;prospective_due 空;codex_replies_unreviewed 空;互助哨 appended 空、activity_anchor=peer-chat:3184(codex 20:36:46)。本回合唯一真活由 wake_brief 的 peer_chat_new 送到:Codex 2026-07-31 20:36:46 的【待裁断提醒】点名我 2026-07-31 19:50:13 的【提案｜ROADMAP North Star】仍待签或驳,且它承接云 18:39:35 的当前明确指令。故本回合的一件事=独立裁断该提案。",
+     "folded_by_frame_id": null,
+     "frozen_refs": [
+      {
+       "file": "peer-chat.jsonl",
+       "from": "claude",
+       "hash_convention": "current-record-minus-LF-v1(工作区物理记录字节,移除恰一个尾随 0x0A)",
+       "kind": "peer_chat_line",
+       "line_number": 3185,
+       "line_sha256": "c85c64233f2a8b7ba33bfcb991e9ca15b2edd229e1ebbad18125041ea76c7064",
+       "re": "2026-07-31 19:50:13",
+       "time": "2026-07-31T20:43:47+09:00"
+      },
+      {
+       "file": "peer-chat.jsonl",
+       "from": "codex",
+       "kind": "peer_chat_line",
+       "line_number": 3180,
+       "note": "被裁断的【提案｜ROADMAP North Star】",
+       "time": "2026-07-31 19:50:13"
+      },
+      {
+       "file": "peer-chat.jsonl",
+       "from": "owner",
+       "kind": "peer_chat_line",
+       "line_number": 3170,
+       "note": "云的大方向原话,忠实性判据的源",
+       "time": "2026-07-31 18:39:35"
+      }
+     ],
+     "observed_head": "wf-20260731-114026-3d2c45",
+     "open_error": "causal parent must be terminal: wf-20260731-114026-3d2c45(同行 Codex 并发持有主干活帧:lineage-show 报 branches.main.head_frame_id=wf-20260731-114026-3d2c45 / status=active;show 该帧得 4 事件、无 close,末事件为 candidate_admitted(cosign_if_current_evidence_passes),其 problem 即独立裁断我 2026-07-31T20:32:50+09:00 的醒来入口修订提案。按认领纪律不接管、不 frame-repair、不抢头驻留、不改 relation 分叉——那帧正是它评审我提案的现场。open 只试一次即停,错误逐字如上。",
+     "pending": "下一个合法帧经 audited adoption 认领本记录。续点:(1) Codex 执行 ROADMAP North Star 后,按其验收 5 由我独立核新节位置、原文、非范围字节守恒与授权可见性,并核三条差异是否如实进了执行收据;(2) Codex 已于 2026-07-31T20:45:46+09:00(peer-chat:3186)对我 20:32:50 的醒来入口修订案发出【反对·窄修】,新 hard blocker=target 3 会把一份已知红的 test 落进树(直接跑 2 FAIL、pytest 收集得 7 errors 缺 tmp fixture)。该条我本回合未处理——回合有界,本回合的一件事是 North Star 裁断。下回合先读全文再判:要么把 target 3 移出落地范围(只留在提案目录作落地前制品),要么改造它使落地后仍绿;不得为了签成而绕过它指出的红。(3) goal:organ-fusion-direction 已 eligible 但无 READY 时钟事件,本回合未做状态转换,其近端起点(先量哪里硌手)已由 19:28:27 的 FINDING 起头,续在上述 (2)。",
+     "schema_version": "weilan_blocker_quarantine_v0.1",
+     "time": "2026-07-31T20:47:31+09:00",
+     "time_authority": "clock",
+     "wake_id": "claude-wake-20260731T1140Z-cosign-roadmap-north-star",
+     "work_performed": true,
+     "work_summary": "已做(只读复算 + 一次茶水间追加,零仓内文件改动):① 独立复算提案 base 三值全部逐字相符——HEAD 6bc3ea86ac40878b5821813392399c9d1aa07f41;ROADMAP.md 工作树干净;blob c226ac8ab18803bcbe8f3d3f5ddf7113d6b56219 由 git rev-parse HEAD:ROADMAP.md 与 git hash-object ROADMAP.md 两条独立路径同值;sha256 bd32917c74701e672187d3270b57ee9124e09238949609536d69048623ba5031、16879 字节。② 另核该 base 无 EOL 口径歧义:check-attr 得 text:set/eol:lf,blob 字节 sha256 与工作区文件 sha256 逐字相同、字节数同、工作区 CR 行 0,故不落在 line-hash-eol-convention-v0.1 的 13 个活实例内。③ 插入点唯一性:^## Version namespaces$ 全文恰 1 次(第7行);ROADMAP.md 与 CHARTER.md 中 'North Star'/'北极星' 零命中。④ 回源核云原话(peer-chat:3170)与我的登记(3172),并实测 3170 之后至 3184 零条 from:owner。⑤ 结论=【同意】,附三条不阻断差异:(一)新节承了云三段中的两段,丢了'最后实现硅上世界和硅外世界的融合,当脑机接口成熟以后';(二)近端段落承载的是我 18:55:16 那条我自己明说'请驳我'、而云至今未答的读法;(三)验收清单漏了 CHARTER 第三条的文件型引证披露表义务。并显式声明本案不是逐字绑定案(提案未锁 final 全文、插入点空行处置未定),我绑定 target/base 三值/引号内节文字/单文件范围,不绑定 final sha256。本回合未改任何仓内文件,未执行 ROADMAP 改动(执行归提案方)。"
+    },
+    {
+     "attempted_parent": "wf-20260731-115359-d63f9a",
+     "attempted_relation": "continue",
+     "authority_basis": "本回合治理=wake_prompt 有界自主回合。memory-recall:activation ACTIVE / continuation_allowed=true;control state=active(event d1d6fe0d,指向 ROADMAP North Star 落地——那件事的执行按我 20:43:47 的签名归 Codex,且它此刻正持帧执行,故本回合不代做)。wake_brief 跑且只跑一遍:owner_inbox_delta 空、prospective_due 空、codex_replies_unreviewed 空、concurrent_receipts_new 空、peer_chat_new 2 条(我 20:43:47 的【同意】与 Codex 20:45:46 的【反对·窄修】)。互助哨 appended 空、无 clock_anomaly。故本回合唯一的真活=处理 Codex 对我自己提案的 hard blocker;这也是上一条隔离记录 pending(2) 明写的续点。",
+     "folded_by_frame_id": null,
+     "frozen_refs": [
+      {
+       "file": "peer-chat.jsonl",
+       "from": "codex",
+       "kind": "peer_chat_line",
+       "line_number": 3186,
+       "note": "被回应的【反对·窄修】,本回合唯一真活的来源",
+       "time": "2026-07-31T20:45:46+09:00"
+      },
+      {
+       "file": "peer-chat.jsonl",
+       "from": "claude",
+       "hash_convention": "current-record-minus-LF-v1(工作区物理记录字节,移除恰一个尾随 0x0A)",
+       "kind": "peer_chat_line",
+       "line_number": 3188,
+       "line_sha256": "0b0833f19c6df66c848cfe321e8481d4e9a95c7effd08b68d7ae4311aec8fd67",
+       "note": "本回合追加的【提案·修订2】",
+       "time": "2026-07-31T21:07:59+09:00"
+      },
+      {
+       "kind": "repo_file",
+       "note": "提案全文,本回合更新为修订2;未 commit",
+       "path": "proposals/wake-entrypoint-ergonomics-v0.1/PROPOSAL_TEXT.md"
+      },
+      {
+       "kind": "repo_file",
+       "note": "规范 LCS 重算后的四行绑定数字",
+       "path": "proposals/wake-entrypoint-ergonomics-v0.1/_binding_figures.out.json"
+      },
+      {
+       "frame_id": "wf-20260731-115359-d63f9a",
+       "kind": "peer_frame",
+       "note": "Codex 并发持有的 ROADMAP North Star 执行帧,本回合未接管"
+      }
+     ],
+     "observed_head": "wf-20260731-115359-d63f9a",
+     "open_error": "causal parent must be terminal: wf-20260731-115359-d63f9a(同行 Codex 并发持有主干活帧:该帧 2026-07-31T11:53:59Z 开于 problem='Land the co-signed ROADMAP North Star direction without touching any other project target.',文件内 3 条记录、无 close,末事件为 holder_probation_started;互助哨 activity_anchor=peer-chat:3187@2026-07-31 20:59:32(codex activity),即它正在执行。按认领纪律不接管、不 frame-repair、不抢头驻留、不改 relation 分叉。open 只试一次即停,错误逐字如上。",
+     "pending": "下一个合法帧经 audited adoption 认领本记录。续点:(1) 等 Codex 对修订2 的复核(它要按新 target 字节、落地态与真实 LCS 口径复核);签到即可落地+部署,驳则再修。(2) Codex 执行 ROADMAP North Star 后,按其验收 5 由我独立核新节位置、原文、非范围字节守恒与授权可见性,并核我 20:43:47 那三条差异(最远那颗星缺席、近端读法未获云确认、CHARTER §3 文件型引证披露表)是否如实进了执行收据。(3) 新差异待判:pytest 收集错误的命名惯例,两条候选(仓根配置排除 / 改惯例本身)我刻意不选,留给 Codex 独立判。(4) goal:organ-fusion-direction:本回合仍是'外环字节对不对'类的活,不是'用起来哪里硌手'——但它是清同行 blocker、不是我自选题;下回合若无更高优先事项,该真的换起点了。",
+     "schema_version": "weilan_blocker_quarantine_v0.1",
+     "time": "2026-07-31T21:11:10+09:00",
+     "time_authority": "clock",
+     "wake_id": "claude-wake-20260731T1200Z-wake-entrypoint-revision2",
+     "work_performed": true,
+     "work_summary": "已做(改动全在本提案目录内,未碰 impl 机件、未碰活体 skill、未部署、未 commit):① 回源核 Codex 的两条反对——target 3 生命周期:实测确认 pytest 默认发现规则会收走 test_*.py;LCS 错标:CONVENTION §5.5.b 逐字读过,反例(a,b,a→b,c,a)与'不得用 SequenceMatcher 冒充 LCS'确在条款里。② 取 A 案且取其硬支:后像文件更名为 _probe_20260731_wake_peek_prelanding_harness.proposed-final.py,落地目标随之改为 .../_probe_20260731_wake_peek_prelanding_harness.py;docstring 改写成自述型(冻结证据而非回归测试、落地后 2 FAIL 属设计、指向长期覆盖去处)。③ 实测:新名 pytest --collect-only 报 no tests collected;旧的 test_*.proposed-final.py 名报 collection ERROR。④ 改名+docstring 后复跑 22 例:ALL PASS、RC 0(它按 __file__.parent 定位,不认自己文件名)。⑤ _binding_figures.py 改为 import 受治理机检器 verify_binding.py 的 lcs_tables(含 MAX_DELTA_CELLS fail-closed),不再用 difflib;输出新增 lcs_length 与 lcs_source{path,symbol,sha256=2b97b0ff…}。⑥ 两种算法逐行对照:65/1、89/5、303/0,三行全部 AGREE——Codex 说的'数字碰巧没错'我独立坐实。⑦ ABSENT 负控在新路径下重跑:写 1 字节即改报 exists=true/2d711642…/1B/+303/-1,跑完即删、ls 复核无残留。⑧ 顺手量出一条不属本提案的差异并写进提案与茶水间、刻意不单方修:`<原名>.proposed-final.py` 惯例对 test_ 开头的目标自造 pytest 收集错误,HEAD 上已被跟踪的两份实测各报 ModuleNotFoundError、合计 2 errors,仓根无任何 pytest 配置排除——即'仓根 pytest 是绿的'在 HEAD 上就不成立。⑨ 提案全文更新为修订2(PROPOSAL_TEXT.md),并追加茶水间【提案·修订2】。未做也不主张:未执行 ROADMAP North Star(执行归 Codex,它正在做);未 commit 任何改动;未动 impl 与活体。"
+    }
+   ]
+  },
+  {
+   "commits_on_head_since_last_touch": 0,
+   "disk_rows": 102,
+   "head_rows": 102,
+   "last_commit_touching": "f69a622822d3",
+   "path": "proposals/bounded-scheduler-v0.1/impl/codex-inbox-processed.jsonl",
+   "rows_absent_from_head": 0,
+   "rows_in_no_commit_at_all": 0,
+   "sample_never_committed": []
+  },
+  {
+   "commits_on_head_since_last_touch": 44,
+   "disk_rows": 9,
+   "head_rows": 9,
+   "last_commit_touching": "41a7e5c3f047",
+   "path": "proposals/bounded-scheduler-v0.1/impl/codex-inbox-replies-reviewed.jsonl",
+   "rows_absent_from_head": 0,
+   "rows_in_no_commit_at_all": 0,
+   "sample_never_committed": []
+  },
+  {
+   "commits_on_head_since_last_touch": 0,
+   "disk_rows": 112,
+   "head_rows": 112,
+   "last_commit_touching": "f69a622822d3",
+   "path": "proposals/bounded-scheduler-v0.1/impl/codex-inbox-replies.jsonl",
+   "rows_absent_from_head": 0,
+   "rows_in_no_commit_at_all": 0,
+   "sample_never_committed": []
+  },
+  {
+   "commits_on_head_since_last_touch": 0,
+   "disk_rows": 101,
+   "head_rows": 101,
+   "last_commit_touching": "f69a622822d3",
+   "path": "proposals/bounded-scheduler-v0.1/impl/codex-inbox.jsonl",
+   "rows_absent_from_head": 0,
+   "rows_in_no_commit_at_all": 0,
+   "sample_never_committed": []
+  },
+  {
+   "commits_on_head_since_last_touch": 213,
+   "disk_rows": 42,
+   "head_rows": 21,
+   "last_commit_touching": "a9edbb202c5c",
+   "path": "proposals/bounded-scheduler-v0.1/impl/concurrent-receipts.jsonl",
+   "rows_absent_from_head": 21,
+   "rows_in_no_commit_at_all": 21,
+   "sample_never_committed": [
+    {
+     "attempted_parent": "wf-20260719-031031-3c2ef4",
+     "attempted_relation": "continue",
+     "folded_by_frame_id": null,
+     "observed_head": "wf-20260719-031031-3c2ef4",
+     "open_error": "Main head wf-20260719-031031-3c2ef4 is Codex OPEN peer review frame (problem=Independently review root README v2 awaiting Codex dual-sign; 5 events, no frame_closed; last evidence 2026-07-19T03:17:06Z). No frame-mutating work this wake: proposal edit + README landing correctly DEFERRED to avoid racing peer review. Read-only verification independently confirmed Codex finding: v2 before-string for README lines 30-31 omits the real newline between 副本是 and 冻结的评测基线, so exact-match=0; v3 fix = split that before-string at the newline (pure match-target correction, no semantic change). Coordination left in peer-chat 2026-07-19 12:20:30 + 12:22:10. Next wake: after Codex review lands, ship v3 and land README.",
+     "schema_version": "weilan_concurrent_receipt_v0.1",
+     "source": "frame:wf-20260719-031031-3c2ef4",
+     "time": "2026-07-19T03:23:20Z",
+     "wake_id": "claude-wake-20260719T0319-readme-v2-newline-confirm",
+     "work_performed": false
+    },
+    {
+     "attempted_parent": "wf-20260719-043934-21f762",
+     "attempted_relation": "continue",
+     "folded_by_frame_id": null,
+     "observed_head": "wf-20260719-043934-21f762",
+     "open_error": "causal parent must be closed: wf-20260719-043934-21f762 (同行 Codex 并发持有主干活帧,正独立核验我2026-07-19 13:29:12的【迁移提案】①-④:核 asset sha256=9329fe79…、独立下旧仓asset比对、确认本仓 gh release=0 无冲突、确认范围只新增Release;04:39开帧、04:40选定holder,回源时仅 frame_opened/candidate,无 close;peer_health 未告警——活跃中,不抢道、不替签自己的提案)",
+     "schema_version": "weilan_concurrent_receipt_v0.1",
+     "source": "本次有界 Claude episode:冷启动 skill-evolution=ACTIVE/continuation_allowed/fresh,control=9580f342。wake_brief:owner-inbox 差集空、无到期前瞻、无未评 Codex 回执;茶水间末条=云(owner)2026-07-19 13:33:19【能不能本地作好了,直接更新到远端?】——最高优先。回源核准:origin 远端存在(GitHub ecosystem788),gh release list=0(证实提案④无冲突),asset receipts/memory-export-20260714T0840JST.json 已在仓库,分支领先1未推。这是对外/不可逆动作(公开Release)的共商,双签未完成(Codex正审)且云正问方法——本回合零不可逆动作、只读核验+协调,在茶水间给云清晰非术语回答并列两条均可回滚路径(A:一条命令发带版本号Release;B:因快照已在仓库,只推分支即远端可下,连Release都省)待其抉择(peer-chat 13:38:31)。peer_health appended空。下一回合:读云的选择+Codex对迁移提案的【同意/反对】;双签成且云选定后按其选执行(单动作可回滚,不碰旧仓/solve-with-weilan/WeiLan/agi),归档另走【提案】。open_agenda goal:wire-parked-findings-r3 未到期(2026-07-21),本回合不动。",
+     "time": "2026-07-19 13:41:00 +0900",
+     "wake_id": "claude-wake-20260719T1338-owner-migration-consult",
+     "work_performed": false
+    },
+    {
+     "attempted_parent": "wf-20260719-102248-61272d",
+     "attempted_relation": "continue",
+     "folded_by_frame_id": null,
+     "observed_head": "wf-20260719-102248-61272d",
+     "open_error": "causal parent must be closed: wf-20260719-102248-61272d — 同行 Codex 并发持有主干活帧,正独立评估我 2026-07-19 19:07:06 的【路径B提案】(candidates: approve_and_push / oppose_and_stop;4事件,无 frame_closed)。不抢道、不替签自己的提案、不关同行的帧。",
+     "schema_version": "weilan_concurrent_receipt_v0.1",
+     "source": "本次有界 Claude episode(CHAT_EXPERIMENT旗在):冷启动 skill-evolution=ACTIVE/continuation_allowed/fresh,control=9580f342。wake_brief+peer_health 干净:owner-inbox 差集空、无到期前瞻、open_agenda 两项均未到期(wire-findings-r3 not_before 2026-07-21 且旗仍在→findings 续驻不接线;archive-checklist 为零权威读指针,归档执行需人在场+四道门现场核,不属本闲聊班)、无未评 Codex 回执、peer_health 无告警(Codex 18:50:39 活跃)。本班唯一动作(零权威、非帧变更):peer-chat 2026-07-19 19:22:00 追加带新差异一条=回答云 18:21'为什么不直接做完'——指认 Codex 18:48【反对】是纪律'好的一半'当场自证(抓到 push 会连带公开两个只签'本地落地'从未签'远端发布'的 commit),给出两情形执行判据。路径B已于19:07路由进 codex-inbox,合法等 Codex 独立会签,我为提案方不自签。下一班从此续:读 Codex 对路径B的会签结论。",
+     "time": "2026-07-19 19:22:30",
+     "wake_id": "claude-wake-20260719-192230",
+     "work_performed": false
+    }
+   ]
+  },
+  {
+   "commits_on_head_since_last_touch": 295,
+   "disk_rows": 4,
+   "head_rows": 4,
+   "last_commit_touching": "3c196d673b57",
+   "path": "proposals/bounded-scheduler-v0.1/impl/owner-inbox-processed.jsonl",
+   "rows_absent_from_head": 0,
+   "rows_in_no_commit_at_all": 0,
+   "sample_never_committed": []
+  },
+  {
+   "commits_on_head_since_last_touch": 295,
+   "disk_rows": 3,
+   "head_rows": 3,
+   "last_commit_touching": "3c196d673b57",
+   "path": "proposals/bounded-scheduler-v0.1/impl/owner-inbox-replies.jsonl",
+   "rows_absent_from_head": 0,
+   "rows_in_no_commit_at_all": 0,
+   "sample_never_committed": []
+  },
+  {
+   "commits_on_head_since_last_touch": 295,
+   "disk_rows": 4,
+   "head_rows": 4,
+   "last_commit_touching": "3c196d673b57",
+   "path": "proposals/bounded-scheduler-v0.1/impl/owner-inbox.jsonl",
+   "rows_absent_from_head": 0,
+   "rows_in_no_commit_at_all": 0,
+   "sample_never_committed": []
+  },
+  {
+   "commits_on_head_since_last_touch": 138,
+   "disk_rows": 16,
+   "head_rows": 11,
+   "last_commit_touching": "0602a23e2c5e",
+   "path": "proposals/bounded-scheduler-v0.1/impl/peer-chat.corrections.jsonl",
+   "rows_absent_from_head": 5,
+   "rows_in_no_commit_at_all": 5,
+   "sample_never_committed": [
+    {
+     "after_hash": "dbd483bc00fdcc18330226c98950c2fdbdbe749eb9ec9f2b1790130bfcc4288d",
+     "after_hash_convention": "sha256(json.dumps(corrected_json, ensure_ascii=False).encode('utf-8'))",
+     "before_hash": "50ef3fdb7bb666cf8f07d0c170ae35aafee9d625478c435c4fa508cc9e373804",
+     "before_hash_convention": "sha256(current physical line bytes, no trailing LF)",
+     "corrected_json": {
+      "from": "claude",
+      "re": "2026-07-28T15:04:09+09:00",
+      "text": "(本行作废)这条是一次追加事故的残骸,不是发言:PowerShell 原生参数传递把多行消息拆成多个参数,追加器只收到空 text。真正的内容已作为独立一行发在 2026-07-28T15:15:51+09:00。与 corrections ledger 里 2026-07-28T00:52:05 / 00:52:40 两条是同一失效模式;本次已改用脚本读文件,不再经 shell 传长文本。",
+      "time": "2026-07-28T15:14:52+09:00",
+      "time_authority": "clock"
+     },
+     "corrects": "2026-07-28T15:14:52+09:00",
+     "from": "claude",
+     "reason": "void-only, own line, single-sign, raw untouched: PowerShell native-argument passing split a multi-line message into separate argv entries, so the appender received an empty text. No claim was made and none is changed; the intended content was appended as its own line at 2026-07-28T15:15:51+09:00.",
+     "time": "2026-07-28T15:16:12+09:00",
+     "time_authority": "clock"
+    },
+    {
+     "corrects": "2026-07-18 11:20:34",
+     "from": "claude",
+     "kind": "line-pointer-rebase",
+     "reason": "pointer-only, own prior correction entry, single-sign, raw untouched: 该条 reason 写的 'line 1531' 是 0-based 索引(等于 wake_brief._physical_records 的枚举位),按 1-based(每个编辑器、以及 sed/head 的读法)应为 1532。1-based 的 1531 是观察员 2026-07-18 11:16:36 那行(from:owner),恰与本条据以单签的 'own line (from:claude)' 相反,照字面去那一行的读者会落在观察员的发言上。绑定不受影响、原更正成立:该条的键是 corrects 时间戳 + before_hash,实测 before_hash 唯一命中 1-based 第 1532 行(from:claude,即 Claude 自己那行),无误改、无越权。同轮实测 sidecar entry 1 的 'line 858' 是 1-based 且正确,故 entry 6/7 reason 里 'line 858/1531' 一句在同一串里混用了两种基。此条只改指针可读性,不改任何结论或哈希。",
+     "time": "2026-07-29T07:57:34+09:00",
+     "time_authority": "clock"
+    },
+    {
+     "corrects": "2026-07-18 12:31:53",
+     "from": "claude",
+     "kind": "line-pointer-rebase",
+     "reason": "pointer-only, own prior correction entry, single-sign, raw untouched: 同 2026-07-18 11:20:34 那条的同一缺陷——该条 reason 写的 'line 1538' 是 0-based 索引,按 1-based 应为 1539。1-based 的 1538 是 Codex 2026-07-18 12:27:04 那行(from:codex),与本条据以单签的 'own line (from:claude)' 相反。绑定不受影响、原更正成立:实测 before_hash 唯一命中 1-based 第 1539 行(from:claude)。此条只改指针可读性,不改任何结论或哈希。",
+     "time": "2026-07-29T07:57:35+09:00",
+     "time_authority": "clock"
+    }
+   ]
+  },
+  {
+   "commits_on_head_since_last_touch": 0,
+   "disk_rows": 3212,
+   "head_rows": 3212,
+   "last_commit_touching": "f69a622822d3",
+   "path": "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+   "rows_absent_from_head": 0,
+   "rows_in_no_commit_at_all": 0,
+   "sample_never_committed": []
+  },
+  {
+   "commits_on_head_since_last_touch": 295,
+   "disk_rows": 6,
+   "head_rows": 0,
+   "last_commit_touching": "3c196d673b57",
+   "path": "proposals/bounded-scheduler-v0.1/impl/peer-health-alerts.jsonl",
+   "rows_absent_from_head": 6,
+   "rows_in_no_commit_at_all": 6,
+   "sample_never_committed": [
+    {
+     "authority": "none",
+     "consecutive_count": 15,
+     "event": "raised",
+     "first_error_time": "2026-07-22T11:31:58",
+     "id": "5683475adbe5",
+     "incident_key": "orphan_frame:wf-20260722-021701-645652",
+     "kind": "orphan_frame",
+     "last_error_time": "2026-07-22T12:02:58",
+     "parent_frame_id": "wf-20260722-021701-645652",
+     "source_ref": "wake-cron.log terminal suffix",
+     "status": "suspected",
+     "time": "2026-07-22 03:05:12"
+    },
+    {
+     "authority": "none",
+     "consecutive_count": 182,
+     "event": "raised",
+     "first_error_time": "2026-07-23T01:46:03",
+     "id": "0f1624a19a7f",
+     "incident_key": "orphan_frame:wf-20260722-162354-4d82de",
+     "kind": "orphan_frame",
+     "last_error_time": "2026-07-23T08:04:58",
+     "parent_frame_id": "wf-20260722-162354-4d82de",
+     "source_ref": "wake-cron.log terminal suffix",
+     "status": "suspected",
+     "time": "2026-07-22 23:10:42"
+    },
+    {
+     "backlog": {
+      "count": 1,
+      "items": [
+       "b3576c7c6fec"
+      ],
+      "signature": "dc28eaeb4843",
+      "source_ref": "codex-inbox.jsonl ids minus codex-inbox-replies.jsonl reply_to ids"
+     },
+     "event": "raised",
+     "id": "fa3438b11d84",
+     "incident_key": "codex:dc28eaeb4843",
+     "note": "Peer may be stuck; this is a heuristic suspicion requiring owner verification.",
+     "peer": "codex",
+     "raised_by": "claude",
+     "silence": {
+      "last_activity_utc": "2026-07-25T05:29:05+00:00",
+      "silence_hours": 7.911,
+      "source_ref": "peer-chat.jsonl:2539@2026-07-25 14:29:05 (codex activity)",
+      "threshold_hours": 6
+     },
+     "status": "suspected",
+     "time": "2026-07-25 13:23:44"
+    }
+   ]
+  },
+  {
+   "commits_on_head_since_last_touch": 295,
+   "disk_rows": 0,
+   "head_rows": 0,
+   "last_commit_touching": "3c196d673b57",
+   "path": "proposals/bounded-scheduler-v0.1/impl/peer-hold.jsonl",
+   "rows_absent_from_head": 0,
+   "rows_in_no_commit_at_all": 0,
+   "sample_never_committed": []
+  }
+ ],
+ "probe": "ledger_commit_lag",
+ "read_only": true,
+ "totals": {
+  "ledgers_with_uncommitted_rows": 4,
+  "rows_in_no_commit_at_all": 34
+ },
+ "tracked_jsonl_count": 13
+}
