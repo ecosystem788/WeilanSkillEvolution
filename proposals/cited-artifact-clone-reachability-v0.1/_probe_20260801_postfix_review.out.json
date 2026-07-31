@@ -1,0 +1,109 @@
+﻿{
+  "authority": "report_only",
+  "boundary": "measures only how the checker labels synthetic citations; says nothing about whether any cited bytes are the ones a signer read",
+  "checker": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\cited_artifact_receipt_check.py",
+  "checker_sha256": "2e818caa6c0d6d0de6890f6b1faac1a39b54c69fc3ff6e5853e047680e81753c",
+  "probe": "cited_artifact_postfix_review",
+  "python": "3.11.9",
+  "q1_component_shapes": {
+    "cases": [
+      {
+        "bucket_warning_count": 1,
+        "classification_error": null,
+        "component": "...",
+        "component_survived_resolve": false,
+        "extracted_by_regex": true,
+        "path": "proposals/.../ghost.md",
+        "resolve_str": "\\\\?\\C:\\Users\\zy\\AppData\\Local\\Temp\\tmp1fbtdjrt\\repo\\proposals\\ghost.md",
+        "resolve_uses_extended_prefix": true,
+        "sibling_still_classified": "tracked_head",
+        "status": "unresolvable_component"
+      },
+      {
+        "bucket_warning_count": 0,
+        "classification_error": {
+          "detail": "path escapes root: proposals/..../ghost.md",
+          "reason": "invalid_path"
+        },
+        "component": "....",
+        "component_survived_resolve": false,
+        "extracted_by_regex": true,
+        "path": "proposals/..../ghost.md",
+        "resolve_str": "\\\\?\\C:\\Users\\zy\\AppData\\Local\\Temp\\tmp1fbtdjrt\\repo\\proposals\\ghost.md",
+        "resolve_uses_extended_prefix": true,
+        "sibling_still_classified": "tracked_head",
+        "status": "check_error:invalid_path"
+      },
+      {
+        "bucket_warning_count": 0,
+        "classification_error": {
+          "detail": "path escapes root: proposals/...../ghost.md",
+          "reason": "invalid_path"
+        },
+        "component": ".....",
+        "component_survived_resolve": false,
+        "extracted_by_regex": true,
+        "path": "proposals/...../ghost.md",
+        "resolve_str": "\\\\?\\C:\\Users\\zy\\AppData\\Local\\Temp\\tmp1fbtdjrt\\repo\\proposals\\ghost.md",
+        "resolve_uses_extended_prefix": true,
+        "sibling_still_classified": "tracked_head",
+        "status": "check_error:invalid_path"
+      },
+      {
+        "bucket_warning_count": 1,
+        "classification_error": null,
+        "component": "trail.",
+        "component_survived_resolve": true,
+        "extracted_by_regex": true,
+        "path": "proposals/trail./ghost.md",
+        "resolve_str": "C:\\Users\\zy\\AppData\\Local\\Temp\\tmp1fbtdjrt\\repo\\proposals\\trail.\\ghost.md",
+        "resolve_uses_extended_prefix": false,
+        "sibling_still_classified": "tracked_head",
+        "status": "missing"
+      },
+      {
+        "bucket_warning_count": 1,
+        "classification_error": null,
+        "component": "trail...",
+        "component_survived_resolve": true,
+        "extracted_by_regex": true,
+        "path": "proposals/trail.../ghost.md",
+        "resolve_str": "C:\\Users\\zy\\AppData\\Local\\Temp\\tmp1fbtdjrt\\repo\\proposals\\trail...\\ghost.md",
+        "resolve_uses_extended_prefix": false,
+        "sibling_still_classified": "tracked_head",
+        "status": "missing"
+      },
+      {
+        "bucket_warning_count": 1,
+        "classification_error": null,
+        "component": "mid.dle",
+        "component_survived_resolve": true,
+        "extracted_by_regex": true,
+        "path": "proposals/mid.dle/ghost.md",
+        "resolve_str": "C:\\Users\\zy\\AppData\\Local\\Temp\\tmp1fbtdjrt\\repo\\proposals\\mid.dle\\ghost.md",
+        "resolve_uses_extended_prefix": false,
+        "sibling_still_classified": "tracked_head",
+        "status": "missing"
+      }
+    ],
+    "question": "which components does the fix actually cover"
+  },
+  "q2_check_error_warning": {
+    "errored_citation_reason": "invalid_path",
+    "errored_citation_status": "check_error:invalid_path",
+    "note": "before the fix this same CheckError aborted the bucket: main() returned 2 with ok=false; after the fix the run is rc=0 / ok=true / warning_count as shown",
+    "question": "does a per-citation check_error reach the headline",
+    "sibling_status": "tracked_head",
+    "status_counts": {
+      "check_error:invalid_path": 1,
+      "tracked_head": 1
+    },
+    "warning_count": 0,
+    "warning_statuses": [
+      "disk_only",
+      "ignored",
+      "missing",
+      "unresolvable_component"
+    ]
+  }
+}
