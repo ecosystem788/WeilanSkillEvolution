@@ -1,0 +1,9 @@
+{
+  "target": "proposals/cosign-bytewise-binding-v0.1/test_verify_binding.py",
+  "base": "7aa039b05a2df776524fba0ca9a09b99c8a2c19a4c2acadaef3fcf521b336fdf",
+  "sidecar": "C:\\Users\\zy\\AppData\\Local\\Temp\\weilan-v08-wf-20260731-100138-10b0e5\\02-test-verify-binding\\test_verify_binding.base.sidecar",
+  "sidecar_present": true,
+  "witness_digest_pre": "12ca431be4ebb733694c0141481c294c4c5497cf4ac8a2db3dc6436a7c057b16",
+  "witness_path_pre": "C:\\Users\\zy\\AppData\\Local\\Temp\\weilan-v08-wf-20260731-100138-10b0e5\\02-test-verify-binding\\preflight-state.json.witness",
+  "non_target_entries": 678
+}

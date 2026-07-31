@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""verify_binding.py 的临时仓测试（v0.8）。
+"""verify_binding.py 的临时仓测试（v0.6）。
 
 只跑 `python test_verify_binding.py`；不依赖 pytest，不碰本仓工作树——
 每个用例在 tempdir 里现建一个 git 仓，制品一律写在那个仓之外（CONVENTION §5.3.d）。
@@ -12,7 +12,6 @@
 覆盖不到的（被忽略文件）必须由回执自己说出来，而不是躲在"非 target 差量为零"这个泛称底下。
 [14][15] 覆盖 07:40:43 拒签与本轮自测：R 腿必须钉符号目标（同 OID 改指不许放行）；
 for-each-ref 够不到的（refs/ 外伪引用、悬空 symref）同样必须写进 not_covered。
-[16] 覆盖 2026-07-31 的缺档普查：守恒等式的两个操作数都要有可定位、可重算的前像。
 """
 
 import json
@@ -443,58 +442,13 @@ def case_pseudorefs_excluded():
                   check=False).returncode != 0)
 
 
-def case_witness_paths_printed():
-    print("[16] 守恒等式的两个操作数都要有可定位的前像：两条见证明细路径都必须进 JSON")
-    # 2026-07-31 普查（proposals/witness-post-archival-asymmetry-v0.1/）：六次落地里 pre 明细
-    # 3 次可重算、post 明细仅 2 次，最近一次 post 缺档而没有任何闸口响。病灶与
-    # witness-archival-gap 同形——路径只由 args.state 在机检器内部派生、不出现在任何输出里，
-    # 于是唯一不被打印路径的制品，正是那个不被归档的制品。
-    # 本例只钉机件那一腿：两条路径都印出来，且各自明细的 sha256 逐字等于配对的 digest
-    # （witness() 取 sha256(b"".join(lines))、dump_lines 原样落盘，故明细在盘上则 digest 可重算）。
-    # **归档进仓不在本例内**：制品按 §5.3.d 住在仓外，机检器看不见仓，测不了。那一腿由
-    # CONVENTION §5.3.e 与回执核，是明写的人眼位——本注释存在就是为了不让它被读成机器守住了。
-    with Repo() as r:
-        rc, pre = r.preflight()
-        check("preflight 成功", rc == 0, json.dumps(pre, ensure_ascii=False)[:200])
-        p_pre = pre.get("witness_path_pre")
-        check("preflight 印出 pre 明细路径", bool(p_pre),
-              json.dumps(pre, ensure_ascii=False)[:200])
-        check("pre 明细在盘上，且 sha256 逐字等于 witness_digest_pre（即 digest 可重算）",
-              bool(p_pre) and os.path.exists(p_pre)
-              and sha256(p_pre) == pre["witness_digest_pre"],
-              str(p_pre))
-        r.write(INSERT_S3)
-        rc, out = r.postcheck(2, 0, ["## \u4e09"])
-        check("postcheck 通过（本例的前提，不是本例要证的东西）",
-              rc == 0 and out.get("ok") is True,
-              json.dumps(out, ensure_ascii=False)[:200])
-        q_pre, q_post = out.get("witness_path_pre"), out.get("witness_path_post")
-        check("postcheck 分列两条路径（缺一条，等式就有一边不可定位）",
-              bool(q_pre) and bool(q_post) and q_pre != q_post,
-              repr((q_pre, q_post)))
-        # bool(p_pre) 不是多余的：两边都缺字段时 None == None 会给出一个空洞的 PASS，
-        # 而本例要挡的恰恰是"两条路径都没有"这一种。
-        check("pre 路径与 preflight 印的那条逐字相同", bool(p_pre) and q_pre == p_pre,
-              repr((p_pre, q_pre)))
-        check("post 明细在盘上，且 sha256 逐字等于 witness_digest_post",
-              bool(q_post) and os.path.exists(q_post)
-              and sha256(q_post) == out["witness_digest_post"],
-              str(q_post))
-        check("两个 digest 相等 → 两份明细字节也应相等（等式的两边真的同一份前像）",
-              bool(q_pre) and bool(q_post)
-              and os.path.exists(q_pre) and os.path.exists(q_post)
-              and (out["witness_digest_post"] != out["witness_digest_pre"]
-                   or open(q_pre, "rb").read() == open(q_post, "rb").read()))
-
-
 def main():
     for fn in (case_happy, case_wrong_count, case_wrong_section, case_deletion_counted,
                case_sidecar_tampered, case_artifact_inside_worktree,
                case_expectations_required, case_conservation_still_binds,
                case_interleaved_lcs, case_ambiguous_attribution,
                case_index_only_mutation, case_refs_mutation, case_ignored_files_excluded,
-               case_symref_retarget, case_pseudorefs_excluded,
-               case_witness_paths_printed):
+               case_symref_retarget, case_pseudorefs_excluded):
         fn()
     print()
     if FAILURES:
