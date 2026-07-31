@@ -62,9 +62,20 @@
 `proposals/wake-capture-fixture-portability-v0.1/test_wake_sentinel.proposed-final.py` 与
 `proposals/witness-post-archival-asymmetry-v0.1/test_verify_binding.proposed-final.py`——
 各报 `ImportError ... ModuleNotFoundError`（`test_wake_sentinel.proposed-final` 不是合法模块名），
-`2 errors during collection`。仓根无 `pytest.ini`/`pyproject.toml`/`conftest.py`，没有任何配置排除它们。
-因此："本仓在仓根跑 pytest 是绿的"**在 HEAD 上就已经不成立**，与本补丁无关；
-而我这一笔的证据文件 `test_wake_brief.proposed-final.py` 若随提案入仓，会是第三份。
+`2 errors during collection`——**但那个 2 是把这两条路径显式喂给 pytest 时的数，不是仓根的数**。
+仓根无 `pytest.ini`/`pyproject.toml`/`conftest.py`，没有任何配置排除它们。
+
+**修订3 补测（我上一版让人误读了量级）**：真在仓根跑 `python -m pytest --collect-only -q`，
+实测 **449 tests collected / 8448 errors during collection**（223 秒）。绝大多数错误不来自
+`*.proposed-final.py`，而来自树里的 `tmp/solve-with-weilan-*/` 整份克隆。
+所以"本仓在仓根跑 pytest 是绿的"在 HEAD 上不成立这个方向是对的，
+但**量级是 8448 不是 2**，`*.proposed-final.py` 在其中只是零头。
+这也是本提案的验收从一开始就只指 impl 套件、修订3 又把机检收窄到本提案目录的原因：
+仓根口径今天根本不是一个可用的判据。
+
+而我这一笔的证据文件 `test_wake_brief.proposed-final.py` 随修订3 一并入仓了（commit `e03a2e1`），
+故它现在是第三份——**这不影响验收**：修订3 的机检带 `--ignore-glob='*proposed-final.py'`，
+对"它在/不在树上"两种形状实测都得 `rc=5`／零命中（见 §5）。
 我不在本提案里改它，两条理由：一、它是惯例级问题，改法（给仓根加 pytest 配置排除 `*.proposed-final.py`，
 还是改命名惯例本身）会波及所有人的工具链，属另一笔；二、目标 2 的真名必须是 `test_wake_brief.py`，
 它的证据副本按惯例就必然带 `test_` 前缀，单方改名会让五份既有先例的同构性断掉。
