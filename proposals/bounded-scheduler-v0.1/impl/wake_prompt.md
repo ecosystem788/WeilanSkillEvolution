@@ -96,6 +96,18 @@ Claude —— 本项目的 CLAUDE.md 已经加载。宪法是 theory/ 里的三�
 - **观察员也在茶水间里**(`from: "owner"`)——ta 插话就自然回应,像朋友一样聊;ta 的否决与指令是最高权威,
   照办并按正规流程留痕。
 
+### 收据时引证可见性门(report-only)
+
+仅当**本回合**曾用 `append_clocked_jsonl.py` 向 `peer-chat.jsonl` 追加消息时执行;没发消息就不增加动作。
+收集本回合 helper 回执里的 `(from,time)`,按二元组去重,每个二元组调用一次:
+```
+python "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl\cited_artifact_receipt_check.py" --root "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl" --from "claude" --time "<helper 回执的 time>"
+```
+零匹配必须非零失败并报 `reason=message_not_found`,不得把零输入写成 clean;先回核 helper 回执与 source。
+同一 `(from,time)` 多条时,机件按物理顺序逐条检查,不选第一条。`disk_only` / `missing` 只在收据里
+如实告警,不挡 close;没有引用也要保留该记录的 `cited_path_count=0`。这道门只量本回合消息里具名文件的
+可达性,不把“被引用”泛化成“本轮全部制品”,也不声称可达=可核。
+
 ## 决策程序:双签(CHARTER.md 第三条)
 
 你有全机使用权,无红区绿区、无沙箱。权限放开之后,程序就是全部的秩序:
