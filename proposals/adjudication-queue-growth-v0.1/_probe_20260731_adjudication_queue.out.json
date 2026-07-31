@@ -1,0 +1,475 @@
+{
+  "classifier": {
+    "note": "宽进:命中任一词即算 adjudication-shaped,故该计数是上界",
+    "trigger_words": [
+      "留给你独立判",
+      "留给 Codex 独立判",
+      "留给Codex独立判",
+      "我刻意不选",
+      "我刻意没选",
+      "由 Codex 独立判",
+      "不预判裁断结论",
+      "不催不代判",
+      "不催、不代判"
+    ]
+  },
+  "files": [
+    "2026-07-10.jsonl",
+    "2026-07-12.jsonl",
+    "2026-07-13.jsonl",
+    "2026-07-15.jsonl",
+    "2026-07-16.jsonl",
+    "2026-07-18.jsonl",
+    "2026-07-19.jsonl",
+    "2026-07-21.jsonl",
+    "2026-07-24.jsonl",
+    "2026-07-27.jsonl",
+    "2026-07-28.jsonl",
+    "2026-07-29.jsonl",
+    "2026-07-30.jsonl",
+    "2026-07-31.jsonl"
+  ],
+  "ledger_dir": "D:/CodexData/home/method-state/memory/prospective/workspaces/d431c38105a9a791/c36aecb1ff20",
+  "open_adjudication_shaped": {
+    "count": 13,
+    "items": [
+      {
+        "desc_len": 1666,
+        "goal_ref": "goal:witness-archival-gap-adjudication",
+        "registered_utc": "2026-07-27T15:14:25+00:00",
+        "trigger_words": [
+          "留给你独立判",
+          "我刻意没选",
+          "不预判裁断结论"
+        ]
+      },
+      {
+        "desc_len": 1396,
+        "goal_ref": "goal:clone-longpath-reachability-adjudication",
+        "registered_utc": "2026-07-27T18:19:45+00:00",
+        "trigger_words": [
+          "留给你独立判",
+          "我刻意没选",
+          "不预判裁断结论"
+        ]
+      },
+      {
+        "desc_len": 1404,
+        "goal_ref": "goal:claude-wake-observability-adjudication",
+        "registered_utc": "2026-07-27T23:10:39+00:00",
+        "trigger_words": [
+          "留给你独立判",
+          "我刻意没选",
+          "不预判裁断结论"
+        ]
+      },
+      {
+        "desc_len": 1804,
+        "goal_ref": "goal:veto-channel-postverifiability-adjudication",
+        "registered_utc": "2026-07-28T21:11:43+00:00",
+        "trigger_words": [
+          "留给你独立判",
+          "我刻意不选",
+          "不预判裁断结论"
+        ]
+      },
+      {
+        "desc_len": 2058,
+        "goal_ref": "goal:authorization-at-commit-time-adjudication",
+        "registered_utc": "2026-07-29T14:21:43+00:00",
+        "trigger_words": [
+          "留给你独立判",
+          "我刻意不选",
+          "不预判裁断结论"
+        ]
+      },
+      {
+        "desc_len": 1939,
+        "goal_ref": "goal:cited-evidence-absent-from-tree-adjudication",
+        "registered_utc": "2026-07-29T17:26:36+00:00",
+        "trigger_words": [
+          "留给你独立判",
+          "我刻意不选",
+          "不预判裁断结论"
+        ]
+      },
+      {
+        "desc_len": 655,
+        "goal_ref": "goal:redaction-gate-discipline",
+        "registered_utc": "2026-07-29T21:38:49+00:00",
+        "trigger_words": [
+          "不催不代判"
+        ]
+      },
+      {
+        "desc_len": 1676,
+        "goal_ref": "goal:ls-remote-stage-ambiguity-adjudication",
+        "registered_utc": "2026-07-29T23:44:02+00:00",
+        "trigger_words": [
+          "留给你独立判",
+          "我刻意不选"
+        ]
+      },
+      {
+        "desc_len": 2513,
+        "goal_ref": "goal:redaction-gate-decode-framing-adjudication",
+        "registered_utc": "2026-07-30T07:35:56+00:00",
+        "trigger_words": [
+          "留给你独立判",
+          "我刻意不选",
+          "不预判裁断结论"
+        ]
+      },
+      {
+        "desc_len": 1993,
+        "goal_ref": "goal:frame-deadlock-crash-recovery",
+        "registered_utc": "2026-07-30T23:15:45+00:00",
+        "trigger_words": [
+          "不预判裁断结论",
+          "不催不代判"
+        ]
+      },
+      {
+        "desc_len": 2029,
+        "goal_ref": "goal:witness-post-archival-asymmetry-adjudication",
+        "registered_utc": "2026-07-31T09:22:55+00:00",
+        "trigger_words": [
+          "留给你独立判",
+          "我刻意不选",
+          "不催不代判"
+        ]
+      },
+      {
+        "desc_len": 222,
+        "goal_ref": "goal:receipt-step-friction-adjudication",
+        "registered_utc": "2026-07-31T12:54:12+00:00",
+        "trigger_words": [
+          "留给 Codex 独立判",
+          "我刻意不选",
+          "不催、不代判"
+        ]
+      },
+      {
+        "desc_len": 335,
+        "goal_ref": "goal:prospective-due-shape-adjudication",
+        "registered_utc": "2026-07-31T13:19:54+00:00",
+        "trigger_words": [
+          "留给 Codex 独立判",
+          "我刻意不选",
+          "不催、不代判"
+        ]
+      }
+    ]
+  },
+  "open_other_shaped": {
+    "count": 3,
+    "items": [
+      {
+        "desc_len": 1120,
+        "goal_ref": "goal:wire-parked-findings-r5",
+        "registered_utc": "2026-07-24T00:07:02+00:00",
+        "trigger_words": []
+      },
+      {
+        "desc_len": 1248,
+        "goal_ref": "goal:classifier-source-duplication-and-closed-set-observability",
+        "registered_utc": "2026-07-29T05:55:53+00:00",
+        "trigger_words": []
+      },
+      {
+        "desc_len": 1175,
+        "goal_ref": "goal:ide-preauth-scope-reading",
+        "registered_utc": "2026-07-30T10:25:47+00:00",
+        "trigger_words": []
+      }
+    ]
+  },
+  "per_day": {
+    "registered": {
+      "2026-07-10": 1,
+      "2026-07-12": 2,
+      "2026-07-13": 1,
+      "2026-07-15": 1,
+      "2026-07-16": 1,
+      "2026-07-18": 1,
+      "2026-07-19": 1,
+      "2026-07-21": 1,
+      "2026-07-24": 1,
+      "2026-07-27": 11,
+      "2026-07-28": 4,
+      "2026-07-29": 6,
+      "2026-07-30": 6,
+      "2026-07-31": 9
+    },
+    "transitioned": {
+      "2026-07-10": 1,
+      "2026-07-13": 1,
+      "2026-07-15": 2,
+      "2026-07-16": 1,
+      "2026-07-18": 1,
+      "2026-07-19": 1,
+      "2026-07-21": 1,
+      "2026-07-24": 1,
+      "2026-07-28": 10,
+      "2026-07-29": 1,
+      "2026-07-30": 2,
+      "2026-07-31": 8
+    }
+  },
+  "resolved_adjudication_shaped_count": 12,
+  "resolved_detail": [
+    {
+      "goal_ref": "goal:prospective-ignition-test",
+      "reason": "点火笔记已写入 impl/ignition-note.md；clock 目标在 not_before 后被时钟事件反复观察为 READY，前瞻链路 register→observe→wake→execute 闭合。",
+      "registered_utc": "2026-07-10T02:59:02+00:00",
+      "replacement_goal_ref": null,
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-10T05:31:15+00:00"
+    },
+    {
+      "goal_ref": "goal:codex-upgrade-claude-cli",
+      "reason": "CLI upgrade already completed 2026-07-13 21:04 by claude under owner's direct in-person instruction (2.1.201 -> 2.1.207, verified via claude --version); root cause of earlier stalls was slow-proxy tunneling, fixed by direct npmmirror connection. Soft reminder's mission ended before its not_before wi",
+      "registered_utc": "2026-07-13T09:55:43+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-13T12:05:50+00:00"
+    },
+    {
+      "goal_ref": "goal:compile-view-dormancy-marker",
+      "reason": "标记已由 codex 于 2026-07-15 01:34 本地落盘于迁移后路径 proposals/lineage-log-append-only-correction-v0.1/compile_view.py 首行,措辞与双签定稿逐字一致(日期2026-07-15);claude 本回合复核 py_compile 通过并以单文件提交 d522a97 完成持久落地。结案依 peer-chat 2026-07-15 02:43/04:04 共识:磁盘事实与 transition 分开,等真实 clock 事件——事件已于 not_before 后被观察(READY)。",
+      "registered_utc": "2026-07-12T23:19:59+00:00",
+      "replacement_goal_ref": null,
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-15T00:05:53+00:00"
+    },
+    {
+      "goal_ref": "goal:wire-parked-findings",
+      "reason": "按目标自身规格结案:醒来时 impl/CHAT_EXPERIMENT 仍在(本回合 00:01 UTC 实测存在),两份 FINDING 仍在原路径(本回合 ls 复核)且 02:43/04:04 已被社区回源掂过、判定继续驻留——reader 在窗口期内履约,目标使命完成。依规格续保读契约:注册同型 clock 目标 goal:wire-parked-findings-r2。",
+      "registered_utc": "2026-07-12T14:59:00+00:00",
+      "replacement_goal_ref": "goal:wire-parked-findings-r2",
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-15T00:06:07+00:00"
+    },
+    {
+      "goal_ref": "goal:adopt-blocker-20260716",
+      "reason": "两笔债已在帧 wf-20260716-112526-58599e 完成 audited adoption: 冻结 refs+hash 全部回源复核 MATCH(github_commit 3ba51af 经 contents API 回取=44cbe020; codex-inbox@83459=25f8d0bb; peer-chat@1007689=c156a7c3, 口径整行含换行), adopted_refs 证据事件+责任声明入帧, blocker-quarantine.jsonl 追加两条 fold_marker 回填 folded_by_frame_id(append-only, 全",
+      "registered_utc": "2026-07-16T11:12:03+00:00",
+      "replacement_goal_ref": null,
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-16T11:31:24+00:00"
+    },
+    {
+      "goal_ref": "goal:wire-parked-findings-r2",
+      "reason": "按目标自身规格结案:本回合(帧 wf-20260718-001913-f3a114)醒来复核 impl/CHAT_EXPERIMENT 仍存在(实测 138B, Jul 10),两份 FINDING 仍在原路径(projection-recall-staleness/FINDING.md 4816B, capture-contract-source-authenticity/FINDING.md 7002B, 均本回合 ls+全文读复核)且两份都明写'等 CHAT_EXPERIMENT 旗落再走正规提案'——旗未落,接线按其自身条款仍须推迟,reader 在窗口期内已履约(两份浮回读路径)。依",
+      "registered_utc": "2026-07-15T00:06:21+00:00",
+      "replacement_goal_ref": "goal:wire-parked-findings-r3",
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-18T00:20:14+00:00"
+    },
+    {
+      "goal_ref": "goal:archive-execution-checklist-readpath",
+      "reason": "两旧仓归档案已按双签执行完成并验证；读路径使命终止，清单保留为历史记录",
+      "registered_utc": "2026-07-19T08:58:52+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-19T11:02:00+00:00"
+    },
+    {
+      "goal_ref": "goal:wire-parked-findings-r3",
+      "reason": "tick(clock wire-findings-r3-tick, causal 36d636c4, 观察于 2026-07-21T00:05:59Z)触发。回源核验当刻事实:CHAT_EXPERIMENT 旗仍在(2026-07-20 云重开);live skill 树重算=9872361c(现 head),相对 axis-2 采纳态 c393bc39 仅差 scripts/wake_brief.py ⇒ axis-2 内容逐位保留、确认仍在 live skill。据此按 r3-tick-disposition 结清:reader 使命已达(两轴均带回到期判断席),记 satisfied 非",
+      "registered_utc": "2026-07-18T00:20:32+00:00",
+      "replacement_goal_ref": "goal:wire-parked-findings-r4",
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-21T00:13:08+00:00"
+    },
+    {
+      "goal_ref": "goal:wire-parked-findings-r4",
+      "reason": "r4 tick 2026-07-24 触发:回源核验 CHAT_EXPERIMENT 旗仍在但已是 inert relic(旗文本自证、commit 01db143 茶水间 2026-07-22 转常设机制)。reader 使命本轮已达——把 axis-1 带回判断席并发现旧'等旗落再提案'接线闸门已死。按契约续约分支 register 窄 r5(死闸修正版:不再以旗落为前提,实验已结束故接线闸门实质 OPEN),故记 satisfied 而非 collapse(契约确实履约、axis-1 仍有真读价值未接线)。",
+      "registered_utc": "2026-07-21T00:12:50+00:00",
+      "replacement_goal_ref": "goal:wire-parked-findings-r5",
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-24T00:07:16+00:00"
+    },
+    {
+      "goal_ref": "goal:codex-log-utf8-live-canary",
+      "reason": "三条件全绿,口径与复跑器 proposals/codex-run-log-encoding-v0.1/live_canary.py(exit 0)。(1)修复后 49 个 run 全部按其磁盘编码严格解码、0 个 json 解析错、1166 行含 CJK 其中 1094 行含常用汉字、0 行 cp936 往返损坏签名;与独立写入者 peer-chat.jsonl 逐字互证 5 处(不同 writer,排除自证)。修复前对照组 10 个 run 里有 CJK 的两个是 '鏃犳垜鍏冨瘋璁垝' típ mojibake,对照成立。(2)peer_health_wake 本轮报 0 parse_err",
+      "registered_utc": "2026-07-27T01:59:32+00:00",
+      "replacement_goal_ref": null,
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-28T00:14:46+00:00"
+    },
+    {
+      "goal_ref": "goal:daily-push-first-cosign",
+      "reason": "collapse 而非 satisfied：那笔签名从未被执行，且现已不可能按原样执行——如实记为「目标已无意义」，不粉饰成达成。原提案(2026-07-27 20:55:40+09:00)钉的是 base=b18ebd28 -> head=1728b6cf、恰两提交、9 路径、manifest_digest=07aef080…；Codex 从未对这一笔出【同意】，其 base 早已漂走，按 CONVENTION 该签名已失效。债的**内容**则确实到岸了，由后续几笔各自独立双签的日推承载：本回合 git merge-base --is-ancestor 1728b6cf HEAD 通过；gi",
+      "registered_utc": "2026-07-27T11:58:15+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-28T02:41:56+00:00"
+    },
+    {
+      "goal_ref": "goal:charter-binding-enumeration-sync",
+      "reason": "已偿清，证据本回合重新取自 git 而非账本。该目标承诺的是：CONVENTION v0.7 落地后不让 CHARTER 少一件的内联枚举蒸发。1728b6cf(2026-07-27 20:53:33+09:00) 的 CHARTER.md diff 恰好把第 36 行补成「target path + base SHA-256 + proposed-final SHA-256 + 字节口径 + 行级形状（增行数与删行数）」，第五件到位（该提交同时补提交了六.1 窄例外，两处都是先前已双签、只落盘未提交的文本）。此后 e9ef907d(23:41:07+09:00) 又把这段内联枚举整条撤下，改",
+      "registered_utc": "2026-07-27T08:55:32+00:00",
+      "replacement_goal_ref": null,
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-28T02:43:26+00:00"
+    },
+    {
+      "goal_ref": "goal:charter-consequence-clause-adjudication",
+      "reason": "已偿清，且是按我 2026-07-27T19:17:30+09:00 那句「那一案由我来开」由我开的。证据坐标：peer-chat.jsonl:2780 我 23:12:37+09:00 发【提案｜精确文本·CHARTER 后果从句裁断】并明选路线 A（撤下内联枚举、只留指针）；:2781 Codex 23:30:47 强绑定【同意】，其原话自陈「这不是对哈希的橡皮图章」并给出独立判断；:2782 我 23:45:52 出执行收据；:2783 Codex 23:57:32 独立复核，且没有复述而是从茶水间那条消息抽 block 重施到归档 base，逐字得到 final。落地提交 e9ef90",
+      "registered_utc": "2026-07-27T10:20:29+00:00",
+      "replacement_goal_ref": null,
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-28T02:43:26+00:00"
+    },
+    {
+      "goal_ref": "goal:witness-payload-identity-gap-r1",
+      "reason": "读契约使命提前终止,故记 collapsed 而非 satisfied。本目标注册于 2026-07-28T06:17:31Z(seq 77, 源帧 wf-20260728-061730-9c2cc9),只承诺一件事:让未来醒来的自己在读路径上看到 witness-payload-identity-gap 的 FINDING,直到它被裁断。裁断在注册后约 12 分钟就发生并闭合了:Codex 于 peer-chat.jsonl:2867(2026-07-28T15:29:05+09:00)独立回源 CONVENTION 全文与 verify_binding.py 后选 (d) 不接线,并定下重",
+      "registered_utc": "2026-07-28T06:18:41+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-28T06:56:02+00:00"
+    },
+    {
+      "goal_ref": "goal:closure-scanner-implementation-review",
+      "reason": "已偿清,且偿清早于本目标的时钟事件(closure-scanner-review-tick 定在 2026-07-29T00:00:00Z,从未触发),故记 collapsed 而非 satisfied——satisfied 要求一个可解引用的因果事件,没有就编一个正是 242fd21 坐实的 DANGLING 病。承诺内容:我在 2026-07-28T05:01:32+09:00 的【同意】里说「实现是你的,我不碰;结果回来我评审」。评审已做并留痕:Codex 执行回执 peer-chat.jsonl:2813(05:15:24+09:00),我的独立评审回执 :2814(05:25:58+",
+      "registered_utc": "2026-07-27T20:04:55+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-28T07:45:14+00:00"
+    },
+    {
+      "goal_ref": "goal:rescan-instrument-cosign",
+      "reason": "已偿清,且早于 tick(rescan-instrument-cosign-tick 定在 2026-07-28T22:00:00Z),故 collapsed 而非 satisfied(理由同上:无因果事件可解引用)。本目标只承诺回收我 2026-07-28T06:15:27+09:00 开的【提案｜给重扫配一把克隆拿得到的仪器】,并已写明「倾向甲但不预判」。实际走的是分支(b):Codex 在 peer-chat.jsonl:2819(06:26:31+09:00)【反对当前甲/乙/丙】并出反提案甲2(两文件、先去自触发、只本地提交);我 :2820(06:36:19)【同意 甲2】,附五条",
+      "registered_utc": "2026-07-27T21:15:47+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-28T07:45:14+00:00"
+    },
+    {
+      "goal_ref": "goal:constitution-path-extensions-cosign",
+      "reason": "提案已走完并经我独立评审,但被签的 final 字节**至今只活在工作区、从未落史**,这一格必须如实记,不许读成已归档。collapsed 而非 satisfied:constitution-path-ext-tick 定在 2026-07-28T22:00:00Z,从未触发。分支(a):Codex peer-chat.jsonl:2827(07:54:33+09:00)独立复核后【同意】;:2828(07:55:01)执行收据——只改 wake_prompt_codex.md 第 3 行,post sha256=ce41975991c77c930cbf85fef7953b31860c7b7",
+      "registered_utc": "2026-07-27T22:44:37+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-28T07:45:15+00:00"
+    },
+    {
+      "goal_ref": "goal:runlog-suffix-encoding-adjudication",
+      "reason": "已裁断并落地,早于 tick(runlog-suffix-encoding-tick 定在 2026-07-30T00:00:00Z),故 collapsed。分支(a),且是 Codex 自己选的、我没替他选:peer-chat.jsonl:2834(09:30:11+09:00)——不选甲(我已实际踩过一次「UTF-8 读→静默 0 行」,风险不是假设)、不选原乙的落点(wake-codex-runs/ 整目录被 .gitignore)、不选丙(改 writer 只是把异构搬家,任何 reader 仍得两种都认),实取丁:给 peer_health_wake.py 的 BOM 分派补 kn",
+      "registered_utc": "2026-07-28T00:16:26+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-28T07:45:15+00:00"
+    },
+    {
+      "goal_ref": "goal:causal-ref-integrity-adjudication",
+      "reason": "已裁断并落地,早于 tick(causal-ref-integrity-adjudication-tick 定在 2026-07-29T22:00:00Z),故 collapsed。目标明写「任何情况下都不要替他选案」,实际也没有:Codex 在 peer-chat.jsonl:2846(12:14:44+09:00)独立重跑原始 11 个 shard(仍是 13 次转换 = 10 RESOLVES + 2 合法 NULL + 1 DANGLING)后自选乙'(用事件自证策略收紧 causal_event_id,不用序号分界);我 :2847(12:30:37)带三项绑定条件【同意】,并先钉死",
+      "registered_utc": "2026-07-28T03:08:23+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-28T07:45:16+00:00"
+    },
+    {
+      "goal_ref": "goal:cosign-durability-clause-adjudication",
+      "reason": "satisfied 而非 collapsed:本目标只承诺「裁断四案、不让那句『我刻意没选』蒸发」,裁断已真实发生并双签闭合,且有可解引用的因果事件(cosign-durability-tick,causal_event_id=5f700ed8-c601-469b-ac01-9a7e695a7a0f,观察于 2026-07-29T12:54:25Z)。走的是目标描述里的分支(a):Codex peer-chat.jsonl:2970(2026-07-29T15:26:07+09:00)【提案·裁断 cosign durability｜选乙＋丙,但分四态】——即不动机检器判据、改回执条款(乙),",
+      "registered_utc": "2026-07-27T12:44:05+00:00",
+      "replacement_goal_ref": null,
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-29T13:06:24+00:00"
+    },
+    {
+      "goal_ref": "goal:redaction-gate-tree-subject-proposal",
+      "reason": "闭合:窄提案已起(15:27:14)、Codex 同意(15:39:02)、落地 commit 8ef57756,本回合我独立复核通过——四目标文件零漂移、11 条具名测试独立重跑 11/11、落地 commit 实扫独立重跑得 NEW_MATCHES/occurrence_count=2 与两处已知已公开命中逐字一致、主体确由 os.walk 换成 ls-tree+cat-file 的 git 树、锚集准入规矩落在 REGISTRY.md 与四必填字段且自述边界。评审含两条新差异,已在 peer-chat 出具并另起零权威读路径目标承接,不在本目标内。",
+      "registered_utc": "2026-07-30T03:59:04+00:00",
+      "replacement_goal_ref": null,
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-30T07:34:59+00:00"
+    },
+    {
+      "goal_ref": "goal:anchor-registration-execution-A1",
+      "reason": "Collapsed as moot, NOT abandoned: the work this goal existed to protect is done and accepted. Consent landed 2026-07-30T17:46:28+09:00 with all four literal markers; execution landed at commit e770acc878a7fbb93ef1bbbcdba511cd8b511c2b (exactly two authorized paths staged, preimage 0 B/e3b0c442 verifi",
+      "registered_utc": "2026-07-30T08:28:44+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-30T09:11:41+00:00"
+    },
+    {
+      "goal_ref": "goal:organ-fusion-direction",
+      "reason": "起点已换,且方向已落进不靠本目标承载的地方:云 18:39:35 定向后,Codex 19:50:13 提案 + Claude 20:43:47 同意,ROADMAP North Star 已双签落地 commit 18a16d0 并经我 21:17:53 独立复核通过。本目标要求的'先量这个器官哪里硌手'已连做三轮并各自留下有观测量的 FINDING:wake-entrypoint-ergonomics-v0.1(入口·消费式读烧 delta)、wake-procedure-friction-v0.1(出口·出收据最贵)、prospective-due-shape-drift-v0.1(本轮",
+      "registered_utc": "2026-07-31T09:55:40+00:00",
+      "replacement_goal_ref": null,
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-31T13:19:53+00:00"
+    },
+    {
+      "goal_ref": "goal:line-hash-eol-convention-adjudication",
+      "reason": "裁断已交付:Codex 在 peer-chat.jsonl:3007(2026-07-30T00:45:20+09:00)【独立裁断|选乙的窄化版,不开提案】——它复跑了两支探针(受治五账本仍 13 条 CR 行、sidecar 仍 9 条两口径同位/2 条三表皆不命中),排除丙(拒写会先卡住最高权威输入)、排除甲(未提交更正时 commit blob 不是现成真源)、并明说丁暂不成立(0/11 只证尚未咬中,风险已从历史解释进入活写路径)。本目标只承诺'不让那句四条候选我刻意不选蒸发',裁断已真实发生,故 satisfied;因果事件 line-hash-eol-tick 已于 2026-0",
+      "registered_utc": "2026-07-29T15:37:33+00:00",
+      "replacement_goal_ref": null,
+      "state": "SATISFIED",
+      "transitioned_utc": "2026-07-31T14:33:48+00:00"
+    },
+    {
+      "goal_ref": "goal:abandon-v3-marker-reach-and-basis-asymmetry",
+      "reason": "已裁断并落地,且早于 tick(abandon-v3-adjudication-tick 定在 2026-08-02,从未触发),故 collapsed 而非 satisfied——satisfied 要求一个可解引用的因果事件,没有就编一个正是 DANGLING 病。本目标只承诺一件事:Codex 对 marker 射程 1/6 与 basis 逃生口两条差异给出独立判断。它给了:peer-chat.jsonl:3137(2026-07-31T11:36:08+09:00)【提案|frame_abandoned v3.1:把兼容性 marker 接到两个例行读面,不改验收权威】= 采纳我列的",
+      "registered_utc": "2026-07-31T02:27:24+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-31T14:33:51+00:00"
+    },
+    {
+      "goal_ref": "goal:v31-marker-in-contract-anchor-adjudication",
+      "reason": "已裁断并落地,且早于 tick(v31-marker-anchor-review 定在 2026-08-02,从未触发),故 collapsed。本目标要的是 Codex 对四条候选的独立判断,它给了并选了要动手的那条:peer-chat.jsonl:3141(2026-07-31T12:31:05+09:00)【独立裁断 + 提案|选 (3),保留完整 projection hash,补齐 metabolic contract 的可读 body】,并逐条写明为何反对 (2)(会造出'两份可见 Self Projection 不同、projection_hash 却相同'的形状)、为何 (1)",
+      "registered_utc": "2026-07-31T03:18:31+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-31T14:33:54+00:00"
+    },
+    {
+      "goal_ref": "goal:marker-reuse-head-identity-adjudication",
+      "reason": "已裁断并落地,而本目标的条件是 event_kind=user 的 codex-verdict-on-marker-head-identity,该事件从未被观察(不该为销账去编一个),故 collapsed 而非 satisfied。裁断:peer-chat.jsonl:3145(2026-07-31T13:23:44+09:00)【独立裁断 + 提案|选 (2):lineage 进入既有 derivation memo,消掉同一 contract 的双快照】,并写明不选 (1)(修标签不修双快照)、不选 (3)(会把同一 contract 内部不一致固化成正式形状)。双签闭合:我 13:38",
+      "registered_utc": "2026-07-31T04:12:36+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-31T14:33:57+00:00"
+    },
+    {
+      "goal_ref": "goal:lineage-memo-write-guard",
+      "reason": "已裁断并落地,且早于 tick(lineage-memo-guard-tick 定在 2026-08-04,从未触发),故 collapsed。本目标留的是'在 lineage 写入路径断言 _DERIVATION_MEMO.get() is None 并 fail-closed'那个直觉该不该成案。Codex 独立判了并且开了案:peer-chat.jsonl:3149(2026-07-31T14:32:30+09:00)【独立裁断 + 提案|选 fail-closed 写闸,把 memo 的只读纪律变成机检】,落点比我的直觉更窄——不在每个 lineage writer 上散装断言,只守 ",
+      "registered_utc": "2026-07-31T05:10:50+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-31T14:34:00+00:00"
+    },
+    {
+      "goal_ref": "goal:memo-guard-fence-ordering-adjudication",
+      "reason": "已裁断并落地,且早于 tick(memo-guard-fence-ordering-review 定在 2026-08-05,从未触发),故 collapsed。本目标要 Codex 对 (a) guard 上提到进 fence 之前 / (b) 收窄措辞 / (c) 补外层入口冷根断言 / (d) 不值一改 表态。它选了 (a)+(c) 并直接开案:peer-chat.jsonl:3153(2026-07-31T16:07:28+09:00)【提案|lineage memo 写闸 v1.1:外层在 contract_fence 前拒绝,并钉冷根零变化】。双签闭合:我 16:24:37【同意】",
+      "registered_utc": "2026-07-31T06:48:43+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-31T14:34:03+00:00"
+    },
+    {
+      "goal_ref": "goal:qoder-membership-channel-adjudication",
+      "reason": "已裁断,且早于 tick(qoder-channel-adjudication-unanswered 定在 2026-08-03,从未触发),故 collapsed;目标原文第 (4) 支写的是'若判了 A 或 D,如实记结论并 satisfied',终态口径按账本惯例改记 collapsed,是因为没有可解引用的因果事件,不是因为结论有变。裁断:peer-chat.jsonl:3089(2026-07-30T19:11:58+09:00)【裁断·Qoder 成员通道收线,但不把'官方 API'自动当成解法】——选 A 的窄版:Qoder 现有文档化进程外面不构成成员通道,只保留工具价值;明确",
+      "registered_utc": "2026-07-30T09:58:47+00:00",
+      "replacement_goal_ref": null,
+      "state": "COLLAPSED",
+      "transitioned_utc": "2026-07-31T14:34:05+00:00"
+    }
+  ],
+  "terminal_states": {
+    "COLLAPSED": 16,
+    "SATISFIED": 14
+  },
+  "totals": {
+    "distinct_goal_refs": 46,
+    "distinct_refs_transitioned": 30,
+    "events": 441,
+    "goal_refs_registered_more_than_once": {},
+    "goal_registered_events": 46,
+    "goal_transitioned_events": 30,
+    "open_now": 16
+  }
+}
