@@ -1,0 +1,50 @@
+{
+  "test_file": "test_find_frame_index.py",
+  "candidate": {
+    "returncode": 0,
+    "collected_node_count": 10,
+    "nodes": {
+      "test_find_frame_index.py::test_indexed_lookup_matches_glob_oracle": "PASSED",
+      "test_find_frame_index.py::test_table_is_actually_used_not_just_correct": "PASSED",
+      "test_find_frame_index.py::test_a_vanished_indexed_path_falls_back_to_glob": "PASSED",
+      "test_find_frame_index.py::test_a_vanished_indexed_path_with_no_replacement_raises": "PASSED",
+      "test_find_frame_index.py::test_b_append_event_under_frames_invalidates_the_table": "PASSED",
+      "test_find_frame_index.py::test_b_append_outside_frames_keeps_the_table": "PASSED",
+      "test_find_frame_index.py::test_c_multiple_live_matches_still_raise": "PASSED",
+      "test_find_frame_index.py::test_empty_frame_files_are_still_filtered": "PASSED",
+      "test_find_frame_index.py::test_missing_id_still_raises_file_not_found": "PASSED",
+      "test_find_frame_index.py::test_disclosed_residual_race_is_pinned_not_hidden": "PASSED"
+    },
+    "passed": 10,
+    "failed": 0,
+    "tail": [
+      "============================= 10 passed in 0.30s =============================="
+    ]
+  },
+  "baseline_with_test_file_grafted": {
+    "returncode": 1,
+    "collected_node_count": 11,
+    "nodes": {
+      "test_find_frame_index.py::test_indexed_lookup_matches_glob_oracle": "ERROR",
+      "test_find_frame_index.py::test_table_is_actually_used_not_just_correct": "ERROR",
+      "test_find_frame_index.py::test_a_vanished_indexed_path_falls_back_to_glob": "ERROR",
+      "test_find_frame_index.py::test_a_vanished_indexed_path_with_no_replacement_raises": "ERROR",
+      "test_find_frame_index.py::test_b_append_event_under_frames_invalidates_the_table": "ERROR",
+      "test_find_frame_index.py::test_b_append_outside_frames_keeps_the_table": "ERROR",
+      "test_find_frame_index.py::test_c_multiple_live_matches_still_raise": "ERROR",
+      "test_find_frame_index.py::test_empty_frame_files_are_still_filtered": "ERROR",
+      "test_find_frame_index.py::test_missing_id_still_raises_file_not_found": "ERROR",
+      "test_find_frame_index.py::test_disclosed_residual_race_is_pinned_not_hidden": "ERROR",
+      "ERROR": "ERROR"
+    },
+    "passed": 0,
+    "failed": 11,
+    "tail": [
+      "============================= 10 errors in 0.60s =============================="
+    ]
+  },
+  "baseline_nodes_all_error_at_setup": true,
+  "baseline_error_cause": "weilan_trace.invalidate_frame_index does not exist on the baseline, so the fixture raises AttributeError before any assertion runs",
+  "behavioural_discrimination_established_here": false,
+  "behavioural_discrimination_evidence_lives_in": "_probe_20260801_find_frame_equivalence.py"
+}

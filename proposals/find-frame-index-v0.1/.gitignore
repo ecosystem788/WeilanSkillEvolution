@@ -1,0 +1,8 @@
+# artifacts/ is a byte-exact content-addressed copy of baseline/ and candidate/,
+# both of which ARE committed. It is regenerated deterministically by the two
+# candidate-freeze commands in README.md section 1, and the address self-verifies
+# (a re-freeze returns created:false only if the stored bytes still hash to it).
+artifacts/
+__pycache__/
+.pytest_cache/
+*.pyc

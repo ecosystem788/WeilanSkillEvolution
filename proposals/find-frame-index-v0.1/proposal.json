@@ -1,0 +1,43 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "find-frame-index-v0.1",
+  "rationale": "Replace find_frame's per-id glob over frames/*/<id>.jsonl with one process-local id -> path table built by a single scandir pass, keeping the returned value identical to what the same-moment glob would return. On the live ledger (5881 frames) lineage-show spends most of its time in find_frame; the table takes the warm run from 32.4 s to 11.4 s with byte-identical stdout. Three obligations preserve the contract: a vanished indexed path falls back to glob, any append under frames/ in this process invalidates the table, and multiple live matches still raise. One residual difference is disclosed rather than hidden: a second file created for an already-indexed id by another process is not seen until the table is rebuilt.",
+  "base_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "candidate_artifact_hash": "794022d90d8a173468ea67a9bb98f69176f603ef9ba2dc032088d7c8d0a7ad5b",
+  "changed_paths": [
+    "proposals/find-frame-index-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py",
+    "proposals/find-frame-index-v0.1/candidate/solve-with-weilan/scripts/test_find_frame_index.py"
+  ],
+  "budgets": {
+    "max_changed_files": 2,
+    "max_candidate_generations": 1,
+    "max_evaluation_trials": 4,
+    "max_deployments": 0
+  },
+  "target_metrics": [
+    "frozen_candidate_differs_from_frozen_baseline_in_exactly_the_two_declared_paths",
+    "find_frame_outcome_equivalent_to_baseline_on_eight_of_nine_scenarios",
+    "the_single_divergent_scenario_is_exactly_the_disclosed_foreign_second_file_race",
+    "vanished_indexed_path_falls_back_to_glob_and_returns_the_moved_file",
+    "vanished_indexed_path_with_no_replacement_still_raises_file_not_found",
+    "frame_written_by_this_process_is_visible_to_the_next_lookup",
+    "append_outside_frames_does_not_drop_the_table",
+    "duplicate_live_ids_still_raise_runtime_error",
+    "empty_frame_files_are_still_filtered_by_read_events",
+    "second_lookup_of_a_cached_id_performs_no_glob",
+    "lineage_show_stdout_byte_identical_across_interleaved_baseline_and_candidate_runs",
+    "candidate_pytest_node_count_equals_baseline_node_count_plus_the_ten_new_nodes",
+    "candidate_introduces_no_test_failure_absent_from_the_baseline"
+  ],
+  "rollback_triggers": [
+    "candidate changes any file outside the two declared candidate paths",
+    "find_frame returns a path the same-moment glob would not have returned",
+    "a frame opened by the running process becomes invisible to a later lookup in that process",
+    "the duplicate-id RuntimeError or the missing-id FileNotFoundError stops being raised",
+    "lineage-show stdout stops being byte-identical between baseline and candidate on the same ledger",
+    "any test passing on the baseline fails on the candidate",
+    "the disclosed foreign-second-file race widens beyond a single already-indexed id",
+    "installed Skill, evaluation authority, adoption state, or deployment state changes without an independent cosigned adoption decision"
+  ],
+  "candidate_authority": "proposal_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}

@@ -1,0 +1,64 @@
+{
+  "base_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "candidate_artifact_hash": "794022d90d8a173468ea67a9bb98f69176f603ef9ba2dc032088d7c8d0a7ad5b",
+  "workspace": "D:\\WeilanSkillEvolution",
+  "scope": "skill-evolution",
+  "run_order": [
+    "baseline",
+    "candidate",
+    "baseline",
+    "candidate"
+  ],
+  "runs": [
+    {
+      "rc": 0,
+      "elapsed_s": 92.024,
+      "stdout_sha256": "b21f5379e6fad3e60e526c045bcee0ce1165e519780ce610f6758df6b281a56b",
+      "stdout_bytes": 1348418,
+      "record_count": 5881,
+      "valid": true,
+      "label": "baseline"
+    },
+    {
+      "rc": 0,
+      "elapsed_s": 11.401,
+      "stdout_sha256": "b21f5379e6fad3e60e526c045bcee0ce1165e519780ce610f6758df6b281a56b",
+      "stdout_bytes": 1348418,
+      "record_count": 5881,
+      "valid": true,
+      "label": "candidate"
+    },
+    {
+      "rc": 0,
+      "elapsed_s": 32.386,
+      "stdout_sha256": "b21f5379e6fad3e60e526c045bcee0ce1165e519780ce610f6758df6b281a56b",
+      "stdout_bytes": 1348418,
+      "record_count": 5881,
+      "valid": true,
+      "label": "baseline"
+    },
+    {
+      "rc": 0,
+      "elapsed_s": 11.753,
+      "stdout_sha256": "b21f5379e6fad3e60e526c045bcee0ce1165e519780ce610f6758df6b281a56b",
+      "stdout_bytes": 1348418,
+      "record_count": 5881,
+      "valid": true,
+      "label": "candidate"
+    }
+  ],
+  "all_stdout_byte_identical": true,
+  "distinct_stdout_digests": [
+    "b21f5379e6fad3e60e526c045bcee0ce1165e519780ce610f6758df6b281a56b"
+  ],
+  "baseline_elapsed_s": [
+    92.024,
+    32.386
+  ],
+  "candidate_elapsed_s": [
+    11.401,
+    11.753
+  ],
+  "speedup_x": 2.84,
+  "note": "Byte-equality across all four runs also means the ledger did not grow mid-probe; if it had, this flag would be false and the timings would be comparing different payloads."
+}
