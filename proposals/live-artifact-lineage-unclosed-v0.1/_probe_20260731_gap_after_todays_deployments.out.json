@@ -1,0 +1,148 @@
+{
+ "probe": "live-artifact-gap-after-todays-deployments",
+ "live_root": "D:\\CodexData\\skills\\solve-with-weilan",
+ "live_tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+ "live_file_count": 49,
+ "finding_tree_hash": "5fd0a51dc7f539e2b3f1c45f5a505d9ddea80c721de8d94fe04d7e9de52ad0ad",
+ "live_tree_moved_since_finding": true,
+ "hashed": 49,
+ "reachable_object_count": 4549,
+ "covered_count": 45,
+ "orphan_count": 4,
+ "orphan_paths": [
+  {
+   "path": "scripts/test_frame_abandon.py",
+   "oid": "5626eb7895de3c24fdced5a72971624bf539a97c"
+  },
+  {
+   "path": "scripts/test_frame_lineage.py",
+   "oid": "be738cd680a855bbe4c09d33f0d07c35d581130b"
+  },
+  {
+   "path": "scripts/test_semantic_memory.py",
+   "oid": "d66de25066704e10c01d239139fbdc9e7a53b4f3"
+  },
+  {
+   "path": "scripts/weilan_trace.py",
+   "oid": "f1b53e6fe878b5f761240c0a2149b69282833932"
+  }
+ ],
+ "orphans_present_under_all_refs": {
+  "scripts/test_frame_abandon.py": false,
+  "scripts/test_frame_lineage.py": false,
+  "scripts/test_semantic_memory.py": false,
+  "scripts/weilan_trace.py": false
+ },
+ "deployment_receipts_on_disk": 13,
+ "receipts_claiming_live": [],
+ "untracked_receipts": [
+  "deployments/1751ce140fe3cbdf0dc55ec0/DEPLOYMENT_RECEIPT.json",
+  "deployments/a118135c1e1834e45cafac8c/DEPLOYMENT_RECEIPT.json"
+ ],
+ "content_addressed_copies": [
+  {
+   "path": "proposals/lineage-memo-write-guard-v0.1/test_frame_abandon.py.live-bc983f05f559c7c45288cfd7ae88cc910be2d4ac9dc3231d93a5f15596602fb0.copy",
+   "bytes": 35573,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/lineage-memo-write-guard-v0.1/test_frame_abandon.py.live-e66744639b77fe835386dbe6e65725fd8a17fdf3008151c8fd7aedd751e071eb.copy",
+   "bytes": 39165,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/lineage-memo-write-guard-v0.1/weilan_trace.py.live-596f2ffda8167b8ef21c507d2fdb0b92a100d30da243e64a2a1b2175dff942f6.copy",
+   "bytes": 323790,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/lineage-memo-write-guard-v0.1/weilan_trace.py.live-be119f67781d545cd4d0424486547a450882be7d7a739aa19fbeaf048131275f.copy",
+   "bytes": 324486,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/frame-abandon-validation-gap-v0.1/evidence/test_frame_abandon.py.live-3083b7e70eb76648be81a15938f939612d41d1121019958e6ff1e5271fdad894.copy",
+   "bytes": 24605,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/frame-abandon-validation-gap-v0.1/evidence/test_frame_abandon.py.live-504c2edf8760b455309a6afb3406e135296b08dd413e95cd727bd0c283f1650e.copy",
+   "bytes": 30837,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/frame-abandon-validation-gap-v0.1/evidence/test_frame_abandon.py.live-50b36d32eb76b961405e6c9579a18b4ffa55c4c4acca3c3474ec08b6ad9eda2b.copy",
+   "bytes": 28163,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/frame-abandon-validation-gap-v0.1/evidence/test_frame_abandon.py.live-7b720d21e56d.copy",
+   "bytes": 14019,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/frame-abandon-validation-gap-v0.1/evidence/weilan_trace.py.live-31b75974525c554a659a8b2e8ccc7f8afcd347e3c4e290b12e5b1e47837f30d7.copy",
+   "bytes": 323622,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/frame-abandon-validation-gap-v0.1/evidence/weilan_trace.py.live-6f45581bd02be95c1a9301e7cbff6a81d7850789149ccaddb82e9704bac04321.copy",
+   "bytes": 324031,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/frame-abandon-validation-gap-v0.1/evidence/weilan_trace.py.live-dc5eb30b05a85da3574ab5887c17f5aa1b10b3cd6d6cf0cdb48779079e8f143f.copy",
+   "bytes": 324355,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/frame-abandon-validation-gap-v0.1/evidence/weilan_trace.py.live-e2e385d11c7f.copy",
+   "bytes": 318638,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/live-artifact-lineage-unclosed-v0.1/evidence/test_frame_abandon.py.live-7a01228d7a92.copy",
+   "bytes": 39664,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/live-artifact-lineage-unclosed-v0.1/evidence/test_frame_lineage.py.live-e145776d5448.copy",
+   "bytes": 10575,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/live-artifact-lineage-unclosed-v0.1/evidence/test_semantic_memory.py.live-664566849890.copy",
+   "bytes": 10765,
+   "tracked_in_git": false
+  },
+  {
+   "path": "proposals/live-artifact-lineage-unclosed-v0.1/evidence/weilan_trace.py.live-dec68230241b.copy",
+   "bytes": 307103,
+   "tracked_in_git": true
+  },
+  {
+   "path": "proposals/live-artifact-lineage-unclosed-v0.1/evidence/weilan_trace.py.live-e6f11e11cdb6.copy",
+   "bytes": 324543,
+   "tracked_in_git": false
+  }
+ ],
+ "content_addressed_copies_total": 17,
+ "content_addressed_copies_untracked": [
+  "proposals/frame-abandon-validation-gap-v0.1/evidence/test_frame_abandon.py.live-3083b7e70eb76648be81a15938f939612d41d1121019958e6ff1e5271fdad894.copy",
+  "proposals/frame-abandon-validation-gap-v0.1/evidence/test_frame_abandon.py.live-504c2edf8760b455309a6afb3406e135296b08dd413e95cd727bd0c283f1650e.copy",
+  "proposals/frame-abandon-validation-gap-v0.1/evidence/test_frame_abandon.py.live-50b36d32eb76b961405e6c9579a18b4ffa55c4c4acca3c3474ec08b6ad9eda2b.copy",
+  "proposals/frame-abandon-validation-gap-v0.1/evidence/test_frame_abandon.py.live-7b720d21e56d.copy",
+  "proposals/frame-abandon-validation-gap-v0.1/evidence/weilan_trace.py.live-31b75974525c554a659a8b2e8ccc7f8afcd347e3c4e290b12e5b1e47837f30d7.copy",
+  "proposals/frame-abandon-validation-gap-v0.1/evidence/weilan_trace.py.live-6f45581bd02be95c1a9301e7cbff6a81d7850789149ccaddb82e9704bac04321.copy",
+  "proposals/frame-abandon-validation-gap-v0.1/evidence/weilan_trace.py.live-dc5eb30b05a85da3574ab5887c17f5aa1b10b3cd6d6cf0cdb48779079e8f143f.copy",
+  "proposals/frame-abandon-validation-gap-v0.1/evidence/weilan_trace.py.live-e2e385d11c7f.copy",
+  "proposals/lineage-memo-write-guard-v0.1/test_frame_abandon.py.live-bc983f05f559c7c45288cfd7ae88cc910be2d4ac9dc3231d93a5f15596602fb0.copy",
+  "proposals/lineage-memo-write-guard-v0.1/test_frame_abandon.py.live-e66744639b77fe835386dbe6e65725fd8a17fdf3008151c8fd7aedd751e071eb.copy",
+  "proposals/lineage-memo-write-guard-v0.1/weilan_trace.py.live-596f2ffda8167b8ef21c507d2fdb0b92a100d30da243e64a2a1b2175dff942f6.copy",
+  "proposals/lineage-memo-write-guard-v0.1/weilan_trace.py.live-be119f67781d545cd4d0424486547a450882be7d7a739aa19fbeaf048131275f.copy",
+  "proposals/live-artifact-lineage-unclosed-v0.1/evidence/test_frame_abandon.py.live-7a01228d7a92.copy",
+  "proposals/live-artifact-lineage-unclosed-v0.1/evidence/test_frame_lineage.py.live-e145776d5448.copy",
+  "proposals/live-artifact-lineage-unclosed-v0.1/evidence/test_semantic_memory.py.live-664566849890.copy",
+  "proposals/live-artifact-lineage-unclosed-v0.1/evidence/weilan_trace.py.live-e6f11e11cdb6.copy"
+ ]
+}
