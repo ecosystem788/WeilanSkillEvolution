@@ -1,0 +1,62 @@
+{
+  "probe": "v31_contract_hash_coupling",
+  "live_script": "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan\\scripts\\weilan_trace.py",
+  "base_script": "D:\\WeilanSkillEvolution\\proposals\\frame-abandon-validation-gap-v0.1\\evidence\\weilan_trace.py.live-31b75974525c554a659a8b2e8ccc7f8afcd347e3c4e290b12e5b1e47837f30d7.copy",
+  "results": {
+    "base_pre_v31": {
+      "v3_current_basis": {
+        "contract_rc": 0,
+        "contract_hash": "6703846f3e55d612680ad83c5a2cd0e4fea6017f2d8ec7d7bb602810a3ad87b0",
+        "input_heads_self_projection": "4ba97c5f150494f4f3790429ccb783fc76fa14f3005bf787f525627b14d9e57c",
+        "contract_branches_canonical": "{\"main\": {\"audit_valid\": true, \"discriminating_test_completed\": false, \"head_abandoned\": true, \"head_closed\": false, \"head_frame_id\": \"wf-20260731-031457-1b7b62\", \"head_terminal\": true, \"joined_into\": null, \"status\": \"active\"}}",
+        "marker_substring_in_contract_stdout": false,
+        "self_project_head_markers": null,
+        "self_projection_hash_from_self_project": "4ba97c5f150494f4f3790429ccb783fc76fa14f3005bf787f525627b14d9e57c"
+      },
+      "v2_no_fields": {
+        "contract_rc": 0,
+        "contract_hash": "6703846f3e55d612680ad83c5a2cd0e4fea6017f2d8ec7d7bb602810a3ad87b0",
+        "input_heads_self_projection": "4ba97c5f150494f4f3790429ccb783fc76fa14f3005bf787f525627b14d9e57c",
+        "contract_branches_canonical": "{\"main\": {\"audit_valid\": true, \"discriminating_test_completed\": false, \"head_abandoned\": true, \"head_closed\": false, \"head_frame_id\": \"wf-20260731-031457-1b7b62\", \"head_terminal\": true, \"joined_into\": null, \"status\": \"active\"}}",
+        "marker_substring_in_contract_stdout": false,
+        "self_project_head_markers": null,
+        "self_projection_hash_from_self_project": "4ba97c5f150494f4f3790429ccb783fc76fa14f3005bf787f525627b14d9e57c"
+      },
+      "_verdict": {
+        "contract_hash_differs_between_shapes": false,
+        "contract_branches_identical_between_shapes": true
+      }
+    },
+    "live_v31": {
+      "v3_current_basis": {
+        "contract_rc": 0,
+        "contract_hash": "ba9b56cc21c5863b3d48b03f5d9041d4ffcaed6999180aba2c0ea00d4b28a61b",
+        "input_heads_self_projection": "4e36dd51ed2c3dbe153f664c3a5473ba01a4c915a2859d8c3c68175a220ea2cb",
+        "contract_branches_canonical": "{\"main\": {\"audit_valid\": true, \"discriminating_test_completed\": false, \"head_abandoned\": true, \"head_closed\": false, \"head_frame_id\": \"wf-20260731-031459-15751f\", \"head_terminal\": true, \"joined_into\": null, \"status\": \"active\"}}",
+        "marker_substring_in_contract_stdout": false,
+        "self_project_head_markers": [],
+        "self_projection_hash_from_self_project": "4e36dd51ed2c3dbe153f664c3a5473ba01a4c915a2859d8c3c68175a220ea2cb"
+      },
+      "v2_no_fields": {
+        "contract_rc": 0,
+        "contract_hash": "126107848025fe6ab4433f9ac5bf268f2228c456bf46fe8b596c95fe2f2d458e",
+        "input_heads_self_projection": "efc27c3979e912d9805faeade8443534936a386d7615e2b41bf6fa8fefe2dcf0",
+        "contract_branches_canonical": "{\"main\": {\"audit_valid\": true, \"discriminating_test_completed\": false, \"head_abandoned\": true, \"head_closed\": false, \"head_frame_id\": \"wf-20260731-031459-15751f\", \"head_terminal\": true, \"joined_into\": null, \"status\": \"active\"}}",
+        "marker_substring_in_contract_stdout": false,
+        "self_project_head_markers": [
+          {
+            "code": "frame_abandoned_v2_obligations_unrecorded",
+            "recorded_basis": null,
+            "current_basis": "weilan_frame_abandon_unmet_obligations_v1"
+          }
+        ],
+        "self_projection_hash_from_self_project": "efc27c3979e912d9805faeade8443534936a386d7615e2b41bf6fa8fefe2dcf0"
+      },
+      "_verdict": {
+        "contract_hash_differs_between_shapes": true,
+        "contract_branches_identical_between_shapes": true
+      }
+    }
+  },
+  "base_staged_sha256": "31b75974525c554a659a8b2e8ccc7f8afcd347e3c4e290b12e5b1e47837f30d7"
+}

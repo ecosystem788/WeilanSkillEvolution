@@ -1,0 +1,220 @@
+﻿{
+  "probe": "abandon_v3_review",
+  "cases": {
+    "v3_as_written": {
+      "validate": {
+        "returncode": 0,
+        "valid": true,
+        "errors": [],
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "show": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": true
+      },
+      "persistence-audit-show": {
+        "returncode": 0,
+        "valid": true,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "lineage-show": {
+        "returncode": 0,
+        "valid": true,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "self-project": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "trace-check": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "gates_relaxed_collapse_without_trace": true
+    },
+    "v3_current_basis_emptied": {
+      "validate": {
+        "returncode": 1,
+        "valid": false,
+        "errors": [
+          "line 3: unmet_obligations do not match weilan_frame_abandon_unmet_obligations_v1"
+        ],
+        "markers": null,
+        "mentions_marker_text": true
+      },
+      "show": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": true
+      },
+      "persistence-audit-show": {
+        "returncode": 0,
+        "valid": true,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "lineage-show": {
+        "returncode": 0,
+        "valid": true,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "self-project": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "trace-check": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "gates_relaxed_collapse_without_trace": false
+    },
+    "v2_no_fields": {
+      "validate": {
+        "returncode": 0,
+        "valid": true,
+        "errors": [],
+        "markers": [
+          {
+            "code": "frame_abandoned_v2_obligations_unrecorded",
+            "recorded_basis": null,
+            "current_basis": "weilan_frame_abandon_unmet_obligations_v1"
+          }
+        ],
+        "mentions_marker_text": true
+      },
+      "show": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "persistence-audit-show": {
+        "returncode": 0,
+        "valid": true,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "lineage-show": {
+        "returncode": 0,
+        "valid": true,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "self-project": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "trace-check": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "gates_relaxed_collapse_without_trace": true
+    },
+    "future_basis_emptied": {
+      "validate": {
+        "returncode": 0,
+        "valid": true,
+        "errors": [],
+        "markers": [
+          {
+            "code": "frame_abandoned_obligations_basis_mismatch",
+            "recorded_basis": "weilan_frame_abandon_unmet_obligations_v99",
+            "current_basis": "weilan_frame_abandon_unmet_obligations_v1"
+          }
+        ],
+        "mentions_marker_text": true
+      },
+      "show": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": true
+      },
+      "persistence-audit-show": {
+        "returncode": 0,
+        "valid": true,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "lineage-show": {
+        "returncode": 0,
+        "valid": true,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "self-project": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "trace-check": {
+        "returncode": 0,
+        "valid": null,
+        "errors": null,
+        "markers": null,
+        "mentions_marker_text": false
+      },
+      "gates_relaxed_collapse_without_trace": true
+    }
+  },
+  "abandon_returncode": 0,
+  "abandon_stderr": "",
+  "recorded_terminal_data": {
+    "evidence": {
+      "alert_id": "review-probe",
+      "consecutive_count": 10,
+      "source_ref": "probe:claude-independent-review"
+    },
+    "observed_silence_seconds": 10800,
+    "reason": "independent review probe",
+    "silence_threshold_seconds": 7200,
+    "unmet_obligations": [
+      {
+        "event_id": "394a274c-a793-4cd4-956c-b36e131ccb51",
+        "kind": "collapse_missing_following_trace"
+      }
+    ],
+    "unmet_obligations_basis": "weilan_frame_abandon_unmet_obligations_v1"
+  },
+  "frame_validation_markers_call_sites": 1,
+  "validate_events_call_sites": 6
+}

@@ -1,0 +1,541 @@
+diff --git a/proposals/live-artifact-lineage-unclosed-v0.1/evidence/weilan_trace.py.live-dec68230241b.copy b/C:/Users/zy/.claude/skills/solve-with-weilan/scripts/weilan_trace.py
+index bc7c837..4c31310 100644
+--- a/proposals/live-artifact-lineage-unclosed-v0.1/evidence/weilan_trace.py.live-dec68230241b.copy
++++ b/C:/Users/zy/.claude/skills/solve-with-weilan/scripts/weilan_trace.py
+@@ -154,6 +154,12 @@ EVIDENCE_TERMINAL_STATES = ("withdrawn", "expired", "superseded")
+ SEMANTIC_DISPOSITIONS = ("active", "dormant", "retired")
+ PERSISTENCE_AUDIT_TRIGGERS = ("round_end", "route_change", "version_switch")
+ ALLOWED_LEVELS = ("L2", "L3")
++TERMINAL_EVENT_TYPES = frozenset({"frame_closed", "frame_abandoned"})
++EVENT_SUBCOMMAND_EXCLUDED = frozenset(
++    {"frame_opened", "frame_closed", "frame_abandoned"}
++)
++FRAME_ABANDON_MIN_SILENCE_SECONDS = 3600
++FRAME_ABANDON_DEFAULT_SILENCE_SECONDS = 7200
+ ALLOWED_EVENTS = {
+     "frame_opened",
+     "candidate_admitted",
+@@ -169,6 +175,7 @@ ALLOWED_EVENTS = {
+     "route_reentered",
+     "frame_blocked",
+     "frame_closed",
++    "frame_abandoned",
+ }
+ REQUIRED_DATA_FIELDS = {
+     "frame_opened": {"problem", "success_criteria", "budget"},
+@@ -335,6 +342,18 @@ def make_event(frame_id, event_type, level, workspace, data):
+     }
+ 
+ 
++def terminal_event(events):
++    """Return the terminal event, if any.
++
++    Terminal answers whether causal continuation is allowed. It must not be
++    used to claim that a frame was adjudicated: only frame_closed carries a
++    verdict and outcome.
++    """
++    if events and events[-1].get("event_type") in TERMINAL_EVENT_TYPES:
++        return events[-1]
++    return None
++
++
+ def lineage_directory(workspace, scope):
+     return (
+         state_root()
+@@ -504,8 +523,8 @@ def write_lineage_heads(workspace, scope, records, state):
+ def assert_closed_parent(frame_id, workspace, scope):
+     path = find_frame(frame_id)
+     events = read_events(path)
+-    if not events or events[-1].get("event_type") != "frame_closed":
+-        raise ValueError(f"causal parent must be closed: {frame_id}")
++    if not terminal_event(events):
++        raise ValueError(f"causal parent must be terminal: {frame_id}")
+     validation_errors = validate_events(events, require_closed=True)
+     if validation_errors:
+         raise ValueError(
+@@ -758,7 +777,14 @@ def command_event(args):
+ 
+ def command_event_fenced(args, path):
+     events = read_events(path)
+-    if events and events[-1].get("event_type") == "frame_closed":
++    if args.type in EVENT_SUBCOMMAND_EXCLUDED:
++        raise ValueError(f"{args.type} must use its dedicated command")
++    terminal = terminal_event(events)
++    if terminal:
++        if terminal.get("event_type") == "frame_abandoned":
++            raise ValueError(
++                "cannot append to an abandoned frame; open a new frame and reference it"
++            )
+         raise ValueError("cannot append to a closed frame")
+     first = events[0]
+     data = parse_fields(args.field)
+@@ -821,14 +847,8 @@ def required_persistence_audit_triggers(events):
+                 for record in scoped_controls
+                 if record.get("timestamp_utc", "") > first.get("timestamp_utc", "")
+             ]
+-        closed_at = next(
+-            (
+-                event.get("timestamp_utc")
+-                for event in reversed(events)
+-                if event.get("event_type") == "frame_closed"
+-            ),
+-            None,
+-        )
++        terminal = terminal_event(events)
++        closed_at = terminal.get("timestamp_utc") if terminal else None
+         if closed_at:
+             later_controls = [
+                 record
+@@ -862,7 +882,12 @@ def command_close(args):
+ 
+ def command_close_fenced(args, path):
+     events = read_events(path)
+-    if events and events[-1].get("event_type") == "frame_closed":
++    terminal = terminal_event(events)
++    if terminal:
++        if terminal.get("event_type") == "frame_abandoned":
++            raise ValueError(
++                "cannot close an abandoned frame; open a new frame and reference it"
++            )
+         raise ValueError("frame is already closed")
+     first = events[0]
+     required_audits = required_persistence_audit_triggers(events)
+@@ -901,6 +926,195 @@ def command_close_fenced(args, path):
+     print(json.dumps({"frame_id": args.frame_id, "closed": True}, ensure_ascii=False))
+ 
+ 
++def parse_frame_timestamp(value):
++    if not isinstance(value, str) or not value.strip():
++        raise ValueError("frame event has no timestamp_utc")
++    normalized = value.strip()
++    if normalized.endswith("Z"):
++        normalized = normalized[:-1] + "+00:00"
++    try:
++        parsed = datetime.fromisoformat(normalized)
++    except ValueError as exc:
++        raise ValueError("frame event timestamp_utc is invalid") from exc
++    if parsed.tzinfo is None:
++        raise ValueError("frame event timestamp_utc must include a UTC offset")
++    return parsed.astimezone(timezone.utc)
++
++
++def append_abandonment_audits(frame_id, events, workspace, scope, threshold):
++    warnings = []
++    existing = [
++        record
++        for record in load_persistence_audit_records(workspace, scope, warnings)
++        if record.get("frame_id") == frame_id
++        and record.get("decision") in {"PROMOTED", "NOT_PERSISTED"}
++    ]
++    if warnings:
++        raise ValueError("persistence audit ledger is invalid: " + "; ".join(warnings))
++    required = required_persistence_audit_triggers(events)
++    completed = {record.get("trigger") for record in existing}
++    missing = sorted(required - completed)
++    reason = (
++        f"frame abandoned after silence >= {threshold}; "
++        "nothing in this frame was reviewed by a live judgment"
++    )
++    date_dir = datetime.now(timezone.utc).strftime("%Y-%m-%d")
++    path = persistence_audit_directory(workspace, scope) / f"{date_dir}.jsonl"
++    audit_ids = []
++    for trigger in missing:
++        record = {
++            "schema_version": PERSISTENCE_AUDIT_SCHEMA_VERSION,
++            "audit_id": str(uuid.uuid4()),
++            "timestamp_utc": utc_now(),
++            "workspace": workspace,
++            "workspace_key": workspace_key(workspace),
++            "scope": scope,
++            "scope_key": scope_key(scope),
++            "frame_id": frame_id,
++            "trigger": trigger,
++            "decision": "NOT_PERSISTED",
++            "evidence_id": None,
++            "semantic_memory_id": None,
++            "reason": reason,
++            "authority": "persistence_audit_never_activation_authority",
++        }
++        append_event(path, record)
++        audit_ids.append(record["audit_id"])
++
++    refreshed = [
++        record
++        for record in load_persistence_audit_records(workspace, scope, warnings)
++        if record.get("frame_id") == frame_id
++        and record.get("decision") in {"PROMOTED", "NOT_PERSISTED"}
++    ]
++    if warnings:
++        raise ValueError("persistence audit ledger is invalid: " + "; ".join(warnings))
++    completed = {record.get("trigger") for record in refreshed}
++    if not required.issubset(completed):
++        raise ValueError("abandonment persistence audit invariant failed")
++    return sorted(required), sorted(completed), audit_ids
++
++
++def command_frame_abandon(args):
++    path = find_frame(args.frame_id)
++    events = read_events(path)
++    if not events:
++        raise ValueError("frame has no events")
++    identity = frame_contract_identity(events)
++    if identity:
++        workspace, scope = identity
++        fence = (
++            contract_fence(
++                state_root(), workspace_key(workspace), scope_key(scope)
++            )
++            if scope
++            else workspace_contract_fence(state_root(), workspace_key(workspace))
++        )
++        with fence:
++            return command_frame_abandon_fenced(args, path)
++    return command_frame_abandon_fenced(args, path)
++
++
++def command_frame_abandon_fenced(args, path):
++    events = read_events(path)
++    if not events:
++        raise ValueError("frame has no events")
++    terminal = terminal_event(events)
++    if terminal:
++        if terminal.get("event_type") == "frame_abandoned":
++            raise ValueError("frame is already abandoned")
++        raise ValueError("frame is already closed")
++
++    first = events[0]
++    causal = first.get("data", {}).get("causal")
++    if not causal:
++        raise ValueError("frame-abandon requires a current lineage head")
++    scope = normalize_scope(causal.get("scope"))
++    branch_id = normalize_branch(causal.get("branch_id"))
++    lineage_warnings = []
++    lineage_records = load_lineage_records(first["workspace"], scope, lineage_warnings)
++    lineage = derive_lineage_state(lineage_records)
++    if lineage_warnings or lineage["issues"]:
++        raise ValueError(
++            "lineage ledger is invalid: "
++            + "; ".join(lineage_warnings + lineage["issues"])
++        )
++    branch = lineage["branches"].get(branch_id)
++    if (
++        not branch
++        or branch.get("status") != "active"
++        or branch.get("head_frame_id") != args.frame_id
++    ):
++        raise ValueError("frame-abandon requires a current active lineage head")
++
++    threshold = args.silence_threshold_seconds
++    if threshold < FRAME_ABANDON_MIN_SILENCE_SECONDS:
++        raise ValueError(
++            "silence threshold must be at least "
++            f"{FRAME_ABANDON_MIN_SILENCE_SECONDS} seconds"
++        )
++    last_at = parse_frame_timestamp(events[-1].get("timestamp_utc"))
++    now = datetime.now(timezone.utc)
++    silence_seconds = (now - last_at).total_seconds()
++    if silence_seconds < threshold:
++        raise ValueError(
++            f"frame silence {max(0, int(silence_seconds))}s is below threshold {threshold}s"
++        )
++
++    try:
++        evidence = json.loads(args.evidence)
++    except json.JSONDecodeError as exc:
++        raise ValueError("--evidence must be valid JSON") from exc
++    if not isinstance(evidence, dict):
++        raise ValueError("--evidence must decode to a JSON object")
++    reason = args.reason.strip()
++    if not reason:
++        raise ValueError("--reason cannot be empty")
++    if len(reason) > 512:
++        raise ValueError("--reason cannot exceed 512 characters")
++    if sensitive_material_reason(reason):
++        raise ValueError("--reason contains sensitive material")
++
++    workspace = canonical_workspace(first["workspace"])
++    required, completed, audit_ids = append_abandonment_audits(
++        args.frame_id, events, workspace, scope, threshold
++    )
++    data = {
++        "reason": reason,
++        "silence_threshold_seconds": threshold,
++        "observed_silence_seconds": max(0, int(silence_seconds)),
++        "evidence": evidence,
++    }
++    event = make_event(
++        args.frame_id,
++        "frame_abandoned",
++        first["level"],
++        first["workspace"],
++        data,
++    )
++    validation_errors = validate_events(events + [event], require_closed=True)
++    if validation_errors:
++        raise ValueError(
++            "frame validation failed before abandonment: "
++            + "; ".join(validation_errors)
++        )
++    append_event(path, event)
++    print(
++        json.dumps(
++            {
++                "frame_id": args.frame_id,
++                "abandoned": True,
++                "silence_threshold_seconds": threshold,
++                "observed_silence_seconds": max(0, int(silence_seconds)),
++                "required_audit_triggers": required,
++                "completed_audit_triggers": completed,
++                "appended_audit_ids": audit_ids,
++            },
++            ensure_ascii=False,
++        )
++    )
++
++
+ def validate_event_required_fields(event, index):
+     errors = []
+     data = event.get("data")
+@@ -926,12 +1140,13 @@ def validate_events(events, require_closed=False):
+         errors.append("first event must be frame_opened")
+     if types.count("frame_opened") != 1:
+         errors.append("frame_opened must be unique")
+-    if types.count("frame_closed") > 1:
+-        errors.append("frame_closed must be unique")
+-    if "frame_closed" in types and types[-1] != "frame_closed":
+-        errors.append("frame_closed must be last")
+-    if require_closed and types[-1] != "frame_closed":
+-        errors.append("frame must be closed")
++    terminal_count = sum(types.count(event_type) for event_type in TERMINAL_EVENT_TYPES)
++    if terminal_count > 1:
++        errors.append("frame terminal event must be unique")
++    if terminal_count and types[-1] not in TERMINAL_EVENT_TYPES:
++        errors.append("frame terminal event must be last")
++    if require_closed and types[-1] not in TERMINAL_EVENT_TYPES:
++        errors.append("frame must be terminal")
+     if "minimal_unit_collapsed" in types:
+         collapse_index = types.index("minimal_unit_collapsed")
+         trace_indices = [index for index, item in enumerate(types) if item == "trace_emitted"]
+@@ -965,6 +1180,12 @@ def validate_events(events, require_closed=False):
+             errors.append(f"line {index}: data must be an object")
+             continue
+         errors.extend(validate_event_required_fields(event, index))
++        if event.get("event_type") == "frame_abandoned" and (
++            "outcome" in data or "verdict" in data
++        ):
++            errors.append(
++                f"line {index}: frame_abandoned must not carry outcome or verdict"
++            )
+         if event.get("event_type") == "frame_opened" and data.get("causal") is not None:
+             causal = data.get("causal")
+             if not isinstance(causal, dict):
+@@ -3207,7 +3428,10 @@ def command_persistence_audit_fenced(args, frame_path, workspace, scope):
+     events = read_events(frame_path)
+     if not events:
+         raise ValueError("frame has no events")
+-    if events[-1].get("event_type") == "frame_closed":
++    terminal = terminal_event(events)
++    if terminal:
++        if terminal.get("event_type") == "frame_abandoned":
++            raise ValueError("cannot audit an abandoned frame")
+         raise ValueError("cannot audit a closed frame")
+     warnings = []
+     existing = [
+@@ -4465,6 +4689,41 @@ def build_self_projection(workspace, scope):
+     lineage_warnings = []
+     lineage_records = load_lineage_records(workspace, scope, lineage_warnings)
+     lineage = derive_lineage_state(lineage_records)
++    audit_records = load_persistence_audit_records(workspace, scope, warnings)
++    branch_heads = {}
++    for branch_id, branch in sorted(lineage["branches"].items()):
++        head_frame_id = branch.get("head_frame_id")
++        head_closed = False
++        head_terminal = False
++        head_abandoned = False
++        audit_valid = False
++        if head_frame_id:
++            try:
++                frame_events = read_events(find_frame(head_frame_id))
++            except (FileNotFoundError, RuntimeError) as exc:
++                warnings.append(str(exc))
++                frame_events = []
++            if frame_events:
++                head_closed = frame_events[-1].get("event_type") == "frame_closed"
++                head_terminal = terminal_event(frame_events) is not None
++                head_abandoned = (
++                    frame_events[-1].get("event_type") == "frame_abandoned"
++                )
++                required = required_persistence_audit_triggers(frame_events)
++                completed = {
++                    record.get("trigger")
++                    for record in audit_records
++                    if record.get("frame_id") == head_frame_id
++                    and record.get("decision") in {"PROMOTED", "NOT_PERSISTED"}
++                }
++                audit_valid = head_terminal and required.issubset(completed)
++        branch_heads[branch_id] = {
++            **branch,
++            "head_closed": head_closed,
++            "head_terminal": head_terminal,
++            "head_abandoned": head_abandoned,
++            "audit_valid": audit_valid,
++        }
+     active_targets = {
+         ref: target
+         for ref, target in state["targets"].items()
+@@ -4501,7 +4760,7 @@ def build_self_projection(workspace, scope):
+             "event_id": state["head_event_id"],
+             "sequence": state["head_sequence"],
+         },
+-        "branch_heads": lineage["branches"],
++        "branch_heads": branch_heads,
+         "active_targets": active_targets,
+         "holders": holders,
+         "unresolved_pressure_vectors": state["pressure_vectors"],
+@@ -4558,6 +4817,8 @@ def current_metabolic_contract(workspace, scope):
+     for branch_id, branch in sorted(lineage["branches"].items()):
+         head_frame_id = branch.get("head_frame_id")
+         head_closed = False
++        head_terminal = False
++        head_abandoned = False
+         audit_valid = False
+         completed_test = False
+         required = set()
+@@ -4570,6 +4831,10 @@ def current_metabolic_contract(workspace, scope):
+                 frame_events = []
+             if frame_events:
+                 head_closed = frame_events[-1].get("event_type") == "frame_closed"
++                head_terminal = terminal_event(frame_events) is not None
++                head_abandoned = (
++                    frame_events[-1].get("event_type") == "frame_abandoned"
++                )
+                 completed_test = any(
+                     event.get("event_type") == "discriminating_test_executed"
+                     for event in frame_events
+@@ -4581,7 +4846,7 @@ def current_metabolic_contract(workspace, scope):
+                     if record.get("frame_id") == head_frame_id
+                     and record.get("decision") in {"PROMOTED", "NOT_PERSISTED"}
+                 }
+-                audit_valid = head_closed and required.issubset(completed)
++                audit_valid = head_terminal and required.issubset(completed)
+                 matching_audits = [
+                     record
+                     for record in audit_records
+@@ -4602,6 +4867,8 @@ def current_metabolic_contract(workspace, scope):
+         branches[branch_id] = {
+             **branch,
+             "head_closed": head_closed,
++            "head_terminal": head_terminal,
++            "head_abandoned": head_abandoned,
+             "audit_valid": audit_valid,
+             "discriminating_test_completed": completed_test,
+         }
+@@ -4754,6 +5021,10 @@ def validate_transaction_record_scope(participant, record, workspace, scope):
+     if normalized_workspace(record.get("workspace", "")) != normalized_workspace(workspace):
+         raise ValueError(f"{participant} intent belongs to another workspace")
+     if participant == "frame":
++        if record.get("event_type") == "frame_abandoned":
++            raise ValueError(
++                "frame_abandoned intent is forbidden; use the frame-abandon command"
++            )
+         causal = record.get("data", {}).get("causal", {})
+         if record.get("event_type") == "frame_opened" and causal:
+             record_scope = causal.get("scope")
+@@ -4798,7 +5069,7 @@ def validate_transaction_intents(intents, workspace, scope):
+         errors = validate_events(combined)
+         if errors:
+             raise ValueError(f"frame {frame_id} transaction replay invalid: " + "; ".join(errors))
+-        if combined[-1].get("event_type") == "frame_closed":
++        if terminal_event(combined):
+             required = required_persistence_audit_triggers(combined)
+             completed = {
+                 record.get("trigger")
+@@ -5953,7 +6224,17 @@ def summarize_episode(events):
+             collapses.append(data)
+         elif event_type == "trace_emitted":
+             traces.append(data)
+-    closed = next((event.get("data", {}) for event in reversed(events) if event.get("event_type") == "frame_closed"), None)
++    closed = next(
++        (
++            event.get("data", {})
++            for event in reversed(events)
++            if event.get("event_type") == "frame_closed"
++        ),
++        None,
++    )
++    abandoned = bool(
++        events and events[-1].get("event_type") == "frame_abandoned"
++    )
+     text_parts = [
+         str(opened.get("problem", "")),
+         str(opened.get("success_criteria", "")),
+@@ -5966,7 +6247,7 @@ def summarize_episode(events):
+         json.dumps(closed or {}, ensure_ascii=False),
+     ]
+     causal = opened.get("causal", {})
+-    return {
++    result = {
+         "frame_id": first.get("frame_id"),
+         "workspace": first.get("workspace"),
+         "scope": frame_scope(events),
+@@ -5982,13 +6263,18 @@ def summarize_episode(events):
+         "evidence": evidence,
+         "collapses": collapses,
+         "traces": traces,
+-        "outcome": (closed or {}).get("outcome", "open"),
++        "outcome": (closed or {}).get(
++            "outcome", "abandoned" if abandoned else "open"
++        ),
+         "verdict": (closed or {}).get("verdict", ""),
+         "opened_at_utc": first.get("timestamp_utc"),
+         "head_timestamp_utc": events[-1].get("timestamp_utc"),
+         "source": f"frame:{first.get('frame_id')}",
+         "tokens": semantic_tokens(" ".join(text_parts)),
+     }
++    if abandoned:
++        result["abandoned"] = True
++    return result
+ 
+ 
+ def episode_index_path(workspace, scope):
+@@ -6277,8 +6563,8 @@ def command_memory_archive_plan(args):
+             continue
+         frame_id = events[0].get("frame_id")
+         reasons = []
+-        if events[-1].get("event_type") != "frame_closed":
+-            reasons.append("frame_not_closed")
++        if not terminal_event(events):
++            reasons.append("frame_not_terminal")
+         if frame_id in referenced_frames:
+             reasons.append("referenced_by_current_projection_or_active_semantic_memory")
+         item = {"frame_id": frame_id, "path": str(path)}
+@@ -7168,10 +7454,28 @@ def build_parser():
+ 
+     event_parser = subparsers.add_parser("event", help="append a lifecycle event")
+     event_parser.add_argument("--frame-id", required=True)
+-    event_parser.add_argument("--type", choices=sorted(ALLOWED_EVENTS - {"frame_opened", "frame_closed"}), required=True)
++    event_parser.add_argument(
++        "--type",
++        choices=sorted(ALLOWED_EVENTS - EVENT_SUBCOMMAND_EXCLUDED),
++        required=True,
++    )
+     event_parser.add_argument("--field", action="append", default=[])
+     event_parser.set_defaults(func=command_event)
+ 
++    frame_abandon_parser = subparsers.add_parser(
++        "frame-abandon",
++        help="mark a sufficiently silent frame terminal without adjudicating it",
++    )
++    frame_abandon_parser.add_argument("--frame-id", required=True)
++    frame_abandon_parser.add_argument(
++        "--silence-threshold-seconds",
++        type=int,
++        default=FRAME_ABANDON_DEFAULT_SILENCE_SECONDS,
++    )
++    frame_abandon_parser.add_argument("--evidence", required=True)
++    frame_abandon_parser.add_argument("--reason", required=True)
++    frame_abandon_parser.set_defaults(func=command_frame_abandon)
++
+     close_parser = subparsers.add_parser("close", help="close a frame")
+     close_parser.add_argument("--frame-id", required=True)
+     close_parser.add_argument("--outcome", choices=("success", "partial", "failed", "blocked"), required=True)
