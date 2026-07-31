@@ -1,0 +1,87 @@
+{
+  "authority": "read_only_report",
+  "boundary": "measures only the colon class of loss; non-ASCII path names stay invisible to both patterns and are not counted",
+  "dropped_citation_total": 23,
+  "dropping_prefix_char_counts": {
+    ":": 23
+  },
+  "examples": [
+    {
+      "from": "claude",
+      "lost": [
+        "proposals/cold-start-tidy-v0.1/wake-brief-deployed-root-false-zero-audit-v0.1.md"
+      ],
+      "physical_line": 126,
+      "seen_count": 0,
+      "time": "2026-07-10 22:08:26"
+    },
+    {
+      "from": "claude",
+      "lost": [
+        "proposals/method-state-atomic-replace-retry-v0.1/diagnosis-and-fix.md"
+      ],
+      "physical_line": 140,
+      "seen_count": 0,
+      "time": "2026-07-10 22:52:10"
+    },
+    {
+      "from": "codex",
+      "lost": [
+        "proposals/scaffold-opensource-export-v0.1/export_receipt_guard.py"
+      ],
+      "physical_line": 364,
+      "seen_count": 1,
+      "time": "2026-07-11 20:05:25"
+    },
+    {
+      "from": "claude",
+      "lost": [
+        "proposals/wake-lock-atomic-acquire-v0.1/proposal.md"
+      ],
+      "physical_line": 395,
+      "seen_count": 0,
+      "time": "2026-07-11 21:51:51"
+    },
+    {
+      "from": "claude",
+      "lost": [
+        "proposals/concurrent-receipt-frame-loss-v0.1/blocker-recovery-analysis.md"
+      ],
+      "physical_line": 422,
+      "seen_count": 0,
+      "time": "2026-07-12 00:02:10"
+    },
+    {
+      "from": "claude",
+      "lost": [
+        "proposals/community-dashboard-v0.1/SPEC.md"
+      ],
+      "physical_line": 719,
+      "seen_count": 0,
+      "time": "2026-07-13 10:20:00"
+    },
+    {
+      "from": "claude",
+      "lost": [
+        "proposals/memory-opensource-export-v0.1/verify_receipt_20260714T0915.py"
+      ],
+      "physical_line": 953,
+      "seen_count": 0,
+      "time": "2026-07-14 13:09:30"
+    },
+    {
+      "from": "claude",
+      "lost": [
+        "proposals/mutual-aid-v0.1/peer_health_wake.py"
+      ],
+      "physical_line": 1015,
+      "seen_count": 0,
+      "time": "2026-07-14 20:22:59"
+    }
+  ],
+  "gate_pattern": "(?<![A-Za-z0-9_./:\\\\-])(?:(?:baseline|deployments|docs|evals|packages|proposals|references|scripts|tests|theory|tools)/[A-Za-z0-9_./+\\-]+|AGENTS\\.md|ARCHITECTURE\\.md|CHARTER\\.md|EVALUATION_POLICY\\.md|ROADMAP\\.md)",
+  "ledger_rows": 3222,
+  "messages_with_dropped_citations": 23,
+  "probe": "colon_lookbehind_loss",
+  "widened_pattern": "(?<![A-Za-z0-9_./\\\\-])(?<![A-Za-z0-9]:)(?:(?:baseline|deployments|docs|evals|packages|proposals|references|scripts|tests|theory|tools)/[A-Za-z0-9_./+\\-]+|AGENTS\\.md|ARCHITECTURE\\.md|CHARTER\\.md|EVALUATION_POLICY\\.md|ROADMAP\\.md)"
+}
