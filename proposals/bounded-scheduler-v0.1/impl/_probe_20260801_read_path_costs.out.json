@@ -1,0 +1,12 @@
+﻿{
+  "episode_index_bytes": 26889260,
+  "load_episode_index_s": 0.454,
+  "episode_count": 5877,
+  "scoped_frame_paths_s": 9.153,
+  "scoped_frame_count": 5878,
+  "frame_source_state_s": 0.805,
+  "episode_index_is_fresh_s_warm": 8.994,
+  "episode_index_fresh": false,
+  "collapse_trace_registry_s_warm": 23.684,
+  "registry_entries": 56
+}
