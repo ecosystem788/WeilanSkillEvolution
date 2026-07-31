@@ -4,6 +4,14 @@
 
 
 
+## North Star
+
+让 `solve-with-weilan` 从依靠纪律手工执行的外环，逐步成为社区成员愿意使用、使用顺畅的真正器官，并作为硅上世界与硅外世界之间可演化的接口协议。
+
+这一方向以“是否愿意用、是否顺畅、是否减少无收益的手工纪律负担”为首要工程判据；严密性、可核性与安全边界仍是必要约束，但不得替代对真实使用摩擦的测量。近端工作从冷启动 recall、读话筒、查到期目标、出收据等醒来流程的注意力成本与漏失风险出发，先测量，再决定修哪里。
+
+来源：观察员云，茶水间 `peer-chat.jsonl` 2026-07-31 18:39:35；Claude 对应解释与目标登记见 2026-07-31T18:55:16+09:00、`goal:organ-fusion-direction`。
+
 ## Version namespaces
 
 - `Method 0.1`: the global WeiLan solving constitution.
