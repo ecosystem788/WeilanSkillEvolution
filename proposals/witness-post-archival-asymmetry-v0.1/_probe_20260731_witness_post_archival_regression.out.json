@@ -1,0 +1,77 @@
+{
+  "landings": 6,
+  "rows": [
+    {
+      "commit": "405b135",
+      "date": "2026-07-27",
+      "dir": "proposals/cosign-bytewise-binding-v0.1/execution-v0.7",
+      "ok": true,
+      "non_target_conserved": true,
+      "digest_pre": "761c7c22745163dff1611ddc21f6bc44f03795aa9f43224a441415c992065105",
+      "digest_post": "761c7c22745163dff1611ddc21f6bc44f03795aa9f43224a441415c992065105",
+      "pre_detail": "ABSENT",
+      "post_detail": "ABSENT"
+    },
+    {
+      "commit": "460f5e3",
+      "date": "2026-07-27",
+      "dir": "proposals/codex-cold-start-scope-ambiguity-v0.1/execution",
+      "ok": true,
+      "non_target_conserved": true,
+      "digest_pre": "539921541d51c1cc3a3ea412767443506ea7b0caee6817d04c72e07e6d1d043e",
+      "digest_post": "539921541d51c1cc3a3ea412767443506ea7b0caee6817d04c72e07e6d1d043e",
+      "pre_detail": "ABSENT",
+      "post_detail": "ABSENT"
+    },
+    {
+      "commit": "8d2f2cb",
+      "date": "2026-07-28",
+      "dir": "proposals/cron-wrapper-portability-v0.1/execution",
+      "ok": true,
+      "non_target_conserved": true,
+      "digest_pre": "64f41ca9604b2f1a3fe3e965d886ce4d5a9abaaa517db27473a0b20454c8ce58",
+      "digest_post": "64f41ca9604b2f1a3fe3e965d886ce4d5a9abaaa517db27473a0b20454c8ce58",
+      "pre_detail": "ABSENT",
+      "post_detail": "ABSENT"
+    },
+    {
+      "commit": "c696f22",
+      "date": "2026-07-29",
+      "dir": "proposals/veto-channel-evidence-layering-v0.1/execution",
+      "ok": true,
+      "non_target_conserved": true,
+      "digest_pre": "06f39d52e1babddb7592c8f636fd6ec62b0e5e14e475395aced3bea0146e103a",
+      "digest_post": "06f39d52e1babddb7592c8f636fd6ec62b0e5e14e475395aced3bea0146e103a",
+      "pre_detail": "recomputes",
+      "post_detail": "recomputes"
+    },
+    {
+      "commit": "2149c96",
+      "date": "2026-07-30",
+      "dir": "proposals/cosign-authorization-at-commit-time-v0.1/execution",
+      "ok": true,
+      "non_target_conserved": true,
+      "digest_pre": "07ee7c8663fd05ffc444476a4b15e38fc22f28769425a68c114df7a6f343a331",
+      "digest_post": "07ee7c8663fd05ffc444476a4b15e38fc22f28769425a68c114df7a6f343a331",
+      "pre_detail": "recomputes",
+      "post_detail": "recomputes"
+    },
+    {
+      "commit": "5d2aea0",
+      "date": "2026-07-31",
+      "dir": "proposals/roadmap-historicisation-v0.1/execution-wf-20260731-085718-011b52",
+      "ok": true,
+      "non_target_conserved": true,
+      "digest_pre": "6375ce290a48f328fa2929d543f535d67d74ece9c78073ebab2828c63d84f085",
+      "digest_post": "6375ce290a48f328fa2929d543f535d67d74ece9c78073ebab2828c63d84f085",
+      "pre_detail": "recomputes",
+      "post_detail": "ABSENT"
+    }
+  ],
+  "summary": {
+    "pre_archived_and_recomputes": 3,
+    "post_archived_and_recomputes": 2,
+    "pre_absent": 3,
+    "post_absent": 4
+  }
+}

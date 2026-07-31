@@ -1,0 +1,35 @@
+{
+  "witness_fingerprint_of_ledger": "562c851ee5017f6f0136ae0e519497ab43bf54601dd24be1f234992cccdd4f2d",
+  "current_worktree": {
+    "bytes": 4143165,
+    "sha256": "1f4bf9a7a858b042eb25084a6084929f41cf073a396f41d4125566985db60deb",
+    "records": 3167
+  },
+  "prefix_match": {
+    "found": true,
+    "records_in_prefix": 3166,
+    "bytes_in_prefix": 4137949
+  },
+  "signature_records": {
+    "2026-07-31T17:50:11+09:00": {
+      "line": 3164,
+      "from": "claude",
+      "within_witnessed_prefix": true
+    },
+    "2026-07-31T18:01:25+09:00": {
+      "line": 3166,
+      "from": "codex",
+      "within_witnessed_prefix": true
+    },
+    "2026-07-31T18:06:17+09:00": {
+      "line": 3167,
+      "from": "codex",
+      "within_witnessed_prefix": false
+    }
+  },
+  "verdict": {
+    "proposal_predates_preflight": true,
+    "consent_predates_preflight": true,
+    "receipt_predates_preflight": false
+  }
+}

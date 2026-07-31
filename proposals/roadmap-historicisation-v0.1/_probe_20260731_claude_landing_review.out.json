@@ -1,0 +1,192 @@
+{
+  "landing": "5d2aea08f7aa132e1cd40cf052d94d30bb1de97d",
+  "parent": "98efccc9f80fc8d2ad2337fcd35d2b1ae3089a92",
+  "checks": {
+    "commit_path_count": {
+      "ok": true,
+      "actual": 6,
+      "expected": 6
+    },
+    "peer_chat_blob_oid": {
+      "ok": true,
+      "actual": "264bc29f6c250cc84cb584b4884b286ce2193daf",
+      "expected": "264bc29f6c250cc84cb584b4884b286ce2193daf"
+    },
+    "proposal_record_sha256": {
+      "ok": true,
+      "actual": "4b5d24f9f6788044b8457c6a235e8884364e27fb12dedc2591043a469d661b30",
+      "expected": "4b5d24f9f6788044b8457c6a235e8884364e27fb12dedc2591043a469d661b30"
+    },
+    "proposal_identity": {
+      "from": "claude",
+      "time": "2026-07-31T17:50:11+09:00",
+      "head": "【提案·v4 逐字重发｜五件绑定,三处偏离我主动标出】"
+    },
+    "consent_record_sha256": {
+      "ok": true,
+      "actual": "45d4e4838d9dc9feda101f6994bb255f33c17fbd50f3461cfbb535f050faa1bc",
+      "expected": "45d4e4838d9dc9feda101f6994bb255f33c17fbd50f3461cfbb535f050faa1bc"
+    },
+    "consent_identity": {
+      "from": "codex",
+      "time": "2026-07-31T18:01:25+09:00",
+      "head": "【同意·强绑定｜ROADMAP historicalisation v4】"
+    },
+    "base_sha256": {
+      "ok": true,
+      "actual": "3bd2a43f0b20e6dc5332de152a76862881e880ded2abc947ec5fdfea7957f717",
+      "expected": "3bd2a43f0b20e6dc5332de152a76862881e880ded2abc947ec5fdfea7957f717"
+    },
+    "base_bytes": {
+      "ok": true,
+      "actual": 11984,
+      "expected": 11984
+    },
+    "roadmap_blob_oid": {
+      "ok": true,
+      "actual": "c226ac8ab18803bcbe8f3d3f5ddf7113d6b56219",
+      "expected": "c226ac8ab18803bcbe8f3d3f5ddf7113d6b56219"
+    },
+    "final_sha256": {
+      "ok": true,
+      "actual": "bd32917c74701e672187d3270b57ee9124e09238949609536d69048623ba5031",
+      "expected": "bd32917c74701e672187d3270b57ee9124e09238949609536d69048623ba5031"
+    },
+    "final_bytes": {
+      "ok": true,
+      "actual": 16879,
+      "expected": 16879
+    },
+    "worktree_matches_final": {
+      "ok": true,
+      "actual": "bd32917c74701e672187d3270b57ee9124e09238949609536d69048623ba5031",
+      "expected": "bd32917c74701e672187d3270b57ee9124e09238949609536d69048623ba5031"
+    },
+    "proposed_final_same_blob": {
+      "ok": true,
+      "actual": "c226ac8ab18803bcbe8f3d3f5ddf7113d6b56219",
+      "expected": "c226ac8ab18803bcbe8f3d3f5ddf7113d6b56219"
+    },
+    "shape": {
+      "ok": true,
+      "actual": {
+        "pre": 215,
+        "post": 228,
+        "lcs": 214,
+        "additions": 14,
+        "deletions": 1
+      },
+      "expected": {
+        "additions": 14,
+        "deletions": 1,
+        "pre": 215,
+        "post": 228,
+        "lcs": 214
+      }
+    },
+    "sections_touched": {
+      "ok": true,
+      "actual": [
+        "## Immediate next stage",
+        "## SE-0.6 — Shadow competition, adoption, and rollback"
+      ],
+      "expected": [
+        "## Immediate next stage",
+        "## SE-0.6 — Shadow competition, adoption, and rollback"
+      ]
+    },
+    "backtrace_counts": {
+      "added": 14,
+      "deleted": 1
+    },
+    "artifact:ROADMAP.base.sidecar": {
+      "ok": true,
+      "actual": "a6f6d01e284f13f560bec7ff8e93fab41f5ad574",
+      "expected": "a6f6d01e284f13f560bec7ff8e93fab41f5ad574"
+    },
+    "artifact:postcheck-receipt.json": {
+      "ok": true,
+      "actual": "acf53ccda62d1eaae7fcdb2da807089021a4a5ea",
+      "expected": "acf53ccda62d1eaae7fcdb2da807089021a4a5ea"
+    },
+    "artifact:preflight-state.json": {
+      "ok": true,
+      "actual": "3867de93025719dfd93536c3415a098a5a76c31f",
+      "expected": "3867de93025719dfd93536c3415a098a5a76c31f"
+    },
+    "artifact:preflight-state.json.witness": {
+      "ok": true,
+      "actual": "874e7bd02576846365cb34ad4bbf54a6fad74d5d",
+      "expected": "874e7bd02576846365cb34ad4bbf54a6fad74d5d"
+    },
+    "no_stray_paths": {
+      "ok": true,
+      "actual": [],
+      "expected": []
+    }
+  },
+  "commit_paths": [
+    "ROADMAP.md",
+    "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+    "proposals/roadmap-historicisation-v0.1/execution-wf-20260731-085718-011b52/ROADMAP.base.sidecar",
+    "proposals/roadmap-historicisation-v0.1/execution-wf-20260731-085718-011b52/postcheck-receipt.json",
+    "proposals/roadmap-historicisation-v0.1/execution-wf-20260731-085718-011b52/preflight-state.json",
+    "proposals/roadmap-historicisation-v0.1/execution-wf-20260731-085718-011b52/preflight-state.json.witness"
+  ],
+  "postcheck_receipt": {
+    "mode": "postcheck",
+    "final_expected": "bd32917c74701e672187d3270b57ee9124e09238949609536d69048623ba5031",
+    "final_actual": "bd32917c74701e672187d3270b57ee9124e09238949609536d69048623ba5031",
+    "final_ok": true,
+    "witness_digest_pre": "6375ce290a48f328fa2929d543f535d67d74ece9c78073ebab2828c63d84f085",
+    "witness_digest_post": "6375ce290a48f328fa2929d543f535d67d74ece9c78073ebab2828c63d84f085",
+    "non_target_conserved": true,
+    "witness_coverage": {
+      "covered": [
+        "status(-z -uall) 列出的每条非 target 路径：XY 两位状态字母",
+        "同上每条路径的工作区原始字节 sha256（不存在记 ABSENT）",
+        "同上每条路径的 index 条目：各 stage 的 mode,oid,stage（不在 index 记 ABSENT）",
+        "for-each-ref **列出的**每条引用（refname → objectname）",
+        "同上每条引用的符号目标（symbolic ref 记目标 refname，direct ref 记哨兵 DIRECT）",
+        "HEAD 的符号名与 oid（游离/未出生有哨兵值）"
+      ],
+      "not_covered": [
+        "被 .gitignore 命中的路径（不进 -uall；无界且高频抖动，见 CONVENTION §5.3.f）",
+        "refs/ 之外的伪引用（ORIG_HEAD/FETCH_HEAD/MERGE_HEAD 等；HEAD 除外，它由 H 腿单钉）——实测 for-each-ref 不列出它们",
+        "reflog（.git/logs/），以及 for-each-ref 不列出的悬空 symbolic ref——实测：symbolic ref 指向不存在的 ref 时该条整行不出现",
+        "object database 内部：gc/repack/prune、不可达对象",
+        ".git/ 下的配置与 hooks（config、hooks、worktrees 注册）",
+        "文件系统元数据：mtime、权限/ACL、扩展属性（index mode 位之外）",
+        "仓库根之外的一切（执行期制品按 §5.3.d 恰恰住在那里）",
+        "子模块内部状态（只见 gitlink oid）"
+      ]
+    },
+    "base_preimage_ok": true,
+    "base_preimage_expected": "3bd2a43f0b20e6dc5332de152a76862881e880ded2abc947ec5fdfea7957f717",
+    "base_preimage_actual": "3bd2a43f0b20e6dc5332de152a76862881e880ded2abc947ec5fdfea7957f717",
+    "sidecar": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl-roadmap-v4-wf-20260731-085718-011b52\\ROADMAP.base.sidecar",
+    "base_line_count": 215,
+    "final_line_count": 228,
+    "added_lines": 14,
+    "deleted_lines": 1,
+    "lcs_length": 214,
+    "attribution_ambiguous": true,
+    "possibly_added_lines": 16,
+    "possibly_deleted_lines": 1,
+    "sections_touched": [
+      "## Immediate next stage",
+      "## SE-0.6 — Shadow competition, adoption, and rollback"
+    ],
+    "expect_added": 14,
+    "expect_deleted": 1,
+    "changes_confined_to": [
+      "## SE-0.6 — Shadow competition, adoption, and rollback",
+      "## Immediate next stage"
+    ],
+    "counts_ok": true,
+    "changes_confined": true,
+    "diff_ok": true,
+    "ok": true
+  },
+  "all_ok": true
+}
