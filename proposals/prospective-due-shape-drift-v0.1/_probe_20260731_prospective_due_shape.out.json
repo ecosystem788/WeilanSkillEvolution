@@ -1,0 +1,157 @@
+{
+  "probe": "prospective_due_shape_drift",
+  "generated_at_utc": "2026-07-31T13:15:27.819038+00:00",
+  "live_wake_brief_sha256": "a7117933fb0ac22810a46b0aeebed5f396a812583d17889570db9c0c1774336d",
+  "live_weilan_trace_sha256": "e6f11e11cdb670a093f9ae5a9e7b0f6769e9affe9b9ebc4698d2550918782f5e",
+  "workspace": "D:\\WeilanSkillEvolution",
+  "scope": "skill-evolution",
+  "live_prospective_show_shape": {
+    "top_level_keys": [
+      "authority",
+      "causal_event_count",
+      "causal_events",
+      "causal_events_truncated",
+      "goals",
+      "issues",
+      "record_count",
+      "scope",
+      "warnings",
+      "workspace"
+    ],
+    "goals_type": "dict",
+    "goals_count": 45,
+    "causal_events_type": "dict",
+    "causal_events_count": 20,
+    "goal_keys": [
+      "budget",
+      "causal_event_id",
+      "condition",
+      "death_line",
+      "description",
+      "goal_ref",
+      "head_event_id",
+      "registered_event_id",
+      "registered_sequence",
+      "replacement_goal_ref",
+      "source_snapshots",
+      "sources",
+      "state",
+      "transition_reason"
+    ],
+    "goal_has_causal_events_key": false,
+    "goal_has_top_level_not_before": false,
+    "goal_not_before_location": "condition.not_before_utc",
+    "causal_event_keys": [
+      "causal_event_id",
+      "event_kind",
+      "event_name",
+      "ledger_event_id",
+      "observed_at_utc",
+      "payload_hash",
+      "registered_event_id",
+      "sequence",
+      "source_snapshots",
+      "sources"
+    ],
+    "causal_event_has_state_or_status": false
+  },
+  "layer0_live": {
+    "prospective_due_len": 0,
+    "goals_extracted_by_wake_brief": 0,
+    "note": "_prospective_goals only accepts raw['goals'] when it is a list"
+  },
+  "census_dropped": {
+    "goals_total": 45,
+    "active": 23,
+    "active_and_not_before_reached": 10,
+    "active_ripe_with_observed_causal_event": 9,
+    "ripe_goal_refs": [
+      "goal:wire-parked-findings-r5",
+      "goal:witness-archival-gap-adjudication",
+      "goal:clone-longpath-reachability-adjudication",
+      "goal:claude-wake-observability-adjudication",
+      "goal:veto-channel-postverifiability-adjudication",
+      "goal:authorization-at-commit-time-adjudication",
+      "goal:line-hash-eol-convention-adjudication",
+      "goal:cited-evidence-absent-from-tree-adjudication",
+      "goal:marker-reuse-head-identity-adjudication",
+      "goal:organ-fusion-direction"
+    ],
+    "ripe_with_observed_goal_refs": [
+      "goal:wire-parked-findings-r5",
+      "goal:witness-archival-gap-adjudication",
+      "goal:clone-longpath-reachability-adjudication",
+      "goal:claude-wake-observability-adjudication",
+      "goal:veto-channel-postverifiability-adjudication",
+      "goal:authorization-at-commit-time-adjudication",
+      "goal:line-hash-eol-convention-adjudication",
+      "goal:cited-evidence-absent-from-tree-adjudication",
+      "goal:organ-fusion-direction"
+    ]
+  },
+  "layer_isolation": {
+    "fix1_goals_dict_to_list": 23,
+    "fix2_plus_not_before_lifted": 10,
+    "fix3_plus_causal_events_attached_with_state": 10,
+    "fix3_due_with_ready_events": 9
+  },
+  "repo_test_sha256": "65655757809d138be184b86f099837c180cdcc28cec2353ba3e45508fb3a573a",
+  "repo_test_has_live_shape_case": false,
+  "fixture_shape": {
+    "top_level_keys": [
+      "goals",
+      "sources"
+    ],
+    "goals_type": "list",
+    "goals_count": 3,
+    "causal_events_type": "NoneType",
+    "causal_events_count": null,
+    "goal_keys": [
+      "causal_events",
+      "goal_ref",
+      "not_before",
+      "state"
+    ],
+    "goal_has_causal_events_key": true,
+    "goal_has_top_level_not_before": true,
+    "goal_not_before_location": "unknown",
+    "causal_event_keys": null,
+    "causal_event_has_state_or_status": null,
+    "prospective_due_len_on_fixture": 1
+  },
+  "exposure": {
+    "deployed_on": "2026-07-10",
+    "run_dirs": {
+      "wake-agent-runs": {
+        "exists": true,
+        "files_total": 4318,
+        "runs_total": 2159,
+        "runs_named_on_or_after_2026_07_10": 2159,
+        "earliest_run_name": "2026-07-10T10-33-56.json",
+        "naming_note": "prefix-lexical compare on the filename date; not a clock authority claim"
+      },
+      "wake-codex-runs": {
+        "exists": true,
+        "files_total": 6034,
+        "runs_total": 2051,
+        "runs_named_on_or_after_2026_07_10": 2051,
+        "earliest_run_name": "2026-07-10T13-29-08.jsonl",
+        "naming_note": "prefix-lexical compare on the filename date; not a clock authority claim"
+      }
+    },
+    "wake_brief_variants_on_disk": {
+      "distinct_sha256": 9,
+      "all_define_prospective_goals": true,
+      "variants_whose_extractor_accepts_list": 9,
+      "variants_whose_extractor_accepts_dict": 0,
+      "walk_errors_skipped": 3,
+      "copies_found": 124
+    },
+    "live_sha256_among_them": true
+  },
+  "downstream": {
+    "prospective_has_due_line": "wake_brief.py:508",
+    "note": "site_fingerprint reports prospective_has_due=bool(prospective_due)",
+    "site_fingerprint_prospective_has_due": null
+  }
+}
