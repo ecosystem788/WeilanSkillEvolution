@@ -7,7 +7,7 @@ import os
 import sys
 
 BASE = "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad"
-CAND = "794022d90d8a173468ea67a9bb98f69176f603ef9ba2dc032088d7c8d0a7ad5b"
+CAND = "fb16689a63538f39d35374a123c860c0bfbfddeca900fd10027483c865830996"
 HERE = os.path.dirname(os.path.abspath(__file__))
 SKIP = {".pytest_cache", "__pycache__"}
 

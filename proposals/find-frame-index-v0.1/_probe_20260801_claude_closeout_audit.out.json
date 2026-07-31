@@ -1,0 +1,187 @@
+{
+  "probe": "claude_closeout_audit",
+  "audited_by": "claude (reviewer, not implementer)",
+  "subject": "closeout of inbox ff608951f920 -- README/proposal.json/tree-diff refresh",
+  "candidate_artifact_hash": "fb16689a63538f39d35374a123c860c0bfbfddeca900fd10027483c865830996",
+  "deprecated_candidate_artifact_hash": "794022d90d8a173468ea67a9bb98f69176f603ef9ba2dc032088d7c8d0a7ad5b",
+  "readme_sha256": "70d89c6ac38b2b4dbb3ec7621276c91459fcd7211e32d745633c109dd3be2886",
+  "proposal_json_sha256": "f2fdcdb0e6fa6e096522d3fdbda4eb5a98432e707ecb091c460723f854d09ba7",
+  "q1_what_the_headline_speedup_pairs": {
+    "source": "_probe_20260801_claude_revision_perf.out.json",
+    "baseline_elapsed_s": [
+      51.752,
+      120.024
+    ],
+    "candidate_elapsed_s": [
+      44.893,
+      20.414
+    ],
+    "reported_min_run_speedup_x": 2.54,
+    "reported_mean_ratio_speedup_x": 2.63,
+    "recomputed_best_of_each_min_b_over_min_c": 2.5351,
+    "worst_case_min_b_over_max_c": 1.1528,
+    "interleaved_adjacent_pairings": [
+      1.1528,
+      5.8795
+    ],
+    "smallest_observed_pairing": 1.1528,
+    "intra_arm_spread_baseline_x": 2.3192,
+    "intra_arm_spread_candidate_x": 2.1991,
+    "arms_overlap_in_wall_clock": false,
+    "reading": "min_run_speedup_x pairs the fastest run of each arm. That is a defensible noise estimator, not a bound, and it is not the smallest speedup observed. With two samples per arm and an intra-arm spread comparable to the claimed between-arm effect, neither 2.5x nor 2.0x is discriminated by this data alone. This says nothing about whether the speedup is real -- only about what this measurement can settle."
+  },
+  "q2_archived_outputs_still_about_the_deprecated_candidate": {
+    "rows": [
+      {
+        "file": "_probe_20260801_candidate_tree_diff.out.json",
+        "declares_deprecated_794022d9": false,
+        "declares_current_fb16689a": true
+      },
+      {
+        "file": "_probe_20260801_claude_mtime_leg_residual.out.json",
+        "declares_deprecated_794022d9": false,
+        "declares_current_fb16689a": true
+      },
+      {
+        "file": "_probe_20260801_claude_revision_acceptance.out.json",
+        "declares_deprecated_794022d9": true,
+        "declares_current_fb16689a": true
+      },
+      {
+        "file": "_probe_20260801_claude_revision_equivalence.out.json",
+        "declares_deprecated_794022d9": false,
+        "declares_current_fb16689a": true
+      },
+      {
+        "file": "_probe_20260801_claude_revision_perf.out.json",
+        "declares_deprecated_794022d9": false,
+        "declares_current_fb16689a": true
+      },
+      {
+        "file": "_probe_20260801_claude_revision_structure.out.json",
+        "declares_deprecated_794022d9": false,
+        "declares_current_fb16689a": true
+      },
+      {
+        "file": "_probe_20260801_find_frame_equivalence.out.json",
+        "declares_deprecated_794022d9": true,
+        "declares_current_fb16689a": false
+      },
+      {
+        "file": "_probe_20260801_frozen_tree_perf.out.json",
+        "declares_deprecated_794022d9": true,
+        "declares_current_fb16689a": false
+      },
+      {
+        "file": "_probe_20260801_guard_cost_and_mtime.out.json",
+        "declares_deprecated_794022d9": false,
+        "declares_current_fb16689a": false
+      },
+      {
+        "file": "_probe_20260801_suite_acceptance.out.json",
+        "declares_deprecated_794022d9": true,
+        "declares_current_fb16689a": false
+      },
+      {
+        "file": "_probe_20260801_test_discriminates.out.json",
+        "declares_deprecated_794022d9": false,
+        "declares_current_fb16689a": false
+      }
+    ],
+    "subject_is_deprecated_only": [
+      "_probe_20260801_find_frame_equivalence.out.json",
+      "_probe_20260801_frozen_tree_perf.out.json",
+      "_probe_20260801_suite_acceptance.out.json"
+    ],
+    "count_deprecated_only": 3
+  },
+  "q3_are_the_cited_numbers_reachable_from_this_tree": {
+    "codex_cited_perf_hits": [
+      {
+        "file": "CLAUDE_REVIEW_20260801_REVISION.md",
+        "line": 44,
+        "token": "2.51",
+        "context": "  Codex 测得 2.51x / 2.61x —— **两次独立测量落在同一处**。"
+      },
+      {
+        "file": "CLAUDE_REVIEW_20260801_REVISION.md",
+        "line": 80,
+        "token": "2.51",
+        "context": "(2.51x、+11 节点、字节同一)**只以散文形式活在 peer-chat 里**,树上没有任何制品支持它们。"
+      },
+      {
+        "file": "CLAUDE_REVIEW_20260801_REVISION.md",
+        "line": 97,
+        "token": "2.51",
+        "context": "`revised_frozen_candidate_..._minimum_run_speedup_is_at_least_2_5x`:Codex 量到 2.51,我量到 2.54。"
+      },
+      {
+        "file": "CLAUDE_REVIEW_20260801_REVISION.md",
+        "line": 44,
+        "token": "2.61",
+        "context": "  Codex 测得 2.51x / 2.61x —— **两次独立测量落在同一处**。"
+      },
+      {
+        "file": "README.md",
+        "line": 99,
+        "token": "2.51",
+        "context": "- Codex:minimum-run speedup **2.51×**,mean-ratio **2.61×**;Claude 独立复核:**2.54× / 2.63×**。"
+      },
+      {
+        "file": "README.md",
+        "line": 99,
+        "token": "2.61",
+        "context": "- Codex:minimum-run speedup **2.51×**,mean-ratio **2.61×**;Claude 独立复核:**2.54× / 2.63×**。"
+      },
+      {
+        "file": "_probe_20260801_claude_closeout_audit.py",
+        "line": 11,
+        "token": "2.51",
+        "context": "  q3  Is Codex's cited 2.51x / 2.61x reproducible from anything in this tree,"
+      },
+      {
+        "file": "_probe_20260801_claude_closeout_audit.py",
+        "line": 103,
+        "token": "2.51",
+        "context": "            for pat in (\"2.51\", \"2.61\"):"
+      },
+      {
+        "file": "_probe_20260801_claude_closeout_audit.py",
+        "line": 11,
+        "token": "2.61",
+        "context": "  q3  Is Codex's cited 2.51x / 2.61x reproducible from anything in this tree,"
+      },
+      {
+        "file": "_probe_20260801_claude_closeout_audit.py",
+        "line": 103,
+        "token": "2.61",
+        "context": "            for pat in (\"2.51\", \"2.61\"):"
+      },
+      {
+        "file": "proposal.json",
+        "line": 4,
+        "token": "2.51",
+        "context": "  \"rationale\": \"Replace find_frame's per-id glob over frames/*/<id>.jsonl with one process-local id -> path table guarded on every lookup by a complete {date_di"
+      },
+      {
+        "file": "proposal.json",
+        "line": 4,
+        "token": "2.61",
+        "context": "  \"rationale\": \"Replace find_frame's per-id glob over frames/*/<id>.jsonl with one process-local id -> path table guarded on every lookup by a complete {date_di"
+      }
+    ],
+    "codex_cited_perf_hits_in_any_out_json": 0,
+    "codex_perf_arm_has_archived_artifact": false,
+    "self_output_excluded_from_scan": "_probe_20260801_claude_closeout_audit.out.json",
+    "hit_list_stability_note": "codex_cited_perf_hits grows whenever another prose document quotes the number; it is not stable across runs and is not the finding. The load-bearing field is codex_perf_arm_has_archived_artifact, which only flips when a machine-readable perf output for the revised candidate actually lands in this directory.",
+    "guard_cost_numbers": {
+      "readme_quotes_197_of_200": true,
+      "readme_quotes_0_9921_ms": true,
+      "probe_dir_mtime_changed": 197,
+      "probe_creations": 200,
+      "probe_smallest_positive_delta_ns": 992100,
+      "quoted_ms_matches_probe_ns": true,
+      "readme_names_the_probe_file": false
+    }
+  }
+}

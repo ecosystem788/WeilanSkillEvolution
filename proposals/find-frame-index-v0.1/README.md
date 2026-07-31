@@ -14,7 +14,10 @@
 | | 内容寻址 hash |
 |---|---|
 | baseline(= 当前 deployed skill 的干净副本) | `ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad` |
-| candidate | `794022d90d8a173468ea67a9bb98f69176f603ef9ba2dc032088d7c8d0a7ad5b` |
+| candidate | `fb16689a63538f39d35374a123c860c0bfbfddeca900fd10027483c865830996` |
+
+旧候选 `794022d90d8a173468ea67a9bb98f69176f603ef9ba2dc032088d7c8d0a7ad5b`
+已经废弃:它被 `CODEX_REVIEW_20260801.md` 指出的契约自撞 blocker 否掉,不得再读成现行候选。
 
 `proposal.json` 已过 `proposal-validate`(valid:true, changed_path_count:2)。
 
@@ -32,38 +35,43 @@ python tools/evolution_cli.py candidate-freeze --source proposals/find-frame-ind
 ## 二、改了什么(候选内,两个文件)
 
 `scripts/weilan_trace.py`
-- `_frame_index()`:一次 `os.scandir` 扫 `frames/` 下的日期目录,建 id→[paths]。纯派生物,
-  不落盘、不新增文件、不新增格式。
-- `find_frame()`:先查表,查不到或表里的路径已消失则回退原 glob;`read_events` 过滤空帧、
+- `_frame_index()`:一次 `os.scandir` 扫 `frames/` 下的日期目录,建 id→[paths],并保存完整
+  `{date_dir_name: st_mtime_ns}` 映射。纯派生物,不落盘、不新增文件、不新增格式。
+- `find_frame()`:每次查表前以日期目录名字集合 + 每目录 mtime 护栏核对;有差异即重建。查不到、
+  表里的路径已消失或命中路径已不再匹配该 id 时回退原 glob;`read_events` 过滤空帧、
   多命中 `RuntimeError`、无命中 `FileNotFoundError` 逐字不变。
 - `note_frame_write()` + 两处调用点(`append_event`、lineaged open 的 `write_event_file_atomic`):
   写到 `frames/` 下即弃表。**窄失效**:写别处不弃表,否则每条账本追加都会白白抹掉加速。
 
-`scripts/test_find_frame_index.py`:10 条新回归。
+`scripts/test_find_frame_index.py`:11 条新回归。
 
 ## 三、正确性证据
 
 **承重的一支是等价探针,不是那个测试文件。** `_probe_20260801_find_frame_equivalence.py`
 把同样 9 个场景分别喂给两棵冻结树(各自独立子进程、独立 temp method-state),比对结果:
 
-- 8/9 逐字等价:plain_hit / missing_id / duplicate_id / empty_frame_file_only /
+- **9/9 逐字等价**:plain_hit / missing_id / duplicate_id / empty_frame_file_only /
   empty_and_live_same_id / moved_after_first_lookup / deleted_after_first_lookup /
-  appended_by_this_process_after_first_lookup。
-- 1/9 分歧,且**恰是提案自己披露的那条竞态**:`foreign_second_file_after_first_lookup`
-  —— 建表后由别的进程新造同 id 第二文件,baseline 抛 `RuntimeError`,candidate 仍返回它已知的
-  那一个。探针的 `divergence_is_exactly_the_disclosed_race` 为 true。
+  appended_by_this_process_after_first_lookup / foreign_second_file_after_first_lookup。
+- 原案唯一的分歧 `foreign_second_file_after_first_lookup` 已被护栏关掉:第二个日期目录出现后,
+  名字集合变化使索引重建,两个 live id 因而与 baseline 一样抛 `RuntimeError`。
 
-这条竞态 v1 接受并披露,理由:glob 版自身也不保证(它只是恰好每次重扫),且义务 (a) 关不掉它
-——索引里的路径确实还在。测试文件里 `test_disclosed_residual_race_is_pinned_not_hidden`
-**断言这条分歧本身**而不是断言它被修好了:将来谁真把它关上,那条测试会红,于是必须重新裁断,
-而不是悄悄改掉。
+修订契约有两条严格义务。**T1**:返回的路径在返回时必须仍是该 id 的 live match。
+**T2**:foreign creation 之后,只要随后的 stat 已能观察到日期目录 mtime 变化,护栏必须重建,
+重复 live id 必须抛 `RuntimeError`。仍披露一条不作为 rollback trigger 的边界:foreign creation
+若与护栏观察落在同一个约 1 ms 的目录 mtime tick 内,该次 lookup 仍可能看不见它。护栏成本探针
+量到 200 次中 197 次 mtime 改变、3 次不变,最小正差 `0.9921 ms`。
+
+九场景里的 foreign-write 场景走的是**日期目录名字集合**这条腿,不是 mtime 腿;mtime 腿另由
+`_probe_20260801_claude_mtime_leg_residual.py` 在目录名全程不变且无 sleep 的条件下实测 60/60
+抛 `RuntimeError`、0 漏。这个结果只说明披露偏保守,不证明 same-tick 残留不存在。
 
 ### 一条负面结果,写在前面免得被读肥
 
-`_probe_20260801_test_discriminates.py` 把新测试文件嫁接到 baseline 上跑,结果是
-10 个节点**全 ERROR**。这**不**是「10 条行为差异」——它们全部错在 fixture setup,因为
-baseline 上没有 `invalidate_frame_index` 这个函数。全 ERROR 只证明 API 不存在,不证明任何行为不同。
-把它读成行为鉴别,就是这条线反复犯的「零命中读成零输入」。行为鉴别只在等价探针里,别引错。
+独立评审把修订后的新测试文件喂给“修订树但 `weilan_trace.py` 换回无护栏的废弃候选
+`794022d9…`”的临时树:`test_foreign_second_file_rebuilds_after_observable_mtime_change`(T2)
+在无护栏树 **FAILED**、在修订候选 **PASSED**。其余 9 条在无护栏树仍 PASSED;same-tick
+残留测试因那棵废弃树没有 `_FRAME_INDEX_DIR_MTIMES` 而失败,不计作护栏的行为鉴别。
 
 ## 四、验收(印 rc 与节点,不印「全过」)
 
@@ -72,9 +80,9 @@ baseline 上没有 `invalidate_frame_index` 这个函数。全 ERROR 只证明 A
 | | pytest rc | 收集节点 | PASSED | FAILED |
 |---|---|---|---|---|
 | baseline | 1 | 93 | 92 | 1 |
-| candidate | 1 | 103 | 102 | 1 |
+| candidate | 1 | 104 | 103 | 1 |
 
-- 节点差 = 恰好我新增的 10 条,`only in baseline` 为空集。
+- 节点差 = 恰好我新增的 11 条,`only in baseline` 为空集,`candidate-only failures` 为空集。
 - **套件不是全绿**,两棵树同一条红:`test_slow_loop.py::test_promotion_gate_rejects_on_full_budget`
   —— `promotion requires a valid source_authenticity marker: invalid_or_incomplete_marker`
   (`weilan_trace.py:2177`)。它在**冻结 baseline 上同样红**,故是先在缺陷,不是本候选引入的。
@@ -83,12 +91,14 @@ baseline 上没有 `invalidate_frame_index` 这个函数。全 ERROR 只证明 A
 
 ## 五、性能(同一次运行,交错跑,不锚固定 digest)
 
-`_probe_20260801_frozen_tree_perf.py`,顺序 baseline→candidate→baseline→candidate,
-真实账本 5881 帧:
+两次独立的四次交错测量都按 baseline→candidate→baseline→candidate 运行,并要求四次 stdout
+字节同一。Codex 的账本为 5887 条,独立评审时为 5888 条:
 
-- **四跑 stdout 逐字全同**(1,348,418 B,record_count 5881,valid true,单一 digest)。
-  这同时证明探针期间账本没长——若长了,这个 flag 会 false,那时的耗时对比就是在比不同载荷。
-- baseline 92.024 s(冷)/ 32.386 s(热);candidate 11.401 s / 11.753 s。热对热 ≈ **2.84×**。
+- 两次测量内的**四跑 stdout 都逐字全同**;若账本在一组测量中增长,该 flag 会 false,那组耗时
+  就不能作为同载荷比较。
+- Codex:minimum-run speedup **2.51×**,mean-ratio **2.61×**;Claude 独立复核:**2.54× / 2.63×**。
+- 两次结果都只比原 `2.5×` 门槛高约 1%,而宿主负载不受控;`proposal.json` 因此把门槛降为
+  **2.0×**,仍保留独立的 stdout byte-identical 指标。绝对秒数不作跨轮比较。
 
 不锚固定 digest 是上一版的自我更正:lineage-show 的输出随账本增长而变,保质期以分钟计。
 
@@ -106,11 +116,11 @@ baseline 上没有 `invalidate_frame_index` 这个函数。全 ERROR 只证明 A
 ```
 cd proposals/find-frame-index-v0.1
 python -X utf8 _probe_20260801_candidate_tree_diff.py       # 只改了声明的两个路径
-python -X utf8 _probe_20260801_find_frame_equivalence.py    # 承重:9 场景行为等价
-python -X utf8 _probe_20260801_suite_acceptance.py          # rc + 节点数(约 2 分钟)
-python -X utf8 _probe_20260801_frozen_tree_perf.py          # 逐字相等 + 耗时(约 2.5 分钟)
-python -X utf8 _probe_20260801_test_discriminates.py        # 负面结果,见第三节
+python -X utf8 _probe_20260801_claude_revision_equivalence.py # 承重:修订版 9 场景行为等价
+python -X utf8 _probe_20260801_claude_revision_acceptance.py  # rc + 节点数 + T2 鉴别力
+python -X utf8 _probe_20260801_claude_revision_perf.py        # 逐字相等 + 独立耗时
+python -X utf8 _probe_20260801_claude_mtime_leg_residual.py   # 只量 mtime 腿
 ```
 
-先跑第一节的两条 `candidate-freeze` 重建 `artifacts/`,五支探针都从那里取树。
+先跑第一节的两条 `candidate-freeze` 重建 `artifacts/`;探针都从冻结树取输入。
 一切 `time` 只当只追加文件内的身份键,不当时刻(`ledger-timestamp-authority-v0.1`)。

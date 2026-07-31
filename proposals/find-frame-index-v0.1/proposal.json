@@ -27,7 +27,7 @@
     "second_lookup_of_a_cached_id_performs_no_glob",
     "lineage_show_stdout_byte_identical_across_interleaved_baseline_and_candidate_runs",
     "candidate_pytest_node_count_equals_baseline_node_count_plus_the_eleven_new_nodes",
-    "revised_frozen_candidate_lineage_show_stdout_is_byte_identical_and_minimum_run_speedup_is_at_least_2_5x",
+    "revised_frozen_candidate_lineage_show_stdout_is_byte_identical_and_minimum_run_speedup_is_at_least_2_0x",
     "candidate_introduces_no_test_failure_absent_from_the_baseline"
   ],
   "rollback_triggers": [

@@ -1,19 +1,19 @@
 {
   "base_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
-  "candidate_artifact_hash": "794022d90d8a173468ea67a9bb98f69176f603ef9ba2dc032088d7c8d0a7ad5b",
+  "candidate_artifact_hash": "fb16689a63538f39d35374a123c860c0bfbfddeca900fd10027483c865830996",
   "base_file_count": 49,
   "candidate_file_count": 50,
   "changed": [
     {
       "path": "scripts/weilan_trace.py",
       "base_sha256": "e6f11e11cdb670a093f9ae5a9e7b0f6769e9affe9b9ebc4698d2550918782f5e",
-      "candidate_sha256": "c114ed0440913d9fe7a033d6e8196f777e42ee7508ce774693fc3d5605157b46"
+      "candidate_sha256": "3e6e60157816be5c6ad62ce2a07259dd77f20d4ce026f9e32368a11d96f63ab1"
     }
   ],
   "added": [
     {
       "path": "scripts/test_find_frame_index.py",
-      "candidate_sha256": "4ed5ae434d41f5fb32a06fcbe95beac02a195dbe005d60a8180f65c2d92034b9"
+      "candidate_sha256": "322dc9725efe22575650af84ab0332655fb5c2282bf08355c1ed0b228fc01e14"
     }
   ],
   "removed": [],
