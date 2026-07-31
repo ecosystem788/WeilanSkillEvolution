@@ -1,0 +1,52 @@
+{
+  "live_weilan_trace_sha256": "be119f67781d545cd4d0424486547a450882be7d7a739aa19fbeaf048131275f",
+  "guard_placement": {
+    "command_open_lineaged_fenced": {
+      "found": true,
+      "stmt_index": 0,
+      "is_first": true,
+      "stmt_count": 7,
+      "lineno": 543
+    },
+    "assert_transaction_write_allowed": {
+      "found": true,
+      "stmt_index": 0,
+      "is_first": true,
+      "stmt_count": 9,
+      "lineno": 5066
+    },
+    "reconcile_runner_materialization": {
+      "found": true,
+      "stmt_index": 0,
+      "is_first": true,
+      "stmt_count": 14,
+      "lineno": 5987
+    }
+  },
+  "error_identity_inside_memo": {
+    "valid_scope": {
+      "raised": true,
+      "type": "ValueError",
+      "message": "guarded transaction and direct lineaged-open write entrances cannot run inside a derivation memo",
+      "is_guard_error": true,
+      "state_entries_created": [
+        "memory",
+        "memory/metabolism",
+        "memory/metabolism/fences",
+        "memory/metabolism/fences/workspaces",
+        "memory/metabolism/fences/workspaces/ab5fb71a6232a847",
+        "memory/metabolism/fences/workspaces/ab5fb71a6232a847/.workspace-contract.lock",
+        "memory/metabolism/fences/workspaces/ab5fb71a6232a847/scopes",
+        "memory/metabolism/fences/workspaces/ab5fb71a6232a847/scopes/628d981625b8",
+        "memory/metabolism/fences/workspaces/ab5fb71a6232a847/scopes/628d981625b8/.scope-contract.lock"
+      ]
+    },
+    "overlong_scope": {
+      "raised": true,
+      "type": "ValueError",
+      "message": "scope cannot exceed 128 characters",
+      "is_guard_error": false,
+      "state_entries_created": []
+    }
+  }
+}
