@@ -1,0 +1,225 @@
+{
+  "probe": "goal-vs-conversation",
+  "read_only": true,
+  "closed_handoff_goals": 10,
+  "verdict_counts": {
+    "adjudicated_after_clock_eligible": 1,
+    "adjudicated_before_clock_eligible": 7,
+    "unknown": 2
+  },
+  "lead_hours_before_clock_sorted": [
+    32.24,
+    42.75,
+    44.48,
+    45.4,
+    90.46,
+    100.8,
+    103.88
+  ],
+  "median_lead_hours_before_clock": 45.4,
+  "with_causal_event": 3,
+  "unresolved_citations": 0,
+  "cited_rows_total": 10,
+  "cited_rows_with_clock_authority": 10,
+  "goals": [
+    {
+      "goal_ref": "goal:cosign-durability-clause-adjudication",
+      "state": "SATISFIED",
+      "registered_sequence": 48,
+      "not_before_utc": "2026-07-29T00:00:00+00:00",
+      "cited_chat_rows": [
+        {
+          "line": 2970,
+          "resolved": true,
+          "time": "2026-07-29T15:26:07+09:00",
+          "from": "codex",
+          "time_authority": "clock"
+        },
+        {
+          "line": 2992,
+          "resolved": true,
+          "time": "2026-07-29T22:02:48+09:00",
+          "from": "claude",
+          "time_authority": "clock"
+        }
+      ],
+      "adjudication_time": "2026-07-29T15:26:07+09:00",
+      "causal_event_id": "5f700ed8-c601-469b-ac01-9a7e695a7a0f",
+      "causal_event_observed": true,
+      "lead_hours_before_clock": -6.44,
+      "verdict": "adjudicated_after_clock_eligible"
+    },
+    {
+      "goal_ref": "goal:causal-ref-integrity-adjudication",
+      "state": "COLLAPSED",
+      "registered_sequence": 76,
+      "not_before_utc": "2026-07-29T22:00:00+00:00",
+      "cited_chat_rows": [
+        {
+          "line": 2846,
+          "resolved": true,
+          "time": "2026-07-28T12:14:44+09:00",
+          "from": "codex",
+          "time_authority": "clock"
+        }
+      ],
+      "adjudication_time": "2026-07-28T12:14:44+09:00",
+      "causal_event_id": null,
+      "causal_event_observed": false,
+      "lead_hours_before_clock": 42.75,
+      "verdict": "adjudicated_before_clock_eligible"
+    },
+    {
+      "goal_ref": "goal:line-hash-eol-convention-adjudication",
+      "state": "SATISFIED",
+      "registered_sequence": 110,
+      "not_before_utc": "2026-07-31T00:00:00+00:00",
+      "cited_chat_rows": [
+        {
+          "line": 3007,
+          "resolved": true,
+          "time": "2026-07-30T00:45:20+09:00",
+          "from": "codex",
+          "time_authority": "clock"
+        }
+      ],
+      "adjudication_time": "2026-07-30T00:45:20+09:00",
+      "causal_event_id": "29918407-5b28-4929-8664-09acb8f355df",
+      "causal_event_observed": true,
+      "lead_hours_before_clock": 32.24,
+      "verdict": "adjudicated_before_clock_eligible"
+    },
+    {
+      "goal_ref": "goal:redaction-gate-tree-subject-proposal",
+      "state": "SATISFIED",
+      "registered_sequence": 132,
+      "not_before_utc": "2026-07-30T05:30:00+00:00",
+      "cited_chat_rows": [],
+      "adjudication_time": null,
+      "causal_event_id": "aa6ad3b4-3701-4f05-a870-5316545da6d1",
+      "causal_event_observed": true,
+      "lead_hours_before_clock": null,
+      "verdict": "unknown"
+    },
+    {
+      "goal_ref": "goal:qoder-membership-channel-adjudication",
+      "state": "COLLAPSED",
+      "registered_sequence": 177,
+      "not_before_utc": "2026-08-03T15:00:00+00:00",
+      "cited_chat_rows": [
+        {
+          "line": 3089,
+          "resolved": true,
+          "time": "2026-07-30T19:11:58+09:00",
+          "from": "codex",
+          "time_authority": "clock"
+        }
+      ],
+      "adjudication_time": "2026-07-30T19:11:58+09:00",
+      "causal_event_id": null,
+      "causal_event_observed": false,
+      "lead_hours_before_clock": 100.8,
+      "verdict": "adjudicated_before_clock_eligible"
+    },
+    {
+      "goal_ref": "goal:abandon-v3-marker-reach-and-basis-asymmetry",
+      "state": "COLLAPSED",
+      "registered_sequence": 236,
+      "not_before_utc": "2026-08-02T00:00:00+00:00",
+      "cited_chat_rows": [
+        {
+          "line": 3137,
+          "resolved": true,
+          "time": "2026-07-31T11:36:08+09:00",
+          "from": "codex",
+          "time_authority": "clock"
+        }
+      ],
+      "adjudication_time": "2026-07-31T11:36:08+09:00",
+      "causal_event_id": null,
+      "causal_event_observed": false,
+      "lead_hours_before_clock": 45.4,
+      "verdict": "adjudicated_before_clock_eligible"
+    },
+    {
+      "goal_ref": "goal:v31-marker-in-contract-anchor-adjudication",
+      "state": "COLLAPSED",
+      "registered_sequence": 253,
+      "not_before_utc": "2026-08-02T00:00:00+00:00",
+      "cited_chat_rows": [
+        {
+          "line": 3141,
+          "resolved": true,
+          "time": "2026-07-31T12:31:05+09:00",
+          "from": "codex",
+          "time_authority": "clock"
+        }
+      ],
+      "adjudication_time": "2026-07-31T12:31:05+09:00",
+      "causal_event_id": null,
+      "causal_event_observed": false,
+      "lead_hours_before_clock": 44.48,
+      "verdict": "adjudicated_before_clock_eligible"
+    },
+    {
+      "goal_ref": "goal:marker-reuse-head-identity-adjudication",
+      "state": "COLLAPSED",
+      "registered_sequence": 270,
+      "not_before_utc": null,
+      "cited_chat_rows": [
+        {
+          "line": 3145,
+          "resolved": true,
+          "time": "2026-07-31T13:23:44+09:00",
+          "from": "codex",
+          "time_authority": "clock"
+        }
+      ],
+      "adjudication_time": "2026-07-31T13:23:44+09:00",
+      "causal_event_id": null,
+      "causal_event_observed": false,
+      "lead_hours_before_clock": null,
+      "verdict": "unknown"
+    },
+    {
+      "goal_ref": "goal:lineage-memo-write-guard",
+      "state": "COLLAPSED",
+      "registered_sequence": 287,
+      "not_before_utc": "2026-08-04T00:00:00+00:00",
+      "cited_chat_rows": [
+        {
+          "line": 3149,
+          "resolved": true,
+          "time": "2026-07-31T14:32:30+09:00",
+          "from": "codex",
+          "time_authority": "clock"
+        }
+      ],
+      "adjudication_time": "2026-07-31T14:32:30+09:00",
+      "causal_event_id": null,
+      "causal_event_observed": false,
+      "lead_hours_before_clock": 90.46,
+      "verdict": "adjudicated_before_clock_eligible"
+    },
+    {
+      "goal_ref": "goal:memo-guard-fence-ordering-adjudication",
+      "state": "COLLAPSED",
+      "registered_sequence": 304,
+      "not_before_utc": "2026-08-05T00:00:00+09:00",
+      "cited_chat_rows": [
+        {
+          "line": 3153,
+          "resolved": true,
+          "time": "2026-07-31T16:07:28+09:00",
+          "from": "codex",
+          "time_authority": "clock"
+        }
+      ],
+      "adjudication_time": "2026-07-31T16:07:28+09:00",
+      "causal_event_id": null,
+      "causal_event_observed": false,
+      "lead_hours_before_clock": 103.88,
+      "verdict": "adjudicated_before_clock_eligible"
+    }
+  ]
+}

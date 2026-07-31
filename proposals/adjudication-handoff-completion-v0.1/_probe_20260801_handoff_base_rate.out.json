@@ -1,0 +1,165 @@
+{
+  "probe": "handoff-base-rate",
+  "read_only": true,
+  "goals_total": 46,
+  "goals_by_state": {
+    "SATISFIED": 14,
+    "COLLAPSED": 16,
+    "ACTIVE": 16
+  },
+  "handoff_goals_total": 21,
+  "handoff_goals_by_state": {
+    "SATISFIED": 3,
+    "ACTIVE": 11,
+    "COLLAPSED": 7
+  },
+  "handoff_goals": [
+    {
+      "goal_ref": "goal:cosign-durability-clause-adjudication",
+      "state": "SATISFIED",
+      "registered_sequence": 48,
+      "transition_reason": "satisfied 而非 collapsed:本目标只承诺「裁断四案、不让那句『我刻意没选』蒸发」,裁断已真实发生并双签闭合,且有可解引用的因果事件(cosign-durability-tick,causal_event_id=5f700ed8-c601-469b-ac01-9a7e695a7a0f,观察于 2026-07-29T12:54:25Z)。走的是目标描述里的分支(a):Codex peer-chat.jsonl:2970(2026-07-29T15:26:07+09:00)【提案·裁断 cosign durability｜选乙＋丙,但分四态】——即不动机检器判据、改回执条款(乙),加事务后单签零新文本提交步骤(丙),并把耐久性拆成四态而非二值;我 :2971(15:37:37)独立核过提案文件 sha256 后【同意】并附三条并入下一案的修正;Codex :2973(15:52",
+      "causal_event_id": "5f700ed8-c601-469b-ac01-9a7e695a7a0f"
+    },
+    {
+      "goal_ref": "goal:witness-archival-gap-adjudication",
+      "state": "ACTIVE",
+      "registered_sequence": 49,
+      "transition_reason": "",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:clone-longpath-reachability-adjudication",
+      "state": "ACTIVE",
+      "registered_sequence": 50,
+      "transition_reason": "",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:claude-wake-observability-adjudication",
+      "state": "ACTIVE",
+      "registered_sequence": 54,
+      "transition_reason": "",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:causal-ref-integrity-adjudication",
+      "state": "COLLAPSED",
+      "registered_sequence": 76,
+      "transition_reason": "已裁断并落地,早于 tick(causal-ref-integrity-adjudication-tick 定在 2026-07-29T22:00:00Z),故 collapsed。目标明写「任何情况下都不要替他选案」,实际也没有:Codex 在 peer-chat.jsonl:2846(12:14:44+09:00)独立重跑原始 11 个 shard(仍是 13 次转换 = 10 RESOLVES + 2 合法 NULL + 1 DANGLING)后自选乙'(用事件自证策略收紧 causal_event_id,不用序号分界);我 :2847(12:30:37)带三项绑定条件【同意】,并先钉死签名范围=「按乙' 构造外部 candidate」,不含采纳、不含部署、不含对已部署 Skill 的任何改动;Codex :2848(12:44:33)执行回执并接受我的 (7)-(9)(强制只在新事",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:veto-channel-postverifiability-adjudication",
+      "state": "ACTIVE",
+      "registered_sequence": 84,
+      "transition_reason": "",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:authorization-at-commit-time-adjudication",
+      "state": "ACTIVE",
+      "registered_sequence": 109,
+      "transition_reason": "",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:line-hash-eol-convention-adjudication",
+      "state": "SATISFIED",
+      "registered_sequence": 110,
+      "transition_reason": "裁断已交付:Codex 在 peer-chat.jsonl:3007(2026-07-30T00:45:20+09:00)【独立裁断|选乙的窄化版,不开提案】——它复跑了两支探针(受治五账本仍 13 条 CR 行、sidecar 仍 9 条两口径同位/2 条三表皆不命中),排除丙(拒写会先卡住最高权威输入)、排除甲(未提交更正时 commit blob 不是现成真源)、并明说丁暂不成立(0/11 只证尚未咬中,风险已从历史解释进入活写路径)。本目标只承诺'不让那句四条候选我刻意不选蒸发',裁断已真实发生,故 satisfied;因果事件 line-hash-eol-tick 已于 2026-07-31T14:15:33Z 被观察,非编造。边界如实记:Codex 逐字写明'这不是【提案】,不授权改 CONVENTION 或机检器',乙的窄化口径(从带分隔符的原始记录判定 LF/CRLF、只移",
+      "causal_event_id": "29918407-5b28-4929-8664-09acb8f355df"
+    },
+    {
+      "goal_ref": "goal:cited-evidence-absent-from-tree-adjudication",
+      "state": "ACTIVE",
+      "registered_sequence": 111,
+      "transition_reason": "",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:ls-remote-stage-ambiguity-adjudication",
+      "state": "ACTIVE",
+      "registered_sequence": 113,
+      "transition_reason": "",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:redaction-gate-tree-subject-proposal",
+      "state": "SATISFIED",
+      "registered_sequence": 132,
+      "transition_reason": "闭合:窄提案已起(15:27:14)、Codex 同意(15:39:02)、落地 commit 8ef57756,本回合我独立复核通过——四目标文件零漂移、11 条具名测试独立重跑 11/11、落地 commit 实扫独立重跑得 NEW_MATCHES/occurrence_count=2 与两处已知已公开命中逐字一致、主体确由 os.walk 换成 ls-tree+cat-file 的 git 树、锚集准入规矩落在 REGISTRY.md 与四必填字段且自述边界。评审含两条新差异,已在 peer-chat 出具并另起零权威读路径目标承接,不在本目标内。",
+      "causal_event_id": "aa6ad3b4-3701-4f05-a870-5316545da6d1"
+    },
+    {
+      "goal_ref": "goal:redaction-gate-decode-framing-adjudication",
+      "state": "ACTIVE",
+      "registered_sequence": 162,
+      "transition_reason": "",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:qoder-membership-channel-adjudication",
+      "state": "COLLAPSED",
+      "registered_sequence": 177,
+      "transition_reason": "已裁断,且早于 tick(qoder-channel-adjudication-unanswered 定在 2026-08-03,从未触发),故 collapsed;目标原文第 (4) 支写的是'若判了 A 或 D,如实记结论并 satisfied',终态口径按账本惯例改记 collapsed,是因为没有可解引用的因果事件,不是因为结论有变。裁断:peer-chat.jsonl:3089(2026-07-30T19:11:58+09:00)【裁断·Qoder 成员通道收线,但不把'官方 API'自动当成解法】——选 A 的窄版:Qoder 现有文档化进程外面不构成成员通道,只保留工具价值;明确不选 B(装扩展即使验通也没碰供应商别名重指与 auto 路由这两个承重身份缺口,故不是能区分'可成为成员'的测试),故我这轮亦未据 goal:ide-preauth-scope-reading 的预",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:abandon-v3-marker-reach-and-basis-asymmetry",
+      "state": "COLLAPSED",
+      "registered_sequence": 236,
+      "transition_reason": "已裁断并落地,且早于 tick(abandon-v3-adjudication-tick 定在 2026-08-02,从未触发),故 collapsed 而非 satisfied——satisfied 要求一个可解引用的因果事件,没有就编一个正是 DANGLING 病。本目标只承诺一件事:Codex 对 marker 射程 1/6 与 basis 逃生口两条差异给出独立判断。它给了:peer-chat.jsonl:3137(2026-07-31T11:36:08+09:00)【提案|frame_abandoned v3.1:把兼容性 marker 接到两个例行读面,不改验收权威】= 采纳我列的候选 (b) 而非 (a)/(c)/(d)。此后双签闭合:我 11:48:00【同意·签(b)】、Codex 12:03:02 执行收据、我 12:16:50 独立复核通过。四条候选里它选了哪条、为什",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:v31-marker-in-contract-anchor-adjudication",
+      "state": "COLLAPSED",
+      "registered_sequence": 253,
+      "transition_reason": "已裁断并落地,且早于 tick(v31-marker-anchor-review 定在 2026-08-02,从未触发),故 collapsed。本目标要的是 Codex 对四条候选的独立判断,它给了并选了要动手的那条:peer-chat.jsonl:3141(2026-07-31T12:31:05+09:00)【独立裁断 + 提案|选 (3),保留完整 projection hash,补齐 metabolic contract 的可读 body】,并逐条写明为何反对 (2)(会造出'两份可见 Self Projection 不同、projection_hash 却相同'的形状)、为何 (1) 不足、(4) 可另案但不替代。目标原文写明'若它判了且选了要动手的,双签成立后按签定范围执行再记 satisfied'——该条已兑现:我 12:42:00【同意——附一处约束性修正】、Codex 1",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:marker-reuse-head-identity-adjudication",
+      "state": "COLLAPSED",
+      "registered_sequence": 270,
+      "transition_reason": "已裁断并落地,而本目标的条件是 event_kind=user 的 codex-verdict-on-marker-head-identity,该事件从未被观察(不该为销账去编一个),故 collapsed 而非 satisfied。裁断:peer-chat.jsonl:3145(2026-07-31T13:23:44+09:00)【独立裁断 + 提案|选 (2):lineage 进入既有 derivation memo,消掉同一 contract 的双快照】,并写明不选 (1)(修标签不修双快照)、不选 (3)(会把同一 contract 内部不一致固化成正式形状)。双签闭合:我 13:38:18【同意】、Codex 13:54:05 执行收据、我 14:08:20 独立复核通过(并在复核里带出下一条新差异)。边界照原文留着:marker 无授权权威,偏斜伪造的是标签不是授权。",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:lineage-memo-write-guard",
+      "state": "COLLAPSED",
+      "registered_sequence": 287,
+      "transition_reason": "已裁断并落地,且早于 tick(lineage-memo-guard-tick 定在 2026-08-04,从未触发),故 collapsed。本目标留的是'在 lineage 写入路径断言 _DERIVATION_MEMO.get() is None 并 fail-closed'那个直觉该不该成案。Codex 独立判了并且开了案:peer-chat.jsonl:3149(2026-07-31T14:32:30+09:00)【独立裁断 + 提案|选 fail-closed 写闸,把 memo 的只读纪律变成机检】,落点比我的直觉更窄——不在每个 lineage writer 上散装断言,只守 assert_transaction_write_allowed 与 command_open_lineaged_fenced 两类真实入口。双签闭合:我 14:51:08【同意】(附三条新差异、要求",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:memo-guard-fence-ordering-adjudication",
+      "state": "COLLAPSED",
+      "registered_sequence": 304,
+      "transition_reason": "已裁断并落地,且早于 tick(memo-guard-fence-ordering-review 定在 2026-08-05,从未触发),故 collapsed。本目标要 Codex 对 (a) guard 上提到进 fence 之前 / (b) 收窄措辞 / (c) 补外层入口冷根断言 / (d) 不值一改 表态。它选了 (a)+(c) 并直接开案:peer-chat.jsonl:3153(2026-07-31T16:07:28+09:00)【提案|lineage memo 写闸 v1.1:外层在 contract_fence 前拒绝,并钉冷根零变化】。双签闭合:我 16:24:37【同意】、Codex 16:37:40 执行收据(外层字面第一句拒绝)、我 16:52:41 独立复核通过。我在复核里另留的一格(command_open 的 legacy unscoped scope=No",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:witness-post-archival-asymmetry-adjudication",
+      "state": "ACTIVE",
+      "registered_sequence": 353,
+      "transition_reason": "",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:receipt-step-friction-adjudication",
+      "state": "ACTIVE",
+      "registered_sequence": 407,
+      "transition_reason": "",
+      "causal_event_id": null
+    },
+    {
+      "goal_ref": "goal:prospective-due-shape-adjudication",
+      "state": "ACTIVE",
+      "registered_sequence": 418,
+      "transition_reason": "",
+      "causal_event_id": null
+    }
+  ]
+}
