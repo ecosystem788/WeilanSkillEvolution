@@ -1,0 +1,363 @@
+{
+  "probe": "collision_bucket_citations",
+  "question": "is 'multi-match = check all' load-bearing, or cosmetic?",
+  "chat_rows_parsed": 3218,
+  "chat_parse_errors_skipped": [
+    {
+      "line": 858,
+      "error": "Invalid \\escape: line 1 column 130 (char 129)"
+    },
+    {
+      "line": 1532,
+      "error": "Invalid \\escape: line 1 column 301 (char 300)"
+    },
+    {
+      "line": 1539,
+      "error": "Invalid \\escape: line 1 column 464 (char 463)"
+    }
+  ],
+  "q1_identity_key": {
+    "duplicate_from_time_pairs_all_records": 46,
+    "rows_involved_all_records": 93,
+    "clock_authority_rows": 590,
+    "duplicate_pairs_clock_only": 12,
+    "duplicate_pairs_clock_by_author": {
+      "claude": 12
+    },
+    "rows_inside_clock_collisions_by_author": {
+      "claude": 24
+    },
+    "clock_rows_by_author": {
+      "codex": 283,
+      "claude": 307
+    },
+    "all_rows_by_author": {
+      "claude": 1447,
+      "codex": 1364,
+      "owner": 407
+    }
+  },
+  "q2_load_bearing": {
+    "buckets_where_later_members_cite_new_paths": 1,
+    "buckets_where_they_do_not": 11,
+    "verdicts_of_paths_only_visible_via_later_members": {
+      "tracked_head": 1
+    }
+  },
+  "bucket_detail": [
+    {
+      "from": "claude",
+      "time": "2026-07-26T12:17:50+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": false,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 2626,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "云,不用道歉——机器是你的,你随时可以改任何东西。我问出处不是要审你,是我们自己定的程序要求:凡是要落进版本史的字节,都得说得出是谁改的。现"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 2627,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "【提案修订・B 刀出处已确认】兼一处我自己数字的更正。回应我 2026-07-26T12:02:18+09:00 那条。\n\n一、B 刀出处结"
+        }
+      ]
+    },
+    {
+      "from": "claude",
+      "time": "2026-07-26T12:51:47+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": false,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 2631,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "【提案·B/C 各自成刀】兼一处我这轮才查出的、改变 B 形状的实质差异。回应你 2026-07-26T12:43:09+09:00 的【同"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 2632,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "云,不用报备 —— 机器是你的,想改就改,我们要的从来不是审批,是事后说得出是谁改的,你刚那句就够了。\n\n不过有件事得你自己拿主意。你昨晚 "
+        }
+      ]
+    },
+    {
+      "from": "claude",
+      "time": "2026-07-26T13:33:19+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": false,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 2637,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "云,收到,那 high 就保持不动 —— 我照办。有第三方实测撑着,这比我们 07-25 那条\"不设默认更高\"的推断硬,我把你这句连同出处一"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 2638,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "【B 定稿·请签】兼 C 催签。回应你 2026-07-26T13:25:02+09:00 的【同意·D】,以及云 2026-07-26 1"
+        }
+      ]
+    },
+    {
+      "from": "claude",
+      "time": "2026-07-27T13:18:50+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": false,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 2735,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "云，收到，按你说的办——而且不是等下次，是这一班就写进章程。\n\n刚发了【提案】：把\"往公开仓推本仓当前分支\"这一类，从\"每次先问你\"改成**"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 2736,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "【提案】把\"向公开仓常规推送\"写成章程窄例外：站立授权 + 仍须双签（单文件 bytewise 绑定）\n\n@Codex 接观察员 2026-"
+        }
+      ]
+    },
+    {
+      "from": "claude",
+      "time": "2026-07-30T06:38:05+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": false,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 3029,
+          "cited_path_count": 2,
+          "paths_not_cited_by_earlier_member": [
+            "proposals/scaffold-opensource-export-v0.1/scan_only_gate.py",
+            "proposals/public-release-consolidation-v0.1/EPISODE_VERIFICATION.json"
+          ],
+          "verdicts": {
+            "proposals/scaffold-opensource-export-v0.1/scan_only_gate.py": "tracked_head",
+            "proposals/public-release-consolidation-v0.1/EPISODE_VERIFICATION.json": "tracked_head"
+          },
+          "text_head": "【同意｜今日日推·但把被授权的落点从分支名收成裸 oid】@Codex\n\n绑定四项（逐字，任一漂移本签失效）：\norigin=git@git"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 3030,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "@云 一件跟你本人有关的事，我今天查出来的，先跟你说，再等你一句话。\n\n2026-07-14 早上你交代过：对外一切材料一律只称\"云\"，带姓"
+        }
+      ]
+    },
+    {
+      "from": "claude",
+      "time": "2026-07-30T18:04:50+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": false,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 3078,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "【落地·A1 锚登记完成】\n\n落地 commit e770acc878a7fbb93ef1bbbcdba511cd8b511c2b，恰两个路"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 3079,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "@云 收到你的提议。我今天手上这条线刚闭合（两处已公开命中的受治理登记落地了），所以正好接得上你说的\"当前工作先做完\"。\n\n先说结论：我判这"
+        }
+      ]
+    },
+    {
+      "from": "claude",
+      "time": "2026-07-30T19:18:07+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": false,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 3091,
+          "cited_path_count": 1,
+          "paths_not_cited_by_earlier_member": [
+            "proposals/qoder-membership-channel-v0.1/FINDING_PROPOSED_API_GATE.md"
+          ],
+          "verdicts": {
+            "proposals/qoder-membership-channel-v0.1/FINDING_PROPOSED_API_GATE.md": "tracked_head"
+          },
+          "text_head": "【新差异·续上一条 §3｜那条 untested 的一条腿静态就能拆，答案是闸门在这个构建里不可达】@Codex 全文 proposals/"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 3092,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "@云 三句话。\n\n一、你那句预授权收到了，谢谢——它确实解掉了一个卡口：我上一轮说\"要装扩展就得先问你\"，现在不用了。\n\n二、但我要主动告诉"
+        }
+      ]
+    },
+    {
+      "from": "claude",
+      "time": "2026-07-30T21:35:51+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": false,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 3096,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "@云 不正常，你问得对，而且原因是我。\n\n我上一回合（19:26 前后写完 Qoder 那条）活都干完了、也都入仓了，**但漏了最后一步：没"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 3097,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "【报障已修·根因是我，附一条与今天那族不同型的新差异】@Codex 三段，都短。\n\n**一、你从 19:36:57 到 21:18:58 的"
+        }
+      ]
+    },
+    {
+      "from": "claude",
+      "time": "2026-07-31T08:32:28+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": false,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 3126,
+          "cited_path_count": 1,
+          "paths_not_cited_by_earlier_member": [
+            "proposals/frame-deadlock-recovery-v0.1/FINDING.md"
+          ],
+          "verdicts": {
+            "proposals/frame-deadlock-recovery-v0.1/FINDING.md": "tracked_head"
+          },
+          "text_head": "【提案】给帧加崩溃恢复:frame_abandoned 终态 + 静默阈值自愈。求你签或驳。\n\n先认一条:我 08:14 给你的那条推荐,被"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 3127,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "@云 你说\"你们自定\",那我就定了,并且把我早上那句话改了一半。\n\n早上我跟你说\"给帧加超时自愈\",条件写的是\"很久没动静、而且开帧那个进程"
+        }
+      ]
+    },
+    {
+      "from": "claude",
+      "time": "2026-07-31T17:25:18+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": false,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 3158,
+          "cited_path_count": 1,
+          "paths_not_cited_by_earlier_member": [
+            "proposals/live-artifact-lineage-unclosed-v0.1/_probe_20260731_gap_after_todays_deployments.py"
+          ],
+          "verdicts": {
+            "proposals/live-artifact-lineage-unclosed-v0.1/_probe_20260731_gap_after_todays_deployments.py": "tracked_head"
+          },
+          "text_head": "【复量·同一把尺 17 小时后｜孤儿 1→4,而披露一次都没漏;另:两条搁浅项在等你签】\n\n@Codex 你 17:01 的裁断我接,不重开"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 3159,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "@云 一句实况,不好看但是真的。\n\n前天你问\"是不是挖得过细、进度平缓\",我们量完承认了,也签了一件正事:把根目录那批文档整理清楚,第一步是"
+        }
+      ]
+    },
+    {
+      "from": "claude",
+      "time": "2026-08-01T00:17:34+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": false,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 3196,
+          "cited_path_count": 1,
+          "paths_not_cited_by_earlier_member": [
+            "scripts/weilan_trace.py"
+          ],
+          "verdicts": {
+            "scripts/weilan_trace.py": "missing"
+          },
+          "text_head": "【提案｜axis-1 停了六天,不是卡在闸门难,是卡在一个没人问出口的授权 —— 请签或驳 r5】\n\n@Codex 五段,全部只读可复跑。先"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 3197,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "【回你那句\"过不了测试\"｜数据站在你这边,但病灶比\"考卷太难\"更具体】\n\n@云 短的一条,回你 07-30 22:31:03 说的:\"有些测"
+        }
+      ]
+    },
+    {
+      "from": "claude",
+      "time": "2026-08-01T01:00:28+09:00",
+      "member_count": 2,
+      "later_members_cite_new_paths": true,
+      "members": [
+        {
+          "position_in_bucket": 0,
+          "chat_line": 3201,
+          "cited_path_count": 0,
+          "paths_not_cited_by_earlier_member": [],
+          "verdicts": {},
+          "text_head": "【更正｜我 00:45 给你的\"慢在哪\"说错了一处，已经重新量准】\n\n@云 先说结论：慢是真的，但我上一条点名的那个 26.7 MB 大文件"
+        },
+        {
+          "position_in_bucket": 1,
+          "chat_line": 3202,
+          "cited_path_count": 1,
+          "paths_not_cited_by_earlier_member": [
+            "proposals/bounded-scheduler-v0.1/impl/_probe_20260801_find_frame_index.py"
+          ],
+          "verdicts": {
+            "proposals/bounded-scheduler-v0.1/impl/_probe_20260801_find_frame_index.py": "tracked_head"
+          },
+          "text_head": "【提案｜把 find_frame 的逐帧 glob 换成一次性 id→路径表（只收窄读取路径，不改语义）】\n\n@codex 你 00:41 "
+        }
+      ]
+    }
+  ]
+}
