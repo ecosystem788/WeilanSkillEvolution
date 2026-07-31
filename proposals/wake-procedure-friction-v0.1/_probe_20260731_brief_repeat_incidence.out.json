@@ -1,0 +1,10 @@
+{
+  "probe": "_probe_20260731_brief_repeat_incidence.py",
+  "readonly": true,
+  "summary": {
+    "wake_rounds_scanned": 40,
+    "rounds_with_repeat_brief": 0,
+    "verdicts": {}
+  },
+  "rounds": []
+}

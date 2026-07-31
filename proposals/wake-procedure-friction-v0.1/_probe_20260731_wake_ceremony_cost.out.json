@@ -1,0 +1,1188 @@
+{
+  "probe": "_probe_20260731_wake_ceremony_cost.py",
+  "readonly": true,
+  "sessions_dir": "C:\\Users\\zy\\.claude\\projects\\D--WeilanSkillEvolution",
+  "wake_prompt_sha256": "48b9c107b55a586158a43c179659a9ac46a97317a2b41b60af200d4617331016",
+  "n_recent_requested": 40,
+  "summary": {
+    "sessions_scanned": 42,
+    "wake_rounds_matched": 40,
+    "rounds_with_work": 40,
+    "rounds_without_any_work_call": 0,
+    "calls_before_first_work": {
+      "median": 3.0,
+      "mean": 2.42,
+      "min": 1,
+      "max": 3
+    },
+    "output_token_fraction_before_first_work": {
+      "median": 0.0333,
+      "mean": 0.0341,
+      "min": 0.0043,
+      "max": 0.0646
+    },
+    "mandated_step_omissions": {
+      "receipt": 1
+    },
+    "mandated_step_omission_rate": {
+      "receipt": 0.025
+    },
+    "ceremony_repeat_rounds": {
+      "receipt": 38,
+      "recall": 1,
+      "prospective_show": 2
+    },
+    "consumption_tail_calls_total": {
+      "peer_health": 68,
+      "wake_brief": 37,
+      "recall": 6,
+      "receipt": 1
+    }
+  },
+  "rounds": [
+    {
+      "session": "b0b159ca-5559-414a-b7e3-f784d095d963.jsonl",
+      "start": "2026-07-31T12:14:08.866Z",
+      "total_calls": 31,
+      "output_tokens": 20691,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 17,
+        "channel_peer": 8,
+        "receipt": 2,
+        "channel_inbox": 1
+      },
+      "ceremony_calls": 5,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1337,
+      "seconds_to_first_work": 39.806,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\nd=json.load(io.open(r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\b0b159ca-5559-414a-b7e3-f784d095d963"
+    },
+    {
+      "session": "e08fb44d-113d-4e45-8875-d7db314486b8.jsonl",
+      "start": "2026-07-31T11:55:19.442Z",
+      "total_calls": 74,
+      "output_tokens": 42456,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "work": 65,
+        "channel_peer": 4,
+        "peer_health": 1,
+        "receipt": 2
+      },
+      "ceremony_calls": 5,
+      "consumption_tails": {
+        "wake_brief": 2,
+        "peer_health": 1
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 2,
+      "calls_before_first_work": 2,
+      "tokens_before_first_work": 872,
+      "seconds_to_first_work": 26.82,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\e08fb44d-113d-4e45-8875-d7db314486b8\\\\tool-results\\\\b0"
+    },
+    {
+      "session": "0ebf9577-19c4-4ebd-904c-45ae8e9b0f5c.jsonl",
+      "start": "2026-07-31T11:38:16.162Z",
+      "total_calls": 39,
+      "output_tokens": 26936,
+      "step_counts": {
+        "recall": 1,
+        "work": 25,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "channel_peer": 10,
+        "receipt": 1
+      },
+      "ceremony_calls": 4,
+      "consumption_tails": {
+        "recall": 2,
+        "peer_health": 3
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {},
+      "first_work_index": 1,
+      "calls_before_first_work": 1,
+      "tokens_before_first_work": 297,
+      "seconds_to_first_work": 12.873,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"file_path\": \"D:\\\\WeilanSkillEvolution\\\\_recall_20260731b.json\"}"
+    },
+    {
+      "session": "a0cb03d9-db00-4360-83b8-15f9108c48bd.jsonl",
+      "start": "2026-07-31T11:27:28.085Z",
+      "total_calls": 44,
+      "output_tokens": 22888,
+      "step_counts": {
+        "recall": 1,
+        "work": 33,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "channel_peer": 1,
+        "receipt": 7
+      },
+      "ceremony_calls": 10,
+      "consumption_tails": {
+        "recall": 1,
+        "wake_brief": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 7
+      },
+      "first_work_index": 1,
+      "calls_before_first_work": 1,
+      "tokens_before_first_work": 438,
+      "seconds_to_first_work": 12.877,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"Get-Content \\\"$env:TEMP\\\\recall_0731.json\\\" -Encoding UTF8 | Select-Object -Skip 200\", \"description\": \"Read rest of recall output\"}"
+    },
+    {
+      "session": "664e3807-29f0-4d1b-9032-636788491533.jsonl",
+      "start": "2026-07-31T10:48:58.080Z",
+      "total_calls": 70,
+      "output_tokens": 48478,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "work": 56,
+        "peer_health": 1,
+        "channel_peer": 5,
+        "receipt": 6
+      },
+      "ceremony_calls": 9,
+      "consumption_tails": {
+        "wake_brief": 1,
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 6
+      },
+      "first_work_index": 2,
+      "calls_before_first_work": 2,
+      "tokens_before_first_work": 902,
+      "seconds_to_first_work": 24.721,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"import json,io; d=json.load(io.open(r'D:\\\\WeilanSkillEvolution\\\\_wake_brief_20260731.json',encoding='utf-8-sig')); print('KEYS',list(d."
+    },
+    {
+      "session": "b3811a1c-e243-46f5-9721-50ce0264e28a.jsonl",
+      "start": "2026-07-31T10:21:45.675Z",
+      "total_calls": 36,
+      "output_tokens": 30570,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 23,
+        "channel_peer": 4,
+        "channel_inbox": 1,
+        "receipt": 5
+      },
+      "ceremony_calls": 8,
+      "consumption_tails": {
+        "peer_health": 4
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 5
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1111,
+      "seconds_to_first_work": 26.724,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\b3811a1c-e243-46f5-9721-50ce0264e28a\\\\tool-results\\\\bf"
+    },
+    {
+      "session": "34a60e58-62ae-45ae-8b4f-b7bbc064a881.jsonl",
+      "start": "2026-07-31T09:38:48.971Z",
+      "total_calls": 58,
+      "output_tokens": 50470,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 37,
+        "channel_peer": 8,
+        "receipt": 9,
+        "channel_inbox": 1
+      },
+      "ceremony_calls": 12,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 9
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1029,
+      "seconds_to_first_work": 25.903,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"cd \\\"D:\\\\WeilanSkillEvolution\\\" && python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\34a60e58-62ae-45ae-"
+    },
+    {
+      "session": "ca25f062-01d9-43ec-9b97-52d32c9e59c4.jsonl",
+      "start": "2026-07-31T09:12:38.713Z",
+      "total_calls": 49,
+      "output_tokens": 39189,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "work": 30,
+        "peer_health": 1,
+        "channel_peer": 13,
+        "receipt": 2,
+        "channel_inbox": 1
+      },
+      "ceremony_calls": 5,
+      "consumption_tails": {
+        "wake_brief": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 2,
+      "calls_before_first_work": 2,
+      "tokens_before_first_work": 972,
+      "seconds_to_first_work": 22.628,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\nd=json.load(io.open(r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\ca25f062-01d9-43ec-9b97-52d32c9e59c4"
+    },
+    {
+      "session": "31fddd76-5272-41c4-a183-f4b8c0f32b72.jsonl",
+      "start": "2026-07-31T08:41:27.070Z",
+      "total_calls": 52,
+      "output_tokens": 38999,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 31,
+        "channel_peer": 12,
+        "receipt": 6
+      },
+      "ceremony_calls": 9,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 6
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1102,
+      "seconds_to_first_work": 33.53,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"$p=\\\"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\31fddd76-5272-41c4-a183-f4b8c0f32b72\\\\tool-results\\\\bxpp89t12.txt\\\"\\npython -c \\\"\\n"
+    },
+    {
+      "session": "ec6adaf2-c78b-4c8d-a550-21225611cefc.jsonl",
+      "start": "2026-07-31T08:08:06.165Z",
+      "total_calls": 76,
+      "output_tokens": 54734,
+      "step_counts": {
+        "recall": 1,
+        "work": 50,
+        "wake_brief": 1,
+        "channel_peer": 21,
+        "peer_health": 1,
+        "receipt": 2
+      },
+      "ceremony_calls": 5,
+      "consumption_tails": {
+        "wake_brief": 2,
+        "peer_health": 1
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 1,
+      "calls_before_first_work": 1,
+      "tokens_before_first_work": 368,
+      "seconds_to_first_work": 13.532,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"Get-Content \\\"$env:TEMP\\\\recall.json\\\" -Encoding utf8 | Select-Object -Skip 200\", \"description\": \"Read rest of recall output\"}"
+    },
+    {
+      "session": "5ad8c00f-2cfd-4535-82ef-246e9fbfcf2f.jsonl",
+      "start": "2026-07-31T07:46:25.297Z",
+      "total_calls": 34,
+      "output_tokens": 16775,
+      "step_counts": {
+        "recall": 1,
+        "work": 25,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "channel_peer": 2,
+        "receipt": 4
+      },
+      "ceremony_calls": 7,
+      "consumption_tails": {
+        "recall": 1,
+        "wake_brief": 3
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 4
+      },
+      "first_work_index": 1,
+      "calls_before_first_work": 1,
+      "tokens_before_first_work": 591,
+      "seconds_to_first_work": 12.534,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"cd \\\"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\5ad8c00f-2cfd-4535-82ef-246e9fbfcf2f\\\\tool-results\\\" && python -c \\\"\\nimport json,i"
+    },
+    {
+      "session": "7828c9d6-7e6a-4217-b248-430f092e646b.jsonl",
+      "start": "2026-07-31T07:20:42.879Z",
+      "total_calls": 32,
+      "output_tokens": 18840,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 19,
+        "channel_peer": 5,
+        "receipt": 5
+      },
+      "ceremony_calls": 8,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 5
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1110,
+      "seconds_to_first_work": 31.504,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"cd \\\"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\7828c9d6-7e6a-4217-b248-430f092e646b\\\\tool-results\\\" && python -c \\\"\\nimport json,i"
+    },
+    {
+      "session": "56cdc162-de10-4079-920f-615a746614cb.jsonl",
+      "start": "2026-07-31T06:38:22.210Z",
+      "total_calls": 42,
+      "output_tokens": 33628,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 35,
+        "channel_peer": 2,
+        "receipt": 2
+      },
+      "ceremony_calls": 5,
+      "consumption_tails": {},
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1046,
+      "seconds_to_first_work": 32.904,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"import json,io; d=json.load(io.open(r'$env:TEMP\\\\brief.json',encoding='utf-8-sig')); print(json.dumps({k:(len(v) if isinstance(v,list) "
+    },
+    {
+      "session": "8e24a7cf-c8cf-401c-9734-1c889d7e6826.jsonl",
+      "start": "2026-07-31T05:45:00.281Z",
+      "total_calls": 38,
+      "output_tokens": 25634,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 28,
+        "channel_peer": 2,
+        "receipt": 4,
+        "channel_inbox": 1
+      },
+      "ceremony_calls": 7,
+      "consumption_tails": {
+        "peer_health": 3
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 4
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 969,
+      "seconds_to_first_work": 49.4,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\8e24a7cf-c8cf-401c-9734-1c889d7e6826\\\\tool-results\\\\bu"
+    },
+    {
+      "session": "b5195233-b4fc-45f5-bee7-4c2c0c5c8d88.jsonl",
+      "start": "2026-07-31T04:59:29.079Z",
+      "total_calls": 59,
+      "output_tokens": 34179,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 46,
+        "channel_peer": 6,
+        "receipt": 4
+      },
+      "ceremony_calls": 7,
+      "consumption_tails": {
+        "peer_health": 4
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 4
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1671,
+      "seconds_to_first_work": 30.917,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"file_path\": \"D:\\\\WeilanSkillEvolution\\\\proposals\\\\bounded-scheduler-v0.1\\\\impl\\\\_read_brief_20260731.py\", \"content\": \"import json, io, sys\\np = r\\\"C:\\\\Users\\\\"
+    },
+    {
+      "session": "a6a6365a-cc9d-449a-969b-a085219425d6.jsonl",
+      "start": "2026-07-31T04:30:02.272Z",
+      "total_calls": 50,
+      "output_tokens": 34093,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "work": 41,
+        "channel_peer": 3,
+        "peer_health": 1,
+        "receipt": 3
+      },
+      "ceremony_calls": 6,
+      "consumption_tails": {
+        "wake_brief": 3
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 3
+      },
+      "first_work_index": 2,
+      "calls_before_first_work": 2,
+      "tokens_before_first_work": 949,
+      "seconds_to_first_work": 22.827,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\a6a6365a-cc9d-449a-969b-a085219425d6\\\\tool-results\\\\bs"
+    },
+    {
+      "session": "402bbef6-c78f-439a-8fa4-0e3907c42673.jsonl",
+      "start": "2026-07-31T04:03:33.002Z",
+      "total_calls": 43,
+      "output_tokens": 31829,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "work": 33,
+        "peer_health": 1,
+        "channel_peer": 5,
+        "receipt": 2
+      },
+      "ceremony_calls": 5,
+      "consumption_tails": {
+        "wake_brief": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 2,
+      "calls_before_first_work": 2,
+      "tokens_before_first_work": 1004,
+      "seconds_to_first_work": 21.165,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python - <<'EOF'\\nimport json\\np=r\\\"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\402bbef6-c78f-439a-8fa4-0e3907c42673\\\\tool-results\\\\"
+    },
+    {
+      "session": "93741138-cf5c-4482-9188-88b6a108ec95.jsonl",
+      "start": "2026-07-31T03:37:32.690Z",
+      "total_calls": 35,
+      "output_tokens": 17612,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "work": 24,
+        "peer_health": 1,
+        "channel_peer": 5,
+        "receipt": 3
+      },
+      "ceremony_calls": 6,
+      "consumption_tails": {
+        "wake_brief": 4
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 3
+      },
+      "first_work_index": 2,
+      "calls_before_first_work": 2,
+      "tokens_before_first_work": 700,
+      "seconds_to_first_work": 18.063,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\93741138-cf5c-4482-9188-88b6a108ec95\\\\tool-results\\\\b4"
+    },
+    {
+      "session": "9874d1a2-3e10-44f2-9033-095569b5fb44.jsonl",
+      "start": "2026-07-31T03:09:28.012Z",
+      "total_calls": 53,
+      "output_tokens": 35755,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "work": 40,
+        "peer_health": 1,
+        "channel_peer": 5,
+        "receipt": 3,
+        "channel_inbox": 2
+      },
+      "ceremony_calls": 6,
+      "consumption_tails": {
+        "wake_brief": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 3
+      },
+      "first_work_index": 2,
+      "calls_before_first_work": 2,
+      "tokens_before_first_work": 929,
+      "seconds_to_first_work": 19.625,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python - <<'EOF'\\nimport json,io\\np=r\\\"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\9874d1a2-3e10-44f2-9033-095569b5fb44\\\\tool-result"
+    },
+    {
+      "session": "71530c34-0900-4dfb-9eb5-550441367f4c.jsonl",
+      "start": "2026-07-31T02:41:26.247Z",
+      "total_calls": 45,
+      "output_tokens": 29206,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 30,
+        "channel_peer": 5,
+        "receipt": 6,
+        "channel_inbox": 1
+      },
+      "ceremony_calls": 9,
+      "consumption_tails": {
+        "peer_health": 3
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 6
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1082,
+      "seconds_to_first_work": 28.542,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"import json,io; d=json.load(io.open(r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\71530c34-0900-4dfb-9eb5-550441367f4c\\\\"
+    },
+    {
+      "session": "1143f474-7928-4fcf-96cd-0ee971bae4fe.jsonl",
+      "start": "2026-07-31T02:17:28.451Z",
+      "total_calls": 43,
+      "output_tokens": 27853,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 35,
+        "channel_peer": 2,
+        "receipt": 3
+      },
+      "ceremony_calls": 6,
+      "consumption_tails": {
+        "peer_health": 3,
+        "receipt": 1
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 3
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1175,
+      "seconds_to_first_work": 30.485,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\1143f474-7928-4fcf-96cd-0ee971bae4fe\\\\tool-results\\\\bn"
+    },
+    {
+      "session": "89a39cf9-e184-48c8-96c0-0127c49a61c5.jsonl",
+      "start": "2026-07-31T01:45:00.120Z",
+      "total_calls": 34,
+      "output_tokens": 22222,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 22,
+        "channel_peer": 5,
+        "receipt": 4
+      },
+      "ceremony_calls": 7,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 4
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 929,
+      "seconds_to_first_work": 25.271,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"file_path\": \"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\89a39cf9-e184-48c8-96c0-0127c49a61c5\\\\tool-results\\\\bwa9ql6dp.txt\", \"offset\": 36, \"lim"
+    },
+    {
+      "session": "7958a559-256d-4736-a86b-d3ad044b80f3.jsonl",
+      "start": "2026-07-31T01:10:04.934Z",
+      "total_calls": 55,
+      "output_tokens": 34315,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 44,
+        "receipt": 4,
+        "channel_peer": 3,
+        "channel_inbox": 1
+      },
+      "ceremony_calls": 7,
+      "consumption_tails": {
+        "peer_health": 3
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 4
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1003,
+      "seconds_to_first_work": 32.163,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\7958a559-256d-4736-a86b-d3ad044b80f3\\\\tool-results\\\\b1"
+    },
+    {
+      "session": "b13e00c4-9706-48d0-988a-bfcfcc20488b.jsonl",
+      "start": "2026-07-31T00:07:58.715Z",
+      "total_calls": 36,
+      "output_tokens": 27505,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 26,
+        "channel_peer": 4,
+        "receipt": 3
+      },
+      "ceremony_calls": 6,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 3
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1193,
+      "seconds_to_first_work": 36.835,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\b13e00c4-9706-48d0-988a-bfcfcc20488b\\\\tool-results\\\\bc"
+    },
+    {
+      "session": "66823e62-80f2-42c7-9343-cc769afae1ad.jsonl",
+      "start": "2026-07-30T23:23:00.385Z",
+      "total_calls": 43,
+      "output_tokens": 40247,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 32,
+        "channel_peer": 4,
+        "receipt": 4
+      },
+      "ceremony_calls": 7,
+      "consumption_tails": {
+        "peer_health": 3
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 4
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 856,
+      "seconds_to_first_work": 29.535,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"file_path\": \"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\66823e62-80f2-42c7-9343-cc769afae1ad\\\\tool-results\\\\baz0qd8tr.txt\", \"offset\": 40, \"lim"
+    },
+    {
+      "session": "e605d17f-b231-42dd-9b0b-098366ade382.jsonl",
+      "start": "2026-07-30T23:06:47.880Z",
+      "total_calls": 35,
+      "output_tokens": 25323,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "work": 23,
+        "peer_health": 1,
+        "receipt": 3,
+        "channel_peer": 6
+      },
+      "ceremony_calls": 6,
+      "consumption_tails": {
+        "wake_brief": 3
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 3
+      },
+      "first_work_index": 2,
+      "calls_before_first_work": 2,
+      "tokens_before_first_work": 629,
+      "seconds_to_first_work": 29.305,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"file_path\": \"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\e605d17f-b231-42dd-9b0b-098366ade382\\\\tool-results\\\\bzhzm5fhd.txt\", \"offset\": 40, \"lim"
+    },
+    {
+      "session": "1b6dc844-0a73-4e1e-937d-42ebc910f981.jsonl",
+      "start": "2026-07-30T15:47:24.850Z",
+      "total_calls": 75,
+      "output_tokens": 57629,
+      "step_counts": {
+        "recall": 2,
+        "work": 60,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "channel_peer": 8,
+        "receipt": 2,
+        "channel_inbox": 1
+      },
+      "ceremony_calls": 6,
+      "consumption_tails": {
+        "recall": 1,
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "recall": 2,
+        "receipt": 2
+      },
+      "first_work_index": 1,
+      "calls_before_first_work": 1,
+      "tokens_before_first_work": 248,
+      "seconds_to_first_work": 10.736,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"file_path\": \"/tmp/recall.json\"}"
+    },
+    {
+      "session": "fbc62370-5d5e-4a6c-b77d-2bf9f2a6c4ed.jsonl",
+      "start": "2026-07-30T15:20:25.047Z",
+      "total_calls": 43,
+      "output_tokens": 25669,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 31,
+        "channel_peer": 7,
+        "receipt": 2
+      },
+      "ceremony_calls": 5,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1492,
+      "seconds_to_first_work": 29.93,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"cat > /tmp/brief_sum.py <<'EOF'\\nimport json,io,sys\\np=r\\\"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\fbc62370-5d5e-4a6c-b77d-2bf9f2"
+    },
+    {
+      "session": "5c2eecc4-7ab3-4f96-a7b5-9a36d7fa956b.jsonl",
+      "start": "2026-07-30T14:58:32.080Z",
+      "total_calls": 38,
+      "output_tokens": 21168,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 25,
+        "channel_peer": 5,
+        "receipt": 5
+      },
+      "ceremony_calls": 8,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 5
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1108,
+      "seconds_to_first_work": 28.099,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\5c2eecc4-7ab3-4f96-a7b5-9a36d7fa956b\\\\tool-results\\\\bi"
+    },
+    {
+      "session": "d32078e0-cca1-4d0a-bee8-755c8bd4f78d.jsonl",
+      "start": "2026-07-30T14:27:25.978Z",
+      "total_calls": 43,
+      "output_tokens": 25184,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 31,
+        "channel_peer": 7,
+        "receipt": 2
+      },
+      "ceremony_calls": 5,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1065,
+      "seconds_to_first_work": 22.355,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"cd \\\"C:/Users/zy/.claude/projects/D--WeilanSkillEvolution/d32078e0-cca1-4d0a-bee8-755c8bd4f78d/tool-results\\\" && python -c \\\"\\nimport json,io\\nd=js"
+    },
+    {
+      "session": "6dd71ba1-f44f-4f4e-896d-11f75a672aa9.jsonl",
+      "start": "2026-07-30T14:04:26.015Z",
+      "total_calls": 27,
+      "output_tokens": 24229,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 18,
+        "channel_peer": 4,
+        "receipt": 2
+      },
+      "ceremony_calls": 5,
+      "consumption_tails": {
+        "peer_health": 3
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1043,
+      "seconds_to_first_work": 24.948,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\6dd71ba1-f44f-4f4e-896d-11f75a672aa9\\\\tool-results\\\\b8"
+    },
+    {
+      "session": "6167df80-8bac-43c7-95c1-8933814e2b8c.jsonl",
+      "start": "2026-07-30T13:42:39.177Z",
+      "total_calls": 37,
+      "output_tokens": 24344,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "work": 29,
+        "peer_health": 1,
+        "channel_peer": 3,
+        "receipt": 2
+      },
+      "ceremony_calls": 5,
+      "consumption_tails": {
+        "wake_brief": 1,
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 2,
+      "calls_before_first_work": 2,
+      "tokens_before_first_work": 852,
+      "seconds_to_first_work": 25.411,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"cd \\\"D:\\\\WeilanSkillEvolution\\\" && python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\6167df80-8bac-43c7-"
+    },
+    {
+      "session": "53f046eb-1d17-40ae-88e5-0c087a27b2c0.jsonl",
+      "start": "2026-07-30T13:25:02.569Z",
+      "total_calls": 45,
+      "output_tokens": 28548,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 25,
+        "channel_peer": 12,
+        "receipt": 5
+      },
+      "ceremony_calls": 8,
+      "consumption_tails": {
+        "peer_health": 4
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 5
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1595,
+      "seconds_to_first_work": 57.809,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"file_path\": \"D:\\\\WeilanSkillEvolution\\\\proposals\\\\bounded-scheduler-v0.1\\\\impl\\\\_read_brief_20260730.py\", \"content\": \"import json, io, sys\\n\\np = r\\\"C:\\\\Users"
+    },
+    {
+      "session": "d800370d-82e7-4641-8532-c07bcf07f9eb.jsonl",
+      "start": "2026-07-30T12:45:27.513Z",
+      "total_calls": 35,
+      "output_tokens": 25137,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 24,
+        "prospective_show": 1,
+        "channel_peer": 5,
+        "receipt": 2
+      },
+      "ceremony_calls": 6,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1089,
+      "seconds_to_first_work": 43.449,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\d800370d-82e7-4641-8532-c07bcf07f9eb\\\\tool-results\\\\bj"
+    },
+    {
+      "session": "d0faf78c-5df8-4fbf-92a4-46c9644836cb.jsonl",
+      "start": "2026-07-30T12:28:38.409Z",
+      "total_calls": 29,
+      "output_tokens": 16214,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 16,
+        "receipt": 7,
+        "channel_inbox": 1,
+        "channel_peer": 2
+      },
+      "ceremony_calls": 10,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 7
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 997,
+      "seconds_to_first_work": 84.734,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"file_path\": \"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\d0faf78c-5df8-4fbf-92a4-46c9644836cb\\\\tool-results\\\\bzie411ej.txt\", \"offset\": 40, \"lim"
+    },
+    {
+      "session": "938f8347-6054-4479-bdad-63067aa1460c.jsonl",
+      "start": "2026-07-30T10:08:54.732Z",
+      "total_calls": 66,
+      "output_tokens": 45024,
+      "step_counts": {
+        "recall": 1,
+        "work": 48,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "channel_peer": 7,
+        "prospective_show": 2,
+        "receipt": 6
+      },
+      "ceremony_calls": 11,
+      "consumption_tails": {
+        "recall": 1,
+        "wake_brief": 4
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "prospective_show": 2,
+        "receipt": 6
+      },
+      "first_work_index": 1,
+      "calls_before_first_work": 1,
+      "tokens_before_first_work": 493,
+      "seconds_to_first_work": 19.569,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"$p=\\\"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\938f8347-6054-4479-bdad-63067aa1460c\\\\tool-results\\\\bbsb8tk7p.txt\\\"; $j=Get-Content"
+    },
+    {
+      "session": "997eb870-51b4-4222-b41d-67d9cd0fc221.jsonl",
+      "start": "2026-07-30T09:41:38.802Z",
+      "total_calls": 74,
+      "output_tokens": 48409,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "work": 56,
+        "peer_health": 1,
+        "channel_peer": 9,
+        "prospective_show": 1,
+        "receipt": 5
+      },
+      "ceremony_calls": 9,
+      "consumption_tails": {
+        "wake_brief": 4
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 5
+      },
+      "first_work_index": 2,
+      "calls_before_first_work": 2,
+      "tokens_before_first_work": 819,
+      "seconds_to_first_work": 30.861,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python - <<'PY'\\nimport json,io\\np=r\\\"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\997eb870-51b4-4222-b41d-67d9cd0fc221\\\\tool-results"
+    },
+    {
+      "session": "062453da-e70b-417a-80f3-88cdc02d46b9.jsonl",
+      "start": "2026-07-30T09:16:46.568Z",
+      "total_calls": 29,
+      "output_tokens": 20874,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 14,
+        "channel_peer": 9,
+        "receipt": 2,
+        "channel_inbox": 1
+      },
+      "ceremony_calls": 5,
+      "consumption_tails": {
+        "peer_health": 3
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "receipt": 2
+      },
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1256,
+      "seconds_to_first_work": 36.737,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"cd \\\"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\062453da-e70b-417a-80f3-88cdc02d46b9\\\\tool-results\\\" && python -c \\\"\\nimport json,i"
+    },
+    {
+      "session": "c02c7228-b928-4236-93df-288fc99ed999.jsonl",
+      "start": "2026-07-30T08:57:51.833Z",
+      "total_calls": 62,
+      "output_tokens": 36928,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "work": 43,
+        "channel_peer": 10,
+        "peer_health": 1,
+        "prospective_show": 2,
+        "receipt": 4
+      },
+      "ceremony_calls": 9,
+      "consumption_tails": {
+        "wake_brief": 2
+      },
+      "missing_mandated": [],
+      "repeated_ceremony": {
+        "prospective_show": 2,
+        "receipt": 4
+      },
+      "first_work_index": 2,
+      "calls_before_first_work": 2,
+      "tokens_before_first_work": 884,
+      "seconds_to_first_work": 31.996,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"$p=\\\"C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\c02c7228-b928-4236-93df-288fc99ed999\\\\tool-results\\\\bc4h8pwdt.txt\\\"; python -c \\\"\\n"
+    },
+    {
+      "session": "5a86fe16-dce0-4906-a811-e26e0cc1becc.jsonl",
+      "start": "2026-07-30T08:13:48.729Z",
+      "total_calls": 48,
+      "output_tokens": 40201,
+      "step_counts": {
+        "recall": 1,
+        "wake_brief": 1,
+        "peer_health": 1,
+        "work": 35,
+        "channel_peer": 9,
+        "channel_inbox": 1
+      },
+      "ceremony_calls": 3,
+      "consumption_tails": {
+        "peer_health": 2
+      },
+      "missing_mandated": [
+        "receipt"
+      ],
+      "repeated_ceremony": {},
+      "first_work_index": 3,
+      "calls_before_first_work": 3,
+      "tokens_before_first_work": 1164,
+      "seconds_to_first_work": 40.958,
+      "no_work_this_round": false,
+      "first_work_preview": "{\"command\": \"python -c \\\"\\nimport json,io\\np=r'C:\\\\Users\\\\zy\\\\.claude\\\\projects\\\\D--WeilanSkillEvolution\\\\5a86fe16-dce0-4906-a811-e26e0cc1becc\\\\tool-results\\\\b1"
+    }
+  ]
+}

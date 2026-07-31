@@ -1,0 +1,617 @@
+{
+  "probe": "_probe_20260731_receipt_step_cost.py",
+  "readonly": true,
+  "summary": {
+    "wake_rounds": 40,
+    "receipt_calls_per_round": {
+      "median": 6.0,
+      "mean": 6.5,
+      "min": 2,
+      "max": 12
+    },
+    "receipt_calls_per_round_strict_no_inspect": {
+      "median": 5.0,
+      "mean": 4.9,
+      "min": 2,
+      "max": 9
+    },
+    "receipt_share_of_all_calls": {
+      "median": 0.1438,
+      "mean": 0.1502,
+      "max": 0.3793
+    },
+    "rounds_using_a_wrapper_script": 13,
+    "wrapper_round_rate": 0.325,
+    "distinct_wrapper_files": [
+      "_close_20260730_receipt.py",
+      "_close_20260731_cosign_receipt.py",
+      "_close_frame_20260730_anchor_exec.py",
+      "_close_frame_20260730_anchor_proposal.py",
+      "_concurrent_receipt_20260731_live_lineage.py",
+      "_open_20260730_receipt.py",
+      "_open_frame_20260730_anchor_exec.py",
+      "_open_frame_20260730_anchor_proposal.py",
+      "_open_receipt_20260731c.py",
+      "_receipt_20260730_qoder_probe_close.py",
+      "_receipt_20260730_qoder_probe_open.py",
+      "_receipt_20260730_roadmap_reverdict.py",
+      "_receipt_20260731_close.py",
+      "_receipt_20260731_open.py",
+      "_receipt_20260731_postlanding_close.py",
+      "_receipt_20260731_postlanding_review.py",
+      "_receipt_close_20260730_roadmap.py",
+      "_tmp_open_frame.py"
+    ]
+  },
+  "rounds": [
+    {
+      "session": "b0b159ca-5559-414a-b7e3-f784d095d963.jsonl",
+      "total_calls": 31,
+      "receipt_calls": 9,
+      "receipt_calls_strict_no_inspect": 6,
+      "breakdown": {
+        "cli_inspect": 3,
+        "cli_lifecycle": 2,
+        "wrapper_authoring": 2,
+        "wrapper_run": 2
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_receipt_20260731_postlanding_close.py",
+        "_receipt_20260731_postlanding_review.py"
+      ],
+      "receipt_share_of_calls": 0.2903
+    },
+    {
+      "session": "e08fb44d-113d-4e45-8875-d7db314486b8.jsonl",
+      "total_calls": 74,
+      "receipt_calls": 3,
+      "receipt_calls_strict_no_inspect": 2,
+      "breakdown": {
+        "cli_inspect": 1,
+        "cli_lifecycle": 2
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.0405
+    },
+    {
+      "session": "0ebf9577-19c4-4ebd-904c-45ae8e9b0f5c.jsonl",
+      "total_calls": 39,
+      "receipt_calls": 5,
+      "receipt_calls_strict_no_inspect": 4,
+      "breakdown": {
+        "cli_inspect": 1,
+        "cli_lifecycle": 1,
+        "wrapper_authoring": 1,
+        "wrapper_run": 2
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_open_receipt_20260731c.py"
+      ],
+      "receipt_share_of_calls": 0.1282
+    },
+    {
+      "session": "a0cb03d9-db00-4360-83b8-15f9108c48bd.jsonl",
+      "total_calls": 44,
+      "receipt_calls": 10,
+      "receipt_calls_strict_no_inspect": 7,
+      "breakdown": {
+        "cli_inspect": 3,
+        "cli_lifecycle": 7
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.2273
+    },
+    {
+      "session": "664e3807-29f0-4d1b-9032-636788491533.jsonl",
+      "total_calls": 70,
+      "receipt_calls": 8,
+      "receipt_calls_strict_no_inspect": 6,
+      "breakdown": {
+        "cli_inspect": 2,
+        "cli_lifecycle": 6
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1143
+    },
+    {
+      "session": "b3811a1c-e243-46f5-9721-50ce0264e28a.jsonl",
+      "total_calls": 36,
+      "receipt_calls": 7,
+      "receipt_calls_strict_no_inspect": 5,
+      "breakdown": {
+        "cli_inspect": 2,
+        "cli_lifecycle": 5
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1944
+    },
+    {
+      "session": "34a60e58-62ae-45ae-8b4f-b7bbc064a881.jsonl",
+      "total_calls": 58,
+      "receipt_calls": 10,
+      "receipt_calls_strict_no_inspect": 8,
+      "breakdown": {
+        "cli_inspect": 2,
+        "cli_lifecycle": 8
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1724
+    },
+    {
+      "session": "ca25f062-01d9-43ec-9b97-52d32c9e59c4.jsonl",
+      "total_calls": 49,
+      "receipt_calls": 8,
+      "receipt_calls_strict_no_inspect": 5,
+      "breakdown": {
+        "cli_inspect": 3,
+        "cli_lifecycle": 2,
+        "wrapper_authoring": 1,
+        "wrapper_run": 2
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_tmp_open_frame.py"
+      ],
+      "receipt_share_of_calls": 0.1633
+    },
+    {
+      "session": "31fddd76-5272-41c4-a183-f4b8c0f32b72.jsonl",
+      "total_calls": 52,
+      "receipt_calls": 9,
+      "receipt_calls_strict_no_inspect": 6,
+      "breakdown": {
+        "cli_inspect": 3,
+        "cli_lifecycle": 6
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1731
+    },
+    {
+      "session": "ec6adaf2-c78b-4c8d-a550-21225611cefc.jsonl",
+      "total_calls": 76,
+      "receipt_calls": 11,
+      "receipt_calls_strict_no_inspect": 8,
+      "breakdown": {
+        "cli_inspect": 3,
+        "cli_lifecycle": 2,
+        "wrapper_authoring": 2,
+        "wrapper_run": 4
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_receipt_20260731_close.py",
+        "_receipt_20260731_open.py"
+      ],
+      "receipt_share_of_calls": 0.1447
+    },
+    {
+      "session": "5ad8c00f-2cfd-4535-82ef-246e9fbfcf2f.jsonl",
+      "total_calls": 34,
+      "receipt_calls": 5,
+      "receipt_calls_strict_no_inspect": 4,
+      "breakdown": {
+        "cli_inspect": 1,
+        "cli_lifecycle": 4
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1471
+    },
+    {
+      "session": "7828c9d6-7e6a-4217-b248-430f092e646b.jsonl",
+      "total_calls": 32,
+      "receipt_calls": 6,
+      "receipt_calls_strict_no_inspect": 5,
+      "breakdown": {
+        "cli_inspect": 1,
+        "cli_lifecycle": 5
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1875
+    },
+    {
+      "session": "56cdc162-de10-4079-920f-615a746614cb.jsonl",
+      "total_calls": 42,
+      "receipt_calls": 6,
+      "receipt_calls_strict_no_inspect": 6,
+      "breakdown": {
+        "cli_lifecycle": 2,
+        "wrapper_authoring": 2,
+        "wrapper_run": 2
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_receipt_20260731_close.py",
+        "_receipt_20260731_open.py"
+      ],
+      "receipt_share_of_calls": 0.1429
+    },
+    {
+      "session": "8e24a7cf-c8cf-401c-9734-1c889d7e6826.jsonl",
+      "total_calls": 38,
+      "receipt_calls": 6,
+      "receipt_calls_strict_no_inspect": 4,
+      "breakdown": {
+        "cli_inspect": 2,
+        "cli_lifecycle": 4
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1579
+    },
+    {
+      "session": "b5195233-b4fc-45f5-bee7-4c2c0c5c8d88.jsonl",
+      "total_calls": 59,
+      "receipt_calls": 4,
+      "receipt_calls_strict_no_inspect": 4,
+      "breakdown": {
+        "cli_lifecycle": 4
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.0678
+    },
+    {
+      "session": "a6a6365a-cc9d-449a-969b-a085219425d6.jsonl",
+      "total_calls": 50,
+      "receipt_calls": 6,
+      "receipt_calls_strict_no_inspect": 5,
+      "breakdown": {
+        "cli_inspect": 1,
+        "cli_lifecycle": 3,
+        "wrapper_authoring": 1,
+        "wrapper_run": 1
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_close_20260731_cosign_receipt.py"
+      ],
+      "receipt_share_of_calls": 0.12
+    },
+    {
+      "session": "402bbef6-c78f-439a-8fa4-0e3907c42673.jsonl",
+      "total_calls": 43,
+      "receipt_calls": 3,
+      "receipt_calls_strict_no_inspect": 2,
+      "breakdown": {
+        "cli_inspect": 1,
+        "cli_lifecycle": 2
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.0698
+    },
+    {
+      "session": "93741138-cf5c-4482-9188-88b6a108ec95.jsonl",
+      "total_calls": 35,
+      "receipt_calls": 3,
+      "receipt_calls_strict_no_inspect": 3,
+      "breakdown": {
+        "cli_lifecycle": 3
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.0857
+    },
+    {
+      "session": "9874d1a2-3e10-44f2-9033-095569b5fb44.jsonl",
+      "total_calls": 53,
+      "receipt_calls": 3,
+      "receipt_calls_strict_no_inspect": 3,
+      "breakdown": {
+        "cli_lifecycle": 3
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.0566
+    },
+    {
+      "session": "71530c34-0900-4dfb-9eb5-550441367f4c.jsonl",
+      "total_calls": 45,
+      "receipt_calls": 6,
+      "receipt_calls_strict_no_inspect": 6,
+      "breakdown": {
+        "cli_lifecycle": 6
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1333
+    },
+    {
+      "session": "1143f474-7928-4fcf-96cd-0ee971bae4fe.jsonl",
+      "total_calls": 43,
+      "receipt_calls": 4,
+      "receipt_calls_strict_no_inspect": 3,
+      "breakdown": {
+        "cli_inspect": 1,
+        "cli_lifecycle": 3
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.093
+    },
+    {
+      "session": "89a39cf9-e184-48c8-96c0-0127c49a61c5.jsonl",
+      "total_calls": 34,
+      "receipt_calls": 4,
+      "receipt_calls_strict_no_inspect": 4,
+      "breakdown": {
+        "cli_lifecycle": 4
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1176
+    },
+    {
+      "session": "7958a559-256d-4736-a86b-d3ad044b80f3.jsonl",
+      "total_calls": 55,
+      "receipt_calls": 7,
+      "receipt_calls_strict_no_inspect": 4,
+      "breakdown": {
+        "cli_inspect": 3,
+        "cli_lifecycle": 4
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1273
+    },
+    {
+      "session": "b13e00c4-9706-48d0-988a-bfcfcc20488b.jsonl",
+      "total_calls": 36,
+      "receipt_calls": 4,
+      "receipt_calls_strict_no_inspect": 3,
+      "breakdown": {
+        "cli_inspect": 1,
+        "cli_lifecycle": 3
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1111
+    },
+    {
+      "session": "66823e62-80f2-42c7-9343-cc769afae1ad.jsonl",
+      "total_calls": 43,
+      "receipt_calls": 4,
+      "receipt_calls_strict_no_inspect": 4,
+      "breakdown": {
+        "cli_lifecycle": 4
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.093
+    },
+    {
+      "session": "e605d17f-b231-42dd-9b0b-098366ade382.jsonl",
+      "total_calls": 35,
+      "receipt_calls": 6,
+      "receipt_calls_strict_no_inspect": 3,
+      "breakdown": {
+        "cli_inspect": 3,
+        "cli_lifecycle": 3
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1714
+    },
+    {
+      "session": "1b6dc844-0a73-4e1e-937d-42ebc910f981.jsonl",
+      "total_calls": 75,
+      "receipt_calls": 6,
+      "receipt_calls_strict_no_inspect": 3,
+      "breakdown": {
+        "cli_inspect": 3,
+        "wrapper_authoring": 1,
+        "wrapper_run": 2
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_concurrent_receipt_20260731_live_lineage.py"
+      ],
+      "receipt_share_of_calls": 0.08
+    },
+    {
+      "session": "fbc62370-5d5e-4a6c-b77d-2bf9f2a6c4ed.jsonl",
+      "total_calls": 43,
+      "receipt_calls": 9,
+      "receipt_calls_strict_no_inspect": 7,
+      "breakdown": {
+        "cli_inspect": 2,
+        "cli_lifecycle": 2,
+        "wrapper_authoring": 2,
+        "wrapper_run": 3
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_receipt_20260731_close.py",
+        "_receipt_20260731_open.py"
+      ],
+      "receipt_share_of_calls": 0.2093
+    },
+    {
+      "session": "5c2eecc4-7ab3-4f96-a7b5-9a36d7fa956b.jsonl",
+      "total_calls": 38,
+      "receipt_calls": 7,
+      "receipt_calls_strict_no_inspect": 5,
+      "breakdown": {
+        "cli_inspect": 2,
+        "cli_lifecycle": 5
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1842
+    },
+    {
+      "session": "d32078e0-cca1-4d0a-bee8-755c8bd4f78d.jsonl",
+      "total_calls": 43,
+      "receipt_calls": 2,
+      "receipt_calls_strict_no_inspect": 2,
+      "breakdown": {
+        "cli_lifecycle": 2
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.0465
+    },
+    {
+      "session": "6dd71ba1-f44f-4f4e-896d-11f75a672aa9.jsonl",
+      "total_calls": 27,
+      "receipt_calls": 6,
+      "receipt_calls_strict_no_inspect": 6,
+      "breakdown": {
+        "cli_lifecycle": 2,
+        "wrapper_authoring": 2,
+        "wrapper_run": 2
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_close_20260730_receipt.py",
+        "_open_20260730_receipt.py"
+      ],
+      "receipt_share_of_calls": 0.2222
+    },
+    {
+      "session": "6167df80-8bac-43c7-95c1-8933814e2b8c.jsonl",
+      "total_calls": 37,
+      "receipt_calls": 9,
+      "receipt_calls_strict_no_inspect": 6,
+      "breakdown": {
+        "cli_inspect": 3,
+        "cli_lifecycle": 2,
+        "wrapper_authoring": 2,
+        "wrapper_run": 2
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_receipt_20260730_roadmap_reverdict.py",
+        "_receipt_close_20260730_roadmap.py"
+      ],
+      "receipt_share_of_calls": 0.2432
+    },
+    {
+      "session": "53f046eb-1d17-40ae-88e5-0c087a27b2c0.jsonl",
+      "total_calls": 45,
+      "receipt_calls": 7,
+      "receipt_calls_strict_no_inspect": 5,
+      "breakdown": {
+        "cli_inspect": 2,
+        "cli_lifecycle": 5
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1556
+    },
+    {
+      "session": "d800370d-82e7-4641-8532-c07bcf07f9eb.jsonl",
+      "total_calls": 35,
+      "receipt_calls": 4,
+      "receipt_calls_strict_no_inspect": 2,
+      "breakdown": {
+        "cli_inspect": 2,
+        "cli_lifecycle": 2
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1143
+    },
+    {
+      "session": "d0faf78c-5df8-4fbf-92a4-46c9644836cb.jsonl",
+      "total_calls": 29,
+      "receipt_calls": 11,
+      "receipt_calls_strict_no_inspect": 7,
+      "breakdown": {
+        "cli_inspect": 4,
+        "cli_lifecycle": 7
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.3793
+    },
+    {
+      "session": "938f8347-6054-4479-bdad-63067aa1460c.jsonl",
+      "total_calls": 66,
+      "receipt_calls": 7,
+      "receipt_calls_strict_no_inspect": 6,
+      "breakdown": {
+        "cli_inspect": 1,
+        "cli_lifecycle": 6
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.1061
+    },
+    {
+      "session": "997eb870-51b4-4222-b41d-67d9cd0fc221.jsonl",
+      "total_calls": 74,
+      "receipt_calls": 6,
+      "receipt_calls_strict_no_inspect": 5,
+      "breakdown": {
+        "cli_inspect": 1,
+        "cli_lifecycle": 5
+      },
+      "used_wrapper": false,
+      "wrapper_files": [],
+      "receipt_share_of_calls": 0.0811
+    },
+    {
+      "session": "062453da-e70b-417a-80f3-88cdc02d46b9.jsonl",
+      "total_calls": 29,
+      "receipt_calls": 8,
+      "receipt_calls_strict_no_inspect": 8,
+      "breakdown": {
+        "cli_lifecycle": 2,
+        "wrapper_authoring": 2,
+        "wrapper_run": 4
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_receipt_20260730_qoder_probe_close.py",
+        "_receipt_20260730_qoder_probe_open.py"
+      ],
+      "receipt_share_of_calls": 0.2759
+    },
+    {
+      "session": "c02c7228-b928-4236-93df-288fc99ed999.jsonl",
+      "total_calls": 62,
+      "receipt_calls": 12,
+      "receipt_calls_strict_no_inspect": 9,
+      "breakdown": {
+        "cli_inspect": 3,
+        "wrapper_authoring": 2,
+        "wrapper_run": 4,
+        "cli_lifecycle": 3
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_close_frame_20260730_anchor_exec.py",
+        "_open_frame_20260730_anchor_exec.py"
+      ],
+      "receipt_share_of_calls": 0.1935
+    },
+    {
+      "session": "5a86fe16-dce0-4906-a811-e26e0cc1becc.jsonl",
+      "total_calls": 48,
+      "receipt_calls": 9,
+      "receipt_calls_strict_no_inspect": 5,
+      "breakdown": {
+        "cli_inspect": 4,
+        "wrapper_authoring": 2,
+        "wrapper_run": 3
+      },
+      "used_wrapper": true,
+      "wrapper_files": [
+        "_close_frame_20260730_anchor_proposal.py",
+        "_open_frame_20260730_anchor_proposal.py"
+      ],
+      "receipt_share_of_calls": 0.1875
+    }
+  ]
+}
