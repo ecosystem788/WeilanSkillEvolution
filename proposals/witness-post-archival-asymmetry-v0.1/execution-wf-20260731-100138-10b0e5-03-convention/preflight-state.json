@@ -1,0 +1,9 @@
+{
+  "target": "proposals/cosign-bytewise-binding-v0.1/CONVENTION.md",
+  "base": "7a453320515ae9b764141e16a9861dbe96b22549994a3f91da16f1e31799bd1e",
+  "sidecar": "C:\\Users\\zy\\AppData\\Local\\Temp\\weilan-v08-wf-20260731-100138-10b0e5\\03-convention\\CONVENTION.base.sidecar",
+  "sidecar_present": true,
+  "witness_digest_pre": "d1cd8c84cfc918056f5256b0d7c98d48086e66a22c34b8a3a8fa8016bee74308",
+  "witness_path_pre": "C:\\Users\\zy\\AppData\\Local\\Temp\\weilan-v08-wf-20260731-100138-10b0e5\\03-convention\\preflight-state.json.witness",
+  "non_target_entries": 678
+}
