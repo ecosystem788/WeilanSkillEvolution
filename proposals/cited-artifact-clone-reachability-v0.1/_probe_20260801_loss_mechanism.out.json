@@ -1,0 +1,340 @@
+{
+  "probe": "loss_mechanism",
+  "disk_only_count": 28,
+  "mechanism_counts": {
+    "whole_line_never_landed": 9,
+    "selective_add_walked_past": 18,
+    "ignored_by_policy": 1
+  },
+  "deployments_dirs_on_disk": [
+    "1751ce140fe3cbdf0dc55ec0",
+    "20260630T134857Z-se-0.2-se-0.3",
+    "2c539d0b9444a395e66ce4dd",
+    "2e3db4f5519f95f7d468",
+    "4554ee3e1f7d12354358588c",
+    "524d4931880d8b084fc2dd61",
+    "a118135c1e1834e45cafac8c",
+    "a1b0cd3db5aa630c9134cbb2",
+    "bc787ade263a82dc054d0d92",
+    "cbfe4af9af792d7bcf719113",
+    "cf8553304505c33eea63f3fe",
+    "dec8809e1d6b5dfc05c746e9",
+    "e82ce3f05acf0713a1941fe3",
+    "se-0.6-v0.1-successor-v0.9"
+  ],
+  "rows": [
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/tmp/probe_rglob_junction.py",
+      "dir": "proposals/bounded-scheduler-v0.1/impl/tmp",
+      "gitignored": true,
+      "tracked_siblings_in_dir": 0,
+      "mechanism": "ignored_by_policy",
+      "dir_last_commit": "",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260728_hygiene_mutation.py",
+      "dir": "proposals/bounded-scheduler-v0.1/impl",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 125,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "218ff59 2026-08-01 finding: 34 ledger rows exist on disk and in no commit, and the fix is one commit wide",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260728_wakeprompt_line3.py",
+      "dir": "proposals/bounded-scheduler-v0.1/impl",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 125,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "218ff59 2026-08-01 finding: 34 ledger rows exist on disk and in no commit, and the fix is one commit wide",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_citation_forms_review.py",
+      "dir": "proposals/bounded-scheduler-v0.1/impl",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 125,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "218ff59 2026-08-01 finding: 34 ledger rows exist on disk and in no commit, and the fix is one commit wide",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260731_abandoned_census.py",
+      "dir": "proposals/bounded-scheduler-v0.1/impl",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 125,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "218ff59 2026-08-01 finding: 34 ledger rows exist on disk and in no commit, and the fix is one commit wide",
+      "cited_by": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_verify_20260731_roadmap_northstar_postlanding.py",
+      "dir": "proposals/bounded-scheduler-v0.1/impl",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 125,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "218ff59 2026-08-01 finding: 34 ledger rows exist on disk and in no commit, and the fix is one commit wide",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_verify_charter_sync_proposal.py",
+      "dir": "proposals/bounded-scheduler-v0.1/impl",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 125,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "218ff59 2026-08-01 finding: 34 ledger rows exist on disk and in no commit, and the fix is one commit wide",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_indep_rescan_20260728b.py",
+      "dir": "proposals/charter-daily-push-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 45,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "225a0d0 2026-07-30 receipt: close frame for the 1bc5727 review round",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_verify_rebased.py",
+      "dir": "proposals/charter-daily-push-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 45,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "225a0d0 2026-07-30 receipt: close frame for the 1bc5727 review round",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/frame-abandon-validation-gap-v0.1/_probe_20260731_claude_quiet_contract_equality.py",
+      "dir": "proposals/frame-abandon-validation-gap-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 7,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "d07fde3 2026-07-31 review: the contract body reuses markers by branch, not by which frame is head",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/frame-abandon-validation-gap-v0.1/_probe_20260731_lineage_memo_safety.py",
+      "dir": "proposals/frame-abandon-validation-gap-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 7,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "d07fde3 2026-07-31 review: the contract body reuses markers by branch, not by which frame is head",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/lineage-memo-write-guard-v0.1/_probe_20260731_claude_independent_v11_review.py",
+      "dir": "proposals/lineage-memo-write-guard-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 2,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "f9e804e 2026-07-31 cosign: memo guard v1.1, and the guard belongs on the literal first line",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/lineage-memo-write-guard-v0.1/_probe_20260731_guard_side_effect_before_raise.py",
+      "dir": "proposals/lineage-memo-write-guard-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 2,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "f9e804e 2026-07-31 cosign: memo guard v1.1, and the guard belongs on the literal first line",
+      "cited_by": [
+        "codex"
+      ]
+    },
+    {
+      "path": "proposals/lineage-memo-write-guard-v0.1/_probe_20260731_memo_write_guard_review.py",
+      "dir": "proposals/lineage-memo-write-guard-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 2,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "f9e804e 2026-07-31 cosign: memo guard v1.1, and the guard belongs on the literal first line",
+      "cited_by": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "path": "proposals/mutual-aid-v0.1/_review_mutate_anchor.py",
+      "dir": "proposals/mutual-aid-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 7,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "41e136f 2026-07-30 Clarify line hash EOL byte sources",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/mutual-aid-v0.1/_review_probe_orphan.py",
+      "dir": "proposals/mutual-aid-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 7,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "41e136f 2026-07-30 Clarify line hash EOL byte sources",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/mutual-aid-v0.1/_review_probe_skew.py",
+      "dir": "proposals/mutual-aid-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 7,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "41e136f 2026-07-30 Clarify line hash EOL byte sources",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/prospective-causal-ref-integrity-v0.1/proposal.json",
+      "dir": "proposals/prospective-causal-ref-integrity-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 3,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "8d2f2cb 2026-07-28 chore: preserve reviewed T1 artifacts",
+      "cited_by": [
+        "codex"
+      ]
+    },
+    {
+      "path": "proposals/redaction-gate-tree-subject-v0.1/_probe_20260730_rollback_linehash.py",
+      "dir": "proposals/redaction-gate-tree-subject-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 55,
+      "mechanism": "selective_add_walked_past",
+      "dir_last_commit": "7262cd9 2026-07-30 receipt: close frame wf-20260730-090953-049c16 for the anchor-execution round",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "deployments/1751ce140fe3cbdf0dc55ec0/DEPLOYMENT_RECEIPT.json",
+      "dir": "deployments/1751ce140fe3cbdf0dc55ec0",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 0,
+      "mechanism": "whole_line_never_landed",
+      "dir_last_commit": "",
+      "cited_by": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/DRIFT_INVENTORY.md",
+      "dir": "proposals/uncommitted-drift-inventory-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 0,
+      "mechanism": "whole_line_never_landed",
+      "dir_last_commit": "",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/T1_COMMIT_PAYLOAD.tsv",
+      "dir": "proposals/uncommitted-drift-inventory-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 0,
+      "mechanism": "whole_line_never_landed",
+      "dir_last_commit": "",
+      "cited_by": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/T1_COMMIT_SCOPE.tsv",
+      "dir": "proposals/uncommitted-drift-inventory-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 0,
+      "mechanism": "whole_line_never_landed",
+      "dir_last_commit": "",
+      "cited_by": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/_verify_b2_recoverability.py",
+      "dir": "proposals/uncommitted-drift-inventory-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 0,
+      "mechanism": "whole_line_never_landed",
+      "dir_last_commit": "",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/t1_payload.py",
+      "dir": "proposals/uncommitted-drift-inventory-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 0,
+      "mechanism": "whole_line_never_landed",
+      "dir_last_commit": "",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/triage_b1.py",
+      "dir": "proposals/uncommitted-drift-inventory-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 0,
+      "mechanism": "whole_line_never_landed",
+      "dir_last_commit": "",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/verify_t1_commit.py",
+      "dir": "proposals/uncommitted-drift-inventory-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 0,
+      "mechanism": "whole_line_never_landed",
+      "dir_last_commit": "",
+      "cited_by": [
+        "claude"
+      ]
+    },
+    {
+      "path": "proposals/witness-payload-identity-gap-v0.1/FINDING.md",
+      "dir": "proposals/witness-payload-identity-gap-v0.1",
+      "gitignored": false,
+      "tracked_siblings_in_dir": 0,
+      "mechanism": "whole_line_never_landed",
+      "dir_last_commit": "",
+      "cited_by": [
+        "claude"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "prospective-causal-ref-integrity-yi-prime-v0.1",
+  "rationale": "Prevent CLI-written prospective terminal transitions from recording a non-empty causal_event_id outside the causal_event_observed.data.causal_event_id namespace, while preserving append-only historical replay through explicit derived downgrade states instead of issues or warnings.",
+  "base_artifact_hash": "5fd0a51dc7f539e2b3f1c45f5a505d9ddea80c721de8d94fe04d7e9de52ad0ad",
+  "candidate_artifact_hash": "faa8132eda9484bf4e57c93541017f2041541aaa44808c9a37c26fa05f1e5c73",
+  "changed_paths": [
+    "proposals/prospective-causal-ref-integrity-v0.1/candidate/solve-with-weilan/scripts/prospective.py",
+    "proposals/prospective-causal-ref-integrity-v0.1/candidate/solve-with-weilan/scripts/test_causal_ref_integrity.py",
+    "proposals/prospective-causal-ref-integrity-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py"
+  ],
+  "budgets": {
+    "max_changed_files": 3,
+    "max_candidate_generations": 1,
+    "max_evaluation_trials": 0,
+    "max_deployments": 0
+  },
+  "target_metrics": [
+    "cli_transition_with_top_level_event_id_exits_nonzero_and_appends_nothing",
+    "real_causal_id_on_collapsed_and_superseded_derives_resolved",
+    "omitted_causal_id_on_collapsed_and_superseded_derives_not_provided",
+    "unmarked_committed_dangling_history_replays_and_appends_as_unresolved_unenforced",
+    "prospective_show_limit_does_not_fabricate_dangling_status",
+    "existing_test_prospective_passes",
+    "marked_committed_dangling_history_replays_and_appends_as_unresolved_enforced",
+    "wrong_namespace_rejection_is_end_to_end_through_prospective_transition_and_append_prospective_event",
+    "derived_names_are_exactly_resolved_not_provided_unresolved_unenforced_unresolved_enforced"
+  ],
+  "rollback_triggers": [
+    "candidate changes any file outside the three declared candidate paths",
+    "a committed unmarked or marked dangling record blocks replay, prospective-cycle, or a later append",
+    "collapse or supersession begins requiring a causal event",
+    "prospective-show derives integrity from its truncated causal-event display instead of full replay",
+    "existing prospective acceptance tests regress",
+    "installed Skill, evaluation authority, adoption state, or deployment state changes"
+  ],
+  "candidate_authority": "proposal_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}

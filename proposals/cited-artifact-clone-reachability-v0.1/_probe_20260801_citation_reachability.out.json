@@ -1,0 +1,4973 @@
+{
+  "probe": "citation_reachability",
+  "chat_rows": 3213,
+  "chat_parse_errors_skipped": 3,
+  "distinct_cited_paths": 290,
+  "verdict_counts": {
+    "tracked_head": 239,
+    "missing": 22,
+    "disk_only": 28,
+    "history_only": 1
+  },
+  "fully_unreachable_dirs": [
+    "deployments/1751ce140fe3cbdf0dc55ec0",
+    "deployments/e8b13605f294164740ac93f3",
+    "proposals/fusion-dogfood-extension-v0.3",
+    "proposals/uncommitted-drift-inventory-v0.1",
+    "proposals/witness-payload-identity-gap-v0.1",
+    "scripts/SKILL.md",
+    "scripts/prospective.py",
+    "scripts/runtime_core.py",
+    "scripts/test_conversation_evidence.py",
+    "scripts/test_event_atomic_replace_retry.py",
+    "scripts/test_find_frame_index.py",
+    "scripts/test_frame_abandon.py",
+    "scripts/test_projection_freshness_v4.py",
+    "scripts/test_semantic_memory.py",
+    "scripts/test_source_authenticity_marker.py",
+    "scripts/wake_brief.py",
+    "scripts/weilan_trace.py"
+  ],
+  "dir_breakdown": {
+    "deployments/1751ce140fe3cbdf0dc55ec0": {
+      "disk_only": 1
+    },
+    "deployments/e8b13605f294164740ac93f3": {
+      "missing": 3
+    },
+    "evals/approvals": {
+      "tracked_head": 1
+    },
+    "evals/cases": {
+      "tracked_head": 1
+    },
+    "evals/fixtures": {
+      "tracked_head": 1
+    },
+    "evals/fusion-dogfood-v0.1-manifest.json": {
+      "tracked_head": 1
+    },
+    "evals/runs": {
+      "tracked_head": 2
+    },
+    "proposals/adjudication-handoff-completion-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/adjudication-queue-growth-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/availability-predicate-grades-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/bounded-scheduler-v0.1": {
+      "tracked_head": 27,
+      "disk_only": 7
+    },
+    "proposals/capture-contract-source-authenticity-v0.1": {
+      "tracked_head": 4
+    },
+    "proposals/charter-consequence-clause-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/charter-daily-push-v0.1": {
+      "tracked_head": 20,
+      "disk_only": 2,
+      "missing": 1
+    },
+    "proposals/ci-coverage-debt-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/cited-evidence-absent-from-tree-v0.1": {
+      "tracked_head": 3,
+      "missing": 1
+    },
+    "proposals/claude-wake-observability-gap-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/codex-cold-start-scope-ambiguity-v0.1": {
+      "tracked_head": 3
+    },
+    "proposals/codex-ledger-write-boundary-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/codex-run-log-encoding-v0.1": {
+      "tracked_head": 4
+    },
+    "proposals/cold-start-tidy-v0.1": {
+      "tracked_head": 6
+    },
+    "proposals/community-dashboard-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/concurrent-receipt-frame-loss-v0.1": {
+      "tracked_head": 5
+    },
+    "proposals/correction-view-unwired-v0.1": {
+      "history_only": 1,
+      "tracked_head": 6
+    },
+    "proposals/cosign-authorization-at-commit-time-v0.1": {
+      "tracked_head": 3
+    },
+    "proposals/cosign-bytewise-binding-v0.1": {
+      "tracked_head": 4
+    },
+    "proposals/cosign-durability-gap-v0.1": {
+      "tracked_head": 12
+    },
+    "proposals/coverage-ladder-derivation-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/cron-wrapper-portability-v0.1": {
+      "tracked_head": 3
+    },
+    "proposals/cross-review-wake-gate-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/decision-provenance-authority-class-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/find-frame-index-v0.1": {
+      "tracked_head": 6
+    },
+    "proposals/focus-reducer-heartbeat-overwrite-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/frame-abandon-validation-gap-v0.1": {
+      "tracked_head": 4,
+      "disk_only": 2
+    },
+    "proposals/frame-deadlock-recovery-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/fusion-dogfood-extension-v0.2": {
+      "tracked_head": 1
+    },
+    "proposals/fusion-dogfood-extension-v0.3": {
+      "missing": 1
+    },
+    "proposals/idle-run-linter-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/ledger-rows-never-committed-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/ledger-timestamp-authority-v0.1": {
+      "tracked_head": 3
+    },
+    "proposals/line-hash-eol-convention-v0.1": {
+      "tracked_head": 2
+    },
+    "proposals/lineage-log-append-only-correction-v0.1": {
+      "missing": 1,
+      "tracked_head": 2
+    },
+    "proposals/lineage-memo-write-guard-v0.1": {
+      "disk_only": 3,
+      "tracked_head": 1
+    },
+    "proposals/live-artifact-lineage-unclosed-v0.1": {
+      "tracked_head": 2
+    },
+    "proposals/machine-antimonopoly-audit-v0.1": {
+      "tracked_head": 2
+    },
+    "proposals/memory-opensource-export-v0.1": {
+      "tracked_head": 3
+    },
+    "proposals/method-state-atomic-replace-retry-v0.1": {
+      "tracked_head": 2
+    },
+    "proposals/method-state-atomic-replace-retry-v0.2": {
+      "tracked_head": 1
+    },
+    "proposals/mutual-aid-v0.1": {
+      "tracked_head": 5,
+      "disk_only": 3
+    },
+    "proposals/p4-m1-n2-ledger-saturation-prereg-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/parked-findings-consolidation-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/parse-diagnostic-contract-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/peer-liveness-anchor-authenticity-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/pirate-covenant-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/projection-recall-staleness-v0.1": {
+      "tracked_head": 14
+    },
+    "proposals/prospective-causal-ref-integrity-v0.1": {
+      "tracked_head": 1,
+      "disk_only": 1
+    },
+    "proposals/prospective-due-shape-drift-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/prospective-readiness-identity-debt-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/public-release-consolidation-v0.1": {
+      "tracked_head": 19
+    },
+    "proposals/public-release-r9-fault-injection-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/push-third-party-reachability-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/qoder-membership-channel-v0.1": {
+      "tracked_head": 2
+    },
+    "proposals/readme-entry-refresh-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/redaction-gate-tree-subject-v0.1": {
+      "tracked_head": 6,
+      "disk_only": 1
+    },
+    "proposals/rescan-instrument-unreachable-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/roadmap-historicisation-v0.1": {
+      "tracked_head": 3
+    },
+    "proposals/root-docs-tidy-v0.1": {
+      "tracked_head": 2
+    },
+    "proposals/scaffold-opensource-export-v0.1": {
+      "missing": 1,
+      "tracked_head": 5
+    },
+    "proposals/se-0.7-fusion-successor-v0.1": {
+      "tracked_head": 2
+    },
+    "proposals/situational-awareness-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/substrate-sensing-design-notes-v0.1": {
+      "tracked_head": 2
+    },
+    "proposals/uncommitted-drift-inventory-v0.1": {
+      "disk_only": 7
+    },
+    "proposals/wake-agent-redirect-pin-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/wake-brief-trail-layer-v0.1": {
+      "tracked_head": 2
+    },
+    "proposals/wake-capture-fixture-portability-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/wake-entrypoint-ergonomics-v0.1": {
+      "tracked_head": 3,
+      "missing": 2
+    },
+    "proposals/wake-lock-atomic-acquire-v0.1": {
+      "tracked_head": 2
+    },
+    "proposals/wake-procedure-friction-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/weilan-memory-release-migration-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/witness-archival-gap-v0.1": {
+      "tracked_head": 1
+    },
+    "proposals/witness-payload-identity-gap-v0.1": {
+      "disk_only": 1
+    },
+    "proposals/witness-post-archival-asymmetry-v0.1": {
+      "tracked_head": 3
+    },
+    "proposals/zero-trust-rederivation-discipline-v0.1": {
+      "tracked_head": 1
+    },
+    "scripts/SKILL.md": {
+      "missing": 1
+    },
+    "scripts/prospective.py": {
+      "missing": 1
+    },
+    "scripts/runtime_core.py": {
+      "missing": 1
+    },
+    "scripts/test_conversation_evidence.py": {
+      "missing": 1
+    },
+    "scripts/test_event_atomic_replace_retry.py": {
+      "missing": 1
+    },
+    "scripts/test_find_frame_index.py": {
+      "missing": 1
+    },
+    "scripts/test_frame_abandon.py": {
+      "missing": 1
+    },
+    "scripts/test_projection_freshness_v4.py": {
+      "missing": 1
+    },
+    "scripts/test_semantic_memory.py": {
+      "missing": 1
+    },
+    "scripts/test_source_authenticity_marker.py": {
+      "missing": 1
+    },
+    "scripts/wake_brief.py": {
+      "missing": 1
+    },
+    "scripts/weilan_trace.py": {
+      "missing": 1
+    }
+  },
+  "detail": [
+    {
+      "path": "deployments/1751ce140fe3cbdf0dc55ec0/DEPLOYMENT_RECEIPT.json",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 3115,
+        "from": "claude",
+        "time": "2026-07-30T23:37:49+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3167,
+        "from": "codex",
+        "time": "2026-07-31T18:06:17+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260728_hygiene_mutation.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2822,
+        "from": "claude",
+        "time": "2026-07-28T07:01:13+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2822,
+        "from": "claude",
+        "time": "2026-07-28T07:01:13+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260728_wakeprompt_line3.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2829,
+        "from": "claude",
+        "time": "2026-07-28T08:08:49+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2829,
+        "from": "claude",
+        "time": "2026-07-28T08:08:49+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_citation_forms_review.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 4,
+      "first_cite": {
+        "chat_line": 3015,
+        "from": "claude",
+        "time": "2026-07-30T02:46:00+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3020,
+        "from": "claude",
+        "time": "2026-07-30T03:30:33+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260731_abandoned_census.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3134,
+        "from": "claude",
+        "time": "2026-07-31T10:52:37+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3135,
+        "from": "codex",
+        "time": "2026-07-31T11:11:22+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_verify_20260731_roadmap_northstar_postlanding.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3189,
+        "from": "claude",
+        "time": "2026-07-31T21:17:53+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3189,
+        "from": "claude",
+        "time": "2026-07-31T21:17:53+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_verify_charter_sync_proposal.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2764,
+        "from": "claude",
+        "time": "2026-07-27T19:17:30+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2764,
+        "from": "claude",
+        "time": "2026-07-27T19:17:30+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/tmp/probe_rglob_junction.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1218,
+        "from": "claude",
+        "time": "2026-07-16 13:11:04"
+      },
+      "last_cite": {
+        "chat_line": 1218,
+        "from": "claude",
+        "time": "2026-07-16 13:11:04"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_indep_rescan_20260728b.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2809,
+        "from": "claude",
+        "time": "2026-07-28T04:40:10+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2809,
+        "from": "claude",
+        "time": "2026-07-28T04:40:10+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_verify_rebased.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2766,
+        "from": "claude",
+        "time": "2026-07-27T19:44:38+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2766,
+        "from": "claude",
+        "time": "2026-07-27T19:44:38+09:00"
+      }
+    },
+    {
+      "path": "proposals/frame-abandon-validation-gap-v0.1/_probe_20260731_claude_quiet_contract_equality.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3148,
+        "from": "claude",
+        "time": "2026-07-31T14:08:20+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3148,
+        "from": "claude",
+        "time": "2026-07-31T14:08:20+09:00"
+      }
+    },
+    {
+      "path": "proposals/frame-abandon-validation-gap-v0.1/_probe_20260731_lineage_memo_safety.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3146,
+        "from": "claude",
+        "time": "2026-07-31T13:38:18+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3146,
+        "from": "claude",
+        "time": "2026-07-31T13:38:18+09:00"
+      }
+    },
+    {
+      "path": "proposals/lineage-memo-write-guard-v0.1/_probe_20260731_claude_independent_v11_review.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3156,
+        "from": "claude",
+        "time": "2026-07-31T16:52:41+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3156,
+        "from": "claude",
+        "time": "2026-07-31T16:52:41+09:00"
+      }
+    },
+    {
+      "path": "proposals/lineage-memo-write-guard-v0.1/_probe_20260731_guard_side_effect_before_raise.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3155,
+        "from": "codex",
+        "time": "2026-07-31T16:37:40+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3155,
+        "from": "codex",
+        "time": "2026-07-31T16:37:40+09:00"
+      }
+    },
+    {
+      "path": "proposals/lineage-memo-write-guard-v0.1/_probe_20260731_memo_write_guard_review.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3150,
+        "from": "claude",
+        "time": "2026-07-31T14:51:08+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3151,
+        "from": "codex",
+        "time": "2026-07-31T15:23:15+09:00"
+      }
+    },
+    {
+      "path": "proposals/mutual-aid-v0.1/_review_mutate_anchor.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2571,
+        "from": "claude",
+        "time": "2026-07-26 03:06:24"
+      },
+      "last_cite": {
+        "chat_line": 2571,
+        "from": "claude",
+        "time": "2026-07-26 03:06:24"
+      }
+    },
+    {
+      "path": "proposals/mutual-aid-v0.1/_review_probe_orphan.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2566,
+        "from": "claude",
+        "time": "2026-07-26 02:21:04"
+      },
+      "last_cite": {
+        "chat_line": 2566,
+        "from": "claude",
+        "time": "2026-07-26 02:21:04"
+      }
+    },
+    {
+      "path": "proposals/mutual-aid-v0.1/_review_probe_skew.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2566,
+        "from": "claude",
+        "time": "2026-07-26 02:21:04"
+      },
+      "last_cite": {
+        "chat_line": 2566,
+        "from": "claude",
+        "time": "2026-07-26 02:21:04"
+      }
+    },
+    {
+      "path": "proposals/prospective-causal-ref-integrity-v0.1/proposal.json",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3119,
+        "from": "codex",
+        "time": "2026-07-31T00:14:49+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3119,
+        "from": "codex",
+        "time": "2026-07-31T00:14:49+09:00"
+      }
+    },
+    {
+      "path": "proposals/redaction-gate-tree-subject-v0.1/_probe_20260730_rollback_linehash.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3066,
+        "from": "claude",
+        "time": "2026-07-30T14:59:56+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3068,
+        "from": "claude",
+        "time": "2026-07-30T15:27:14+09:00"
+      }
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/DRIFT_INVENTORY.md",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2650,
+        "from": "claude",
+        "time": "2026-07-26T16:32:54+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2650,
+        "from": "claude",
+        "time": "2026-07-26T16:32:54+09:00"
+      }
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/T1_COMMIT_PAYLOAD.tsv",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 5,
+      "first_cite": {
+        "chat_line": 2862,
+        "from": "claude",
+        "time": "2026-07-28T14:49:54+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3017,
+        "from": "codex",
+        "time": "2026-07-30T02:58:26+09:00"
+      }
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/T1_COMMIT_SCOPE.tsv",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2859,
+        "from": "claude",
+        "time": "2026-07-28T14:25:43+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2860,
+        "from": "codex",
+        "time": "2026-07-28T14:38:44+09:00"
+      }
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/_verify_b2_recoverability.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2652,
+        "from": "claude",
+        "time": "2026-07-26T16:56:21+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2652,
+        "from": "claude",
+        "time": "2026-07-26T16:56:21+09:00"
+      }
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/t1_payload.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2862,
+        "from": "claude",
+        "time": "2026-07-28T14:49:54+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2862,
+        "from": "claude",
+        "time": "2026-07-28T14:49:54+09:00"
+      }
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/triage_b1.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2857,
+        "from": "claude",
+        "time": "2026-07-28T14:04:19+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2857,
+        "from": "claude",
+        "time": "2026-07-28T14:04:19+09:00"
+      }
+    },
+    {
+      "path": "proposals/uncommitted-drift-inventory-v0.1/verify_t1_commit.py",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2866,
+        "from": "claude",
+        "time": "2026-07-28T15:15:51+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2866,
+        "from": "claude",
+        "time": "2026-07-28T15:15:51+09:00"
+      }
+    },
+    {
+      "path": "proposals/witness-payload-identity-gap-v0.1/FINDING.md",
+      "verdict": "disk_only",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2866,
+        "from": "claude",
+        "time": "2026-07-28T15:15:51+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2866,
+        "from": "claude",
+        "time": "2026-07-28T15:15:51+09:00"
+      }
+    },
+    {
+      "path": "proposals/correction-view-unwired-v0.1/test_canonical_contract.py",
+      "verdict": "history_only",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2793,
+        "from": "claude",
+        "time": "2026-07-28T01:42:49+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2793,
+        "from": "claude",
+        "time": "2026-07-28T01:42:49+09:00"
+      }
+    },
+    {
+      "path": "deployments/e8b13605f294164740ac93f3/DEPLOYMENT_INTENT.json",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3183,
+        "from": "claude",
+        "time": "2026-07-31T20:32:50+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3183,
+        "from": "claude",
+        "time": "2026-07-31T20:32:50+09:00"
+      }
+    },
+    {
+      "path": "deployments/e8b13605f294164740ac93f3/DEPLOYMENT_RECEIPT.json",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3183,
+        "from": "claude",
+        "time": "2026-07-31T20:32:50+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3183,
+        "from": "claude",
+        "time": "2026-07-31T20:32:50+09:00"
+      }
+    },
+    {
+      "path": "deployments/e8b13605f294164740ac93f3/rollback/solve-with-weilan/scripts/wake_brief.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3183,
+        "from": "claude",
+        "time": "2026-07-31T20:32:50+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3183,
+        "from": "claude",
+        "time": "2026-07-31T20:32:50+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/repro_scanner_false_negative.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2812,
+        "from": "claude",
+        "time": "2026-07-28T05:01:32+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2812,
+        "from": "claude",
+        "time": "2026-07-28T05:01:32+09:00"
+      }
+    },
+    {
+      "path": "proposals/cited-evidence-absent-from-tree-v0.1/_probe_20260730_citation_forms_review.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3017,
+        "from": "codex",
+        "time": "2026-07-30T02:58:26+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3019,
+        "from": "codex",
+        "time": "2026-07-30T03:17:03+09:00"
+      }
+    },
+    {
+      "path": "proposals/fusion-dogfood-extension-v0.3/.../wf-20260705-085147-66482d.jsonl",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2732,
+        "from": "claude",
+        "time": "2026-07-27T13:00:02+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2732,
+        "from": "claude",
+        "time": "2026-07-27T13:00:02+09:00"
+      }
+    },
+    {
+      "path": "proposals/lineage-log-append-only-correction-v0.1/impl/compile_view.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1111,
+        "from": "codex",
+        "time": "2026-07-15 06:35:37"
+      },
+      "last_cite": {
+        "chat_line": 1111,
+        "from": "codex",
+        "time": "2026-07-15 06:35:37"
+      }
+    },
+    {
+      "path": "proposals/scaffold-opensource-export-v0.1/export-manifest-v1.DRAFT.md",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 355,
+        "from": "claude",
+        "time": "2026-07-11 19:12:30"
+      },
+      "last_cite": {
+        "chat_line": 355,
+        "from": "claude",
+        "time": "2026-07-11 19:12:30"
+      }
+    },
+    {
+      "path": "proposals/wake-entrypoint-ergonomics-v0.1/_probe_20260731_wake_peek_prelanding_harness.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3188,
+        "from": "claude",
+        "time": "2026-07-31T21:07:59+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3188,
+        "from": "claude",
+        "time": "2026-07-31T21:07:59+09:00"
+      }
+    },
+    {
+      "path": "proposals/wake-entrypoint-ergonomics-v0.1/test_wake_peek_and_cursor_observability.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 3181,
+        "from": "claude",
+        "time": "2026-07-31T20:04:26+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3186,
+        "from": "codex",
+        "time": "2026-07-31T20:45:46+09:00"
+      }
+    },
+    {
+      "path": "scripts/SKILL.md/weilan_trace.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 97,
+        "from": "codex",
+        "time": "2026-07-10 21:10:33"
+      },
+      "last_cite": {
+        "chat_line": 97,
+        "from": "codex",
+        "time": "2026-07-10 21:10:33"
+      }
+    },
+    {
+      "path": "scripts/prospective.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 28,
+        "from": "codex",
+        "time": "2026-07-10 17:20:22"
+      },
+      "last_cite": {
+        "chat_line": 28,
+        "from": "codex",
+        "time": "2026-07-10 17:20:22"
+      }
+    },
+    {
+      "path": "scripts/runtime_core.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 150,
+        "from": "owner",
+        "time": "2026-07-10 23:23:17"
+      },
+      "last_cite": {
+        "chat_line": 150,
+        "from": "owner",
+        "time": "2026-07-10 23:23:17"
+      }
+    },
+    {
+      "path": "scripts/test_conversation_evidence.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 1832,
+        "from": "claude",
+        "time": "2026-07-19 14:06:02"
+      },
+      "last_cite": {
+        "chat_line": 1834,
+        "from": "claude",
+        "time": "2026-07-19 14:32:59"
+      }
+    },
+    {
+      "path": "scripts/test_event_atomic_replace_retry.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 151,
+        "from": "codex",
+        "time": "2026-07-10 23:29:10"
+      },
+      "last_cite": {
+        "chat_line": 151,
+        "from": "codex",
+        "time": "2026-07-10 23:29:10"
+      }
+    },
+    {
+      "path": "scripts/test_find_frame_index.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3206,
+        "from": "codex",
+        "time": "2026-08-01T02:20:54+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3206,
+        "from": "codex",
+        "time": "2026-08-01T02:20:54+09:00"
+      }
+    },
+    {
+      "path": "scripts/test_frame_abandon.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 7,
+      "first_cite": {
+        "chat_line": 3135,
+        "from": "codex",
+        "time": "2026-07-31T11:11:22+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3155,
+        "from": "codex",
+        "time": "2026-07-31T16:37:40+09:00"
+      }
+    },
+    {
+      "path": "scripts/test_projection_freshness_v4.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2495,
+        "from": "claude",
+        "time": "2026-07-24 11:02:40"
+      },
+      "last_cite": {
+        "chat_line": 2497,
+        "from": "claude",
+        "time": "2026-07-24 11:21:52"
+      }
+    },
+    {
+      "path": "scripts/test_semantic_memory.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2495,
+        "from": "claude",
+        "time": "2026-07-24 11:02:40"
+      },
+      "last_cite": {
+        "chat_line": 2497,
+        "from": "claude",
+        "time": "2026-07-24 11:21:52"
+      }
+    },
+    {
+      "path": "scripts/test_source_authenticity_marker.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 1986,
+        "from": "codex",
+        "time": "2026-07-20 22:21:12"
+      },
+      "last_cite": {
+        "chat_line": 1991,
+        "from": "claude",
+        "time": "2026-07-20 23:04:00"
+      }
+    },
+    {
+      "path": "scripts/wake_brief.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 16,
+      "first_cite": {
+        "chat_line": 335,
+        "from": "codex",
+        "time": "2026-07-11 18:25:00"
+      },
+      "last_cite": {
+        "chat_line": 3183,
+        "from": "claude",
+        "time": "2026-07-31T20:32:50+09:00"
+      }
+    },
+    {
+      "path": "scripts/weilan_trace.py",
+      "verdict": "missing",
+      "on_disk": false,
+      "cite_count": 28,
+      "first_cite": {
+        "chat_line": 1986,
+        "from": "codex",
+        "time": "2026-07-20 22:21:12"
+      },
+      "last_cite": {
+        "chat_line": 3206,
+        "from": "codex",
+        "time": "2026-08-01T02:20:54+09:00"
+      }
+    },
+    {
+      "path": "evals/approvals/fusion-dogfood-v0.1-approval.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3167,
+        "from": "codex",
+        "time": "2026-07-31T18:06:17+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3167,
+        "from": "codex",
+        "time": "2026-07-31T18:06:17+09:00"
+      }
+    },
+    {
+      "path": "evals/cases/fusion-dogfood-v0.1.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2511,
+        "from": "claude",
+        "time": "2026-07-24 13:55:30"
+      },
+      "last_cite": {
+        "chat_line": 2513,
+        "from": "claude",
+        "time": "2026-07-24 16:20:00"
+      }
+    },
+    {
+      "path": "evals/fixtures/fusion-dogfood-v0.1/fusion-scope-redirection-to-eval-proposal/public/skill-evolution-workspace/ROADMAP.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3104,
+        "from": "claude",
+        "time": "2026-07-30T22:30:25+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3104,
+        "from": "claude",
+        "time": "2026-07-30T22:30:25+09:00"
+      }
+    },
+    {
+      "path": "evals/fusion-dogfood-v0.1-manifest.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2515,
+        "from": "claude",
+        "time": "2026-07-24 15:05:00"
+      },
+      "last_cite": {
+        "chat_line": 2550,
+        "from": "claude",
+        "time": "2026-07-26 00:02:23"
+      }
+    },
+    {
+      "path": "evals/runs/fusion-dogfood-v0.1-e1-2ae80d/e1-preregistered-result.corrected.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3109,
+        "from": "claude",
+        "time": "2026-07-30T22:47:54+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3109,
+        "from": "claude",
+        "time": "2026-07-30T22:47:54+09:00"
+      }
+    },
+    {
+      "path": "evals/runs/fusion-dogfood-v0.1-e1-2ae80d/shadow-result.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3117,
+        "from": "codex",
+        "time": "2026-07-30T23:52:01+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3117,
+        "from": "codex",
+        "time": "2026-07-30T23:52:01+09:00"
+      }
+    },
+    {
+      "path": "proposals/adjudication-handoff-completion-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3215,
+        "from": "claude",
+        "time": "2026-08-01T05:09:36+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3215,
+        "from": "claude",
+        "time": "2026-08-01T05:09:36+09:00"
+      }
+    },
+    {
+      "path": "proposals/adjudication-queue-growth-v0.1/_probe_20260731_adjudication_queue.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3195,
+        "from": "claude",
+        "time": "2026-07-31T23:35:38+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3195,
+        "from": "claude",
+        "time": "2026-07-31T23:35:38+09:00"
+      }
+    },
+    {
+      "path": "proposals/availability-predicate-grades-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2925,
+        "from": "claude",
+        "time": "2026-07-29T04:45:39+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2925,
+        "from": "claude",
+        "time": "2026-07-29T04:45:39+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260729_batch_impostor_scanner.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2927,
+        "from": "claude",
+        "time": "2026-07-29T05:08:41+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2927,
+        "from": "claude",
+        "time": "2026-07-29T05:08:41+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_citation_fidelity.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3020,
+        "from": "claude",
+        "time": "2026-07-30T03:30:33+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3020,
+        "from": "claude",
+        "time": "2026-07-30T03:30:33+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_meta_visible_surface.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3024,
+        "from": "claude",
+        "time": "2026-07-30T04:11:35+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3024,
+        "from": "claude",
+        "time": "2026-07-30T04:11:35+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_meta_visible_surface2.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3024,
+        "from": "claude",
+        "time": "2026-07-30T04:11:35+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3024,
+        "from": "claude",
+        "time": "2026-07-30T04:11:35+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_meta_visible_surface3.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3024,
+        "from": "claude",
+        "time": "2026-07-30T04:11:35+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3024,
+        "from": "claude",
+        "time": "2026-07-30T04:11:35+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260730_withdrawal_link.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3022,
+        "from": "claude",
+        "time": "2026-07-30T03:52:00+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3022,
+        "from": "claude",
+        "time": "2026-07-30T03:52:00+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260731_live_artifact_identity.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3120,
+        "from": "claude",
+        "time": "2026-07-31T00:25:21+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3120,
+        "from": "claude",
+        "time": "2026-07-31T00:25:21+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260801_find_frame_index.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3202,
+        "from": "claude",
+        "time": "2026-08-01T01:00:28+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3202,
+        "from": "claude",
+        "time": "2026-08-01T01:00:28+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/append_clocked_jsonl.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2614,
+        "from": "codex",
+        "time": "2026-07-26T10:45:03+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2614,
+        "from": "codex",
+        "time": "2026-07-26T10:45:03+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/codex-inbox.jsonl",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 3072,
+        "from": "claude",
+        "time": "2026-07-30T16:34:42+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3076,
+        "from": "codex",
+        "time": "2026-07-30T17:46:28+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/observe.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 131,
+        "from": "codex",
+        "time": "2026-07-10 22:36:41"
+      },
+      "last_cite": {
+        "chat_line": 131,
+        "from": "codex",
+        "time": "2026-07-10 22:36:41"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/peer-chat.corrections.jsonl",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3024,
+        "from": "claude",
+        "time": "2026-07-30T04:11:35+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3024,
+        "from": "claude",
+        "time": "2026-07-30T04:11:35+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 24,
+      "first_cite": {
+        "chat_line": 2930,
+        "from": "claude",
+        "time": "2026-07-29T05:45:36+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3189,
+        "from": "claude",
+        "time": "2026-07-31T21:17:53+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/r3-tick-disposition.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2003,
+        "from": "claude",
+        "time": "2026-07-20 16:05:30"
+      },
+      "last_cite": {
+        "chat_line": 2003,
+        "from": "claude",
+        "time": "2026-07-20 16:05:30"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/run_wake_cron.ps1",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 2748,
+        "from": "claude",
+        "time": "2026-07-27T15:16:34+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2777,
+        "from": "codex",
+        "time": "2026-07-27T22:10:40+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/test_append_clocked_jsonl.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2614,
+        "from": "codex",
+        "time": "2026-07-26T10:45:03+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2617,
+        "from": "claude",
+        "time": "2026-07-26T11:16:21+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/test_bounded_scheduler.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 77,
+        "from": "codex",
+        "time": "2026-07-10 20:21:46"
+      },
+      "last_cite": {
+        "chat_line": 77,
+        "from": "codex",
+        "time": "2026-07-10 20:21:46"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/test_wake_brief.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 77,
+        "from": "codex",
+        "time": "2026-07-10 20:21:46"
+      },
+      "last_cite": {
+        "chat_line": 3183,
+        "from": "claude",
+        "time": "2026-07-31T20:32:50+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/test_wake_brief_integration.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 77,
+        "from": "codex",
+        "time": "2026-07-10 20:21:46"
+      },
+      "last_cite": {
+        "chat_line": 77,
+        "from": "codex",
+        "time": "2026-07-10 20:21:46"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/test_wake_sentinel.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 9,
+      "first_cite": {
+        "chat_line": 2655,
+        "from": "codex",
+        "time": "2026-07-26T17:39:14+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2743,
+        "from": "codex",
+        "time": "2026-07-27T14:19:35+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/test_window.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 77,
+        "from": "codex",
+        "time": "2026-07-10 20:21:46"
+      },
+      "last_cite": {
+        "chat_line": 77,
+        "from": "codex",
+        "time": "2026-07-10 20:21:46"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/wake.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 79,
+        "from": "codex",
+        "time": "2026-07-10 20:27:13"
+      },
+      "last_cite": {
+        "chat_line": 79,
+        "from": "codex",
+        "time": "2026-07-10 20:27:13"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/wake_agent.ps1",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2732,
+        "from": "claude",
+        "time": "2026-07-27T13:00:02+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2732,
+        "from": "claude",
+        "time": "2026-07-27T13:00:02+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/wake_brief.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 7,
+      "first_cite": {
+        "chat_line": 73,
+        "from": "codex",
+        "time": "2026-07-10 20:10:40"
+      },
+      "last_cite": {
+        "chat_line": 3183,
+        "from": "claude",
+        "time": "2026-07-31T20:32:50+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/wake_codex.ps1",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 7,
+      "first_cite": {
+        "chat_line": 150,
+        "from": "owner",
+        "time": "2026-07-10 23:23:17"
+      },
+      "last_cite": {
+        "chat_line": 2755,
+        "from": "codex",
+        "time": "2026-07-27T16:37:54+09:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/wake_prompt.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 593,
+        "from": "claude",
+        "time": "2026-07-12 17:23:00"
+      },
+      "last_cite": {
+        "chat_line": 593,
+        "from": "claude",
+        "time": "2026-07-12 17:23:00"
+      }
+    },
+    {
+      "path": "proposals/bounded-scheduler-v0.1/impl/wake_prompt_codex.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 11,
+      "first_cite": {
+        "chat_line": 589,
+        "from": "codex",
+        "time": "2026-07-12 16:52:58"
+      },
+      "last_cite": {
+        "chat_line": 2988,
+        "from": "claude",
+        "time": "2026-07-29T20:56:34+09:00"
+      }
+    },
+    {
+      "path": "proposals/capture-contract-source-authenticity-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 635,
+        "from": "claude",
+        "time": "2026-07-13 00:12:05"
+      },
+      "last_cite": {
+        "chat_line": 635,
+        "from": "claude",
+        "time": "2026-07-13 00:12:05"
+      }
+    },
+    {
+      "path": "proposals/capture-contract-source-authenticity-v0.1/LANDING_REPRODUCIBILITY.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2661,
+        "from": "codex",
+        "time": "2026-07-26T19:26:40+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2661,
+        "from": "codex",
+        "time": "2026-07-26T19:26:40+09:00"
+      }
+    },
+    {
+      "path": "proposals/capture-contract-source-authenticity-v0.1/PROPOSAL.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 1970,
+        "from": "codex",
+        "time": "2026-07-20 19:37:00"
+      },
+      "last_cite": {
+        "chat_line": 1976,
+        "from": "codex",
+        "time": "2026-07-20 20:23:54"
+      }
+    },
+    {
+      "path": "proposals/capture-contract-source-authenticity-v0.1/verify_landing.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2661,
+        "from": "codex",
+        "time": "2026-07-26T19:26:40+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2661,
+        "from": "codex",
+        "time": "2026-07-26T19:26:40+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-consequence-clause-v0.1/execution/RECEIPT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2782,
+        "from": "claude",
+        "time": "2026-07-27T23:45:52+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2782,
+        "from": "claude",
+        "time": "2026-07-27T23:45:52+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/CHARTER.proposed-final.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2766,
+        "from": "claude",
+        "time": "2026-07-27T19:44:38+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2769,
+        "from": "codex",
+        "time": "2026-07-27T20:18:13+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/PROPOSAL.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2768,
+        "from": "claude",
+        "time": "2026-07-27T20:06:05+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2768,
+        "from": "claude",
+        "time": "2026-07-27T20:06:05+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_msg_cosign_20260730_push.txt",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3031,
+        "from": "codex",
+        "time": "2026-07-30T06:57:05+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3031,
+        "from": "codex",
+        "time": "2026-07-30T06:57:05+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_probe_20260730_lease_window_and_ref_forms.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 3035,
+        "from": "claude",
+        "time": "2026-07-30T07:37:56+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3037,
+        "from": "codex",
+        "time": "2026-07-30T07:49:48+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_probe_20260730_porcelain_shapes.out.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3044,
+        "from": "codex",
+        "time": "2026-07-30T09:01:49+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3044,
+        "from": "codex",
+        "time": "2026-07-30T09:01:49+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_probe_20260730_porcelain_shapes.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 3040,
+        "from": "claude",
+        "time": "2026-07-30T08:18:02+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3044,
+        "from": "codex",
+        "time": "2026-07-30T09:01:49+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_probe_20260730_push_performed_absent.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3045,
+        "from": "claude",
+        "time": "2026-07-30T09:20:04+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3045,
+        "from": "claude",
+        "time": "2026-07-30T09:20:04+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_probe_20260730_remote_read_exit_pairs.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3047,
+        "from": "claude",
+        "time": "2026-07-30T10:00:15+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3048,
+        "from": "codex",
+        "time": "2026-07-30T10:34:09+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_probe_20260730_review_landing_a592eef.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3045,
+        "from": "claude",
+        "time": "2026-07-30T09:20:04+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3045,
+        "from": "claude",
+        "time": "2026-07-30T09:20:04+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_probe_20260730_review_porcelain_landing.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3042,
+        "from": "claude",
+        "time": "2026-07-30T08:39:47+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3042,
+        "from": "claude",
+        "time": "2026-07-30T08:39:47+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_probe_20260730_review_push_attempted_landing.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3049,
+        "from": "claude",
+        "time": "2026-07-30T10:54:55+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3049,
+        "from": "claude",
+        "time": "2026-07-30T10:54:55+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_probe_20260730_review_push_attempted_required.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3054,
+        "from": "claude",
+        "time": "2026-07-30T12:23:35+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3054,
+        "from": "claude",
+        "time": "2026-07-30T12:23:35+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/_probe_20260730_stderr_abort_after_success.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3032,
+        "from": "claude",
+        "time": "2026-07-30T07:09:25+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3034,
+        "from": "codex",
+        "time": "2026-07-30T07:23:28+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/execution/PUSH_RECEIPT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2774,
+        "from": "claude",
+        "time": "2026-07-27T21:16:57+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2908,
+        "from": "claude",
+        "time": "2026-07-29T01:36:25+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/execution/RECEIPT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2770,
+        "from": "claude",
+        "time": "2026-07-27T20:29:58+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2770,
+        "from": "claude",
+        "time": "2026-07-27T20:29:58+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/execution/claude-independent-rescan-20260728T0718+0900.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2825,
+        "from": "claude",
+        "time": "2026-07-28T07:20:16+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2861,
+        "from": "codex",
+        "time": "2026-07-28T14:40:11+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/push_authorized_oid.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 10,
+      "first_cite": {
+        "chat_line": 3032,
+        "from": "claude",
+        "time": "2026-07-30T07:09:25+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3053,
+        "from": "codex",
+        "time": "2026-07-30T12:05:38+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/scan_push_manifest.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 11,
+      "first_cite": {
+        "chat_line": 2772,
+        "from": "claude",
+        "time": "2026-07-27T20:55:40+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3034,
+        "from": "codex",
+        "time": "2026-07-30T07:23:28+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/test_push_authorized_oid.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 11,
+      "first_cite": {
+        "chat_line": 3034,
+        "from": "codex",
+        "time": "2026-07-30T07:23:28+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3053,
+        "from": "codex",
+        "time": "2026-07-30T12:05:38+09:00"
+      }
+    },
+    {
+      "path": "proposals/charter-daily-push-v0.1/test_scan_push_manifest.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 5,
+      "first_cite": {
+        "chat_line": 2815,
+        "from": "codex",
+        "time": "2026-07-28T05:36:42+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3034,
+        "from": "codex",
+        "time": "2026-07-30T07:23:28+09:00"
+      }
+    },
+    {
+      "path": "proposals/ci-coverage-debt-v0.1/probe_coverage_debt.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2746,
+        "from": "claude",
+        "time": "2026-07-27T14:48:08+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2748,
+        "from": "claude",
+        "time": "2026-07-27T15:16:34+09:00"
+      }
+    },
+    {
+      "path": "proposals/cited-evidence-absent-from-tree-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 4,
+      "first_cite": {
+        "chat_line": 3013,
+        "from": "claude",
+        "time": "2026-07-30T02:23:57+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3120,
+        "from": "claude",
+        "time": "2026-07-31T00:25:21+09:00"
+      }
+    },
+    {
+      "path": "proposals/cited-evidence-absent-from-tree-v0.1/_probe_20260730_citation_forms.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3017,
+        "from": "codex",
+        "time": "2026-07-30T02:58:26+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3017,
+        "from": "codex",
+        "time": "2026-07-30T02:58:26+09:00"
+      }
+    },
+    {
+      "path": "proposals/cited-evidence-absent-from-tree-v0.1/_probe_20260730_cited_evidence_presence.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3017,
+        "from": "codex",
+        "time": "2026-07-30T02:58:26+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3017,
+        "from": "codex",
+        "time": "2026-07-30T02:58:26+09:00"
+      }
+    },
+    {
+      "path": "proposals/claude-wake-observability-gap-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2829,
+        "from": "claude",
+        "time": "2026-07-28T08:08:49+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2829,
+        "from": "claude",
+        "time": "2026-07-28T08:08:49+09:00"
+      }
+    },
+    {
+      "path": "proposals/codex-cold-start-scope-ambiguity-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2754,
+        "from": "claude",
+        "time": "2026-07-27T16:27:43+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2754,
+        "from": "claude",
+        "time": "2026-07-27T16:27:43+09:00"
+      }
+    },
+    {
+      "path": "proposals/codex-cold-start-scope-ambiguity-v0.1/execution/RECEIPT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2756,
+        "from": "claude",
+        "time": "2026-07-27T17:03:57+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2756,
+        "from": "claude",
+        "time": "2026-07-27T17:03:57+09:00"
+      }
+    },
+    {
+      "path": "proposals/codex-cold-start-scope-ambiguity-v0.1/scan_recall_bootstrap.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2754,
+        "from": "claude",
+        "time": "2026-07-27T16:27:43+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2754,
+        "from": "claude",
+        "time": "2026-07-27T16:27:43+09:00"
+      }
+    },
+    {
+      "path": "proposals/codex-ledger-write-boundary-v0.1/DECISION-20260711.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 173,
+        "from": "claude",
+        "time": "2026-07-11 10:52:14"
+      },
+      "last_cite": {
+        "chat_line": 173,
+        "from": "claude",
+        "time": "2026-07-11 10:52:14"
+      }
+    },
+    {
+      "path": "proposals/codex-run-log-encoding-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2714,
+        "from": "claude",
+        "time": "2026-07-27T10:22:32+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2714,
+        "from": "claude",
+        "time": "2026-07-27T10:22:32+09:00"
+      }
+    },
+    {
+      "path": "proposals/codex-run-log-encoding-v0.1/emit_json.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 5,
+      "first_cite": {
+        "chat_line": 2719,
+        "from": "claude",
+        "time": "2026-07-27T11:26:58+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2732,
+        "from": "claude",
+        "time": "2026-07-27T13:00:02+09:00"
+      }
+    },
+    {
+      "path": "proposals/codex-run-log-encoding-v0.1/live_canary.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2833,
+        "from": "claude",
+        "time": "2026-07-28T09:15:51+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2833,
+        "from": "claude",
+        "time": "2026-07-28T09:15:51+09:00"
+      }
+    },
+    {
+      "path": "proposals/codex-run-log-encoding-v0.1/test_wake_codex_encoding.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 7,
+      "first_cite": {
+        "chat_line": 2718,
+        "from": "codex",
+        "time": "2026-07-27T11:11:20+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2732,
+        "from": "claude",
+        "time": "2026-07-27T13:00:02+09:00"
+      }
+    },
+    {
+      "path": "proposals/cold-start-tidy-v0.1/cold-start-diagnostic-v0.1.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 45,
+        "from": "claude",
+        "time": "2026-07-10 18:16:40"
+      },
+      "last_cite": {
+        "chat_line": 45,
+        "from": "claude",
+        "time": "2026-07-10 18:16:40"
+      }
+    },
+    {
+      "path": "proposals/cold-start-tidy-v0.1/verify-wake-brief-deployment-readiness.ps1",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 91,
+        "from": "codex",
+        "time": "2026-07-10 20:53:10"
+      },
+      "last_cite": {
+        "chat_line": 91,
+        "from": "codex",
+        "time": "2026-07-10 20:53:10"
+      }
+    },
+    {
+      "path": "proposals/cold-start-tidy-v0.1/wake-brief-build-spec-v0.1.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 48,
+        "from": "claude",
+        "time": "2026-07-10 18:22:10"
+      },
+      "last_cite": {
+        "chat_line": 48,
+        "from": "claude",
+        "time": "2026-07-10 18:22:10"
+      }
+    },
+    {
+      "path": "proposals/cold-start-tidy-v0.1/wake-brief-deployed-root-false-zero-audit-v0.1.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 126,
+        "from": "claude",
+        "time": "2026-07-10 22:08:26"
+      },
+      "last_cite": {
+        "chat_line": 126,
+        "from": "claude",
+        "time": "2026-07-10 22:08:26"
+      }
+    },
+    {
+      "path": "proposals/cold-start-tidy-v0.1/wake-brief-deployment-readiness-v0.1.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 88,
+        "from": "claude",
+        "time": "2026-07-10 20:45:16"
+      },
+      "last_cite": {
+        "chat_line": 88,
+        "from": "claude",
+        "time": "2026-07-10 20:45:16"
+      }
+    },
+    {
+      "path": "proposals/cold-start-tidy-v0.1/wake-brief-runtime-cursor-permission-observation-v0.1.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 123,
+        "from": "codex",
+        "time": "2026-07-10 22:00:05"
+      },
+      "last_cite": {
+        "chat_line": 124,
+        "from": "codex",
+        "time": "2026-07-10 22:01:50"
+      }
+    },
+    {
+      "path": "proposals/community-dashboard-v0.1/SPEC.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 719,
+        "from": "claude",
+        "time": "2026-07-13 10:20:00"
+      },
+      "last_cite": {
+        "chat_line": 758,
+        "from": "claude",
+        "time": "2026-07-13 10:14:44"
+      }
+    },
+    {
+      "path": "proposals/concurrent-receipt-frame-loss-v0.1/analysis.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 405,
+        "from": "claude",
+        "time": "2026-07-11 22:33:41"
+      },
+      "last_cite": {
+        "chat_line": 405,
+        "from": "claude",
+        "time": "2026-07-11 22:33:41"
+      }
+    },
+    {
+      "path": "proposals/concurrent-receipt-frame-loss-v0.1/blocker-recovery-analysis.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 422,
+        "from": "claude",
+        "time": "2026-07-12 00:02:10"
+      },
+      "last_cite": {
+        "chat_line": 422,
+        "from": "claude",
+        "time": "2026-07-12 00:02:10"
+      }
+    },
+    {
+      "path": "proposals/concurrent-receipt-frame-loss-v0.1/proposal.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 409,
+        "from": "claude",
+        "time": "2026-07-11 23:22:40"
+      },
+      "last_cite": {
+        "chat_line": 409,
+        "from": "claude",
+        "time": "2026-07-11 23:22:40"
+      }
+    },
+    {
+      "path": "proposals/concurrent-receipt-frame-loss-v0.1/test_concurrent_receipts.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2666,
+        "from": "codex",
+        "time": "2026-07-26T21:06:46+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2667,
+        "from": "codex",
+        "time": "2026-07-26T21:08:57+09:00"
+      }
+    },
+    {
+      "path": "proposals/concurrent-receipt-frame-loss-v0.1/verify_harness.ps1",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 411,
+        "from": "codex",
+        "time": "2026-07-11 23:00:54"
+      },
+      "last_cite": {
+        "chat_line": 411,
+        "from": "codex",
+        "time": "2026-07-11 23:00:54"
+      }
+    },
+    {
+      "path": "proposals/correction-view-unwired-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 2957,
+        "from": "claude",
+        "time": "2026-07-29T12:10:48+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3119,
+        "from": "codex",
+        "time": "2026-07-31T00:14:49+09:00"
+      }
+    },
+    {
+      "path": "proposals/correction-view-unwired-v0.1/evidence/changeset_v2_probe.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2951,
+        "from": "claude",
+        "time": "2026-07-29T10:11:40+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2966,
+        "from": "claude",
+        "time": "2026-07-29T14:19:06+09:00"
+      }
+    },
+    {
+      "path": "proposals/correction-view-unwired-v0.1/evidence/phase_matrix_probe.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2953,
+        "from": "claude",
+        "time": "2026-07-29T10:49:25+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2953,
+        "from": "claude",
+        "time": "2026-07-29T10:49:25+09:00"
+      }
+    },
+    {
+      "path": "proposals/correction-view-unwired-v0.1/evidence/triage_probe.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2947,
+        "from": "claude",
+        "time": "2026-07-29T08:46:44+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2966,
+        "from": "claude",
+        "time": "2026-07-29T14:19:06+09:00"
+      }
+    },
+    {
+      "path": "proposals/correction-view-unwired-v0.1/evidence/txn_shape_probe.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2955,
+        "from": "claude",
+        "time": "2026-07-29T11:38:14+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2955,
+        "from": "claude",
+        "time": "2026-07-29T11:38:14+09:00"
+      }
+    },
+    {
+      "path": "proposals/correction-view-unwired-v0.1/evidence/wiring_spec_probe.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2969,
+        "from": "claude",
+        "time": "2026-07-29T14:54:47+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3012,
+        "from": "claude",
+        "time": "2026-07-30T01:59:16+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-authorization-at-commit-time-v0.1/CHARTER.proposed.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3002,
+        "from": "claude",
+        "time": "2026-07-29T23:46:34+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3003,
+        "from": "codex",
+        "time": "2026-07-29T23:57:31+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-authorization-at-commit-time-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3000,
+        "from": "claude",
+        "time": "2026-07-29T23:19:21+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3000,
+        "from": "claude",
+        "time": "2026-07-29T23:19:21+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-authorization-at-commit-time-v0.1/execution/RECEIPT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3004,
+        "from": "claude",
+        "time": "2026-07-30T00:10:29+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3004,
+        "from": "claude",
+        "time": "2026-07-30T00:10:29+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-bytewise-binding-v0.1/CONVENTION.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 6,
+      "first_cite": {
+        "chat_line": 2758,
+        "from": "claude",
+        "time": "2026-07-27T17:50:55+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3171,
+        "from": "claude",
+        "time": "2026-07-31T18:51:20+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-bytewise-binding-v0.1/PROPOSAL.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2590,
+        "from": "claude",
+        "time": "2026-07-26 05:43:01"
+      },
+      "last_cite": {
+        "chat_line": 2590,
+        "from": "claude",
+        "time": "2026-07-26 05:43:01"
+      }
+    },
+    {
+      "path": "proposals/cosign-bytewise-binding-v0.1/test_verify_binding.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 3005,
+        "from": "codex",
+        "time": "2026-07-30T00:20:01+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3177,
+        "from": "codex",
+        "time": "2026-07-31T19:15:07+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-bytewise-binding-v0.1/verify_binding.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 2592,
+        "from": "claude",
+        "time": "2026-07-26 06:10:05"
+      },
+      "last_cite": {
+        "chat_line": 3188,
+        "from": "claude",
+        "time": "2026-07-31T21:07:59+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/EVIDENCE_AUDIT_DENOMINATOR_AND_DIRTY_POPULATION.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2980,
+        "from": "claude",
+        "time": "2026-07-29T18:06:56+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2980,
+        "from": "claude",
+        "time": "2026-07-29T18:06:56+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/EVIDENCE_CENSUS_COVERAGE.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2992,
+        "from": "claude",
+        "time": "2026-07-29T22:02:48+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2992,
+        "from": "claude",
+        "time": "2026-07-29T22:02:48+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/EVIDENCE_CHECKPOINT_REF_RETENTION.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2976,
+        "from": "claude",
+        "time": "2026-07-29T16:42:16+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2976,
+        "from": "claude",
+        "time": "2026-07-29T16:42:16+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/EVIDENCE_LEDGER_APPEND_ONLY.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2896,
+        "from": "claude",
+        "time": "2026-07-28T22:34:52+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2896,
+        "from": "claude",
+        "time": "2026-07-28T22:34:52+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/EVIDENCE_PROPOSAL_SELF_CLASSIFIES_BLOCKED.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2978,
+        "from": "claude",
+        "time": "2026-07-29T17:15:42+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2978,
+        "from": "claude",
+        "time": "2026-07-29T17:15:42+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/EVIDENCE_REF_CLASS_REACHABILITY.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2974,
+        "from": "claude",
+        "time": "2026-07-29T16:08:32+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2974,
+        "from": "claude",
+        "time": "2026-07-29T16:08:32+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/EVIDENCE_SIGNATURE_PUBLICITY.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2894,
+        "from": "claude",
+        "time": "2026-07-28T21:58:14+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2894,
+        "from": "claude",
+        "time": "2026-07-28T21:58:14+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 2776,
+        "from": "claude",
+        "time": "2026-07-27T21:42:56+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2780,
+        "from": "claude",
+        "time": "2026-07-27T23:12:37+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/PROPOSAL-POSTCHECK-DURABILITY-CLOSURE.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2970,
+        "from": "codex",
+        "time": "2026-07-29T15:26:07+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2970,
+        "from": "codex",
+        "time": "2026-07-29T15:26:07+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/_audit_cosign_durability.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2777,
+        "from": "codex",
+        "time": "2026-07-27T22:10:40+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2777,
+        "from": "codex",
+        "time": "2026-07-27T22:10:40+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/_probe_20260729_closure_index_state.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2971,
+        "from": "claude",
+        "time": "2026-07-29T15:37:37+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2971,
+        "from": "claude",
+        "time": "2026-07-29T15:37:37+09:00"
+      }
+    },
+    {
+      "path": "proposals/cosign-durability-gap-v0.1/_probe_20260729_ledger_anchored_denominator.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2993,
+        "from": "codex",
+        "time": "2026-07-29T22:12:35+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2997,
+        "from": "codex",
+        "time": "2026-07-29T22:41:42+09:00"
+      }
+    },
+    {
+      "path": "proposals/coverage-ladder-derivation-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1920,
+        "from": "claude",
+        "time": "2026-07-20 02:21:40"
+      },
+      "last_cite": {
+        "chat_line": 1920,
+        "from": "claude",
+        "time": "2026-07-20 02:21:40"
+      }
+    },
+    {
+      "path": "proposals/cron-wrapper-portability-v0.1/execution/RECEIPT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2750,
+        "from": "claude",
+        "time": "2026-07-27T15:39:28+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2750,
+        "from": "claude",
+        "time": "2026-07-27T15:39:28+09:00"
+      }
+    },
+    {
+      "path": "proposals/cron-wrapper-portability-v0.1/execution/postcheck-receipt.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2778,
+        "from": "claude",
+        "time": "2026-07-27T22:35:29+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2861,
+        "from": "codex",
+        "time": "2026-07-28T14:40:11+09:00"
+      }
+    },
+    {
+      "path": "proposals/cron-wrapper-portability-v0.1/scan_dropped_rc.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2752,
+        "from": "claude",
+        "time": "2026-07-27T16:05:00+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2752,
+        "from": "claude",
+        "time": "2026-07-27T16:05:00+09:00"
+      }
+    },
+    {
+      "path": "proposals/cross-review-wake-gate-v0.1/PROPOSAL.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 5,
+      "first_cite": {
+        "chat_line": 1960,
+        "from": "claude",
+        "time": "2026-07-20 22:40:00"
+      },
+      "last_cite": {
+        "chat_line": 1989,
+        "from": "claude",
+        "time": "2026-07-20 22:43:28"
+      }
+    },
+    {
+      "path": "proposals/decision-provenance-authority-class-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1913,
+        "from": "claude",
+        "time": "2026-07-20 01:34:35"
+      },
+      "last_cite": {
+        "chat_line": 1913,
+        "from": "claude",
+        "time": "2026-07-20 01:34:35"
+      }
+    },
+    {
+      "path": "proposals/find-frame-index-v0.1/CLAUDE_ADJUDICATION_20260801.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3207,
+        "from": "claude",
+        "time": "2026-08-01T02:35:14+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3207,
+        "from": "claude",
+        "time": "2026-08-01T02:35:14+09:00"
+      }
+    },
+    {
+      "path": "proposals/find-frame-index-v0.1/CLAUDE_REVIEW_20260801_CLOSEOUT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3211,
+        "from": "claude",
+        "time": "2026-08-01T03:55:30+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3211,
+        "from": "claude",
+        "time": "2026-08-01T03:55:30+09:00"
+      }
+    },
+    {
+      "path": "proposals/find-frame-index-v0.1/CLAUDE_REVIEW_20260801_CLOSEOUT2.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3213,
+        "from": "claude",
+        "time": "2026-08-01T04:17:50+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3213,
+        "from": "claude",
+        "time": "2026-08-01T04:17:50+09:00"
+      }
+    },
+    {
+      "path": "proposals/find-frame-index-v0.1/CLAUDE_REVIEW_20260801_REVISION.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3209,
+        "from": "claude",
+        "time": "2026-08-01T03:22:07+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3209,
+        "from": "claude",
+        "time": "2026-08-01T03:22:07+09:00"
+      }
+    },
+    {
+      "path": "proposals/find-frame-index-v0.1/CODEX_REVIEW_20260801.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3206,
+        "from": "codex",
+        "time": "2026-08-01T02:20:54+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3206,
+        "from": "codex",
+        "time": "2026-08-01T02:20:54+09:00"
+      }
+    },
+    {
+      "path": "proposals/find-frame-index-v0.1/_probe_20260801_guard_cost_and_mtime.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3207,
+        "from": "claude",
+        "time": "2026-08-01T02:35:14+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3207,
+        "from": "claude",
+        "time": "2026-08-01T02:35:14+09:00"
+      }
+    },
+    {
+      "path": "proposals/focus-reducer-heartbeat-overwrite-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1649,
+        "from": "claude",
+        "time": "2026-07-18 23:32:52"
+      },
+      "last_cite": {
+        "chat_line": 1649,
+        "from": "claude",
+        "time": "2026-07-18 23:32:52"
+      }
+    },
+    {
+      "path": "proposals/frame-abandon-validation-gap-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3132,
+        "from": "claude",
+        "time": "2026-07-31T10:26:21+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3135,
+        "from": "codex",
+        "time": "2026-07-31T11:11:22+09:00"
+      }
+    },
+    {
+      "path": "proposals/frame-abandon-validation-gap-v0.1/_probe_20260731_abandon_v3_review.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3136,
+        "from": "claude",
+        "time": "2026-07-31T11:24:43+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3136,
+        "from": "claude",
+        "time": "2026-07-31T11:24:43+09:00"
+      }
+    },
+    {
+      "path": "proposals/frame-abandon-validation-gap-v0.1/_probe_20260731_marker_lineage_read_skew.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3144,
+        "from": "claude",
+        "time": "2026-07-31T13:10:09+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3144,
+        "from": "claude",
+        "time": "2026-07-31T13:10:09+09:00"
+      }
+    },
+    {
+      "path": "proposals/frame-abandon-validation-gap-v0.1/_probe_20260731_v31_contract_hash_coupling.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3140,
+        "from": "claude",
+        "time": "2026-07-31T12:16:50+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3140,
+        "from": "claude",
+        "time": "2026-07-31T12:16:50+09:00"
+      }
+    },
+    {
+      "path": "proposals/frame-deadlock-recovery-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 3126,
+        "from": "claude",
+        "time": "2026-07-31T08:32:28+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3131,
+        "from": "codex",
+        "time": "2026-07-31T10:00:02+09:00"
+      }
+    },
+    {
+      "path": "proposals/fusion-dogfood-extension-v0.2/CALIBRATION_RESULT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3115,
+        "from": "claude",
+        "time": "2026-07-30T23:37:49+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3167,
+        "from": "codex",
+        "time": "2026-07-31T18:06:17+09:00"
+      }
+    },
+    {
+      "path": "proposals/idle-run-linter-v0.1/README.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 188,
+        "from": "codex",
+        "time": "2026-07-11 11:10:59"
+      },
+      "last_cite": {
+        "chat_line": 188,
+        "from": "codex",
+        "time": "2026-07-11 11:10:59"
+      }
+    },
+    {
+      "path": "proposals/ledger-rows-never-committed-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3214,
+        "from": "claude",
+        "time": "2026-08-01T04:40:25+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3214,
+        "from": "claude",
+        "time": "2026-08-01T04:40:25+09:00"
+      }
+    },
+    {
+      "path": "proposals/ledger-timestamp-authority-v0.1/COSIGN.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2606,
+        "from": "claude",
+        "time": "2026-07-26T09:19:39+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2606,
+        "from": "claude",
+        "time": "2026-07-26T09:19:39+09:00"
+      }
+    },
+    {
+      "path": "proposals/ledger-timestamp-authority-v0.1/probe_forward_asymmetry.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2606,
+        "from": "claude",
+        "time": "2026-07-26T09:19:39+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2617,
+        "from": "claude",
+        "time": "2026-07-26T11:16:21+09:00"
+      }
+    },
+    {
+      "path": "proposals/ledger-timestamp-authority-v0.1/probe_timestamp_authority.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2617,
+        "from": "claude",
+        "time": "2026-07-26T11:16:21+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2617,
+        "from": "claude",
+        "time": "2026-07-26T11:16:21+09:00"
+      }
+    },
+    {
+      "path": "proposals/line-hash-eol-convention-v0.1/CENSUS_BEFORE_HASH_ENTRYPOINTS.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3008,
+        "from": "claude",
+        "time": "2026-07-30T01:09:21+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3008,
+        "from": "claude",
+        "time": "2026-07-30T01:09:21+09:00"
+      }
+    },
+    {
+      "path": "proposals/line-hash-eol-convention-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3006,
+        "from": "claude",
+        "time": "2026-07-30T00:36:26+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3006,
+        "from": "claude",
+        "time": "2026-07-30T00:36:26+09:00"
+      }
+    },
+    {
+      "path": "proposals/lineage-log-append-only-correction-v0.1/compile_view.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 6,
+      "first_cite": {
+        "chat_line": 1112,
+        "from": "claude",
+        "time": "2026-07-15 06:41:27"
+      },
+      "last_cite": {
+        "chat_line": 3024,
+        "from": "claude",
+        "time": "2026-07-30T04:11:35+09:00"
+      }
+    },
+    {
+      "path": "proposals/lineage-log-append-only-correction-v0.1/test_compile_view.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2966,
+        "from": "claude",
+        "time": "2026-07-29T14:19:06+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2966,
+        "from": "claude",
+        "time": "2026-07-29T14:19:06+09:00"
+      }
+    },
+    {
+      "path": "proposals/lineage-memo-write-guard-v0.1/_probe_20260731_guard_placement_uniformity.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3154,
+        "from": "claude",
+        "time": "2026-07-31T16:24:37+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3155,
+        "from": "codex",
+        "time": "2026-07-31T16:37:40+09:00"
+      }
+    },
+    {
+      "path": "proposals/live-artifact-lineage-unclosed-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3121,
+        "from": "claude",
+        "time": "2026-07-31T00:57:39+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3121,
+        "from": "claude",
+        "time": "2026-07-31T00:57:39+09:00"
+      }
+    },
+    {
+      "path": "proposals/live-artifact-lineage-unclosed-v0.1/_probe_20260731_gap_after_todays_deployments.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3158,
+        "from": "claude",
+        "time": "2026-07-31T17:25:18+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3158,
+        "from": "claude",
+        "time": "2026-07-31T17:25:18+09:00"
+      }
+    },
+    {
+      "path": "proposals/machine-antimonopoly-audit-v0.1/bridge-vs-church-decision-procedure.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 27,
+        "from": "claude",
+        "time": "2026-07-10 17:16:00"
+      },
+      "last_cite": {
+        "chat_line": 27,
+        "from": "claude",
+        "time": "2026-07-10 17:16:00"
+      }
+    },
+    {
+      "path": "proposals/machine-antimonopoly-audit-v0.1/witness-id-nursery-product.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 35,
+        "from": "codex",
+        "time": "2026-07-10 17:35:44"
+      },
+      "last_cite": {
+        "chat_line": 35,
+        "from": "codex",
+        "time": "2026-07-10 17:35:44"
+      }
+    },
+    {
+      "path": "proposals/memory-opensource-export-v0.1/receipts/memory-export-20260714T0840JST.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1841,
+        "from": "claude",
+        "time": "2026-07-19 15:31:10"
+      },
+      "last_cite": {
+        "chat_line": 1841,
+        "from": "claude",
+        "time": "2026-07-19 15:31:10"
+      }
+    },
+    {
+      "path": "proposals/memory-opensource-export-v0.1/receipts/memory-export-20260714T0915JST.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 950,
+        "from": "codex",
+        "time": "2026-07-14 09:19:55"
+      },
+      "last_cite": {
+        "chat_line": 950,
+        "from": "codex",
+        "time": "2026-07-14 09:19:55"
+      }
+    },
+    {
+      "path": "proposals/memory-opensource-export-v0.1/verify_receipt_20260714T0915.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 953,
+        "from": "claude",
+        "time": "2026-07-14 13:09:30"
+      },
+      "last_cite": {
+        "chat_line": 953,
+        "from": "claude",
+        "time": "2026-07-14 13:09:30"
+      }
+    },
+    {
+      "path": "proposals/method-state-atomic-replace-retry-v0.1/codex-candidate-verification-20260710.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 151,
+        "from": "codex",
+        "time": "2026-07-10 23:29:10"
+      },
+      "last_cite": {
+        "chat_line": 151,
+        "from": "codex",
+        "time": "2026-07-10 23:29:10"
+      }
+    },
+    {
+      "path": "proposals/method-state-atomic-replace-retry-v0.1/diagnosis-and-fix.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 140,
+        "from": "claude",
+        "time": "2026-07-10 22:52:10"
+      },
+      "last_cite": {
+        "chat_line": 150,
+        "from": "owner",
+        "time": "2026-07-10 23:23:17"
+      }
+    },
+    {
+      "path": "proposals/method-state-atomic-replace-retry-v0.2/REVIEW-20260711.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 168,
+        "from": "claude",
+        "time": "2026-07-11 00:57:40"
+      },
+      "last_cite": {
+        "chat_line": 168,
+        "from": "claude",
+        "time": "2026-07-11 00:57:40"
+      }
+    },
+    {
+      "path": "proposals/mutual-aid-v0.1/NOTE.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 458,
+        "from": "claude",
+        "time": "2026-07-12 08:12:05"
+      },
+      "last_cite": {
+        "chat_line": 460,
+        "from": "claude",
+        "time": "2026-07-12 08:21:57"
+      }
+    },
+    {
+      "path": "proposals/mutual-aid-v0.1/TIMESTAMP_FRAME_FORENSICS.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2564,
+        "from": "claude",
+        "time": "2026-07-26 02:00:23"
+      },
+      "last_cite": {
+        "chat_line": 2564,
+        "from": "claude",
+        "time": "2026-07-26 02:00:23"
+      }
+    },
+    {
+      "path": "proposals/mutual-aid-v0.1/peer_health_wake.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 7,
+      "first_cite": {
+        "chat_line": 1015,
+        "from": "claude",
+        "time": "2026-07-14 20:22:59"
+      },
+      "last_cite": {
+        "chat_line": 3012,
+        "from": "claude",
+        "time": "2026-07-30T01:59:16+09:00"
+      }
+    },
+    {
+      "path": "proposals/mutual-aid-v0.1/test_peer_health_wake.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 11,
+      "first_cite": {
+        "chat_line": 2611,
+        "from": "codex",
+        "time": "2026-07-26T10:22:39+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2959,
+        "from": "claude",
+        "time": "2026-07-29T12:47:13+09:00"
+      }
+    },
+    {
+      "path": "proposals/mutual-aid-v0.1/timestamp_monotonicity_probe.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2564,
+        "from": "claude",
+        "time": "2026-07-26 02:00:23"
+      },
+      "last_cite": {
+        "chat_line": 2564,
+        "from": "claude",
+        "time": "2026-07-26 02:00:23"
+      }
+    },
+    {
+      "path": "proposals/p4-m1-n2-ledger-saturation-prereg-v0.1/PREREG.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3109,
+        "from": "claude",
+        "time": "2026-07-30T22:47:54+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3109,
+        "from": "claude",
+        "time": "2026-07-30T22:47:54+09:00"
+      }
+    },
+    {
+      "path": "proposals/parked-findings-consolidation-v0.1/INVENTORY.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1923,
+        "from": "claude",
+        "time": "2026-07-20 22:40:00"
+      },
+      "last_cite": {
+        "chat_line": 1923,
+        "from": "claude",
+        "time": "2026-07-20 22:40:00"
+      }
+    },
+    {
+      "path": "proposals/parse-diagnostic-contract-v0.1/SPEC.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 4,
+      "first_cite": {
+        "chat_line": 1136,
+        "from": "claude",
+        "time": "2026-07-15 09:14:00"
+      },
+      "last_cite": {
+        "chat_line": 1141,
+        "from": "codex",
+        "time": "2026-07-15 09:46:35"
+      }
+    },
+    {
+      "path": "proposals/peer-liveness-anchor-authenticity-v0.1/classify_runs.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2710,
+        "from": "claude",
+        "time": "2026-07-27T09:23:00+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2710,
+        "from": "claude",
+        "time": "2026-07-27T09:23:00+09:00"
+      }
+    },
+    {
+      "path": "proposals/pirate-covenant-v0.1/DRAFT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 4,
+      "first_cite": {
+        "chat_line": 894,
+        "from": "claude",
+        "time": "2026-07-13 23:13:57"
+      },
+      "last_cite": {
+        "chat_line": 929,
+        "from": "claude",
+        "time": "2026-07-14 07:39:21"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/CONTESTED_RESOLUTION_LADDER.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2394,
+        "from": "claude",
+        "time": "2026-07-22 16:25:36"
+      },
+      "last_cite": {
+        "chat_line": 2394,
+        "from": "claude",
+        "time": "2026-07-22 16:25:36"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 622,
+        "from": "claude",
+        "time": "2026-07-12 20:05:30"
+      },
+      "last_cite": {
+        "chat_line": 622,
+        "from": "claude",
+        "time": "2026-07-12 20:05:30"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/FIXTURE_DESIGN.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1909,
+        "from": "claude",
+        "time": "2026-07-20 20:41:00"
+      },
+      "last_cite": {
+        "chat_line": 1909,
+        "from": "claude",
+        "time": "2026-07-20 20:41:00"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/STAGE3_FULL_SHADOW_SPEC.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2509,
+        "from": "claude",
+        "time": "2026-07-24 15:40:00"
+      },
+      "last_cite": {
+        "chat_line": 2509,
+        "from": "claude",
+        "time": "2026-07-24 15:40:00"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/adoption/R4_REVIEW_FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2544,
+        "from": "claude",
+        "time": "2026-07-25 23:31:05"
+      },
+      "last_cite": {
+        "chat_line": 2544,
+        "from": "claude",
+        "time": "2026-07-25 23:31:05"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/adoption/R7_OVERHEAD_DEAD_WEIGHT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2555,
+        "from": "claude",
+        "time": "2026-07-26 09:12:31"
+      },
+      "last_cite": {
+        "chat_line": 2558,
+        "from": "codex",
+        "time": "2026-07-26 10:11:24"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/adoption/TARGETED_SHADOW_RESULT.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2497,
+        "from": "claude",
+        "time": "2026-07-24 11:21:52"
+      },
+      "last_cite": {
+        "chat_line": 2861,
+        "from": "codex",
+        "time": "2026-07-28T14:40:11+09:00"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/adoption/full-shadow-proposal.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2517,
+        "from": "codex",
+        "time": "2026-07-24 14:50:16"
+      },
+      "last_cite": {
+        "chat_line": 2517,
+        "from": "codex",
+        "time": "2026-07-24 14:50:16"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/adoption/full_shadow_axis1.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2533,
+        "from": "codex",
+        "time": "2026-07-25 10:23:30"
+      },
+      "last_cite": {
+        "chat_line": 2533,
+        "from": "codex",
+        "time": "2026-07-25 10:23:30"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/adoption/proposal.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2501,
+        "from": "claude",
+        "time": "2026-07-24 12:03:03"
+      },
+      "last_cite": {
+        "chat_line": 2501,
+        "from": "claude",
+        "time": "2026-07-24 12:03:03"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/adoption/targeted_shadow_axis1.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2497,
+        "from": "claude",
+        "time": "2026-07-24 11:21:52"
+      },
+      "last_cite": {
+        "chat_line": 2497,
+        "from": "claude",
+        "time": "2026-07-24 11:21:52"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/candidate/solve-with-weilan/scripts/test_projection_freshness_v4.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2497,
+        "from": "claude",
+        "time": "2026-07-24 11:21:52"
+      },
+      "last_cite": {
+        "chat_line": 2497,
+        "from": "claude",
+        "time": "2026-07-24 11:21:52"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/candidate/solve-with-weilan/scripts/test_semantic_memory.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2497,
+        "from": "claude",
+        "time": "2026-07-24 11:21:52"
+      },
+      "last_cite": {
+        "chat_line": 2497,
+        "from": "claude",
+        "time": "2026-07-24 11:21:52"
+      }
+    },
+    {
+      "path": "proposals/projection-recall-staleness-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2487,
+        "from": "claude",
+        "time": "2026-07-24 09:32:41"
+      },
+      "last_cite": {
+        "chat_line": 2497,
+        "from": "claude",
+        "time": "2026-07-24 11:21:52"
+      }
+    },
+    {
+      "path": "proposals/prospective-causal-ref-integrity-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2875,
+        "from": "claude",
+        "time": "2026-07-28T17:04:48+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2875,
+        "from": "claude",
+        "time": "2026-07-28T17:04:48+09:00"
+      }
+    },
+    {
+      "path": "proposals/prospective-due-shape-drift-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3191,
+        "from": "claude",
+        "time": "2026-07-31T22:18:04+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3191,
+        "from": "claude",
+        "time": "2026-07-31T22:18:04+09:00"
+      }
+    },
+    {
+      "path": "proposals/prospective-readiness-identity-debt-v0.1/NOTES.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 542,
+        "from": "claude",
+        "time": "2026-07-12 13:01:00"
+      },
+      "last_cite": {
+        "chat_line": 542,
+        "from": "claude",
+        "time": "2026-07-12 13:01:00"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/ARCHIVE_EXECUTION_CHECKLIST.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1846,
+        "from": "claude",
+        "time": "2026-07-19 17:58:00"
+      },
+      "last_cite": {
+        "chat_line": 1846,
+        "from": "claude",
+        "time": "2026-07-19 17:58:00"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/COMMITTED_TREE_AUDIT.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1142,
+        "from": "claude",
+        "time": "2026-07-15 09:50:57"
+      },
+      "last_cite": {
+        "chat_line": 1142,
+        "from": "claude",
+        "time": "2026-07-15 09:50:57"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/EPISODE_VERIFICATION.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3029,
+        "from": "claude",
+        "time": "2026-07-30T06:38:05+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3031,
+        "from": "codex",
+        "time": "2026-07-30T06:57:05+09:00"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 990,
+        "from": "codex",
+        "time": "2026-07-14 18:48:48"
+      },
+      "last_cite": {
+        "chat_line": 991,
+        "from": "codex",
+        "time": "2026-07-14 18:50:38"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/INCLUSION_MANIFEST.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 1008,
+        "from": "claude",
+        "time": "2026-07-14 20:21:00"
+      },
+      "last_cite": {
+        "chat_line": 1827,
+        "from": "claude",
+        "time": "2026-07-19 13:53:07"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/INSTALL_OWNERSHIP_RECEIPT.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 6,
+      "first_cite": {
+        "chat_line": 1303,
+        "from": "claude",
+        "time": "2026-07-17 01:23:07"
+      },
+      "last_cite": {
+        "chat_line": 1309,
+        "from": "claude",
+        "time": "2026-07-17 01:54:20"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/LICENSE_DECISION_PACKET_PROPOSAL.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1285,
+        "from": "claude",
+        "time": "2026-07-17 00:03:05"
+      },
+      "last_cite": {
+        "chat_line": 1285,
+        "from": "claude",
+        "time": "2026-07-17 00:03:05"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/PROVENANCE_INVENTORY.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1230,
+        "from": "claude",
+        "time": "2026-07-16 14:46:54"
+      },
+      "last_cite": {
+        "chat_line": 1230,
+        "from": "claude",
+        "time": "2026-07-16 14:46:54"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/R15_AUDIT_PROTOCOL.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1344,
+        "from": "claude",
+        "time": "2026-07-17 07:51:57"
+      },
+      "last_cite": {
+        "chat_line": 1344,
+        "from": "claude",
+        "time": "2026-07-17 07:51:57"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/R16_PUBLICATION_RECEIPT.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 1782,
+        "from": "claude",
+        "time": "2026-07-19 10:46:20"
+      },
+      "last_cite": {
+        "chat_line": 1784,
+        "from": "codex",
+        "time": "2026-07-19 10:58:49"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/R2_INDEPENDENT_REVIEW.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1281,
+        "from": "claude",
+        "time": "2026-07-16 21:02:07"
+      },
+      "last_cite": {
+        "chat_line": 1281,
+        "from": "claude",
+        "time": "2026-07-16 21:02:07"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/R4R8_PORTABLE_RUNTIME_WIRING_SPEC.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 1381,
+        "from": "claude",
+        "time": "2026-07-17 15:11:31"
+      },
+      "last_cite": {
+        "chat_line": 1402,
+        "from": "claude",
+        "time": "2026-07-17 17:34:48"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/RC_FREEZE_SPEC.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1297,
+        "from": "claude",
+        "time": "2026-07-17 00:45:37"
+      },
+      "last_cite": {
+        "chat_line": 1297,
+        "from": "claude",
+        "time": "2026-07-17 00:45:37"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/RELEASE_ACCEPTANCE_MATRIX.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1606,
+        "from": "codex",
+        "time": "2026-07-18 18:18:36"
+      },
+      "last_cite": {
+        "chat_line": 1606,
+        "from": "codex",
+        "time": "2026-07-18 18:18:36"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/RUNTIME_DEPLOYABILITY_RECEIPT.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1153,
+        "from": "codex",
+        "time": "2026-07-15 11:27:00"
+      },
+      "last_cite": {
+        "chat_line": 1153,
+        "from": "codex",
+        "time": "2026-07-15 11:27:00"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/test_clean_home_rehearsal.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 1638,
+        "from": "claude",
+        "time": "2026-07-18 21:56:21"
+      },
+      "last_cite": {
+        "chat_line": 1641,
+        "from": "claude",
+        "time": "2026-07-18 22:11:40"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/test_portable_runtime.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 1638,
+        "from": "claude",
+        "time": "2026-07-18 21:56:21"
+      },
+      "last_cite": {
+        "chat_line": 1754,
+        "from": "claude",
+        "time": "2026-07-19 08:40:41"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/test_release_candidate_hygiene.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 1638,
+        "from": "claude",
+        "time": "2026-07-18 21:56:21"
+      },
+      "last_cite": {
+        "chat_line": 1641,
+        "from": "claude",
+        "time": "2026-07-18 22:11:40"
+      }
+    },
+    {
+      "path": "proposals/public-release-consolidation-v0.1/test_release_installer.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 1638,
+        "from": "claude",
+        "time": "2026-07-18 21:56:21"
+      },
+      "last_cite": {
+        "chat_line": 1641,
+        "from": "claude",
+        "time": "2026-07-18 22:11:40"
+      }
+    },
+    {
+      "path": "proposals/public-release-r9-fault-injection-v0.1/test_release_installer_r9_faults.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 4,
+      "first_cite": {
+        "chat_line": 1456,
+        "from": "codex",
+        "time": "2026-07-18 04:53:08"
+      },
+      "last_cite": {
+        "chat_line": 1731,
+        "from": "claude",
+        "time": "2026-07-19 06:31:56"
+      }
+    },
+    {
+      "path": "proposals/push-third-party-reachability-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 2802,
+        "from": "claude",
+        "time": "2026-07-28T03:17:42+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2809,
+        "from": "claude",
+        "time": "2026-07-28T04:40:10+09:00"
+      }
+    },
+    {
+      "path": "proposals/qoder-membership-channel-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3087,
+        "from": "claude",
+        "time": "2026-07-30T18:59:50+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3087,
+        "from": "claude",
+        "time": "2026-07-30T18:59:50+09:00"
+      }
+    },
+    {
+      "path": "proposals/qoder-membership-channel-v0.1/FINDING_PROPOSED_API_GATE.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3091,
+        "from": "claude",
+        "time": "2026-07-30T19:18:07+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3091,
+        "from": "claude",
+        "time": "2026-07-30T19:18:07+09:00"
+      }
+    },
+    {
+      "path": "proposals/readme-entry-refresh-v0.1/PROPOSAL.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 1799,
+        "from": "claude",
+        "time": "2026-07-19 11:33:25"
+      },
+      "last_cite": {
+        "chat_line": 1810,
+        "from": "claude",
+        "time": "2026-07-19 12:29:02"
+      }
+    },
+    {
+      "path": "proposals/redaction-gate-tree-subject-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 4,
+      "first_cite": {
+        "chat_line": 3056,
+        "from": "claude",
+        "time": "2026-07-30T12:54:42+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3070,
+        "from": "codex",
+        "time": "2026-07-30T16:09:18+09:00"
+      }
+    },
+    {
+      "path": "proposals/redaction-gate-tree-subject-v0.1/REGISTRY.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3064,
+        "from": "claude",
+        "time": "2026-07-30T14:34:12+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3070,
+        "from": "codex",
+        "time": "2026-07-30T16:09:18+09:00"
+      }
+    },
+    {
+      "path": "proposals/redaction-gate-tree-subject-v0.1/_probe_20260730_anchor_identity_stability.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3075,
+        "from": "claude",
+        "time": "2026-07-30T17:22:33+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3075,
+        "from": "claude",
+        "time": "2026-07-30T17:22:33+09:00"
+      }
+    },
+    {
+      "path": "proposals/redaction-gate-tree-subject-v0.1/_probe_20260730_review_commit_gate.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3072,
+        "from": "claude",
+        "time": "2026-07-30T16:34:42+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3072,
+        "from": "claude",
+        "time": "2026-07-30T16:34:42+09:00"
+      }
+    },
+    {
+      "path": "proposals/redaction-gate-tree-subject-v0.1/occurrence-registry.jsonl",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 3064,
+        "from": "claude",
+        "time": "2026-07-30T14:34:12+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3075,
+        "from": "claude",
+        "time": "2026-07-30T17:22:33+09:00"
+      }
+    },
+    {
+      "path": "proposals/redaction-gate-tree-subject-v0.1/test_scan_only_gate.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3064,
+        "from": "claude",
+        "time": "2026-07-30T14:34:12+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3070,
+        "from": "codex",
+        "time": "2026-07-30T16:09:18+09:00"
+      }
+    },
+    {
+      "path": "proposals/rescan-instrument-unreachable-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 2818,
+        "from": "claude",
+        "time": "2026-07-28T06:15:27+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2823,
+        "from": "codex",
+        "time": "2026-07-28T07:11:11+09:00"
+      }
+    },
+    {
+      "path": "proposals/roadmap-historicisation-v0.1/ROADMAP.proposed-final.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3164,
+        "from": "claude",
+        "time": "2026-07-31T17:50:11+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3167,
+        "from": "codex",
+        "time": "2026-07-31T18:06:17+09:00"
+      }
+    },
+    {
+      "path": "proposals/roadmap-historicisation-v0.1/_probe_20260731_claude_landing_review.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3168,
+        "from": "claude",
+        "time": "2026-07-31T18:19:47+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3168,
+        "from": "claude",
+        "time": "2026-07-31T18:19:47+09:00"
+      }
+    },
+    {
+      "path": "proposals/roadmap-historicisation-v0.1/build_proposed_final_v4.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3167,
+        "from": "codex",
+        "time": "2026-07-31T18:06:17+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3167,
+        "from": "codex",
+        "time": "2026-07-31T18:06:17+09:00"
+      }
+    },
+    {
+      "path": "proposals/root-docs-tidy-v0.1/PROPOSAL_AGENTS_MD.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 4,
+      "first_cite": {
+        "chat_line": 2582,
+        "from": "claude",
+        "time": "2026-07-26 04:31:43"
+      },
+      "last_cite": {
+        "chat_line": 2587,
+        "from": "codex",
+        "time": "2026-07-26 05:17:01"
+      }
+    },
+    {
+      "path": "proposals/root-docs-tidy-v0.1/ROOT_DOC_INVENTORY.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 3,
+      "first_cite": {
+        "chat_line": 2579,
+        "from": "claude",
+        "time": "2026-07-26 04:41:55"
+      },
+      "last_cite": {
+        "chat_line": 3102,
+        "from": "codex",
+        "time": "2026-07-30T22:14:35+09:00"
+      }
+    },
+    {
+      "path": "proposals/scaffold-opensource-export-v0.1/export_receipt_guard.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 364,
+        "from": "codex",
+        "time": "2026-07-11 20:05:25"
+      },
+      "last_cite": {
+        "chat_line": 364,
+        "from": "codex",
+        "time": "2026-07-11 20:05:25"
+      }
+    },
+    {
+      "path": "proposals/scaffold-opensource-export-v0.1/out/export-local-20260711-121142/export-receipt.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 386,
+        "from": "codex",
+        "time": "2026-07-11 21:24:17"
+      },
+      "last_cite": {
+        "chat_line": 386,
+        "from": "codex",
+        "time": "2026-07-11 21:24:17"
+      }
+    },
+    {
+      "path": "proposals/scaffold-opensource-export-v0.1/redact_surname_20260714.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 948,
+        "from": "claude",
+        "time": "2026-07-14 09:10:28"
+      },
+      "last_cite": {
+        "chat_line": 948,
+        "from": "claude",
+        "time": "2026-07-14 09:10:28"
+      }
+    },
+    {
+      "path": "proposals/scaffold-opensource-export-v0.1/scan_only_gate.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 9,
+      "first_cite": {
+        "chat_line": 3029,
+        "from": "claude",
+        "time": "2026-07-30T06:38:05+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3070,
+        "from": "codex",
+        "time": "2026-07-30T16:09:18+09:00"
+      }
+    },
+    {
+      "path": "proposals/scaffold-opensource-export-v0.1/test_export_receipt_guard.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 364,
+        "from": "codex",
+        "time": "2026-07-11 20:05:25"
+      },
+      "last_cite": {
+        "chat_line": 367,
+        "from": "codex",
+        "time": "2026-07-11 20:04:40"
+      }
+    },
+    {
+      "path": "proposals/se-0.7-fusion-successor-v0.1/CLAUDE_REBOUND_AUDIT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 3115,
+        "from": "claude",
+        "time": "2026-07-30T23:37:49+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3167,
+        "from": "codex",
+        "time": "2026-07-31T18:06:17+09:00"
+      }
+    },
+    {
+      "path": "proposals/se-0.7-fusion-successor-v0.1/proposal.json",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3109,
+        "from": "claude",
+        "time": "2026-07-30T22:47:54+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3109,
+        "from": "claude",
+        "time": "2026-07-30T22:47:54+09:00"
+      }
+    },
+    {
+      "path": "proposals/situational-awareness-v0.1/NOTE.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 439,
+        "from": "claude",
+        "time": "2026-07-12 10:40:00"
+      },
+      "last_cite": {
+        "chat_line": 439,
+        "from": "claude",
+        "time": "2026-07-12 10:40:00"
+      }
+    },
+    {
+      "path": "proposals/substrate-sensing-design-notes-v0.1/AUTHORITY_PIPELINE_SKETCH.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2421,
+        "from": "codex",
+        "time": "2026-07-22 19:54:54"
+      },
+      "last_cite": {
+        "chat_line": 2421,
+        "from": "codex",
+        "time": "2026-07-22 19:54:54"
+      }
+    },
+    {
+      "path": "proposals/substrate-sensing-design-notes-v0.1/NOTE.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 489,
+        "from": "claude",
+        "time": "2026-07-12 10:31:20"
+      },
+      "last_cite": {
+        "chat_line": 489,
+        "from": "claude",
+        "time": "2026-07-12 10:31:20"
+      }
+    },
+    {
+      "path": "proposals/wake-agent-redirect-pin-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2722,
+        "from": "claude",
+        "time": "2026-07-27T11:53:13+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2722,
+        "from": "claude",
+        "time": "2026-07-27T11:53:13+09:00"
+      }
+    },
+    {
+      "path": "proposals/wake-brief-trail-layer-v0.1/DESIGN.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 324,
+        "from": "claude",
+        "time": "2026-07-11 17:26:40"
+      },
+      "last_cite": {
+        "chat_line": 324,
+        "from": "claude",
+        "time": "2026-07-11 17:26:40"
+      }
+    },
+    {
+      "path": "proposals/wake-brief-trail-layer-v0.1/candidate/wake_brief.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 335,
+        "from": "codex",
+        "time": "2026-07-11 18:25:00"
+      },
+      "last_cite": {
+        "chat_line": 335,
+        "from": "codex",
+        "time": "2026-07-11 18:25:00"
+      }
+    },
+    {
+      "path": "proposals/wake-capture-fixture-portability-v0.1/test_wake_sentinel.proposed-final.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3188,
+        "from": "claude",
+        "time": "2026-07-31T21:07:59+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3188,
+        "from": "claude",
+        "time": "2026-07-31T21:07:59+09:00"
+      }
+    },
+    {
+      "path": "proposals/wake-entrypoint-ergonomics-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3178,
+        "from": "claude",
+        "time": "2026-07-31T19:28:27+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3178,
+        "from": "claude",
+        "time": "2026-07-31T19:28:27+09:00"
+      }
+    },
+    {
+      "path": "proposals/wake-entrypoint-ergonomics-v0.1/PROPOSAL_TEXT.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3188,
+        "from": "claude",
+        "time": "2026-07-31T21:07:59+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3188,
+        "from": "claude",
+        "time": "2026-07-31T21:07:59+09:00"
+      }
+    },
+    {
+      "path": "proposals/wake-entrypoint-ergonomics-v0.1/wake_brief.proposed-final.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3181,
+        "from": "claude",
+        "time": "2026-07-31T20:04:26+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3181,
+        "from": "claude",
+        "time": "2026-07-31T20:04:26+09:00"
+      }
+    },
+    {
+      "path": "proposals/wake-lock-atomic-acquire-v0.1/proposal.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 2,
+      "first_cite": {
+        "chat_line": 395,
+        "from": "claude",
+        "time": "2026-07-11 21:51:51"
+      },
+      "last_cite": {
+        "chat_line": 397,
+        "from": "codex",
+        "time": "2026-07-11 21:53:17"
+      }
+    },
+    {
+      "path": "proposals/wake-lock-atomic-acquire-v0.1/verify_harness.ps1",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 403,
+        "from": "claude",
+        "time": "2026-07-11 22:41:12"
+      },
+      "last_cite": {
+        "chat_line": 403,
+        "from": "claude",
+        "time": "2026-07-11 22:41:12"
+      }
+    },
+    {
+      "path": "proposals/wake-procedure-friction-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3190,
+        "from": "claude",
+        "time": "2026-07-31T21:52:10+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3190,
+        "from": "claude",
+        "time": "2026-07-31T21:52:10+09:00"
+      }
+    },
+    {
+      "path": "proposals/weilan-memory-release-migration-v0.1/PROPOSAL.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 1819,
+        "from": "claude",
+        "time": "2026-07-19 13:29:12"
+      },
+      "last_cite": {
+        "chat_line": 1819,
+        "from": "claude",
+        "time": "2026-07-19 13:29:12"
+      }
+    },
+    {
+      "path": "proposals/witness-archival-gap-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 2784,
+        "from": "claude",
+        "time": "2026-07-28T00:10:55+09:00"
+      },
+      "last_cite": {
+        "chat_line": 2784,
+        "from": "claude",
+        "time": "2026-07-28T00:10:55+09:00"
+      }
+    },
+    {
+      "path": "proposals/witness-post-archival-asymmetry-v0.1/FINDING.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3177,
+        "from": "codex",
+        "time": "2026-07-31T19:15:07+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3177,
+        "from": "codex",
+        "time": "2026-07-31T19:15:07+09:00"
+      }
+    },
+    {
+      "path": "proposals/witness-post-archival-asymmetry-v0.1/build_proposed_final.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3177,
+        "from": "codex",
+        "time": "2026-07-31T19:15:07+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3177,
+        "from": "codex",
+        "time": "2026-07-31T19:15:07+09:00"
+      }
+    },
+    {
+      "path": "proposals/witness-post-archival-asymmetry-v0.1/test_verify_binding.proposed-final.py",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 3188,
+        "from": "claude",
+        "time": "2026-07-31T21:07:59+09:00"
+      },
+      "last_cite": {
+        "chat_line": 3188,
+        "from": "claude",
+        "time": "2026-07-31T21:07:59+09:00"
+      }
+    },
+    {
+      "path": "proposals/zero-trust-rederivation-discipline-v0.1/NOTES.md",
+      "verdict": "tracked_head",
+      "on_disk": true,
+      "cite_count": 1,
+      "first_cite": {
+        "chat_line": 294,
+        "from": "claude",
+        "time": "2026-07-11 16:17:25"
+      },
+      "last_cite": {
+        "chat_line": 294,
+        "from": "claude",
+        "time": "2026-07-11 16:17:25"
+      }
+    }
+  ]
+}

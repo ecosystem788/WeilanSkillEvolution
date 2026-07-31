@@ -1,0 +1,26 @@
+{
+  "schema_version": "weilan_skill_deployment_receipt_v0.6",
+  "deployment_id": "1751ce140fe3cbdf0dc55ec0",
+  "decision_hash": "fc0b164fd9aa892b1d216740d9c3f542745aef7dd0e7fabe5ab5fc7c986aba6a",
+  "authority_source": "community dual-sign proposal peer-chat 2026-07-20 17:42:30 and independent consent 2026-07-21 02:38:25; execution delegation codex-inbox da2f036f4260",
+  "target": "D:\\CodexData\\skills\\solve-with-weilan",
+  "before_artifact_hash": "c393bc3916a9276f2dddfda6973790d3738acd0bd756ec8259f4d87463c60d6c",
+  "after_artifact_hash": "9872361cd77d4a3efaa23b2f00560288301d9ce921425c762687b2c58f551d9e",
+  "rollback_artifact": "D:\\WeilanSkillEvolution\\deployments\\1751ce140fe3cbdf0dc55ec0\\rollback\\solve-with-weilan",
+  "rollback_triggers": [
+    "wake_brief test suite fails",
+    "clock display fields alter site_fingerprint.hash for the same ledger state",
+    "condition.not_before_utc is omitted from fingerprint authority",
+    "changed live path exceeds scripts/wake_brief.py"
+  ],
+  "reversible": true,
+  "changed_live_paths": [
+    "scripts/wake_brief.py"
+  ],
+  "verification": {
+    "command": "python -m pytest -q test_wake_brief.py test_wake_brief_open_agenda.py test_wake_brief_integration.py",
+    "result": "26 passed in 1.47s",
+    "live_two_now_acceptance": true,
+    "wake_brief_sha256": "a7117933fb0ac22810a46b0aeebed5f396a812583d17889570db9c0c1774336d"
+  }
+}

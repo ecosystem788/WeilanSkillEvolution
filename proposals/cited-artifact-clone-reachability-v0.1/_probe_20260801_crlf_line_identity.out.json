@@ -1,0 +1,130 @@
+{
+  "probe": "crlf_line_identity",
+  "disk_total_lines": 3218,
+  "disk_crlf_line_numbers": [
+    2723,
+    2728,
+    2733,
+    3077,
+    3084,
+    3088,
+    3094,
+    3095,
+    3098,
+    3101,
+    3103,
+    3105,
+    3106,
+    3110,
+    3111,
+    3122,
+    3125,
+    3162,
+    3170,
+    3198
+  ],
+  "head_blob_crlf_count": 0,
+  "corrections_records": 16,
+  "anchor_resolution": [
+    {
+      "corrections_line": 1,
+      "target_field": "before_hash",
+      "target_hash": "e0d4ad52e85f2966",
+      "resolves_on_disk_at": null,
+      "resolves_in_HEAD_blob_at": null,
+      "disk_line_is_crlf": null
+    },
+    {
+      "corrections_line": 2,
+      "target_field": "before_hash",
+      "target_hash": "346042703ef6c252",
+      "resolves_on_disk_at": 873,
+      "resolves_in_HEAD_blob_at": 873,
+      "disk_line_is_crlf": false
+    },
+    {
+      "corrections_line": 4,
+      "target_field": "before_hash",
+      "target_hash": "30b6791b025a9bf5",
+      "resolves_on_disk_at": 858,
+      "resolves_in_HEAD_blob_at": 858,
+      "disk_line_is_crlf": false
+    },
+    {
+      "corrections_line": 5,
+      "target_field": "before_hash",
+      "target_hash": "2e19bed1c4e57ec4",
+      "resolves_on_disk_at": 1518,
+      "resolves_in_HEAD_blob_at": 1518,
+      "disk_line_is_crlf": false
+    },
+    {
+      "corrections_line": 6,
+      "target_field": "before_hash",
+      "target_hash": "3d9723bdf5e958aa",
+      "resolves_on_disk_at": 1532,
+      "resolves_in_HEAD_blob_at": 1532,
+      "disk_line_is_crlf": false
+    },
+    {
+      "corrections_line": 7,
+      "target_field": "before_hash",
+      "target_hash": "cb718cf7ce2c45c4",
+      "resolves_on_disk_at": 1539,
+      "resolves_in_HEAD_blob_at": 1539,
+      "disk_line_is_crlf": false
+    },
+    {
+      "corrections_line": 8,
+      "target_field": "before_hash",
+      "target_hash": "d201d3e244ae2afc",
+      "resolves_on_disk_at": null,
+      "resolves_in_HEAD_blob_at": null,
+      "disk_line_is_crlf": null
+    },
+    {
+      "corrections_line": 9,
+      "target_field": "before_hash",
+      "target_hash": "23ce2a564986f883",
+      "resolves_on_disk_at": 2786,
+      "resolves_in_HEAD_blob_at": 2786,
+      "disk_line_is_crlf": false
+    },
+    {
+      "corrections_line": 10,
+      "target_field": "before_hash",
+      "target_hash": "39e35ae1090fcb18",
+      "resolves_on_disk_at": 2788,
+      "resolves_in_HEAD_blob_at": 2788,
+      "disk_line_is_crlf": false
+    },
+    {
+      "corrections_line": 11,
+      "target_field": "before_hash",
+      "target_hash": "895c1e9cb5f85f37",
+      "resolves_on_disk_at": 2789,
+      "resolves_in_HEAD_blob_at": 2789,
+      "disk_line_is_crlf": false
+    },
+    {
+      "corrections_line": 12,
+      "target_field": "before_hash",
+      "target_hash": "50ef3fdb7bb666cf",
+      "resolves_on_disk_at": 2865,
+      "resolves_in_HEAD_blob_at": 2865,
+      "disk_line_is_crlf": false
+    },
+    {
+      "corrections_line": 16,
+      "target_field": "before_hash",
+      "target_hash": "78db0a528f03ebd2",
+      "resolves_on_disk_at": 3017,
+      "resolves_in_HEAD_blob_at": 3017,
+      "disk_line_is_crlf": false
+    }
+  ],
+  "anchors_unresolvable_in_HEAD": [
+    1,
+    8
+  ]
+}
