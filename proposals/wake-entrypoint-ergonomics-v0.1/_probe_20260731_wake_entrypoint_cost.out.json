@@ -1,0 +1,101 @@
+{
+  "probe": "wake-entrypoint-ergonomics-v0.1",
+  "read_only": true,
+  "note": "第三段全部写操作在 tempfile;其余为静态读与只读命令",
+  "cli_surface": {
+    "wake_brief_sha256": "a7117933fb0ac22810a46b0aeebed5f396a812583d17889570db9c0c1774336d",
+    "build_brief_has_commit_cursor_param": true,
+    "build_brief_commit_cursor_default": true,
+    "main_cli_long_flags": [
+      "--root;",
+      "--workspace"
+    ],
+    "commit_cursor_reachable_from_cli": false,
+    "call_site_in_main": [
+      "brief = build_brief("
+    ],
+    "verdict": "库层存在非消费式读,CLI 无任何开关可达",
+    "_source_has_commit_cursor": true
+  },
+  "cursor_backup": {
+    "call_site": "preserve_previous=cursor_mode == \"full_rescan\" and mismatch_details is not None,",
+    "preserve_previous_truth_table": {
+      "incremental|details=None": false,
+      "incremental|details=set": false,
+      "full_rescan|details=None": false,
+      "full_rescan|details=set": true,
+      "representation_drift|details=None": false,
+      "representation_drift|details=set": false
+    },
+    "incremental_double_run_keeps_backup": false
+  },
+  "double_run": {
+    "run0": {
+      "rc": 0,
+      "cursor_status": {
+        "status": "full_rescan",
+        "reason": "no_cursor"
+      },
+      "peer_chat_new": 3176
+    },
+    "run1": {
+      "rc": 0,
+      "cursor_status": {
+        "status": "incremental"
+      },
+      "peer_chat_new": 1
+    },
+    "run2": {
+      "rc": 0,
+      "cursor_status": {
+        "status": "incremental"
+      },
+      "peer_chat_new": 0
+    },
+    "delta_visible_only_once": true,
+    "prev_cursor_file_exists_after_double_run": false,
+    "run2_stdout_bytes": 94966,
+    "brief_key_bytes": {
+      "authority": 1253,
+      "owner_inbox_delta": 2,
+      "prospective_due": 2,
+      "open_agenda": 76902,
+      "codex_replies_unreviewed": 2,
+      "peer_chat_new": 86,
+      "concurrent_receipts_new": 2,
+      "sources": 7264,
+      "cursor_status": 25,
+      "site_fingerprint": 3847
+    },
+    "brief_total_bytes": 95087,
+    "decision_bearing_bytes": 1370,
+    "decision_bearing_share": 0.0153
+  },
+  "volume": {
+    "memory_recall": {
+      "rc": 0,
+      "stdout_bytes": 86849,
+      "key_bytes": {
+        "matched": 4,
+        "requested_workspace": 26,
+        "matched_workspace": 26,
+        "activation": 178,
+        "control": 901,
+        "projection": 7575,
+        "open_agenda": 74601,
+        "freshness": 130,
+        "scope_candidates": 99
+      },
+      "decision_bearing_keys": [
+        "activation",
+        "control"
+      ],
+      "decision_bearing_bytes": 1079,
+      "decision_bearing_share": 0.0129
+    },
+    "prospective_show": {
+      "rc": 0,
+      "stdout_bytes": 192028
+    }
+  }
+}
