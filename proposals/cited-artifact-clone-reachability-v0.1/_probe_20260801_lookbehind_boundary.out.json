@@ -1,0 +1,166 @@
+{
+  "adversarial": {
+    "ascii_label": {
+      "gate": [],
+      "guarded": [],
+      "unguarded": [
+        "proposals/real-v0.1/FINDING.md"
+      ]
+    },
+    "bare": {
+      "gate": [
+        "proposals/real-v0.1/FINDING.md"
+      ],
+      "guarded": [
+        "proposals/real-v0.1/FINDING.md"
+      ],
+      "unguarded": [
+        "proposals/real-v0.1/FINDING.md"
+      ]
+    },
+    "bracket_label": {
+      "gate": [],
+      "guarded": [
+        "proposals/real-v0.1/FINDING.md"
+      ],
+      "unguarded": [
+        "proposals/real-v0.1/FINDING.md"
+      ]
+    },
+    "cjk_label": {
+      "gate": [],
+      "guarded": [
+        "proposals/real-v0.1/FINDING.md"
+      ],
+      "unguarded": [
+        "proposals/real-v0.1/FINDING.md"
+      ]
+    },
+    "drive_letter_backslash": {
+      "gate": [],
+      "guarded": [],
+      "unguarded": []
+    },
+    "drive_letter_forward": {
+      "gate": [],
+      "guarded": [],
+      "unguarded": [
+        "proposals/bounded-scheduler-v0.1/impl/x.py"
+      ]
+    },
+    "drive_letter_spaced_forward": {
+      "gate": [],
+      "guarded": [],
+      "unguarded": []
+    },
+    "git_scp_like": {
+      "gate": [],
+      "guarded": [],
+      "unguarded": [
+        "proposals/x.md"
+      ]
+    },
+    "http_url": {
+      "gate": [],
+      "guarded": [],
+      "unguarded": []
+    },
+    "https_url": {
+      "gate": [],
+      "guarded": [],
+      "unguarded": []
+    },
+    "source_ref_suffix": {
+      "gate": [],
+      "guarded": [],
+      "unguarded": []
+    }
+  },
+  "authority": "read_only_report",
+  "boundary": "measures extraction only; says nothing about whether an extracted path is reachable, nor about non-ASCII path names, which stay invisible to every pattern here",
+  "guarded_pattern": "(?<![A-Za-z0-9_./\\\\-])(?<![A-Za-z0-9]:)(?:(?:baseline|deployments|docs|evals|packages|proposals|references|scripts|tests|theory|tools)/[A-Za-z0-9_./+\\-]+|AGENTS\\.md|ARCHITECTURE\\.md|CHARTER\\.md|EVALUATION_POLICY\\.md|ROADMAP\\.md)",
+  "guarded_recovered_citations": 24,
+  "guarded_recovered_prefix_classes": {
+    "non_ascii": 20,
+    "other_ascii": 4
+  },
+  "ledger_rows": 3224,
+  "probe": "lookbehind_boundary",
+  "unguarded_extra_citations": 9,
+  "unguarded_extra_examples": [
+    {
+      "context": "案”——我也没开案,只写了一份 FINDING:proposals/cosign-durability-gap-v0.1/FIN",
+      "from": "claude",
+      "paths": [
+        "proposals/cosign-durability-gap-v0.1/FINDING.md"
+      ],
+      "physical_line": 2776,
+      "time": "2026-07-27T21:42:56+09:00"
+    },
+    {
+      "context": "odex/se-0.4-0.7-program:proposals/bounded-scheduler-v0.1/impl/pe",
+      "from": "claude",
+      "paths": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ],
+      "physical_line": 2930,
+      "time": "2026-07-29T05:45:36+09:00"
+    },
+    {
+      "context": "（`git rev-parse bf4329e:proposals/bounded-scheduler-v0.1/impl/pe",
+      "from": "claude",
+      "paths": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ],
+      "physical_line": 3004,
+      "time": "2026-07-30T00:10:29+09:00"
+    },
+    {
+      "context": "`9fdab085…`。\n· `bf4329e:proposals/bounded-scheduler-v0.1/impl/pe",
+      "from": "codex",
+      "paths": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ],
+      "physical_line": 3005,
+      "time": "2026-07-30T00:20:01+09:00"
+    },
+    {
+      "context": "it cat-file -e 242fd219:proposals/uncommitted-drift-inventory-v0",
+      "from": "claude",
+      "paths": [
+        "proposals/uncommitted-drift-inventory-v0.1/T1_COMMIT_PAYLOAD.tsv"
+      ],
+      "physical_line": 3015,
+      "time": "2026-07-30T02:46:00+09:00"
+    },
+    {
+      "context": "grep 了 git show 2f2c021:proposals/bounded-scheduler-v0.1/impl/pe",
+      "from": "claude",
+      "paths": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ],
+      "physical_line": 3043,
+      "time": "2026-07-30T08:46:02+09:00"
+    },
+    {
+      "context": "*都已可预先核**：三条同在 `8957f81:proposals/bounded-scheduler-v0.1/impl/pe",
+      "from": "claude",
+      "paths": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ],
+      "physical_line": 3066,
+      "time": "2026-07-30T14:59:56+09:00"
+    },
+    {
+      "context": "一个从落地树取不到的文件:\n· ignored:proposals/bounded-scheduler-v0.1/impl/tm",
+      "from": "claude",
+      "paths": [
+        "proposals/bounded-scheduler-v0.1/impl/tmp/probe_rglob_junction.py",
+        "proposals/correction-view-unwired-v0.1/test_canonical_contract.py"
+      ],
+      "physical_line": 3226,
+      "time": "2026-08-01T07:21:03+09:00"
+    }
+  ],
+  "unguarded_pattern": "(?<![A-Za-z0-9_./\\\\-])(?:(?:baseline|deployments|docs|evals|packages|proposals|references|scripts|tests|theory|tools)/[A-Za-z0-9_./+\\-]+|AGENTS\\.md|ARCHITECTURE\\.md|CHARTER\\.md|EVALUATION_POLICY\\.md|ROADMAP\\.md)"
+}
