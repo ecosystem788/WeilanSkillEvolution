@@ -1,0 +1,76 @@
+{
+  "base_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "candidate_artifact_hash": "ec236760072cf20d3a65df3eebd4c4075e86f79e64971b59375e4937fb3d956f",
+  "workspace": "D:\\WeilanSkillEvolution",
+  "scope": "skill-evolution",
+  "commands": {
+    "memory-recall": {
+      "argv": [
+        "memory-recall",
+        "--workspace",
+        "D:\\WeilanSkillEvolution",
+        "--scope",
+        "skill-evolution"
+      ],
+      "baseline": {
+        "returncode": 0,
+        "stdout_bytes": 40847,
+        "stdout_sha256": "20af84c7ea58598e3bfa9705a8a3c30f72559f7ba70145cdbb80ab05afd09a94",
+        "stderr_tail": ""
+      },
+      "candidate": {
+        "returncode": 0,
+        "stdout_bytes": 40847,
+        "stdout_sha256": "20af84c7ea58598e3bfa9705a8a3c30f72559f7ba70145cdbb80ab05afd09a94",
+        "stderr_tail": ""
+      },
+      "stdout_byte_identical": true
+    },
+    "prospective-show": {
+      "argv": [
+        "prospective-show",
+        "--workspace",
+        "D:\\WeilanSkillEvolution",
+        "--scope",
+        "skill-evolution"
+      ],
+      "baseline": {
+        "returncode": 0,
+        "stdout_bytes": 209079,
+        "stdout_sha256": "9336284e1ed2dcd7399975a1da654910bf187d6f0c47f7119edd0cfefb70ab53",
+        "stderr_tail": ""
+      },
+      "candidate": {
+        "returncode": 0,
+        "stdout_bytes": 209079,
+        "stdout_sha256": "9336284e1ed2dcd7399975a1da654910bf187d6f0c47f7119edd0cfefb70ab53",
+        "stderr_tail": ""
+      },
+      "stdout_byte_identical": true
+    },
+    "lineage-show": {
+      "argv": [
+        "lineage-show",
+        "--workspace",
+        "D:\\WeilanSkillEvolution",
+        "--scope",
+        "skill-evolution"
+      ],
+      "baseline": {
+        "returncode": 0,
+        "stdout_bytes": 1409733,
+        "stdout_sha256": "c1c6de0401cc52cb50783eecc8b5e86e32be2c4ccfad4cafe75be78bd9824fdb",
+        "stderr_tail": ""
+      },
+      "candidate": {
+        "returncode": 0,
+        "stdout_bytes": 1409733,
+        "stdout_sha256": "c1c6de0401cc52cb50783eecc8b5e86e32be2c4ccfad4cafe75be78bd9824fdb",
+        "stderr_tail": ""
+      },
+      "stdout_byte_identical": true
+    }
+  },
+  "all_commands_byte_identical": true,
+  "boundary": "Read-only command equivalence on one current ledger is not a proof over all inputs."
+}

@@ -1,0 +1,27 @@
+{
+  "declared_base_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "declared_candidate_artifact_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+  "base_source_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "candidate_source_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+  "base_frozen_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "candidate_frozen_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+  "changed_paths": [
+    "scripts/runtime_core.py",
+    "scripts/test_canonical_workspace_cache.py"
+  ],
+  "expected_changed_paths": [
+    "scripts/runtime_core.py",
+    "scripts/test_canonical_workspace_cache.py"
+  ],
+  "exact_two_path_delta": true,
+  "previous_candidate_artifact_hash": "ec236760072cf20d3a65df3eebd4c4075e86f79e64971b59375e4937fb3d956f",
+  "revision_changed_paths": [
+    "scripts/test_canonical_workspace_cache.py"
+  ],
+  "expected_revision_changed_paths": [
+    "scripts/test_canonical_workspace_cache.py"
+  ],
+  "revision_changes_only_the_contract_test": true,
+  "runtime_core_unchanged_from_previous_candidate": true,
+  "all_hashes_match": true
+}

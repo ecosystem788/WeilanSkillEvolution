@@ -1,0 +1,102 @@
+{
+  "base_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "candidate_artifact_hash": "ec236760072cf20d3a65df3eebd4c4075e86f79e64971b59375e4937fb3d956f",
+  "subject": "real open command against one copied snapshot of the live ledger",
+  "live_state_source": "D:\\CodexData\\home\\method-state",
+  "workspace": "D:\\WeilanSkillEvolution",
+  "scope": "skill-evolution",
+  "parent": "wf-20260716-064901-72e801",
+  "timeout_s_per_run": 240,
+  "run_order": [
+    "baseline",
+    "candidate",
+    "candidate",
+    "baseline",
+    "baseline",
+    "candidate"
+  ],
+  "runs": [
+    {
+      "label": "baseline",
+      "sequence": 1,
+      "elapsed_s": 192.747,
+      "returncode": 0,
+      "frame_id": "wf-20260801-031719-98d57c",
+      "stdout_bytes": 1891,
+      "stderr_tail": ""
+    },
+    {
+      "label": "candidate",
+      "sequence": 2,
+      "elapsed_s": 36.983,
+      "returncode": 0,
+      "frame_id": "wf-20260801-032015-c2ef56",
+      "stdout_bytes": 2049,
+      "stderr_tail": ""
+    },
+    {
+      "label": "candidate",
+      "sequence": 3,
+      "elapsed_s": 40.51,
+      "returncode": 0,
+      "frame_id": "wf-20260801-032052-89ebf3",
+      "stdout_bytes": 2206,
+      "stderr_tail": ""
+    },
+    {
+      "label": "baseline",
+      "sequence": 4,
+      "elapsed_s": 84.91,
+      "returncode": 0,
+      "frame_id": "wf-20260801-032146-9cd70c",
+      "stdout_bytes": 2361,
+      "stderr_tail": ""
+    },
+    {
+      "label": "baseline",
+      "sequence": 5,
+      "elapsed_s": 95.163,
+      "returncode": 0,
+      "frame_id": "wf-20260801-032317-d98a24",
+      "stdout_bytes": 2517,
+      "stderr_tail": ""
+    },
+    {
+      "label": "candidate",
+      "sequence": 6,
+      "elapsed_s": 38.923,
+      "returncode": 0,
+      "frame_id": "wf-20260801-032433-6a0ef0",
+      "stdout_bytes": 2675,
+      "stderr_tail": ""
+    }
+  ],
+  "baseline": {
+    "n": 3,
+    "min_s": 84.91,
+    "max_s": 192.747,
+    "median_s": 95.163,
+    "mean_s": 124.273,
+    "samples_s": [
+      192.747,
+      84.91,
+      95.163
+    ]
+  },
+  "candidate": {
+    "n": 3,
+    "min_s": 36.983,
+    "max_s": 40.51,
+    "median_s": 38.923,
+    "mean_s": 38.805,
+    "samples_s": [
+      36.983,
+      40.51,
+      38.923
+    ]
+  },
+  "all_runs_returned_open_frames": true,
+  "median_speedup_x": 2.445,
+  "candidate_median_lower": true,
+  "boundary": "This is the real open code path and a full copied live ledger, but not a deployment or a production-ledger write. Host load is uncontrolled; three samples per arm bound observation, not a universal latency guarantee."
+}

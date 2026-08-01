@@ -1,0 +1,37 @@
+{
+  "schema_version": "weilan_skill_change_proposal_v0.5",
+  "proposal_id": "canonical-workspace-cache-v0.1",
+  "rationale": "Cache canonical_workspace by exact expanded path for the lifetime of one process. The deployed CLI runs one command per process and does not create or replace its workspace while that command is running, while a real open profile observed 37,327 canonical_workspace calls and a 14.4104 second uncached microbenchmark cost. The candidate makes the narrower contract explicit and executable: repeated calls in one process keep the first resolution, a new process resolves again, and long-lived callers must explicitly clear the cache after changing workspace path existence, links, or on-disk spelling.",
+  "base_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "candidate_artifact_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+  "changed_paths": [
+    "proposals/canonical-workspace-cache-v0.1/candidate/solve-with-weilan/scripts/runtime_core.py",
+    "proposals/canonical-workspace-cache-v0.1/candidate/solve-with-weilan/scripts/test_canonical_workspace_cache.py"
+  ],
+  "budgets": {
+    "max_changed_files": 2,
+    "max_candidate_generations": 1,
+    "max_evaluation_trials": 12,
+    "max_deployments": 0
+  },
+  "target_metrics": [
+    "frozen_candidate_differs_from_the_frozen_baseline_in_exactly_the_two_declared_paths",
+    "baseline_compatible_behavioral_contract_test_fails_by_assertion_on_the_no_contract_baseline_and_passes_on_the_candidate",
+    "same_expanded_workspace_path_is_resolved_once_per_process_until_explicit_cache_clear",
+    "a_new_process_resolves_the_same_expanded_workspace_path_again",
+    "baseline_and_candidate_read_only_cli_outputs_are_byte_identical",
+    "candidate_full_regression_has_no_failure_absent_from_the_baseline",
+    "equal_budget_real_open_runs_on_the_same_copied_live_ledger_use_at_least_three_samples_per_arm",
+    "candidate_real_open_median_wall_time_is_lower_than_baseline_on_the_copied_live_ledger"
+  ],
+  "rollback_triggers": [
+    "candidate changes any file outside the two declared candidate paths",
+    "the baseline-compatible behavioral contract test does not fail by assertion without AttributeError on the baseline",
+    "the contract test does not pass on the candidate",
+    "a read-only CLI output differs between frozen baseline and candidate",
+    "any test passing on the baseline fails on the candidate",
+    "candidate median real-open wall time is not lower than baseline under the equal-budget copied-ledger probe",
+    "installed Skill, evaluation authority, adoption state, or deployment state changes without a separate independent cosigned adoption decision"
+  ],
+  "candidate_authority": "proposal_only_never_evaluation_adoption_deployment_or_rollback_authority"
+}
