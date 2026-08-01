@@ -1,0 +1,27 @@
+{
+ "baseline": {
+  "errors": 0,
+  "failed": 1,
+  "fails_by_assertion": true,
+  "has_attribute_error": false,
+  "passed": 0,
+  "returncode": 1,
+  "tail": "gs)\r\n    \r\n        monkeypatch.setattr(pathlib.Path, \"resolve\", counting_resolve)\r\n    \r\n        first = runtime_core.canonical_workspace(key)\r\n        second = runtime_core.canonical_workspace(key)\r\n    \r\n        assert first == second\r\n        relevant = [c for c in calls if \"behavioral-input\" in c]\r\n>       assert len(relevant) == 1, (\r\n            \"expected exactly one underlying resolve() for two calls with the \"\r\n            \"same expanded path, got {}\".format(len(relevant))\r\n        )\r\nE       AssertionError: expected exactly one underlying resolve() for two calls with the same expanded path, got 2\r\nE       assert 2 == 1\r\nE        +  where 2 = len(['C:\\\\Users\\\\zy\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-zy\\\\pytest-736\\\\test_same_expanded_path_is_res0\\\\behavioral-input', 'C:\\\\Users\\\\zy\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-zy\\\\pytest-736\\\\test_same_expanded_path_is_res0\\\\behavioral-input'])\r\n\r\ntest_behavioral_contract.py:29: AssertionError\r\n=========================== short test summary info ===========================\r\nFAILED test_behavioral_contract.py::test_same_expanded_path_is_resolved_once_per_process\r\n============================== 1 failed in 0.51s ==============================\r\n"
+ },
+ "candidate": {
+  "errors": 0,
+  "failed": 0,
+  "fails_by_assertion": false,
+  "has_attribute_error": false,
+  "passed": 1,
+  "returncode": 0,
+  "tail": "============================= test session starts =============================\r\ncollecting ... collected 1 item\r\n\r\ntest_behavioral_contract.py::test_same_expanded_path_is_resolved_once_per_process PASSED [100%]\r\n\r\n============================== 1 passed in 0.26s ==============================\r\n"
+ },
+ "probe": "behavioral_discriminator",
+ "test_source": "\nimport pathlib\nfrom pathlib import Path\n\nimport runtime_core\n\n\ndef test_same_expanded_path_is_resolved_once_per_process(monkeypatch, tmp_path):\n    \"\"\"Behavioral only: never names a cache-specific symbol.\n\n    Passes iff repeated canonical_workspace() calls with the same input\n    trigger exactly one underlying resolve().\n    \"\"\"\n    key = str(tmp_path / \"behavioral-input\")\n    calls = []\n    real_resolve = pathlib.Path.resolve\n\n    def counting_resolve(self, *args, **kwargs):\n        calls.append(str(self))\n        return real_resolve(self, *args, **kwargs)\n\n    monkeypatch.setattr(pathlib.Path, \"resolve\", counting_resolve)\n\n    first = runtime_core.canonical_workspace(key)\n    second = runtime_core.canonical_workspace(key)\n\n    assert first == second\n    relevant = [c for c in calls if \"behavioral-input\" in c]\n    assert len(relevant) == 1, (\n        \"expected exactly one underlying resolve() for two calls with the \"\n        \"same expanded path, got {}\".format(len(relevant))\n    )\n",
+ "verdict": {
+  "baseline_fails_by_assertion_not_attribute_error": true,
+  "candidate_passes": true,
+  "discriminates_behaviorally": true
+ }
+}

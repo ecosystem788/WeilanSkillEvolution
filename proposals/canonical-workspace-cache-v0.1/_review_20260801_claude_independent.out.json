@@ -1,0 +1,199 @@
+{
+ "baseline_vs_candidate": {
+  "comparable": true,
+  "differing_content": [
+   "scripts/runtime_core.py"
+  ],
+  "file_count_a": 49,
+  "file_count_b": 50,
+  "identical": false,
+  "only_in_a": [],
+  "only_in_b": [
+   "scripts/test_canonical_workspace_cache.py"
+  ]
+ },
+ "contract_discrimination_independent": {
+  "baseline": {
+   "errors": 0,
+   "failed": 1,
+   "has_assertion_error": false,
+   "has_collection_error": false,
+   "passed": 0,
+   "returncode": 1,
+   "stderr_tail": "",
+   "tail": "============================= test session starts =============================\r\ncollecting ... collected 1 item\r\n\r\ntest_canonical_workspace_cache.py::test_resolution_is_fixed_in_process_and_repeated_in_a_new_process FAILED [100%]\r\n\r\n================================== FAILURES ===================================\r\n______ test_resolution_is_fixed_in_process_and_repeated_in_a_new_process ______\r\n\r\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000016493816C10>\r\ntmp_path = WindowsPath('C:/Users/zy/AppData/Local/Temp/pytest-of-zy/pytest-734/test_resolution_is_fixed_in_pr0')\r\n\r\n    def test_resolution_is_fixed_in_process_and_repeated_in_a_new_process(monkeypatch, tmp_path):\r\n        key = str(tmp_path / \"contract-input\")\r\n        calls = []\r\n    \r\n        def parent_resolve(path):\r\n            calls.append(str(path))\r\n            return Path(f\"{path}-parent-resolution-{len(calls)}\")\r\n    \r\n>       runtime_core.clear_canonical_workspace_cache()\r\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nE       AttributeError: module 'runtime_core' has no attribute 'clear_canonical_workspace_cache'\r\n\r\ntest_canonical_workspace_cache.py:19: AttributeError\r\n=========================== short test summary info ===========================\r\nFAILED test_canonical_workspace_cache.py::test_resolution_is_fixed_in_process_and_repeated_in_a_new_process\r\n============================== 1 failed in 1.21s ==============================\r\n"
+  },
+  "candidate": {
+   "errors": 0,
+   "failed": 0,
+   "has_assertion_error": false,
+   "has_collection_error": false,
+   "passed": 1,
+   "returncode": 0,
+   "stderr_tail": "",
+   "tail": "============================= test session starts =============================\r\ncollecting ... collected 1 item\r\n\r\ntest_canonical_workspace_cache.py::test_resolution_is_fixed_in_process_and_repeated_in_a_new_process PASSED [100%]\r\n\r\n============================== 1 passed in 1.03s ==============================\r\n"
+  },
+  "test_body": "\"\"\"Executable contract for process-local canonical workspace resolution.\"\"\"\n\nimport subprocess\nimport sys\nimport textwrap\nfrom pathlib import Path\n\nimport runtime_core\n\n\ndef test_resolution_is_fixed_in_process_and_repeated_in_a_new_process(monkeypatch, tmp_path):\n    key = str(tmp_path / \"contract-input\")\n    calls = []\n\n    def parent_resolve(path):\n        calls.append(str(path))\n        return Path(f\"{path}-parent-resolution-{len(calls)}\")\n\n    runtime_core.clear_canonical_workspace_cache()\n    monkeypatch.setattr(runtime_core.Path, \"resolve\", parent_resolve)\n\n    first = runtime_core.canonical_workspace(key)\n    second = runtime_core.canonical_workspace(key)\n\n    assert first == second, (\n        \"the same expanded path must retain its first resolution within one process\"\n    )\n    assert calls == [key]\n    assert \"A new process resolves it again\" in runtime_core.CANONICAL_WORKSPACE_CACHE_CONTRACT\n\n    runtime_core.clear_canonical_workspace_cache()\n    after_explicit_clear = runtime_core.canonical_workspace(key)\n    assert after_explicit_clear != first\n    assert calls == [key, key]\n\n    child_code = textwrap.dedent(\n        \"\"\"\n        import sys\n        from pathlib import Path\n\n        def child_resolve(path):\n            return Path(f\"{path}-child-resolution\")\n\n        Path.resolve = child_resolve\n        sys.path.insert(0, sys.argv[1])\n        import runtime_core\n        print(runtime_core.canonical_workspace(sys.argv[2]))\n        \"\"\"\n    )\n    child = subprocess.run(\n        [sys.executable, \"-X\", \"utf8\", \"-c\", child_code, str(Path(__file__).parent), key],\n        capture_output=True,\n        text=True,\n        encoding=\"utf-8\",\n        errors=\"replace\",\n    )\n    assert child.returncode == 0, child.stderr\n    assert child.stdout.strip() == f\"{key}-child-resolution\"\n",
+  "test_exists": true
+ },
+ "find_frame_index": {
+  "candidate_vs_its_baseline": {
+   "comparable": true,
+   "differing_content": [
+    "scripts/weilan_trace.py"
+   ],
+   "file_count_a": 50,
+   "file_count_b": 49,
+   "identical": false,
+   "only_in_a": [
+    "scripts/test_find_frame_index.py"
+   ],
+   "only_in_b": []
+  },
+  "installs_vs_ffi_candidate": {
+   "claude_home": {
+    "comparable": true,
+    "differing_content": [
+     "scripts/weilan_trace.py"
+    ],
+    "file_count_a": 59,
+    "file_count_b": 50,
+    "identical": false,
+    "only_in_a": [
+     ".pytest_cache/.gitignore",
+     ".pytest_cache/CACHEDIR.TAG",
+     ".pytest_cache/README.md",
+     ".pytest_cache/v/cache/lastfailed",
+     ".pytest_cache/v/cache/nodeids",
+     "scripts/.pytest_cache/.gitignore",
+     "scripts/.pytest_cache/CACHEDIR.TAG",
+     "scripts/.pytest_cache/README.md",
+     "scripts/.pytest_cache/v/cache/lastfailed",
+     "scripts/.pytest_cache/v/cache/nodeids"
+    ],
+    "only_in_b": [
+     "scripts/test_find_frame_index.py"
+    ]
+   },
+   "repo_skill": {
+    "comparable": true,
+    "differing_content": [
+     "references/memory-system.md",
+     "scripts/test_conversation_evidence.py",
+     "scripts/test_frame_lineage.py",
+     "scripts/test_semantic_memory.py",
+     "scripts/wake_brief.py",
+     "scripts/weilan_trace.py"
+    ],
+    "file_count_a": 57,
+    "file_count_b": 50,
+    "identical": false,
+    "only_in_a": [
+     ".pytest_cache/.gitignore",
+     ".pytest_cache/CACHEDIR.TAG",
+     ".pytest_cache/README.md",
+     ".pytest_cache/v/cache/nodeids",
+     "LICENSE",
+     "README.md",
+     "runtime/__init__.py",
+     "runtime/bounded_scheduler.py",
+     "runtime/dashboard.py",
+     "runtime/lifecycle.py",
+     "runtime/scheduler_cli.py"
+    ],
+    "only_in_b": [
+     "scripts/test_find_frame_index.py",
+     "scripts/test_frame_abandon.py",
+     "scripts/test_source_authenticity_marker.py",
+     "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak"
+    ]
+   }
+  },
+  "its_baseline_equals_this_baseline": {
+   "comparable": true,
+   "differing_content": [],
+   "file_count_a": 49,
+   "file_count_b": 49,
+   "identical": true,
+   "only_in_a": [],
+   "only_in_b": []
+  },
+  "package_present": true
+ },
+ "installs_vs_package_baseline": {
+  "claude_home": {
+   "comparable": true,
+   "differing_content": [],
+   "file_count_a": 59,
+   "file_count_b": 49,
+   "identical": false,
+   "only_in_a": [
+    ".pytest_cache/.gitignore",
+    ".pytest_cache/CACHEDIR.TAG",
+    ".pytest_cache/README.md",
+    ".pytest_cache/v/cache/lastfailed",
+    ".pytest_cache/v/cache/nodeids",
+    "scripts/.pytest_cache/.gitignore",
+    "scripts/.pytest_cache/CACHEDIR.TAG",
+    "scripts/.pytest_cache/README.md",
+    "scripts/.pytest_cache/v/cache/lastfailed",
+    "scripts/.pytest_cache/v/cache/nodeids"
+   ],
+   "only_in_b": []
+  },
+  "repo_skill": {
+   "comparable": true,
+   "differing_content": [
+    "references/memory-system.md",
+    "scripts/test_conversation_evidence.py",
+    "scripts/test_frame_lineage.py",
+    "scripts/test_semantic_memory.py",
+    "scripts/wake_brief.py",
+    "scripts/weilan_trace.py"
+   ],
+   "file_count_a": 57,
+   "file_count_b": 49,
+   "identical": false,
+   "only_in_a": [
+    ".pytest_cache/.gitignore",
+    ".pytest_cache/CACHEDIR.TAG",
+    ".pytest_cache/README.md",
+    ".pytest_cache/v/cache/nodeids",
+    "LICENSE",
+    "README.md",
+    "runtime/__init__.py",
+    "runtime/bounded_scheduler.py",
+    "runtime/dashboard.py",
+    "runtime/lifecycle.py",
+    "runtime/scheduler_cli.py"
+   ],
+   "only_in_b": [
+    "scripts/test_frame_abandon.py",
+    "scripts/test_source_authenticity_marker.py",
+    "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak"
+   ]
+  }
+ },
+ "latency_separation": {
+  "arms": {},
+  "raw_keys": [
+   "all_runs_returned_open_frames",
+   "base_artifact_hash",
+   "baseline",
+   "boundary",
+   "candidate",
+   "candidate_artifact_hash",
+   "candidate_median_lower",
+   "live_state_source",
+   "median_speedup_x",
+   "parent",
+   "run_order",
+   "runs",
+   "scope",
+   "subject",
+   "timeout_s_per_run",
+   "workspace"
+  ]
+ },
+ "probe": "claude_independent_review_canonical_workspace_cache_v0_1"
+}
