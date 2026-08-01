@@ -1,0 +1,68 @@
+{
+  "authority": "read_only_observation; no adoption or deployment authority",
+  "boundary": "Counts only tracked *.out.json. Untracked probe outputs are invisible here by construction, and 'content_differs' is not judged - it may be a legitimate uncommitted re-run. No claim is made about any proposal's adoption.",
+  "content_differs_examples_truncated_to_8": [
+    {
+      "blob_sha256": "fe35254daa0d964d87e5f68af3738561ae10b43a7d4f74a185b55f0d19ef722b",
+      "disk_sha256": "f91a5b90bcd9510d062bddc0d2741810820be465726f540436b1efc15519ab36",
+      "ref": "proposals/bounded-scheduler-v0.1/impl/_probe_20260731_live_artifact_recoverability.out.json"
+    },
+    {
+      "blob_sha256": "67eaefb85ee6e3e60b782457cd5da133d46a6477abcfb84e3f4d35b2ae1d648c",
+      "disk_sha256": "5f4e833f11caf8771fcfaa21a601922940168a6b28ce327bb04b0c940242199a",
+      "ref": "proposals/cited-artifact-clone-reachability-v0.1/_probe_20260801_status_class_census.out.json"
+    }
+  ],
+  "crlf_only_examples_truncated_to_8": [
+    {
+      "blob_sha256": "ff565c1b73b6f164b5c53a3f0c6b6cc61cf77f3d392fd719805fbbcd531c215a",
+      "disk_sha256": "c3b312e9a2fcecf2fc5d4c5647aa89a73e83bc1688b0854ca1ab5a994cff145d",
+      "ref": "_probe_20260801_delivery_ratio.out.json"
+    },
+    {
+      "blob_sha256": "58e4ea3c6db7404387e3818bb08c1979cad1912b330d76fcb55c69336fceadd9",
+      "disk_sha256": "aba51a6dd2ef93abd754dd363c3b9ad940edf98d5387510909dd4d8dbad3a5eb",
+      "ref": "_probe_20260801_delivery_ratio2.out.json"
+    },
+    {
+      "blob_sha256": "3e77edce33f0c69f5e24a69e91a9704cd974b17a7491d0b20796d9704d280023",
+      "disk_sha256": "02d00ea95b0ccb3eda06a58c614f3c744c35dbd639cbd799d27dc25d9cced723",
+      "ref": "_probe_20260801_delivery_ratio3.out.json"
+    },
+    {
+      "blob_sha256": "6aaf777fee5a431bc5b55d508916ef3bedfc8033680d091087bbcb83737d4e92",
+      "disk_sha256": "fa3484dac7d460e042622ac830fa4e131e0beea635f0bb362378697cf1cc6559",
+      "ref": "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_goal_vs_conversation.out.json"
+    },
+    {
+      "blob_sha256": "b9ce3bad69cb6ff58ac21402d1e8d75c84686a9e03542b3baa8d67dff470a1c3",
+      "disk_sha256": "6186d6831f37ba10e64be90f976bc0c8a2a0d9ca1df35860ad5a8941a08a1d2a",
+      "ref": "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_handoff_base_rate.out.json"
+    },
+    {
+      "blob_sha256": "52c98a268230cdc7064588f15f98dd2e666f22ea9237c1286554783c0de0a9d2",
+      "disk_sha256": "1b5aacd2522211fde7d1979b4ec56950e447308d98eb26bbe5207cbb8336187b",
+      "ref": "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_handoff_completion.out.json"
+    },
+    {
+      "blob_sha256": "f820f1384805867828f3c68960a0318437d8d34995fc0ef37c77798f6ffa0d9c",
+      "disk_sha256": "ab924a26090a617ced88259c34b5af779631b4571250bd58c78e4ad4a7a23ce0",
+      "ref": "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_idle_turn_choice.out.json"
+    },
+    {
+      "blob_sha256": "acb5a05b87c890c8863277a0f5c6a9760544d822de220edf52922c10bb95932b",
+      "disk_sha256": "b3d1c89b4f2d3e60a4103bfb404dfba2ebb1edca662375c9d817ac0d716a3893",
+      "ref": "proposals/bounded-scheduler-v0.1/impl/_probe_20260731_deployment_lineage_closure.out.json"
+    }
+  ],
+  "head": "56c69cd4d53e3c901b00a95ff10f14aa114b562c",
+  "population": "tracked paths ending in .out.json at HEAD",
+  "population_size": 85,
+  "probe": "_probe_20260801_out_json_byte_domain_census.py",
+  "tally": {
+    "content_differs": 2,
+    "crlf_only_difference": 75,
+    "lf_on_disk": 8,
+    "missing_from_worktree": 0
+  }
+}

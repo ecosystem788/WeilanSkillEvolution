@@ -1,0 +1,66 @@
+{
+  "authority": "read_only_observation; no adoption or deployment authority",
+  "boundary": "Trackedness is not authenticity: a committed tree is not proof that those bytes are what any measurement consumed. Suffix matching for the declared paths could in principle collide with an unrelated file of the same basename; the counts are reported so a reader can check rather than trust. One control proposal is not a survey of repo norms.",
+  "control": {
+    "baseline": {
+      "tracked": 49,
+      "untracked": 0
+    },
+    "candidate": {
+      "tracked": 50,
+      "untracked": 0
+    },
+    "ignored_present_count": 286,
+    "prefix": "proposals/find-frame-index-v0.1",
+    "proposal_json_tracked": true,
+    "proposal_json_untracked": false,
+    "self_excluded_paths": [],
+    "tracked_count": 133,
+    "untracked_count": 8
+  },
+  "declared_changed_path_reachability": [
+    {
+      "declared_path": "scripts/runtime_core.py",
+      "exists_at_any_tracked_path": true,
+      "tracked_inside_subject_candidate_tree": 0,
+      "tracked_paths_anywhere_in_repo": 36
+    },
+    {
+      "declared_path": "scripts/test_canonical_workspace_cache.py",
+      "exists_at_any_tracked_path": false,
+      "tracked_inside_subject_candidate_tree": 0,
+      "tracked_paths_anywhere_in_repo": 0
+    }
+  ],
+  "head": "56c69cd4d53e3c901b00a95ff10f14aa114b562c",
+  "probe": "_probe_20260801_package_trackedness.py",
+  "subject": {
+    "baseline": {
+      "tracked": 0,
+      "untracked": 49
+    },
+    "candidate": {
+      "tracked": 0,
+      "untracked": 50
+    },
+    "ignored_present_count": 237,
+    "prefix": "proposals/canonical-workspace-cache-v0.1",
+    "proposal_json_tracked": false,
+    "proposal_json_untracked": true,
+    "self_excluded_paths": [
+      "proposals/canonical-workspace-cache-v0.1/_probe_20260801_package_trackedness.out.json",
+      "proposals/canonical-workspace-cache-v0.1/_probe_20260801_package_trackedness.py"
+    ],
+    "tracked_count": 30,
+    "untracked_count": 114
+  },
+  "subject_gitignore": {
+    "note": "An untracked .gitignore does not travel to a clone; it explains why these paths were never committed here, not what a third party would see.",
+    "path": "proposals/canonical-workspace-cache-v0.1/.gitignore",
+    "present_on_disk": true,
+    "rules": [
+      "artifacts/"
+    ],
+    "tracked": false
+  }
+}
