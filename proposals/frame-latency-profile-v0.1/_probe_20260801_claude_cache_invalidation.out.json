@@ -1,0 +1,61 @@
+{
+  "probe": "canonical_workspace process-local cache invalidation",
+  "authority": "read_only_evidence_no_adoption",
+  "platform": "win32",
+  "python": "3.11.9",
+  "install_points": {
+    "claude": {
+      "path": "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan\\scripts\\runtime_core.py",
+      "exists": true,
+      "sha256": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68"
+    },
+    "codex": {
+      "path": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\runtime_core.py",
+      "exists": true,
+      "sha256": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68"
+    },
+    "identical": true
+  },
+  "cases": [
+    {
+      "case": "resolve_before_vs_after_mkdir_case_differs",
+      "input": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cache_probe_45db2rdk\\workspacecasetest",
+      "on_disk_name": "WorkspaceCaseTest",
+      "before_exists": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cache_probe_45db2rdk\\workspacecasetest",
+      "after_exists": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cache_probe_45db2rdk\\WorkspaceCaseTest",
+      "stable": false,
+      "note": "unstable => a dict cache keyed on the input string can hand back a pre-creation value for the rest of the process"
+    },
+    {
+      "case": "resolve_twice_directory_stable",
+      "input": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cache_probe_45db2rdk\\AlreadyThere",
+      "first": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cache_probe_45db2rdk\\AlreadyThere",
+      "second": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cache_probe_45db2rdk\\AlreadyThere",
+      "stable": true
+    },
+    {
+      "case": "same_name_recreated_with_different_disk_case",
+      "input": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cache_probe_45db2rdk\\SwapMe",
+      "first": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cache_probe_45db2rdk\\SwapMe",
+      "second": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cache_probe_45db2rdk\\swapme",
+      "stable": false
+    },
+    {
+      "case": "cli_accepts_nonexistent_workspace",
+      "input": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cache_probe_45db2rdk\\NeverCreated",
+      "returncode": 0,
+      "accepted": true,
+      "stdout_head": "{\r\n  \"matched\": false,\r\n  \"requested_workspace\": \"C:\\\\Users\\\\zy\\\\AppData\\\\Local\\\\Temp\\\\wl_cache_probe_45db2rdk\\\\NeverCreated\",\r\n  \"activation\": {\r\n    \"state\": \"NO_CONTEXT\",\r\n    \"continuation_allowed\": false,\r\n    \"reason_codes\": [\r\n      \"no_workspace_memory\"\r\n    ],\r\n    \"instruction\": \"Do not claim prior project context. Work only from the current user request.\"\r\n  },\r\n  \"projection\": null\r\n}\r",
+      "stderr_head": "",
+      "note": "if the CLI accepts a workspace path that does not exist, case 1 is reachable through a real command, not only in-process"
+    }
+  ],
+  "verdict": {
+    "unstable_cases": [
+      "resolve_before_vs_after_mkdir_case_differs",
+      "same_name_recreated_with_different_disk_case"
+    ],
+    "same_string_can_resolve_two_ways_in_one_process": true,
+    "reading": "empty unstable_cases => memoizing canonical_workspace is a pure function cache under any process shape; non-empty => the cache is sound only because each process runs exactly one command, and that boundary must be stated as a contract, not a caveat"
+  }
+}
