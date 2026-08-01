@@ -1,0 +1,35 @@
+{
+  "churn_by_week_kind": {
+    "w1": {
+      "real_machinery": 16213,
+      "probe_or_test": 11092
+    },
+    "w2": {
+      "probe_or_test": 403,
+      "real_machinery": 70
+    },
+    "w3": {
+      "real_machinery": 1234,
+      "ceremony_oneshot": 2196,
+      "probe_or_test": 5151
+    }
+  },
+  "distinct_files_by_kind": {
+    "real_machinery": 28,
+    "ceremony_oneshot": 39,
+    "probe_or_test": 76
+  },
+  "churn_total_by_kind": {
+    "real_machinery": 17517,
+    "ceremony_oneshot": 2196,
+    "probe_or_test": 16646
+  },
+  "ceremony_scripts_on_disk_now": 434,
+  "prospective_record_count": 551,
+  "prospective_record_kinds": {
+    "?": 551
+  },
+  "prospective_goal_count": 0,
+  "prospective_final_states": {},
+  "prospective_open": []
+}

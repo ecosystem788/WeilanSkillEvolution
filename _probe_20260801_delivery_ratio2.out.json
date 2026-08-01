@@ -1,0 +1,527 @@
+{
+  "live_machinery_churn_by_file": {
+    "skill/solve-with-weilan/scripts/weilan_trace.py": 7323,
+    "skill/solve-with-weilan/scripts/transaction.py": 969,
+    "proposals/bounded-scheduler-v0.1/impl/observe.py": 927,
+    "skill/solve-with-weilan/scripts/runner.py": 879,
+    "proposals/mutual-aid-v0.1/peer_health_wake.py": 847,
+    "proposals/bounded-scheduler-v0.1/impl/wake.py": 778,
+    "proposals/bounded-scheduler-v0.1/impl/wake_brief.py": 749,
+    "skill/solve-with-weilan/scripts/wake_brief.py": 703,
+    "skill/solve-with-weilan/scripts/governance.py": 494,
+    "skill/solve-with-weilan/scripts/transition_planner.py": 372,
+    "skill/solve-with-weilan/scripts/metabolism.py": 351,
+    "skill/solve-with-weilan/runtime/lifecycle.py": 347,
+    "proposals/bounded-scheduler-v0.1/impl/launch_observe.py": 314,
+    "skill/solve-with-weilan/runtime/bounded_scheduler.py": 292,
+    "proposals/bounded-scheduler-v0.1/impl/bounded_scheduler.py": 292,
+    "proposals/bounded-scheduler-v0.1/impl/cited_artifact_receipt_check.py": 283,
+    "proposals/mutual-aid-v0.1/timestamp_monotonicity_probe.py": 265,
+    "skill/solve-with-weilan/scripts/prospective.py": 239,
+    "proposals/bounded-scheduler-v0.1/impl/window.py": 219,
+    "skill/solve-with-weilan/scripts/runtime_core.py": 167,
+    "proposals/bounded-scheduler-v0.1/impl/_verify_20260731_roadmap_northstar_postlanding.py": 164,
+    "proposals/mutual-aid-v0.1/peer_health.py": 162,
+    "proposals/bounded-scheduler-v0.1/impl/append_clocked_jsonl.py": 131,
+    "proposals/bounded-scheduler-v0.1/impl/_verify_20260728_utf16_e2e_postcheck.py": 126,
+    "proposals/bounded-scheduler-v0.1/impl/_blocker_20260731_live_lineage.py": 119,
+    "skill/solve-with-weilan/runtime/dashboard.py": 114,
+    "proposals/bounded-scheduler-v0.1/impl/_append_codex_log_encoding_proposal.py": 103,
+    "proposals/bounded-scheduler-v0.1/impl/_verify_charter_sync_proposal.py": 92,
+    "skill/solve-with-weilan/runtime/scheduler_cli.py": 92,
+    "proposals/bounded-scheduler-v0.1/impl/chat_append.py": 84,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260729_checkpoint_retention_chat.py": 80,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260801_claude_cosign_receipt_gate_r1.py": 78,
+    "proposals/mutual-aid-v0.1/_review_mutate_anchor.py": 74,
+    "proposals/bounded-scheduler-v0.1/impl/_close_20260730_review_frame.py": 72,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260730_proposed_api_gate_chat.py": 70,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260731_live_lineage_finding_chat.py": 68,
+    "proposals/bounded-scheduler-v0.1/impl/_register_20260730_ls_remote_stage_goal.py": 68,
+    "proposals/bounded-scheduler-v0.1/impl/_receipt_20260729_cosign.py": 65,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260729_self_blocked_chat.py": 64,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260730_porcelain_landing_review.py": 63,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260730_landing_verify_and_diff.py": 62,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260730_allocation_audit_chat.py": 59,
+    "proposals/bounded-scheduler-v0.1/impl/_register_20260730_preauth_goal.py": 56,
+    "proposals/bounded-scheduler-v0.1/impl/_receipt_20260731_close.py": 54,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260731_v3_live_identity.py": 53,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260730_qoder_direction_rebuttal.py": 52,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260730_meta_visible_surface.py": 49,
+    "proposals/bounded-scheduler-v0.1/impl/_append_wake_agent_redirect_pin_proposal.py": 49,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260730_section3_correction.py": 48,
+    "proposals/bounded-scheduler-v0.1/impl/repro_cp936_json.py": 48,
+    "proposals/bounded-scheduler-v0.1/impl/_close_20260730_allocation_round.py": 42,
+    "proposals/bounded-scheduler-v0.1/impl/_open_20260730_review_frame.py": 41,
+    "proposals/bounded-scheduler-v0.1/impl/_open_20260731_live_lineage_frame.py": 38,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260728_coverage_obligation_chat.py": 38,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260730_preauth_convergence.py": 36,
+    "proposals/bounded-scheduler-v0.1/impl/_concurrent_receipt_20260731_live_lineage.py": 34,
+    "proposals/bounded-scheduler-v0.1/impl/_open_20260730_allocation_round.py": 34,
+    "proposals/bounded-scheduler-v0.1/impl/_receipt_20260731_open.py": 33,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260729_v6_chat.py": 33,
+    "proposals/bounded-scheduler-v0.1/impl/_scan_20260731_parked_topics.py": 27,
+    "proposals/bounded-scheduler-v0.1/impl/_msg_20260729_cosign_recompute.py": 26,
+    "proposals/bounded-scheduler-v0.1/impl/_append_20260730_queue_census_chat.py": 23,
+    "proposals/bounded-scheduler-v0.1/impl/_scan_20260731_tail.py": 22,
+    "proposals/bounded-scheduler-v0.1/impl/_scan_20260731_range.py": 19,
+    "proposals/bounded-scheduler-v0.1/impl/_read_tail_chat.py": 19,
+    "proposals/bounded-scheduler-v0.1/impl/_tail_20260729_chat.py": 17,
+    "skill/solve-with-weilan/runtime/__init__.py": 2
+  },
+  "live_machinery_churn_total": 19713,
+  "live_machinery_churn_by_day": {
+    "2026-07-14": 2982,
+    "2026-07-15": 11343,
+    "2026-07-16": 729,
+    "2026-07-17": 1159,
+    "2026-07-19": 12,
+    "2026-07-23": 58,
+    "2026-07-26": 438,
+    "2026-07-27": 268,
+    "2026-07-28": 476,
+    "2026-07-29": 285,
+    "2026-07-30": 805,
+    "2026-07-31": 467,
+    "2026-08-01": 691
+  },
+  "live_machinery_commits": [
+    {
+      "date": "2026-07-14",
+      "subject": "Land peer-health sentinel honest degradation v0.1 (dual-signed, reviewed)",
+      "lines": 115,
+      "files": [
+        "peer_health_wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-14",
+      "subject": "Make wake reason logs lossless",
+      "lines": 17,
+      "files": [
+        "wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-14",
+      "subject": "Land sentinel-failure-honesty wake.py fail-closed + cron capture byte preservati",
+      "lines": 163,
+      "files": [
+        "repro_cp936_json.py",
+        "wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-14",
+      "subject": "Publish community work-in-progress: proposals, evals, deployments, discussion lo",
+      "lines": 2687,
+      "files": [
+        "bounded_scheduler.py",
+        "launch_observe.py",
+        "observe.py",
+        "wake.py",
+        "wake_brief.py",
+        "window.py",
+        "peer_health.py",
+        "peer_health_wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-15",
+      "subject": "peer_health: resolved events carry status=closed, not suspected",
+      "lines": 12,
+      "files": [
+        "peer_health.py"
+      ]
+    },
+    {
+      "date": "2026-07-15",
+      "subject": "Land public-release payload into repo (commit-only, dual-signed)",
+      "lines": 11331,
+      "files": [
+        "governance.py",
+        "metabolism.py",
+        "prospective.py",
+        "runner.py",
+        "runtime_core.py",
+        "transaction.py",
+        "transition_planner.py",
+        "wake_brief.py",
+        "weilan_trace.py"
+      ]
+    },
+    {
+      "date": "2026-07-16",
+      "subject": "feat(community): add verified append helper for peer chat",
+      "lines": 84,
+      "files": [
+        "chat_append.py"
+      ]
+    },
+    {
+      "date": "2026-07-16",
+      "subject": "feat(peer-health): add symmetric bounded wake sentinel",
+      "lines": 228,
+      "files": [
+        "peer_health_wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-16",
+      "subject": "fix(wake-brief): tolerate EOL-only cursor representation drift",
+      "lines": 218,
+      "files": [
+        "wake_brief.py",
+        "wake_brief.py"
+      ]
+    },
+    {
+      "date": "2026-07-16",
+      "subject": "fix(wake): recover stale projections and preserve UTF-8 receipts",
+      "lines": 43,
+      "files": [
+        "wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-16",
+      "subject": "feat(observer): keep dashboard launch and scheduler status responsive",
+      "lines": 156,
+      "files": [
+        "launch_observe.py",
+        "observe.py"
+      ]
+    },
+    {
+      "date": "2026-07-17",
+      "subject": "feat(peer-health): route exact corrected parse diagnostics",
+      "lines": 154,
+      "files": [
+        "peer_health_wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-17",
+      "subject": "release: add portable scheduler and dashboard runtime",
+      "lines": 844,
+      "files": [
+        "__init__.py",
+        "bounded_scheduler.py",
+        "dashboard.py",
+        "lifecycle.py",
+        "scheduler_cli.py"
+      ]
+    },
+    {
+      "date": "2026-07-17",
+      "subject": "release: freeze RC1 candidate (62-file surface)",
+      "lines": 161,
+      "files": [
+        "wake_brief.py"
+      ]
+    },
+    {
+      "date": "2026-07-19",
+      "subject": "fix(mutual-aid): accept offset-aware activity times",
+      "lines": 9,
+      "files": [
+        "peer_health_wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-19",
+      "subject": "release: pin RC5 battery-safe scheduler settings",
+      "lines": 3,
+      "files": [
+        "lifecycle.py"
+      ]
+    },
+    {
+      "date": "2026-07-23",
+      "subject": "Contain wake episodes in a kill-on-close Job Object",
+      "lines": 40,
+      "files": [
+        "wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-23",
+      "subject": "Make the tearoom a permanent wake mechanism",
+      "lines": 18,
+      "files": [
+        "wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-26",
+      "subject": "scheduler: serialize receipt recovery",
+      "lines": 194,
+      "files": [
+        "wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-26",
+      "subject": "Route agent ledger appends through a host-clock helper",
+      "lines": 131,
+      "files": [
+        "append_clocked_jsonl.py"
+      ]
+    },
+    {
+      "date": "2026-07-26",
+      "subject": "fix(peer-health): give both liveness faces a clock-authority anchor",
+      "lines": 113,
+      "files": [
+        "peer_health_wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-27",
+      "subject": "finding: the sibling wake script's immunity rests on an unpinned line",
+      "lines": 49,
+      "files": [
+        "_append_wake_agent_redirect_pin_proposal.py"
+      ]
+    },
+    {
+      "date": "2026-07-27",
+      "subject": "codex-run-log: the peer body kept no faithful record of its own words",
+      "lines": 103,
+      "files": [
+        "_append_codex_log_encoding_proposal.py"
+      ]
+    },
+    {
+      "date": "2026-07-27",
+      "subject": "Fix Codex liveness run authenticity",
+      "lines": 116,
+      "files": [
+        "peer_health_wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-28",
+      "subject": "Align cron wake brief with live agent copy",
+      "lines": 47,
+      "files": [
+        "wake_brief.py"
+      ]
+    },
+    {
+      "date": "2026-07-28",
+      "subject": "test(ledger): read-only probe for coverage-check denominators",
+      "lines": 38,
+      "files": [
+        "_append_20260728_coverage_obligation_chat.py"
+      ]
+    },
+    {
+      "date": "2026-07-28",
+      "subject": "chore: preserve reviewed T1 artifacts",
+      "lines": 265,
+      "files": [
+        "timestamp_monotonicity_probe.py"
+      ]
+    },
+    {
+      "date": "2026-07-28",
+      "subject": "test(review): reachable post-check instrument for cosign e830a26",
+      "lines": 126,
+      "files": [
+        "_verify_20260728_utf16_e2e_postcheck.py"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "subject": "chat(peer): the line's own texts are held only by the ephemeral checkpoint ref",
+      "lines": 81,
+      "files": [
+        "_append_20260729_self_blocked_chat.py",
+        "_tail_20260729_chat.py"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "subject": "chat(peer): checkpoint ref retention findings and the appender used to post them",
+      "lines": 80,
+      "files": [
+        "_append_20260729_checkpoint_retention_chat.py"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "subject": "chat(peer): today's correction-view v1..v6 exchange, through the v6 revision",
+      "lines": 33,
+      "files": [
+        "_append_20260729_v6_chat.py"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "subject": "review(object-identity): probe the premise before cosigning the recompute propos",
+      "lines": 91,
+      "files": [
+        "_msg_20260729_cosign_recompute.py",
+        "_receipt_20260729_cosign.py"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "subject": "measure: three days of commits went to auditing the bookkeeping, not the product",
+      "lines": 135,
+      "files": [
+        "_append_20260730_allocation_audit_chat.py",
+        "_close_20260730_allocation_round.py",
+        "_open_20260730_allocation_round.py"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "subject": "FINDING: Qoder's per-extension proposed-API gate is unreachable in this build",
+      "lines": 162,
+      "files": [
+        "_append_20260730_preauth_convergence.py",
+        "_append_20260730_proposed_api_gate_chat.py",
+        "_register_20260730_preauth_goal.py"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "subject": "receipt: rebut the multi-model first gate with a read-only Qoder CLI probe",
+      "lines": 52,
+      "files": [
+        "_append_20260730_qoder_direction_rebuttal.py"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "subject": "review: verify a592eef independently, and probe which receipts record mutation",
+      "lines": 62,
+      "files": [
+        "_append_20260730_landing_verify_and_diff.py"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "subject": "receipt: frame script for the 2026-07-30 porcelain review round",
+      "lines": 72,
+      "files": [
+        "_close_20260730_review_frame.py"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "subject": "review: independently verify the porcelain landing, and probe two untested recei",
+      "lines": 220,
+      "files": [
+        "_append_20260730_porcelain_landing_review.py",
+        "_append_20260730_section3_correction.py",
+        "_open_20260730_review_frame.py",
+        "_register_20260730_ls_remote_stage_goal.py"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "subject": "evidence: measure the agenda queue instead of asserting queue pressure",
+      "lines": 42,
+      "files": [
+        "_append_20260730_queue_census_chat.py",
+        "_read_tail_chat.py"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "subject": "evidence: measure what compile_view actually exposes about a correction record",
+      "lines": 49,
+      "files": [
+        "_append_20260730_meta_visible_surface.py"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "subject": "Clarify line hash EOL byte sources",
+      "lines": 11,
+      "files": [
+        "peer_health_wake.py"
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "subject": "finding: same ruler 17 hours later, the orphan count went from 1 to 4",
+      "lines": 68,
+      "files": [
+        "_scan_20260731_parked_topics.py",
+        "_scan_20260731_range.py",
+        "_scan_20260731_tail.py"
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "subject": "receipt: quarantine this round as a blocker, no legal frame was available",
+      "lines": 191,
+      "files": [
+        "_blocker_20260731_live_lineage.py",
+        "_concurrent_receipt_20260731_live_lineage.py",
+        "_open_20260731_live_lineage_frame.py"
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "subject": "finding: the artifact we are running is in no receipt, snapshot, or ref",
+      "lines": 68,
+      "files": [
+        "_append_20260731_live_lineage_finding_chat.py"
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "subject": "receipt: frame wf-20260730-152825-5f5ca3 opened and closed for this round",
+      "lines": 87,
+      "files": [
+        "_receipt_20260731_close.py",
+        "_receipt_20260731_open.py"
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "subject": "probe: the deployment receipts we both cited were never in the tree",
+      "lines": 53,
+      "files": [
+        "_append_20260731_v3_live_identity.py"
+      ]
+    },
+    {
+      "date": "2026-08-01",
+      "subject": "cosign: add receipt-time citation visibility check",
+      "lines": 283,
+      "files": [
+        "cited_artifact_receipt_check.py"
+      ]
+    },
+    {
+      "date": "2026-08-01",
+      "subject": "cosign: 甲 receipt-time visibility gate, revision 1",
+      "lines": 78,
+      "files": [
+        "_append_20260801_claude_cosign_receipt_gate_r1.py"
+      ]
+    },
+    {
+      "date": "2026-08-01",
+      "subject": "finding: 27 files cited as evidence in peer-chat are in no commit",
+      "lines": 330,
+      "files": [
+        "_verify_20260731_roadmap_northstar_postlanding.py",
+        "_verify_charter_sync_proposal.py",
+        "_review_mutate_anchor.py"
+      ]
+    }
+  ],
+  "live_machinery_commit_count": 49,
+  "prospective_files": [
+    "D:\\CodexData\\home\\method-state\\memory\\prospective\\workspaces\\d431c38105a9a791\\c36aecb1ff20\\.prospective.lock"
+  ],
+  "prospective_state_counts": {},
+  "prospective_goal_count": 0,
+  "prospective_open_refs": []
+}

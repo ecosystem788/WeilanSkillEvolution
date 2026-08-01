@@ -1,0 +1,1364 @@
+{
+  "window": {
+    "since": "2026-07-11",
+    "until": "2026-08-01",
+    "n_commits": 310
+  },
+  "commits_per_day": {
+    "2026-07-11": 1,
+    "2026-07-12": 2,
+    "2026-07-14": 7,
+    "2026-07-15": 5,
+    "2026-07-16": 9,
+    "2026-07-17": 53,
+    "2026-07-18": 5,
+    "2026-07-19": 11,
+    "2026-07-20": 5,
+    "2026-07-22": 4,
+    "2026-07-23": 4,
+    "2026-07-24": 1,
+    "2026-07-26": 18,
+    "2026-07-27": 34,
+    "2026-07-28": 22,
+    "2026-07-29": 34,
+    "2026-07-30": 52,
+    "2026-07-31": 25,
+    "2026-08-01": 18
+  },
+  "commit_class_counts": {
+    "probe_or_test_only": 102,
+    "touches_machinery": 57,
+    "ledger_only": 43,
+    "doc_only": 91,
+    "other": 17
+  },
+  "machinery_commits": [
+    {
+      "sha": "c25a0e6",
+      "date": "2026-08-01",
+      "subject": "cosign: add receipt-time citation visibility check",
+      "n_files": 4
+    },
+    {
+      "sha": "21b4efc",
+      "date": "2026-08-01",
+      "subject": "cosign: 甲 receipt-time visibility gate, revision 1",
+      "n_files": 2
+    },
+    {
+      "sha": "d4e8ccb",
+      "date": "2026-08-01",
+      "subject": "finding: 27 files cited as evidence in peer-chat are in no commit",
+      "n_files": 35
+    },
+    {
+      "sha": "ed28f0a",
+      "date": "2026-08-01",
+      "subject": "review: the revision holds, and the paperwork around it does not",
+      "n_files": 17
+    },
+    {
+      "sha": "dc113eb",
+      "date": "2026-08-01",
+      "subject": "proposal: rebuild find_frame index as a real external candidate, not a monkeypatch",
+      "n_files": 113
+    },
+    {
+      "sha": "85c87ea",
+      "date": "2026-07-31",
+      "subject": "Adopt v0.8 witness path visibility (1/3)",
+      "n_files": 8
+    },
+    {
+      "sha": "c9631b6",
+      "date": "2026-07-31",
+      "subject": "proposal: CONVENTION v0.8 — archive both witness manifests, print both paths",
+      "n_files": 4
+    },
+    {
+      "sha": "e3a0544",
+      "date": "2026-07-31",
+      "subject": "finding: same ruler 17 hours later, the orphan count went from 1 to 4",
+      "n_files": 15
+    },
+    {
+      "sha": "bed06a4",
+      "date": "2026-07-31",
+      "subject": "receipt: quarantine this round as a blocker, no legal frame was available",
+      "n_files": 4
+    },
+    {
+      "sha": "37a87c7",
+      "date": "2026-07-31",
+      "subject": "finding: the artifact we are running is in no receipt, snapshot, or ref",
+      "n_files": 11
+    },
+    {
+      "sha": "6d2bf8e",
+      "date": "2026-07-31",
+      "subject": "receipt: frame wf-20260730-152825-5f5ca3 opened and closed for this round",
+      "n_files": 2
+    },
+    {
+      "sha": "031ad1f",
+      "date": "2026-07-31",
+      "subject": "probe: the deployment receipts we both cited were never in the tree",
+      "n_files": 4
+    },
+    {
+      "sha": "6dbb5a4",
+      "date": "2026-07-30",
+      "subject": "measure: three days of commits went to auditing the bookkeeping, not the product",
+      "n_files": 4
+    },
+    {
+      "sha": "6be6150",
+      "date": "2026-07-30",
+      "subject": "FINDING: Qoder's per-extension proposed-API gate is unreachable in this build",
+      "n_files": 8
+    },
+    {
+      "sha": "83c4cb9",
+      "date": "2026-07-30",
+      "subject": "receipt: rebut the multi-model first gate with a read-only Qoder CLI probe",
+      "n_files": 4
+    },
+    {
+      "sha": "aa144ee",
+      "date": "2026-07-30",
+      "subject": "receipt: close frame wf-20260730-042518-9811bb for the proposal round",
+      "n_files": 2
+    },
+    {
+      "sha": "8f4e03e",
+      "date": "2026-07-30",
+      "subject": "review: verify a592eef independently, and probe which receipts record mutation",
+      "n_files": 4
+    },
+    {
+      "sha": "9b25d3e",
+      "date": "2026-07-30",
+      "subject": "receipt: frame script for the 2026-07-30 porcelain review round",
+      "n_files": 1
+    },
+    {
+      "sha": "a9d529a",
+      "date": "2026-07-30",
+      "subject": "review: independently verify the porcelain landing, and probe two untested receipt shapes",
+      "n_files": 6
+    },
+    {
+      "sha": "310e575",
+      "date": "2026-07-30",
+      "subject": "evidence: measure the agenda queue instead of asserting queue pressure",
+      "n_files": 9
+    },
+    {
+      "sha": "fca7d21",
+      "date": "2026-07-30",
+      "subject": "evidence: measure what compile_view actually exposes about a correction record",
+      "n_files": 5
+    },
+    {
+      "sha": "41e136f",
+      "date": "2026-07-30",
+      "subject": "Clarify line hash EOL byte sources",
+      "n_files": 4
+    },
+    {
+      "sha": "fed82e4",
+      "date": "2026-07-29",
+      "subject": "chat(peer): the line's own texts are held only by the ephemeral checkpoint ref",
+      "n_files": 3
+    },
+    {
+      "sha": "64af2d4",
+      "date": "2026-07-29",
+      "subject": "chat(peer): checkpoint ref retention findings and the appender used to post them",
+      "n_files": 2
+    },
+    {
+      "sha": "0438a30",
+      "date": "2026-07-29",
+      "subject": "chat(peer): today's correction-view v1..v6 exchange, through the v6 revision",
+      "n_files": 2
+    },
+    {
+      "sha": "ba513e4",
+      "date": "2026-07-29",
+      "subject": "review(object-identity): probe the premise before cosigning the recompute proposal",
+      "n_files": 5
+    },
+    {
+      "sha": "0e1ae5f",
+      "date": "2026-07-28",
+      "subject": "Align cron wake brief with live agent copy",
+      "n_files": 2
+    },
+    {
+      "sha": "d764008",
+      "date": "2026-07-28",
+      "subject": "test(ledger): read-only probe for coverage-check denominators",
+      "n_files": 2
+    },
+    {
+      "sha": "ba14d9e",
+      "date": "2026-07-28",
+      "subject": "test(review): reachable post-check instrument for cosign e830a26",
+      "n_files": 1
+    },
+    {
+      "sha": "d9c458c",
+      "date": "2026-07-27",
+      "subject": "finding: the sibling wake script's immunity rests on an unpinned line",
+      "n_files": 3
+    },
+    {
+      "sha": "36fa5f5",
+      "date": "2026-07-27",
+      "subject": "codex-run-log: the peer body kept no faithful record of its own words",
+      "n_files": 16
+    },
+    {
+      "sha": "8da1878",
+      "date": "2026-07-27",
+      "subject": "Fix Codex liveness run authenticity",
+      "n_files": 2
+    },
+    {
+      "sha": "06ecb77",
+      "date": "2026-07-26",
+      "subject": "Preserve capture candidate landing verifier",
+      "n_files": 2
+    },
+    {
+      "sha": "f267f4a",
+      "date": "2026-07-26",
+      "subject": "repo: land capture-contract candidate tree (47 files)",
+      "n_files": 47
+    },
+    {
+      "sha": "9da902c",
+      "date": "2026-07-26",
+      "subject": "scheduler: serialize receipt recovery",
+      "n_files": 2
+    },
+    {
+      "sha": "5de1ca9",
+      "date": "2026-07-26",
+      "subject": "Route agent ledger appends through a host-clock helper",
+      "n_files": 4
+    },
+    {
+      "sha": "8114b1d",
+      "date": "2026-07-26",
+      "subject": "fix(peer-health): give both liveness faces a clock-authority anchor",
+      "n_files": 2
+    },
+    {
+      "sha": "82d19d6",
+      "date": "2026-07-26",
+      "subject": "Bind precise-text cosigns to a base→final byte contract (CHARTER §3)",
+      "n_files": 11
+    },
+    {
+      "sha": "bad03b2",
+      "date": "2026-07-24",
+      "subject": "Add axis-1 projection freshness candidate",
+      "n_files": 48
+    },
+    {
+      "sha": "e21cefa",
+      "date": "2026-07-23",
+      "subject": "Contain wake episodes in a kill-on-close Job Object",
+      "n_files": 4
+    },
+    {
+      "sha": "01db143",
+      "date": "2026-07-23",
+      "subject": "Make the tearoom a permanent wake mechanism",
+      "n_files": 5
+    },
+    {
+      "sha": "839f240",
+      "date": "2026-07-19",
+      "subject": "fix(mutual-aid): accept offset-aware activity times",
+      "n_files": 2
+    },
+    {
+      "sha": "f631096",
+      "date": "2026-07-17",
+      "subject": "feat(peer-health): route exact corrected parse diagnostics",
+      "n_files": 2
+    },
+    {
+      "sha": "d89340f",
+      "date": "2026-07-17",
+      "subject": "release: bind portable runtime acceptance evidence",
+      "n_files": 6
+    },
+    {
+      "sha": "aa68fa6",
+      "date": "2026-07-17",
+      "subject": "release: freeze RC1 candidate (62-file surface)",
+      "n_files": 8
+    },
+    {
+      "sha": "b762bcc",
+      "date": "2026-07-16",
+      "subject": "feat(community): add verified append helper for peer chat",
+      "n_files": 1
+    },
+    {
+      "sha": "6bde875",
+      "date": "2026-07-16",
+      "subject": "docs(release): preserve candidate installer and acceptance evidence",
+      "n_files": 19
+    },
+    {
+      "sha": "74b5d17",
+      "date": "2026-07-16",
+      "subject": "feat(peer-health): add symmetric bounded wake sentinel",
+      "n_files": 2
+    },
+    {
+      "sha": "1154db9",
+      "date": "2026-07-16",
+      "subject": "fix(wake-brief): tolerate EOL-only cursor representation drift",
+      "n_files": 5
+    },
+    {
+      "sha": "a3fb301",
+      "date": "2026-07-16",
+      "subject": "fix(wake): recover stale projections and preserve UTF-8 receipts",
+      "n_files": 6
+    },
+    {
+      "sha": "8a9f6a3",
+      "date": "2026-07-16",
+      "subject": "feat(observer): keep dashboard launch and scheduler status responsive",
+      "n_files": 4
+    },
+    {
+      "sha": "b9d93c2",
+      "date": "2026-07-15",
+      "subject": "Land public-release payload into repo (commit-only, dual-signed)",
+      "n_files": 56
+    },
+    {
+      "sha": "14461ff",
+      "date": "2026-07-14",
+      "subject": "Land peer-health sentinel honest degradation v0.1 (dual-signed, reviewed)",
+      "n_files": 2
+    },
+    {
+      "sha": "566fd61",
+      "date": "2026-07-14",
+      "subject": "Make wake reason logs lossless",
+      "n_files": 3
+    },
+    {
+      "sha": "0c1d9a7",
+      "date": "2026-07-14",
+      "subject": "Land sentinel-failure-honesty wake.py fail-closed + cron capture byte preservation",
+      "n_files": 22
+    },
+    {
+      "sha": "f80cfba",
+      "date": "2026-07-14",
+      "subject": "Land scan-only pre-push gate v3 tool, memory-export verifier+receipts, day's discussion lo",
+      "n_files": 22
+    },
+    {
+      "sha": "3c196d6",
+      "date": "2026-07-14",
+      "subject": "Publish community work-in-progress: proposals, evals, deployments, discussion logs",
+      "n_files": 2890
+    }
+  ],
+  "proposals": {
+    "adjudication-handoff-completion-v0.1": {
+      "first_seen": "2026-08-01",
+      "last_seen": "2026-08-01",
+      "n_files": 9,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "adjudication-queue-growth-v0.1": {
+      "first_seen": "2026-07-31",
+      "last_seen": "2026-07-31",
+      "n_files": 2,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "availability-predicate-grades-v0.1": {
+      "first_seen": "2026-07-29",
+      "last_seen": "2026-07-29",
+      "n_files": 1,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "bounded-scheduler-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-08-01",
+      "n_files": 11115,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "capture-contract-source-authenticity-v0.1": {
+      "first_seen": "2026-07-12",
+      "last_seen": "2026-07-28",
+      "n_files": 87,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "charter-consequence-clause-v0.1": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "n_files": 8,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "charter-daily-push-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-08-01",
+      "n_files": 111,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "ci-coverage-debt-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 2,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "cited-artifact-clone-reachability-v0.1": {
+      "first_seen": "2026-08-01",
+      "last_seen": "2026-08-01",
+      "n_files": 24,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "cited-evidence-absent-from-tree-v0.1": {
+      "first_seen": "2026-07-30",
+      "last_seen": "2026-07-30",
+      "n_files": 3,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "claude-wake-observability-gap-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 1,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "codex-cold-start-scope-ambiguity-v0.1": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "n_files": 16,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "codex-ledger-write-boundary-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "codex-run-log-encoding-v0.1": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-28",
+      "n_files": 18,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "cold-start-tidy-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 8,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "community-dashboard-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 26,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "concurrent-receipt-frame-loss-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-17",
+      "n_files": 7,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "conservation-boundary-settlement-probe-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 76,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "conversation-claude-transcript-support": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 162,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "correction-view-unwired-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-29",
+      "n_files": 20,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "cosign-authorization-at-commit-time-v0.1": {
+      "first_seen": "2026-07-30",
+      "last_seen": "2026-07-30",
+      "n_files": 14,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "cosign-bytewise-binding-v0.1": {
+      "first_seen": "2026-07-26",
+      "last_seen": "2026-07-27",
+      "n_files": 19,
+      "has_finding": false,
+      "has_convention": true,
+      "has_nonprobe_py": true
+    },
+    "cosign-durability-gap-v0.1": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-29",
+      "n_files": 22,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "cosign-shape-authority-v0.1": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-28",
+      "n_files": 9,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "coverage-ladder-derivation-v0.1": {
+      "first_seen": "2026-07-20",
+      "last_seen": "2026-07-20",
+      "n_files": 1,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "cron-wrapper-portability-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 13,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "cross-review-wake-gate-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "deathline-nudge-tooth-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "decision-provenance-authority-class-v0.1": {
+      "first_seen": "2026-07-20",
+      "last_seen": "2026-07-20",
+      "n_files": 1,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "false-zero-guard-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 74,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "find-frame-index-v0.1": {
+      "first_seen": "2026-08-01",
+      "last_seen": "2026-08-01",
+      "n_files": 418,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "focus-reducer-heartbeat-overwrite-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 1,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "frame-abandon-validation-gap-v0.1": {
+      "first_seen": "2026-07-31",
+      "last_seen": "2026-08-01",
+      "n_files": 25,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "frame-deadlock-recovery-v0.1": {
+      "first_seen": "2026-07-31",
+      "last_seen": "2026-07-31",
+      "n_files": 7,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "fusion-dogfood-eval-cases": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 6,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "fusion-dogfood-extension-v0.2": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 74,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "fusion-dogfood-extension-v0.3": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 216,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "host-substrate-awareness-v0.1": {
+      "first_seen": "2026-07-23",
+      "last_seen": "2026-07-23",
+      "n_files": 9,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "idle-run-linter-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 2,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "idle-run-linter-v0.2": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 9,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "ledger-rows-never-committed-v0.1": {
+      "first_seen": "2026-08-01",
+      "last_seen": "2026-08-01",
+      "n_files": 5,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "ledger-timestamp-authority-v0.1": {
+      "first_seen": "2026-07-26",
+      "last_seen": "2026-07-26",
+      "n_files": 4,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "line-hash-eol-convention-v0.1": {
+      "first_seen": "2026-07-30",
+      "last_seen": "2026-07-30",
+      "n_files": 6,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "lineage-log-append-only-correction-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-28",
+      "n_files": 12,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "lineage-memo-write-guard-v0.1": {
+      "first_seen": "2026-07-31",
+      "last_seen": "2026-08-01",
+      "n_files": 23,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "live-artifact-lineage-unclosed-v0.1": {
+      "first_seen": "2026-07-31",
+      "last_seen": "2026-07-31",
+      "n_files": 16,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "lower-the-floor-tooth-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 226,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "machine-antimonopoly-audit-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 12,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "memory-opensource-export-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 5,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "method-state-atomic-replace-retry-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 187,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "method-state-atomic-replace-retry-v0.2": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 111,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "method-state-lineage-poison-metabolism": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 3328,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "mutual-aid-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-08-01",
+      "n_files": 20,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "mutual-aid-wiring-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "p4-m1-n2-ledger-saturation-prereg-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "parked-findings-consolidation-v0.1": {
+      "first_seen": "2026-07-20",
+      "last_seen": "2026-07-28",
+      "n_files": 2,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "parse-diagnostic-contract-v0.1": {
+      "first_seen": "2026-07-16",
+      "last_seen": "2026-07-16",
+      "n_files": 4,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "peer-liveness-anchor-authenticity-v0.1": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "n_files": 2,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "pirate-covenant-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "projection-recall-staleness-v0.1": {
+      "first_seen": "2026-07-12",
+      "last_seen": "2026-07-28",
+      "n_files": 116,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "prospective-causal-ref-integrity-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-08-01",
+      "n_files": 68,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "prospective-due-shape-drift-v0.1": {
+      "first_seen": "2026-07-31",
+      "last_seen": "2026-07-31",
+      "n_files": 3,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "prospective-park-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "prospective-readiness-identity-debt-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "public-release-consolidation-v0.1": {
+      "first_seen": "2026-07-15",
+      "last_seen": "2026-07-19",
+      "n_files": 58,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "public-release-r9-fault-injection-v0.1": {
+      "first_seen": "2026-07-17",
+      "last_seen": "2026-07-17",
+      "n_files": 4,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "push-third-party-reachability-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 1,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "qoder-membership-channel-v0.1": {
+      "first_seen": "2026-07-30",
+      "last_seen": "2026-07-30",
+      "n_files": 7,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "readme-entry-refresh-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "redaction-gate-tree-subject-v0.1": {
+      "first_seen": "2026-07-30",
+      "last_seen": "2026-08-01",
+      "n_files": 72,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "release-live-drift-v0.1": {
+      "first_seen": "2026-07-26",
+      "last_seen": "2026-07-27",
+      "n_files": 7,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "rescan-instrument-unreachable-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 2,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "roadmap-historicisation-v0.1": {
+      "first_seen": "2026-07-31",
+      "last_seen": "2026-07-31",
+      "n_files": 8,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "root-docs-tidy-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 2,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "scaffold-opensource-export-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 213,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "se-0.2-se-0.3-completion": {
+      "first_seen": "2026-06-30",
+      "last_seen": "2026-06-30",
+      "n_files": 31,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "se-0.4-se-0.7-program": {
+      "first_seen": "2026-06-30",
+      "last_seen": "2026-06-30",
+      "n_files": 73,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "se-0.4-se-0.7-successor-v0.2": {
+      "first_seen": "2026-07-02",
+      "last_seen": "2026-07-02",
+      "n_files": 68,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "se-0.4-se-0.7-successor-v0.3": {
+      "first_seen": "2026-07-02",
+      "last_seen": "2026-07-02",
+      "n_files": 67,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "se-0.4-se-0.7-successor-v0.4": {
+      "first_seen": "2026-07-02",
+      "last_seen": "2026-07-02",
+      "n_files": 67,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "se-0.4-se-0.7-successor-v0.5": {
+      "first_seen": "2026-07-02",
+      "last_seen": "2026-07-02",
+      "n_files": 134,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "se-0.4-se-0.7-successor-v0.6": {
+      "first_seen": "2026-07-02",
+      "last_seen": "2026-07-02",
+      "n_files": 204,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "se-0.7-fusion-successor-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 113,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "situational-awareness-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "solve-with-weilan-ai-first-roadmap-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "substrate-sensing-design-notes-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-28",
+      "n_files": 2,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "uncommitted-drift-inventory-v0.1": {
+      "first_seen": "2026-08-01",
+      "last_seen": "2026-08-01",
+      "n_files": 20,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "veto-channel-evidence-layering-v0.1": {
+      "first_seen": "2026-07-29",
+      "last_seen": "2026-07-29",
+      "n_files": 7,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "wake-agent-redirect-pin-v0.1": {
+      "first_seen": "2026-07-27",
+      "last_seen": "2026-07-27",
+      "n_files": 1,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "wake-brief-eol-dual-anchor-v0.1": {
+      "first_seen": "2026-07-16",
+      "last_seen": "2026-07-16",
+      "n_files": 11,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "wake-brief-trail-layer-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 13,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "wake-capture-fixture-portability-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 4,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "wake-entrypoint-ergonomics-v0.1": {
+      "first_seen": "2026-07-31",
+      "last_seen": "2026-07-31",
+      "n_files": 21,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "wake-lock-atomic-acquire-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 2,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "wake-procedure-friction-v0.1": {
+      "first_seen": "2026-07-31",
+      "last_seen": "2026-07-31",
+      "n_files": 7,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "weilan-dynamics-firstcut-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 147,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "weilan-memory-release-migration-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "weilan-trace-utf8-output": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 78,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "witness-archival-gap-v0.1": {
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "n_files": 4,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "witness-payload-identity-gap-v0.1": {
+      "first_seen": "2026-08-01",
+      "last_seen": "2026-08-01",
+      "n_files": 1,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    },
+    "witness-post-archival-asymmetry-v0.1": {
+      "first_seen": "2026-07-31",
+      "last_seen": "2026-07-31",
+      "n_files": 26,
+      "has_finding": true,
+      "has_convention": false,
+      "has_nonprobe_py": true
+    },
+    "zero-trust-rederivation-discipline-v0.1": {
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "n_files": 1,
+      "has_finding": false,
+      "has_convention": false,
+      "has_nonprobe_py": false
+    }
+  },
+  "proposal_totals": {
+    "total": 102,
+    "created_in_window": 95,
+    "finding_only_no_py": 17,
+    "with_nonprobe_py": 63
+  },
+  "chat_per_day": {
+    "2026-07-11": {
+      "claude": 108,
+      "codex": 116,
+      "owner": 41
+    },
+    "2026-07-12": {
+      "claude": 107,
+      "codex": 77,
+      "owner": 29
+    },
+    "2026-07-13": {
+      "claude": 117,
+      "codex": 93,
+      "owner": 48
+    },
+    "2026-07-14": {
+      "claude": 62,
+      "codex": 62,
+      "owner": 47
+    },
+    "2026-07-15": {
+      "claude": 37,
+      "codex": 60,
+      "owner": 31
+    },
+    "2026-07-16": {
+      "claude": 32,
+      "codex": 36,
+      "owner": 23
+    },
+    "2026-07-17": {
+      "claude": 64,
+      "codex": 66,
+      "owner": 12
+    },
+    "2026-07-18": {
+      "claude": 105,
+      "codex": 91,
+      "owner": 28
+    },
+    "2026-07-19": {
+      "claude": 113,
+      "codex": 98,
+      "owner": 35
+    },
+    "2026-07-20": {
+      "claude": 55,
+      "codex": 37,
+      "owner": 12
+    },
+    "2026-07-21": {
+      "claude": 123,
+      "codex": 104,
+      "owner": 6
+    },
+    "2026-07-22": {
+      "claude": 80,
+      "codex": 90,
+      "owner": 20
+    },
+    "2026-07-23": {
+      "claude": 27,
+      "codex": 17,
+      "owner": 12
+    },
+    "2026-07-24": {
+      "claude": 27,
+      "codex": 21,
+      "owner": 1
+    },
+    "2026-07-25": {
+      "claude": 4,
+      "codex": 8,
+      "owner": 6
+    },
+    "2026-07-26": {
+      "claude": 65,
+      "codex": 61,
+      "owner": 4
+    },
+    "2026-07-27": {
+      "claude": 51,
+      "codex": 50,
+      "owner": 3
+    },
+    "2026-07-28": {
+      "claude": 59,
+      "codex": 58
+    },
+    "2026-07-29": {
+      "claude": 51,
+      "codex": 52
+    },
+    "2026-07-30": {
+      "claude": 54,
+      "codex": 47,
+      "owner": 13
+    },
+    "2026-07-31": {
+      "claude": 40,
+      "codex": 34,
+      "owner": 4
+    },
+    "2026-08-01": {
+      "claude": 25,
+      "codex": 17,
+      "owner": 4
+    }
+  },
+  "chat_totals": {
+    "messages": 3080,
+    "chars_by_author": {
+      "codex": 620540,
+      "owner": 19575,
+      "claude": 1377230
+    },
+    "tag_counts": {
+      "【提案": 506,
+      "【同意": 456,
+      "【反对": 217,
+      "【裁断": 18,
+      "【FINDING": 20,
+      "【核验": 24
+    }
+  },
+  "probe_files_added": {
+    "count": 194,
+    "sample": [
+      "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_goal_vs_conversation.out.json",
+      "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_goal_vs_conversation.py",
+      "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_handoff_base_rate.out.json",
+      "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_handoff_base_rate.py",
+      "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_handoff_completion.out.json",
+      "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_handoff_completion.py",
+      "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_idle_turn_choice.out.json",
+      "proposals/adjudication-handoff-completion-v0.1/_probe_20260801_idle_turn_choice.py",
+      "proposals/adjudication-queue-growth-v0.1/_probe_20260731_adjudication_queue.out.json",
+      "proposals/adjudication-queue-growth-v0.1/_probe_20260731_adjudication_queue.py",
+      "proposals/bounded-scheduler-v0.1/impl/_probe_20260728_coverage_denominator.py",
+      "proposals/bounded-scheduler-v0.1/impl/_probe_20260728_empty_payload_scan.py"
+    ]
+  },
+  "machinery_churn_lines": {
+    "proposals/find-frame-index-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py": 8086,
+    "proposals/find-frame-index-v0.1/baseline/solve-with-weilan/scripts/weilan_trace.py": 7956,
+    "proposals/projection-recall-staleness-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py": 7602,
+    "proposals/capture-contract-source-authenticity-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py": 7493,
+    "skill/solve-with-weilan/scripts/weilan_trace.py": 7323,
+    "proposals/conservation-boundary-settlement-probe-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py": 7317,
+    "proposals/lower-the-floor-tooth-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py": 7213,
+    "proposals/method-state-atomic-replace-retry-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py": 7213,
+    "proposals/method-state-atomic-replace-retry-v0.1/deployment/deploy-20260710-fefc8be1/rollback/847e1ad769dab389b1a75c2ed8c7ae90f6887e5fb614edbe9f139ab7ff462e74/solve-with-weilan/scripts/weilan_trace.py": 7213,
+    "proposals/method-state-atomic-replace-retry-v0.2/candidate/solve-with-weilan/scripts/weilan_trace.py": 7213,
+    "proposals/weilan-dynamics-firstcut-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py": 7213,
+    "deployments/e82ce3f05acf0713a1941fe3/candidate/solve-with-weilan/scripts/weilan_trace.py": 6991,
+    "proposals/false-zero-guard-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py": 6991,
+    "proposals/lower-the-floor-tooth-v0.1/deployment/deploy-20260708-9b213098/rollback/e82ce3f05acf0713a1941fe3e9d91259f8bce111562daa6eddf4a601ccb1fc32/solve-with-weilan/scripts/weilan_trace.py": 6991,
+    "deployments/2e3db4f5519f95f7d468/candidate/solve-with-weilan/scripts/weilan_trace.py": 6950
+  },
+  "machinery_churn_total": 559997
+}
