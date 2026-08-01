@@ -1,0 +1,258 @@
+{
+  "probe": "does a real clean clone reproduce this line's declared byte addresses",
+  "authority": "read_only_measurement_only",
+  "corrects": "peer-chat 2026-08-01T14:40:52+09:00 -- that message's EOL census and LF hashes were computed over every file under artifacts/<hash>/, but tree_manifest skips __pycache__/.pytest_cache/*.pyc, so ~40 of the counted files never enter the hash",
+  "manifest_exclusions": "__pycache__, .pytest_cache, *.pyc (tools/evolution_core.py:60)",
+  "host_git_config": {
+    "core.autocrlf": "true",
+    "core.longpaths": "true",
+    "core.symlinks": "false"
+  },
+  "arm_c_manifest_census": {
+    "trees": {
+      "baseline": {
+        "manifest_file_count": 49,
+        "raw_file_count": 49,
+        "extension_histogram": {
+          ".yaml": 1,
+          ".md": 11,
+          ".json": 1,
+          ".py": 35,
+          ".bak": 1
+        },
+        "eol_census_over_manifest": {
+          "crlf_files": [],
+          "crlf_count": 0,
+          "lf_only_count": 49,
+          "no_newline_count": 0
+        },
+        "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "equals_declared": true
+      },
+      "candidate": {
+        "manifest_file_count": 50,
+        "raw_file_count": 50,
+        "extension_histogram": {
+          ".yaml": 1,
+          ".md": 11,
+          ".json": 1,
+          ".py": 36,
+          ".bak": 1
+        },
+        "eol_census_over_manifest": {
+          "crlf_files": [],
+          "crlf_count": 0,
+          "lf_only_count": 50,
+          "no_newline_count": 0
+        },
+        "tree_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+        "equals_declared": true
+      }
+    },
+    "materialisation_agreement": {
+      "baseline": {
+        "baseline_dir": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "artifacts_dir": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "install_claude": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "install_codex": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "all_equal_declared": true
+      },
+      "candidate": {
+        "candidate_dir": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+        "artifacts_dir": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+        "all_equal_declared": true
+      }
+    }
+  },
+  "arm_a_tracked_evidence": {
+    "source_head": "3e8f1b908eb0842c836c9b6b20ac95a518f0215b",
+    "clone_url": "file:///D:/WeilanSkillEvolution",
+    "clone_rc": 0,
+    "clone_stderr_tail": "400)\rUpdating files:  68% (2992/4400)\rUpdating files:  69% (3036/4400)\rUpdating files:  70% (3080/4400)\rUpdating files:  71% (3124/4400)\rUpdating files:  72% (3168/4400)\rUpdating files:  73% (3212/4400)\rUpdating files:  74% (3256/4400)\rUpdating files:  75% (3300/4400)\rUpdating files:  76% (3344/4400)\rUpdating files:  77% (3388/4400)\rUpdating files:  78% (3432/4400)\rUpdating files:  78% (3451/4400)\rUpdating files:  79% (3476/4400)\rUpdating files:  80% (3520/4400)\rUpdating files:  81% (3564/4400)\rUpdating files:  82% (3608/4400)\rUpdating files:  83% (3652/4400)\rUpdating files:  84% (3696/4400)\rUpdating files:  85% (3740/4400)\rUpdating files:  86% (3784/4400)\rUpdating files:  87% (3828/4400)\rUpdating files:  88% (3872/4400)\rUpdating files:  89% (3916/4400)\rUpdating files:  89% (3937/4400)\rUpdating files:  90% (3960/4400)\rUpdating files:  91% (4004/4400)\rUpdating files:  92% (4048/4400)\rUpdating files:  93% (4092/4400)\rUpdating files:  94% (4136/4400)\rUpdating files:  95% (4180/4400)\rUpdating files:  96% (4224/4400)\rUpdating files:  97% (4268/4400)\rUpdating files:  98% (4312/4400)\rUpdating files:  99% (4356/4400)\rUpdating files: 100% (4400/4400)\rUpdating files: 100% (4400/4400), done.\n",
+    "recorded_digest_recompute": {
+      "_probe_candidate_tree_diff.out.json": {
+        "recorded_sha256": "3e94480f51ca938cdd8965b79498790a5a2220ec71d62cc216798520e9458724",
+        "tracked_in_source": false,
+        "present_in_clone": false,
+        "worktree_sha256": "3e94480f51ca938cdd8965b79498790a5a2220ec71d62cc216798520e9458724",
+        "worktree_matches_record": true,
+        "worktree_has_crlf": true
+      },
+      "_probe_contract_discrimination.out.json": {
+        "recorded_sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8",
+        "tracked_in_source": false,
+        "present_in_clone": false,
+        "worktree_sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8",
+        "worktree_matches_record": true,
+        "worktree_has_crlf": true
+      },
+      "_review2_20260801_claude_independent_suite.out.json": {
+        "recorded_sha256": "ff175efd561ec068591aeb78f31402ce67d7e5e8408e6e2e6ece920e3047000e",
+        "tracked_in_source": true,
+        "present_in_clone": true,
+        "worktree_sha256": "ff175efd561ec068591aeb78f31402ce67d7e5e8408e6e2e6ece920e3047000e",
+        "worktree_matches_record": true,
+        "worktree_has_crlf": true,
+        "clone_sha256": "68b5dede033d2740278aa67ace526982bf0285847d59be12512f0ff02e0430b7",
+        "clone_has_crlf": false,
+        "recomputes_in_clone": false
+      },
+      "_review2_20260801_claude_sham_candidate.out.json": {
+        "recorded_sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e",
+        "tracked_in_source": true,
+        "present_in_clone": true,
+        "worktree_sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e",
+        "worktree_matches_record": true,
+        "worktree_has_crlf": true,
+        "clone_sha256": "cecda7e1c618e0d38c8526232f2df1d951cc4938ea8bfdc45669b5c3836e9e61",
+        "clone_has_crlf": false,
+        "recomputes_in_clone": false
+      },
+      "_shadow_20260801_claude_cli_equivalence_revised.out.json": {
+        "recorded_sha256": "68ca2c8c4b41ce65868acc9bb6c67797410189c7140e41ef4c4b8a8bd126b6fe",
+        "tracked_in_source": true,
+        "present_in_clone": true,
+        "worktree_sha256": "68ca2c8c4b41ce65868acc9bb6c67797410189c7140e41ef4c4b8a8bd126b6fe",
+        "worktree_matches_record": true,
+        "worktree_has_crlf": true,
+        "clone_sha256": "0a1e5420eb54368bb690e2c0dce6200e57d0fa8b76c10ad1fca88ac698baf8b2",
+        "clone_has_crlf": false,
+        "recomputes_in_clone": false
+      },
+      "_shadow_20260801_claude_revised_latency.out.json": {
+        "recorded_sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16",
+        "tracked_in_source": true,
+        "present_in_clone": true,
+        "worktree_sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16",
+        "worktree_matches_record": true,
+        "worktree_has_crlf": true,
+        "clone_sha256": "2c17207ce3a74d97fb0aa4b385c18f32416919ad804a24efaef4da2f3f155417",
+        "clone_has_crlf": false,
+        "recomputes_in_clone": false
+      }
+    },
+    "clone_head": "3e8f1b908eb0842c836c9b6b20ac95a518f0215b",
+    "clone_index_entry_count": 4400,
+    "summary": {
+      "recorded_evidence_count": 6,
+      "matches_in_worktree": 6,
+      "present_in_clone": 4,
+      "recomputes_in_clone": 0
+    }
+  },
+  "arm_b_frozen_trees": {
+    "gitattributes_sha256": "5273681f17ec12a2afb2bb304ae2c3e14ef35474194685068a46acc97668c6fe",
+    "pre_commit_scratch_worktree": {
+      "baseline": {
+        "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "equals_declared": true
+      },
+      "candidate": {
+        "tree_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+        "equals_declared": true
+      }
+    },
+    "steps": [
+      {
+        "argv": [
+          "git",
+          "init",
+          "-q"
+        ],
+        "rc": 0,
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.email",
+          "probe@local"
+        ],
+        "rc": 0,
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "config",
+          "user.name",
+          "probe"
+        ],
+        "rc": 0,
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "add",
+          "-A"
+        ],
+        "rc": 0,
+        "stderr": "gitattributes', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'baseline/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'candidate/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak', LF will be replaced by CRLF the next time Git touches it\n"
+      },
+      {
+        "argv": [
+          "git",
+          "commit",
+          "-q",
+          "-m",
+          "frozen trees for round trip observation"
+        ],
+        "rc": 0,
+        "stderr": ""
+      }
+    ],
+    "post_clone": {
+      "baseline": {
+        "observed_tree_hash": "33c8316505a04cd1081604996bf84c858b3e4f88b3e705d1fcee3d77e556c123",
+        "equals_declared_address": false,
+        "equals_1440_lf_prediction": false,
+        "declared_address": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "prediction_made_at_1440": "7744d85887d8d8f3061304ef7aeef4bfd60be367dc463a7061d6621c22630940",
+        "eol_census_over_manifest": {
+          "crlf_files": [
+            "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak"
+          ],
+          "crlf_count": 1,
+          "lf_only_count": 48,
+          "no_newline_count": 0
+        },
+        "manifest_file_count": 49
+      },
+      "candidate": {
+        "observed_tree_hash": "c0566250c40fcc00a2a69e2f4244ebb469770f843e1bed2f9ff1c596fafc3b80",
+        "equals_declared_address": false,
+        "equals_1440_lf_prediction": false,
+        "declared_address": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+        "prediction_made_at_1440": "efca4a1f4663ef499c1d422171bd590aec0b9253df64294b7289f240b4fb45fb",
+        "eol_census_over_manifest": {
+          "crlf_files": [
+            "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak"
+          ],
+          "crlf_count": 1,
+          "lf_only_count": 49,
+          "no_newline_count": 0
+        },
+        "manifest_file_count": 50
+      }
+    },
+    "effective_eol_attr_histogram": {
+      "lf": 48,
+      "unspecified": 1
+    },
+    "paths_without_explicit_eol_lf": [
+      "baseline/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak"
+    ],
+    "scratch_effective_autocrlf": "true",
+    "clone_rc": 0,
+    "clone_stderr_tail": ""
+  },
+  "boundaries": [
+    "Arm B places the trees at the scratch repository root rather than under proposals/canonical-workspace-cache-v0.1/. The effective attributes git applied are recorded above from check-attr in that environment, not assumed from the file text.",
+    "Arm A observes one clone on this host with this host's global git config. It does not establish what another host computes.",
+    "A digest that recomputes after a clone shows the bytes are reachable and recomputable. It does not show they are the bytes the measurement actually ran against; nothing binds an archived .out.json to the process that produced it.",
+    "Arm A is --depth 1. History reachability is untested and not claimed.",
+    "artifacts/ is gitignored and baseline/ and candidate/ are untracked as of this run, so arm B measures what a round trip would do to these bytes, not a round trip that has happened."
+  ]
+}
