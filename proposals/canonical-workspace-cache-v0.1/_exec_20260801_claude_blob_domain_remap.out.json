@@ -1,0 +1,197 @@
+{
+  "blob_stable_across_commits_count": 6,
+  "boundary": "blob recomputability is not evidence that the measuring process consumed these bytes",
+  "commits_compared": [
+    "e516aca",
+    "HEAD"
+  ],
+  "head_oid": "2cb9c1a6931a70df6362b9862af508489b9ceb0c",
+  "occurrence_count": 11,
+  "occurrences": [
+    {
+      "blob_sha256": "90be313a6bff5e3032dc2620e166bba998d1e7061d8938e93784b87955f57d37",
+      "check_index": 0,
+      "evidence_index": 0,
+      "path": "proposals/canonical-workspace-cache-v0.1/_probe_candidate_tree_diff.out.json",
+      "recorded_equals_blob": false,
+      "recorded_equals_worktree": true,
+      "recorded_sha256": "3e94480f51ca938cdd8965b79498790a5a2220ec71d62cc216798520e9458724",
+      "worktree_sha256": "3e94480f51ca938cdd8965b79498790a5a2220ec71d62cc216798520e9458724"
+    },
+    {
+      "blob_sha256": "5d4f4624781fa8ff4fe9357b10ebe320e90e59d5ee350b216126947d3740ef45",
+      "check_index": 1,
+      "evidence_index": 0,
+      "path": "proposals/canonical-workspace-cache-v0.1/_probe_contract_discrimination.out.json",
+      "recorded_equals_blob": false,
+      "recorded_equals_worktree": true,
+      "recorded_sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8",
+      "worktree_sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8"
+    },
+    {
+      "blob_sha256": "cecda7e1c618e0d38c8526232f2df1d951cc4938ea8bfdc45669b5c3836e9e61",
+      "check_index": 1,
+      "evidence_index": 1,
+      "path": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_sham_candidate.out.json",
+      "recorded_equals_blob": false,
+      "recorded_equals_worktree": true,
+      "recorded_sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e",
+      "worktree_sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e"
+    },
+    {
+      "blob_sha256": "5d4f4624781fa8ff4fe9357b10ebe320e90e59d5ee350b216126947d3740ef45",
+      "check_index": 2,
+      "evidence_index": 0,
+      "path": "proposals/canonical-workspace-cache-v0.1/_probe_contract_discrimination.out.json",
+      "recorded_equals_blob": false,
+      "recorded_equals_worktree": true,
+      "recorded_sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8",
+      "worktree_sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8"
+    },
+    {
+      "blob_sha256": "cecda7e1c618e0d38c8526232f2df1d951cc4938ea8bfdc45669b5c3836e9e61",
+      "check_index": 2,
+      "evidence_index": 1,
+      "path": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_sham_candidate.out.json",
+      "recorded_equals_blob": false,
+      "recorded_equals_worktree": true,
+      "recorded_sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e",
+      "worktree_sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e"
+    },
+    {
+      "blob_sha256": "5d4f4624781fa8ff4fe9357b10ebe320e90e59d5ee350b216126947d3740ef45",
+      "check_index": 3,
+      "evidence_index": 0,
+      "path": "proposals/canonical-workspace-cache-v0.1/_probe_contract_discrimination.out.json",
+      "recorded_equals_blob": false,
+      "recorded_equals_worktree": true,
+      "recorded_sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8",
+      "worktree_sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8"
+    },
+    {
+      "blob_sha256": "cecda7e1c618e0d38c8526232f2df1d951cc4938ea8bfdc45669b5c3836e9e61",
+      "check_index": 3,
+      "evidence_index": 1,
+      "path": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_sham_candidate.out.json",
+      "recorded_equals_blob": false,
+      "recorded_equals_worktree": true,
+      "recorded_sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e",
+      "worktree_sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e"
+    },
+    {
+      "blob_sha256": "0a1e5420eb54368bb690e2c0dce6200e57d0fa8b76c10ad1fca88ac698baf8b2",
+      "check_index": 4,
+      "evidence_index": 0,
+      "path": "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_cli_equivalence_revised.out.json",
+      "recorded_equals_blob": false,
+      "recorded_equals_worktree": true,
+      "recorded_sha256": "68ca2c8c4b41ce65868acc9bb6c67797410189c7140e41ef4c4b8a8bd126b6fe",
+      "worktree_sha256": "68ca2c8c4b41ce65868acc9bb6c67797410189c7140e41ef4c4b8a8bd126b6fe"
+    },
+    {
+      "blob_sha256": "68b5dede033d2740278aa67ace526982bf0285847d59be12512f0ff02e0430b7",
+      "check_index": 5,
+      "evidence_index": 0,
+      "path": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_independent_suite.out.json",
+      "recorded_equals_blob": false,
+      "recorded_equals_worktree": true,
+      "recorded_sha256": "ff175efd561ec068591aeb78f31402ce67d7e5e8408e6e2e6ece920e3047000e",
+      "worktree_sha256": "ff175efd561ec068591aeb78f31402ce67d7e5e8408e6e2e6ece920e3047000e"
+    },
+    {
+      "blob_sha256": "2c17207ce3a74d97fb0aa4b385c18f32416919ad804a24efaef4da2f3f155417",
+      "check_index": 6,
+      "evidence_index": 0,
+      "path": "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_revised_latency.out.json",
+      "recorded_equals_blob": false,
+      "recorded_equals_worktree": true,
+      "recorded_sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16",
+      "worktree_sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16"
+    },
+    {
+      "blob_sha256": "2c17207ce3a74d97fb0aa4b385c18f32416919ad804a24efaef4da2f3f155417",
+      "check_index": 7,
+      "evidence_index": 0,
+      "path": "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_revised_latency.out.json",
+      "recorded_equals_blob": false,
+      "recorded_equals_worktree": true,
+      "recorded_sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16",
+      "worktree_sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16"
+    }
+  ],
+  "per_file": [
+    {
+      "blob_sha256": "90be313a6bff5e3032dc2620e166bba998d1e7061d8938e93784b87955f57d37",
+      "blob_sha256_by_commit": {
+        "HEAD": "90be313a6bff5e3032dc2620e166bba998d1e7061d8938e93784b87955f57d37",
+        "e516aca": "90be313a6bff5e3032dc2620e166bba998d1e7061d8938e93784b87955f57d37"
+      },
+      "blob_stable_across_commits": true,
+      "path": "proposals/canonical-workspace-cache-v0.1/_probe_candidate_tree_diff.out.json",
+      "worktree_sha256": "3e94480f51ca938cdd8965b79498790a5a2220ec71d62cc216798520e9458724"
+    },
+    {
+      "blob_sha256": "5d4f4624781fa8ff4fe9357b10ebe320e90e59d5ee350b216126947d3740ef45",
+      "blob_sha256_by_commit": {
+        "HEAD": "5d4f4624781fa8ff4fe9357b10ebe320e90e59d5ee350b216126947d3740ef45",
+        "e516aca": "5d4f4624781fa8ff4fe9357b10ebe320e90e59d5ee350b216126947d3740ef45"
+      },
+      "blob_stable_across_commits": true,
+      "path": "proposals/canonical-workspace-cache-v0.1/_probe_contract_discrimination.out.json",
+      "worktree_sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8"
+    },
+    {
+      "blob_sha256": "68b5dede033d2740278aa67ace526982bf0285847d59be12512f0ff02e0430b7",
+      "blob_sha256_by_commit": {
+        "HEAD": "68b5dede033d2740278aa67ace526982bf0285847d59be12512f0ff02e0430b7",
+        "e516aca": "68b5dede033d2740278aa67ace526982bf0285847d59be12512f0ff02e0430b7"
+      },
+      "blob_stable_across_commits": true,
+      "path": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_independent_suite.out.json",
+      "worktree_sha256": "ff175efd561ec068591aeb78f31402ce67d7e5e8408e6e2e6ece920e3047000e"
+    },
+    {
+      "blob_sha256": "cecda7e1c618e0d38c8526232f2df1d951cc4938ea8bfdc45669b5c3836e9e61",
+      "blob_sha256_by_commit": {
+        "HEAD": "cecda7e1c618e0d38c8526232f2df1d951cc4938ea8bfdc45669b5c3836e9e61",
+        "e516aca": "cecda7e1c618e0d38c8526232f2df1d951cc4938ea8bfdc45669b5c3836e9e61"
+      },
+      "blob_stable_across_commits": true,
+      "path": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_sham_candidate.out.json",
+      "worktree_sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e"
+    },
+    {
+      "blob_sha256": "0a1e5420eb54368bb690e2c0dce6200e57d0fa8b76c10ad1fca88ac698baf8b2",
+      "blob_sha256_by_commit": {
+        "HEAD": "0a1e5420eb54368bb690e2c0dce6200e57d0fa8b76c10ad1fca88ac698baf8b2",
+        "e516aca": "0a1e5420eb54368bb690e2c0dce6200e57d0fa8b76c10ad1fca88ac698baf8b2"
+      },
+      "blob_stable_across_commits": true,
+      "path": "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_cli_equivalence_revised.out.json",
+      "worktree_sha256": "68ca2c8c4b41ce65868acc9bb6c67797410189c7140e41ef4c4b8a8bd126b6fe"
+    },
+    {
+      "blob_sha256": "2c17207ce3a74d97fb0aa4b385c18f32416919ad804a24efaef4da2f3f155417",
+      "blob_sha256_by_commit": {
+        "HEAD": "2c17207ce3a74d97fb0aa4b385c18f32416919ad804a24efaef4da2f3f155417",
+        "e516aca": "2c17207ce3a74d97fb0aa4b385c18f32416919ad804a24efaef4da2f3f155417"
+      },
+      "blob_stable_across_commits": true,
+      "path": "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_revised_latency.out.json",
+      "worktree_sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16"
+    }
+  ],
+  "probe": "_exec_20260801_claude_blob_domain_remap",
+  "proposed_mapping": {
+    "proposals/canonical-workspace-cache-v0.1/_probe_candidate_tree_diff.out.json": "90be313a6bff5e3032dc2620e166bba998d1e7061d8938e93784b87955f57d37",
+    "proposals/canonical-workspace-cache-v0.1/_probe_contract_discrimination.out.json": "5d4f4624781fa8ff4fe9357b10ebe320e90e59d5ee350b216126947d3740ef45",
+    "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_independent_suite.out.json": "68b5dede033d2740278aa67ace526982bf0285847d59be12512f0ff02e0430b7",
+    "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_sham_candidate.out.json": "cecda7e1c618e0d38c8526232f2df1d951cc4938ea8bfdc45669b5c3836e9e61",
+    "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_cli_equivalence_revised.out.json": "0a1e5420eb54368bb690e2c0dce6200e57d0fa8b76c10ad1fca88ac698baf8b2",
+    "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_revised_latency.out.json": "2c17207ce3a74d97fb0aa4b385c18f32416919ad804a24efaef4da2f3f155417"
+  },
+  "recorded_equals_blob_count": 0,
+  "recorded_equals_worktree_count": 11,
+  "repo": "D:\\WeilanSkillEvolution",
+  "unique_file_count": 6
+}

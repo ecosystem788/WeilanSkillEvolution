@@ -34,7 +34,7 @@
       "evidence": [
         {
           "ref": "proposals/canonical-workspace-cache-v0.1/_probe_candidate_tree_diff.out.json",
-          "sha256": "3e94480f51ca938cdd8965b79498790a5a2220ec71d62cc216798520e9458724"
+          "sha256": "90be313a6bff5e3032dc2620e166bba998d1e7061d8938e93784b87955f57d37"
         }
       ],
       "observed": {
@@ -52,11 +52,11 @@
       "evidence": [
         {
           "ref": "proposals/canonical-workspace-cache-v0.1/_probe_contract_discrimination.out.json",
-          "sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8"
+          "sha256": "5d4f4624781fa8ff4fe9357b10ebe320e90e59d5ee350b216126947d3740ef45"
         },
         {
           "ref": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_sham_candidate.out.json",
-          "sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e"
+          "sha256": "cecda7e1c618e0d38c8526232f2df1d951cc4938ea8bfdc45669b5c3836e9e61"
         }
       ],
       "observed": {
@@ -82,11 +82,11 @@
       "evidence": [
         {
           "ref": "proposals/canonical-workspace-cache-v0.1/_probe_contract_discrimination.out.json",
-          "sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8"
+          "sha256": "5d4f4624781fa8ff4fe9357b10ebe320e90e59d5ee350b216126947d3740ef45"
         },
         {
           "ref": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_sham_candidate.out.json",
-          "sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e"
+          "sha256": "cecda7e1c618e0d38c8526232f2df1d951cc4938ea8bfdc45669b5c3836e9e61"
         }
       ],
       "observed": {
@@ -102,11 +102,11 @@
       "evidence": [
         {
           "ref": "proposals/canonical-workspace-cache-v0.1/_probe_contract_discrimination.out.json",
-          "sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8"
+          "sha256": "5d4f4624781fa8ff4fe9357b10ebe320e90e59d5ee350b216126947d3740ef45"
         },
         {
           "ref": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_sham_candidate.out.json",
-          "sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e"
+          "sha256": "cecda7e1c618e0d38c8526232f2df1d951cc4938ea8bfdc45669b5c3836e9e61"
         }
       ],
       "observed": {
@@ -122,7 +122,7 @@
       "evidence": [
         {
           "ref": "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_cli_equivalence_revised.out.json",
-          "sha256": "68ca2c8c4b41ce65868acc9bb6c67797410189c7140e41ef4c4b8a8bd126b6fe"
+          "sha256": "0a1e5420eb54368bb690e2c0dce6200e57d0fa8b76c10ad1fca88ac698baf8b2"
         }
       ],
       "observed": {
@@ -142,7 +142,7 @@
       "evidence": [
         {
           "ref": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_independent_suite.out.json",
-          "sha256": "ff175efd561ec068591aeb78f31402ce67d7e5e8408e6e2e6ece920e3047000e"
+          "sha256": "68b5dede033d2740278aa67ace526982bf0285847d59be12512f0ff02e0430b7"
         }
       ],
       "observed": {
@@ -160,7 +160,7 @@
       "evidence": [
         {
           "ref": "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_revised_latency.out.json",
-          "sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16"
+          "sha256": "2c17207ce3a74d97fb0aa4b385c18f32416919ad804a24efaef4da2f3f155417"
         }
       ],
       "observed": {
@@ -187,7 +187,7 @@
       "evidence": [
         {
           "ref": "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_revised_latency.out.json",
-          "sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16"
+          "sha256": "2c17207ce3a74d97fb0aa4b385c18f32416919ad804a24efaef4da2f3f155417"
         }
       ],
       "observed": {
@@ -209,5 +209,5 @@
   "adoption_eligible": true,
   "boundary": "Byte identity on one ledger, a passing contract test, a rejected cache-free sham, one full-suite comparison and three timed opens per arm are what was measured. None of it proves semantic equivalence over all inputs, and process-local resolution stability is not filesystem stability.",
   "authority": "targeted_shadow_evidence_only_never_adopts_or_deploys",
-  "result_hash": "13a694cf8ac6e0dbce2e59051d5d2826e4d3601e1ed84389d1acc5cc87c9fe11"
+  "result_hash": "70ea86b2c2b042c3c4c8d76f103a861d014ba7e834e3ea7d99ada9bf125f7b9c"
 }
