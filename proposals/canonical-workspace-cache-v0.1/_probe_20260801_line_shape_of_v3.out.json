@@ -1,0 +1,33 @@
+{
+  "attribution_ambiguous": false,
+  "base": "ABSENT",
+  "checker_path": "proposals/cosign-bytewise-binding-v0.1/verify_binding.py",
+  "checker_sha256": "2b97b0ff09700be1da8c1515ecb850572c281022728d59adb0b300e9511e7eae",
+  "expected_added": 1,
+  "expected_deleted": 0,
+  "final_bytes_len": 12,
+  "final_has_bom": false,
+  "final_has_cr": false,
+  "final_repr": "'*.bak -text\\n'",
+  "final_sha256": "b3b1fb0f9049ff042f75c37f223baa403596480c67f29d549619cd54bd58f450",
+  "line_delta": {
+    "added_lines": 1,
+    "attribution_ambiguous": false,
+    "base_line_count": 0,
+    "deleted_lines": 0,
+    "final_line_count": 1,
+    "lcs_length": 0,
+    "possibly_added_lines": 1,
+    "possibly_deleted_lines": 0,
+    "sections_touched": [
+      "<无标题前言>"
+    ]
+  },
+  "possibly_added_lines": 1,
+  "possibly_deleted_lines": 0,
+  "probe": "line_shape_of_v3",
+  "python": "3.11.9",
+  "read_only": true,
+  "target_exists": false,
+  "target_path": "proposals/canonical-workspace-cache-v0.1/.gitattributes"
+}
