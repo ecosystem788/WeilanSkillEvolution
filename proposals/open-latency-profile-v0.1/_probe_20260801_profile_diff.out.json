@@ -1,0 +1,149 @@
+﻿{
+  "profiled_total_tt": {
+    "baseline": 40.166,
+    "candidate": 20.799
+  },
+  "note": "cProfile inflates wall clock; unprofiled warm means were baseline 34.650s / candidate 15.022s",
+  "functions": {
+    "weilan_trace.py:4551(attach_trace_advisory_result)": {
+      "baseline": {
+        "ncalls": 1,
+        "self_s": 0.006,
+        "cum_s": 31.512
+      },
+      "candidate": {
+        "ncalls": 1,
+        "self_s": 0.006,
+        "cum_s": 20.078
+      },
+      "self_delta_s": 0.0,
+      "ncalls_delta": 0
+    },
+    "weilan_trace.py:4458(collapse_trace_registry)": {
+      "baseline": {
+        "ncalls": 1,
+        "self_s": 0.032,
+        "cum_s": 31.477
+      },
+      "candidate": {
+        "ncalls": 1,
+        "self_s": 0.033,
+        "cum_s": 20.038
+      },
+      "self_delta_s": 0.001,
+      "ncalls_delta": 0
+    },
+    "weilan_trace.py:6439(build_episode_index_value)": {
+      "baseline": {
+        "ncalls": 1,
+        "self_s": 0.0,
+        "cum_s": 18.831
+      },
+      "candidate": {
+        "ncalls": 1,
+        "self_s": 0.0,
+        "cum_s": 12.793
+      },
+      "self_delta_s": 0.0,
+      "ncalls_delta": 0
+    },
+    "weilan_trace.py:6476(episode_index_is_fresh)": {
+      "baseline": {
+        "ncalls": 1,
+        "self_s": 0.003,
+        "cum_s": 12.13
+      },
+      "candidate": {
+        "ncalls": 1,
+        "self_s": 0.003,
+        "cum_s": 6.56
+      },
+      "self_delta_s": 0.0,
+      "ncalls_delta": 0
+    },
+    "weilan_trace.py:6315(scan)": {
+      "baseline": {
+        "ncalls": 2,
+        "self_s": 0.111,
+        "cum_s": 21.461
+      },
+      "candidate": {
+        "ncalls": 2,
+        "self_s": 0.101,
+        "cum_s": 9.916
+      },
+      "self_delta_s": -0.01,
+      "ncalls_delta": 0
+    },
+    "weilan_trace.py:304(read_events)": {
+      "baseline": {
+        "ncalls": 18212,
+        "self_s": 0.042,
+        "cum_s": 12.339
+      },
+      "candidate": {
+        "ncalls": 18212,
+        "self_s": 0.047,
+        "cum_s": 13.196
+      },
+      "self_delta_s": 0.005,
+      "ncalls_delta": 0
+    },
+    "runtime_core.py:26(canonical_workspace)": {
+      "baseline": {
+        "ncalls": 37669,
+        "self_s": 0.239,
+        "cum_s": 20.393
+      },
+      "candidate": {
+        "ncalls": 0,
+        "self_s": 0.0,
+        "cum_s": 0.0
+      },
+      "self_delta_s": -0.239,
+      "ncalls_delta": -37669
+    },
+    "~:0(<built-in method nt._getfinalpathname>)": {
+      "baseline": {
+        "ncalls": 75374,
+        "self_s": 12.031,
+        "cum_s": 12.031
+      },
+      "candidate": {
+        "ncalls": 46,
+        "self_s": 0.01,
+        "cum_s": 0.01
+      },
+      "self_delta_s": -12.02,
+      "ncalls_delta": -75328
+    },
+    "~:0(<built-in method nt.stat>)": {
+      "baseline": {
+        "ncalls": 68093,
+        "self_s": 8.267,
+        "cum_s": 8.667
+      },
+      "candidate": {
+        "ncalls": 30429,
+        "self_s": 3.571,
+        "cum_s": 3.718
+      },
+      "self_delta_s": -4.696,
+      "ncalls_delta": -37664
+    },
+    "~:0(<built-in method io.open>)": {
+      "baseline": {
+        "ncalls": 18300,
+        "self_s": 2.78,
+        "cum_s": 2.886
+      },
+      "candidate": {
+        "ncalls": 18300,
+        "self_s": 2.991,
+        "cum_s": 3.106
+      },
+      "self_delta_s": 0.211,
+      "ncalls_delta": 0
+    }
+  }
+}

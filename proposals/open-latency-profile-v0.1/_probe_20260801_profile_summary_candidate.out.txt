@@ -1,0 +1,53 @@
+﻿profiled_total_tt=20.799s  primitive_calls=11629320  calls=11654734
+
+=== top 18 by cumulative ===
+cum=  20.799  tot=   0.000  ncalls=      27  ~:0(<built-in method builtins.exec>)
+cum=  20.799  tot=   0.000  ncalls=       1  weilan_trace.py:1(<module>)
+cum=  20.739  tot=   0.000  ncalls=       1  weilan_trace.py:7942(main)
+cum=  20.688  tot=   0.000  ncalls=       1  weilan_trace.py:731(command_open)
+cum=  20.688  tot=   0.006  ncalls=       1  weilan_trace.py:534(command_open_lineaged)
+cum=  20.678  tot=   0.000  ncalls=       1  weilan_trace.py:544(command_open_lineaged_fenced)
+cum=  20.078  tot=   0.006  ncalls=       1  weilan_trace.py:4551(attach_trace_advisory_result)
+cum=  20.071  tot=   0.033  ncalls=       1  weilan_trace.py:4529(trace_reentry_advisory_result)
+cum=  20.038  tot=   0.033  ncalls=       1  weilan_trace.py:4458(collapse_trace_registry)
+cum=  14.018  tot=   0.039  ncalls=   18214  weilan_trace.py:1456(memoized_value)
+cum=  13.196  tot=   0.047  ncalls=   18212  weilan_trace.py:304(read_events)
+cum=  13.005  tot=   0.090  ncalls=   18212  weilan_trace.py:305(load)
+cum=  12.793  tot=   0.000  ncalls=       1  weilan_trace.py:6439(build_episode_index_value)
+cum=   9.917  tot=   0.000  ncalls=       2  weilan_trace.py:6311(scoped_frame_paths)
+cum=   9.916  tot=   0.101  ncalls=       2  weilan_trace.py:6315(scan)
+cum=   9.016  tot=   0.380  ncalls=   18212  weilan_trace.py:238(read_events_raw)
+cum=   7.481  tot=   0.025  ncalls=       1  weilan_trace.py:6443(<listcomp>)
+cum=   6.560  tot=   0.003  ncalls=       1  weilan_trace.py:6476(episode_index_is_fresh)
+
+=== top 18 by tottime (self) ===
+tot=   3.571  cum=   3.718  ncalls=   30429  ~:0(<built-in method nt.stat>)
+tot=   2.991  cum=   3.106  ncalls=   18300  ~:0(<built-in method io.open>)
+tot=   1.167  cum=   2.164  ncalls=  158721  pathlib.py:56(parse_parts)
+tot=   0.941  cum=   0.941  ncalls=   55450  decoder.py:343(raw_decode)
+tot=   0.876  cum=   0.876  ncalls=   18318  ~:0(<method 'read' of '_io.BufferedReader' objects>)
+tot=   0.581  cum=   2.767  ncalls=    6060  weilan_trace.py:2402(semantic_tokens)
+tot=   0.560  cum=   0.594  ncalls=  304746  pathlib.py:147(splitroot)
+tot=   0.486  cum=   0.486  ncalls=   18325  ~:0(<method '__exit__' of '_io._IOBase' objects>)
+tot=   0.479  cum=   2.767  ncalls=  158713  pathlib.py:484(_parse_args)
+tot=   0.434  cum=   1.198  ncalls=  621158  __init__.py:168(fullmatch)
+tot=   0.380  cum=   9.016  ncalls=   18212  weilan_trace.py:238(read_events_raw)
+tot=   0.362  cum=   0.513  ncalls=  628201  __init__.py:272(_compile)
+tot=   0.293  cum=   0.293  ncalls= 1306748  ~:0(<built-in method builtins.isinstance>)
+tot=   0.283  cum=   0.283  ncalls=  633742  ~:0(<method 'fullmatch' of 're.Pattern' objects>)
+tot=   0.278  cum=   5.641  ncalls=   73742  transaction.py:95(iter_ledger_lines)
+tot=   0.233  cum=   0.362  ncalls=   78915  pathlib.py:536(__str__)
+tot=   0.223  cum=   1.325  ncalls=   55450  decoder.py:332(decode)
+tot=   0.223  cum=   0.381  ncalls=  191884  ~:0(<method 'update' of 'set' objects>)
+
+=== filesystem / io primitives ===
+stat         self=   3.947s  ncalls=134568
+open         self=   3.039s  ncalls=36706
+read         self=   1.598s  ncalls=73356
+loads        self=   0.148s  ncalls=55475
+replace      self=   0.090s  ncalls=342963
+scandir      self=   0.016s  ncalls=237
+fsync        self=   0.013s  ncalls=3
+glob         self=   0.007s  ncalls=12310
+listdir      self=   0.001s  ncalls=3
+locking      self=   0.000s  ncalls=6
