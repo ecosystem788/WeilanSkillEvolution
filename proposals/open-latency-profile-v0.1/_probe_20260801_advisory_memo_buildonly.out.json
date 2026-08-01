@@ -1,0 +1,103 @@
+﻿{
+  "warmup": {
+    "memo": {
+      "fresh": false,
+      "seconds_freshness": 5.623,
+      "episode_count": 5998,
+      "seconds_build": 2.218,
+      "seconds_total": 7.841,
+      "arm": "memo"
+    },
+    "buildonly": {
+      "freshness_skipped": true,
+      "fresh": false,
+      "seconds_freshness": 0.0,
+      "episode_count": 5998,
+      "seconds_build": 5.378,
+      "seconds_total": 5.378,
+      "arm": "buildonly"
+    }
+  },
+  "samples": {
+    "memo": [
+      {
+        "fresh": false,
+        "seconds_freshness": 3.969,
+        "episode_count": 5998,
+        "seconds_build": 2.155,
+        "seconds_total": 6.124,
+        "arm": "memo"
+      },
+      {
+        "fresh": false,
+        "seconds_freshness": 4.069,
+        "episode_count": 5998,
+        "seconds_build": 2.529,
+        "seconds_total": 6.598,
+        "arm": "memo"
+      },
+      {
+        "fresh": false,
+        "seconds_freshness": 4.376,
+        "episode_count": 5998,
+        "seconds_build": 2.248,
+        "seconds_total": 6.623,
+        "arm": "memo"
+      }
+    ],
+    "buildonly": [
+      {
+        "freshness_skipped": true,
+        "fresh": false,
+        "seconds_freshness": 0.0,
+        "episode_count": 5998,
+        "seconds_build": 5.627,
+        "seconds_total": 5.627,
+        "arm": "buildonly"
+      },
+      {
+        "freshness_skipped": true,
+        "fresh": false,
+        "seconds_freshness": 0.0,
+        "episode_count": 5998,
+        "seconds_build": 5.505,
+        "seconds_total": 5.505,
+        "arm": "buildonly"
+      },
+      {
+        "freshness_skipped": true,
+        "fresh": false,
+        "seconds_freshness": 0.0,
+        "episode_count": 5998,
+        "seconds_build": 5.692,
+        "seconds_total": 5.692,
+        "arm": "buildonly"
+      }
+    ]
+  },
+  "summary": {
+    "memo": {
+      "totals": [
+        6.124,
+        6.598,
+        6.623
+      ],
+      "median_total": 6.598,
+      "episode_counts": [
+        5998
+      ]
+    },
+    "buildonly": {
+      "totals": [
+        5.627,
+        5.505,
+        5.692
+      ],
+      "median_total": 5.627,
+      "episode_counts": [
+        5998
+      ]
+    },
+    "buildonly_minus_memo_seconds": -0.971
+  }
+}

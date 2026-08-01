@@ -1,0 +1,146 @@
+﻿{
+  "warmup": {
+    "nomemo": {
+      "fresh": false,
+      "seconds_freshness": 4.585,
+      "episode_count": 5998,
+      "seconds_build": 8.355,
+      "seconds_total": 12.94,
+      "arm": "nomemo"
+    },
+    "memo": {
+      "fresh": false,
+      "seconds_freshness": 4.05,
+      "episode_count": 5998,
+      "seconds_build": 2.172,
+      "seconds_total": 6.222,
+      "arm": "memo"
+    }
+  },
+  "samples": {
+    "nomemo": [
+      {
+        "fresh": false,
+        "seconds_freshness": 3.907,
+        "episode_count": 5998,
+        "seconds_build": 8.522,
+        "seconds_total": 12.429,
+        "arm": "nomemo"
+      },
+      {
+        "fresh": false,
+        "seconds_freshness": 4.0,
+        "episode_count": 5998,
+        "seconds_build": 9.035,
+        "seconds_total": 13.035,
+        "arm": "nomemo"
+      },
+      {
+        "fresh": false,
+        "seconds_freshness": 3.999,
+        "episode_count": 5998,
+        "seconds_build": 8.828,
+        "seconds_total": 12.827,
+        "arm": "nomemo"
+      }
+    ],
+    "memo": [
+      {
+        "fresh": false,
+        "seconds_freshness": 4.177,
+        "episode_count": 5998,
+        "seconds_build": 2.156,
+        "seconds_total": 6.332,
+        "arm": "memo"
+      },
+      {
+        "fresh": false,
+        "seconds_freshness": 4.138,
+        "episode_count": 5998,
+        "seconds_build": 2.344,
+        "seconds_total": 6.481,
+        "arm": "memo"
+      },
+      {
+        "fresh": false,
+        "seconds_freshness": 4.179,
+        "episode_count": 5998,
+        "seconds_build": 2.234,
+        "seconds_total": 6.412,
+        "arm": "memo"
+      }
+    ]
+  },
+  "summary": {
+    "nomemo": {
+      "totals": [
+        12.429,
+        13.035,
+        12.827
+      ],
+      "median_total": 12.827,
+      "freshness": [
+        3.907,
+        4.0,
+        3.999
+      ],
+      "build": [
+        8.522,
+        9.035,
+        8.828
+      ],
+      "fresh_values": [
+        false
+      ],
+      "episode_counts": [
+        5998
+      ]
+    },
+    "memo": {
+      "totals": [
+        6.332,
+        6.481,
+        6.412
+      ],
+      "median_total": 6.412,
+      "freshness": [
+        4.177,
+        4.138,
+        4.179
+      ],
+      "build": [
+        2.156,
+        2.344,
+        2.234
+      ],
+      "fresh_values": [
+        false
+      ],
+      "episode_counts": [
+        5998
+      ]
+    },
+    "memo_over_nomemo": 0.5,
+    "seconds_saved_median": 6.415
+  },
+  "memory": {
+    "nomemo": {
+      "fresh": false,
+      "seconds_freshness": 7.588,
+      "episode_count": 5998,
+      "seconds_build": 20.375,
+      "seconds_total": 27.963,
+      "arm": "nomemo",
+      "peak_python_heap_mb": 220.4
+    },
+    "memo": {
+      "fresh": false,
+      "seconds_freshness": 7.828,
+      "episode_count": 5998,
+      "seconds_build": 7.528,
+      "seconds_total": 15.356,
+      "arm": "memo",
+      "peak_python_heap_mb": 230.6
+    }
+  }
+}
