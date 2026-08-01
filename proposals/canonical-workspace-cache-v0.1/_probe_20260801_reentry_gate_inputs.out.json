@@ -1,0 +1,589 @@
+{
+  "probe": "measure the two unmeasured inputs of Codex's 16:09:07 re-entry gate",
+  "authority": "read_only_measurement_only",
+  "selects_nothing": "This probe attaches numbers to branches. It does not choose one, does not open a proposal, and does not touch either install point or any ledger.",
+  "gate_source": "peer-chat.jsonl time=2026-08-01T16:09:07+09:00 (codex)",
+  "manifest_exclusions": "__pycache__, .pytest_cache, *.pyc (tools/evolution_core.py:60)",
+  "host_git_config": {
+    "core.autocrlf": "true",
+    "core.longpaths": "true"
+  },
+  "leg1_artifacts_rebuildability": {
+    "question": "Codex 16:09:07 allows artifacts/ to stay out of the tree IF the 237 files are deterministically rebuildable from the two source trees at the named commit. This tests that per directory.",
+    "source_trees": {
+      "baseline": {
+        "path": "D:\\WeilanSkillEvolution\\proposals\\canonical-workspace-cache-v0.1\\baseline\\solve-with-weilan",
+        "exists": true,
+        "manifest_file_count": 49,
+        "all_file_count": 49,
+        "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "equals_declared": true
+      },
+      "candidate": {
+        "path": "D:\\WeilanSkillEvolution\\proposals\\canonical-workspace-cache-v0.1\\candidate\\solve-with-weilan",
+        "exists": true,
+        "manifest_file_count": 50,
+        "all_file_count": 50,
+        "tree_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+        "equals_declared": true
+      }
+    },
+    "artifact_dirs": [
+      {
+        "artifact_hash_dirname": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+        "tree_exists": true,
+        "all_file_count": 91,
+        "manifest_file_count": 50,
+        "residue_file_count": 41,
+        "self_consistent": true,
+        "recomputed_tree_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+        "manifest_identical_to_source_trees": [
+          "candidate"
+        ],
+        "rebuildable_from_named_source_tree": true
+      },
+      {
+        "artifact_hash_dirname": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "tree_exists": true,
+        "all_file_count": 89,
+        "manifest_file_count": 49,
+        "residue_file_count": 40,
+        "self_consistent": true,
+        "recomputed_tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "manifest_identical_to_source_trees": [
+          "baseline"
+        ],
+        "rebuildable_from_named_source_tree": true
+      },
+      {
+        "artifact_hash_dirname": "ec236760072cf20d3a65df3eebd4c4075e86f79e64971b59375e4937fb3d956f",
+        "tree_exists": true,
+        "all_file_count": 57,
+        "manifest_file_count": 50,
+        "residue_file_count": 7,
+        "self_consistent": true,
+        "recomputed_tree_hash": "ec236760072cf20d3a65df3eebd4c4075e86f79e64971b59375e4937fb3d956f",
+        "manifest_identical_to_source_trees": [],
+        "rebuildable_from_named_source_tree": false,
+        "distance_from_sources": {
+          "baseline": {
+            "differing_manifest_paths": [
+              "scripts/runtime_core.py",
+              "scripts/test_canonical_workspace_cache.py"
+            ],
+            "differing_count": 2
+          },
+          "candidate": {
+            "differing_manifest_paths": [
+              "scripts/test_canonical_workspace_cache.py"
+            ],
+            "differing_count": 1
+          }
+        }
+      }
+    ],
+    "total_files_under_artifacts": 237,
+    "summary": {
+      "artifact_dir_count": 3,
+      "rebuildable_count": 2,
+      "not_rebuildable": [
+        "ec236760072cf20d3a65df3eebd4c4075e86f79e64971b59375e4937fb3d956f"
+      ],
+      "conditional_holds_for_all": false
+    }
+  },
+  "leg2_bak_fork_addresses": {
+    "question": "Codex 15:33 declined to pick between giving the .bak an attribute and dropping it from the artifact, and neither branch has a number. A candidate-freeze re-run from a checkout cannot be attempted until one is chosen, because the untouched trees clone back to different addresses. This attaches the addresses to both branches.",
+    "bak_path_relative_to_skill_tree": "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak",
+    "staged_at_real_repo_relative_path": "proposals/canonical-workspace-cache-v0.1",
+    "variants": [
+      {
+        "variant": "V0",
+        "root_gitattributes_sha256": "5273681f17ec12a2afb2bb304ae2c3e14ef35474194685068a46acc97668c6fe",
+        "root_gitattributes_mutated": false,
+        "gitattributes_tail": ".json text eol=lf\n*.jsonl text eol=lf\n*.py text eol=lf\n*.ps1 text eol=lf\n*.yaml text eol=lf\n*.yml text eol=lf\nLICENSE text eol=lf\nevals/fixtures/** text eol=lf\n",
+        "package_scoped_gitattributes": null,
+        "dropped_bak": false,
+        "pre_commit_worktree": {
+          "baseline": {
+            "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+            "equals_declared": true,
+            "manifest_file_count": 49
+          },
+          "candidate": {
+            "tree_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+            "equals_declared": true,
+            "manifest_file_count": 50
+          }
+        },
+        "steps": [
+          {
+            "argv": [
+              "git",
+              "init",
+              "-q"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "user.email",
+              "probe@local"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "user.name",
+              "probe"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "core.longpaths",
+              "true"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "add",
+              "-A"
+            ],
+            "rc": 0,
+            "stderr": "-v01.9adab069.bak', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'proposals/canonical-workspace-cache-v0.1/candidate/solve-with-weilan/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak', LF will be replaced by CRLF the next time Git touches it\n"
+          },
+          {
+            "argv": [
+              "git",
+              "commit",
+              "-q",
+              "-m",
+              "re-entry gate dry run V0"
+            ],
+            "rc": 0,
+            "stderr": ""
+          }
+        ],
+        "named_commit": "822329d5e1707259a3e73aaee4e92621471d9b0d",
+        "ls_tree_rc": 0,
+        "ls_tree_path_count": 100,
+        "reachable_at_commit": {
+          "baseline": 49,
+          "candidate": 50
+        },
+        "bak_effective_attrs": [
+          "proposals/canonical-workspace-cache-v0.1/baseline/solve-with-weilan/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak: text: auto",
+          "proposals/canonical-workspace-cache-v0.1/baseline/solve-with-weilan/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak: eol: unspecified"
+        ],
+        "bak_present_at_commit": true,
+        "bak_blob_domain_sha256": "9adab069e1ea43720be23f84ad1932df03b7f01793cdc3d260caf54c489c9fb5",
+        "bak_worktree_sha256": "9adab069e1ea43720be23f84ad1932df03b7f01793cdc3d260caf54c489c9fb5",
+        "bak_blob_equals_worktree": true,
+        "clone_rc": 0,
+        "clone_stderr_tail": "",
+        "clone_status_empty": true,
+        "post_clone": {
+          "baseline": {
+            "observed_tree_hash": "33c8316505a04cd1081604996bf84c858b3e4f88b3e705d1fcee3d77e556c123",
+            "equals_declared_address": false,
+            "equals_1518_observation": true,
+            "manifest_file_count": 49,
+            "crlf_files_in_manifest": [
+              "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak"
+            ]
+          },
+          "candidate": {
+            "observed_tree_hash": "c0566250c40fcc00a2a69e2f4244ebb469770f843e1bed2f9ff1c596fafc3b80",
+            "equals_declared_address": false,
+            "equals_1518_observation": true,
+            "manifest_file_count": 50,
+            "crlf_files_in_manifest": [
+              "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak"
+            ]
+          }
+        }
+      },
+      {
+        "variant": "V1",
+        "root_gitattributes_sha256": "055508a02d0c86afb46267e4f0e4642f0998a4c8f3e4e9b4a9ccf796b5ec5028",
+        "root_gitattributes_mutated": true,
+        "gitattributes_tail": "ol=lf\n*.jsonl text eol=lf\n*.py text eol=lf\n*.ps1 text eol=lf\n*.yaml text eol=lf\n*.yml text eol=lf\nLICENSE text eol=lf\nevals/fixtures/** text eol=lf\n*.bak -text\n",
+        "package_scoped_gitattributes": null,
+        "dropped_bak": false,
+        "pre_commit_worktree": {
+          "baseline": {
+            "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+            "equals_declared": true,
+            "manifest_file_count": 49
+          },
+          "candidate": {
+            "tree_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+            "equals_declared": true,
+            "manifest_file_count": 50
+          }
+        },
+        "steps": [
+          {
+            "argv": [
+              "git",
+              "init",
+              "-q"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "user.email",
+              "probe@local"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "user.name",
+              "probe"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "core.longpaths",
+              "true"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "add",
+              "-A"
+            ],
+            "rc": 0,
+            "stderr": "warning: in the working copy of '.gitattributes', LF will be replaced by CRLF the next time Git touches it\n"
+          },
+          {
+            "argv": [
+              "git",
+              "commit",
+              "-q",
+              "-m",
+              "re-entry gate dry run V1"
+            ],
+            "rc": 0,
+            "stderr": ""
+          }
+        ],
+        "named_commit": "621bcb04ce5bc2c8c8e169e9db43ac922ff84990",
+        "ls_tree_rc": 0,
+        "ls_tree_path_count": 100,
+        "reachable_at_commit": {
+          "baseline": 49,
+          "candidate": 50
+        },
+        "bak_effective_attrs": [
+          "proposals/canonical-workspace-cache-v0.1/baseline/solve-with-weilan/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak: text: unset",
+          "proposals/canonical-workspace-cache-v0.1/baseline/solve-with-weilan/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak: eol: unspecified"
+        ],
+        "bak_present_at_commit": true,
+        "bak_blob_domain_sha256": "9adab069e1ea43720be23f84ad1932df03b7f01793cdc3d260caf54c489c9fb5",
+        "bak_worktree_sha256": "9adab069e1ea43720be23f84ad1932df03b7f01793cdc3d260caf54c489c9fb5",
+        "bak_blob_equals_worktree": true,
+        "clone_rc": 0,
+        "clone_stderr_tail": "",
+        "clone_status_empty": true,
+        "post_clone": {
+          "baseline": {
+            "observed_tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+            "equals_declared_address": true,
+            "equals_1518_observation": false,
+            "manifest_file_count": 49,
+            "crlf_files_in_manifest": []
+          },
+          "candidate": {
+            "observed_tree_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+            "equals_declared_address": true,
+            "equals_1518_observation": false,
+            "manifest_file_count": 50,
+            "crlf_files_in_manifest": []
+          }
+        }
+      },
+      {
+        "variant": "V2",
+        "root_gitattributes_sha256": "5273681f17ec12a2afb2bb304ae2c3e14ef35474194685068a46acc97668c6fe",
+        "root_gitattributes_mutated": false,
+        "gitattributes_tail": ".json text eol=lf\n*.jsonl text eol=lf\n*.py text eol=lf\n*.ps1 text eol=lf\n*.yaml text eol=lf\n*.yml text eol=lf\nLICENSE text eol=lf\nevals/fixtures/** text eol=lf\n",
+        "package_scoped_gitattributes": null,
+        "dropped_bak": true,
+        "pre_commit_worktree": {
+          "baseline": {
+            "tree_hash": "35e553ebb3bb384e11f5c32951dbf0ff115cae052873ca1ac49ab17d2597a8d8",
+            "equals_declared": false,
+            "manifest_file_count": 48
+          },
+          "candidate": {
+            "tree_hash": "f53c4128c0207244145f63fac421499483f805f6096dd80128932fef6b653e1e",
+            "equals_declared": false,
+            "manifest_file_count": 49
+          }
+        },
+        "steps": [
+          {
+            "argv": [
+              "git",
+              "init",
+              "-q"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "user.email",
+              "probe@local"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "user.name",
+              "probe"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "core.longpaths",
+              "true"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "add",
+              "-A"
+            ],
+            "rc": 0,
+            "stderr": "warning: in the working copy of '.gitattributes', LF will be replaced by CRLF the next time Git touches it\n"
+          },
+          {
+            "argv": [
+              "git",
+              "commit",
+              "-q",
+              "-m",
+              "re-entry gate dry run V2"
+            ],
+            "rc": 0,
+            "stderr": ""
+          }
+        ],
+        "named_commit": "620610da2731e6aba10ce7d91547de27db1afb9b",
+        "ls_tree_rc": 0,
+        "ls_tree_path_count": 98,
+        "reachable_at_commit": {
+          "baseline": 48,
+          "candidate": 49
+        },
+        "bak_effective_attrs": [
+          "proposals/canonical-workspace-cache-v0.1/baseline/solve-with-weilan/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak: text: auto",
+          "proposals/canonical-workspace-cache-v0.1/baseline/solve-with-weilan/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak: eol: unspecified"
+        ],
+        "bak_present_at_commit": false,
+        "clone_rc": 0,
+        "clone_stderr_tail": "",
+        "clone_status_empty": true,
+        "post_clone": {
+          "baseline": {
+            "observed_tree_hash": "35e553ebb3bb384e11f5c32951dbf0ff115cae052873ca1ac49ab17d2597a8d8",
+            "equals_declared_address": false,
+            "equals_1518_observation": false,
+            "manifest_file_count": 48,
+            "crlf_files_in_manifest": []
+          },
+          "candidate": {
+            "observed_tree_hash": "f53c4128c0207244145f63fac421499483f805f6096dd80128932fef6b653e1e",
+            "equals_declared_address": false,
+            "equals_1518_observation": false,
+            "manifest_file_count": 49,
+            "crlf_files_in_manifest": []
+          }
+        }
+      },
+      {
+        "variant": "V3",
+        "root_gitattributes_sha256": "5273681f17ec12a2afb2bb304ae2c3e14ef35474194685068a46acc97668c6fe",
+        "root_gitattributes_mutated": false,
+        "gitattributes_tail": ".json text eol=lf\n*.jsonl text eol=lf\n*.py text eol=lf\n*.ps1 text eol=lf\n*.yaml text eol=lf\n*.yml text eol=lf\nLICENSE text eol=lf\nevals/fixtures/** text eol=lf\n",
+        "package_scoped_gitattributes": "*.bak -text\n",
+        "dropped_bak": false,
+        "pre_commit_worktree": {
+          "baseline": {
+            "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+            "equals_declared": true,
+            "manifest_file_count": 49
+          },
+          "candidate": {
+            "tree_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+            "equals_declared": true,
+            "manifest_file_count": 50
+          }
+        },
+        "steps": [
+          {
+            "argv": [
+              "git",
+              "init",
+              "-q"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "user.email",
+              "probe@local"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "user.name",
+              "probe"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "config",
+              "core.longpaths",
+              "true"
+            ],
+            "rc": 0,
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "add",
+              "-A"
+            ],
+            "rc": 0,
+            "stderr": "warning: in the working copy of '.gitattributes', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'proposals/canonical-workspace-cache-v0.1/.gitattributes', LF will be replaced by CRLF the next time Git touches it\n"
+          },
+          {
+            "argv": [
+              "git",
+              "commit",
+              "-q",
+              "-m",
+              "re-entry gate dry run V3"
+            ],
+            "rc": 0,
+            "stderr": ""
+          }
+        ],
+        "named_commit": "68527452acefb82eececcfdbc9ec6c22614d77c4",
+        "ls_tree_rc": 0,
+        "ls_tree_path_count": 101,
+        "reachable_at_commit": {
+          "baseline": 49,
+          "candidate": 50
+        },
+        "bak_effective_attrs": [
+          "proposals/canonical-workspace-cache-v0.1/baseline/solve-with-weilan/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak: text: unset",
+          "proposals/canonical-workspace-cache-v0.1/baseline/solve-with-weilan/scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak: eol: unspecified"
+        ],
+        "bak_present_at_commit": true,
+        "bak_blob_domain_sha256": "9adab069e1ea43720be23f84ad1932df03b7f01793cdc3d260caf54c489c9fb5",
+        "bak_worktree_sha256": "9adab069e1ea43720be23f84ad1932df03b7f01793cdc3d260caf54c489c9fb5",
+        "bak_blob_equals_worktree": true,
+        "clone_rc": 0,
+        "clone_stderr_tail": "",
+        "clone_status_empty": true,
+        "post_clone": {
+          "baseline": {
+            "observed_tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+            "equals_declared_address": true,
+            "equals_1518_observation": false,
+            "manifest_file_count": 49,
+            "crlf_files_in_manifest": []
+          },
+          "candidate": {
+            "observed_tree_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+            "equals_declared_address": true,
+            "equals_1518_observation": false,
+            "manifest_file_count": 50,
+            "crlf_files_in_manifest": []
+          }
+        }
+      }
+    ],
+    "bak_on_disk": {
+      "baseline": {
+        "exists": true,
+        "size": 306895,
+        "sha256": "9adab069e1ea43720be23f84ad1932df03b7f01793cdc3d260caf54c489c9fb5",
+        "contains_crlf": false
+      },
+      "candidate": {
+        "exists": true,
+        "size": 306895,
+        "sha256": "9adab069e1ea43720be23f84ad1932df03b7f01793cdc3d260caf54c489c9fb5",
+        "contains_crlf": false
+      }
+    },
+    "variant_legend": {
+      "V0": "control -- trees unchanged, root .gitattributes verbatim",
+      "V1": "root .gitattributes gains `*.bak -text` (repository-wide)",
+      "V2": "the .bak is dropped from both frozen trees, no attribute change",
+      "V3": "`*.bak -text` in a package-scoped .gitattributes, repository root untouched"
+    }
+  },
+  "boundaries": [
+    "Reachable at a named commit + a self-consistent blob digest still does not show that the measuring process consumed those bytes. Codex wrote that boundary at 16:09:07 and this probe does not close it.",
+    "Leg 1 tests reconstructibility as byte-identity of the manifest rows. It does not test that any tool would in fact regenerate artifacts/ from the sources -- only that the bytes needed to are present in a named source tree.",
+    "Leg 2's V1 and V2 are staged in scratch repositories. Neither branch has been applied to this repository, and this probe does not recommend either.",
+    "Scratch repos set core.longpaths=true, matching the recipe push-third-party-reachability-v0.1 established for this host. Without it a clone can report success while the checkout silently fails; clone_status_empty is recorded as the guard."
+  ]
+}
