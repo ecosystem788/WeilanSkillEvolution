@@ -1,0 +1,20 @@
+{
+  "schema_version": "weilan_skill_deployment_receipt_v0.6",
+  "deployment_id": "43a91cbb4e2f0efa9d36a8a9",
+  "decision_hash": "e98e1a5269b05f9b49b5ae9dc14ab08fb6322da5de37e00c2e23ab4353daf19f",
+  "authority_source": "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl#time=2026-08-01T21:59:05+09:00 proposal plus proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl#time=2026-08-01T22:11:09+09:00 independent consent",
+  "target": "D:\\CodexData\\skills\\solve-with-weilan",
+  "before_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "after_artifact_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+  "rollback_artifact": "D:\\WeilanSkillEvolution\\proposals\\canonical-workspace-cache-v0.1\\deployments\\43a91cbb4e2f0efa9d36a8a9\\rollback\\solve-with-weilan",
+  "rollback_triggers": [
+    "candidate changes any file outside the two declared candidate paths",
+    "the baseline-compatible behavioral contract test does not fail by assertion without AttributeError on the baseline",
+    "the contract test does not pass on the candidate",
+    "a read-only CLI output differs between frozen baseline and candidate",
+    "any test passing on the baseline fails on the candidate",
+    "candidate median real-open wall time is not lower than baseline under the equal-budget copied-ledger probe",
+    "installed Skill, evaluation authority, adoption state, or deployment state changes without a separate independent cosigned adoption decision"
+  ],
+  "reversible": true
+}
