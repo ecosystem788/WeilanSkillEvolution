@@ -1,0 +1,118 @@
+{
+  "probe": "claude independent equal-budget real-open latency, revised candidate",
+  "baseline_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "candidate_artifact_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+  "prior_candidate_artifact_hash": "ec236760072cf20d3a65df3eebd4c4075e86f79e64971b59375e4937fb3d956f",
+  "runtime_core_sha256_by_artifact": {
+    "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68",
+    "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0",
+    "ec236760072cf20d3a65df3eebd4c4075e86f79e64971b59375e4937fb3d956f": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0"
+  },
+  "revised_and_prior_candidate_share_runtime_core": true,
+  "candidate_runtime_core_differs_from_baseline": true,
+  "live_state_source": "D:\\CodexData\\home\\method-state",
+  "workspace": "D:\\WeilanSkillEvolution",
+  "scope": "skill-evolution",
+  "parent": "wf-20260716-064901-72e801",
+  "timeout_s_per_run": 240,
+  "run_order": [
+    "baseline",
+    "candidate",
+    "candidate",
+    "baseline",
+    "baseline",
+    "candidate"
+  ],
+  "runs": [
+    {
+      "label": "baseline",
+      "sequence": 1,
+      "artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "executed_runtime_core_sha256": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68",
+      "elapsed_s": 97.571,
+      "returncode": 0,
+      "frame_id": "wf-20260801-053023-ba0fa6",
+      "stderr_tail": ""
+    },
+    {
+      "label": "candidate",
+      "sequence": 2,
+      "artifact_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+      "executed_runtime_core_sha256": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0",
+      "elapsed_s": 18.614,
+      "returncode": 0,
+      "frame_id": "wf-20260801-053155-b69c5e",
+      "stderr_tail": ""
+    },
+    {
+      "label": "candidate",
+      "sequence": 3,
+      "artifact_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+      "executed_runtime_core_sha256": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0",
+      "elapsed_s": 18.556,
+      "returncode": 0,
+      "frame_id": "wf-20260801-053213-cb9754",
+      "stderr_tail": ""
+    },
+    {
+      "label": "baseline",
+      "sequence": 4,
+      "artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "executed_runtime_core_sha256": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68",
+      "elapsed_s": 37.069,
+      "returncode": 0,
+      "frame_id": "wf-20260801-053238-951c97",
+      "stderr_tail": ""
+    },
+    {
+      "label": "baseline",
+      "sequence": 5,
+      "artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "executed_runtime_core_sha256": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68",
+      "elapsed_s": 36.882,
+      "returncode": 0,
+      "frame_id": "wf-20260801-053315-12a293",
+      "stderr_tail": ""
+    },
+    {
+      "label": "candidate",
+      "sequence": 6,
+      "artifact_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+      "executed_runtime_core_sha256": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0",
+      "elapsed_s": 18.443,
+      "returncode": 0,
+      "frame_id": "wf-20260801-053346-429fa3",
+      "stderr_tail": ""
+    }
+  ],
+  "baseline": {
+    "n": 3,
+    "min_s": 36.882,
+    "max_s": 97.571,
+    "median_s": 37.069,
+    "mean_s": 57.174,
+    "samples_s": [
+      97.571,
+      37.069,
+      36.882
+    ]
+  },
+  "candidate": {
+    "n": 3,
+    "min_s": 18.443,
+    "max_s": 18.614,
+    "median_s": 18.556,
+    "mean_s": 18.538,
+    "samples_s": [
+      18.614,
+      18.556,
+      18.443
+    ]
+  },
+  "all_runs_returned_open_frames": true,
+  "median_speedup_x": 1.998,
+  "candidate_median_lower": true,
+  "arms_have_disjoint_ranges": true,
+  "worst_cross_arm_ratio_x": 1.981,
+  "boundary": "Real open code path on a full copied live ledger, not a deployment and not a production-ledger write. Host load is uncontrolled and three samples per arm bound an observation, not a universal latency floor."
+}

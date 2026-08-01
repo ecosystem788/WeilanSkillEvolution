@@ -1,0 +1,213 @@
+{
+  "schema_version": "weilan_skill_shadow_result_v0.6",
+  "shadow_id": "canonical-workspace-cache-v0.1-revised-targeted-20260801",
+  "evidence_kind": "targeted_executable_verification",
+  "proposal_id": "canonical-workspace-cache-v0.1",
+  "baseline_artifact_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+  "candidate_artifact_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+  "prior_candidate_artifact_hash": "ec236760072cf20d3a65df3eebd4c4075e86f79e64971b59375e4937fb3d956f",
+  "recomputed_tree_hashes": {
+    "tracked_baseline_tree": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+    "tracked_candidate_tree": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+    "frozen_baseline_artifact": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+    "frozen_candidate_artifact": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a"
+  },
+  "installed_tree_state": {
+    "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan": {
+      "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "equals_frozen_baseline": true
+    },
+    "D:\\CodexData\\skills\\solve-with-weilan": {
+      "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "equals_frozen_baseline": true
+    }
+  },
+  "produced_by": "claude",
+  "author_of_candidate": "codex",
+  "independence": "the member assembling this evidence is not the candidate author; assembling shadow evidence confers no adoption or deployment authority on either member",
+  "comparison_count": 8,
+  "checks": [
+    {
+      "metric": "frozen_candidate_differs_from_the_frozen_baseline_in_exactly_the_two_declared_paths",
+      "verified": true,
+      "provenance": "recomputed_now_from_bytes",
+      "evidence": [
+        {
+          "ref": "proposals/canonical-workspace-cache-v0.1/_probe_candidate_tree_diff.out.json",
+          "sha256": "3e94480f51ca938cdd8965b79498790a5a2220ec71d62cc216798520e9458724"
+        }
+      ],
+      "observed": {
+        "changed_paths_between_frozen_trees": [
+          "scripts/runtime_core.py",
+          "scripts/test_canonical_workspace_cache.py"
+        ]
+      },
+      "bound_to_revised_candidate": true
+    },
+    {
+      "metric": "baseline_compatible_behavioral_contract_test_fails_by_assertion_on_the_no_contract_baseline_and_passes_on_the_candidate",
+      "verified": true,
+      "provenance": "archived_receipt_bound_to_revised_candidate",
+      "evidence": [
+        {
+          "ref": "proposals/canonical-workspace-cache-v0.1/_probe_contract_discrimination.out.json",
+          "sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8"
+        },
+        {
+          "ref": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_sham_candidate.out.json",
+          "sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e"
+        }
+      ],
+      "observed": {
+        "baseline_fails_by_assertion_without_attribute_error": true,
+        "candidate_passes": true,
+        "cache_free_sham_with_full_api_is_rejected": {
+          "sham_is_rejected": true,
+          "sham_rejected_by_assertion_not_attribute_error": true,
+          "which_tests_catch_the_sham": [
+            "test_canonical_workspace_cache.py::test_same_expanded_path_is_resolved_once_per_process"
+          ],
+          "which_tests_the_sham_passes": [
+            "test_canonical_workspace_cache.py::test_explicit_clear_and_new_process_resolution"
+          ]
+        }
+      },
+      "bound_to_revised_candidate": true
+    },
+    {
+      "metric": "same_expanded_workspace_path_is_resolved_once_per_process_until_explicit_cache_clear",
+      "verified": true,
+      "provenance": "archived_receipt_bound_to_revised_candidate",
+      "evidence": [
+        {
+          "ref": "proposals/canonical-workspace-cache-v0.1/_probe_contract_discrimination.out.json",
+          "sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8"
+        },
+        {
+          "ref": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_sham_candidate.out.json",
+          "sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e"
+        }
+      ],
+      "observed": {
+        "discriminating": true,
+        "note": "this is the half a cache-free sham fails"
+      },
+      "bound_to_revised_candidate": true
+    },
+    {
+      "metric": "a_new_process_resolves_the_same_expanded_workspace_path_again",
+      "verified": true,
+      "provenance": "archived_receipt_bound_to_revised_candidate",
+      "evidence": [
+        {
+          "ref": "proposals/canonical-workspace-cache-v0.1/_probe_contract_discrimination.out.json",
+          "sha256": "ded7d1f2c30723a58c5a916d4636d4e66171747522faf55db3a17385da2d64d8"
+        },
+        {
+          "ref": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_sham_candidate.out.json",
+          "sha256": "5eb4d7ff0cf0486b63561e97505210c4813ee5169b1ecfd092ace8f4cab19b7e"
+        }
+      ],
+      "observed": {
+        "discriminating": false,
+        "disclosure": "the cache-free sham also passes this half, so it documents the contract rather than discriminating cached from uncached; it is still a true assertion about the candidate, which is what the metric text asks for"
+      },
+      "bound_to_revised_candidate": true
+    },
+    {
+      "metric": "baseline_and_candidate_read_only_cli_outputs_are_byte_identical",
+      "verified": true,
+      "provenance": "rerun_now_bound_to_revised_candidate",
+      "evidence": [
+        {
+          "ref": "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_cli_equivalence_revised.out.json",
+          "sha256": "68ca2c8c4b41ce65868acc9bb6c67797410189c7140e41ef4c4b8a8bd126b6fe"
+        }
+      ],
+      "observed": {
+        "commands": [
+          "lineage-show",
+          "memory-recall",
+          "prospective-show"
+        ],
+        "prior_and_revised_candidate_byte_identical": true
+      },
+      "bound_to_revised_candidate": true
+    },
+    {
+      "metric": "candidate_full_regression_has_no_failure_absent_from_the_baseline",
+      "verified": true,
+      "provenance": "archived_receipt_bound_to_revised_candidate",
+      "evidence": [
+        {
+          "ref": "proposals/canonical-workspace-cache-v0.1/_review2_20260801_claude_independent_suite.out.json",
+          "sha256": "ff175efd561ec068591aeb78f31402ce67d7e5e8408e6e2e6ece920e3047000e"
+        }
+      ],
+      "observed": {
+        "candidate_only_failures": [],
+        "baseline_only_nodes": [],
+        "shared_nodes_with_changed_verdict": {},
+        "disclosure": "the suite is not all green on either arm; one pre-existing failure, test_slow_loop.py::test_promotion_gate_rejects_on_full_budget, fails on baseline and candidate alike and predates this line"
+      },
+      "bound_to_revised_candidate": true
+    },
+    {
+      "metric": "equal_budget_real_open_runs_on_the_same_copied_live_ledger_use_at_least_three_samples_per_arm",
+      "verified": true,
+      "provenance": "rerun_now_bound_to_revised_candidate",
+      "evidence": [
+        {
+          "ref": "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_revised_latency.out.json",
+          "sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16"
+        }
+      ],
+      "observed": {
+        "samples_per_arm": [
+          3,
+          3
+        ],
+        "run_order": [
+          "baseline",
+          "candidate",
+          "candidate",
+          "baseline",
+          "baseline",
+          "candidate"
+        ],
+        "all_runs_returned_open_frames": true
+      },
+      "bound_to_revised_candidate": true
+    },
+    {
+      "metric": "candidate_real_open_median_wall_time_is_lower_than_baseline_on_the_copied_live_ledger",
+      "verified": true,
+      "provenance": "rerun_now_bound_to_revised_candidate",
+      "evidence": [
+        {
+          "ref": "proposals/canonical-workspace-cache-v0.1/_shadow_20260801_claude_revised_latency.out.json",
+          "sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16"
+        }
+      ],
+      "observed": {
+        "baseline_median_s": 37.069,
+        "candidate_median_s": 18.556,
+        "median_speedup_x": 1.998,
+        "arms_have_disjoint_ranges": true,
+        "worst_cross_arm_ratio_x": 1.981,
+        "disclosure": "host load is uncontrolled and three samples per arm bound an observation on one copied ledger; this is not a latency floor and no lower bound is claimed"
+      },
+      "bound_to_revised_candidate": true
+    }
+  ],
+  "metrics_verified": 8,
+  "metrics_total": 8,
+  "unbound_metrics": [],
+  "unverified_metrics": [],
+  "gate_failures": [],
+  "adoption_eligible": true,
+  "boundary": "Byte identity on one ledger, a passing contract test, a rejected cache-free sham, one full-suite comparison and three timed opens per arm are what was measured. None of it proves semantic equivalence over all inputs, and process-local resolution stability is not filesystem stability.",
+  "authority": "targeted_shadow_evidence_only_never_adopts_or_deploys",
+  "result_hash": "13a694cf8ac6e0dbce2e59051d5d2826e4d3601e1ed84389d1acc5cc87c9fe11"
+}

@@ -1,0 +1,68 @@
+{
+  "probe": "do the byte bindings survive a git round trip",
+  "authority": "read_only_measurement_only",
+  "gitattributes_declares": [
+    "*.py text eol=lf",
+    "*.json text eol=lf"
+  ],
+  "core_autocrlf": "true",
+  "frozen_trees": {
+    "baseline": {
+      "declared_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "recomputed_from_disk": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "eol_census": {
+        "crlf_files": 37,
+        "lf_only_files": 52,
+        "no_newline_files": 0
+      },
+      "hash_if_bytes_were_lf": "7744d85887d8d8f3061304ef7aeef4bfd60be367dc463a7061d6621c22630940"
+    },
+    "candidate": {
+      "declared_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+      "recomputed_from_disk": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+      "eol_census": {
+        "crlf_files": 38,
+        "lf_only_files": 53,
+        "no_newline_files": 0
+      },
+      "hash_if_bytes_were_lf": "efca4a1f4663ef499c1d422171bd590aec0b9253df64294b7289f240b4fb45fb"
+    }
+  },
+  "evidence_files": {
+    "_shadow_20260801_claude_cli_equivalence_revised.out.json": {
+      "on_disk_sha256": "68ca2c8c4b41ce65868acc9bb6c67797410189c7140e41ef4c4b8a8bd126b6fe",
+      "has_crlf": true,
+      "lf_normalized_sha256": "0a1e5420eb54368bb690e2c0dce6200e57d0fa8b76c10ad1fca88ac698baf8b2",
+      "git_blob_id_of_working_copy": "aa31ac37a77bbc2c73fc3c7ee6f66d71523a8e4c"
+    },
+    "_shadow_20260801_claude_revised_latency.out.json": {
+      "on_disk_sha256": "e6a0173a9cf85baa7e6dc29632ea9a3777128dd2eb19921aa63774e194a60d16",
+      "has_crlf": true,
+      "lf_normalized_sha256": "2c17207ce3a74d97fb0aa4b385c18f32416919ad804a24efaef4da2f3f155417",
+      "git_blob_id_of_working_copy": "b1bd28868c6fa62efd29ca945c6f6a129886077e"
+    },
+    "_shadow_20260801_claude_decision_contract_probe.out.json": {
+      "on_disk_sha256": "d66202c021d0e961195d3cceb1a0960dff6f8c906bd42da0235fd21c307530d6",
+      "has_crlf": true,
+      "lf_normalized_sha256": "ba844f6c405e14c57b863729b80f3aec33a4027d166123ffdaf91e9fc5165863",
+      "git_blob_id_of_working_copy": "c75a6c60a99e02094f9b7cbb5e3df0df20d67cf6"
+    },
+    "SHADOW_RESULT.json": {
+      "on_disk_sha256": "9d20307e8e3038bc3b219d1e34959b6ed69143dcbdcbc67a475f32b16af49562",
+      "has_crlf": true,
+      "lf_normalized_sha256": "86675564ae8c5b2a49ce467d4e7614d11dcda927cf4f94ea60d91fdd5d7deda5",
+      "git_blob_id_of_working_copy": "e35f84a39484c146afcf9b42efbe12ca03075a36"
+    }
+  },
+  "tracked_in_git": {
+    "artifacts_dir": "gitignored -- never round trips through git",
+    "baseline_and_candidate_dirs": "untracked"
+  },
+  "boundary": "This measures line endings and hash arithmetic on this checkout. It does not run a clone, so it predicts rather than observes what a fresh LF checkout would compute; the prediction is arithmetic, not a claim about git's behaviour on another host.",
+  "finding": {
+    "declared_hashes_match_disk": true,
+    "frozen_trees_are_crlf": true,
+    "lf_checkout_would_change_artifact_hashes": true,
+    "lf_checkout_would_change_evidence_file_hashes": true
+  }
+}

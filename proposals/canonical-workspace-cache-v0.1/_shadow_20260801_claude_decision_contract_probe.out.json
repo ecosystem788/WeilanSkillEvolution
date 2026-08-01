@@ -1,0 +1,47 @@
+{
+  "probe": "what validate_decision actually binds",
+  "authority": "read_only_probe_never_a_decision_never_a_deployment",
+  "arm_a_real_assembled_shadow_result": {
+    "result_hash": "13a694cf8ac6e0dbce2e59051d5d2826e4d3601e1ed84389d1acc5cc87c9fe11",
+    "adoption_eligible": true,
+    "metrics_verified": "8/8",
+    "decision_would_validate": true,
+    "issues": []
+  },
+  "arm_b_hollow_fabricated_shadow_result": {
+    "fields_present": [
+      "adoption_eligible",
+      "baseline_artifact_hash",
+      "candidate_artifact_hash",
+      "note",
+      "result_hash"
+    ],
+    "decision_would_validate": true,
+    "issues": []
+  },
+  "arm_c_canonical_producer_requirements": {
+    "empty_plan_issue_count": 18,
+    "empty_plan_issues": [
+      "unsupported shadow-plan schema",
+      "missing shadow-plan shadow_id",
+      "missing shadow-plan baseline_artifact_hash",
+      "missing shadow-plan candidate_artifact_hash",
+      "missing shadow-plan configuration_hash",
+      "missing shadow-plan evaluation_manifest_hash",
+      "missing shadow-plan case_spec_hash",
+      "shadow plan requires distinct baseline and candidate artifacts",
+      "shadow plan evaluation manifest hash mismatch",
+      "shadow plan validation requires the loaded frozen case set",
+      "shadow plan configuration_hash must bind a canonical manifest",
+      "shadow plan requires environment_id",
+      "shadow plan fixture_manifest_hashes must cover every case exactly",
+      "shadow plan evaluator_artifact_hashes must cover every case exactly",
+      "shadow plan must predeclare equal-case aggregation",
+      "shadow plan receipt budget cannot cover the frozen evaluation suite",
+      "shadow plan lacks an external adoption gate",
+      "shadow gate lacks min_mean_delta"
+    ]
+  },
+  "finding": "validate_decision binds the decision to a result_hash and two artifact hashes and reads adoption_eligible. It does not read schema_version, evidence_kind, checks, gate_failures, or any provenance field of the shadow result, and it does not require that the result came from run_shadow. Whether targeted executable verification may occupy the shadow-result slot is therefore a governance judgment; the tooling will accept either and cannot make it for us.",
+  "boundary": "This measures the validator, not the candidate. It says nothing about whether the canonical-workspace-cache candidate is correct, and it is not an argument that the assembled evidence is weak -- arm A carries eight verified metrics that arm B does not. It only shows the validator cannot tell them apart."
+}
