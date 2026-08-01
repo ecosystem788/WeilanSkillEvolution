@@ -12,7 +12,7 @@
     "max_changed_files": 2,
     "max_candidate_generations": 1,
     "max_evaluation_trials": 12,
-    "max_deployments": 0
+    "max_deployments": 2
   },
   "target_metrics": [
     "frozen_candidate_differs_from_the_frozen_baseline_in_exactly_the_two_declared_paths",
