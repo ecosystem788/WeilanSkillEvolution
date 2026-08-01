@@ -1,0 +1,113 @@
+{
+  "authority": "read_only_measurement",
+  "boundary": "extraction and classification only; not evidentiary verifiability, not non-ASCII path coverage",
+  "fix1_dots_only_component": {
+    "count": 3,
+    "items": [
+      {
+        "from": "claude",
+        "path": "proposals/..../ghost.md",
+        "physical_line": 3232,
+        "time": "2026-08-01T08:39:25+09:00"
+      },
+      {
+        "from": "claude",
+        "path": "proposals/..../ghost.md",
+        "physical_line": 3233,
+        "time": "2026-08-01T08:40:06+09:00"
+      },
+      {
+        "from": "claude",
+        "path": "proposals/..../ghost.md",
+        "physical_line": 3234,
+        "time": "2026-08-01T08:40:12+09:00"
+      }
+    ],
+    "question": "citations a dots-only(>=3) test catches that the literal '...' test misses"
+  },
+  "fix2_clean_set_inversion": {
+    "current_warning_statuses": [
+      "disk_only",
+      "ignored",
+      "missing",
+      "unresolvable_component"
+    ],
+    "invisible_to_current_warning_count": 3,
+    "items": [
+      {
+        "from": "claude",
+        "path": "proposals/..../ghost.md",
+        "physical_line": 3232,
+        "status": "check_error:invalid_path",
+        "time": "2026-08-01T08:39:25+09:00"
+      },
+      {
+        "from": "claude",
+        "path": "proposals/..../ghost.md",
+        "physical_line": 3233,
+        "status": "check_error:invalid_path",
+        "time": "2026-08-01T08:40:06+09:00"
+      },
+      {
+        "from": "claude",
+        "path": "proposals/..../ghost.md",
+        "physical_line": 3234,
+        "status": "check_error:invalid_path",
+        "time": "2026-08-01T08:40:12+09:00"
+      }
+    ],
+    "proposed_clean_statuses": [
+      "tracked_head",
+      "history_only"
+    ],
+    "question": "citations counted by neither clean-set nor current warning_statuses",
+    "status_counts": {
+      "check_error:invalid_path": 3,
+      "disk_only": 6,
+      "history_only": 1,
+      "ignored": 2,
+      "missing": 61,
+      "tracked_head": 633,
+      "unresolvable_component": 2
+    }
+  },
+  "fix3_rev_suffix_guard": {
+    "dropped_count": 4,
+    "items": [
+      {
+        "context": " base：git show e830a26^:proposals/mutual-aid-v0.1/test_peer_health_wake.py",
+        "from": "claude",
+        "path": "proposals/mutual-aid-v0.1/test_peer_health_wake.py",
+        "physical_line": 2841,
+        "time": "2026-07-28T11:18:15+09:00"
+      },
+      {
+        "context": ",原文是 `git show e830a26^:proposals/mutual-aid-v0.1/test_peer_health_wake.py",
+        "from": "claude",
+        "path": "proposals/mutual-aid-v0.1/test_peer_health_wake.py",
+        "physical_line": 3232,
+        "time": "2026-08-01T08:39:25+09:00"
+      },
+      {
+        "context": ":我引的 `git show e830a26^:proposals/mutual-aid-v0.1/test_peer_health_wake.py",
+        "from": "claude",
+        "path": "proposals/mutual-aid-v0.1/test_peer_health_wake.py",
+        "physical_line": 3233,
+        "time": "2026-08-01T08:40:06+09:00"
+      },
+      {
+        "context": ":我引的 `git show e830a26^:proposals/mutual-aid-v0.1/test_peer_health_wake.py",
+        "from": "claude",
+        "path": "proposals/mutual-aid-v0.1/test_peer_health_wake.py",
+        "physical_line": 3234,
+        "time": "2026-08-01T08:40:12+09:00"
+      }
+    ],
+    "question": "citations the widened lookbehind stops extracting",
+    "widened_lookbehind": "(?<![A-Za-z0-9^}~]:)"
+  },
+  "ledger_rows": 3234,
+  "parse_errors": 3,
+  "probe": "adjudication_cost_of_three_fixes",
+  "total_citations": 708
+}
