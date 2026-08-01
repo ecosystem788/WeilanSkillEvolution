@@ -1,0 +1,286 @@
+{
+ "arm": "current_deployed_baseline",
+ "boundary": [
+  "(model thinking, harness round-trip, permission checks) -- that gap is computed",
+  "separately in the `outside_process` section from this turn's own tool-call",
+  "timestamps, and is explicitly an estimate, not an instrumented measurement."
+ ],
+ "buckets_s": {
+  "command_body_delta": {
+   "lineage-show": 34.0528,
+   "memory-recall": 1.5225,
+   "prospective-show": 0.4523
+  },
+  "interpreter_startup": 0.0587,
+  "module_import_delta": 0.1219,
+  "parser_build_delta": 0.1083
+ },
+ "head_frame_id_probed": null,
+ "ladder": {
+  "rung0_bare_interpreter": {
+   "max_s": 0.0646,
+   "median_s": 0.0587,
+   "min_s": 0.0558,
+   "n": 5,
+   "rcs": [
+    0
+   ],
+   "runs": [
+    {
+     "elapsed_s": 0.0592,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 0
+    },
+    {
+     "elapsed_s": 0.0558,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 0
+    },
+    {
+     "elapsed_s": 0.0561,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 0
+    },
+    {
+     "elapsed_s": 0.0646,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 0
+    },
+    {
+     "elapsed_s": 0.0587,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 0
+    }
+   ],
+   "stdout_bytes": 0
+  },
+  "rung1_import_module": {
+   "max_s": 0.1886,
+   "median_s": 0.1806,
+   "min_s": 0.1741,
+   "n": 5,
+   "rcs": [
+    0
+   ],
+   "runs": [
+    {
+     "elapsed_s": 0.1886,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 0
+    },
+    {
+     "elapsed_s": 0.1814,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 0
+    },
+    {
+     "elapsed_s": 0.1751,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 0
+    },
+    {
+     "elapsed_s": 0.1741,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 0
+    },
+    {
+     "elapsed_s": 0.1806,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 0
+    }
+   ],
+   "stdout_bytes": 0
+  },
+  "rung2_build_parser_help": {
+   "max_s": 0.3103,
+   "median_s": 0.2889,
+   "min_s": 0.2736,
+   "n": 5,
+   "rcs": [
+    0
+   ],
+   "runs": [
+    {
+     "elapsed_s": 0.2754,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 8885
+    },
+    {
+     "elapsed_s": 0.3103,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 8885
+    },
+    {
+     "elapsed_s": 0.2736,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 8885
+    },
+    {
+     "elapsed_s": 0.2889,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 8885
+    },
+    {
+     "elapsed_s": 0.2921,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 8885
+    }
+   ],
+   "stdout_bytes": 8885
+  }
+ },
+ "ledger_size": {
+  "exists": true,
+  "file_count": 6494,
+  "frame_json_count": 0,
+  "method_state_root": "D:\\CodexData\\home\\method-state",
+  "total_bytes": 50549372
+ },
+ "probe": "latency_buckets",
+ "python": "3.11.9",
+ "read_only_commands": {
+  "lineage-show": {
+   "max_s": 36.0585,
+   "median_s": 34.3417,
+   "min_s": 33.8107,
+   "n": 5,
+   "rcs": [
+    0
+   ],
+   "runs": [
+    {
+     "elapsed_s": 33.838,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 1408548
+    },
+    {
+     "elapsed_s": 34.6604,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 1408548
+    },
+    {
+     "elapsed_s": 36.0585,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 1408548
+    },
+    {
+     "elapsed_s": 34.3417,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 1408548
+    },
+    {
+     "elapsed_s": 33.8107,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 1408548
+    }
+   ],
+   "stdout_bytes": 1408548
+  },
+  "memory-recall": {
+   "max_s": 1.8951,
+   "median_s": 1.8114,
+   "min_s": 1.7631,
+   "n": 5,
+   "rcs": [
+    0
+   ],
+   "runs": [
+    {
+     "elapsed_s": 1.8951,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 40851
+    },
+    {
+     "elapsed_s": 1.8662,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 40851
+    },
+    {
+     "elapsed_s": 1.8114,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 40851
+    },
+    {
+     "elapsed_s": 1.7635,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 40851
+    },
+    {
+     "elapsed_s": 1.7631,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 40851
+    }
+   ],
+   "stdout_bytes": 40851
+  },
+  "prospective-show": {
+   "max_s": 0.7815,
+   "median_s": 0.7412,
+   "min_s": 0.7277,
+   "n": 5,
+   "rcs": [
+    0
+   ],
+   "runs": [
+    {
+     "elapsed_s": 0.7815,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 209080
+    },
+    {
+     "elapsed_s": 0.7367,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 209080
+    },
+    {
+     "elapsed_s": 0.7429,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 209080
+    },
+    {
+     "elapsed_s": 0.7277,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 209080
+    },
+    {
+     "elapsed_s": 0.7412,
+     "rc": 0,
+     "stderr_bytes": 0,
+     "stdout_bytes": 209080
+    }
+   ],
+   "stdout_bytes": 209080
+  }
+ },
+ "repeats": 5,
+ "trace_script": "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan\\scripts\\weilan_trace.py"
+}

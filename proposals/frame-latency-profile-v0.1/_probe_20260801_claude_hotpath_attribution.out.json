@@ -1,0 +1,514 @@
+{
+ "boundary": [
+  "than the uninstrumented 34s. Read the SHARES, not the absolute totals; the",
+  "uninstrumented number of record is in the bucket-ladder probe."
+ ],
+ "by_cumulative": [
+  {
+   "cumtime_s": 40.3765,
+   "func": "weilan_trace.py:1(<module>)",
+   "ncalls": 1,
+   "primitive_calls": 1,
+   "tottime_s": 0.0002
+  },
+  {
+   "cumtime_s": 40.3765,
+   "func": "~:0(<built-in method builtins.exec>)",
+   "ncalls": 27,
+   "primitive_calls": 1,
+   "tottime_s": 0.0003
+  },
+  {
+   "cumtime_s": 40.3029,
+   "func": "weilan_trace.py:7942(main)",
+   "ncalls": 1,
+   "primitive_calls": 1,
+   "tottime_s": 0.0046
+  },
+  {
+   "cumtime_s": 40.2406,
+   "func": "weilan_trace.py:691(command_lineage_show)",
+   "ncalls": 1,
+   "primitive_calls": 1,
+   "tottime_s": 0.0697
+  },
+  {
+   "cumtime_s": 29.9939,
+   "func": "weilan_trace.py:224(find_frame)",
+   "ncalls": 5936,
+   "primitive_calls": 5936,
+   "tottime_s": 0.0416
+  },
+  {
+   "cumtime_s": 25.2883,
+   "func": "pathlib.py:940(glob)",
+   "ncalls": 11906,
+   "primitive_calls": 11906,
+   "tottime_s": 0.0663
+  },
+  {
+   "cumtime_s": 24.1601,
+   "func": "pathlib.py:353(_select_from)",
+   "ncalls": 11906,
+   "primitive_calls": 11906,
+   "tottime_s": 1.0517
+  },
+  {
+   "cumtime_s": 23.7511,
+   "func": "pathlib.py:1008(stat)",
+   "ncalls": 231508,
+   "primitive_calls": 231508,
+   "tottime_s": 0.274
+  },
+  {
+   "cumtime_s": 23.5083,
+   "func": "~:0(<built-in method nt.stat>)",
+   "ncalls": 231658,
+   "primitive_calls": 231658,
+   "tottime_s": 22.1823
+  },
+  {
+   "cumtime_s": 22.3623,
+   "func": "pathlib.py:1230(exists)",
+   "ncalls": 213697,
+   "primitive_calls": 213697,
+   "tottime_s": 0.5382
+  },
+  {
+   "cumtime_s": 21.5701,
+   "func": "pathlib.py:337(_select_from)",
+   "ncalls": 207760,
+   "primitive_calls": 207760,
+   "tottime_s": 0.2418
+  },
+  {
+   "cumtime_s": 8.3227,
+   "func": "weilan_trace.py:304(read_events)",
+   "ncalls": 11872,
+   "primitive_calls": 11872,
+   "tottime_s": 0.0296
+  },
+  {
+   "cumtime_s": 8.2887,
+   "func": "weilan_trace.py:1456(memoized_value)",
+   "ncalls": 11872,
+   "primitive_calls": 11872,
+   "tottime_s": 0.027
+  },
+  {
+   "cumtime_s": 8.2556,
+   "func": "weilan_trace.py:305(load)",
+   "ncalls": 11872,
+   "primitive_calls": 11872,
+   "tottime_s": 0.0512
+  },
+  {
+   "cumtime_s": 5.8337,
+   "func": "weilan_trace.py:238(read_events_raw)",
+   "ncalls": 11872,
+   "primitive_calls": 11872,
+   "tottime_s": 0.2135
+  },
+  {
+   "cumtime_s": 5.8301,
+   "func": "weilan_trace.py:376(load_lineage_records)",
+   "ncalls": 1,
+   "primitive_calls": 1,
+   "tottime_s": 0.0
+  },
+  {
+   "cumtime_s": 5.8294,
+   "func": "weilan_trace.py:1440(memoized_records)",
+   "ncalls": 1,
+   "primitive_calls": 1,
+   "tottime_s": 0.0
+  },
+  {
+   "cumtime_s": 5.8294,
+   "func": "weilan_trace.py:1611(load_scoped_ledger_records)",
+   "ncalls": 1,
+   "primitive_calls": 1,
+   "tottime_s": 0.0
+  },
+  {
+   "cumtime_s": 5.8294,
+   "func": "weilan_trace.py:1612(loader)",
+   "ncalls": 1,
+   "primitive_calls": 1,
+   "tottime_s": 0.0304
+  },
+  {
+   "cumtime_s": 5.4737,
+   "func": "runtime_core.py:31(normalized_workspace)",
+   "ncalls": 11873,
+   "primitive_calls": 11873,
+   "tottime_s": 0.0229
+  },
+  {
+   "cumtime_s": 5.377,
+   "func": "runtime_core.py:26(canonical_workspace)",
+   "ncalls": 11874,
+   "primitive_calls": 11874,
+   "tottime_s": 0.0592
+  },
+  {
+   "cumtime_s": 5.0965,
+   "func": "pathlib.py:981(resolve)",
+   "ncalls": 11874,
+   "primitive_calls": 11874,
+   "tottime_s": 0.0497
+  },
+  {
+   "cumtime_s": 4.3477,
+   "func": "weilan_trace.py:226(<listcomp>)",
+   "ncalls": 5936,
+   "primitive_calls": 5936,
+   "tottime_s": 0.0219
+  },
+  {
+   "cumtime_s": 3.4834,
+   "func": "<frozen ntpath>:674(realpath)",
+   "ncalls": 11874,
+   "primitive_calls": 11874,
+   "tottime_s": 0.09
+  },
+  {
+   "cumtime_s": 3.346,
+   "func": "transaction.py:95(iter_ledger_lines)",
+   "ncalls": 49243,
+   "primitive_calls": 49243,
+   "tottime_s": 0.1515
+  }
+ ],
+ "by_tottime": [
+  {
+   "cumtime_s": 23.5083,
+   "func": "~:0(<built-in method nt.stat>)",
+   "ncalls": 231658,
+   "primitive_calls": 231658,
+   "tottime_s": 22.1823
+  },
+  {
+   "cumtime_s": 3.1807,
+   "func": "~:0(<built-in method nt._getfinalpathname>)",
+   "ncalls": 23748,
+   "primitive_calls": 23748,
+   "tottime_s": 3.1807
+  },
+  {
+   "cumtime_s": 1.7531,
+   "func": "~:0(<built-in method io.open>)",
+   "ncalls": 11909,
+   "primitive_calls": 11909,
+   "tottime_s": 1.6846
+  },
+  {
+   "cumtime_s": 24.1601,
+   "func": "pathlib.py:353(_select_from)",
+   "ncalls": 11906,
+   "primitive_calls": 11906,
+   "tottime_s": 1.0517
+  },
+  {
+   "cumtime_s": 1.6194,
+   "func": "pathlib.py:56(parse_parts)",
+   "ncalls": 193437,
+   "primitive_calls": 193437,
+   "tottime_s": 0.916
+  },
+  {
+   "cumtime_s": 1.2085,
+   "func": "pathlib.py:536(__str__)",
+   "ncalls": 284974,
+   "primitive_calls": 284974,
+   "tottime_s": 0.7262
+  },
+  {
+   "cumtime_s": 0.6815,
+   "func": "~:0(<built-in method nt.scandir>)",
+   "ncalls": 5937,
+   "primitive_calls": 5937,
+   "tottime_s": 0.6726
+  },
+  {
+   "cumtime_s": 0.5461,
+   "func": "~:0(<method 'read' of '_io.BufferedReader' objects>)",
+   "ncalls": 11934,
+   "primitive_calls": 11934,
+   "tottime_s": 0.5461
+  },
+  {
+   "cumtime_s": 22.3623,
+   "func": "pathlib.py:1230(exists)",
+   "ncalls": 213697,
+   "primitive_calls": 213697,
+   "tottime_s": 0.5382
+  },
+  {
+   "cumtime_s": 2.2033,
+   "func": "pathlib.py:484(_parse_args)",
+   "ncalls": 187500,
+   "primitive_calls": 187500,
+   "tottime_s": 0.4842
+  },
+  {
+   "cumtime_s": 0.8139,
+   "func": "pathlib.py:877(_make_child_relpath)",
+   "ncalls": 403681,
+   "primitive_calls": 403681,
+   "tottime_s": 0.3973
+  },
+  {
+   "cumtime_s": 0.4147,
+   "func": "pathlib.py:147(splitroot)",
+   "ncalls": 264990,
+   "primitive_calls": 264990,
+   "tottime_s": 0.3877
+  },
+  {
+   "cumtime_s": 0.3574,
+   "func": "~:0(<method '__exit__' of '_io._IOBase' objects>)",
+   "ncalls": 11934,
+   "primitive_calls": 11934,
+   "tottime_s": 0.3574
+  },
+  {
+   "cumtime_s": 0.5115,
+   "func": "pathlib.py:515(_from_parsed_parts)",
+   "ncalls": 500381,
+   "primitive_calls": 500381,
+   "tottime_s": 0.3511
+  },
+  {
+   "cumtime_s": 0.4822,
+   "func": "pathlib.py:523(_format_parsed_parts)",
+   "ncalls": 255290,
+   "primitive_calls": 255290,
+   "tottime_s": 0.351
+  },
+  {
+   "cumtime_s": 0.3306,
+   "func": "decoder.py:343(raw_decode)",
+   "ncalls": 37334,
+   "primitive_calls": 37334,
+   "tottime_s": 0.3306
+  },
+  {
+   "cumtime_s": 0.2855,
+   "func": "~:0(<method 'fullmatch' of 're.Pattern' objects>)",
+   "ncalls": 201858,
+   "primitive_calls": 201858,
+   "tottime_s": 0.2855
+  },
+  {
+   "cumtime_s": 23.7511,
+   "func": "pathlib.py:1008(stat)",
+   "ncalls": 231508,
+   "primitive_calls": 231508,
+   "tottime_s": 0.274
+  },
+  {
+   "cumtime_s": 1.4645,
+   "func": "pathlib.py:546(__fspath__)",
+   "ncalls": 261228,
+   "primitive_calls": 261228,
+   "tottime_s": 0.2667
+  },
+  {
+   "cumtime_s": 21.5701,
+   "func": "pathlib.py:337(_select_from)",
+   "ncalls": 207760,
+   "primitive_calls": 207760,
+   "tottime_s": 0.2418
+  },
+  {
+   "cumtime_s": 5.8337,
+   "func": "weilan_trace.py:238(read_events_raw)",
+   "ncalls": 11872,
+   "primitive_calls": 11872,
+   "tottime_s": 0.2135
+  },
+  {
+   "cumtime_s": 1.0931,
+   "func": "pathlib.py:530(_make_child)",
+   "ncalls": 96700,
+   "primitive_calls": 96700,
+   "tottime_s": 0.207
+  },
+  {
+   "cumtime_s": 0.4241,
+   "func": "<frozen os>:674(__getitem__)",
+   "ncalls": 111772,
+   "primitive_calls": 111772,
+   "tottime_s": 0.2048
+  },
+  {
+   "cumtime_s": 2.4398,
+   "func": "runtime_core.py:16(state_root)",
+   "ncalls": 55143,
+   "primitive_calls": 55143,
+   "tottime_s": 0.1961
+  },
+  {
+   "cumtime_s": 0.1947,
+   "func": "~:0(<built-in method __new__ of type object at 0x00007FFDE4290FD0>)",
+   "ncalls": 591214,
+   "primitive_calls": 591214,
+   "tottime_s": 0.1947
+  }
+ ],
+ "named_suspects": {
+  "find_frame": [
+   {
+    "cumtime_s": 29.9939,
+    "func": "weilan_trace.py:224(find_frame)",
+    "ncalls": 5936,
+    "tottime_s": 0.0416
+   }
+  ],
+  "glob": [
+   {
+    "cumtime_s": 25.2883,
+    "func": "pathlib.py:940(glob)",
+    "ncalls": 11906,
+    "tottime_s": 0.0663
+   },
+   {
+    "cumtime_s": 0.0,
+    "func": "~:0(<built-in method builtins.globals>)",
+    "ncalls": 14,
+    "tottime_s": 0.0
+   }
+  ],
+  "listdir": [
+   {
+    "cumtime_s": 0.0007,
+    "func": "~:0(<built-in method nt.listdir>)",
+    "ncalls": 3,
+    "tottime_s": 0.0007
+   }
+  ],
+  "load_lineage_records": [
+   {
+    "cumtime_s": 5.8301,
+    "func": "weilan_trace.py:376(load_lineage_records)",
+    "ncalls": 1,
+    "tottime_s": 0.0
+   }
+  ],
+  "loads": [
+   {
+    "cumtime_s": 0.6786,
+    "func": "__init__.py:299(loads)",
+    "ncalls": 37334,
+    "tottime_s": 0.084
+   },
+   {
+    "cumtime_s": 0.0041,
+    "func": "~:0(<built-in method marshal.loads>)",
+    "ncalls": 25,
+    "tottime_s": 0.0041
+   }
+  ],
+  "open": [
+   {
+    "cumtime_s": 1.7701,
+    "func": "pathlib.py:1036(open)",
+    "ncalls": 11909,
+    "tottime_s": 0.017
+   },
+   {
+    "cumtime_s": 1.7531,
+    "func": "~:0(<built-in method io.open>)",
+    "ncalls": 11909,
+    "tottime_s": 1.6846
+   },
+   {
+    "cumtime_s": 0.0125,
+    "func": "~:0(<built-in method io.open_code>)",
+    "ncalls": 25,
+    "tottime_s": 0.0125
+   },
+   {
+    "cumtime_s": 0.0003,
+    "func": "hashlib.py:126(__get_openssl_constructor)",
+    "ncalls": 14,
+    "tottime_s": 0.0
+   },
+   {
+    "cumtime_s": 0.0,
+    "func": "_parser.py:86(opengroup)",
+    "ncalls": 9,
+    "tottime_s": 0.0
+   }
+  ],
+  "read_events": [
+   {
+    "cumtime_s": 8.3227,
+    "func": "weilan_trace.py:304(read_events)",
+    "ncalls": 11872,
+    "tottime_s": 0.0296
+   },
+   {
+    "cumtime_s": 5.8337,
+    "func": "weilan_trace.py:238(read_events_raw)",
+    "ncalls": 11872,
+    "tottime_s": 0.2135
+   }
+  ],
+  "scandir": [
+   {
+    "cumtime_s": 0.6888,
+    "func": "pathlib.py:934(_scandir)",
+    "ncalls": 5937,
+    "tottime_s": 0.0073
+   },
+   {
+    "cumtime_s": 0.6815,
+    "func": "~:0(<built-in method nt.scandir>)",
+    "ncalls": 5937,
+    "tottime_s": 0.6726
+   }
+  ],
+  "stat": [
+   {
+    "cumtime_s": 23.7511,
+    "func": "pathlib.py:1008(stat)",
+    "ncalls": 231508,
+    "tottime_s": 0.274
+   },
+   {
+    "cumtime_s": 23.5083,
+    "func": "~:0(<built-in method nt.stat>)",
+    "ncalls": 231658,
+    "tottime_s": 22.1823
+   },
+   {
+    "cumtime_s": 2.4398,
+    "func": "runtime_core.py:16(state_root)",
+    "ncalls": 55143,
+    "tottime_s": 0.1961
+   },
+   {
+    "cumtime_s": 0.0332,
+    "func": "weilan_trace.py:384(derive_lineage_state)",
+    "ncalls": 1,
+    "tottime_s": 0.0247
+   },
+   {
+    "cumtime_s": 0.0313,
+    "func": "<frozen importlib._bootstrap_external>:140(_path_stat)",
+    "ncalls": 150,
+    "tottime_s": 0.0001
+   }
+  ]
+ },
+ "probe": "hotpath_attribution",
+ "profiled_run": {
+  "rc": 0,
+  "stderr_tail": "",
+  "stdout_bytes": 1408548
+ },
+ "total_calls": 10830028,
+ "total_profiled_s": 40.3764
+}

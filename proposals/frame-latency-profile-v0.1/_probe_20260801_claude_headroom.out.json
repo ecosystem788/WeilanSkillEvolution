@@ -1,0 +1,22 @@
+{
+ "cost_a_path_canonicalization": {
+  "dict_cached_s": 0.0148,
+  "distinct_inputs_in_this_bench": 1,
+  "note": "single-string bench; the deployed call sites pass a small set of distinct workspaces, so real distinct-key count is small but was not enumerated here",
+  "recoverable_s": 14.6755,
+  "uncached_s": 14.6903
+ },
+ "cost_b_whole_store_rescan": {
+  "date_dir_count": 34,
+  "frame_file_count": 6051,
+  "frames_root": "D:\\CodexData\\home\\method-state\\frames",
+  "glob_plus_stat_s": 0.7423,
+  "note": "collapse_trace_registry walks this set twice per `open` (freshness check, then index rebuild), and read_events parses each line as JSON on top of the raw read measured here",
+  "read_bytes": 13243995,
+  "read_every_file_s": 1.3558,
+  "total_bytes": 13243995
+ },
+ "observed_call_count": 37327,
+ "probe": "headroom",
+ "workspace": "D:\\WeilanSkillEvolution"
+}

@@ -1,0 +1,273 @@
+{
+ "boundary": [
+  "previous turn was 30.06s, archived in find-frame-index-v0.1/",
+  "_probe_20260801_claude_predeploy_latency.out.json). Read the SHARES."
+ ],
+ "by_cumulative": [
+  {
+   "cumtime_s": 42.1367,
+   "func": "weilan_trace.py:1(<module>)",
+   "ncalls": 1,
+   "tottime_s": 0.0002
+  },
+  {
+   "cumtime_s": 42.1367,
+   "func": "~:0(<built-in method builtins.exec>)",
+   "ncalls": 27,
+   "tottime_s": 0.0003
+  },
+  {
+   "cumtime_s": 42.0659,
+   "func": "weilan_trace.py:7942(main)",
+   "ncalls": 1,
+   "tottime_s": 0.0001
+  },
+  {
+   "cumtime_s": 42.0172,
+   "func": "weilan_trace.py:534(command_open_lineaged)",
+   "ncalls": 1,
+   "tottime_s": 0.0083
+  },
+  {
+   "cumtime_s": 42.0172,
+   "func": "weilan_trace.py:731(command_open)",
+   "ncalls": 1,
+   "tottime_s": 0.0
+  },
+  {
+   "cumtime_s": 42.0061,
+   "func": "weilan_trace.py:544(command_open_lineaged_fenced)",
+   "ncalls": 1,
+   "tottime_s": 0.0004
+  },
+  {
+   "cumtime_s": 35.4608,
+   "func": "weilan_trace.py:4551(attach_trace_advisory_result)",
+   "ncalls": 1,
+   "tottime_s": 0.008
+  },
+  {
+   "cumtime_s": 35.4528,
+   "func": "weilan_trace.py:4529(trace_reentry_advisory_result)",
+   "ncalls": 1,
+   "tottime_s": 0.0363
+  },
+  {
+   "cumtime_s": 35.4156,
+   "func": "weilan_trace.py:4458(collapse_trace_registry)",
+   "ncalls": 1,
+   "tottime_s": 0.0423
+  },
+  {
+   "cumtime_s": 27.9727,
+   "func": "weilan_trace.py:1456(memoized_value)",
+   "ncalls": 18043,
+   "tottime_s": 0.042
+  },
+  {
+   "cumtime_s": 23.2635,
+   "func": "weilan_trace.py:6439(build_episode_index_value)",
+   "ncalls": 1,
+   "tottime_s": 0.0
+  },
+  {
+   "cumtime_s": 22.0293,
+   "func": "weilan_trace.py:6311(scoped_frame_paths)",
+   "ncalls": 2,
+   "tottime_s": 0.0
+  },
+  {
+   "cumtime_s": 22.0263,
+   "func": "weilan_trace.py:6315(scan)",
+   "ncalls": 2,
+   "tottime_s": 0.1043
+  },
+  {
+   "cumtime_s": 18.614,
+   "func": "runtime_core.py:31(normalized_workspace)",
+   "ncalls": 37321,
+   "tottime_s": 0.0929
+  },
+  {
+   "cumtime_s": 18.2657,
+   "func": "runtime_core.py:26(canonical_workspace)",
+   "ncalls": 37327,
+   "tottime_s": 0.2116
+  },
+  {
+   "cumtime_s": 17.2977,
+   "func": "pathlib.py:981(resolve)",
+   "ncalls": 37345,
+   "tottime_s": 0.175
+  },
+  {
+   "cumtime_s": 15.0759,
+   "func": "weilan_trace.py:304(read_events)",
+   "ncalls": 18041,
+   "tottime_s": 0.0532
+  },
+  {
+   "cumtime_s": 14.889,
+   "func": "weilan_trace.py:305(load)",
+   "ncalls": 18041,
+   "tottime_s": 0.0901
+  },
+  {
+   "cumtime_s": 11.9293,
+   "func": "<frozen ntpath>:674(realpath)",
+   "ncalls": 37345,
+   "tottime_s": 0.3285
+  },
+  {
+   "cumtime_s": 11.623,
+   "func": "weilan_trace.py:6476(episode_index_is_fresh)",
+   "ncalls": 1,
+   "tottime_s": 0.0047
+  },
+  {
+   "cumtime_s": 10.8475,
+   "func": "~:0(<built-in method nt._getfinalpathname>)",
+   "ncalls": 74690,
+   "tottime_s": 10.8475
+  },
+  {
+   "cumtime_s": 10.727,
+   "func": "weilan_trace.py:6443(<listcomp>)",
+   "ncalls": 1,
+   "tottime_s": 0.0394
+  },
+  {
+   "cumtime_s": 10.5162,
+   "func": "weilan_trace.py:238(read_events_raw)",
+   "ncalls": 18041,
+   "tottime_s": 0.3655
+  },
+  {
+   "cumtime_s": 8.512,
+   "func": "pathlib.py:1008(stat)",
+   "ncalls": 67316,
+   "tottime_s": 0.08
+  },
+  {
+   "cumtime_s": 8.4623,
+   "func": "~:0(<built-in method nt.stat>)",
+   "ncalls": 67466,
+   "tottime_s": 8.0811
+  }
+ ],
+ "by_tottime": [
+  {
+   "cumtime_s": 10.8475,
+   "func": "~:0(<built-in method nt._getfinalpathname>)",
+   "ncalls": 74690,
+   "tottime_s": 10.8475
+  },
+  {
+   "cumtime_s": 8.4623,
+   "func": "~:0(<built-in method nt.stat>)",
+   "ncalls": 67466,
+   "tottime_s": 8.0811
+  },
+  {
+   "cumtime_s": 3.2139,
+   "func": "~:0(<built-in method io.open>)",
+   "ncalls": 18129,
+   "tottime_s": 3.0876
+  },
+  {
+   "cumtime_s": 3.0858,
+   "func": "pathlib.py:56(parse_parts)",
+   "ncalls": 304477,
+   "tottime_s": 1.7322
+  },
+  {
+   "cumtime_s": 1.0732,
+   "func": "~:0(<method 'read' of '_io.BufferedReader' objects>)",
+   "ncalls": 18147,
+   "tottime_s": 1.0732
+  },
+  {
+   "cumtime_s": 4.2352,
+   "func": "pathlib.py:484(_parse_args)",
+   "ncalls": 304469,
+   "tottime_s": 0.8878
+  },
+  {
+   "cumtime_s": 3.9214,
+   "func": "weilan_trace.py:2402(semantic_tokens)",
+   "ncalls": 5997,
+   "tottime_s": 0.856
+  },
+  {
+   "cumtime_s": 0.8536,
+   "func": "decoder.py:343(raw_decode)",
+   "ncalls": 54742,
+   "tottime_s": 0.8536
+  },
+  {
+   "cumtime_s": 0.847,
+   "func": "pathlib.py:147(splitroot)",
+   "ncalls": 449134,
+   "tottime_s": 0.7914
+  },
+  {
+   "cumtime_s": 0.5888,
+   "func": "~:0(<method 'fullmatch' of 're.Pattern' objects>)",
+   "ncalls": 618327,
+   "tottime_s": 0.5888
+  },
+  {
+   "cumtime_s": 1.7655,
+   "func": "__init__.py:168(fullmatch)",
+   "ncalls": 605857,
+   "tottime_s": 0.5342
+  },
+  {
+   "cumtime_s": 0.7632,
+   "func": "pathlib.py:536(__str__)",
+   "ncalls": 190140,
+   "tottime_s": 0.5218
+  },
+  {
+   "cumtime_s": 0.689,
+   "func": "__init__.py:272(_compile)",
+   "ncalls": 612838,
+   "tottime_s": 0.4852
+  },
+  {
+   "cumtime_s": 0.4693,
+   "func": "~:0(<method '__exit__' of '_io._IOBase' objects>)",
+   "ncalls": 18154,
+   "tottime_s": 0.4693
+  },
+  {
+   "cumtime_s": 0.4636,
+   "func": "~:0(<built-in method builtins.isinstance>)",
+   "ncalls": 1838599,
+   "tottime_s": 0.4636
+  }
+ ],
+ "elapsed_s_profiled": 42.407,
+ "find_frame": [
+  {
+   "cumtime_s": 0.0053,
+   "func": "weilan_trace.py:224(find_frame)",
+   "ncalls": 1,
+   "tottime_s": 0.0
+  }
+ ],
+ "nt_stat": [
+  {
+   "cumtime_s": 8.4623,
+   "func": "~:0(<built-in method nt.stat>)",
+   "ncalls": 67466,
+   "tottime_s": 8.0811
+  }
+ ],
+ "probe": "open_attribution",
+ "rc": 0,
+ "stderr_tail": "",
+ "stdout": "{\r\n  \"frame_id\": \"wf-20260801-015737-db44b4\",\r\n  \"path\": \"D:\\\\CodexData\\\\home\\\\method-state\\\\frames\\\\2026-08-01\\\\wf-20260801-015737-db44b4.jsonl\",\r\n  \"causal\": {\r\n    \"schema_version\": \"weilan_frame_lineage_v0.4\",\r\n    \"lineage_event_id\": \"c56346dd-f8a2-41de-8e36-31fdd93b67a0\",\r\n    \"scope\": \"skill-evolution\",\r\n    \"branch_id\": \"main\",\r\n    \"relation\": \"continue\",\r\n    \"parent_frame_ids\": [\r\n      \"wf-20260801-014615-bb5ed7\"\r\n    ],\r\n    \"joined_branch_ids\": []\r\n  },\r\n  \"branch_heads_path\": \"D:\\\\CodexData\\\\home\\\\method-state\\\\memory\\\\lineage\\\\heads\\\\d431c38105a9a791\\\\c36aecb1ff20.json\",\r\n  \"branch_heads\": {\r\n    \"main\": {\r\n      \"head_frame_id\": \"wf-20260801-015737-db44b4\",\r\n      \"status\": \"active\",\r\n      \"joined_into\": null\r\n    },\r\n    \"method-state-atomic-retry-v0.1-codex\": {\r\n      \"head_frame_id\": \"wf-20260710-145158-2856a7\",\r\n      \"status\": \"active\",\r\n      \"joined_into\": null\r\n    },\r\n    \"method-state-atomic-retry-v0.1-canary\": {\r\n      \"head_frame_id\": \"wf-20260710-151032-e43498\",\r\n      \"status\": \"active\",\r\n      \"joined_into\": null\r\n    },\r\n    \"claude-dash-amend-20260713\": {\r\n      \"head_frame_id\": \"wf-20260713-065533-9a617f\",\r\n      \"status\": \"active\",\r\n      \"joined_into\": null\r\n    },\r\n    \"codex-only-release-20260716\": {\r\n      \"head_frame_id\": \"wf-20260716-064901-72e801\",\r\n      \"status\": \"active\",\r\n      \"joined_into\": null\r\n    },\r\n    \"claude-rev6-20260720\": {\r\n      \"head_frame_id\": \"wf-20260720-132906-f9f31a\",\r\n      \"status\": \"active\",\r\n      \"joined_into\": null\r\n    },\r\n    \"claude-ladder-10b-20260722\": {\r\n      \"head_frame_id\": \"wf-20260722-073733-a5008a\",\r\n      \"status\": \"active\",\r\n      \"joined_into\": null\r\n    }\r\n  }\r\n}\r\n",
+ "total_calls": 15634795,
+ "total_profiled_s": 42.1367
+}
