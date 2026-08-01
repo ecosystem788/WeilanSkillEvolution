@@ -1,0 +1,249 @@
+{
+  "token": "lock timeout on",
+  "window_bytes": 420,
+  "total_occurrences": 30,
+  "occurrences_by_class": {
+    "ambiguous_both_markers": 14,
+    "unclassified": 16
+  },
+  "distinct_files_by_class": {
+    "ambiguous_both_markers": [
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-10T16-47-22.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-10T17-06-31.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-10T17-54-53.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-10T18-48-37.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-10T23-21-01.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-11T00-48-25.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-11T22-53-38.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-20T23-31-37.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-08-01T11-07-02.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-08-01T11-40-42.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-08-01T17-24-15.jsonl"
+    ],
+    "unclassified": [
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-22T10-49-41.err.txt",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-22T10-49-41.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-24T17-17-33.err.txt",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-24T17-17-33.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-25T13-34-02.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T12-05-46.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T12-32-35.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T12-47-45.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T13-17-25.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T14-30-35.jsonl",
+      "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-cron.log"
+    ]
+  },
+  "hits": [
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-10T16-47-22.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 373208,
+      "class": "ambiguous_both_markers",
+      "context": "t_error = exc\\r\\n if time.monotonic() >= deadline:\\r\\n break\\r\\n if last_error is not None:\\r\\n raise RuntimeError(\\r\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\r\\n ) from last_error\\r\\n try:\\r\\n yield\\r\\n finally:\\r\\n handle.seek(0)\\r\\n msv"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-10T17-06-31.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 305694,
+      "class": "ambiguous_both_markers",
+      "context": "t_error = exc\\r\\n if time.monotonic() >= deadline:\\r\\n break\\r\\n if last_error is not None:\\r\\n raise RuntimeError(\\r\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\r\\n ) from last_error\\r\\n try:\\r\\n yield\\r\\n finally:\\r\\n handle.seek(0)\\r\\n msv"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-10T17-54-53.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 482120,
+      "class": "ambiguous_both_markers",
+      "context": "last_error = exc\\n if time.monotonic() >= deadline:\\n break\\n if last_error is not None:\\n raise RuntimeError(\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\n ) from last_error\\n try:\\n yield\\n finally:\\n handle.seek(0)\\n msvcrt.locking("
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-10T18-48-37.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 400968,
+      "class": "ambiguous_both_markers",
+      "context": "t_error = exc\\r\\n if time.monotonic() >= deadline:\\r\\n break\\r\\n if last_error is not None:\\r\\n raise RuntimeError(\\r\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\r\\n ) from last_error\\r\\n try:\\r\\n yield\\r\\n finally:\\r\\n handle.seek(0)\\r\\n msv"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-10T23-21-01.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 416056,
+      "class": "ambiguous_both_markers",
+      "context": "last_error = exc\\n if time.monotonic() >= deadline:\\n break\\n if last_error is not None:\\n raise RuntimeError(\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\n ) from last_error\\n try:\\n yield\\n finally:\\n handle.seek(0)\\n msvcrt.locking("
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-11T00-48-25.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 169888,
+      "class": "ambiguous_both_markers",
+      "context": "last_error = exc\\n if time.monotonic() >= deadline:\\n break\\n if last_error is not None:\\n raise RuntimeError(\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\n ) from last_error\\n try:\\n yield\\n finally:\\n handle.seek(0)\\n msvcrt.locking("
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-11T00-48-25.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 197410,
+      "class": "ambiguous_both_markers",
+      "context": "last_error = exc\\n if time.monotonic() >= deadline:\\n break\\n if last_error is not None:\\n raise RuntimeError(\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\n ) from last_error\\n try:\\n yield\\n finally:\\n handle.seek(0)\\n msvcrt.locking("
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-11T22-53-38.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 787236,
+      "class": "ambiguous_both_markers",
+      "context": "last_error = exc\\n if time.monotonic() >= deadline:\\n break\\n if last_error is not None:\\n raise RuntimeError(\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\n ) from last_error\\n try:\\n yield\\n finally:\\n handle.seek(0)\\n msvcrt.locking("
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-20T23-31-37.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 547856,
+      "class": "ambiguous_both_markers",
+      "context": "t_error = exc\\r\\n if time.monotonic() >= deadline:\\r\\n break\\r\\n if last_error is not None:\\r\\n raise RuntimeError(\\r\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\r\\n ) from last_error\\r\\n try:\\r\\n yield\\r\\n finally:\\r\\n handle.seek(0)\\r\\n msv"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-22T10-49-41.err.txt",
+      "encoding": "utf-16-le",
+      "byte_offset": 3350,
+      "class": "unclassified",
+      "context": "failed to refresh available models: timeout waiting fo r child process to exit 2026-07-22T01:59:18.717951Z ERROR codex_core::tools::router: error=Exit code: 1 Wall time: 120.2 seconds Output: OPEN error: lock timeout on .workspace-contract.lock; another weilan session holds it 2026-07-22T02:00:10.999834Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting fo r child process to exit 20"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-22T10-49-41.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 2684264,
+      "class": "unclassified",
+      "context": "thon $trace projection-rebuild --workspace $ws --scope $scope --branch main 2>&1; Write-Output '\\\"'PROJECTION'; Write-Output (\\\"'$projRaw -join \\\"`n\\\"); exit $LASTEXITCODE'\",\"aggregated_output\":\"OPEN\\r\\nerror: lock timeout on .workspace-contract.lock; another weilan session holds it\\r\\n\",\"exit_code\":1,\"status\":\"failed\"}} {\"type\":\"item.completed\",\"item\":{\"id\":\"item_29\",\"type\":\"agent_message\",\"text\":\"缁抚鏈啓鍏ワ細璐︽湰鏄庣‘杩斿洖 `.workspace-c"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-24T17-17-33.err.txt",
+      "encoding": "utf-16-le",
+      "byte_offset": 7020,
+      "class": "unclassified",
+      "context": "ager: failed to refresh available models: timeout waiting fo r child process to exit 2026-07-24T08:33:42.129689Z ERROR codex_core::tools::router: error=Exit code: 1 Wall time: 135.9 seconds Output: error: lock timeout on .workspace-contract.lock; another weilan session holds it 2026-07-24T08:34:09.149633Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting fo r child process to exit 20"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-24T17-17-33.err.txt",
+      "encoding": "utf-16-le",
+      "byte_offset": 8334,
+      "class": "unclassified",
+      "context": "124 Wall time: 184.1 seconds Output: command timed out after 184104 milliseconds 2026-07-24T08:41:02.162117Z ERROR codex_core::tools::router: error=Exit code: 1 Wall time: 145.8 seconds Output: error: lock timeout on .workspace-contract.lock; another weilan session holds it 2026-07-24T08:41:34.728349Z ERROR codex_core::tools::router: error=Exit code: 124 Wall time: 20.8 seconds Output: command timed out after 20800 m"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-24T17-17-33.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 2962154,
+      "class": "unclassified",
+      "context": "n absolute codex.cmd plus version/hash preflight, persist a recomputable launched-harness snapshot, archive the c4d6303b stop result, and run exactly one authorized full shadow.'\\\"\",\"aggregated_output\":\"error: lock timeout on .workspace-contract.lock; another weilan session holds it\\r\\n\",\"exit_code\":1,\"status\":\"failed\"}} {\"type\":\"item.completed\",\"item\":{\"id\":\"item_38\",\"type\":\"agent_message\",\"text\":\"浜嬩欢杩藉姞澶辫触鐨勫師鍥犲凡鏄庣‘锛歚.workspace-c"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-24T17-17-33.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 3128710,
+      "class": "unclassified",
+      "context": "on, budget, migration, pairing, or guardrail mismatch stops fail-closed; no rerun and no threshold changes; no adoption/deployment/rollback/adoption decision/Gate B advancement.'\\\"\",\"aggregated_output\":\"error: lock timeout on .workspace-contract.lock; another weilan session holds it\\r\\n\",\"exit_code\":1,\"status\":\"failed\"}} {\"type\":\"item.completed\",\"item\":{\"id\":\"item_48\",\"type\":\"agent_message\",\"text\":\"`holder_selected` 鍐嶆鏄庣‘鎶?`.work"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-25T13-34-02.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 4688104,
+      "class": "unclassified",
+      "context": "_completed else []}\\n+ if args[0] == \\\"persistence-audit\\\" and not audit_completed:\\n+ if [call[0] for call in calls].count(\\\"persistence-audit\\\") == 1:\\n+ raise _trace_error(\\\"lock timeout on .workspace-contract.lock\\\")\\n+ audit_completed = True\\n+ return {\\\"saved\\\": True}\\n+ return {\\\"valid\\\": True}\\n+\\n+ monkeypatch.setattr(wake, \\\"_trace\\\", fake_trace)\\n+ monke"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T12-05-46.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 2681768,
+      "class": "unclassified",
+      "context": "_completed else []}\\n+ if args[0] == \\\"persistence-audit\\\" and not audit_completed:\\n+ if [call[0] for call in calls].count(\\\"persistence-audit\\\") == 1:\\n+ raise _trace_error(\\\"lock timeout on .workspace-contract.lock\\\")\\n+ audit_completed = True\\n+ return {\\\"saved\\\": True}\\n+ return {\\\"valid\\\": True}\\n+\\n+ monkeypatch.setattr(wake, \\\"_trace\\\", fake_trace)\\n+ monke"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T12-05-46.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 2894366,
+      "class": "unclassified",
+      "context": "est_wake_sentinel.py:281: if [call[0] for call in calls].count(\\\"persistence-audit\\\") == 1:\\r\\nproposals\\\\bounded-scheduler-v0.1\\\\impl\\\\test_wake_sentinel.py:282: raise _trace_error(\\\"lock timeout on .workspace-contract.lock\\\")\\r\\nproposals\\\\bounded-scheduler-v0.1\\\\impl\\\\test_wake_sentinel.py:283: audit_completed = True\\r\\nproposals\\\\bounded-scheduler-v0.1\\\\impl\\\\test_wake_sentinel.py:284:"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T12-32-35.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 3266192,
+      "class": "unclassified",
+      "context": "l\\\\test_wake_sentinel.py-281- if [call[0] for call in calls].count(\\\"persistence-audit\\\") == 1:\\nproposals/bounded-scheduler-v0.1/impl\\\\test_wake_sentinel.py-282- raise _trace_error(\\\"lock timeout on .workspace-contract.lock\\\")\\nproposals/bounded-scheduler-v0.1/impl\\\\test_wake_sentinel.py-283- audit_completed = True\\n--\\nproposals/bounded-scheduler-v0.1/impl\\\\wake.py-51-# tearoom no longer depen"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T12-32-35.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 3423396,
+      "class": "unclassified",
+      "context": "\\n 280: if args[0] == \\\"persistence-audit\\\" and not audit_completed:\\r\\n 281: if [call[0] for call in calls].count(\\\"persistence-audit\\\") == 1:\\r\\n 282: raise _trace_error(\\\"lock timeout on .workspace-contract.lock\\\")\\r\\n 283: audit_completed = True\\r\\n 284: return {\\\"saved\\\": True}\\r\\n 285: return {\\\"valid\\\": True}\\r\\n 286: \\r\\n 287: monkeypatch.setattr(wake,"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T12-47-45.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 2949998,
+      "class": "unclassified",
+      "context": "_completed else []}\\n+ if args[0] == \\\"persistence-audit\\\" and not audit_completed:\\n+ if [call[0] for call in calls].count(\\\"persistence-audit\\\") == 1:\\n+ raise _trace_error(\\\"lock timeout on .workspace-contract.lock\\\")\\n+ audit_completed = True\\n+ return {\\\"saved\\\": True}\\n+ return {\\\"valid\\\": True}\\n+\\n+ monkeypatch.setattr(wake, \\\"_trace\\\", fake_trace)\\n+ monke"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T12-47-45.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 3120424,
+      "class": "unclassified",
+      "context": "else []}\\\\n if args[0] == \\\\\\\"persistence-audit\\\\\\\" and not audit_completed:\\\\n if [call[0] for call in calls].count(\\\\\\\"persistence-audit\\\\\\\") == 1:\\\\n raise _trace_error(\\\\\\\"lock timeout on .workspace-contract.lock\\\\\\\")\\\\n audit_completed = True\\\\n return {\\\\\\\"saved\\\\\\\": True}\\\\n return {\\\\\\\"valid\\\\\\\": True}\\\\n\\\\n monkeypatch.setattr(wake, \\\\\\\"_trace\\\\\\\", fake_trac"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T13-17-25.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 864732,
+      "class": "unclassified",
+      "context": "\\n 335: if args[0] == \\\"persistence-audit\\\" and not audit_completed:\\r\\n 336: if [call[0] for call in calls].count(\\\"persistence-audit\\\") == 1:\\r\\n 337: raise _trace_error(\\\"lock timeout on .workspace-contract.lock\\\")\\r\\n 338: audit_completed = True\\r\\n 339: return {\\\"saved\\\": True}\\r\\n 340: return {\\\"valid\\\": True}\\r\\n 341: \\r\\n 342: monkeypatch.setattr(wake,"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-07-26T14-30-35.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 377700,
+      "class": "unclassified",
+      "context": "dit_completed else []}\\n if args[0] == \\\"persistence-audit\\\" and not audit_completed:\\n if [call[0] for call in calls].count(\\\"persistence-audit\\\") == 1:\\n raise _trace_error(\\\"lock timeout on .workspace-contract.lock\\\")\\n audit_completed = True\\n return {\\\"saved\\\": True}\\n return {\\\"valid\\\": True}\\n\\n monkeypatch.setattr(wake, \\\"_trace\\\", fake_trace)\\n monkeypatch"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-08-01T11-07-02.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 2834704,
+      "class": "ambiguous_both_markers",
+      "context": "last_error = exc\\n if time.monotonic() >= deadline:\\n break\\n if last_error is not None:\\n raise RuntimeError(\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\n ) from last_error\\n try:\\n yield\\n finally:\\n handle.seek(0)\\n msvcrt.locking("
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-08-01T11-40-42.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 3148026,
+      "class": "ambiguous_both_markers",
+      "context": "t_error = exc\\r\\n if time.monotonic() >= deadline:\\r\\n break\\r\\n if last_error is not None:\\r\\n raise RuntimeError(\\r\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\r\\n ) from last_error\\r\\n try:\\r\\n yield\\r\\n finally:\\r\\n handle.seek(0)\\r\\n msv"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-08-01T11-40-42.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 3675906,
+      "class": "ambiguous_both_markers",
+      "context": "last_error = exc\\n if time.monotonic() >= deadline:\\n break\\n if last_error is not None:\\n raise RuntimeError(\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\n ) from last_error\\n try:\\n yield\\n finally:\\n handle.seek(0)\\n msvcrt.locking("
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-08-01T17-24-15.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 1686918,
+      "class": "ambiguous_both_markers",
+      "context": "last_error = exc\\n if time.monotonic() >= deadline:\\n break\\n if last_error is not None:\\n raise RuntimeError(\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\n ) from last_error\\n try:\\n yield\\n finally:\\n handle.seek(0)\\n msvcrt.locking("
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-codex-runs\\2026-08-01T17-24-15.jsonl",
+      "encoding": "utf-16-le",
+      "byte_offset": 2519228,
+      "class": "ambiguous_both_markers",
+      "context": "last_error = exc\\n if time.monotonic() >= deadline:\\n break\\n if last_error is not None:\\n raise RuntimeError(\\n f\\\"lock timeout on {path.name}; another weilan session holds it\\\"\\n ) from last_error\\n try:\\n yield\\n finally:\\n handle.seek(0)\\n msvcrt.locking("
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake-cron.log",
+      "encoding": "utf-8",
+      "byte_offset": 907037,
+      "class": "unclassified",
+      "context": "done rc=0 2026-07-24T17:29:06 wake ok stop=quiescent frame=wf-20260724-084843-3ff44f 2026-07-24T17:29:06 escalating: reasons=chat -> model episode 2026-07-24T17:40:16 ERROR rc=3 stage=native_exit diag_sha256=dc2cc79e3113c8fee469665f2324cf82c80b50cf8917c71a946e3897a86e1c47 stderr={ \"frame_commit_failure\": { \"stage\": \"frame_finalize\", \"command\": \"persistence-audit\", \"rc\": 1, \"stderr\": \"error: lock timeout on .workspace-contract.lock; another weilan session holds it\", \"frame_id\": \"wf-20260724-090 2026-07-24T17:50:01 ERROR rc=3 stage=native_exit diag_sha256=c05f59e39b49cb2c65b487cdcecdf2dbbf38059923fde3d91d88368bffd64207 stderr={ \"frame_commit_failure\": { \"stage\": \"frame_open_stale_head\", \"command\": \"open\", \"rc\": 1, \"stderr\": \"error: causal parent must be closed: wf-20260724-090757-5341fc\", \"at"
+    }
+  ]
+}

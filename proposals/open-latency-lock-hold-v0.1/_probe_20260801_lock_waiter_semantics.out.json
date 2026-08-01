@@ -1,0 +1,34 @@
+﻿{
+  "lock_impl": "runtime_core.exclusive_file_lock",
+  "platform": "nt",
+  "default_timeout_s_from_source": 120.0,
+  "arms": [
+    {
+      "arm": "A_default_timeout",
+      "holder_hold_s": 6.0,
+      "waiter_configured_timeout_s": null,
+      "holder_reached_lock": true,
+      "holder_returncode": 0,
+      "holder_stderr_tail": "",
+      "waiter_acquired": true,
+      "waiter_waited_s": 6.047,
+      "waiter_error": null,
+      "seconds_from_hold_start_to_waiter_return": 6.047
+    },
+    {
+      "arm": "B_short_timeout",
+      "holder_hold_s": 25.0,
+      "waiter_configured_timeout_s": 2,
+      "holder_reached_lock": true,
+      "holder_returncode": 0,
+      "holder_stderr_tail": "",
+      "waiter_acquired": false,
+      "waiter_waited_s": 9.047,
+      "waiter_error": {
+        "type": "RuntimeError",
+        "message": "lock timeout on B_short_timeout.lock; another weilan session holds it"
+      },
+      "seconds_from_hold_start_to_waiter_return": 9.047
+    }
+  ]
+}

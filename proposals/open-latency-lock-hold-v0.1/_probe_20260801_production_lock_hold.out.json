@@ -1,0 +1,12 @@
+{
+  "lock_kind": "workspace",
+  "lock_path": "D:\\CodexData\\home\\method-state\\memory\\metabolism\\fences\\workspaces\\d431c38105a9a791\\.workspace-contract.lock",
+  "delay_s": 2.0,
+  "acquired": true,
+  "blocked_s": 12.094,
+  "lock_hold_lower_bound_s": 14.094,
+  "error": null,
+  "probe_wall_s": 14.094,
+  "note": "blocked_s>~0 means another process held the lineage lock for at least that long after this probe started asking; the probe itself held the lock for microseconds and wrote nothing",
+  "env_lock_timeout_s": null
+}
