@@ -1,0 +1,128 @@
+{
+  "part_a_receipt_verification": {
+    "a1_alias": {
+      "t1_resolved": "D:\\CodexData\\skills\\solve-with-weilan",
+      "t2_resolved": "D:\\CodexData\\skills\\solve-with-weilan",
+      "resolve_collides": true,
+      "t1_file_id": [
+        4042177392,
+        1407374883726403
+      ],
+      "t2_file_id": [
+        4042177392,
+        1407374883726403
+      ],
+      "file_id_identical": true,
+      "claude_skills_is_reparse_point": true
+    },
+    "a2_current_state": {
+      "t1_tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "t2_tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "rollback_snapshot_tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "t1_is_baseline": true,
+      "t2_is_baseline": true,
+      "snapshot_is_baseline": true,
+      "any_is_candidate": false
+    },
+    "a3_package": {
+      "baseline_tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "candidate_tree_hash": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+      "baseline_matches": true,
+      "candidate_matches": true
+    },
+    "a4_receipt_math": {
+      "t1_decision_hash": "7a37981c344bb7131b273c834405e15573f2036225b94e82c82a2523e9f2fb99",
+      "receipt_decision_hash": "7a37981c344bb7131b273c834405e15573f2036225b94e82c82a2523e9f2fb99",
+      "decision_hash_matches": true,
+      "t1_deployment_id_recomputed": "56bc789721f37b7e5055d37a",
+      "deployment_id_matches": true,
+      "t2_deployment_id_would_have_been": "7006dc98cf715ae5830369bb",
+      "t2_id_differs_from_t1": true,
+      "receipt_before": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "receipt_after": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+      "before_is_baseline": true,
+      "after_is_candidate": true,
+      "rollback_restored": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "rollback_replaced": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+      "rollback_restored_is_baseline": true
+    },
+    "a5_budget": {
+      "max_deployments": 2,
+      "deployment_dirs": [
+        "56bc789721f37b7e5055d37a"
+      ],
+      "deployment_receipts": [
+        "deployments\\56bc789721f37b7e5055d37a\\DEPLOYMENT_RECEIPT.json"
+      ],
+      "deployment_intents": [
+        "deployments\\56bc789721f37b7e5055d37a\\DEPLOYMENT_INTENT.json"
+      ],
+      "consumed": 1,
+      "within_budget": true
+    }
+  },
+  "part_b_alias_guard_probe": {
+    "sandbox_root": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_alias_io5tm8pt",
+    "mklink_rc": 0,
+    "sandbox_hashes": {
+      "baseline": "fd4bfe9f2fcae3598e1029a1b450d50704273fb15d6ec7fd2fafd180cc986730",
+      "candidate": "a0df8ce36c19bfd8be45b9ffc769d2543fdc38e60e329d85fc9e320172800272",
+      "distinct": true
+    },
+    "alias_resolves_same": true,
+    "t1": {
+      "deployment_id": "4f8e58b1b129d9d0434136ca",
+      "before": "fd4bfe9f2fcae3598e1029a1b450d50704273fb15d6ec7fd2fafd180cc986730",
+      "after": "a0df8ce36c19bfd8be45b9ffc769d2543fdc38e60e329d85fc9e320172800272",
+      "reversible": true,
+      "before_is_baseline": true
+    },
+    "t2": {
+      "raised": null,
+      "deployment_id": "00a6685a4d274baf476239db",
+      "distinct_deployment_id": true,
+      "target_recorded": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_alias_io5tm8pt\\realskills\\solve-with-weilan",
+      "before": "a0df8ce36c19bfd8be45b9ffc769d2543fdc38e60e329d85fc9e320172800272",
+      "after": "a0df8ce36c19bfd8be45b9ffc769d2543fdc38e60e329d85fc9e320172800272",
+      "reversible": true,
+      "rollback_snapshot_tree_hash": "a0df8ce36c19bfd8be45b9ffc769d2543fdc38e60e329d85fc9e320172800272",
+      "rollback_snapshot_is_candidate_not_baseline": true
+    },
+    "verdict": {
+      "tool_fails_closed_on_alias": false,
+      "second_receipt_written_with_candidate_rollback_domain": true
+    }
+  },
+  "part_c_redeploy_after_rollback": {
+    "sandbox_root": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_redeploy_pq45_wyj",
+    "deploy1": {
+      "id": "2a4c25d5ef48792c9b7195e4",
+      "after_state": "a0df8ce36c19bfd8be45b9ffc769d2543fdc38e60e329d85fc9e320172800272"
+    },
+    "rollback": {
+      "id": "61568125603b4019132857d1",
+      "restored": "fd4bfe9f2fcae3598e1029a1b450d50704273fb15d6ec7fd2fafd180cc986730",
+      "state_now_is_baseline": true
+    },
+    "redeploy_same_decision": {
+      "raised": "ValueError: existing deployment receipt does not match current state"
+    },
+    "redeploy_fresh_decision": {
+      "raised": null,
+      "id": "64b373c2e825773e4ae89f7f",
+      "distinct_id": true,
+      "before": "fd4bfe9f2fcae3598e1029a1b450d50704273fb15d6ec7fd2fafd180cc986730",
+      "before_is_baseline": true,
+      "state_now_is_candidate": true
+    },
+    "verdict": {
+      "same_decision_blocked": true,
+      "fresh_decision_required_for_reentry": true
+    }
+  },
+  "summary": {
+    "codex_receipt_claims_confirmed": true,
+    "deployments_consumed": 1,
+    "currently_deployed": false
+  }
+}

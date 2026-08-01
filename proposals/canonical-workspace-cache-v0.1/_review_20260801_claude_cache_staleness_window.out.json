@@ -1,0 +1,73 @@
+﻿{
+ "candidate_exports_clear": true,
+ "candidate_contract": "Within one process, the first resolution of an expanded workspace path is fixed for later calls with that same expanded path. A new process resolves it again. A long-lived caller that changes workspace path existence, links, or on-disk spelling must call clear_canonical_workspace_cache before resolving again.",
+ "sandbox_root": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v",
+ "mklink_rc": 0,
+ "window_1_create_junction_after_first_resolve": {
+  "candidate_before": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v\\linked_ws",
+  "candidate_after": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v\\linked_ws",
+  "baseline_before": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v\\linked_ws",
+  "baseline_after": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v\\real_ws",
+  "baseline_changed_after_creation": true,
+  "candidate_changed_after_creation": false,
+  "candidate_diverges_from_baseline": true,
+  "real_target": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v\\real_ws"
+ },
+ "window_1_after_documented_clear": {
+  "candidate": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v\\real_ws",
+  "baseline": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v\\real_ws",
+  "recovers": true
+ },
+ "window_2_retarget_existing_junction": {
+  "candidate_before": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v\\real_ws",
+  "candidate_after": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v\\real_ws",
+  "baseline_before": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v\\real_ws",
+  "baseline_after": "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_cachewin_x2x3a70v\\real_ws_2",
+  "baseline_changed": true,
+  "candidate_changed": false,
+  "candidate_diverges_from_baseline": true
+ },
+ "in_tree_callers": [
+  {
+   "file": "runtime_core.py",
+   "is_test": false,
+   "calls": 2
+  },
+  {
+   "file": "test_canonical_workspace_cache.py",
+   "is_test": true,
+   "calls": 5
+  },
+  {
+   "file": "test_derivation_performance.py",
+   "is_test": true,
+   "calls": 6
+  },
+  {
+   "file": "test_frame_abandon.py",
+   "is_test": true,
+   "calls": 2
+  },
+  {
+   "file": "test_runtime_boundary.py",
+   "is_test": true,
+   "calls": 0
+  },
+  {
+   "file": "test_slow_loop.py",
+   "is_test": true,
+   "calls": 2
+  },
+  {
+   "file": "test_v3_robustness.py",
+   "is_test": true,
+   "calls": 2
+  },
+  {
+   "file": "weilan_trace.py",
+   "is_test": false,
+   "calls": 63
+  }
+ ],
+ "clear_called_anywhere_in_tree": 3
+}
