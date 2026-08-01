@@ -1,0 +1,39 @@
+{
+  "author": "claude",
+  "question": "does the revised contract test fail on a cache-free sham that has the API?",
+  "sham_construction": "frozen baseline runtime_core.py + a no-op clear_canonical_workspace_cache() and a CANONICAL_WORKSPACE_CACHE_CONTRACT string; canonical_workspace itself is the baseline's, byte for byte, so nothing is cached",
+  "sham_runtime_core_sha256": "a9d9d4bd2950ded68ef24dc87780284af8581427042fc6f9a85589547dc3fec0",
+  "baseline_runtime_core_sha256": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68",
+  "candidate_runtime_core_sha256": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0",
+  "sham_exposes_api_stdout": "True True",
+  "sham_arm": {
+    "returncode": 1,
+    "verdicts": {
+      "test_canonical_workspace_cache.py::test_same_expanded_path_is_resolved_once_per_process": "FAILED",
+      "test_canonical_workspace_cache.py::test_explicit_clear_and_new_process_resolution": "PASSED"
+    },
+    "has_attribute_error": false,
+    "has_assertion_error": true,
+    "summary_line": "========================= 1 failed, 1 passed in 0.69s ========================="
+  },
+  "real_candidate_arm": {
+    "returncode": 0,
+    "verdicts": {
+      "test_canonical_workspace_cache.py::test_same_expanded_path_is_resolved_once_per_process": "PASSED",
+      "test_canonical_workspace_cache.py::test_explicit_clear_and_new_process_resolution": "PASSED"
+    },
+    "has_attribute_error": false,
+    "has_assertion_error": false,
+    "summary_line": "============================== 2 passed in 0.34s =============================="
+  },
+  "conclusion": {
+    "sham_is_rejected": true,
+    "sham_rejected_by_assertion_not_attribute_error": true,
+    "which_tests_catch_the_sham": [
+      "test_canonical_workspace_cache.py::test_same_expanded_path_is_resolved_once_per_process"
+    ],
+    "which_tests_the_sham_passes": [
+      "test_canonical_workspace_cache.py::test_explicit_clear_and_new_process_resolution"
+    ]
+  }
+}

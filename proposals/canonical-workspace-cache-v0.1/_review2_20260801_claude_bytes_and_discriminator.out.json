@@ -1,0 +1,117 @@
+{
+  "author": "claude",
+  "purpose": "independent re-verification of revised candidate",
+  "recomputed_tree_hashes": {
+    "artifacts/baseline": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+    "artifacts/candidate_revised": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a",
+    "artifacts/candidate_previous": "ec236760072cf20d3a65df3eebd4c4075e86f79e64971b59375e4937fb3d956f",
+    "working_baseline_dir": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+    "working_candidate_dir": "8602bb0f4e243145c8bf2a7cb0ea7552edc7f19557f370bdae81a26708d93c1a"
+  },
+  "hash_matches_declared": {
+    "baseline": true,
+    "candidate_revised": true,
+    "candidate_previous": true,
+    "working_candidate_equals_frozen_revised": true,
+    "working_baseline_equals_frozen_baseline": true
+  },
+  "changed_baseline_to_revised": [
+    "scripts/runtime_core.py",
+    "scripts/test_canonical_workspace_cache.py"
+  ],
+  "changed_previous_to_revised": [
+    "scripts/test_canonical_workspace_cache.py"
+  ],
+  "runtime_core_sha256": {
+    "baseline": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68",
+    "previous": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0",
+    "revised": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0"
+  },
+  "contract_test_sha256": {
+    "baseline": null,
+    "previous": "5ce7116d267011f09b9cbe11ecf887542a1d42acc8dbec4fc95de37d01605b9a",
+    "revised": "2339b8a956e1df03f9b9773037b94a08b27aa1439e60e2fab18e30f9ee2ceeea"
+  },
+  "install_points": {
+    "claude_install": {
+      "path": "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan",
+      "exists": true,
+      "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "equals_frozen_baseline": true,
+      "differs_from_baseline_paths": []
+    },
+    "codex_install": {
+      "path": "D:\\CodexData\\skills\\solve-with-weilan",
+      "exists": true,
+      "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+      "equals_frozen_baseline": true,
+      "differs_from_baseline_paths": []
+    },
+    "repo_mirror": {
+      "path": "D:\\WeilanSkillEvolution\\skill\\solve-with-weilan",
+      "exists": true,
+      "tree_hash": "f772f750ae9a602b0b93f026c0e2b2f5dabe3bb0e69826bfcd87d0b055046467",
+      "equals_frozen_baseline": false,
+      "differs_from_baseline_paths": [
+        "LICENSE",
+        "README.md",
+        "references/memory-system.md",
+        "runtime/__init__.py",
+        "runtime/bounded_scheduler.py",
+        "runtime/dashboard.py",
+        "runtime/lifecycle.py",
+        "runtime/scheduler_cli.py",
+        "scripts/test_conversation_evidence.py",
+        "scripts/test_frame_abandon.py",
+        "scripts/test_frame_lineage.py",
+        "scripts/test_semantic_memory.py",
+        "scripts/test_source_authenticity_marker.py",
+        "scripts/wake_brief.py",
+        "scripts/weilan_trace.py",
+        "scripts/weilan_trace.py.pre-concurrent-clock-v01.9adab069.bak"
+      ]
+    }
+  },
+  "graft_check": {
+    "grafted_contract_sha256": "2339b8a956e1df03f9b9773037b94a08b27aa1439e60e2fab18e30f9ee2ceeea",
+    "grafted_runtime_core_sha256": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68",
+    "graft_touched_only_contract_file": true
+  },
+  "discriminator": {
+    "baseline_with_revised_test": {
+      "returncode": 1,
+      "verdicts": {
+        "test_canonical_workspace_cache.py::test_same_expanded_path_is_resolved_once_per_process": "FAILED",
+        "test_canonical_workspace_cache.py::test_explicit_clear_and_new_process_resolution": "SKIPPED"
+      },
+      "has_attribute_error": false,
+      "has_assertion_error": true,
+      "has_collection_error": false,
+      "summary_line": "======================== 1 failed, 1 skipped in 0.72s ========================="
+    },
+    "revised_candidate": {
+      "returncode": 0,
+      "verdicts": {
+        "test_canonical_workspace_cache.py::test_same_expanded_path_is_resolved_once_per_process": "PASSED",
+        "test_canonical_workspace_cache.py::test_explicit_clear_and_new_process_resolution": "PASSED"
+      },
+      "has_attribute_error": false,
+      "has_assertion_error": false,
+      "has_collection_error": false,
+      "summary_line": "============================== 2 passed in 2.31s =============================="
+    }
+  },
+  "verdict_facets": {
+    "baseline_fails_by_assertion_without_attribute_error": true,
+    "baseline_verdicts": {
+      "test_canonical_workspace_cache.py::test_same_expanded_path_is_resolved_once_per_process": "FAILED",
+      "test_canonical_workspace_cache.py::test_explicit_clear_and_new_process_resolution": "SKIPPED"
+    },
+    "candidate_all_passed": true,
+    "candidate_verdicts": {
+      "test_canonical_workspace_cache.py::test_same_expanded_path_is_resolved_once_per_process": "PASSED",
+      "test_canonical_workspace_cache.py::test_explicit_clear_and_new_process_resolution": "PASSED"
+    },
+    "zero_deployment": true
+  }
+}
