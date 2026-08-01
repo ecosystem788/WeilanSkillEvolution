@@ -1,0 +1,50 @@
+{
+ "archive": "proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes",
+ "files": [
+  {
+   "path": "proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/postcheck-receipt.json",
+   "size": 2768,
+   "sha256": "706ca0c168f677e6beda3fa7531ff66e8db123f5af47d62cd4d2bdf4f51ff9ae",
+   "crlf_count": 52,
+   "raw_oid": "4b041cec399c999b416e1a1bb189cf9f18a1f74c",
+   "filtered_oid": "4b041cec399c999b416e1a1bb189cf9f18a1f74c",
+   "raw_equals_filtered": true,
+   "check_attr": "proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/postcheck-receipt.json: text: unset | proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/postcheck-receipt.json: eol: lf"
+  },
+  {
+   "path": "proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/preflight-state.json",
+   "size": 484,
+   "sha256": "a6a08effa87fda42ce826ba31650b80bd3d42263f57ced7f70a83277e552cf46",
+   "crlf_count": 8,
+   "raw_oid": "c606c03806916d70ca70589e799423364695efaf",
+   "filtered_oid": "c606c03806916d70ca70589e799423364695efaf",
+   "raw_equals_filtered": true,
+   "check_attr": "proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/preflight-state.json: text: unset | proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/preflight-state.json: eol: lf"
+  },
+  {
+   "path": "proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/preflight-state.json.witness",
+   "size": 157612,
+   "sha256": "6ca1ac68be72036ee3953c57254834ded5c157e1e0a585a0dc9051150045bc4f",
+   "crlf_count": 0,
+   "raw_oid": "7d4f5f28eab077ba4ab139e33d13fc8d229ae0e3",
+   "filtered_oid": "7d4f5f28eab077ba4ab139e33d13fc8d229ae0e3",
+   "raw_equals_filtered": true,
+   "check_attr": "proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/preflight-state.json.witness: text: unset | proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/preflight-state.json.witness: eol: unspecified"
+  },
+  {
+   "path": "proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/preflight-state.json.witness.post",
+   "size": 157612,
+   "sha256": "6ca1ac68be72036ee3953c57254834ded5c157e1e0a585a0dc9051150045bc4f",
+   "crlf_count": 0,
+   "raw_oid": "7d4f5f28eab077ba4ab139e33d13fc8d229ae0e3",
+   "filtered_oid": "7d4f5f28eab077ba4ab139e33d13fc8d229ae0e3",
+   "raw_equals_filtered": true,
+   "check_attr": "proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/preflight-state.json.witness.post: text: unset | proposals/canonical-workspace-cache-v0.1/execution-wf-20260801-075758-0b0905-v3-gitattributes/preflight-state.json.witness.post: eol: unspecified"
+  }
+ ],
+ "tracked_in_package": 42,
+ "summary": {
+  "files_checked": 4,
+  "raw_equals_filtered": 4
+ }
+}

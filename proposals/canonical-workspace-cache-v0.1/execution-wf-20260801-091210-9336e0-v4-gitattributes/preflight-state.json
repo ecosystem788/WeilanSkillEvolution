@@ -1,0 +1,9 @@
+{
+  "target": "proposals/canonical-workspace-cache-v0.1/.gitattributes",
+  "base": "b3b1fb0f9049ff042f75c37f223baa403596480c67f29d549619cd54bd58f450",
+  "sidecar": "C:/wl_v4exec/target.sidecar",
+  "sidecar_present": true,
+  "witness_digest_pre": "2dca7ffa5b95d6ce297cdb6fea55f0fdf35dfc170efdd31f9f26219989e18e15",
+  "witness_path_pre": "C:/wl_v4exec/preflight-state.json.witness",
+  "non_target_entries": 1119
+}
