@@ -16,6 +16,7 @@ import hashlib
 import json
 import os
 import shutil
+import stat
 import subprocess
 import sys
 
@@ -41,6 +42,25 @@ def sha256_bytes(b):
     return hashlib.sha256(b).hexdigest()
 
 
+def _force_writable(func, path, _exc):
+    # git marks its object files read-only, so rmtree fails on a rerun; with
+    # ignore_errors that failure was silent and the next clone hit a non-empty
+    # destination. Clear the bit and retry instead of hiding the error.
+    os.chmod(path, stat.S_IWRITE)
+    func(path)
+
+
+def clear_scratch(path):
+    # this repo carries paths past MAX_PATH, so plain rmtree raises WinError 3
+    # on the deepest clone entries; the extended-length prefix lifts that limit.
+    target = path
+    if sys.platform == "win32" and not path.startswith("\\\\?\\"):
+        target = "\\\\?\\" + os.path.abspath(path)
+    if os.path.isdir(target):
+        shutil.rmtree(target, onerror=_force_writable)
+    return not os.path.exists(path)
+
+
 def main():
     commit = run(["git", "rev-parse", "HEAD"], REPO)["out"].strip()
     out = {"named_commit": commit, "package": PKG}
@@ -59,8 +79,7 @@ def main():
     }
 
     # 2. a real clone of that commit
-    if os.path.isdir(SCRATCH):
-        shutil.rmtree(SCRATCH, ignore_errors=True)
+    out["scratch_cleared"] = clear_scratch(SCRATCH)
     os.makedirs(SCRATCH, exist_ok=True)
     clone = os.path.join(SCRATCH, "clone")
     url = "file:///" + REPO.replace("\\", "/")
