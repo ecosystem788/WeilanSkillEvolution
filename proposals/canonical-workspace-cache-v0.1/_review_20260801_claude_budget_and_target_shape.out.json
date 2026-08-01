@@ -1,0 +1,96 @@
+{
+  "probe": "claude independent review of codex 2026-08-01T19:13:58+09:00 proposal",
+  "authority": "review_evidence_only_never_adopts_or_deploys",
+  "reviewed_commit_note": "run against the working tree; no governed file is written",
+  "check_1_max_deployments_enforcement": {
+    "tool_plane_hits": [
+      {
+        "file": "tools/evolution_runner.py",
+        "line": 88,
+        "text": "\"max_deployments\": sum(step.get(\"kind\") == \"deploy\" for step in steps),"
+      }
+    ],
+    "hits_reading_a_proposal_budget": [],
+    "verdict": "proposal.budgets.max_deployments is enforced by no gate"
+  },
+  "check_2_shadow_binds_proposal_content": {
+    "shadow_top_level_keys": [
+      "adoption_eligible",
+      "author_of_candidate",
+      "authority",
+      "baseline_artifact_hash",
+      "boundary",
+      "candidate_artifact_hash",
+      "checks",
+      "comparison_count",
+      "evidence_kind",
+      "gate_failures",
+      "independence",
+      "installed_tree_state",
+      "metrics_total",
+      "metrics_verified",
+      "prior_candidate_artifact_hash",
+      "produced_by",
+      "proposal_id",
+      "recomputed_tree_hashes",
+      "result_hash",
+      "schema_version",
+      "shadow_id",
+      "unbound_metrics",
+      "unverified_metrics"
+    ],
+    "proposal_binding_keys_beyond_id": [],
+    "verdict": "shadow binds proposal by id only, not by content hash"
+  },
+  "check_3_target_metric_identity": {
+    "declared_count": 8,
+    "measured_count": 8,
+    "identical_and_ordered": true,
+    "declared_not_measured": [],
+    "measured_not_declared": []
+  },
+  "check_4_simulated_budget_edit": {
+    "before": 0,
+    "after": 2,
+    "leaf_diff": [
+      "budgets.max_deployments"
+    ],
+    "leaf_diff_count": 1,
+    "is_exactly_the_budget_leaf": true
+  },
+  "check_5_rollback_triggers": {
+    "count": 7,
+    "canonical_digest": "c68ff934198d0b64523b5a6db908761bd416f22a26001c2f83f386385f2b96d7",
+    "triggers": [
+      "candidate changes any file outside the two declared candidate paths",
+      "the baseline-compatible behavioral contract test does not fail by assertion without AttributeError on the baseline",
+      "the contract test does not pass on the candidate",
+      "a read-only CLI output differs between frozen baseline and candidate",
+      "any test passing on the baseline fails on the candidate",
+      "candidate median real-open wall time is not lower than baseline under the equal-budget copied-ledger probe",
+      "installed Skill, evaluation authority, adoption state, or deployment state changes without a separate independent cosigned adoption decision"
+    ]
+  },
+  "check_6_one_decision_cannot_bind_two_targets": {
+    "joined_string": "D:\\CodexData\\skills\\solve-with-weilan;C:\\Users\\zy\\.claude\\skills\\solve-with-weilan",
+    "resolved": "D:\\CodexData\\skills\\solve-with-weilan;C:\\Users\\zy\\.claude\\skills\\solve-with-weilan",
+    "matches_a_real_target": [],
+    "verdict": "a joined deployment_target resolves to neither install point, so deploy_candidate's equality check rejects both deploys"
+  },
+  "check_7_install_points_still_baseline": {
+    "frozen_baseline": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+    "installed": {
+      "D:\\CodexData\\skills\\solve-with-weilan": {
+        "exists": true,
+        "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "equals_frozen_baseline": true
+      },
+      "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan": {
+        "exists": true,
+        "tree_hash": "ae0537dab5c050c9c1fadf7d432eaa39fa34449ba4420dd879f13068d0b142ad",
+        "equals_frozen_baseline": true
+      }
+    },
+    "both_equal_baseline": true
+  }
+}
