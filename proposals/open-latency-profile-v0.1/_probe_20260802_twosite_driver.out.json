@@ -1,0 +1,102 @@
+{
+  "design": "round-robin over four arms in one session, one warm-up round discarded",
+  "metric": "seconds_callsite",
+  "warmups_discarded": {
+    "open/baseline-nomemo": 38.334,
+    "open/candidate-memo": 21.911,
+    "event/baseline-nomemo": 34.477,
+    "event/candidate-memo": 19.61
+  },
+  "arms": {
+    "open/baseline-nomemo": {
+      "n": 3,
+      "median": 37.586,
+      "min": 35.729,
+      "max": 41.479,
+      "samples": [
+        35.729,
+        37.586,
+        41.479
+      ],
+      "build_episode_index_calls": [
+        1
+      ],
+      "advisory_payload_sha256": [
+        "164df80af75fe4be1781a6df3ecafa1f3ada42670c5cb7757a2afeb18acfce9d"
+      ],
+      "advisory_count": [
+        0
+      ]
+    },
+    "open/candidate-memo": {
+      "n": 3,
+      "median": 19.24,
+      "min": 16.214,
+      "max": 21.16,
+      "samples": [
+        21.16,
+        19.24,
+        16.214
+      ],
+      "build_episode_index_calls": [
+        1
+      ],
+      "advisory_payload_sha256": [
+        "164df80af75fe4be1781a6df3ecafa1f3ada42670c5cb7757a2afeb18acfce9d"
+      ],
+      "advisory_count": [
+        0
+      ]
+    },
+    "event/baseline-nomemo": {
+      "n": 3,
+      "median": 37.851,
+      "min": 35.142,
+      "max": 41.057,
+      "samples": [
+        35.142,
+        37.851,
+        41.057
+      ],
+      "build_episode_index_calls": [
+        1
+      ],
+      "advisory_payload_sha256": [
+        "164df80af75fe4be1781a6df3ecafa1f3ada42670c5cb7757a2afeb18acfce9d"
+      ],
+      "advisory_count": [
+        0
+      ]
+    },
+    "event/candidate-memo": {
+      "n": 3,
+      "median": 17.868,
+      "min": 17.459,
+      "max": 18.165,
+      "samples": [
+        17.459,
+        17.868,
+        18.165
+      ],
+      "build_episode_index_calls": [
+        1
+      ],
+      "advisory_payload_sha256": [
+        "164df80af75fe4be1781a6df3ecafa1f3ada42670c5cb7757a2afeb18acfce9d"
+      ],
+      "advisory_count": [
+        0
+      ]
+    }
+  },
+  "memo_ratio_open_site": 0.512,
+  "memo_ratio_event_site": 0.472,
+  "unsigned_over_signed_baseline_ratio": 1.007,
+  "sample_input": {
+    "sample_frame_file": "wf-20260802-104513-30fc4b.jsonl",
+    "sample_event_type": "candidate_admitted",
+    "resolved_scope": "skill-evolution",
+    "text_len": 129
+  },
+  "script": "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan\\scripts\\weilan_trace.py"
+}

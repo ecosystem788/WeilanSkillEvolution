@@ -1,0 +1,70 @@
+{
+  "call_site": "command_event:805",
+  "metric": "seconds_callsite",
+  "tracemalloc_active": false,
+  "warmups_discarded": {
+    "baseline-nomemo": 38.14,
+    "candidate-memo": 18.213
+  },
+  "arms": {
+    "baseline-nomemo": {
+      "summary": {
+        "n": 3,
+        "median": 33.719,
+        "min": 32.62,
+        "max": 39.523
+      },
+      "build_episode_index_calls": [
+        1
+      ],
+      "advisory_payload_sha256": [
+        "164df80af75fe4be1781a6df3ecafa1f3ada42670c5cb7757a2afeb18acfce9d"
+      ],
+      "advisory_count": [
+        0
+      ],
+      "advisory_error": [
+        "None"
+      ],
+      "samples": [
+        33.719,
+        39.523,
+        32.62
+      ]
+    },
+    "candidate-memo": {
+      "summary": {
+        "n": 3,
+        "median": 21.72,
+        "min": 17.232,
+        "max": 25.553
+      },
+      "build_episode_index_calls": [
+        1
+      ],
+      "advisory_payload_sha256": [
+        "164df80af75fe4be1781a6df3ecafa1f3ada42670c5cb7757a2afeb18acfce9d"
+      ],
+      "advisory_count": [
+        0
+      ],
+      "advisory_error": [
+        "None"
+      ],
+      "samples": [
+        25.553,
+        21.72,
+        17.232
+      ]
+    }
+  },
+  "sample_input": {
+    "sample_frame_file": "wf-20260802-104513-30fc4b.jsonl",
+    "sample_event_type": "candidate_admitted",
+    "resolved_scope": "skill-evolution",
+    "text_len": 129
+  },
+  "script": "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan\\scripts\\weilan_trace.py",
+  "ratio_candidate_over_baseline": 0.644,
+  "intervals_overlap": false
+}
