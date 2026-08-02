@@ -1,0 +1,152 @@
+{
+ "tmp": "C:\\Users\\zy\\AppData\\Local\\Temp\\gate_review_5vvaz4c7",
+ "pin": "4384a5cf2069366c7f89e8b03ee6fb5bcf0d59d7",
+ "checks": {
+  "c1_zero_drift": {
+   "old_rc": 3,
+   "new_rc": 3,
+   "old_key_order": [
+    "commit",
+    "resolved_oid",
+    "entries_scanned",
+    "files_scanned",
+    "non_blob_entries",
+    "pattern_count",
+    "ruleset_digest",
+    "stale_anchor_count",
+    "occurrence_count",
+    "unanchored_occurrence_count",
+    "reason_codes",
+    "occurrences",
+    "state"
+   ],
+   "new_prefix_matches_old": true,
+   "new_suffix": [
+    "private_strings_path",
+    "private_strings_bytes_sha256",
+    "registry_path",
+    "registry_bytes_sha256",
+    "registry_entry_count",
+    "registry_anchor_set_sha256",
+    "gate_version"
+   ],
+   "suffix_is_exactly_seven_spec_keys": true,
+   "shared_values_equal": true,
+   "occurrences_byte_identical": true,
+   "new_receipt": {
+    "commit": "4384a5cf2069366c7f89e8b03ee6fb5bcf0d59d7",
+    "resolved_oid": "4384a5cf2069366c7f89e8b03ee6fb5bcf0d59d7",
+    "entries_scanned": 4652,
+    "files_scanned": 4652,
+    "non_blob_entries": 0,
+    "pattern_count": 3,
+    "ruleset_digest": "51047b475e9e250bb8ddd3ff3bfe4a839da9015a5343442e7000987733f4eceb",
+    "stale_anchor_count": 0,
+    "occurrence_count": 2,
+    "unanchored_occurrence_count": 0,
+    "reason_codes": [],
+    "state": "KNOWN_PUBLIC_ONLY",
+    "private_strings_path": "D:\\WeilanSkillEvolution\\proposals\\scaffold-opensource-export-v0.1\\redaction-private-strings.local.txt",
+    "private_strings_bytes_sha256": "9284b9d3517c5735206d22d1cdb2a17acb6ec645962f1787bbedd00b9b6099d5",
+    "registry_path": "D:\\WeilanSkillEvolution\\proposals\\redaction-gate-tree-subject-v0.1\\occurrence-registry.jsonl",
+    "registry_bytes_sha256": "1f5e6e5f2cf837699648fa16540b3ff6a87a36b688210de590ba0cf420b638cd",
+    "registry_entry_count": 2,
+    "registry_anchor_set_sha256": "cf6d495cef32e713f8355202af069b0bc4bf440812a86f800019e7e243e40a94",
+    "gate_version": "scan-only-gate/4.1",
+    "_occurrence_digest": "b6ccbd2a50cdcc699ecf067e9fe607ac00e2fbc073f226893d8fa6ada151e3cb"
+   }
+  },
+  "c2_tree_unchanged": {
+   "rc_equal": true,
+   "stdout_byte_identical": true,
+   "rc": 0,
+   "registry_keys_absent": true
+  },
+  "c3_registry_copies": {
+   "verbatim": {
+    "rc": 3,
+    "path_differs": true,
+    "bytes_sha_equal": true,
+    "anchor_sha_equal": true,
+    "state_equal": true
+   },
+   "reversed": {
+    "rc": 3,
+    "bytes_sha_differs": true,
+    "anchor_sha_equal": true,
+    "state_equal": true,
+    "entry_count_equal": true
+   },
+   "duplicated": {
+    "rc": 3,
+    "anchor_sha_equal": true,
+    "entry_count_doubled": true,
+    "stale_anchor_count": 0,
+    "state_equal": true
+   }
+  },
+  "c4_bad_registry": {
+   "missing": {
+    "rc": 1,
+    "stderr": "{\"error\": \"registry_unreadable\"}",
+    "stdout_empty": true
+   },
+   "bad_line": {
+    "rc": 1,
+    "stderr": "{\"error\": \"invalid_registry_record:2\", \"commit\": \"4384a5cf2069366c7f89e8b03ee6fb5bcf0d59d7\"}",
+    "stdout_empty": true
+   },
+   "incomplete": {
+    "rc": 1,
+    "stderr": "{\"error\": \"incomplete_registry_record:1\", \"commit\": \"4384a5cf2069366c7f89e8b03ee6fb5bcf0d59d7\"}",
+    "stdout_empty": true
+   },
+   "directory": {
+    "rc": 1,
+    "stderr": "{\"error\": \"commit_scan_io_error\", \"commit\": \"4384a5cf2069366c7f89e8b03ee6fb5bcf0d59d7\"}",
+    "stdout_empty": true,
+    "is_structured": true
+   }
+  },
+  "c5_c9_new_matches": {
+   "rc": 2,
+   "state": "NEW_MATCHES",
+   "all_seven_present": true,
+   "gate_version_rc2": "scan-only-gate/4.1",
+   "gate_version_rc3": "scan-only-gate/4.1",
+   "private_path_is_fixture": true,
+   "private_bytes_sha_matches_disk": true,
+   "anchor_sha_equal_base": true,
+   "occurrence_count": 532
+  },
+  "c8_canonical": {
+   "spec_digest_from_disk": "cf6d495cef32e713f8355202af069b0bc4bf440812a86f800019e7e243e40a94",
+   "gate_receipt_digest": "cf6d495cef32e713f8355202af069b0bc4bf440812a86f800019e7e243e40a94",
+   "independent_matches_receipt": true,
+   "F1_order_invariant": true,
+   "F1_duplication_invariant": true,
+   "F4_empty_set": true,
+   "empty_vector": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "bool_int_equal": true,
+   "F2_discriminative": true,
+   "entry_count_disk": 2,
+   "entry_count_receipt": 2
+  },
+  "c7_cross_workspace": {
+   "clone_rc": 0,
+   "clone_stderr": "",
+   "rc": 3,
+   "stderr": "",
+   "paths_differ": true,
+   "digests_equal": true,
+   "thirteen_keys_equal": true,
+   "state": "KNOWN_PUBLIC_ONLY"
+  },
+  "c6_read_only": {
+   "subjects_unchanged": true,
+   "leaked_pattern_count": 0,
+   "tmp_files_written_in_repo": false
+  }
+ },
+ "_note": "leaked_pattern_count counts private tokens appearing verbatim in any gate stdout/stderr of this probe"
+}

@@ -1,0 +1,42 @@
+{
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  17,
+  99,
+  12345
+ ],
+ "real_registry_entries": 2,
+ "real_registry": {
+  "distinct_unsorted_digests": 2,
+  "distinct_sorted_digests": 1,
+  "unsorted_digests": [
+   "45efd9efc3f0917cd16e5993dfce41eb4a543701502841a48bab17e2fec96f43",
+   "cf6d495cef32e713f8355202af069b0bc4bf440812a86f800019e7e243e40a94"
+  ],
+  "sorted_digest": [
+   "cf6d495cef32e713f8355202af069b0bc4bf440812a86f800019e7e243e40a94"
+  ]
+ },
+ "synthetic_12_entries": {
+  "distinct_unsorted_digests": 8,
+  "distinct_sorted_digests": 1,
+  "unsorted_digests": [
+   "06bc10a53828ede6cc2e5c55b6be5af1e13a37e54fe04b3205dbaa73a7253e6a",
+   "32aaf8f41f6b94a0f91be27c73328d932289b284e9f030579c3344913624f5fe",
+   "34430b0d5c10cd5a60f01107bd5e39c581654ba34007203bb70f9c9309aa4fd3",
+   "51a0aa1798d10d4320980f8cb40fe40a2f861f2f96fa919e402a757c12770dfd",
+   "97d9d7193b7aba41a08f1fbc4e547ed1e60d88581cc1be783cf94975f0d2303d",
+   "a7519d0b91ea2ef1b026ff844638fc5a65a3d531ffc72108c5fb7addd941dd54",
+   "c8a17c265b85dae16b6f40be2518ea94efeca2a942264d698fef712fbf66e37d",
+   "f9baa9624c7c0aa4f65f95917a922665dc865dece8dccd83c74420f767b9f43a"
+  ],
+  "sorted_digest": [
+   "d172274eb3e8c8635a1835841aa68d4e4be1ecb21f3faaa4414cacc88d10abaa"
+  ]
+ },
+ "reading": "distinct_unsorted_digests > 1 means the sort-free variant violates F1: one anchor set, several digests"
+}

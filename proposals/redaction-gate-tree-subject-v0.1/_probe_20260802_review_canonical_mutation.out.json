@@ -1,0 +1,57 @@
+{
+ "meaning": "control must be RED=false; a mutant with verdict=GREEN(survived) is a canonical step the suite does not pin",
+ "results": [
+  {
+   "mutant": "control",
+   "target_occurrences_in_source": 1,
+   "rc": 0,
+   "verdict": "GREEN(survived)",
+   "summary": "OK",
+   "failing_tests": []
+  },
+  {
+   "mutant": "drop_sort",
+   "target_occurrences_in_source": 1,
+   "rc": 0,
+   "verdict": "GREEN(survived)",
+   "summary": "OK",
+   "failing_tests": []
+  },
+  {
+   "mutant": "widen_separators",
+   "target_occurrences_in_source": 1,
+   "rc": 0,
+   "verdict": "GREEN(survived)",
+   "summary": "OK",
+   "failing_tests": []
+  },
+  {
+   "mutant": "flip_ensure_ascii",
+   "target_occurrences_in_source": 1,
+   "rc": 0,
+   "verdict": "GREEN(survived)",
+   "summary": "OK",
+   "failing_tests": []
+  },
+  {
+   "mutant": "drop_dedup",
+   "target_occurrences_in_source": 1,
+   "rc": 1,
+   "verdict": "RED(killed)",
+   "summary": "FAILED (failures=1)",
+   "failing_tests": [
+    "FAIL: test_14_canonical_anchor_digest_matches_gate_set_semantics (__main__.GateFixture.test_14_canonical_anchor_digest_matches_gate_set_semantics)"
+   ]
+  },
+  {
+   "mutant": "drop_bool_normalisation",
+   "target_occurrences_in_source": 1,
+   "rc": 1,
+   "verdict": "RED(killed)",
+   "summary": "FAILED (failures=1)",
+   "failing_tests": [
+    "FAIL: test_14_canonical_anchor_digest_matches_gate_set_semantics (__main__.GateFixture.test_14_canonical_anchor_digest_matches_gate_set_semantics)"
+   ]
+  }
+ ]
+}
