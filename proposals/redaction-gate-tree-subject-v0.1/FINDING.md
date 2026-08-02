@@ -102,3 +102,111 @@ authorized oid 上的 blob。此刻 `git status` 有 **15 个** dirty 的被跟�
 `goal:redaction-gate-discipline` 的第 (1) 项(两行已公开命中:留着不动 vs 重写公开历史)
 仍在等云裁断,本条**不催、不代判**,也不依赖它:上面四条候选在两种裁断下都成立。
 只补一条云可能用得上的事实——那两处就是全部,git 树上没有第三处。
+
+## 八、2026-08-02 追加:门的输入契约没闭合(Codex 退回重提的四条,实测)
+
+- 触发:Codex 于 peer-chat `2026-08-02T13:10:52+09:00` 【反对·退回重提】我 `13:01:03` 的
+  「把推送前跑私串门写进 CHARTER 六.1」提案,承重理由是**输入契约未闭合**。本节不辩,只量。
+- 只读探针:`_probe_20260802_gate_input_binding.py` / 输出 `.out.json`
+- 口径:`commit=4384a5cf2069366c7f89e8b03ee6fb5bcf0d59d7`;fixture ruleset 用两个**必然命中路径的
+  无害 token**(不是私串),写在临时目录,工作区一个字节不动;从不打印 pattern。
+
+### 8.1 Codex 要的两条,给了,结论对门有利
+
+| 问 | 实测 |
+| --- | --- |
+| (3) 真实 NEW_MATCHES(rc 2) 夹具 | **有**:`state=NEW_MATCHES`、`rc=2`、4652 blob 扫出 3120 处、全部 unanchored |
+| (4) 跨工作区同输入同结果 | **是**:`--no-checkout` 新克隆里重跑,9 个可比字段**逐个相同** |
+
+顺带一条好消息:ruleset 摘要只是**文件内容**的函数——同字节换个路径,摘要不变
+(`path_changes_digest: false`)。所以"私档放哪儿"不是分歧源。
+
+### 8.2 但 (4) 那个"是"要打折,而折扣正好坐实 Codex
+
+第二个工作区读的 registry **就是第一个工作区那一份**——`DEFAULT_REGISTRY` 是写死的
+`D:\...` 绝对路径(`scan_only_gate.py:27-29`),两次跑的 `stale_anchor_count=2` 相同是因为
+**它们读的是同一个文件**,不是因为裁决可复现。故 8.1 那行只证明**扫描**与工作区无关,
+**不证明裁决**与工作区无关。
+
+### 8.3 新差异一:同一套私串,只是行序不同,就把整个 registry 打成陈旧
+
+摘要取自 `"\n".join(patterns)`(`scan_only_gate.py:63-64`),是**有序**的:
+
+```
+ruleset_a          (set {A,B}, 序 A→B)  digest a76934...  occurrence_count 3120
+ruleset_b_reordered(set {A,B}, 序 B→A)  digest 58890f...  occurrence_count 3120
+```
+
+命中集合逐字段相同,摘要不同。而门的裁决不变式(文件头 6-10 行)要求 anchor 的
+`ruleset_digest` **精确相等**才算已锚定——于是两个签名者哪怕持有**完全相同的私串集合**,
+只要文件行序不同,对方的全部 anchor 一律 stale、全部命中 unanchored、结果必然 NEW_MATCHES,
+**永远到不了 KNOWN_PUBLIC_ONLY**。这就是 Codex 说的"两个签名者得到不同 ruleset_digest",
+现在有数了,且成因比"字节不同"更细:**集合相同也不够,得字节相同**。
+
+### 8.4 新差异二:被退回的提案要求的绑定,今天在 CLI 上根本写不出来
+
+`--registry` **不是参数**——传了直接 argparse 报错退出:
+
+```
+scan_only_gate.py: error: unrecognized arguments: --registry ...   (rc 2)
+```
+
+所以"明确两位签名者使用的 registry 输入与摘要绑定"不是补一段 CHARTER 文本能做到的,
+它得**先改机件**。
+
+### 8.5 新差异三:收据里没有能定位分歧的字段
+
+收据的全部顶层键只有 13 个,下面这些**一个都没有**:
+
+```
+private_strings_path  registry_path  registry_digest
+registry_entry_count  repository     gate_version
+```
+
+被退回的提案要两位签名者"报六项"再比对——可一旦两人 `ruleset_digest` 不一致,收据里
+**没有任何字段能告诉他们为什么**(行序?私档不同?registry 不同?)。比对因此只能产出
+"不一致"三个字,不能产出可裁决的差异。这是比 Codex 原话更强的一条:不只是输入没锁定,
+**输出也不足以事后归因**。
+
+### 8.6 对重提顺序的结论(判断,不是授权)
+
+我**接受退回**。并且实测把顺序也定了:**CHARTER 文本不能先行**。可核的最小前置是改机件——
+(a) 加 `--registry` 并把 registry 摘要与条目数写进收据;(b) 把私档路径与其摘要写进收据;
+(c) ruleset 身份要么改为**有序集合的规范化**摘要、要么在 CHARTER 里明写"行序即身份、
+签名者必须共享同一份字节"。三条都是机件改动 ⇒ **须与 Codex 双签、实现委派 Codex**。
+本回合不提这个提案,先把测量交出去让 Codex 独立复核。
+
+### 8.7 同日晚追加:registry 与 ruleset 的身份语义**不对称**——所以"同输入"不能按字节算
+
+Codex 于 `2026-08-02T13:28:52+09:00` 独立复跑 8.1–8.5,逐字复现。起草 (a)(b) 的最小机件提案时
+冒出一个 8.3 没答的问题:**registry 是不是也像 ruleset 那样对行序敏感?** 若是,将来 CHARTER
+可以把"同输入"键在 registry 原始字节上;若否,那样键就会造出假停机。去测了。
+
+- 只读探针:`_probe_20260802_registry_order_sensitivity.py` / 输出 `.out.json`
+  (import 门本体、喂**真** registry,不经 CLI——因为 8.4 已证 `--registry` today 传不进去)
+
+| 排列 | arrangement 摘要 | anchor 集合摘要 | verdict |
+| --- | --- | --- | --- |
+| 原序 | `7c2ffc27…` | `86151a01…` | `KNOWN_PUBLIC_ONLY` / rc 3 |
+| 逆序 | `0a7c3223…` | `86151a01…` | 同上,`classified` **逐字节相同** |
+| 每条复制一份 | `ab0e68b3…` | `86151a01…` | 同上,`classified` **逐字节相同** |
+
+三个字节摘要各不相同,anchor 集合摘要**只有一个**,三者 `classified_sha256` 同为 `5626d8db…`。
+机制在 `scan_only_gate.py:325-334`:registry 被消费成两个按 identity 元组建的 **set**,
+与顺序无关、与重复无关;而 ruleset 是有序 `join`(`:63-64`)。**同一个工具,两种输入,两种身份语义。**
+
+⇒ 结论(判断):将来 CHARTER 的停机判据应当键在 **anchor 集合摘要**,不是 registry 原始字节摘要。
+键在字节,会把两个持有完全相同 anchor 集合、只是行序不同的签名者判成"输入不一致"而停——
+一个**可证明不可能改变任何裁决**的假停。字节摘要仍应写进收据,但它答的是"我读的是哪份文件"。
+
+**两个折扣,自己先打:**
+
+1. 真 registry 只有 **2 条**,逆序=两元素对调,样本小到不足以单独承重;承重的是 `:325-334`
+   的 set 语义,实测只是与它一致、**没撞翻**它。
+2. 这支探针**测不出** `stale_anchor_count` 的重复敏感性:它是 `:380-382` 对 entries 直接求和
+   (带重复),而当前 `stale=0`,复制一份仍是 0。按构造 `stale_anchor_count` **是**重复敏感的、
+   anchor 集合摘要不是 ⇒ 两人若 registry 有重复行会得到**相同 state 但不同 stale_anchor_count**。
+   此条**按构造主张、未实测**。
+
+据此起草的最小机件提案(只做 (a)(b),(c) 仍不动)发于 peer-chat `2026-08-02T13:38:31+09:00`,
+待 Codex 独立评审;**签之前不改机件一个字节**。

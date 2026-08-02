@@ -1,0 +1,62 @@
+{
+ "probe": "registry_order_sensitivity",
+ "read_only": true,
+ "gate_path": "D:/WeilanSkillEvolution/proposals/scaffold-opensource-export-v0.1/scan_only_gate.py",
+ "registry_path": "D:/WeilanSkillEvolution/proposals/redaction-gate-tree-subject-v0.1/occurrence-registry.jsonl",
+ "registry_bytes_sha256": "1f5e6e5f2cf837699648fa16540b3ff6a87a36b688210de590ba0cf420b638cd",
+ "registry_entry_count": 2,
+ "distinct_ruleset_digests_in_registry": 1,
+ "adjudicating_ruleset_digest_prefix": "51047b475e9e",
+ "arrangements": {
+  "original": {
+   "entry_count": 2,
+   "arrangement_sha256": "7c2ffc271c031e7969a5174dc4ce2b0da530309960c6e7c2332b4ff58c486fde",
+   "anchor_set_sha256": "86151a01124d0daab29869a913df5861f86e5399d5f837b60d32d29049553db9",
+   "verdict": {
+    "state": "KNOWN_PUBLIC_ONLY",
+    "exit_code": 3,
+    "occurrence_count": 2,
+    "unanchored_occurrence_count": 0,
+    "stale_anchor_count": 0,
+    "reason_codes": [],
+    "classified_sha256": "5626d8dbb46302739123961012ee93512675e3d6ea60e107bc47e76090c28a91"
+   }
+  },
+  "reversed": {
+   "entry_count": 2,
+   "arrangement_sha256": "0a7c3223a88aa2064eebe8e6db64958556ce116404606ba4803d913d5db4813b",
+   "anchor_set_sha256": "86151a01124d0daab29869a913df5861f86e5399d5f837b60d32d29049553db9",
+   "verdict": {
+    "state": "KNOWN_PUBLIC_ONLY",
+    "exit_code": 3,
+    "occurrence_count": 2,
+    "unanchored_occurrence_count": 0,
+    "stale_anchor_count": 0,
+    "reason_codes": [],
+    "classified_sha256": "5626d8dbb46302739123961012ee93512675e3d6ea60e107bc47e76090c28a91"
+   }
+  },
+  "duplicated": {
+   "entry_count": 4,
+   "arrangement_sha256": "ab0e68b313321d37765da11f9ba89eca3261b5408117161e4dc19525e5a5a4db",
+   "anchor_set_sha256": "86151a01124d0daab29869a913df5861f86e5399d5f837b60d32d29049553db9",
+   "verdict": {
+    "state": "KNOWN_PUBLIC_ONLY",
+    "exit_code": 3,
+    "occurrence_count": 2,
+    "unanchored_occurrence_count": 0,
+    "stale_anchor_count": 0,
+    "reason_codes": [],
+    "classified_sha256": "5626d8dbb46302739123961012ee93512675e3d6ea60e107bc47e76090c28a91"
+   }
+  }
+ },
+ "verdict_identical_to_original": {
+  "original": true,
+  "reversed": true,
+  "duplicated": true
+ },
+ "arrangement_digests_distinct": 3,
+ "anchor_set_digests_distinct": 1,
+ "python": "3.11.9"
+}

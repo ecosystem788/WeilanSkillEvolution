@@ -1,0 +1,79 @@
+﻿{
+ "probe": "scan_only_gate_input_binding",
+ "commit": "4384a5cf2069366c7f89e8b03ee6fb5bcf0d59d7",
+ "tmp": "C:\\Users\\zy\\AppData\\Local\\Temp\\gate_input_probe_cj890pxn",
+ "observations": {
+  "fixture_digests": {
+   "a": "a76934576175022539652cba57ab0b7d68c9b096b90637e828d25d957a41d0db",
+   "b_reordered": "58890f46f7715574758562a94078b97c553e65b96710fbab58622194b0434211",
+   "c_same_bytes_other_path": "a76934576175022539652cba57ab0b7d68c9b096b90637e828d25d957a41d0db",
+   "reorder_changes_digest": true,
+   "path_changes_digest": false
+  },
+  "A_home_ruleset_a": {
+   "state": "NEW_MATCHES",
+   "ruleset_digest": "a76934576175022539652cba57ab0b7d68c9b096b90637e828d25d957a41d0db",
+   "pattern_count": 2,
+   "entries_scanned": 4652,
+   "files_scanned": 4652,
+   "occurrence_count": 3120,
+   "unanchored_occurrence_count": 3120,
+   "stale_anchor_count": 2,
+   "resolved_oid": "4384a5cf2069366c7f89e8b03ee6fb5bcf0d59d7",
+   "rc": 2
+  },
+  "C_home_ruleset_b_reordered": {
+   "state": "NEW_MATCHES",
+   "ruleset_digest": "58890f46f7715574758562a94078b97c553e65b96710fbab58622194b0434211",
+   "pattern_count": 2,
+   "entries_scanned": 4652,
+   "files_scanned": 4652,
+   "occurrence_count": 3120,
+   "unanchored_occurrence_count": 3120,
+   "stale_anchor_count": 2,
+   "resolved_oid": "4384a5cf2069366c7f89e8b03ee6fb5bcf0d59d7",
+   "rc": 2
+  },
+  "clone_rc": 0,
+  "B_workspace2_ruleset_a": {
+   "state": "NEW_MATCHES",
+   "ruleset_digest": "a76934576175022539652cba57ab0b7d68c9b096b90637e828d25d957a41d0db",
+   "pattern_count": 2,
+   "entries_scanned": 4652,
+   "files_scanned": 4652,
+   "occurrence_count": 3120,
+   "unanchored_occurrence_count": 3120,
+   "stale_anchor_count": 2,
+   "resolved_oid": "4384a5cf2069366c7f89e8b03ee6fb5bcf0d59d7",
+   "rc": 2
+  },
+  "registry_flag": {
+   "rc": 2,
+   "stderr_tail": "                         [--private-strings PRIVATE_STRINGS]\r\nscan_only_gate.py: error: unrecognized arguments: --registry C:\\Users\\zy\\AppData\\Local\\Temp\\gate_input_probe_cj890pxn\\empty-registry.jsonl"
+  },
+  "receipt_top_level_keys": [
+   "commit",
+   "entries_scanned",
+   "files_scanned",
+   "non_blob_entries",
+   "occurrence_count",
+   "occurrences",
+   "pattern_count",
+   "reason_codes",
+   "resolved_oid",
+   "ruleset_digest",
+   "stale_anchor_count",
+   "state",
+   "unanchored_occurrence_count"
+  ],
+  "receipt_omits": [
+   "private_strings_path",
+   "registry_path",
+   "registry_digest",
+   "registry_entry_count",
+   "repository",
+   "gate_version"
+  ]
+ },
+ "cleanup": "removed"
+}
