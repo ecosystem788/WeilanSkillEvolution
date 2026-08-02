@@ -1,0 +1,65 @@
+........................................................................ [ 75%]
+.F.....................                                                  [100%]
+================================== FAILURES ===================================
+_________________ test_promotion_gate_rejects_on_full_budget __________________
+
+state_home = WindowsPath('C:/Users/zy/AppData/Local/Temp/pytest-of-zy/pytest-769/test_promotion_gate_rejects_on0/method-state')
+tmp_path = WindowsPath('C:/Users/zy/AppData/Local/Temp/pytest-of-zy/pytest-769/test_promotion_gate_rejects_on0')
+capsys = <_pytest.capture.CaptureFixture object at 0x0000011BDAB7BFD0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000011BDAB7A950>
+
+    def test_promotion_gate_rejects_on_full_budget(state_home, tmp_path, capsys, monkeypatch):
+        source = tmp_path / "s.md"
+        source.write_text("fact\n", encoding="utf-8")
+        set_budget(capsys, 1)
+        consolidate(capsys, "occupies the only slot", source)
+    
+        evidence_dir = weilan_trace.evidence_directory(WORKSPACE, SCOPE)
+        evidence = {
+            "schema_version": weilan_trace.EVIDENCE_SCHEMA_VERSION,
+            "evidence_id": "ev-budget-full",
+            "timestamp_utc": "2026-01-01T00:00:00+00:00",
+            "workspace": runtime_core.canonical_workspace(WORKSPACE),
+            "scope": SCOPE,
+            "signal": "architectural_decision",
+            "claim": "promoted decision claim",
+            "sources": [],
+            "source_snapshots": [],
+        }
+        weilan_trace.append_event(evidence_dir / "2026-01-01.jsonl", evidence)
+    
+        args = argparse.Namespace(
+            workspace=WORKSPACE, scope=SCOPE, evidence_id="ev-budget-full",
+            kind="decision", summary="promoted decision claim", detail="",
+            tag=[], source=[], supersedes=[], conflicts_with=[],
+            stable=True, reusable=True, privacy_reviewed=True, displace=[],
+        )
+>       weilan_trace.command_evidence_promote(args)
+
+..\..\..\..\find-frame-index-v0.1\baseline\solve-with-weilan\scripts\test_slow_loop.py:320: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+weilan_trace.py:3297: in command_evidence_promote
+    return command_evidence_promote_fenced(args, workspace, scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+weilan_trace.py:3392: in command_evidence_promote_fenced
+    path = append_promotion_record(workspace, scope, record)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+weilan_trace.py:3284: in append_promotion_record
+    require_source_authenticity_marker(record)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+promotion = {'schema_version': 'weilan_promotion_gate_v0.5', 'promotion_id': 'e63ddb9b-d9ca-4490-a75c-eb7390f94d02', 'timestamp_utc': '2026-08-02T10:33:59+00:00', 'workspace': 'D:\\SlowLoopTest', ...}
+
+    def require_source_authenticity_marker(promotion):
+        interpreted = interpret_source_authenticity(promotion)
+        if interpreted.get("status") != "declared":
+>           raise ValueError(
+                "promotion requires a valid source_authenticity marker: "
+                + interpreted.get("reason", interpreted.get("status", "unknown"))
+            )
+E           ValueError: promotion requires a valid source_authenticity marker: invalid_or_incomplete_marker
+
+weilan_trace.py:2178: ValueError
+=========================== short test summary info ===========================
+FAILED test_slow_loop.py::test_promotion_gate_rejects_on_full_budget - ValueE...
+1 failed, 94 passed in 54.69s

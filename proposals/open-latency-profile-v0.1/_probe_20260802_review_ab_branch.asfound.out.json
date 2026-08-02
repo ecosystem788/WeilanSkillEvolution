@@ -1,0 +1,153 @@
+{
+ "as-found": {
+  "warmup": {
+   "baseline": {
+    "arm": "baseline-nomemo",
+    "index_state": "as-found",
+    "build_episode_index_calls": 1,
+    "advisory_count": 1,
+    "advisory_payload_sha256": "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf",
+    "seconds_callsite": 13.345,
+    "script": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py"
+   },
+   "memo": {
+    "arm": "candidate-memo",
+    "index_state": "as-found",
+    "build_episode_index_calls": 1,
+    "advisory_count": 1,
+    "advisory_payload_sha256": "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf",
+    "seconds_callsite": 6.408,
+    "script": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py"
+   }
+  },
+  "samples": {
+   "baseline": [
+    {
+     "arm": "baseline-nomemo",
+     "index_state": "as-found",
+     "build_episode_index_calls": 1,
+     "advisory_count": 1,
+     "advisory_payload_sha256": "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf",
+     "seconds_callsite": 12.65,
+     "script": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py"
+    },
+    {
+     "arm": "baseline-nomemo",
+     "index_state": "as-found",
+     "build_episode_index_calls": 1,
+     "advisory_count": 1,
+     "advisory_payload_sha256": "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf",
+     "seconds_callsite": 12.735,
+     "script": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py"
+    },
+    {
+     "arm": "baseline-nomemo",
+     "index_state": "as-found",
+     "build_episode_index_calls": 1,
+     "advisory_count": 1,
+     "advisory_payload_sha256": "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf",
+     "seconds_callsite": 12.712,
+     "script": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py"
+    }
+   ],
+   "memo": [
+    {
+     "arm": "candidate-memo",
+     "index_state": "as-found",
+     "build_episode_index_calls": 1,
+     "advisory_count": 1,
+     "advisory_payload_sha256": "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf",
+     "seconds_callsite": 6.345,
+     "script": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py"
+    },
+    {
+     "arm": "candidate-memo",
+     "index_state": "as-found",
+     "build_episode_index_calls": 1,
+     "advisory_count": 1,
+     "advisory_payload_sha256": "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf",
+     "seconds_callsite": 6.339,
+     "script": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py"
+    },
+    {
+     "arm": "candidate-memo",
+     "index_state": "as-found",
+     "build_episode_index_calls": 1,
+     "advisory_count": 1,
+     "advisory_payload_sha256": "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf",
+     "seconds_callsite": 6.636,
+     "script": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py"
+    }
+   ]
+  },
+  "summary": {
+   "baseline": {
+    "seconds": [
+     12.65,
+     12.735,
+     12.712
+    ],
+    "median": 12.712,
+    "range": [
+     12.65,
+     12.735
+    ],
+    "build_calls": [
+     1
+    ],
+    "advisory_counts": [
+     1
+    ],
+    "payload_sha256": [
+     "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf"
+    ]
+   },
+   "memo": {
+    "seconds": [
+     6.345,
+     6.339,
+     6.636
+    ],
+    "median": 6.345,
+    "range": [
+     6.339,
+     6.636
+    ],
+    "build_calls": [
+     1
+    ],
+    "advisory_counts": [
+     1
+    ],
+    "payload_sha256": [
+     "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf"
+    ]
+   },
+   "ranges_overlap": false,
+   "memo_over_baseline": 0.499,
+   "payload_equal_across_arms": true
+  },
+  "memory": {
+   "baseline": {
+    "arm": "baseline-nomemo",
+    "index_state": "as-found",
+    "build_episode_index_calls": 1,
+    "advisory_count": 1,
+    "advisory_payload_sha256": "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf",
+    "seconds_callsite": 27.384,
+    "script": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py",
+    "peak_python_heap_mb": 104.1
+   },
+   "memo": {
+    "arm": "candidate-memo",
+    "index_state": "as-found",
+    "build_episode_index_calls": 1,
+    "advisory_count": 1,
+    "advisory_payload_sha256": "91d27e08596c3cf32157cd92d8667f27ba68ac31db34d8dacc06af784f8ed1bf",
+    "seconds_callsite": 15.958,
+    "script": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py",
+    "peak_python_heap_mb": 138.3
+   }
+  }
+ }
+}
