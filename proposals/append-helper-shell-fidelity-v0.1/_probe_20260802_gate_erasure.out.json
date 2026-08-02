@@ -1,0 +1,81 @@
+﻿{
+  "probe": "citation gate vs shell erasure",
+  "intended_text": "evidence in `proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl` and proposals/mutual-aid-v0.1/peer_health_wake.py end",
+  "gate_sees_in_intended": [
+    "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+    "proposals/mutual-aid-v0.1/peer_health_wake.py"
+  ],
+  "arms": [
+    {
+      "arm": "bash_double",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "text_identical": false,
+      "stored_text": "evidence in  and proposals/mutual-aid-v0.1/peer_health_wake.py end",
+      "gate_sees_paths": [
+        "proposals/mutual-aid-v0.1/peer_health_wake.py"
+      ],
+      "paths_erased_from_the_gate": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+      ],
+      "gate_would_report": "partial",
+      "stderr_head": "/usr/bin/bash: line 1: proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl: No such file or directory"
+    },
+    {
+      "arm": "bash_single",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "text_identical": true,
+      "stored_text": "evidence in `proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl` and proposals/mutual-aid-v0.1/peer_health_wake.py end",
+      "gate_sees_paths": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+        "proposals/mutual-aid-v0.1/peer_health_wake.py"
+      ],
+      "paths_erased_from_the_gate": [],
+      "gate_would_report": "clean",
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_double",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "text_identical": false,
+      "stored_text": "evidence in proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl and proposals/mutual-aid-v0.1/peer_health_wake.py end",
+      "gate_sees_paths": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+        "proposals/mutual-aid-v0.1/peer_health_wake.py"
+      ],
+      "paths_erased_from_the_gate": [],
+      "gate_would_report": "clean",
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_single",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "text_identical": true,
+      "stored_text": "evidence in `proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl` and proposals/mutual-aid-v0.1/peer_health_wake.py end",
+      "gate_sees_paths": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+        "proposals/mutual-aid-v0.1/peer_health_wake.py"
+      ],
+      "paths_erased_from_the_gate": [],
+      "gate_would_report": "clean",
+      "stderr_head": ""
+    },
+    {
+      "arm": "argv_control",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "text_identical": true,
+      "stored_text": "evidence in `proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl` and proposals/mutual-aid-v0.1/peer_health_wake.py end",
+      "gate_sees_paths": [
+        "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+        "proposals/mutual-aid-v0.1/peer_health_wake.py"
+      ],
+      "paths_erased_from_the_gate": [],
+      "gate_would_report": "clean",
+      "stderr_head": ""
+    }
+  ]
+}

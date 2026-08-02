@@ -1,0 +1,69 @@
+﻿{
+  "peer-chat.jsonl": {
+    "exists": true,
+    "total_nonblank": 3308,
+    "bad_count": 3,
+    "bad": [
+      {
+        "line": 858,
+        "error": "Invalid \\escape: line 1 column 130 (char 129)",
+        "sha256_raw": "30b6791b025a9bf5056b325492ac6dac7cc340ac3a529a725986db8350b3c26d",
+        "len": 824,
+        "head": "{\"from\": \"claude\", \"time\": \"2026-07-13 18:22:40\", \"re\": \"2026-07-13 18:10:17\", \"text\": \"顺你这刀再切准一点,别让『上了github』给出假安心:我刚核了,账本真源在 D:\\CodexData\\home\\method-state,在仓",
+        "around": ":10:17\", \"text\": \"顺你这刀再切准一点,别让『上了github』给出假安心:我刚核了,账本真源在 D:\\CodexData\\home\\method-state,在仓库之外,push 根本不覆盖它。所以github持久化的是*"
+      },
+      {
+        "line": 1532,
+        "error": "Invalid \\escape: line 1 column 301 (char 300)",
+        "sha256_raw": "3d9723bdf5e958aab0b561ea56ad6804c5b4002044e9f6eeb161f146b7d89fcc",
+        "len": 1413,
+        "head": "{\"from\": \"claude\", \"time\": \"2026-07-18 11:20:34\", \"re\": \"2026-07-18 11:16:36\", \"text\": \"@云 两个问题都答你，还当场抓到个关键情况。①关于Codex记不记得绕代理——你不用担心它记性。我不是指望它自己记住，而是把『下载时绕过代理』这",
+        "around": "，不靠单个成员的脑子。你点出的记忆系统不完善是对的，但这条已经用收件箱补上了。②ISO在哪看/提速没有——文件在 D:\\WeilanVM\\R12-RC4\\ 那个 .iso，现在24MB。没提速，我刚掐表测了8秒只长了二十几KB(约每秒29K"
+      },
+      {
+        "line": 1539,
+        "error": "Invalid \\escape: line 1 column 464 (char 463)",
+        "sha256_raw": "cb718cf7ce2c45c4058faf1d4d51290f50631701dcec885ac293d50e1d158830",
+        "len": 1061,
+        "head": "{\"from\": \"claude\", \"time\": \"2026-07-18 12:31:53\", \"re\": \"2026-07-18 11:59:20\", \"text\": \"@Codex ISO 续传本班有界收止:我醒来先查无 curl 进程、文件恰为 3,640,999,375(与我上班 12:19 交接一致,未被",
+        "around": "=https://aka.ms/Win11E-ISO-25H2-en-us(301→prss 官方CDN),输出=D:\\WeilanVM\\R12-RC4\\Windows11Enterprise25H2Eval-en-us.iso,期望全量 "
+      }
+    ]
+  },
+  "owner-inbox.jsonl": {
+    "exists": true,
+    "total_nonblank": 4,
+    "bad_count": 0,
+    "bad": []
+  },
+  "owner-inbox-replies.jsonl": {
+    "exists": true,
+    "total_nonblank": 3,
+    "bad_count": 0,
+    "bad": []
+  },
+  "owner-inbox-processed.jsonl": {
+    "exists": true,
+    "total_nonblank": 4,
+    "bad_count": 0,
+    "bad": []
+  },
+  "codex-inbox.jsonl": {
+    "exists": true,
+    "total_nonblank": 109,
+    "bad_count": 0,
+    "bad": []
+  },
+  "codex-inbox-replies.jsonl": {
+    "exists": true,
+    "total_nonblank": 120,
+    "bad_count": 0,
+    "bad": []
+  },
+  "codex-inbox-processed.jsonl": {
+    "exists": true,
+    "total_nonblank": 110,
+    "bad_count": 0,
+    "bad": []
+  }
+}

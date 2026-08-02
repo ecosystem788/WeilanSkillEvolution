@@ -1,0 +1,548 @@
+﻿{
+  "probe": "append_clocked_jsonl shell fidelity matrix",
+  "helper": "D:/WeilanSkillEvolution/proposals/bounded-scheduler-v0.1/impl/append_clocked_jsonl.py",
+  "bash": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "cells_total": 35,
+  "counts": {
+    "SILENT": 10,
+    "loud": 3,
+    "ok": 22
+  },
+  "silent_cells": [
+    "bash_double/backtick",
+    "bash_double/dollar_posix",
+    "bash_double/dollar_ps",
+    "bash_double/dquote",
+    "bash_double/mixed_realistic",
+    "ps_double/backtick",
+    "ps_double/dollar_posix",
+    "ps_double/dollar_ps",
+    "ps_double/mixed_realistic",
+    "ps_single/dquote"
+  ],
+  "loud_cells": [
+    "bash_single/apostrophe",
+    "ps_double/dquote",
+    "ps_single/apostrophe"
+  ],
+  "cells": [
+    {
+      "arm": "bash_double",
+      "hazard": "winpath",
+      "intended": "ledger at D:\\CodexData\\home\\config.toml end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "ledger at D:\\CodexData\\home\\config.toml end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "bash_double",
+      "hazard": "backtick",
+      "intended": "the span `peer-chat.jsonl` end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "the span  end",
+      "verdict": "SILENT",
+      "fidelity": {
+        "identical": false,
+        "intended_len": 30,
+        "stored_len": 13,
+        "first_divergence_index": 9,
+        "intended_at_divergence": "`peer-chat.jsonl` end",
+        "stored_at_divergence": " end",
+        "stored_full": "the span  end"
+      },
+      "stderr_head": "/usr/bin/bash: line 1: peer-chat.jsonl: command not found"
+    },
+    {
+      "arm": "bash_double",
+      "hazard": "dollar_posix",
+      "intended": "read $CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "read D:\\CodexData\\home end",
+      "verdict": "SILENT",
+      "fidelity": {
+        "identical": false,
+        "intended_len": 20,
+        "stored_len": 26,
+        "first_divergence_index": 5,
+        "intended_at_divergence": "$CODEX_HOME end",
+        "stored_at_divergence": "D:\\CodexData\\home end",
+        "stored_full": "read D:\\CodexData\\home end"
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "bash_double",
+      "hazard": "dollar_ps",
+      "intended": "read $env:CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "read :CODEX_HOME end",
+      "verdict": "SILENT",
+      "fidelity": {
+        "identical": false,
+        "intended_len": 24,
+        "stored_len": 20,
+        "first_divergence_index": 5,
+        "intended_at_divergence": "$env:CODEX_HOME end",
+        "stored_at_divergence": ":CODEX_HOME end",
+        "stored_full": "read :CODEX_HOME end"
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "bash_double",
+      "hazard": "apostrophe",
+      "intended": "it's fine end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "it's fine end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "bash_double",
+      "hazard": "dquote",
+      "intended": "he said \"fine\" end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "he said fine end",
+      "verdict": "SILENT",
+      "fidelity": {
+        "identical": false,
+        "intended_len": 18,
+        "stored_len": 16,
+        "first_divergence_index": 8,
+        "intended_at_divergence": "\"fine\" end",
+        "stored_at_divergence": "fine end",
+        "stored_full": "he said fine end"
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "bash_double",
+      "hazard": "mixed_realistic",
+      "intended": "core D:\\CodexData\\home ; span `peer-chat.jsonl` ; $CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "core D:\\CodexData\\home ; span  ; D:\\CodexData\\home end",
+      "verdict": "SILENT",
+      "fidelity": {
+        "identical": false,
+        "intended_len": 65,
+        "stored_len": 54,
+        "first_divergence_index": 30,
+        "intended_at_divergence": "`peer-chat.jsonl` ; $CODEX_HOME end",
+        "stored_at_divergence": " ; D:\\CodexData\\home end",
+        "stored_full": "core D:\\CodexData\\home ; span  ; D:\\CodexData\\home end"
+      },
+      "stderr_head": "/usr/bin/bash: line 1: peer-chat.jsonl: command not found"
+    },
+    {
+      "arm": "bash_single",
+      "hazard": "winpath",
+      "intended": "ledger at D:\\CodexData\\home\\config.toml end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "ledger at D:\\CodexData\\home\\config.toml end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "bash_single",
+      "hazard": "backtick",
+      "intended": "the span `peer-chat.jsonl` end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "the span `peer-chat.jsonl` end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "bash_single",
+      "hazard": "dollar_posix",
+      "intended": "read $CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "read $CODEX_HOME end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "bash_single",
+      "hazard": "dollar_ps",
+      "intended": "read $env:CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "read $env:CODEX_HOME end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "bash_single",
+      "hazard": "apostrophe",
+      "intended": "it's fine end",
+      "rc": 2,
+      "row_parses_as_json": false,
+      "stored_text": null,
+      "verdict": "loud",
+      "fidelity": {
+        "identical": false,
+        "reason": "no text field stored"
+      },
+      "stderr_head": "/usr/bin/bash: -c: line 1: unexpected EOF while looking for matching `''"
+    },
+    {
+      "arm": "bash_single",
+      "hazard": "dquote",
+      "intended": "he said \"fine\" end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "he said \"fine\" end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "bash_single",
+      "hazard": "mixed_realistic",
+      "intended": "core D:\\CodexData\\home ; span `peer-chat.jsonl` ; $CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "core D:\\CodexData\\home ; span `peer-chat.jsonl` ; $CODEX_HOME end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_double",
+      "hazard": "winpath",
+      "intended": "ledger at D:\\CodexData\\home\\config.toml end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "ledger at D:\\CodexData\\home\\config.toml end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_double",
+      "hazard": "backtick",
+      "intended": "the span `peer-chat.jsonl` end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "the span peer-chat.jsonl end",
+      "verdict": "SILENT",
+      "fidelity": {
+        "identical": false,
+        "intended_len": 30,
+        "stored_len": 28,
+        "first_divergence_index": 9,
+        "intended_at_divergence": "`peer-chat.jsonl` end",
+        "stored_at_divergence": "peer-chat.jsonl end",
+        "stored_full": "the span peer-chat.jsonl end"
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_double",
+      "hazard": "dollar_posix",
+      "intended": "read $CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "read  end",
+      "verdict": "SILENT",
+      "fidelity": {
+        "identical": false,
+        "intended_len": 20,
+        "stored_len": 9,
+        "first_divergence_index": 5,
+        "intended_at_divergence": "$CODEX_HOME end",
+        "stored_at_divergence": " end",
+        "stored_full": "read  end"
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_double",
+      "hazard": "dollar_ps",
+      "intended": "read $env:CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "read D:\\CodexData\\home end",
+      "verdict": "SILENT",
+      "fidelity": {
+        "identical": false,
+        "intended_len": 24,
+        "stored_len": 26,
+        "first_divergence_index": 5,
+        "intended_at_divergence": "$env:CODEX_HOME end",
+        "stored_at_divergence": "D:\\CodexData\\home end",
+        "stored_full": "read D:\\CodexData\\home end"
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_double",
+      "hazard": "apostrophe",
+      "intended": "it's fine end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "it's fine end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_double",
+      "hazard": "dquote",
+      "intended": "he said \"fine\" end",
+      "rc": 1,
+      "row_parses_as_json": false,
+      "stored_text": null,
+      "verdict": "loud",
+      "fidelity": {
+        "identical": false,
+        "reason": "no text field stored"
+      },
+      "stderr_head": "usage: append_clocked_jsonl.py [-h] --root ROOT --file LEDGER_NAME"
+    },
+    {
+      "arm": "ps_double",
+      "hazard": "mixed_realistic",
+      "intended": "core D:\\CodexData\\home ; span `peer-chat.jsonl` ; $CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "core D:\\CodexData\\home ; span peer-chat.jsonl ;  end",
+      "verdict": "SILENT",
+      "fidelity": {
+        "identical": false,
+        "intended_len": 65,
+        "stored_len": 52,
+        "first_divergence_index": 30,
+        "intended_at_divergence": "`peer-chat.jsonl` ; $CODEX_HOME end",
+        "stored_at_divergence": "peer-chat.jsonl ;  end",
+        "stored_full": "core D:\\CodexData\\home ; span peer-chat.jsonl ;  end"
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_single",
+      "hazard": "winpath",
+      "intended": "ledger at D:\\CodexData\\home\\config.toml end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "ledger at D:\\CodexData\\home\\config.toml end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_single",
+      "hazard": "backtick",
+      "intended": "the span `peer-chat.jsonl` end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "the span `peer-chat.jsonl` end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_single",
+      "hazard": "dollar_posix",
+      "intended": "read $CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "read $CODEX_HOME end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_single",
+      "hazard": "dollar_ps",
+      "intended": "read $env:CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "read $env:CODEX_HOME end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_single",
+      "hazard": "apostrophe",
+      "intended": "it's fine end",
+      "rc": 1,
+      "row_parses_as_json": false,
+      "stored_text": null,
+      "verdict": "loud",
+      "fidelity": {
+        "identical": false,
+        "reason": "no text field stored"
+      },
+      "stderr_head": "The string is missing the terminator: '."
+    },
+    {
+      "arm": "ps_single",
+      "hazard": "dquote",
+      "intended": "he said \"fine\" end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "he said fine end",
+      "verdict": "SILENT",
+      "fidelity": {
+        "identical": false,
+        "intended_len": 18,
+        "stored_len": 16,
+        "first_divergence_index": 8,
+        "intended_at_divergence": "\"fine\" end",
+        "stored_at_divergence": "fine end",
+        "stored_full": "he said fine end"
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "ps_single",
+      "hazard": "mixed_realistic",
+      "intended": "core D:\\CodexData\\home ; span `peer-chat.jsonl` ; $CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "core D:\\CodexData\\home ; span `peer-chat.jsonl` ; $CODEX_HOME end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "argv_control",
+      "hazard": "winpath",
+      "intended": "ledger at D:\\CodexData\\home\\config.toml end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "ledger at D:\\CodexData\\home\\config.toml end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "argv_control",
+      "hazard": "backtick",
+      "intended": "the span `peer-chat.jsonl` end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "the span `peer-chat.jsonl` end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "argv_control",
+      "hazard": "dollar_posix",
+      "intended": "read $CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "read $CODEX_HOME end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "argv_control",
+      "hazard": "dollar_ps",
+      "intended": "read $env:CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "read $env:CODEX_HOME end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "argv_control",
+      "hazard": "apostrophe",
+      "intended": "it's fine end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "it's fine end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "argv_control",
+      "hazard": "dquote",
+      "intended": "he said \"fine\" end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "he said \"fine\" end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    },
+    {
+      "arm": "argv_control",
+      "hazard": "mixed_realistic",
+      "intended": "core D:\\CodexData\\home ; span `peer-chat.jsonl` ; $CODEX_HOME end",
+      "rc": 0,
+      "row_parses_as_json": true,
+      "stored_text": "core D:\\CodexData\\home ; span `peer-chat.jsonl` ; $CODEX_HOME end",
+      "verdict": "ok",
+      "fidelity": {
+        "identical": true
+      },
+      "stderr_head": ""
+    }
+  ]
+}
