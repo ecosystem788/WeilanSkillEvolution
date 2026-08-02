@@ -1,0 +1,13 @@
+{
+ "measurement": "tracemalloc peak of json.load on the episode index alone",
+ "index_path": "D:\\CodexData\\home\\method-state\\memory\\episode-indexes\\workspaces\\d431c38105a9a791\\c36aecb1ff20.json",
+ "index_file_mb": 28.36,
+ "index_episode_count": 6070,
+ "frame_files_on_disk": 6186,
+ "index_is_stale_vs_frame_count": true,
+ "retained_after_load_mb": 97.0,
+ "peak_python_heap_mb": 225.0,
+ "python": "3.11.9",
+ "note": "tracemalloc counts Python allocation bytes, not RSS. The index file is rewritten by whichever body opens a frame next, so this number is an instant reading of a corpus a concurrent peer mutates.",
+ "pid": 1760
+}
