@@ -10,6 +10,10 @@ Reason codes are diagnostic only.  Registry-wide stale anchors never produce a
 state.
 
 The tool never modifies its subject or registry and never prints a pattern.
+
+The ``--commit`` receipt contract is named by ``GATE_VERSION``.  The name
+covers its top-level keys, occurrence keys, identity projection,
+``registry_anchor_set_sha256`` algorithm, and state/exit-code mapping.
 """
 
 # Read-only pre-push gate (push 前脱敏门 v4).
@@ -40,6 +44,7 @@ REGISTRY_REQUIRED_FIELDS = set(IDENTITY_FIELDS) | {
 }
 HEX_40 = re.compile(r"^[0-9a-f]{40}$")
 HEX_64 = re.compile(r"^[0-9a-f]{64}$")
+GATE_VERSION = "scan-only-gate/4.1"
 
 
 def longpath(path):
@@ -62,6 +67,11 @@ def load_patterns(private_abs):
         raise ValueError("private_strings_file_empty")
     joined = "\n".join(patterns).encode("utf-8")
     return patterns, hashlib.sha256(joined).hexdigest()
+
+
+def file_bytes_sha256(path):
+    with open(path, "rb") as fh:
+        return hashlib.sha256(fh.read()).hexdigest()
 
 
 def scan_tree(tree, private_abs, patterns):
@@ -321,6 +331,23 @@ def identity(entry, include_digest=True):
     return tuple(entry[field] for field in fields)
 
 
+def canonical_registry_anchor_set_sha256(registry):
+    """Hash the set consumed by the gate using its exact identity semantics."""
+    rows = set()
+    for entry in registry:
+        projected = []
+        for field in IDENTITY_FIELDS:
+            value = entry[field]
+            if isinstance(value, bool):
+                value = int(value)
+            projected.append(value)
+        rows.add(json.dumps(
+            projected, ensure_ascii=False, separators=(",", ":")
+        ))
+    body = "\n".join(sorted(rows)).encode("utf-8")
+    return hashlib.sha256(body).hexdigest()
+
+
 def classify_occurrences(occurrences, registry, ruleset_digest):
     current_anchors = {
         identity(entry)
@@ -355,8 +382,8 @@ def classify_occurrences(occurrences, registry, ruleset_digest):
     return classified, reason_codes
 
 
-def scan_commit(commit_arg, private_abs, registry_path, patterns,
-                ruleset_digest):
+def scan_commit(commit_arg, private_abs, private_bytes_sha256, registry_path,
+                patterns, ruleset_digest):
     resolved = resolve_commit(commit_arg)
     entries = parse_ls_tree(resolved)
     private_relative = private_path_in_repository(private_abs)
@@ -401,6 +428,15 @@ def scan_commit(commit_arg, private_abs, registry_path, patterns,
         "reason_codes": reason_codes,
         "occurrences": classified,
         "state": state,
+        "private_strings_path": private_abs,
+        "private_strings_bytes_sha256": private_bytes_sha256,
+        "registry_path": registry_path,
+        "registry_bytes_sha256": file_bytes_sha256(registry_path),
+        "registry_entry_count": len(registry),
+        "registry_anchor_set_sha256": canonical_registry_anchor_set_sha256(
+            registry
+        ),
+        "gate_version": GATE_VERSION,
     }
     return receipt, exit_code
 
@@ -418,11 +454,13 @@ def main(argv=None):
     subject.add_argument("--tree", help="root of the exact export tree")
     subject.add_argument("--commit", help="commit-ish whose resolved commit tree is scanned")
     parser.add_argument("--private-strings", default=DEFAULT_PRIVATE)
+    parser.add_argument("--registry", default=DEFAULT_REGISTRY)
     args = parser.parse_args(argv)
 
     private_abs = os.path.abspath(args.private_strings)
     try:
         patterns, ruleset_digest = load_patterns(private_abs)
+        private_bytes_sha256 = file_bytes_sha256(private_abs)
     except (OSError, UnicodeDecodeError, ValueError) as exc:
         reason = str(exc) if isinstance(exc, ValueError) else "private_strings_unreadable"
         return usage_error(reason)
@@ -438,9 +476,10 @@ def main(argv=None):
         return 0 if not receipt["hits"] else 2
 
     try:
+        registry_abs = os.path.abspath(args.registry)
         receipt, exit_code = scan_commit(
-            args.commit, private_abs, DEFAULT_REGISTRY, patterns,
-            ruleset_digest,
+            args.commit, private_abs, private_bytes_sha256, registry_abs,
+            patterns, ruleset_digest,
         )
     except FileNotFoundError:
         return usage_error("registry_unreadable")

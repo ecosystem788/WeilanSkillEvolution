@@ -68,11 +68,11 @@ class GateFixture(unittest.TestCase):
     def run_gate(self, *args):
         stdout = io.StringIO()
         stderr = io.StringIO()
+        argv = list(args)
+        if "--private-strings" not in argv:
+            argv.extend(["--private-strings", str(self.patterns)])
         with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
-            rc = GATE.main([
-                *args,
-                "--private-strings", str(self.patterns),
-            ])
+            rc = GATE.main(argv)
         payload = json.loads(stdout.getvalue()) if stdout.getvalue() else None
         return rc, payload, stdout.getvalue(), stderr.getvalue()
 
@@ -242,6 +242,119 @@ class GateFixture(unittest.TestCase):
         rc, payload, _stdout, _stderr = self.run_commit()
         self.assertEqual((0, "CLEAN", 2),
                          (rc, payload["state"], payload["stale_anchor_count"]))
+
+    def test_12_commit_receipt_binds_private_and_registry_inputs(self):
+        self.write("record.txt", TOKEN + "\n")
+        commit = self.commit("receipt fields")
+        rc, payload, _stdout, _stderr = self.run_commit(commit)
+        self.assertEqual((2, "NEW_MATCHES"), (rc, payload["state"]))
+        expected_keys = {
+            "private_strings_path", "private_strings_bytes_sha256",
+            "registry_path", "registry_bytes_sha256",
+            "registry_entry_count", "registry_anchor_set_sha256",
+            "gate_version",
+        }
+        self.assertTrue(expected_keys.issubset(payload))
+        self.assertEqual(str(self.patterns.resolve()), payload["private_strings_path"])
+        self.assertEqual(str(self.registry.resolve()), payload["registry_path"])
+        self.assertEqual(
+            hashlib.sha256(self.patterns.read_bytes()).hexdigest(),
+            payload["private_strings_bytes_sha256"],
+        )
+        self.assertEqual(hashlib.sha256(b"").hexdigest(),
+                         payload["registry_bytes_sha256"])
+        self.assertEqual((0, hashlib.sha256(b"").hexdigest(),
+                          "scan-only-gate/4.1"),
+                         (payload["registry_entry_count"],
+                          payload["registry_anchor_set_sha256"],
+                          payload["gate_version"]))
+
+        self.set_registry(self.valid_anchor(payload["occurrences"][0]))
+        rc, known, _stdout, _stderr = self.run_commit(commit)
+        self.assertEqual((3, "KNOWN_PUBLIC_ONLY"),
+                         (rc, known["state"]))
+        self.assertEqual(1, known["registry_entry_count"])
+        self.assertEqual(
+            hashlib.sha256(self.registry.read_bytes()).hexdigest(),
+            known["registry_bytes_sha256"],
+        )
+
+    def test_13_registry_override_and_invalid_input_remain_at_the_gate(self):
+        self.write("record.txt", TOKEN + "\n")
+        commit = self.commit("registry argument")
+        override = self.base / "override.jsonl"
+        override.write_bytes(self.registry.read_bytes())
+        rc, payload, _stdout, _stderr = self.run_gate(
+            "--commit", commit, "--registry", str(override)
+        )
+        self.assertEqual((2, "NEW_MATCHES"), (rc, payload["state"]))
+        self.assertEqual(str(override.resolve()), payload["registry_path"])
+
+        invalid = self.base / "invalid.jsonl"
+        invalid.write_bytes(b"{not-json\n")
+        rc, payload, stdout, stderr = self.run_gate(
+            "--commit", commit, "--registry", str(invalid)
+        )
+        self.assertEqual((1, None, ""), (rc, payload, stdout))
+        self.assertIn("invalid_registry_record:1", stderr)
+
+    def test_14_canonical_anchor_digest_matches_gate_set_semantics(self):
+        self.write("record.txt", TOKEN + "\n")
+        self.commit("canonical digest")
+        occurrence = self.first_occurrence()
+        anchor = self.valid_anchor(occurrence)
+        self.assertEqual(
+            "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            GATE.canonical_registry_anchor_set_sha256([]),
+        )
+        self.assertEqual(
+            GATE.canonical_registry_anchor_set_sha256([anchor]),
+            GATE.canonical_registry_anchor_set_sha256([anchor, anchor]),
+        )
+        bool_anchor = dict(anchor, pattern_index=True)
+        int_anchor = dict(anchor, pattern_index=1)
+        self.assertEqual(
+            GATE.canonical_registry_anchor_set_sha256([bool_anchor]),
+            GATE.canonical_registry_anchor_set_sha256([int_anchor]),
+        )
+
+    def test_15_cross_workspace_same_inputs_have_same_identity_digests(self):
+        self.write("record.txt", TOKEN + "\n")
+        commit = self.commit("cross workspace")
+        clone = self.base / "clone"
+        subprocess.run(
+            ["git", "clone", "-q", self.repo.as_uri(), str(clone)],
+            check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        )
+        clone_patterns = clone / "patterns.txt"
+        clone_patterns.write_bytes(self.patterns.read_bytes())
+        clone_registry = clone / "registry.jsonl"
+        clone_registry.write_bytes(self.registry.read_bytes())
+
+        rc, first, _stdout, _stderr = self.run_gate(
+            "--commit", commit, "--registry", str(self.registry)
+        )
+        self.assertEqual(2, rc)
+        previous_cwd = os.getcwd()
+        try:
+            os.chdir(clone)
+            rc, second, _stdout, _stderr = self.run_gate(
+                "--commit", commit,
+                "--private-strings", str(clone_patterns),
+                "--registry", str(clone_registry),
+            )
+        finally:
+            os.chdir(previous_cwd)
+        self.assertEqual(2, rc)
+        for key in (
+            "resolved_oid", "ruleset_digest", "occurrences",
+            "private_strings_bytes_sha256", "registry_bytes_sha256",
+            "registry_anchor_set_sha256",
+        ):
+            self.assertEqual(first[key], second[key], key)
+        self.assertNotEqual(first["private_strings_path"],
+                            second["private_strings_path"])
+        self.assertNotEqual(first["registry_path"], second["registry_path"])
 
 
 if __name__ == "__main__":
