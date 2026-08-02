@@ -1,0 +1,49 @@
+{
+  "probe": "_probe_20260802_review_advisory_callsite.py",
+  "purpose": "Independent review of delegation 18435aa7faa8: exercise the SIGNED call site (attach_trace_advisory_result) unstubbed, base vs candidate, and record what the delegated acceptance probes do and do not cover.",
+  "read_only": true,
+  "workspace": "D:\\WeilanSkillEvolution",
+  "scope": "skill-evolution",
+  "text_value": "bounded review of the open advisory memo wrapper candidate",
+
+  "structural_findings": {
+    "candidate_diff_vs_deployed_weilan_trace": "exactly the signed change: `with derivation_memo_scope():` wrapping the attach_trace_advisory_result call in command_open_lineaged_fenced (:685-687); print() untouched; +1 line, nothing else. diff -u clean apart from that hunk.",
+    "candidate_tree_runtime_core_is_stale": {
+      "deployed_sha256": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0",
+      "candidate_sha256": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68",
+      "candidate_mtime": "2026-07-10 23:25",
+      "delta": "candidate lacks the 2026-08-01 co-signed canonical_workspace lru_cache (CANONICAL_WORKSPACE_CACHE_CONTRACT, _canonical_workspace_from_expanded, clear_canonical_workspace_cache all absent); candidate tree also lacks test_canonical_workspace_cache.py which is present at the install point.",
+      "why_it_binds": "weilan_trace.py does a sibling `from runtime_core import (...)` (:16) and both delegated probes insert the script's own directory at sys.path[0], so every candidate-arm measurement ran WITHOUT the landed 08-01 cache."
+    },
+    "two_install_points_are_one_file": {
+      "link": "C:\\Users\\zy\\.claude\\skills",
+      "link_type": "Junction",
+      "target": "D:\\CodexData\\skills",
+      "consequence": "the proposal's 'both install points byte-identical' acceptance criterion is structurally satisfied and cannot fail; it is not an independent check. Author of that criterion: claude."
+    }
+  },
+
+  "delegated_probe_coverage": {
+    "_probe_20260802_advisory_ab.py": "wraps episode_index_is_fresh + build_episode_index_value directly. That is a sub-segment of collapse_trace_registry; it omits reduce_governance (weilan_trace.py:4485) and never executes the changed line in command_open_lineaged_fenced.",
+    "_probe_20260802_advisory_equivalence.py": "monkeypatches module.trace_reentry_advisory_result to a constant-returning lambda (:24-32) before calling attach_trace_advisory_result. Everything the memo scope memoizes is replaced by a fixture, and the changed line is never executed. `contains_advisory: true` is guaranteed by the fixture, not observed."
+  },
+
+  "callsite_cells": [
+    {"arm": "base",      "memo_wrapper_applied_by_probe": false, "script_sha256": "e6f11e11cdb670a093f9ae5a9e7b0f6769e9affe9b9ebc4698d2550918782f5e", "runtime_core_sha256": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0", "advisory_keys": [], "advisory_payload_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a", "seconds_callsite": 20.201},
+    {"arm": "candidate", "memo_wrapper_applied_by_probe": false, "script_sha256": "cf544e77ff8fe89e25938f4b5d3803e21eb6e0b3edd78d27ce8e7369c530e190", "runtime_core_sha256": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68", "advisory_keys": [], "advisory_payload_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a", "seconds_callsite": 26.361},
+    {"arm": "base",      "memo_wrapper_applied_by_probe": true,  "script_sha256": "e6f11e11cdb670a093f9ae5a9e7b0f6769e9affe9b9ebc4698d2550918782f5e", "runtime_core_sha256": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0", "advisory_keys": [], "advisory_payload_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a", "seconds_callsite": 69.646},
+    {"arm": "candidate", "memo_wrapper_applied_by_probe": true,  "script_sha256": "cf544e77ff8fe89e25938f4b5d3803e21eb6e0b3edd78d27ce8e7369c530e190", "runtime_core_sha256": "f35ac76b99f400553e465e422a3cf66f4b381d0747315ad091826e62a5c0dc68", "advisory_keys": [], "advisory_payload_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a", "seconds_callsite": 16.185}
+  ],
+
+  "what_the_cells_do_and_do_not_support": {
+    "supported": "All four cells produce an identical advisory payload `{}` (sha256 44136fa3...). Real, unstubbed equivalence — but with EMPTY content, so it does not exercise the matching path either. Neither the delegated equivalence probe nor this one has yet shown equivalence on non-empty real advisory content with the memo scope actually entered.",
+    "not_supported": "No timing claim. Each cell is n=1, uncontrolled temperature, possibly concurrent with a peer wake. base/nomemo=20.201s vs base/memo=69.646s on the identical function and input is by itself proof that single-sample cells on this machine are not load-bearing (cf. benchmark-cache-warmth-dominates: cold/warm spread 4.66x exceeds the 2.31x code-version effect)."
+  },
+
+  "not_ruled_out": [
+    "Whether reduce_governance (omitted by the delegated A/B) benefits, is neutral to, or is harmed by the memo scope was not measured by anyone yet.",
+    "Whether a non-empty collapse-trace registry produces byte-identical advisories under the memo scope was not measured; a non-vacuous equivalence test needs a text_value that actually matches a registry entry.",
+    "History-wide behaviour, other commands, and deployment are all out of scope here.",
+    "All `time` values are append-only-file identity keys, not clock instants (ledger-timestamp-authority-v0.1)."
+  ]
+}
