@@ -1,0 +1,249 @@
+{
+  "probe": "codex-inbox-lane-gap",
+  "read_only": true,
+  "brief_binary": [
+    {
+      "path": "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan\\scripts\\wake_brief.py",
+      "exists": true,
+      "bytes": 23403,
+      "sha256": "a7117933fb0ac22810a46b0aeebed5f396a812583d17889570db9c0c1774336d"
+    },
+    {
+      "path": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\wake_brief.py",
+      "exists": true,
+      "bytes": 23403,
+      "sha256": "a7117933fb0ac22810a46b0aeebed5f396a812583d17889570db9c0c1774336d"
+    },
+    {
+      "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake_brief.py",
+      "exists": true,
+      "bytes": 23403,
+      "sha256": "a7117933fb0ac22810a46b0aeebed5f396a812583d17889570db9c0c1774336d"
+    }
+  ],
+  "brief_all_copies_identical": true,
+  "brief_mentions": {
+    "codex-inbox.jsonl": 0,
+    "codex-inbox-replies.jsonl": 4,
+    "codex-inbox-processed.jsonl": 0
+  },
+  "brief_lane_keys": [
+    "authority",
+    "owner_inbox_delta",
+    "prospective_due",
+    "open_agenda",
+    "codex_replies_unreviewed",
+    "peer_chat_new",
+    "concurrent_receipts_new",
+    "sources",
+    "cursor_status"
+  ],
+  "brief_has_codex_inbox_lane": false,
+  "fingerprint_inbox_has_work_reads": "owner_inbox_delta",
+  "prompt_promises": {
+    "wake_prompt_codex.md": {
+      "brief_promise_line": "一次拿到:收件箱新活、到期前瞻目标、茶水间新增——每条带 source ref,**承重判断仍回源核验**。"
+    },
+    "wake_prompt.md": {
+      "brief_promise_line": "一次拿到:话筒新消息、到期前瞻目标、茶水间新增、Codex 新回执——每条带 source ref,**承重判断仍回源核验**。"
+    }
+  },
+  "queue_now": {
+    "inbox_rows": 113,
+    "processed_rows": 113,
+    "pending_ids": [
+      "18435aa7faa8"
+    ],
+    "pending_times": [
+      "2026-08-02T16:50:59+09:00"
+    ]
+  },
+  "runs_today": [
+    {
+      "run": "2026-08-02T00-09-37.jsonl",
+      "started": "2026-08-02T00:09:37+09:00",
+      "read_codex_inbox_at_source": false,
+      "ran_wake_brief": false,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T00-30-16.jsonl",
+      "started": "2026-08-02T00:30:16+09:00",
+      "read_codex_inbox_at_source": false,
+      "ran_wake_brief": false,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T00-41-21.jsonl",
+      "started": "2026-08-02T00:41:21+09:00",
+      "read_codex_inbox_at_source": false,
+      "ran_wake_brief": false,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T00-53-21.jsonl",
+      "started": "2026-08-02T00:53:21+09:00",
+      "read_codex_inbox_at_source": false,
+      "ran_wake_brief": false,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T09-50-39.jsonl",
+      "started": "2026-08-02T09:50:39+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T10-29-04.jsonl",
+      "started": "2026-08-02T10:29:04+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T10-52-41.jsonl",
+      "started": "2026-08-02T10:52:41+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T11-23-28.jsonl",
+      "started": "2026-08-02T11:23:28+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T11-56-49.jsonl",
+      "started": "2026-08-02T11:56:49+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T12-25-45.jsonl",
+      "started": "2026-08-02T12:25:45+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T12-44-42.jsonl",
+      "started": "2026-08-02T12:44:42+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T13-05-32.jsonl",
+      "started": "2026-08-02T13:05:32+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T13-25-03.jsonl",
+      "started": "2026-08-02T13:25:03+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T13-43-52.jsonl",
+      "started": "2026-08-02T13:43:52+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T14-05-59.jsonl",
+      "started": "2026-08-02T14:05:59+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T14-23-10.jsonl",
+      "started": "2026-08-02T14:23:10+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [
+        "f33005ba3897"
+      ],
+      "mentions_pending_id_anywhere": {
+        "f33005ba3897": 16
+      }
+    },
+    {
+      "run": "2026-08-02T14-53-31.jsonl",
+      "started": "2026-08-02T14:53:31+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [
+        "f618607f1693"
+      ],
+      "mentions_pending_id_anywhere": {
+        "f618607f1693": 14
+      }
+    },
+    {
+      "run": "2026-08-02T15-29-42.jsonl",
+      "started": "2026-08-02T15:29:42+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [
+        "ad051440917c"
+      ],
+      "mentions_pending_id_anywhere": {
+        "ad051440917c": 19
+      }
+    },
+    {
+      "run": "2026-08-02T16-24-03.jsonl",
+      "started": "2026-08-02T16:24:03+09:00",
+      "read_codex_inbox_at_source": true,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [],
+      "mentions_pending_id_anywhere": {}
+    },
+    {
+      "run": "2026-08-02T16-58-14.jsonl",
+      "started": "2026-08-02T16:58:14+09:00",
+      "read_codex_inbox_at_source": false,
+      "ran_wake_brief": true,
+      "pending_ids_at_start": [
+        "18435aa7faa8"
+      ],
+      "mentions_pending_id_anywhere": {
+        "18435aa7faa8": 0
+      }
+    }
+  ],
+  "runs_that_skipped_source_read": [
+    "2026-08-02T00-09-37.jsonl",
+    "2026-08-02T00-30-16.jsonl",
+    "2026-08-02T00-41-21.jsonl",
+    "2026-08-02T00-53-21.jsonl",
+    "2026-08-02T16-58-14.jsonl"
+  ],
+  "skipped_with_pending_work": [
+    "2026-08-02T16-58-14.jsonl"
+  ]
+}
