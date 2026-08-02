@@ -1,0 +1,87 @@
+{
+  "conclusion": {
+    "divergent_branch_reachable_in_production": false,
+    "note": "deploy_find_frame_index.cmd_verify sets state='divergent' only when the two classify() results differ; both read the same bytes, so that branch and the R9 rollback trigger built on it cannot fire in this environment.",
+    "one_physical_tree": true
+  },
+  "deploy_tool_verify": {
+    "all_installs_agree": true,
+    "observed_identical_across_installs": true,
+    "rc": 0,
+    "state": "baseline",
+    "tool": "D:\\WeilanSkillEvolution\\proposals\\find-frame-index-v0.1\\deploy_find_frame_index.py"
+  },
+  "per_file": {
+    "scripts/runtime_core.py": {
+      "claude": {
+        "file_id": "0x0000000000000000000500000002a535",
+        "path": "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan\\scripts\\runtime_core.py",
+        "sha256": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0",
+        "size": 6179
+      },
+      "codex": {
+        "file_id": "0x0000000000000000000500000002a535",
+        "path": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\runtime_core.py",
+        "sha256": "c714e283a28f5679aafe742d935f0a6f4445b889edb8c25a6491c813fdfddfa0",
+        "size": 6179
+      },
+      "same_ntfs_file_id": true
+    },
+    "scripts/weilan_trace.py": {
+      "claude": {
+        "file_id": "0x0000000000000000000500000002a554",
+        "path": "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan\\scripts\\weilan_trace.py",
+        "sha256": "e6f11e11cdb670a093f9ae5a9e7b0f6769e9affe9b9ebc4698d2550918782f5e",
+        "size": 324543
+      },
+      "codex": {
+        "file_id": "0x0000000000000000000500000002a554",
+        "path": "D:\\CodexData\\skills\\solve-with-weilan\\scripts\\weilan_trace.py",
+        "sha256": "e6f11e11cdb670a093f9ae5a9e7b0f6769e9affe9b9ebc4698d2550918782f5e",
+        "size": 324543
+      },
+      "same_ntfs_file_id": true
+    }
+  },
+  "probe": "install_point_aliasing",
+  "question": "Do the two install points named by deploy_find_frame_index.installs() resolve to one physical file, making 'both installs agree' unfailable?",
+  "reparse_chain": {
+    "claude": [
+      {
+        "link_type": "Junction",
+        "path": "C:\\Users\\zy\\.claude\\skills",
+        "target": "D:\\CodexData\\skills"
+      }
+    ],
+    "codex": []
+  },
+  "roots": {
+    "claude": "C:\\Users\\zy\\.claude\\skills\\solve-with-weilan",
+    "codex": "D:\\CodexData\\skills\\solve-with-weilan"
+  },
+  "sandbox": {
+    "agreement_forced_in_all_three_reads": [
+      true,
+      true,
+      true
+    ],
+    "created": true,
+    "divergence_ever_observed": false,
+    "roots": [
+      "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_alias_zr5e7xyn\\aliased",
+      "C:\\Users\\zy\\AppData\\Local\\Temp\\wl_alias_zr5e7xyn\\real"
+    ],
+    "states_after_write_via_link": [
+      "5eef8098ed6ec0a16249fc7c12422027fc9fd75b16130cc9382cf09102014796",
+      "5eef8098ed6ec0a16249fc7c12422027fc9fd75b16130cc9382cf09102014796"
+    ],
+    "states_after_write_via_real": [
+      "1e81270f1a47dce22a2e4985250c74b2e3374443734f1492b03ea2cd2af4ec48",
+      "1e81270f1a47dce22a2e4985250c74b2e3374443734f1492b03ea2cd2af4ec48"
+    ],
+    "states_initial": [
+      "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+      "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e"
+    ]
+  }
+}
