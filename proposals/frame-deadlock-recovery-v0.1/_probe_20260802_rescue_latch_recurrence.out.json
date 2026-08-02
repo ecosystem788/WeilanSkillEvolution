@@ -1,0 +1,164 @@
+{
+  "probe": "_probe_20260802_rescue_latch_recurrence.py",
+  "day": "2026-08-02",
+  "read_only": true,
+  "F1_F2_cron_segment": {
+    "error_count": 25,
+    "first_error_stamp": "2026-08-02T00:54:58",
+    "last_error_stamp": "2026-08-02T09:19:59",
+    "distinct_diag_sha256": [
+      "e15dacfe4bf3b05a3ba05caa4b7a20a84f3c1e4d453c87962115b73bccdf1fc9"
+    ],
+    "alert_lines": [
+      "2026-08-02T00:58:58  ALERT sentinel_failure_streak=3 action=wake_agent"
+    ],
+    "alert_count": 1,
+    "rescue_return_lines": [
+      {
+        "done_line": "2026-08-02T00:58:58  alert wake_agent done rc=1",
+        "preceding_error_stamp": "2026-08-02T02:16:58",
+        "following_error_stamp": "2026-08-02T02:18:58"
+      }
+    ]
+  },
+  "F3_latch": {
+    "source": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\run_wake_cron.ps1",
+    "sha256": "c485e953814a43ec7894afbacdf1de9f084f780d938adc89417245c4b60fc49d",
+    "latch_lines": {
+      "76": "alerted = @($segment | Where-Object { $_ -match '\\sALERT sentinel_failure_streak=' }).Count -gt 0",
+      "125": "if ($streak.count -ge 3 -and -not $streak.alerted) {"
+    },
+    "escalation_call_lines": {
+      "128": "& powershell -NoProfile -ExecutionPolicy Bypass -File $WakeAgentScript",
+      "222": "& powershell -NoProfile -ExecutionPolicy Bypass -File $WakeAgentScript -RescueContext $rescueB64",
+      "224": "& powershell -NoProfile -ExecutionPolicy Bypass -File $WakeAgentScript"
+    }
+  },
+  "F3b_rescue_context": {
+    "source": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake_agent.ps1",
+    "sha256": "15864f6a839c7e4055a71131bcc3b0abbd8cd81c4d6619e8a19fd0523f9f3a5b",
+    "lines": {
+      "2": "param([string]$RescueContext = \"\")",
+      "188": "if ([string]::IsNullOrWhiteSpace($RescueContext)) { return $false }",
+      "224": "if (-not $stale -and -not $skipReason) { $rescueAllowed = Test-RescueTakeover }",
+      "228": "} elseif (-not $skipReason) { $skipReason = \"episode already running or rescue proof failed\" }"
+    }
+  },
+  "F4_F5_agent_runs": {
+    "rows": [
+      {
+        "stamp": "2026-08-02T00-13-21",
+        "rc": 0,
+        "subtype": "success",
+        "turns": "53",
+        "cost": "4.023970499999999",
+        "moved": "ledger_advanced",
+        "head": "wf-20260801-152750-fb9f1a"
+      },
+      {
+        "stamp": "2026-08-02T00-34-16",
+        "rc": 0,
+        "subtype": "success",
+        "turns": "29",
+        "cost": "1.991553",
+        "moved": "ledger_unchanged",
+        "head": "wf-20260801-153257-625ad1"
+      },
+      {
+        "stamp": "2026-08-02T00-45-17",
+        "rc": 0,
+        "subtype": "success",
+        "turns": "26",
+        "cost": "1.6445000000000003",
+        "moved": "ledger_advanced",
+        "head": "wf-20260801-155022-12b9c0"
+      },
+      {
+        "stamp": "2026-08-02T00-59-58",
+        "rc": 1,
+        "subtype": "success",
+        "turns": "12",
+        "cost": "0.9550005",
+        "moved": "ledger_unchanged",
+        "head": "wf-20260801-155022-12b9c0"
+      },
+      {
+        "stamp": "2026-08-02T09-07-39",
+        "rc": 0,
+        "subtype": "success",
+        "turns": "54",
+        "cost": "3.216696",
+        "moved": "ledger_advanced",
+        "head": "wf-20260802-002344-2b7990"
+      },
+      {
+        "stamp": "2026-08-02T09-30-48",
+        "rc": 0,
+        "subtype": "success",
+        "turns": "53",
+        "cost": "4.087708999999999",
+        "moved": "ledger_advanced",
+        "head": "wf-20260802-004512-f2bdbd"
+      },
+      {
+        "stamp": "2026-08-02T09-51-42",
+        "rc": 0,
+        "subtype": "success",
+        "turns": "43",
+        "cost": "2.318246",
+        "moved": "ledger_advanced",
+        "head": "wf-20260802-010212-39f86f"
+      }
+    ]
+  },
+  "F5_exit_path": {
+    "source": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\wake_agent.ps1",
+    "function_defs": {
+      "139": "function Get-HeadAndOpenState {",
+      "247": "function Get-Head {"
+    },
+    "call_sites": {
+      "Get-HeadAndOpenState": [
+        199,
+        248
+      ],
+      "Get-Head": [
+        307,
+        330
+      ],
+      "moved_expression": [
+        338
+      ]
+    }
+  },
+  "F6_abandon_callers": {
+    "wake.py": {
+      "abandon_occurrences": 0,
+      "sha256": "e7a892a2ad9c48b2443eff5132c7cf3ad592a0d5e22dea7d22c5ae53374288be"
+    },
+    "run_wake_cron.ps1": {
+      "abandon_occurrences": 0,
+      "sha256": "c485e953814a43ec7894afbacdf1de9f084f780d938adc89417245c4b60fc49d"
+    },
+    "wake_agent.ps1": {
+      "abandon_occurrences": 1,
+      "sha256": "15864f6a839c7e4055a71131bcc3b0abbd8cd81c4d6619e8a19fd0523f9f3a5b"
+    },
+    "run_wake_cron_hidden.vbs": {
+      "abandon_occurrences": 0,
+      "sha256": "cbe72606c39962d6c62350b4d20c68e72e73fb49d002911d611a64fdbef81b45"
+    },
+    "wake_codex.ps1": {
+      "abandon_occurrences": 0,
+      "sha256": "b013f094d5fdca2307b2dd338d9a5e01cf0915692ac2c1527edf38289e7ecbde"
+    },
+    "wake_prompt.md": {
+      "abandon_occurrences": 0,
+      "sha256": "40d1f661fd50c7187ec2f9fb73f78fb127edc505be428fef1a02d5b88234f539"
+    },
+    "wake_prompt_codex.md": {
+      "abandon_occurrences": 0,
+      "sha256": "d431acf106de844b80b18e0cb2ab0003578ce0b56ccc42eeabf55006795fe7fc"
+    }
+  }
+}
