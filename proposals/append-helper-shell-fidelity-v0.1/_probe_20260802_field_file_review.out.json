@@ -1,0 +1,152 @@
+﻿{
+  "probe": "_probe_20260802_field_file_review",
+  "helper": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\append_clocked_jsonl.py",
+  "signed_spec": "peer-chat 2026-08-02T10:48:39+09:00 (proposal) + 11:01:16 (agreement)",
+  "cases": [
+    {
+      "case": "reserved_time_via_field_file",
+      "clause": "spec 1: time/time_authority still refused",
+      "observed": {
+        "rc": 2,
+        "ledger_rows": 0
+      }
+    },
+    {
+      "case": "reserved_time_authority_via_field_file",
+      "clause": "spec 1: no back door",
+      "observed": {
+        "rc": 2,
+        "ledger_rows": 0
+      }
+    },
+    {
+      "case": "reserved_time_mixed_with_field",
+      "clause": "spec 1: no back door under mixing",
+      "observed": {
+        "rc": 2,
+        "ledger_rows": 0
+      }
+    },
+    {
+      "case": "data_json_conflict",
+      "clause": "spec 1: mutually exclusive with --data-json",
+      "observed": {
+        "rc": 2,
+        "ledger_rows": 0
+      }
+    },
+    {
+      "case": "empty_key",
+      "clause": "spec 1: empty key refused",
+      "observed": {
+        "rc": 2,
+        "ledger_rows": 0
+      }
+    },
+    {
+      "case": "consume_without_field_file",
+      "clause": "spec 3: flag requires --field-file",
+      "observed": {
+        "rc": 2,
+        "ledger_rows": 0
+      }
+    },
+    {
+      "case": "duplicate_field_file_keys",
+      "clause": "spec 1: duplicate keys refused",
+      "observed": {
+        "rc": 2,
+        "a_still_exists": true,
+        "b_still_exists": true,
+        "ledger_rows": 0
+      }
+    },
+    {
+      "case": "no_strip_trailing_newline",
+      "clause": "spec 1: no strip",
+      "observed": {
+        "rc": 0,
+        "byte_exact": true,
+        "stored_repr": "'line one\\nline two\\n\\n'",
+        "ledger_rows": 1
+      }
+    },
+    {
+      "case": "no_crlf_normalisation",
+      "clause": "spec 1: no newline normalisation",
+      "observed": {
+        "rc": 0,
+        "byte_exact": true,
+        "stored_repr": "'a\\r\\nb\\r\\n'",
+        "ledger_rows": 1
+      }
+    },
+    {
+      "case": "single_physical_line",
+      "clause": "JSONL invariant: one row = one line",
+      "observed": {
+        "rc": 0,
+        "newline_count": 1,
+        "ends_with_newline": true,
+        "ledger_rows": 1
+      }
+    },
+    {
+      "case": "empty_file_value",
+      "clause": "spec 1: empty file is a value, not an error",
+      "observed": {
+        "rc": 0,
+        "stored_repr": "''",
+        "ledger_rows": 1
+      }
+    },
+    {
+      "case": "utf16_payload",
+      "clause": "spec 1: strict UTF-8 only",
+      "observed": {
+        "rc": 2,
+        "refused_by": "nul_guard_not_decode_guard",
+        "ledger_rows": 0
+      }
+    },
+    {
+      "case": "no_append_when_second_file_bad",
+      "clause": "spec 1: failure means no append",
+      "observed": {
+        "rc": 2,
+        "ledger_rows": 0
+      }
+    },
+    {
+      "case": "consume_not_run_on_failure",
+      "clause": "spec 3: consume only after success",
+      "observed": {
+        "rc": 2,
+        "good_survived": true,
+        "bad_survived": true,
+        "ledger_rows": 0
+      }
+    },
+    {
+      "case": "consume_unlink_failure_stays_rc0",
+      "clause": "spec 3: unlink failure warns, rc stays 0",
+      "observed": {
+        "rc": 0,
+        "unlink_failed_as_designed": true,
+        "stderr_has_warning": true,
+        "stderr": "Warning: could not consume field file C:\\Users\\zy\\AppData\\Local\\Temp\\tmpeer6c7p7\\held.txt: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: 'C:\\\\Users\\\\zy\\\\AppData\\\\Local\\\\Temp\\\\tmpeer6c7p7\\\\held.txt'",
+        "ledger_rows": 1
+      }
+    },
+    {
+      "case": "same_file_two_keys_consumed_once",
+      "clause": "spec 3: consume dedup",
+      "observed": {
+        "rc": 0,
+        "file_gone": true,
+        "stderr": "",
+        "ledger_rows": 1
+      }
+    }
+  ]
+}
