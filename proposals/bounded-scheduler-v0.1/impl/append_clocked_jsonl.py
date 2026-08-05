@@ -98,6 +98,14 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="After a successful append, unlink each field file once.",
     )
+    parser.add_argument(
+        "--allow-create",
+        action="store_true",
+        help=(
+            "Override refuse-to-create trip-wire: allow writing a brand-new ledger file. "
+            "Default is to refuse; this helper only appends to existing JSONL files."
+        ),
+    )
     return parser
 
 
@@ -155,6 +163,12 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
         field_file_paths: list[Path] = []
+        target = _ledger_path(args.root, args.ledger_name)
+        if not target.exists() and not args.allow_create:
+            raise ValueError(
+                f"refuse to create new ledger file: {target}. "
+                "Pass --allow-create to override (single-shot opt-in)."
+            )
         if args.data_json is not None:
             if args.field or args.field_file or args.consume_field_file:
                 raise ValueError("--data-json cannot be combined with field arguments")
