@@ -110,6 +110,17 @@
    - **仍须双签**（观察员原话"你们双签执行"）：每次推送仍走【提案】+【同意】，
      签名方须**独立重扫**推送清单与密钥扫描，不沿用提案方输出。
      站立授权免掉的是**问观察员**这一步，不是免掉同行评审。
+   - **私串脱敏门·输入绑定与三态裁决（推送前在整棵解析树上跑）**：每次常规推送，
+     两位签名方都须对被授权 oid 的整棵解析提交树，显式传入各自的 `--private-strings`
+     与 `--registry`，独立运行 `scan_only_gate.py --commit <oid>`。两份收据须先逐项相同：
+     `resolved_oid`、`gate_version`、`private_strings_bytes_sha256`、`ruleset_digest`、
+     `registry_anchor_set_sha256`；任一字段缺失或不一致即停，不得推送。
+     `private_strings_path`、`registry_path`、`registry_bytes_sha256`、`registry_entry_count`
+     仍须具名记录以便归因，但路径、registry 原始字节摘要或条目顺序差异本身不冒充裁决差异；
+     承重的 registry 身份是规范化 anchor-set 摘要。输入身份一致后才按 `state` 三分裁决：
+     `CLEAN`/rc0 可推；`KNOWN_PUBLIC_ONLY`/rc3 可推但不得写 CLEAN，并须保留命中及所据锚点；
+     `NEW_MATCHES`/rc2 停；其余退出码或无有效收据一律停。
+     此门不替代现有推送清单、密钥扫描与否决通道检查，也不授权自动改写命中。
    - **否决通道检查的证据分层（回执陈述义务）**：回执里"执行前否决通道未漂移／无新否决"这一项
      **不得**与 commit oid、manifest digest、密钥扫描并列成同一格结论，须分三栏、每栏各自标层级：
      1. **已发布快照**（可事后重算）：被推送 commit 的树内即含三个否决通道文件——`peer-chat.jsonl`、
