@@ -43,6 +43,17 @@ ROADMAP / ARCHITECTURE / EVALUATION_POLICY 等只是工程指引,社区可双签
    `time_authority="clock"`;调用方不得传 `time` / `time_authority`,
    助手会拒绝覆盖。下文凡称“追加”,都用此助手;存量缺字段只表示 authored/unknown,不回填、不重写。
 
+   **正文危险字符强制通道**（peer-chat:3448 "双签",3449 Claude 同意 with 反斜杠校正）:
+   当正文（任一字段）含以下四类之一——CJK / 反引号 ` ` / $ / 双引号 ""——时，改走
+   `--field-file text=<临时文件路径>`，**整条消息经文件通道**（不分字段）。
+   临时文件必须**原子写入**（Node `fs.writeFileSync` 或 `apply_patch` 直写）、**禁止任何
+   shell pipe 边界接触**（PowerShell stdin、bash here-string 走 stdin、`echo … | python -`、
+   PS `| python -` 等）:pipe 口一开、UTF-8 在 PS 5.1 会被 us-ascii 解码退化为 `?`
+   (08-06 事故根因、与 memory 里 powershell-pipe-degrades-cjk / powershell-2null-redirect /
+   powershell-pipe-bom-breaks 三条同源不同症）。
+   ASCII 可打印 + 空白（且不含上述四类）可保留 `--field` 兼容。
+   证据与边界见 `proposals/append-helper-shell-fidelity-v0.1/FINDING.md`。
+
 2. **读工作收件箱(最高优先)**:
    读 `proposals\bounded-scheduler-v0.1\impl\codex-inbox.jsonl`(不存在就跳过)与 `codex-inbox-processed.jsonl`,
    两者 id 之差 = 交给你的新活(来自 Claude 的委派或观察员)。对每条:

@@ -82,12 +82,21 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--root", required=True, type=Path)
     parser.add_argument("--file", required=True, dest="ledger_name")
-    payload = parser.add_mutually_exclusive_group(required=True)
-    payload.add_argument("--data-json")
-    payload.add_argument(
+    parser.add_argument("--data-json")
+    parser.add_argument(
         "--field",
         action="append",
         help="Top-level string field as key=value; repeat for additional fields.",
+    )
+    parser.add_argument(
+        "--field-file",
+        action="append",
+        help="Top-level string field as key=path, reading exact UTF-8 file bytes; repeat.",
+    )
+    parser.add_argument(
+        "--consume-field-file",
+        action="store_true",
+        help="After a successful append, unlink each field file once.",
     )
     return parser
 
@@ -106,20 +115,72 @@ def _payload_from_fields(fields: list[str]) -> dict[str, str]:
     return payload
 
 
+def _field_file_parts(fields: list[str]) -> list[tuple[str, Path]]:
+    parts: list[tuple[str, Path]] = []
+    for field in fields:
+        if "=" not in field:
+            raise ValueError("--field-file must use key=path")
+        key, path_text = field.split("=", 1)
+        if not key:
+            raise ValueError("--field-file key cannot be empty")
+        parts.append((key, Path(path_text)))
+    return parts
+
+
+def _merge_field_files(
+    payload: dict[str, str], parts: list[tuple[str, Path]]
+) -> tuple[dict[str, str], list[Path]]:
+    consumed_paths: list[Path] = []
+    for key, path in parts:
+        if key in payload:
+            raise ValueError(f"duplicate field key: {key}")
+        if not path.is_file():
+            raise ValueError(f"--field-file path is not a regular file: {path}")
+        raw = path.read_bytes()
+        if raw.startswith(b"\xef\xbb\xbf"):
+            raise ValueError(f"--field-file must not start with a UTF-8 BOM: {path}")
+        if b"\x00" in raw:
+            raise ValueError(f"--field-file must not contain NUL bytes: {path}")
+        try:
+            value = raw.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ValueError(f"--field-file is not valid UTF-8: {path}") from exc
+        payload[key] = value
+        if path not in consumed_paths:
+            consumed_paths.append(path)
+    return payload, consumed_paths
+
+
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        field_file_paths: list[Path] = []
         if args.data_json is not None:
+            if args.field or args.field_file or args.consume_field_file:
+                raise ValueError("--data-json cannot be combined with field arguments")
             payload = json.loads(args.data_json)
             if not isinstance(payload, dict):
                 raise ValueError("--data-json must decode to a JSON object")
         else:
-            payload = _payload_from_fields(args.field)
+            if not args.field and not args.field_file:
+                raise ValueError("one of --data-json, --field, or --field-file is required")
+            if args.consume_field_file and not args.field_file:
+                raise ValueError("--consume-field-file requires --field-file")
+            payload = _payload_from_fields(args.field or [])
+            payload, field_file_paths = _merge_field_files(
+                payload, _field_file_parts(args.field_file or [])
+            )
         row = append_clocked_row(
             root=args.root,
             ledger_name=args.ledger_name,
             payload=payload,
         )
+        if args.consume_field_file:
+            for path in field_file_paths:
+                try:
+                    path.unlink()
+                except OSError as exc:
+                    print(f"Warning: could not consume field file {path}: {exc}", file=sys.stderr)
     except (OSError, TypeError, ValueError, json.JSONDecodeError) as exc:
         print(f"{type(exc).__name__}: {exc}", file=sys.stderr)
         return 2

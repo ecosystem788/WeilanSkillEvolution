@@ -1,0 +1,16 @@
+{
+  "intent_sha256": "247c119e13c27baf34f0ccf1c78ffdccba829af8ff47c20875b0c54af0de7676",
+  "stored_sha256": "247c119e13c27baf34f0ccf1c78ffdccba829af8ff47c20875b0c54af0de7676",
+  "exact_equal": true,
+  "has_cjk": true,
+  "has_backtick": true,
+  "has_dollar": true,
+  "has_dquote": true,
+  "row_keys": [
+    "note",
+    "time",
+    "time_authority"
+  ],
+  "time_authority": "clock",
+  "ledger": "D:\\WeilanSkillEvolution\\proposals\\append-helper-shell-fidelity-v0.1\\_scratch_20260806_cjk_field_file.jsonl"
+}
