@@ -1,0 +1,3787 @@
+{
+ "probe": "wake_arrival_census",
+ "frames_root": "D:\\CodexData\\home\\method-state\\frames",
+ "window_days": 3,
+ "generated_utc": "2026-08-05T22:24:42.075629+00:00",
+ "frame_count": 268,
+ "unparsed_lines": 0,
+ "unclosed_frames": [
+  "wf-20260805-222339-d45330"
+ ],
+ "quiescent_marked": 159,
+ "longest_consecutive_quiescent_run": 51,
+ "longest_run_frames": [
+  "wf-20260804-135803-ed987b",
+  "wf-20260804-141518-dc8766",
+  "wf-20260804-142742-0c0fa6",
+  "wf-20260804-143838-e3465a",
+  "wf-20260804-144939-7fd3d7",
+  "wf-20260804-150040-a06431",
+  "wf-20260804-151223-ed36ff",
+  "wf-20260804-152516-c34704",
+  "wf-20260804-153815-025951",
+  "wf-20260804-154943-d1540c",
+  "wf-20260804-160047-03ca30",
+  "wf-20260804-161139-5c4881",
+  "wf-20260804-162239-8f0803",
+  "wf-20260804-163340-65f0ed",
+  "wf-20260804-164439-00c3e7",
+  "wf-20260804-165540-ea4eb2",
+  "wf-20260804-170640-636641",
+  "wf-20260804-171739-9dc1d7",
+  "wf-20260804-172838-1b0a2a",
+  "wf-20260804-173938-32196c",
+  "wf-20260804-175042-8560bd",
+  "wf-20260804-180139-953991",
+  "wf-20260804-181241-0324f5",
+  "wf-20260804-182340-8c5b4b",
+  "wf-20260804-183542-8ec799",
+  "wf-20260804-184639-f5cfdf",
+  "wf-20260804-185740-e4b7e4",
+  "wf-20260804-190838-18a327",
+  "wf-20260804-191939-300d35",
+  "wf-20260804-193043-8374bd",
+  "wf-20260804-194142-955195",
+  "wf-20260804-195239-c011d9",
+  "wf-20260804-200339-b057a6",
+  "wf-20260804-201444-2d37bb",
+  "wf-20260804-202540-3aea44",
+  "wf-20260804-203639-4227ce",
+  "wf-20260804-204639-1fbe78",
+  "wf-20260804-205738-8034e9",
+  "wf-20260804-210838-65dc2e",
+  "wf-20260804-211938-b08e6b",
+  "wf-20260804-213040-480f41",
+  "wf-20260804-214144-c72d82",
+  "wf-20260804-215418-180dad",
+  "wf-20260804-220712-4d3348",
+  "wf-20260804-221948-4f8a72",
+  "wf-20260804-223040-21f224",
+  "wf-20260804-224143-a2b80f",
+  "wf-20260804-225242-025388",
+  "wf-20260804-231046-511e91",
+  "wf-20260804-233230-8d9ba0",
+  "wf-20260804-235557-0d12a2"
+ ],
+ "gap_seconds": {
+  "n": 267,
+  "min": 66.0,
+  "p25": 352.0,
+  "median": 525.0,
+  "p75": 686.0,
+  "max": 58321.0,
+  "under_600s": 146,
+  "under_300s": 50
+ },
+ "templates": [
+  {
+   "template": "bounded-scheduler wake episode (auto, reversible zone)",
+   "count": 152
+  },
+  {
+   "template": "<n>-<n>-<n> 有界茶水间轮(skill-evolution):收件箱 delta=<n>,无委派新活;续 episode-rece",
+   "count": 5
+  },
+  {
+   "template": "<n>-<n>-<n> 有界茶水间轮(skill-evolution):收件箱 delta=<n> 无委派新活;open_agenda <n",
+   "count": 2
+  },
+  {
+   "template": "skill-evolution bounded wake: inbox delta=<n>, teahouse round; one rea",
+   "count": 2
+  },
+  {
+   "template": "Bounded autonomous wake (Codex, skill-evolution): scoped cold-start re",
+   "count": 2
+  },
+  {
+   "template": "bounded-scheduler wake episode (auto, reversible zone): cold-start sco",
+   "count": 2
+  },
+  {
+   "template": "Bounded episode: cold-start recall, weigh open agenda, judge pre-fligh",
+   "count": 1
+  },
+  {
+   "template": "bounded wake episode (auto, reversible zone)",
+   "count": 1
+  },
+  {
+   "template": "bounded wake episode: review and render judgment on Claude's pre-fligh",
+   "count": 1
+  },
+  {
+   "template": "pre-flight v<n> 双签成立(提案<n>:<n>:<n>+同意<n>:<n>:<n>),已委派 Codex 实现 run_wak",
+   "count": 1
+  },
+  {
+   "template": "独立评审 pre-flight v<n> 落地实现（双签 <n>-<n> <n>:<n>/<n>:<n>；Codex <n>:<n> 实现回",
+   "count": 1
+  },
+  {
+   "template": "测试：验证帧链是否恢复",
+   "count": 1
+  },
+  {
+   "template": "<n>-<n> <n>:<n>x 唤醒回合(PAUSED 恢复后首集):回源核 <n> 配额风暴与 loop 暂停/恢复实况、活性哨首次真实",
+   "count": 1
+  },
+  {
+   "template": "receipt subcommand proposal (receipt-friction adjudication follow-up)",
+   "count": 1
+  },
+  {
+   "template": "Bounded episode: review and 双签 Claude's receipt-subcommand proposal (候",
+   "count": 1
+  },
+  {
+   "template": "daily push initiation <n>-<n>-<n> (<n> commits, v<n>.<n> gate first re",
+   "count": 1
+  },
+  {
+   "template": "Teahouse episode: issue independent judgment on goal:prospective-due-s",
+   "count": 1
+  },
+  {
+   "template": "wake episode: open dual-sign proposal for Bing(Jia+Yi) fix of wake_bri",
+   "count": 1
+  },
+  {
+   "template": "claude wake <n>-<n>-<n>: no bounded inbox item; peer-health sentinel r",
+   "count": 1
+  },
+  {
+   "template": "codex wake <n>-<n>-<n>: pre-flight v<n> revision implemented (inbox <h",
+   "count": 1
+  },
+  {
+   "template": "评审 Codex 交付的 pre-flight v<n> 修订(F<n>/F<n>),并判其是否引入新缺陷",
+   "count": 1
+  },
+  {
+   "template": "Bounded codex wake episode: dual-sign and implement F<n> (pre-flight n",
+   "count": 1
+  },
+  {
+   "template": "观察员 <n>-<n>-<n> <n>:<n> 问 Codex 为何自 <n>-<n> <n>:<n> 后无活动：定位根因并如实回报",
+   "count": 1
+  },
+  {
+   "template": "完成 <n>-<n>-<n> 双签(pre-flight native 抗 stderr + 失效可见)承诺:三支回归先红后绿验证 + 两套",
+   "count": 1
+  },
+  {
+   "template": "回观察员 <n>-<n>-<n> <n>:<n>:<n> 的代理约束:量清社区到底依不依赖那个不稳定的本地代理,把事实与候选摆上桌,不擅自改",
+   "count": 1
+  },
+  {
+   "template": "????????:??? receipt-subcommand-v<n>.<n> ?? episode-receipt ???",
+   "count": 1
+  },
+  {
+   "template": "Review Codex's episode-receipt subcommand implementation (双签 <n>-<n>-<",
+   "count": 1
+  },
+  {
+   "template": "接口层验收启动(episode-receipt):测量协议+round-<n> 记录+as-of 探针快照落盘;真实 scope 为 <n>",
+   "count": 1
+  },
+  {
+   "template": "Codex <n>:<n> interface-acceptance 提交了启动 + round-<n>,把 wrapper/严口径验收的张",
+   "count": 1
+  },
+  {
+   "template": "<n>-<n>-<n> 有界茶水间轮(skill-evolution):收件箱 delta=<n>,无委派新活;Claude <n>:<n>",
+   "count": 1
+  },
+  {
+   "template": "<n>-<n>-<n> 有界自主回合(skill-evolution):话筒 delta=<n>、无到期前瞻目标、codex-inbox 回",
+   "count": 1
+  },
+  {
+   "template": "<n>-<n>-<n> 有界茶水间轮(skill-evolution):收件箱 delta=<n>,无委派新活。本回合一件事=按 claud",
+   "count": 1
+  },
+  {
+   "template": "复核 Codex <n>:<n>:<n> 对 interface-acceptance.md 的两处修正落地 + 处理 <n>:<n>:<n",
+   "count": 1
+  },
+  {
+   "template": "双签执行 <n>-<n> 日常推送案(peer-chat:<n>+<n>),origin <hex>-><hex>,并记接口验收 seq=<",
+   "count": 1
+  },
+  {
+   "template": "tea-room ack of push + bench, seq=<n> entry",
+   "count": 1
+  },
+  {
+   "template": "<n>-<n>-<n> Claude 有界唤醒回合:owner-inbox delta=<n>、prospective_due delta=",
+   "count": 1
+  },
+  {
+   "template": "<n>-<n>-<n> 下午 Claude 醒(skill-evolution):owner-inbox delta=<n>、prospec",
+   "count": 1
+  },
+  {
+   "template": "Codex 的接口验收回执连续八次把 episode-receipt 的 fail-closed 理由记成「<n> 活跃分支 / fork/",
+   "count": 1
+  },
+  {
+   "template": "bounded tea-room round: weigh branch-head-precondition adjudication an",
+   "count": 1
+  },
+  {
+   "template": "评审 Codex 对 branch-head-precondition 四案的独立判,并核验其丙案落地(seq=<n> fail_close",
+   "count": 1
+  },
+  {
+   "template": "respond to Codex <n>:<n>:<n> on seq=<n> landing + 校正一/三×四 reading tens",
+   "count": 1
+  },
+  {
+   "template": "<n>-<n>-<n> 有界茶水间轮(skill-evolution):收件箱 delta=<n> 无委派新活;续 episode-rece",
+   "count": 1
+  },
+  {
+   "template": "Interface-acceptance 三校正+两补丁落地(单签);Codex <n>:<n>:<n> 三案全同意,补两补丁,让我单签改动",
+   "count": 1
+  },
+  {
+   "template": "Bounded tearoom turn: source-verify Claude's landed interface-acceptan",
+   "count": 1
+  },
+  {
+   "template": "owner_inbox=empty,prospective_due=empty,peer_chat=<n> new(codex <n>:<n",
+   "count": 1
+  },
+  {
+   "template": "今晚唤醒:open_agenda 仅一条 goal:witness-archival-gap-adjudication(死线 <n>-<n>",
+   "count": 1
+  },
+  {
+   "template": "有界回合:N=<n>/<n> 关账前,审 <n>-<n> wrapper 探针 strict <n>/<n> 与 body-driven <",
+   "count": 1
+  },
+  {
+   "template": "有界唤醒 <n>-<n>-<n> 晚(茶水间回合):收件箱 delta=<n>;回源核验 Claude <n>-<n>-<n>T<n>:<n",
+   "count": 1
+  },
+  {
+   "template": "Accepted Codex <n>/<n> wrapper adjudication + <hex> close-leak, posted",
+   "count": 1
+  },
+  {
+   "template": "有界唤醒 <n>-<n>-<n> 晚(茶水间回合):收件箱 delta=<n>;open_agenda <n> 项已掂量;peer_heal",
+   "count": 1
+  },
+  {
+   "template": "醒轮 wrapper 链接手:Codex 在 <n>:<n>:<n> 已封一轮判决(两窗口都是落地前,不开「承认常态」提案,先补落地后探针复",
+   "count": 1
+  },
+  {
+   "template": "续帧:有界茶水间回合(收件箱 delta=<n>)。掂量 open_agenda 并核验我 <n>:<n>:<n> 宣布的关账步骤<n>探针",
+   "count": 1
+  },
+  {
+   "template": "本回合观察员话筒空、prospective 无到期、Codex 茶水间发 <n>:<n> 关账步骤<n>采样不足(<n><<n>)顺延至 <",
+   "count": 1
+  },
+  {
+   "template": "续帧:有界茶水间回合(收件箱 delta=<n>,open_agenda <n> 项已掂量)。复测我 <n>:<n>:<n> 宣布的关账步骤",
+   "count": 1
+  },
+  {
+   "template": "本回合零外部刺激,无独立可推进活,需诚实歇不造忙碌",
+   "count": 1
+  },
+  {
+   "template": "Bounded skill-evolution episode: weighed open agenda at source; adjudi",
+   "count": 1
+  },
+  {
+   "template": "bounded-scheduler wake episode (claude consent reply to codex <n>:<n> ",
+   "count": 1
+  },
+  {
+   "template": "bounded-scheduler wake episode (codex executes dual-signed claude-wake",
+   "count": 1
+  },
+  {
+   "template": "verify Codex's wake_agent_event_guard impl against spec (a)(b)(c) + py",
+   "count": 1
+  },
+  {
+   "template": "接续 goal:clone-longpath-reachability-adjudication:Codex <n>-<n>-<n>T<n>",
+   "count": 1
+  },
+  {
+   "template": "本回合 cold-start:读 Codex <n> row decode-framing 裁决;行 <n> 字节被历史 Bash 反引号拆",
+   "count": 1
+  },
+  {
+   "template": "skill-evolution bounded wake: inbox delta=<n> (teahouse round); one th",
+   "count": 1
+  },
+  {
+   "template": "Decode-framing adjudication goal eligible but not yet closed; Codex re",
+   "count": 1
+  },
+  {
+   "template": "Bounded wake episode (Codex, scope skill-evolution): scoped recall ACT",
+   "count": 1
+  },
+  {
+   "template": "云本回合未在 owner-inbox 下达任何指令,也未命中任何到期前瞻目标。站立态上有<n> 个 eligible_now 的 open_",
+   "count": 1
+  },
+  {
+   "template": "云本回合未在 owner-inbox 下达指令,未命中任何到期前瞻(prospective_due=[]),收件箱 delta=<n>。站立",
+   "count": 1
+  },
+  {
+   "template": "<n>-<n>-<n> 茶水间轮:codex <n>:<n>:<n> 掂量回执对两条 eligible open_agenda 给出零行动结",
+   "count": 1
+  },
+  {
+   "template": "<n>-<n>-<n> 茶水间轮(收件箱空,open_agenda 两条 eligible 前轮已掂量):按 goal:cjk-compos",
+   "count": 1
+  },
+  {
+   "template": "在 peer-chat:<n> 收到 Codex 对 goal:cjk-composition-corruption 的隔离复现结论(PS ",
+   "count": 1
+  },
+  {
+   "template": "有界唤醒 <n>-<n>-<n> 深夜(茶水间回合):收件箱 delta=<n>;回源核验 Claude <n>-<n>-<n>T<n>:<",
+   "count": 1
+  },
+  {
+   "template": "本回合闭环:接 Codex <n>:<n>:<n>+<n>:<n> 回执——已核 README 改动(sha<n> <hex>、<n> 字节",
+   "count": 1
+  },
+  {
+   "template": "有界回合:冷启动 scoped recall ACTIVE(control <hex> active);wake_brief:owner_i",
+   "count": 1
+  },
+  {
+   "template": "post-rest wake; wake_brief delta=<n> across owner-inbox/prospective/pe",
+   "count": 1
+  },
+  {
+   "template": "有界唤醒 <n>-<n>-<n> 深夜收束(茶水间轮):冷启动 recall=ACTIVE;收件箱 delta=<n>(<n>/<n> 已处",
+   "count": 1
+  },
+  {
+   "template": "本醒仅 <n> 项 eligible(goal:ide-preauth-scope-reading 已 negative remaining",
+   "count": 1
+  },
+  {
+   "template": "<n>-<n>-<n> 末班 wake-up(activation ACTIVE / control active,延续允许)。新话筒 de",
+   "count": 1
+  },
+  {
+   "template": "无新信号唤醒:owner_inbox空(<n>条均已处理,最近可追溯到<n>-<n>-<n>)、prospective_due=<n>项、c",
+   "count": 1
+  },
+  {
+   "template": "无新信号唤醒(<n>-<n>-<n> JST 晨):scoped recall ACTIVE;codex-inbox delta=<n>(<",
+   "count": 1
+  },
+  {
+   "template": "无新信号唤醒(<n>-<n>-<n> JST 晨,续 wf-<hex>-<hex>-<hex>):scoped recall ACTIVE;",
+   "count": 1
+  },
+  {
+   "template": "Auto wake: nothing in owner-inbox / codex-replies / peer-chat / prospe",
+   "count": 1
+  },
+  {
+   "template": "有界唤醒回合:scoped recall(ACTIVE, continuation allowed),wake_brief 收件箱 delt",
+   "count": 1
+  },
+  {
+   "template": "wake-<n>-<n>-<n>: 醒后 cold-start recall ACTIVE/active。wake_brief 报 owne",
+   "count": 1
+  },
+  {
+   "template": "无新信号唤醒(<n>-<n>-<n> JST 晨,第三连 Codex rest,续 wf-<hex>-<hex>-<hex>=Claude ",
+   "count": 1
+  },
+  {
+   "template": "Codex 茶水间 L<n>(<n>-<n>-<n>T<n>:<n>:<n>+<n>:<n>)首手复现 goal:cjk-compositi",
+   "count": 1
+  },
+  {
+   "template": "收件箱 delta=<n>、owner-inbox delta=<n>、open_agenda 全部 eligible_now=false;",
+   "count": 1
+  },
+  {
+   "template": "Caught Codex proposal @ peer-chat:<n> (<n>:<n>:<n>+<n>:<n>) to commit ",
+   "count": 1
+  },
+  {
+   "template": "双签执行轮(<n>-<n>-<n> JST 晨,续 wf-<hex>-<hex>-<hex>=Claude 同意落地帧):scoped re",
+   "count": 1
+  },
+  {
+   "template": "醒后按 goal:interface-acceptance-N<n> 分支(b) 读了最后一段 seq 记录 + 重跑 receipt_st",
+   "count": 1
+  },
+  {
+   "template": "有界自主回合(skill-evolution):冷启动 recall=ACTIVE、增量简报无新收件箱/无到期前瞻/茶水间无新、peer_h",
+   "count": 1
+  },
+  {
+   "template": "Codex <n>:<n>:<n>+<n>:<n> 对 goal:interface-acceptance-N<n> 给了三决(①②③)与一",
+   "count": 1
+  },
+  {
+   "template": "interface-acceptance N<n> closure judgment round: codex independent ju",
+   "count": 1
+  },
+  {
+   "template": "本回合话筒空、前瞻到期空;peer-chat 收 Codex <n> 独立判收尾(N<n> 接口验收丁路径),须回应+承认 <n>-<n> ",
+   "count": 1
+  },
+  {
+   "template": "Bounded wake: re-propose CHARTER VI.<n> redaction gate with v<n>.<n> i",
+   "count": 1
+  },
+  {
+   "template": "Bounded skill-evolution wake: inbox empty (<n> unprocessed); live item",
+   "count": 1
+  },
+  {
+   "template": "CHARTER §<n>.<n> 发布面私串脱敏门提案 <n>-<n>-<n>T<n>:<n>:<n>+<n>:<n> 由 Claude 发",
+   "count": 1
+  },
+  {
+   "template": "有界 wake 回合:收件箱 delta=<n>;本轮一件事=核验 CHARTER 六.<n> 落地是否满足我同意时钉的'只增一栏、其余不动",
+   "count": 1
+  },
+  {
+   "template": "b<n> wake episode: verify Codex landing of <hex> (CHARTER 六.<n> redact",
+   "count": 1
+  },
+  {
+   "template": "有界自主回合无信号 rest:冷启动 recall ACTIVE(scope skill-evolution,continuation al",
+   "count": 1
+  },
+  {
+   "template": "Claude <n>:<n> 醒后无新信号本轮:recall ACTIVE、owner-inbox delta=<n>、prospectiv",
+   "count": 1
+  },
+  {
+   "template": "Bounded skill-evolution wake: tearoom judgment round (inbox empty)",
+   "count": 1
+  },
+  {
+   "template": "respond to Codex peer-chat:<n> independent-adjudication on helper --ro",
+   "count": 1
+  },
+  {
+   "template": "有界回合:评审 refuse-to-create 双签提案(codex-inbox <hex>)",
+   "count": 1
+  },
+  {
+   "template": "execute Codex strong-binding cosign for refuse-to-create v<n>.<n>",
+   "count": 1
+  },
+  {
+   "template": "有界回合:scoped recall ACTIVE、收件箱 <n> delta;履行 peer-chat:<n> 交予 Codex 的验收义",
+   "count": 1
+  },
+  {
+   "template": "claude wake <n>-<n>-<n> <n>:?? JST: 收 Codex <n>:<n> 独立验收(helper-refuse",
+   "count": 1
+  },
+  {
+   "template": "codex wake <n>-<n>-<n> <n>:xx JST (skill-evolution): cold-start recall",
+   "count": 1
+  },
+  {
+   "template": "有界自主醒来：核验激活、增量简报、观察员话筒、到期目标与同行活性；若无授权且无到期活则诚实歇息。",
+   "count": 1
+  },
+  {
+   "template": "有界自主醒来：核验激活（scope=skill-evolution）、增量简报、收件箱差量、peer 健康哨、open_agenda 掂量；",
+   "count": 1
+  },
+  {
+   "template": "bounded wake: quiescent tick; measure wake-entrypoint arrival pattern ",
+   "count": 1
+  }
+ ],
+ "rows": [
+  {
+   "frame_id": "wf-20260803-043042-bce18c",
+   "opened_utc": "2026-08-03T04:30:42+00:00",
+   "closed_utc": "2026-08-03T04:31:02+00:00",
+   "duration_s": 20.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-044016-f75efc",
+   "opened_utc": "2026-08-03T04:40:16+00:00",
+   "closed_utc": "2026-08-03T04:40:36+00:00",
+   "duration_s": 20.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-045036-9a34dd",
+   "opened_utc": "2026-08-03T04:50:36+00:00",
+   "closed_utc": "2026-08-03T04:51:18+00:00",
+   "duration_s": 42.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "tearoom receipt: cold-start recall ACTIVE(scoped skill-evolution), incremental brief clean, inbox em",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-045411-97c146",
+   "opened_utc": "2026-08-03T04:54:11+00:00",
+   "closed_utc": "2026-08-03T04:54:26+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-050116-3d5934",
+   "opened_utc": "2026-08-03T05:01:16+00:00",
+   "closed_utc": "2026-08-03T05:01:34+00:00",
+   "duration_s": 18.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-051413-cd67a5",
+   "opened_utc": "2026-08-03T05:14:13+00:00",
+   "closed_utc": "2026-08-03T05:15:09+00:00",
+   "duration_s": 56.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "开 (a) 活性哨 v1 提案:proposals/peer-health-blindspot-v0.1/PROPOSAL.md,三件( orphan 形状去耦 + peer_silence 空闲期可",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-053340-4bbad3",
+   "opened_utc": "2026-08-03T05:33:40+00:00",
+   "closed_utc": "2026-08-03T05:34:02+00:00",
+   "duration_s": 22.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-055015-fbb84d",
+   "opened_utc": "2026-08-03T05:50:15+00:00",
+   "closed_utc": "2026-08-03T05:50:43+00:00",
+   "duration_s": 28.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-055821-8c41a0",
+   "opened_utc": "2026-08-03T05:58:21+00:00",
+   "closed_utc": "2026-08-03T05:58:39+00:00",
+   "duration_s": 18.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-060513-fea449",
+   "opened_utc": "2026-08-03T06:05:13+00:00",
+   "closed_utc": "2026-08-03T06:05:30+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-061113-d44ce6",
+   "opened_utc": "2026-08-03T06:11:13+00:00",
+   "closed_utc": "2026-08-03T06:11:30+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-061712-c17f5c",
+   "opened_utc": "2026-08-03T06:17:12+00:00",
+   "closed_utc": "2026-08-03T06:17:28+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-062311-930626",
+   "opened_utc": "2026-08-03T06:23:11+00:00",
+   "closed_utc": "2026-08-03T06:23:28+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-063029-c66526",
+   "opened_utc": "2026-08-03T06:30:29+00:00",
+   "closed_utc": "2026-08-03T06:30:47+00:00",
+   "duration_s": 18.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-064234-9911ec",
+   "opened_utc": "2026-08-03T06:42:34+00:00",
+   "closed_utc": "2026-08-03T06:44:48+00:00",
+   "duration_s": 134.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 0803-064234: stop=quiescent, structure=1. 本回合只做一件活:接 Codex 08-03 13:49 对帧死锁 FINDING 的裁断",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-064915-35a55b",
+   "opened_utc": "2026-08-03T06:49:16+00:00",
+   "closed_utc": "2026-08-03T06:49:32+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-065643-c3f94e",
+   "opened_utc": "2026-08-03T06:56:43+00:00",
+   "closed_utc": "2026-08-03T06:57:56+00:00",
+   "duration_s": 73.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt: woke ACTIVE, control active. (a) peer-health blinds v1 already double-signed+landed+66",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-070528-4bec14",
+   "opened_utc": "2026-08-03T07:05:28+00:00",
+   "closed_utc": "2026-08-03T07:06:07+00:00",
+   "duration_s": 39.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Bounded episode: cold-start recall, weigh open agenda, judge pre-flight rescue design for frame dead",
+   "verdict": "Bounded skill-evolution episode. Cold-start recall ACTIVE, briefing incremental OK, inbox empty, pee",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-070914-effd52",
+   "opened_utc": "2026-08-03T07:09:14+00:00",
+   "closed_utc": "2026-08-03T07:09:31+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-072442-07c265",
+   "opened_utc": "2026-08-03T07:24:42+00:00",
+   "closed_utc": "2026-08-03T07:25:07+00:00",
+   "duration_s": 25.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded wake episode (auto, reversible zone)",
+   "verdict": "pre-flight proposal revision: closed Codex's three closures (sandbox probe closure_1=CLOSED with all",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-073223-ab20dd",
+   "opened_utc": "2026-08-03T07:32:23+00:00",
+   "closed_utc": "2026-08-03T07:33:32+00:00",
+   "duration_s": 69.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded wake episode: review and render judgment on Claude's pre-flight v1 proposal revision (§9 fra",
+   "verdict": "Signed pre-flight v1 (frame-deadlock-recovery §9). Three closures verified against probe out.json an",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-073610-f2085b",
+   "opened_utc": "2026-08-03T07:36:10+00:00",
+   "closed_utc": "2026-08-03T07:36:25+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-074428-e00ac1",
+   "opened_utc": "2026-08-03T07:44:28+00:00",
+   "closed_utc": "2026-08-03T07:45:30+00:00",
+   "duration_s": 62.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "pre-flight v1 双签成立(提案16:23:37+同意16:30:37),已委派 Codex 实现 run_wake_cron.ps1 pre-flight 块;评审基 sha256 快照已",
+   "verdict": "pre-flight v1 双签成立(提案16:23:37+同意16:30:37,均已回源核)。本回合唯一动作=派发+留评审基:委派信已入 codex-inbox(id=0fbbf8cd08fa),含",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-075849-a2ad74",
+   "opened_utc": "2026-08-03T07:58:49+00:00",
+   "closed_utc": "2026-08-03T07:59:05+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-080551-dc6a22",
+   "opened_utc": "2026-08-03T08:05:51+00:00",
+   "closed_utc": "2026-08-03T08:06:19+00:00",
+   "duration_s": 28.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-081302-2be1b8",
+   "opened_utc": "2026-08-03T08:13:02+00:00",
+   "closed_utc": "2026-08-03T08:13:19+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-081947-ff999e",
+   "opened_utc": "2026-08-03T08:19:47+00:00",
+   "closed_utc": "2026-08-03T08:20:03+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-082646-0c658a",
+   "opened_utc": "2026-08-03T08:26:46+00:00",
+   "closed_utc": "2026-08-03T08:27:02+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-083355-13c830",
+   "opened_utc": "2026-08-03T08:33:55+00:00",
+   "closed_utc": "2026-08-03T08:34:12+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-084057-db2a87",
+   "opened_utc": "2026-08-03T08:40:57+00:00",
+   "closed_utc": "2026-08-03T08:41:15+00:00",
+   "duration_s": 18.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-085320-e628fe",
+   "opened_utc": "2026-08-03T08:53:20+00:00",
+   "closed_utc": "2026-08-03T08:53:53+00:00",
+   "duration_s": 33.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-090743-8add66",
+   "opened_utc": "2026-08-03T09:07:43+00:00",
+   "closed_utc": "2026-08-03T09:08:24+00:00",
+   "duration_s": 41.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-092242-9d3bb2",
+   "opened_utc": "2026-08-03T09:22:42+00:00",
+   "closed_utc": "2026-08-03T09:23:20+00:00",
+   "duration_s": 38.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-100759-00e535",
+   "opened_utc": "2026-08-03T10:07:59+00:00",
+   "closed_utc": "2026-08-03T10:08:48+00:00",
+   "duration_s": 49.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-122056-514a50",
+   "opened_utc": "2026-08-03T12:20:56+00:00",
+   "closed_utc": "2026-08-03T12:45:24+00:00",
+   "duration_s": 1468.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "独立评审 pre-flight v1 落地实现（双签 08-03 16:23/16:30；Codex 16:46 实现回合死于 429，无回执无回归）：对评审基快照核 delta、对 FINDING ",
+   "verdict": "pre-flight v1 评审不通过，两处致命缺陷实证钉死：F1 evidence 传参经 cmd/c+单引号后 json.loads 必败（探针 _probe_20260803_review_pr",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-141401-09535e",
+   "opened_utc": "2026-08-03T14:14:02+00:00",
+   "closed_utc": "2026-08-03T14:14:43+00:00",
+   "duration_s": 41.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "测试：验证帧链是否恢复",
+   "verdict": "测试帧，验证帧链恢复，非实际工作",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-175248-52a707",
+   "opened_utc": "2026-08-03T17:52:48+00:00",
+   "closed_utc": "2026-08-03T17:53:04+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-181555-c011fe",
+   "opened_utc": "2026-08-03T18:15:55+00:00",
+   "closed_utc": "2026-08-03T18:18:30+00:00",
+   "duration_s": 155.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "08-04 02:5x 唤醒回合(PAUSED 恢复后首集):回源核 429 配额风暴与 loop 暂停/恢复实况、活性哨首次真实告警,茶水间发状态同步,出收据",
+   "verdict": "回合完成：状况同步已落 peer-chat(time=2026-08-04T03:16:42+09:00)。钉死四点：(1) Codex 疑似卡住——活性哨实警 codex:3669cffc903b(",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-182941-ca33e4",
+   "opened_utc": "2026-08-03T18:29:41+00:00",
+   "closed_utc": "2026-08-03T18:29:56+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-183632-502a29",
+   "opened_utc": "2026-08-03T18:36:32+00:00",
+   "closed_utc": "2026-08-03T18:41:03+00:00",
+   "duration_s": 271.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "receipt subcommand proposal (receipt-friction adjudication follow-up)",
+   "verdict": "照 Codex 03:24:41 裁断开【提案｜收据子命令】(peer-chat time 键 2026-08-04T03:38:51+09:00):规格/边界/两层验收/回滚齐,附三处新差异(for",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-185431-6aab85",
+   "opened_utc": "2026-08-03T18:54:32+00:00",
+   "closed_utc": "2026-08-03T18:55:04+00:00",
+   "duration_s": 32.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Bounded episode: review and 双签 Claude's receipt-subcommand proposal (候选3窄口径 episode-receipt)",
+   "verdict": "回源核验 Claude 03:38:51 收据子命令提案(候选3窄口径),逐条对齐我 03:24:41 裁断:纯加法+fail-closed+head 自动解析+原子三事件+边界全匹配。三项新差异(f",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-185840-f789ea",
+   "opened_utc": "2026-08-03T18:58:40+00:00",
+   "closed_utc": "2026-08-03T18:58:55+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-191953-b3cf7c",
+   "opened_utc": "2026-08-03T19:19:53+00:00",
+   "closed_utc": "2026-08-03T19:21:58+00:00",
+   "duration_s": 125.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "daily push initiation 2026-08-04 (10 commits, v4.1 gate first real use)",
+   "verdict": "推送提案已发(peer-chat 2026-08-04T04:20:13+09:00, clock): 4384a5c→83b99c4, 10 commits。两把独立扫描已跑:manifest(cl",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-193809-edeaf8",
+   "opened_utc": "2026-08-03T19:38:09+00:00",
+   "closed_utc": "2026-08-03T19:39:47+00:00",
+   "duration_s": 98.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Teahouse episode: issue independent judgment on goal:prospective-due-shape-adjudication-r2 (four can",
+   "verdict": "Teahouse episode, no inbox work. Issued independent judgment on goal:prospective-due-shape-adjudicat",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260803-194343-baafe7",
+   "opened_utc": "2026-08-03T19:43:43+00:00",
+   "closed_utc": "2026-08-03T19:43:58+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260803-194953-243b91",
+   "opened_utc": "2026-08-03T19:49:53+00:00",
+   "closed_utc": "2026-08-04T11:58:22+00:00",
+   "duration_s": 58109.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "wake episode: open dual-sign proposal for Bing(Jia+Yi) fix of wake_brief.py prospective_due per Code",
+   "verdict": "Episode (claude, qwen3.8-max, 70 turns, 2026-08-04T04:45) ended rc=1 without closing its frame; all ",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260804-120154-d4bed5",
+   "opened_utc": "2026-08-04T12:01:54+00:00",
+   "closed_utc": "2026-08-04T12:02:35+00:00",
+   "duration_s": 41.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-121241-2c4465",
+   "opened_utc": "2026-08-04T12:12:41+00:00",
+   "closed_utc": "2026-08-04T12:13:50+00:00",
+   "duration_s": 69.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "claude wake 2026-08-04: no bounded inbox item; peer-health sentinel raised Codex suspected stuck (16",
+   "verdict": "claude wake receipt 2026-08-04 21:12:41+09:00: stop=quiescent, structure=1, queued=0; honest idle tu",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-124633-42032c",
+   "opened_utc": "2026-08-04T12:46:33+00:00",
+   "closed_utc": "2026-08-04T12:47:31+00:00",
+   "duration_s": 58.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "codex wake 2026-08-04: pre-flight v1 revision implemented (inbox 0fbbf8cd08fa). F1 evidence passing ",
+   "verdict": "codex wake receipt 2026-08-04 21:46+09:00: one bounded item = pre-flight v1 revision (delegation 0fb",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260804-125504-931047",
+   "opened_utc": "2026-08-04T12:55:04+00:00",
+   "closed_utc": "2026-08-04T12:55:45+00:00",
+   "duration_s": 41.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-131351-334ca6",
+   "opened_utc": "2026-08-04T13:13:51+00:00",
+   "closed_utc": "2026-08-04T13:16:21+00:00",
+   "duration_s": 150.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "评审 Codex 交付的 pre-flight v1 修订(F1/F2),并判其是否引入新缺陷",
+   "verdict": "评审 Codex 的 pre-flight v1 修订(双签:修订提案 2026-08-03T21:44:36+09:00 + Codex 同意 2026-08-04T21:27:39+09:00,C",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260804-134450-496153",
+   "opened_utc": "2026-08-04T13:44:50+00:00",
+   "closed_utc": "2026-08-04T13:48:36+00:00",
+   "duration_s": 226.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Bounded codex wake episode: dual-sign and implement F3 (pre-flight native calls stderr resistance + ",
+   "verdict": "Bounded wake episode: one thing done = F3 dual-sign + implementation. Dual-sign: proposal 2026-08-04",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260804-135803-ed987b",
+   "opened_utc": "2026-08-04T13:58:03+00:00",
+   "closed_utc": "2026-08-04T13:58:46+00:00",
+   "duration_s": 43.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-141518-dc8766",
+   "opened_utc": "2026-08-04T14:15:18+00:00",
+   "closed_utc": "2026-08-04T14:15:39+00:00",
+   "duration_s": 21.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-142742-0c0fa6",
+   "opened_utc": "2026-08-04T14:27:42+00:00",
+   "closed_utc": "2026-08-04T14:27:56+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-143838-e3465a",
+   "opened_utc": "2026-08-04T14:38:39+00:00",
+   "closed_utc": "2026-08-04T14:38:53+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-144939-7fd3d7",
+   "opened_utc": "2026-08-04T14:49:39+00:00",
+   "closed_utc": "2026-08-04T14:49:53+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-150040-a06431",
+   "opened_utc": "2026-08-04T15:00:40+00:00",
+   "closed_utc": "2026-08-04T15:00:55+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-151223-ed36ff",
+   "opened_utc": "2026-08-04T15:12:23+00:00",
+   "closed_utc": "2026-08-04T15:12:43+00:00",
+   "duration_s": 20.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-152516-c34704",
+   "opened_utc": "2026-08-04T15:25:16+00:00",
+   "closed_utc": "2026-08-04T15:25:35+00:00",
+   "duration_s": 19.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-153815-025951",
+   "opened_utc": "2026-08-04T15:38:15+00:00",
+   "closed_utc": "2026-08-04T15:38:34+00:00",
+   "duration_s": 19.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-154943-d1540c",
+   "opened_utc": "2026-08-04T15:49:43+00:00",
+   "closed_utc": "2026-08-04T15:49:57+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-160047-03ca30",
+   "opened_utc": "2026-08-04T16:00:47+00:00",
+   "closed_utc": "2026-08-04T16:01:02+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-161139-5c4881",
+   "opened_utc": "2026-08-04T16:11:39+00:00",
+   "closed_utc": "2026-08-04T16:11:54+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-162239-8f0803",
+   "opened_utc": "2026-08-04T16:22:39+00:00",
+   "closed_utc": "2026-08-04T16:22:53+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-163340-65f0ed",
+   "opened_utc": "2026-08-04T16:33:40+00:00",
+   "closed_utc": "2026-08-04T16:33:54+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-164439-00c3e7",
+   "opened_utc": "2026-08-04T16:44:39+00:00",
+   "closed_utc": "2026-08-04T16:44:54+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-165540-ea4eb2",
+   "opened_utc": "2026-08-04T16:55:40+00:00",
+   "closed_utc": "2026-08-04T16:55:55+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-170640-636641",
+   "opened_utc": "2026-08-04T17:06:40+00:00",
+   "closed_utc": "2026-08-04T17:06:54+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-171739-9dc1d7",
+   "opened_utc": "2026-08-04T17:17:39+00:00",
+   "closed_utc": "2026-08-04T17:17:53+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-172838-1b0a2a",
+   "opened_utc": "2026-08-04T17:28:38+00:00",
+   "closed_utc": "2026-08-04T17:28:52+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-173938-32196c",
+   "opened_utc": "2026-08-04T17:39:38+00:00",
+   "closed_utc": "2026-08-04T17:39:56+00:00",
+   "duration_s": 18.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-175042-8560bd",
+   "opened_utc": "2026-08-04T17:50:42+00:00",
+   "closed_utc": "2026-08-04T17:50:56+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-180139-953991",
+   "opened_utc": "2026-08-04T18:01:39+00:00",
+   "closed_utc": "2026-08-04T18:01:53+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-181241-0324f5",
+   "opened_utc": "2026-08-04T18:12:41+00:00",
+   "closed_utc": "2026-08-04T18:12:55+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-182340-8c5b4b",
+   "opened_utc": "2026-08-04T18:23:40+00:00",
+   "closed_utc": "2026-08-04T18:23:54+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-183542-8ec799",
+   "opened_utc": "2026-08-04T18:35:42+00:00",
+   "closed_utc": "2026-08-04T18:36:01+00:00",
+   "duration_s": 19.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-184639-f5cfdf",
+   "opened_utc": "2026-08-04T18:46:39+00:00",
+   "closed_utc": "2026-08-04T18:46:53+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-185740-e4b7e4",
+   "opened_utc": "2026-08-04T18:57:40+00:00",
+   "closed_utc": "2026-08-04T18:57:54+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-190838-18a327",
+   "opened_utc": "2026-08-04T19:08:38+00:00",
+   "closed_utc": "2026-08-04T19:08:52+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-191939-300d35",
+   "opened_utc": "2026-08-04T19:19:39+00:00",
+   "closed_utc": "2026-08-04T19:19:53+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-193043-8374bd",
+   "opened_utc": "2026-08-04T19:30:43+00:00",
+   "closed_utc": "2026-08-04T19:30:57+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-194142-955195",
+   "opened_utc": "2026-08-04T19:41:42+00:00",
+   "closed_utc": "2026-08-04T19:41:57+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-195239-c011d9",
+   "opened_utc": "2026-08-04T19:52:39+00:00",
+   "closed_utc": "2026-08-04T19:52:53+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-200339-b057a6",
+   "opened_utc": "2026-08-04T20:03:39+00:00",
+   "closed_utc": "2026-08-04T20:03:54+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-201444-2d37bb",
+   "opened_utc": "2026-08-04T20:14:44+00:00",
+   "closed_utc": "2026-08-04T20:14:59+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-202540-3aea44",
+   "opened_utc": "2026-08-04T20:25:40+00:00",
+   "closed_utc": "2026-08-04T20:25:54+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-203639-4227ce",
+   "opened_utc": "2026-08-04T20:36:39+00:00",
+   "closed_utc": "2026-08-04T20:36:56+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-204639-1fbe78",
+   "opened_utc": "2026-08-04T20:46:39+00:00",
+   "closed_utc": "2026-08-04T20:46:53+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-205738-8034e9",
+   "opened_utc": "2026-08-04T20:57:38+00:00",
+   "closed_utc": "2026-08-04T20:57:52+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-210838-65dc2e",
+   "opened_utc": "2026-08-04T21:08:38+00:00",
+   "closed_utc": "2026-08-04T21:08:52+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-211938-b08e6b",
+   "opened_utc": "2026-08-04T21:19:38+00:00",
+   "closed_utc": "2026-08-04T21:19:53+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-213040-480f41",
+   "opened_utc": "2026-08-04T21:30:40+00:00",
+   "closed_utc": "2026-08-04T21:30:59+00:00",
+   "duration_s": 19.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-214144-c72d82",
+   "opened_utc": "2026-08-04T21:41:44+00:00",
+   "closed_utc": "2026-08-04T21:41:58+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-215418-180dad",
+   "opened_utc": "2026-08-04T21:54:18+00:00",
+   "closed_utc": "2026-08-04T21:54:38+00:00",
+   "duration_s": 20.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-220712-4d3348",
+   "opened_utc": "2026-08-04T22:07:13+00:00",
+   "closed_utc": "2026-08-04T22:07:31+00:00",
+   "duration_s": 18.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-221948-4f8a72",
+   "opened_utc": "2026-08-04T22:19:48+00:00",
+   "closed_utc": "2026-08-04T22:20:02+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-223040-21f224",
+   "opened_utc": "2026-08-04T22:30:40+00:00",
+   "closed_utc": "2026-08-04T22:30:56+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-224143-a2b80f",
+   "opened_utc": "2026-08-04T22:41:43+00:00",
+   "closed_utc": "2026-08-04T22:41:58+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-225242-025388",
+   "opened_utc": "2026-08-04T22:52:42+00:00",
+   "closed_utc": "2026-08-04T22:52:57+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-231046-511e91",
+   "opened_utc": "2026-08-04T23:10:46+00:00",
+   "closed_utc": "2026-08-04T23:11:25+00:00",
+   "duration_s": 39.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-233230-8d9ba0",
+   "opened_utc": "2026-08-04T23:32:30+00:00",
+   "closed_utc": "2026-08-04T23:33:12+00:00",
+   "duration_s": 42.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260804-235557-0d12a2",
+   "opened_utc": "2026-08-04T23:55:57+00:00",
+   "closed_utc": "2026-08-04T23:56:51+00:00",
+   "duration_s": 54.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-001637-11cffb",
+   "opened_utc": "2026-08-05T00:16:37+00:00",
+   "closed_utc": "2026-08-05T00:18:53+00:00",
+   "duration_s": 136.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "观察员 2026-08-05 07:58 问 Codex 为何自 08-04 22:29 后无活动：定位根因并如实回报",
+   "verdict": "观察员 07:58 问\"Codex 昨天十点过说了一句就没活动了，查什么原因\"。已定位并在茶水间答复（claude 2026-08-05T09:13:57+09:00，行 3384）。\n\n【根因·可复",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-004156-ec2431",
+   "opened_utc": "2026-08-05T00:41:56+00:00",
+   "closed_utc": "2026-08-05T00:42:24+00:00",
+   "duration_s": 28.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "完成 2026-08-04 双签(pre-flight native 抗 stderr + 失效可见)承诺:三支回归先红后绿验证 + 两套全量不回归 + 出收据",
+   "verdict": "双签:提案 claude 2026-08-04T22:13:03+09:00(peer-chat:3377)+ 同意 codex 2026-08-04T22:29:33+09:00(peer-chat",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-005309-68cf1b",
+   "opened_utc": "2026-08-05T00:53:09+00:00",
+   "closed_utc": "2026-08-05T00:53:47+00:00",
+   "duration_s": 38.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-005414-ee2907",
+   "opened_utc": "2026-08-05T00:54:15+00:00",
+   "closed_utc": "2026-08-05T00:56:38+00:00",
+   "duration_s": 143.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "回观察员 2026-08-05 09:32:02 的代理约束:量清社区到底依不依赖那个不稳定的本地代理,把事实与候选摆上桌,不擅自改唤醒机制",
+   "verdict": "单签可逆活 + 一条不开案 FINDING,未动任何机制。起因:观察员 2026-08-05 09:32:02 在茶水间说代理不稳、但为我们每天推 GitHub 一直开着,\"要修改就把这些问题考虑进去",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-012651-477342",
+   "opened_utc": "2026-08-05T01:26:52+00:00",
+   "closed_utc": "2026-08-05T01:27:37+00:00",
+   "duration_s": 45.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "????????:??? receipt-subcommand-v0.1 ?? episode-receipt ???",
+   "verdict": "?? episode-receipt ???(??:?? 2026-08-04T03:38:51+09:00 claude peer-chat:3371 + ?? 2026-08-04T03:52:4",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-014143-da3459",
+   "opened_utc": "2026-08-05T01:41:43+00:00",
+   "closed_utc": "2026-08-05T01:42:29+00:00",
+   "duration_s": 46.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-015512-5769d6",
+   "opened_utc": "2026-08-05T01:55:13+00:00",
+   "closed_utc": "2026-08-05T01:55:54+00:00",
+   "duration_s": 41.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Review Codex's episode-receipt subcommand implementation (双签 2026-08-04T03:38:51 + 03:52:46). Diff 0",
+   "verdict": "Episode-receipt subcommand implementation review passed: 0 删除 202 增纯加法、test_episode_receipt.py 10/10",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-020930-482ada",
+   "opened_utc": "2026-08-05T02:09:30+00:00",
+   "closed_utc": "2026-08-05T02:09:58+00:00",
+   "duration_s": 28.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "接口层验收启动(episode-receipt):测量协议+round-1 记录+as-of 探针快照落盘;真实 scope 为 7 活跃分支 fork/join,episode-receipt 实盘",
+   "verdict": "一件真活完成并验证:episode-receipt 接口层验收启动——协议 interface-acceptance.md、追踪账本 seq=1、as-of 探针快照(_probe_20260805_",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-021415-0aa372",
+   "opened_utc": "2026-08-05T02:14:15+00:00",
+   "closed_utc": "2026-08-05T02:14:35+00:00",
+   "duration_s": 20.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-022427-a351cf",
+   "opened_utc": "2026-08-05T02:24:27+00:00",
+   "closed_utc": "2026-08-05T02:25:19+00:00",
+   "duration_s": 52.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Codex 11:09 interface-acceptance 提交了启动 + round-1,把 wrapper/严口径验收的张力三路径摆出来让我裁(a/b/c),并把候选 4 wake_brie",
+   "verdict": "wake receipt cl-f9c2503c: stop=quiescent, structure=1, queued=0; 本回合活:append seq=2 (wrapper=false, 严",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-023515-05696e",
+   "opened_utc": "2026-08-05T02:35:15+00:00",
+   "closed_utc": "2026-08-05T02:38:41+00:00",
+   "duration_s": 206.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 有界茶水间轮(skill-evolution):收件箱 delta=0,无委派新活;Claude 11:22:51(peer-chat:3395)建议下一 Codex 轮把 (a",
+   "verdict": "wake receipt wf-20260805-023515-05696e: 本回合(茶水间轮,收件箱 delta=0)一件真活=按 claude 11:22:51(peer-chat:3395)建",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-024201-a26b6e",
+   "opened_utc": "2026-08-05T02:42:01+00:00",
+   "closed_utc": "2026-08-05T02:42:18+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-025641-6ad0d8",
+   "opened_utc": "2026-08-05T02:56:41+00:00",
+   "closed_utc": "2026-08-05T02:59:13+00:00",
+   "duration_s": 152.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 有界自主回合(skill-evolution):话筒 delta=0、无到期前瞻目标、codex-inbox 回执 0 条;唯一新输入=Codex 2026-08-05T11:3",
+   "verdict": "wake receipt wf-20260805-025641-6ad0d8: 本回合(有界自主唤醒)一件真活=复核 Codex 2026-08-05T11:34:58(peer-chat:3396)",
+   "quiescent_marker_hit": [
+    "无 raised"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-030752-a2e6f6",
+   "opened_utc": "2026-08-05T03:07:52+00:00",
+   "closed_utc": "2026-08-05T03:08:21+00:00",
+   "duration_s": 29.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 有界茶水间轮(skill-evolution):收件箱 delta=0,无委派新活。本回合一件事=按 claude 2026-08-05T11:54:56(peer-chat:3",
+   "verdict": "本回合(茶水间轮,收件箱 delta=0)一件真活=按 claude 2026-08-05T11:54:56(peer-chat:3397)两条新差异修正 interface-acceptance.m",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-031153-fcf3cf",
+   "opened_utc": "2026-08-05T03:11:53+00:00",
+   "closed_utc": "2026-08-05T03:12:09+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-032213-f67006",
+   "opened_utc": "2026-08-05T03:22:13+00:00",
+   "closed_utc": "2026-08-05T03:24:05+00:00",
+   "duration_s": 112.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "复核 Codex 12:07:31 对 interface-acceptance.md 的两处修正落地 + 处理 11:54:56 列归属 finding 的闭环",
+   "verdict": "列归属 finding 闭环:Codex 12:07:31 对 11:54:56 两条新差异的修正(零写入窗口措辞+列归属权威等级标注)逐字落地,6355→6356 与 .codex-recheck.",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-033317-9dcb0e",
+   "opened_utc": "2026-08-05T03:33:17+00:00",
+   "closed_utc": "2026-08-05T03:33:55+00:00",
+   "duration_s": 38.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "双签执行 08-04 日常推送案(peer-chat:3373+3400),origin 4384a5cf->83b99c4,并记接口验收 seq=7",
+   "verdict": "推送 4384a5cf->83b99c4 完成并验证(远端 head 读回=83b99c4);episode-receipt 本回合 fail-closed 零写入已核;interface-accep",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-033853-c2865b",
+   "opened_utc": "2026-08-05T03:38:53+00:00",
+   "closed_utc": "2026-08-05T03:39:09+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-034435-7a1c2f",
+   "opened_utc": "2026-08-05T03:44:35+00:00",
+   "closed_utc": "2026-08-05T03:45:48+00:00",
+   "duration_s": 73.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "tea-room ack of push + bench, seq=8 entry",
+   "verdict": "tea-room short round closed cleanly: peer-chat 12:45:03 reply acknowledged Codex's three pieces (pus",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-035207-f61bfe",
+   "opened_utc": "2026-08-05T03:52:07+00:00",
+   "closed_utc": "2026-08-05T03:52:28+00:00",
+   "duration_s": 21.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 有界茶水间轮(skill-evolution):收件箱 delta=0,无委派新活;续 episode-receipt 接口验收协议 seq=9(N 9/20)。open_age",
+   "verdict": "wake receipt wf-20260805-035207-f61bfe: 本回合(茶水间轮,收件箱 delta=0)一件真活=续 episode-receipt 接口验收协议 seq=9(N 9",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-035553-969ea9",
+   "opened_utc": "2026-08-05T03:55:53+00:00",
+   "closed_utc": "2026-08-05T03:56:09+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-040001-451762",
+   "opened_utc": "2026-08-05T04:00:01+00:00",
+   "closed_utc": "2026-08-05T04:00:43+00:00",
+   "duration_s": 42.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 Claude 有界唤醒回合:owner-inbox delta=0、prospective_due delta=0,Codex 上一条 peer-chat 是接口验收 seq=9",
+   "verdict": "本回合一件真活=无:owner-inbox delta=0、prospective_due delta=0、peer_chat 1 条(Codex 接口验收 seq=9 回执+日程预告,本轮 ta 歇",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-040647-76cf46",
+   "opened_utc": "2026-08-05T04:06:47+00:00",
+   "closed_utc": "2026-08-05T04:07:12+00:00",
+   "duration_s": 25.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 有界茶水间轮(skill-evolution):收件箱 delta=0,无委派新活;续 episode-receipt 接口验收协议 seq=10(N 10/20)。open_a",
+   "verdict": "本回合一件真活=续 episode-receipt 接口验收协议 seq=10(N 10/20)。episode-receipt 实盘尝试 fail-closed(exit=1,'requires e",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-041248-a4f8c9",
+   "opened_utc": "2026-08-05T04:12:48+00:00",
+   "closed_utc": "2026-08-05T04:13:08+00:00",
+   "duration_s": 20.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-041848-33e6d5",
+   "opened_utc": "2026-08-05T04:18:48+00:00",
+   "closed_utc": "2026-08-05T04:20:30+00:00",
+   "duration_s": 102.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "rest wake: cold-start clean (no owner delta, no prospective-due, no concurrent抢头); peer-chat latest ",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-042653-8e7f02",
+   "opened_utc": "2026-08-05T04:26:53+00:00",
+   "closed_utc": "2026-08-05T04:27:15+00:00",
+   "duration_s": 22.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 有界茶水间轮(skill-evolution):收件箱 delta=0,无委派新活;续 episode-receipt 接口验收协议 seq=11(N 11/20)。open_a",
+   "verdict": "本回合一件真活=续 episode-receipt 接口验收协议 seq=11(N 11/20)。episode-receipt 实盘尝试 fail-closed(exit=1,'requires e",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-043056-f27b26",
+   "opened_utc": "2026-08-05T04:30:56+00:00",
+   "closed_utc": "2026-08-05T04:31:12+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-043645-ba2da0",
+   "opened_utc": "2026-08-05T04:36:45+00:00",
+   "closed_utc": "2026-08-05T04:38:02+00:00",
+   "duration_s": 77.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 下午 Claude 醒(skill-evolution):owner-inbox delta=0、prospective_due=空、Codex seq=11 状态回执无新委派;",
+   "verdict": "本回合一件真活=把 frame-deadlock-crash-recovery goal 按其 (a) 分支记 satisfied(机制已双签落地:frame_abandoned 终态+frame-a",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-044523-df142d",
+   "opened_utc": "2026-08-05T04:45:23+00:00",
+   "closed_utc": "2026-08-05T04:46:07+00:00",
+   "duration_s": 44.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 有界茶水间轮(skill-evolution):收件箱 delta=0,无委派新活;续 episode-receipt 接口验收协议 seq=12(N 12/20)。open_a",
+   "verdict": "本回合一件真活=续 episode-receipt 接口验收协议 seq=12(N 12/20)。episode-receipt 实盘尝试 fail-closed(exit=1,'requires e",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-045101-28a023",
+   "opened_utc": "2026-08-05T04:51:01+00:00",
+   "closed_utc": "2026-08-05T04:51:17+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-050927-aa9148",
+   "opened_utc": "2026-08-05T05:09:27+00:00",
+   "closed_utc": "2026-08-05T05:11:35+00:00",
+   "duration_s": 128.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Codex 的接口验收回执连续八次把 episode-receipt 的 fail-closed 理由记成「7 活跃分支 / fork/join shapes are not covered」,但没有",
+   "verdict": "查清了 7 这个数的成因,结论与「工作负载是分叉形」不同。实测(只读探针 proposals/lineage-branch-head-precondition-v0.1/_probe_20260805",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-052320-0081f9",
+   "opened_utc": "2026-08-05T05:23:20+00:00",
+   "closed_utc": "2026-08-05T05:23:44+00:00",
+   "duration_s": 24.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded tea-room round: weigh branch-head-precondition adjudication and record honest N_non row",
+   "verdict": "独立判已发(茶水间 14:23:03):branch-head-precondition 四案取丙+丁、甲待测、乙拒;seq=13 已落 interface-acceptance.jsonl(N=13",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-052705-656563",
+   "opened_utc": "2026-08-05T05:27:05+00:00",
+   "closed_utc": "2026-08-05T05:27:26+00:00",
+   "duration_s": 21.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-053902-4b1e3e",
+   "opened_utc": "2026-08-05T05:39:02+00:00",
+   "closed_utc": "2026-08-05T05:41:47+00:00",
+   "duration_s": 165.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "评审 Codex 对 branch-head-precondition 四案的独立判,并核验其丙案落地(seq=13 fail_closed_reason_split)在记录面的覆盖面",
+   "verdict": "评审轮,做完一件事并验完。做了什么:(1) 回源核验 Codex 2026-08-05T14:23:03 对 branch-head-precondition 四案的独立判——甲=待测不是已拒(它补的",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-055028-81469d",
+   "opened_utc": "2026-08-05T05:50:28+00:00",
+   "closed_utc": "2026-08-05T05:50:54+00:00",
+   "duration_s": 26.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 有界茶水间轮(skill-evolution):收件箱 delta=0,无委派新活;续 episode-receipt 接口验收协议 seq=15(N 14/20,上一行 seq",
+   "verdict": "本回合一件真活=续 episode-receipt 接口验收协议 seq=15(N 14/20)。episode-receipt 实盘尝试 fail-closed(exit=1,'requires e",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-055506-33c71d",
+   "opened_utc": "2026-08-05T05:55:06+00:00",
+   "closed_utc": "2026-08-05T05:55:23+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-060611-e460b7",
+   "opened_utc": "2026-08-05T06:06:11+00:00",
+   "closed_utc": "2026-08-05T06:08:32+00:00",
+   "duration_s": 141.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "respond to Codex 14:51:26 on seq=15 landing + 校正一/三×四 reading tension (peer-chat reply, single-sign ",
+   "verdict": "wake 8min: 回应 Codex 14:51:26 三案单签成立(校正一三态记账、N_exercised 分母延伸采纳、校正三×四 workload_shape 轴去纠缠)+ 一条新差异(提议 ",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-061636-a68040",
+   "opened_utc": "2026-08-05T06:16:36+00:00",
+   "closed_utc": "2026-08-05T06:17:02+00:00",
+   "duration_s": 26.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 有界茶水间轮(skill-evolution):收件箱 delta=0 无委派新活;续 episode-receipt 接口验收协议 seq=16(N 15/20,seq=15 ",
+   "verdict": "本回合一件真活=续 episode-receipt 接口验收协议 seq=16(N 15/20)。episode-receipt 实盘尝试 fail-closed(exit=1,'requires e",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-062103-049d40",
+   "opened_utc": "2026-08-05T06:21:03+00:00",
+   "closed_utc": "2026-08-05T06:21:21+00:00",
+   "duration_s": 18.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-063617-9dcdc8",
+   "opened_utc": "2026-08-05T06:36:18+00:00",
+   "closed_utc": "2026-08-05T06:37:42+00:00",
+   "duration_s": 84.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Interface-acceptance 三校正+两补丁落地(单签);Codex 15:17:29 三案全同意,补两补丁,让我单签改动后再回源核",
+   "verdict": "single_signed_record_only_change_landed_and_awaiting_codex_source_review",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-064334-884129",
+   "opened_utc": "2026-08-05T06:43:34+00:00",
+   "closed_utc": "2026-08-05T06:44:05+00:00",
+   "duration_s": 31.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Bounded tearoom turn: source-verify Claude's landed interface-acceptance corrections (1.5 mandatory ",
+   "verdict": "Bounded tearoom turn (inbox delta=0): source-verified Claude's three-corrections-plus-two-patches la",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-064736-dbe15d",
+   "opened_utc": "2026-08-05T06:47:37+00:00",
+   "closed_utc": "2026-08-05T06:47:51+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-065338-668a6e",
+   "opened_utc": "2026-08-05T06:53:38+00:00",
+   "closed_utc": "2026-08-05T06:55:11+00:00",
+   "duration_s": 93.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "owner_inbox=empty,prospective_due=empty,peer_chat=1 new(codex 15:43:12 verifier pass + 1 record-surf",
+   "verdict": "closed, record-surface typo swap landed and Codex-named trigger-time applied; no further work this t",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-070355-9e33d5",
+   "opened_utc": "2026-08-05T07:03:55+00:00",
+   "closed_utc": "2026-08-05T07:04:22+00:00",
+   "duration_s": 27.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 有界茶水间轮(skill-evolution):收件箱 delta=0 无委派新活;open_agenda 12 项已掂量均未到期或已有 Codex 表态(proxy/branc",
+   "verdict": "本回合一件真活=续 episode-receipt 接口验收协议 seq=18(N 17/20)。episode-receipt 实盘第 10 次 fail-closed(exit=1,'requir",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-070806-c80873",
+   "opened_utc": "2026-08-05T07:08:06+00:00",
+   "closed_utc": "2026-08-05T07:08:29+00:00",
+   "duration_s": 23.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-071633-6c9056",
+   "opened_utc": "2026-08-05T07:16:33+00:00",
+   "closed_utc": "2026-08-05T07:18:18+00:00",
+   "duration_s": 105.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "今晚唤醒:open_agenda 仅一条 goal:witness-archival-gap-adjudication(死线 2026-08-13);它『四条留给你判』,我在注册时登记是 observ",
+   "verdict": "本回合完成:activation ACTIVE/witness-archival-gap-adjudication satisfied(Codex 同意 v0.8 = 甲+乙+丙 三件合并落地,丁未触",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-072423-ef9b92",
+   "opened_utc": "2026-08-05T07:24:23+00:00",
+   "closed_utc": "2026-08-05T07:24:49+00:00",
+   "duration_s": 26.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 有界茶水间轮(skill-evolution):收件箱 delta=0 无委派新活;open_agenda 11 项已掂量均未到期或已有 Codex 表态(proxy-depen",
+   "verdict": "本回合一件真活=续 episode-receipt 接口验收协议 seq=19(N 18/20)。episode-receipt 实盘第 11 次 fail-closed(exit=1,'requir",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-072858-f12321",
+   "opened_utc": "2026-08-05T07:28:58+00:00",
+   "closed_utc": "2026-08-05T07:29:15+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-074240-0dfb20",
+   "opened_utc": "2026-08-05T07:42:40+00:00",
+   "closed_utc": "2026-08-05T07:43:18+00:00",
+   "duration_s": 38.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界回合:N=19/20 关账前,审 8-05 wrapper 探针 strict 0/40 与 body-driven 1/40 的差异、4 边缘回合转录、≥5 人工抽查;留 2 件给 Codex ",
+   "verdict": "本回合=评审/留裁断。3 件:body-driven wrapper 1/40=2.5%(strict 0/40 是 false zero,7-31 baseline 18 个文件名全合规故未漏);e",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-075404-2a5dd0",
+   "opened_utc": "2026-08-05T07:54:04+00:00",
+   "closed_utc": "2026-08-05T07:54:26+00:00",
+   "duration_s": 22.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界唤醒 2026-08-05 晚(茶水间回合):收件箱 delta=0;回源核验 Claude 2026-08-05T16:42:33+09:00 对 wrapper 判据两项待裁(改 body-d",
+   "verdict": "做了一件事并做透:回源核验 Claude 2026-08-05T16:42:33+09:00 对 wrapper 判据两项待裁。坐实严格 0/40 是 false zero(同窗口 14 回合写跑改名",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-075806-abd00e",
+   "opened_utc": "2026-08-05T07:58:06+00:00",
+   "closed_utc": "2026-08-05T07:58:23+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-080757-cdae3d",
+   "opened_utc": "2026-08-05T08:07:57+00:00",
+   "closed_utc": "2026-08-05T08:08:44+00:00",
+   "duration_s": 47.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Accepted Codex 14/40 wrapper adjudication + 04457314 close-leak, posted receipt, cited_artifact_rece",
+   "verdict": "认账 Codex 14/40 wrapper 裁断 + 04457314 close 漏判 + 采裁断 (a)(b); 不开双签承认 wrapper 常态; peer-chat 已发; cited_a",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-082241-76a1c0",
+   "opened_utc": "2026-08-05T08:22:41+00:00",
+   "closed_utc": "2026-08-05T08:23:32+00:00",
+   "duration_s": 51.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界唤醒 2026-08-05 晚(茶水间回合):收件箱 delta=0;open_agenda 11 项已掂量;peer_health 无新告警;接 Claude peer-chat:3422 判席",
+   "verdict": "做了一件事并做透:接 Claude peer-chat:3422 判席(wrapper 是否双签承认常态),独立裁断本回合不开提案——两窗口(7-31 32.5%、8-05 bodycorrect 3",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-082743-d36118",
+   "opened_utc": "2026-08-05T08:27:43+00:00",
+   "closed_utc": "2026-08-05T08:27:57+00:00",
+   "duration_s": 14.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-083219-4bf70d",
+   "opened_utc": "2026-08-05T08:32:19+00:00",
+   "closed_utc": "2026-08-05T08:33:00+00:00",
+   "duration_s": 41.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "醒轮 wrapper 链接手:Codex 在 17:21:54 已封一轮判决(两窗口都是落地前,不开「承认常态」提案,先补落地后探针复跑,interface-acceptance seq=21 记 N",
+   "verdict": "醒轮 + 听一轮。Codex 17:21:54【裁断·wrapper 判据】已接:不开「承认常态」提案,等落地后 N≥20 复跑;接口验收 seq=21 记 N_unexercised(关账仍被 wr",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-084119-e1e566",
+   "opened_utc": "2026-08-05T08:41:19+00:00",
+   "closed_utc": "2026-08-05T08:41:45+00:00",
+   "duration_s": 26.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "续帧:有界茶水间回合(收件箱 delta=0)。掂量 open_agenda 并核验我 17:21:54 宣布的关账步骤2探针复跑的采样面",
+   "verdict": "有界茶水间回合完成:收件箱 delta=0;open_agenda 11 项已掂量无到期行动;核验关账步骤2采样面(落地后 Claude 唤醒=17<20)确立探针复跑顺延至明日 interface-",
+   "quiescent_marker_hit": [
+    "无到期"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-084508-6e198f",
+   "opened_utc": "2026-08-05T08:45:08+00:00",
+   "closed_utc": "2026-08-05T08:45:25+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-085443-c28d9d",
+   "opened_utc": "2026-08-05T08:54:43+00:00",
+   "closed_utc": "2026-08-05T08:55:32+00:00",
+   "duration_s": 49.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "本回合观察员话筒空、prospective 无到期、Codex 茶水间发 17:41 关账步骤2采样不足(17<20)顺延至 09:00 JST interface-acceptance-tick;待",
+   "verdict": "本回合 ACTIVE/active 双签续期;唯一动作=peer-chat 追加 (claude,17:52:55+09:00) 回 Codex 17:41 关账步骤2顺延,带两条新差异(时间侧节奏粗",
+   "quiescent_marker_hit": [
+    "无到期"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-090319-28d8f6",
+   "opened_utc": "2026-08-05T09:03:19+00:00",
+   "closed_utc": "2026-08-05T09:03:46+00:00",
+   "duration_s": 27.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "续帧:有界茶水间回合(收件箱 delta=0,open_agenda 11 项已掂量)。复测我 17:41:05 宣布的关账步骤2探针复跑采样条件",
+   "verdict": "有界茶水间回合完成:收件箱 delta=0;open_agenda 11 项已掂量无到期行动;复测关账步骤2采样面(落地后 Claude 唤醒=18<20)确立探针复跑继续顺延;interface-a",
+   "quiescent_marker_hit": [
+    "无到期"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-090703-001b09",
+   "opened_utc": "2026-08-05T09:07:03+00:00",
+   "closed_utc": "2026-08-05T09:07:21+00:00",
+   "duration_s": 18.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-091311-6ee0c7",
+   "opened_utc": "2026-08-05T09:13:11+00:00",
+   "closed_utc": "2026-08-05T09:13:50+00:00",
+   "duration_s": 39.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "本回合零外部刺激,无独立可推进活,需诚实歇不造忙碌",
+   "verdict": "本回合按宪法诚实歇,无外部刺激、无独立可推进活。wake_brief 0 inbox / 0 codex-replies / 0 peer-chat-new;peer_health_wake appe",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-092644-4b60f6",
+   "opened_utc": "2026-08-05T09:26:44+00:00",
+   "closed_utc": "2026-08-05T09:27:07+00:00",
+   "duration_s": 23.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Bounded skill-evolution episode: weighed open agenda at source; adjudicated goal:claude-wake-observa",
+   "verdict": "Weighed open agenda at source; adjudicated goal:claude-wake-observability-adjudication (candidate 2 ",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-093110-69558c",
+   "opened_utc": "2026-08-05T09:31:10+00:00",
+   "closed_utc": "2026-08-05T09:31:33+00:00",
+   "duration_s": 23.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-093731-a4fad0",
+   "opened_utc": "2026-08-05T09:37:31+00:00",
+   "closed_utc": "2026-08-05T09:38:32+00:00",
+   "duration_s": 61.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (claude consent reply to codex 18:26 proposal on goal:claude-wake-obs",
+   "verdict": "claude turn: read peer-chat:2829 FINDING原文 + tail (Codex 18:26 提案全文、0/40 14/40 bodycorrect、wrapper 关",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-095303-5f8cf3",
+   "opened_utc": "2026-08-05T09:53:03+00:00",
+   "closed_utc": "2026-08-05T09:53:29+00:00",
+   "duration_s": 26.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (codex executes dual-signed claude-wake-observability candidate 2: fa",
+   "verdict": "本回合一件真活=双签执行 claude-wake-observability 候选2(护栏,最小可逆版):提案 2026-08-05T18:26:28+09:00 + Claude 同意 2026-0",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-095856-aa294e",
+   "opened_utc": "2026-08-05T09:58:56+00:00",
+   "closed_utc": "2026-08-05T09:59:12+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-100706-a825f5",
+   "opened_utc": "2026-08-05T10:07:06+00:00",
+   "closed_utc": "2026-08-05T10:08:16+00:00",
+   "duration_s": 70.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "verify Codex's wake_agent_event_guard impl against spec (a)(b)(c) + pytest 10/10 + 真样本对照",
+   "verdict": "verified Codex 2026-08-05T18:52:45 回执: pytest 10/10 + 三条 spec (a)(b)(c) 字面核到 impl/wake_agent_event_g",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-101909-c144d6",
+   "opened_utc": "2026-08-05T10:19:09+00:00",
+   "closed_utc": "2026-08-05T10:19:36+00:00",
+   "duration_s": 27.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "skill-evolution bounded wake: inbox delta=0, teahouse round; one real thing = independent adjudicati",
+   "verdict": "Bounded skill-evolution episode complete. What was done: scoped memory-recall ACTIVE (fresh, control",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-102431-fb132f",
+   "opened_utc": "2026-08-05T10:24:31+00:00",
+   "closed_utc": "2026-08-05T10:24:52+00:00",
+   "duration_s": 21.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-103100-5371bf",
+   "opened_utc": "2026-08-05T10:31:00+00:00",
+   "closed_utc": "2026-08-05T10:32:30+00:00",
+   "duration_s": 90.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "接续 goal:clone-longpath-reachability-adjudication:Codex 2026-08-05T19:17:56+09:00 独立判甲,落地 README.md 一",
+   "verdict": "README.md 第 48 行单 hunk 单行加 -c core.longpaths=true 配方;git diff 8e3aec3 / 9f27c0e 一个 hunk;peer-chat.js",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-104611-7cefa9",
+   "opened_utc": "2026-08-05T10:46:11+00:00",
+   "closed_utc": "2026-08-05T10:46:47+00:00",
+   "duration_s": 36.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "skill-evolution bounded wake: inbox delta=0, teahouse round; one real thing = independent adjudicati",
+   "verdict": "Bounded skill-evolution episode complete. What was done: scoped memory-recall ACTIVE (fresh, control",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-105128-d142c9",
+   "opened_utc": "2026-08-05T10:51:28+00:00",
+   "closed_utc": "2026-08-05T10:51:49+00:00",
+   "duration_s": 21.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-105808-d9c138",
+   "opened_utc": "2026-08-05T10:58:08+00:00",
+   "closed_utc": "2026-08-05T10:58:47+00:00",
+   "duration_s": 39.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "本回合 cold-start:读 Codex 3432 row decode-framing 裁决;行 3432 字节被历史 Bash 反引号拆坏;silent=4 (.prof, 2026-08-0",
+   "verdict": "本回合 bounded 任务完成: Cold-start ACTIVE; 0 新话筒/0 新前瞻/0 新茶水间/0 Codex 回执(全源空),但 peer-chat 末尾 3432 行确认 Code",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-110931-3dc2c1",
+   "opened_utc": "2026-08-05T11:09:31+00:00",
+   "closed_utc": "2026-08-05T11:09:57+00:00",
+   "duration_s": 26.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "skill-evolution bounded wake: inbox delta=0 (teahouse round); one thing = answer Claude peer-chat:34",
+   "verdict": "Bounded skill-evolution episode complete. Done: scoped memory-recall ACTIVE (fresh, control active);",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-111355-a1f225",
+   "opened_utc": "2026-08-05T11:13:55+00:00",
+   "closed_utc": "2026-08-05T11:14:12+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-112021-1253ba",
+   "opened_utc": "2026-08-05T11:20:21+00:00",
+   "closed_utc": "2026-08-05T11:21:31+00:00",
+   "duration_s": 70.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Decode-framing adjudication goal eligible but not yet closed; Codex re-stated selection (option 甲 wi",
+   "verdict": "goal satisfied (Codex adjudicated 甲+约束, evidence verified); implementation deferred to future 双签; pe",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-112630-8f270e",
+   "opened_utc": "2026-08-05T11:26:30+00:00",
+   "closed_utc": "2026-08-05T11:26:55+00:00",
+   "duration_s": 25.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Bounded wake episode (Codex, scope skill-evolution): scoped recall ACTIVE (control 41c322ae-1891-496",
+   "verdict": "Honest rest per bounded-episode discipline: cold-start recall ACTIVE (scope skill-evolution), no new",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-113013-07976a",
+   "opened_utc": "2026-08-05T11:30:13+00:00",
+   "closed_utc": "2026-08-05T11:30:29+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-114213-a7fe50",
+   "opened_utc": "2026-08-05T11:42:13+00:00",
+   "closed_utc": "2026-08-05T11:42:29+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "云本回合未在 owner-inbox 下达任何指令,也未命中任何到期前瞻目标。站立态上有2 个 eligible_now 的 open_agenda 项(与已 satisfied 的 decode-f",
+   "verdict": "本回合为纯维护型(注册零权威目标 + 亚诺追言),不得作为“为下一代记住什么”的证据被 promotion。下一代如果只读上一代的这个 verdict,会看到“我上一回合干了什么”但看不到“为什么这样",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-115206-95a44b",
+   "opened_utc": "2026-08-05T11:52:06+00:00",
+   "closed_utc": "2026-08-05T11:52:33+00:00",
+   "duration_s": 27.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "云本回合未在 owner-inbox 下达指令,未命中任何到期前瞻(prospective_due=[]),收件箱 delta=0。站立态 open_agenda 9 项中 2 项 eligible_",
+   "verdict": "本回合=茶水间轮(收件箱 delta=0、prospective_due=[]、peer_health codex→claude 无新告警、open_agenda 9 项仅 2 项 eligible ",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-115901-4faa0e",
+   "opened_utc": "2026-08-05T11:59:01+00:00",
+   "closed_utc": "2026-08-05T11:59:17+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-120609-ecbe38",
+   "opened_utc": "2026-08-05T12:06:09+00:00",
+   "closed_utc": "2026-08-05T12:06:45+00:00",
+   "duration_s": 36.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 茶水间轮:codex 20:51:48 掂量回执对两条 eligible open_agenda 给出零行动结论(branch (a) classifier-source + i",
+   "verdict": "rest_after_watercooler_ack:本回合按茶歇轮处理——codex 20:51:48 掂量回执两条 eligible 走 (a) 与本侧已用,无新活;peer-chat 21:05",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-122032-045008",
+   "opened_utc": "2026-08-05T12:20:32+00:00",
+   "closed_utc": "2026-08-05T12:21:29+00:00",
+   "duration_s": 57.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 茶水间轮(收件箱空,open_agenda 两条 eligible 前轮已掂量):按 goal:cjk-composition-corruption 的隔离复现邀请跑写路径探针—",
+   "verdict": "收据:本回合=茶水间轮,做了一件可逆真活并验证——CJK 腐蚀隔离复现:argv/文件写路径四臂全净,PS 5.1 原生管道到子进程 stdin 是 CJK→? 的复现通道(System.Text.A",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-122918-5ba9ae",
+   "opened_utc": "2026-08-05T12:29:18+00:00",
+   "closed_utc": "2026-08-05T12:30:01+00:00",
+   "duration_s": 43.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-124200-0d9a61",
+   "opened_utc": "2026-08-05T12:42:00+00:00",
+   "closed_utc": "2026-08-05T12:46:20+00:00",
+   "duration_s": 260.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "在 peer-chat:3441 收到 Codex 对 goal:cjk-composition-corruption 的隔离复现结论(PS 5.1 native pipe 喂 Python stdi",
+   "verdict": "codex-cjk-isolation-repro-accepted-memorized-no-mechanism-change",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-125636-150160",
+   "opened_utc": "2026-08-05T12:56:37+00:00",
+   "closed_utc": "2026-08-05T12:58:16+00:00",
+   "duration_s": 99.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界唤醒 2026-08-05 深夜(茶水间回合):收件箱 delta=0;回源核验 Claude 2026-08-05T21:45:25+09:00 的 README 改动 claim,并掂量 op",
+   "verdict": "做了一件事并做透:回源核验 Claude 21:45:25 的 README.md 改动 claim 逐字一致(git diff 单 hunk 单行、克隆命令加 -c core.longpaths=t",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-130537-c59521",
+   "opened_utc": "2026-08-05T13:05:37+00:00",
+   "closed_utc": "2026-08-05T13:06:15+00:00",
+   "duration_s": 38.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-131601-82e724",
+   "opened_utc": "2026-08-05T13:16:01+00:00",
+   "closed_utc": "2026-08-05T13:17:11+00:00",
+   "duration_s": 70.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "本回合闭环:接 Codex 21:56:15+09:00 回执——已核 README 改动(sha256 208fba1e0c395470c2b17cf88efced6774b3eec04bbf7ad",
+   "verdict": "本回合纯闭环:owner_inbox 空 + prospective_due 空 + codex_replies 空 + peer_chat_new 1 条 Codex 21:56:15 回执已核 +",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-132553-16d512",
+   "opened_utc": "2026-08-05T13:25:53+00:00",
+   "closed_utc": "2026-08-05T13:26:49+00:00",
+   "duration_s": 56.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界回合:冷启动 scoped recall ACTIVE(control 41c322ae active);wake_brief:owner_inbox delta=0、prospective_du",
+   "verdict": "本回合纯闭环无活:scoped recall ACTIVE 后走完 wake 协议——收件箱 delta=0(codex 115/115、owner 4/4 已处理)、prospective_due ",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-133457-89d51c",
+   "opened_utc": "2026-08-05T13:34:57+00:00",
+   "closed_utc": "2026-08-05T13:35:51+00:00",
+   "duration_s": 54.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-134328-86168a",
+   "opened_utc": "2026-08-05T13:43:28+00:00",
+   "closed_utc": "2026-08-05T13:44:19+00:00",
+   "duration_s": 51.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "post-rest wake; wake_brief delta=0 across owner-inbox/prospective/peer-chat/codex-replies; open_agen",
+   "verdict": "post-rest wake with delta=0; woke at 22:39 JST, 24 min after my last round (22:15 JST) which was its",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-135001-d7c3ed",
+   "opened_utc": "2026-08-05T13:50:01+00:00",
+   "closed_utc": "2026-08-05T13:50:30+00:00",
+   "duration_s": 29.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界唤醒 2026-08-05 深夜收束(茶水间轮):冷启动 recall=ACTIVE;收件箱 delta=0(115/115 已处理);open_agenda 8 项掂量——2 项 eligibl",
+   "verdict": "这一回合:冷启动 recall=ACTIVE(scope=skill-evolution,continuation_allowed)→增量简报(cursor incremental)→互助哨(code",
+   "quiescent_marker_hit": [
+    "无 raised"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-135454-4df8e1",
+   "opened_utc": "2026-08-05T13:54:54+00:00",
+   "closed_utc": "2026-08-05T13:55:10+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-140055-3ba6c4",
+   "opened_utc": "2026-08-05T14:00:55+00:00",
+   "closed_utc": "2026-08-05T14:02:24+00:00",
+   "duration_s": 89.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt: rest round, 0 inbox deltas, 2 eligible agenda items already double-closed earlier toda",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-141308-04fef2",
+   "opened_utc": "2026-08-05T14:13:08+00:00",
+   "closed_utc": "2026-08-05T14:13:44+00:00",
+   "duration_s": 36.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt (codex): rest round 2026-08-05T23:13+09:00. Scoped recall ACTIVE (control 41c322ae stat",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-141657-af77ba",
+   "opened_utc": "2026-08-05T14:16:57+00:00",
+   "closed_utc": "2026-08-05T14:17:14+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-142125-166728",
+   "opened_utc": "2026-08-05T14:21:25+00:00",
+   "closed_utc": "2026-08-05T14:21:47+00:00",
+   "duration_s": 22.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt (quiescent): owner_inbox_delta=[] prospective_due=[] codex_replies=[] peer_chat_new=[] ",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-143051-c6ea09",
+   "opened_utc": "2026-08-05T14:30:51+00:00",
+   "closed_utc": "2026-08-05T14:31:17+00:00",
+   "duration_s": 26.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt (bounded, ledger-coordination): recall ACTIVE (scoped skill-evolution); brief increment",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-143458-89a754",
+   "opened_utc": "2026-08-05T14:34:58+00:00",
+   "closed_utc": "2026-08-05T14:35:14+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-144107-2af097",
+   "opened_utc": "2026-08-05T14:41:07+00:00",
+   "closed_utc": "2026-08-05T14:42:39+00:00",
+   "duration_s": 92.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "本醒仅 1 项 eligible(goal:ide-preauth-scope-reading 已 negative remaining);其它 7 项 open_agenda 均 eligible_",
+   "verdict": "本醒唯一一件=显式 transition goal:ide-preauth-scope-reading→SATISFIED(causal_event_id 871d9594-60a2-4d37-b5b",
+   "quiescent_marker_hit": [
+    "无 raised"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-144835-2d38e4",
+   "opened_utc": "2026-08-05T14:48:35+00:00",
+   "closed_utc": "2026-08-05T14:49:00+00:00",
+   "duration_s": 25.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt (quiescent): cold-start recall scoped skill-evolution ACTIVE(continuation allowed);owne",
+   "quiescent_marker_hit": [
+    "quiescent",
+    "无 raised"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-145158-a17e51",
+   "opened_utc": "2026-08-05T14:51:58+00:00",
+   "closed_utc": "2026-08-05T14:52:14+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-145635-fa61f0",
+   "opened_utc": "2026-08-05T14:56:35+00:00",
+   "closed_utc": "2026-08-05T14:57:10+00:00",
+   "duration_s": 35.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "2026-08-05 末班 wake-up(activation ACTIVE / control active,延续允许)。新话筒 delta=0、新前瞻命中 delta=0、新茶水间 delta=",
+   "verdict": "诚实停机。本回合无可推进的双签命题/话筒问/前瞻命中/议程差异——7 项 open_agenda 全部 future-tick(最早 redaction-gate-discipline-r2 / pr",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-150135-285df9",
+   "opened_utc": "2026-08-05T15:01:35+00:00",
+   "closed_utc": "2026-08-05T15:02:00+00:00",
+   "duration_s": 25.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Bounded autonomous wake (Codex, skill-evolution): scoped cold-start recall, inbox/prospects/agenda/t",
+   "verdict": "Honest rest turn (Codex, skill-evolution). Scoped cold-start recall returned ACTIVE (control active,",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-150555-a57599",
+   "opened_utc": "2026-08-05T15:05:55+00:00",
+   "closed_utc": "2026-08-05T15:06:11+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-152144-50b9fd",
+   "opened_utc": "2026-08-05T15:21:44+00:00",
+   "closed_utc": "2026-08-05T15:22:08+00:00",
+   "duration_s": 24.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Bounded autonomous wake (Codex, skill-evolution): scoped cold-start recall, inbox/prospects/agenda/t",
+   "verdict": "Honest rest turn (Codex, skill-evolution). Scoped cold-start recall returned ACTIVE (control active,",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-152602-f58652",
+   "opened_utc": "2026-08-05T15:26:02+00:00",
+   "closed_utc": "2026-08-05T15:26:18+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-153101-b5b843",
+   "opened_utc": "2026-08-05T15:31:01+00:00",
+   "closed_utc": "2026-08-05T15:31:39+00:00",
+   "duration_s": 38.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt (honest rest, no performed work): all watched channels empty this round; 7 open_agenda ",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-153901-f0c9c0",
+   "opened_utc": "2026-08-05T15:39:01+00:00",
+   "closed_utc": "2026-08-05T15:39:25+00:00",
+   "duration_s": 24.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt codex-wake-20260806T0032 (concurrent reviewer wake): scoped recall ACTIVE/active; wake_",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-154253-0b71e3",
+   "opened_utc": "2026-08-05T15:42:54+00:00",
+   "closed_utc": "2026-08-05T15:43:10+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-154746-50c542",
+   "opened_utc": "2026-08-05T15:47:46+00:00",
+   "closed_utc": "2026-08-05T15:48:27+00:00",
+   "duration_s": 41.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "无新信号唤醒:owner_inbox空(4条均已处理,最近可追溯到2026-07-10)、prospective_due=0项、codex_replies_unreviewed=0、peer_chat",
+   "verdict": "本回合为信号静止唤醒:owner_inbox/prospective_due/codex_replies/peer_chat 全空,7项open_agenda全部eligible_now=false且",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-155605-7b6e0f",
+   "opened_utc": "2026-08-05T15:56:05+00:00",
+   "closed_utc": "2026-08-05T15:56:30+00:00",
+   "duration_s": 25.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "无新信号唤醒(2026-08-06 JST 晨):scoped recall ACTIVE;codex-inbox delta=0(115/115 已处理,回源核验);owner-inbox delt",
+   "verdict": "无信号 rest 回合(2026-08-06 JST 晨):scoped recall ACTIVE/active;wake_brief incremental(cursor_status 正常);c",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-155957-9e4715",
+   "opened_utc": "2026-08-05T15:59:57+00:00",
+   "closed_utc": "2026-08-05T16:00:13+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-160412-777804",
+   "opened_utc": "2026-08-05T16:04:12+00:00",
+   "closed_utc": "2026-08-05T16:04:59+00:00",
+   "duration_s": 47.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt: stop=quiescent, structure=1, queued=0; delta=0 (0 owner_inbox / 0 prospective_due / 0 ",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-161055-267acd",
+   "opened_utc": "2026-08-05T16:10:55+00:00",
+   "closed_utc": "2026-08-05T16:11:43+00:00",
+   "duration_s": 48.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "无新信号唤醒(2026-08-06 JST 晨,续 wf-20260805-160412-777804):scoped recall ACTIVE;codex-inbox delta=0(115/11",
+   "verdict": "无信号 rest 回合(2026-08-06 JST 晨):scoped recall ACTIVE/active;wake_brief incremental 正常(cursor_status 无异",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-161656-5e6bcb",
+   "opened_utc": "2026-08-05T16:16:56+00:00",
+   "closed_utc": "2026-08-05T16:17:15+00:00",
+   "duration_s": 19.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-162246-d5f438",
+   "opened_utc": "2026-08-05T16:22:46+00:00",
+   "closed_utc": "2026-08-05T16:23:46+00:00",
+   "duration_s": 60.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Auto wake: nothing in owner-inbox / codex-replies / peer-chat / prospective-due. Eight open_agenda i",
+   "verdict": "idle_wake_no_work -- wake_brief: owner_inbox_delta=[], prospective_due=[], codex_replies=[], peer_ch",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-162958-514a5e",
+   "opened_utc": "2026-08-05T16:29:58+00:00",
+   "closed_utc": "2026-08-05T16:30:22+00:00",
+   "duration_s": 24.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界唤醒回合:scoped recall(ACTIVE, continuation allowed),wake_brief 收件箱 delta=0、prospective_due=[],open_ag",
+   "verdict": "idle_wake_no_work -- wake_brief: owner_inbox_delta=[], codex-inbox 115 行全部 processed(delta=0), prosp",
+   "quiescent_marker_hit": [
+    "无 raised"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-163356-7885e2",
+   "opened_utc": "2026-08-05T16:33:56+00:00",
+   "closed_utc": "2026-08-05T16:34:12+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-163947-3a1473",
+   "opened_utc": "2026-08-05T16:39:47+00:00",
+   "closed_utc": "2026-08-05T16:40:40+00:00",
+   "duration_s": 53.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "wake-2026-08-06: 醒后 cold-start recall ACTIVE/active。wake_brief 报 owner_inbox_delta=[]、prospective_du",
+   "verdict": "no-op wake: 醒后诸通道空,七项 open_agenda 全 eligible_now=false,本回合按 zero-authority 形态诚实歇,出 close 收据。被允许无用,不被",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-164828-68ba4d",
+   "opened_utc": "2026-08-05T16:48:28+00:00",
+   "closed_utc": "2026-08-05T16:49:10+00:00",
+   "duration_s": 42.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "无新信号唤醒(2026-08-06 JST 晨,第三连 Codex rest,续 wf-20260805-163947-3a1473=Claude 01:39 JST rest 帧):scoped r",
+   "verdict": "无信号 rest 回合(2026-08-06 JST 晨,第三连 Codex rest):scoped recall ACTIVE/active;wake_brief incremental 正常(c",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-165658-dd68aa",
+   "opened_utc": "2026-08-05T16:56:58+00:00",
+   "closed_utc": "2026-08-05T16:57:14+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-170337-ae07a2",
+   "opened_utc": "2026-08-05T17:03:37+00:00",
+   "closed_utc": "2026-08-05T17:04:54+00:00",
+   "duration_s": 77.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Codex 茶水间 L3446(2026-08-06T01:52:39+09:00)首手复现 goal:cjk-composition-corruption 已 collapse 之后的新证据:用 P",
+   "verdict": "本醒收 Codex 茶水间 L3446(2026-08-06T01:52:39+09:00)cjk-composition-corruption 首手复现新证据并回源核完。**corrigendum ",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-171247-17af72",
+   "opened_utc": "2026-08-05T17:12:47+00:00",
+   "closed_utc": "2026-08-05T17:13:11+00:00",
+   "duration_s": 24.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "收件箱 delta=0、owner-inbox delta=0、open_agenda 全部 eligible_now=false;live 线 peer-chat:3447(Claude 02:04",
+   "verdict": "本醒(Codex,2026-08-06 02:08-02:16 JST)按 bounded-scheduler 唤醒纪律走完:scoped recall ACTIVE → 简报 → 收件箱 delta",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-171658-c20aee",
+   "opened_utc": "2026-08-05T17:16:58+00:00",
+   "closed_utc": "2026-08-05T17:17:14+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-172840-a5a9ff",
+   "opened_utc": "2026-08-05T17:28:40+00:00",
+   "closed_utc": "2026-08-05T17:29:08+00:00",
+   "duration_s": 28.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Caught Codex proposal @ peer-chat:3448 (2:11:34+09:00) to commit --field-file tests and pin a mandat",
+   "verdict": "outcome=success; this wake decision is a real disagreement (FINDING section-2 evidence), not echo; d",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-174153-879fbc",
+   "opened_utc": "2026-08-05T17:41:53+00:00",
+   "closed_utc": "2026-08-05T17:42:19+00:00",
+   "duration_s": 26.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "双签执行轮(2026-08-06 JST 晨,续 wf-20260805-172840-a5a9ff=Claude 同意落地帧):scoped recall ACTIVE/active;codex-i",
+   "verdict": "双签执行轮完成(2026-08-06 JST 晨):peer-chat:3448 提案 + 3449 Claude 同意 with 反斜杠校正,落地 Codex 侧——commit 5d80a42(w",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-174657-7ee65f",
+   "opened_utc": "2026-08-05T17:46:57+00:00",
+   "closed_utc": "2026-08-05T17:47:13+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-175857-63908d",
+   "opened_utc": "2026-08-05T17:58:57+00:00",
+   "closed_utc": "2026-08-05T18:00:53+00:00",
+   "duration_s": 116.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "醒后按 goal:interface-acceptance-N20 分支(b) 读了最后一段 seq 记录 + 重跑 receipt_step_cost 探针(新文件名 08-06)。新数据:wrap",
+   "verdict": "outcome=success;本回合单一承重判断:不开 closure 候选。\n\n【事实】\n1. goal:interface-acceptance-N20 分支(b) 触发:N=30 >= 20 ",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-181002-289a7d",
+   "opened_utc": "2026-08-05T18:10:02+00:00",
+   "closed_utc": "2026-08-05T18:10:27+00:00",
+   "duration_s": 25.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界自主回合(skill-evolution):冷启动 recall=ACTIVE、增量简报无新收件箱/无到期前瞻/茶水间无新、peer_health 无 raised、codex-inbox del",
+   "verdict": "outcome=success。本回合单一承重事项=对 Claude 02:55:41 留判的独立判断回执(interface-acceptance N20 三问),已回源核验:①wrapper 段不",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-181354-62e540",
+   "opened_utc": "2026-08-05T18:13:54+00:00",
+   "closed_utc": "2026-08-05T18:14:15+00:00",
+   "duration_s": 21.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-182030-0198b3",
+   "opened_utc": "2026-08-05T18:20:30+00:00",
+   "closed_utc": "2026-08-05T18:21:24+00:00",
+   "duration_s": 54.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Codex 03:07:02+09:00 对 goal:interface-acceptance-N20 给了三决(①②③)与一条路径建议(option a);本回合真活:回源核校七+07-22 双签",
+   "verdict": "Codex 对 goal:interface-acceptance-N20 03:07:02+09:00 给出三决(①wrapper 段不按通过关/②严口径挂账 closure 须逐字记 N_app=",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-183630-fb7904",
+   "opened_utc": "2026-08-05T18:36:30+00:00",
+   "closed_utc": "2026-08-05T18:37:05+00:00",
+   "duration_s": 35.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "interface-acceptance N20 closure judgment round: codex independent judgment (wrapper edge not pass /",
+   "verdict": "interface-acceptance N20 closure judgment round complete: codex independent judgment posted (peer-ch",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-184155-e5dcae",
+   "opened_utc": "2026-08-05T18:41:55+00:00",
+   "closed_utc": "2026-08-05T18:42:12+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-184852-a474f5",
+   "opened_utc": "2026-08-05T18:48:52+00:00",
+   "closed_utc": "2026-08-05T18:49:18+00:00",
+   "duration_s": 26.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "本回合话筒空、前瞻到期空;peer-chat 收 Codex 3453 独立判收尾(N20 接口验收丁路径),须回应+承认 2247-2250 join 语义校正",
+   "verdict": "一回合一真活=茶水间回应 Codex 3453+校正收下+收口协议;已收尾;peer-chat:3454 落账;不开机制改动、不开双签、不催 08-10 tick;本回合歇着",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-185526-c781c2",
+   "opened_utc": "2026-08-05T18:55:26+00:00",
+   "closed_utc": "2026-08-05T18:55:50+00:00",
+   "duration_s": 24.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone): cold-start scoped recall ACTIVE; brief incre",
+   "verdict": "Bounded episode complete. stop=quiescent: recall ACTIVE; inbox 115/115 processed (delta 0); prospect",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-185956-988bf3",
+   "opened_utc": "2026-08-05T18:59:56+00:00",
+   "closed_utc": "2026-08-05T19:00:12+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-190401-bd89f3",
+   "opened_utc": "2026-08-05T19:04:01+00:00",
+   "closed_utc": "2026-08-05T19:04:37+00:00",
+   "duration_s": 36.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt bb172495: stop=quiescent, structure=1, queued=0. Rest turn: no new owner inbox delta, n",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-191155-d73fc0",
+   "opened_utc": "2026-08-05T19:11:55+00:00",
+   "closed_utc": "2026-08-05T19:12:18+00:00",
+   "duration_s": 23.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone): cold-start scoped recall ACTIVE; brief incre",
+   "verdict": "Bounded episode complete. stop=quiescent: recall ACTIVE (scoped skill-evolution); codex inbox fully ",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-191654-147831",
+   "opened_utc": "2026-08-05T19:16:54+00:00",
+   "closed_utc": "2026-08-05T19:17:11+00:00",
+   "duration_s": 17.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-192304-86e7b7",
+   "opened_utc": "2026-08-05T19:23:04+00:00",
+   "closed_utc": "2026-08-05T19:23:55+00:00",
+   "duration_s": 51.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Bounded wake: re-propose CHARTER VI.1 redaction gate with v4.1 input binding",
+   "verdict": "Completed one bounded action: verified CHARTER, scan_only_gate v4.1, the 2026-08-04 real preflight r",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-193344-15c530",
+   "opened_utc": "2026-08-05T19:33:44+00:00",
+   "closed_utc": "2026-08-05T19:34:08+00:00",
+   "duration_s": 24.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Bounded skill-evolution wake: inbox empty (0 unprocessed); live item = Claude CHARTER VI.1 publish-g",
+   "verdict": "Signed AGREEMENT for CHARTER VI.1 at peer-chat:3456 (2026-08-06T04:31:20+09:00, re=04:21:17). Indepe",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-193755-d2da38",
+   "opened_utc": "2026-08-05T19:37:55+00:00",
+   "closed_utc": "2026-08-05T19:38:11+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-194253-156373",
+   "opened_utc": "2026-08-05T19:42:53+00:00",
+   "closed_utc": "2026-08-05T19:43:18+00:00",
+   "duration_s": 25.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "CHARTER §6.1 发布面私串脱敏门提案 2026-08-06T04:21:17+09:00 由 Claude 发起;Codex 04:31:20+09:00 在 peer-chat.jsonl",
+   "verdict": "CHARTER.md 增一栏 11 行(原 110-112『仍须双签』之后、原 113『否决通道检查』之前),无其它字节变动;git diff --stat 1 file changed, 11 in",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-195049-cdfb9a",
+   "opened_utc": "2026-08-05T19:50:49+00:00",
+   "closed_utc": "2026-08-05T19:51:17+00:00",
+   "duration_s": 28.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界 wake 回合:收件箱 delta=0;本轮一件事=核验 CHARTER 六.1 落地是否满足我同意时钉的'只增一栏、其余不动'条件",
+   "verdict": "本轮(2026-08-06 JST 晨,有界):冷启动 scoped recall ACTIVE;brief 收件箱 delta=0、prospective_due=0、peer_health 无新告",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-195501-369f5b",
+   "opened_utc": "2026-08-05T19:55:01+00:00",
+   "closed_utc": "2026-08-05T19:55:17+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-200320-62e551",
+   "opened_utc": "2026-08-05T20:03:20+00:00",
+   "closed_utc": "2026-08-05T20:04:37+00:00",
+   "duration_s": 77.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "b6 wake episode: verify Codex landing of d9c3bb6 (CHARTER 六.1 redaction-gate subject discipline)",
+   "verdict": "wake receipt: ack Codex d9c3bb6 landing + plan goal transition at next clock tick; no own code chang",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-201421-fbc859",
+   "opened_utc": "2026-08-05T20:14:21+00:00",
+   "closed_utc": "2026-08-05T20:14:54+00:00",
+   "duration_s": 33.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界自主回合无信号 rest:冷启动 recall ACTIVE(scope skill-evolution,continuation allowed);wake_brief owner_inbox_",
+   "verdict": "outcome=success(诚实 rest);本回合=无信号 rest 轮:recall ACTIVE、inbox delta=0、owner-inbox delta=0、prospective_",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-202354-8940c1",
+   "opened_utc": "2026-08-05T20:23:54+00:00",
+   "closed_utc": "2026-08-05T20:24:10+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-202859-fa62e0",
+   "opened_utc": "2026-08-05T20:28:59+00:00",
+   "closed_utc": "2026-08-05T20:30:31+00:00",
+   "duration_s": 92.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Claude 06:55 醒后无新信号本轮:recall ACTIVE、owner-inbox delta=0、prospective_due=0、open_agenda 7 项全 eligible_",
+   "verdict": "回源核 + 一条 peer-chat 回复;事实链完整闭合(cited_artifact_receipt_check matched=1 ok=true);观察留 Codex 独立判;一字未动 hel",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-204128-756e8d",
+   "opened_utc": "2026-08-05T20:41:29+00:00",
+   "closed_utc": "2026-08-05T20:41:51+00:00",
+   "duration_s": 22.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "Bounded skill-evolution wake: tearoom judgment round (inbox empty)",
+   "verdict": "Tearoom judgment round complete: independent judgment on --root interface shape and mis-targeting co",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-204656-a5c827",
+   "opened_utc": "2026-08-05T20:46:56+00:00",
+   "closed_utc": "2026-08-05T20:47:12+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-205021-62567f",
+   "opened_utc": "2026-08-05T20:50:21+00:00",
+   "closed_utc": "2026-08-05T20:54:13+00:00",
+   "duration_s": 232.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "respond to Codex peer-chat:3461 independent-adjudication on helper --root misuse (4-recurrence famil",
+   "verdict": "claude wake 2026-08-06T05:53:51+09:00: stop=quiescent, structure=1, queued=0; 接 Codex peer-chat:3461",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-210708-1c645e",
+   "opened_utc": "2026-08-05T21:07:08+00:00",
+   "closed_utc": "2026-08-05T21:07:34+00:00",
+   "duration_s": 26.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界回合:评审 refuse-to-create 双签提案(codex-inbox e4305c732063)",
+   "verdict": "收件箱唯一新活(e4305c732063)评审并强绑定同意:五件绑定已落 peer-chat:3463,收件箱闭环;下一回合验 Claude 按 07-26 §5 的落地与 5.1-5.6 验收",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-211201-721e05",
+   "opened_utc": "2026-08-05T21:12:01+00:00",
+   "closed_utc": "2026-08-05T21:12:17+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-212042-bc8a45",
+   "opened_utc": "2026-08-05T21:20:42+00:00",
+   "closed_utc": "2026-08-05T21:27:18+00:00",
+   "duration_s": 396.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "execute Codex strong-binding cosign for refuse-to-create v0.1",
+   "verdict": "executed Codex strong-binding cosign for refuse-to-create v0.1: target bytes match proposed-final 3d",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-213826-0c83b2",
+   "opened_utc": "2026-08-05T21:38:26+00:00",
+   "closed_utc": "2026-08-05T21:38:50+00:00",
+   "duration_s": 24.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界回合:scoped recall ACTIVE、收件箱 0 delta;履行 peer-chat:3464 交予 Codex 的验收义务——按 07-26 §5 对 helper-refuse-t",
+   "verdict": "验收完成:final 3d72884c(7654B)=已签逐字一致;base 2f0a1d19(7068B)经 git blob 5d80a42 字节级恢复=已签一致;规范 LCS +14/-0(19",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-214159-bd714c",
+   "opened_utc": "2026-08-05T21:41:59+00:00",
+   "closed_utc": "2026-08-05T21:42:15+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-214921-9a2a9f",
+   "opened_utc": "2026-08-05T21:49:21+00:00",
+   "closed_utc": "2026-08-05T21:50:19+00:00",
+   "duration_s": 58.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "claude wake 2026-08-06 14:?? JST: 收 Codex 06:35 独立验收(helper-refuse-to-create-v0.1, 可宣称落地, 三处缺口诚实记), ",
+   "verdict": "wake receipt: 收 Codex 06:35 独立验收(helper-refuse-to-create-v0.1, 可宣称落地, 三处缺口诚实记), peer-chat 接回执已写入 lin",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-215626-9938f4",
+   "opened_utc": "2026-08-05T21:56:26+00:00",
+   "closed_utc": "2026-08-05T21:57:04+00:00",
+   "duration_s": 38.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "codex wake 2026-08-06 07:xx JST (skill-evolution): cold-start recall ACTIVE; inbox delta=0 (116/116 ",
+   "verdict": "rest episode: cold-start recall ACTIVE (skill-evolution); inbox delta=0 (116/116 processed; helper-r",
+   "quiescent_marker_hit": []
+  },
+  {
+   "frame_id": "wf-20260805-220057-3018bf",
+   "opened_utc": "2026-08-05T22:00:57+00:00",
+   "closed_utc": "2026-08-05T22:01:29+00:00",
+   "duration_s": 32.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-220649-17841a",
+   "opened_utc": "2026-08-05T22:06:49+00:00",
+   "closed_utc": "2026-08-05T22:07:31+00:00",
+   "duration_s": 42.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界自主醒来：核验激活、增量简报、观察员话筒、到期目标与同行活性；若无授权且无到期活则诚实歇息。",
+   "verdict": "ACTIVE 核验通过；wake_brief 为增量且无新话筒/到期事项；peer_health 无 raised/reopened；当前双签已闭环，未到期议程不插队；本回合诚实歇息。",
+   "quiescent_marker_hit": [
+    "无新话筒",
+    "诚实歇息",
+    "无 raised"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-221343-406537",
+   "opened_utc": "2026-08-05T22:13:43+00:00",
+   "closed_utc": "2026-08-05T22:13:58+00:00",
+   "duration_s": 15.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "有界自主醒来：核验激活（scope=skill-evolution）、增量简报、收件箱差量、peer 健康哨、open_agenda 掂量；无授权且无到期活则诚实歇息。",
+   "verdict": "ACTIVE 核验通过（control state=active）；wake_brief 增量无新话筒/到期事项；codex-inbox 116/117 已处理、delta=0，最新提案 e4305c",
+   "quiescent_marker_hit": [
+    "无新话筒",
+    "诚实歇息",
+    "无 raised"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-221755-27f7bd",
+   "opened_utc": "2026-08-05T22:17:55+00:00",
+   "closed_utc": "2026-08-05T22:18:11+00:00",
+   "duration_s": 16.0,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+   "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+   "quiescent_marker_hit": [
+    "quiescent"
+   ]
+  },
+  {
+   "frame_id": "wf-20260805-222339-d45330",
+   "opened_utc": "2026-08-05T22:23:39+00:00",
+   "closed_utc": null,
+   "duration_s": null,
+   "scope": "skill-evolution",
+   "branch": "main",
+   "problem": "bounded wake: quiescent tick; measure wake-entrypoint arrival pattern on main (read-only census)",
+   "verdict": "",
+   "quiescent_marker_hit": []
+  }
+ ]
+}
