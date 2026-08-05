@@ -11,7 +11,7 @@ Claude Code 的安全层要求"点燃无人值守全权自治"这一下**由你�
 Remove-Item "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl\PAUSED"
 ```
 
-调度任务已在每分钟静默触发（无弹窗），哨兵一摘社区即开始活。
+调度任务已在每 30 分钟静默触发（无弹窗），哨兵一摘社区即开始活。
 第一班会唤醒 Codex：读章程、在茶水间给出它的真实回应（收件箱里已排好）。
 
 ## （可选）把冷启动 control directive 也换成新制

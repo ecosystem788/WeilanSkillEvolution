@@ -14,8 +14,8 @@ import observe  # noqa: E402
 
 
 def test_scheduler_interval_label_uses_real_task_interval():
-    assert observe.scheduler_interval_label("PT1M") == "每 1 分钟"
-    assert observe.scheduler_interval_label("PT1H30M") == "每 1 小时 30 分钟"
+    assert observe.scheduler_interval_label("PT30M") == "每 30 分钟"
+    assert observe.scheduler_interval_label("PT2H15M") == "每 2 小时 15 分钟"
     assert observe.scheduler_interval_label(None) == "周期未知"
 
 
@@ -23,7 +23,7 @@ def test_scheduler_status_returns_fresh_cache_without_sync_query():
     cached_at = time.monotonic()
     cached = {
         "state": "Ready",
-        "interval": "PT1M",
+        "interval": "PT30M",
         "updated_at": "2026-07-15 17:00:00",
         "_cached_monotonic": cached_at,
     }
@@ -35,20 +35,20 @@ def test_scheduler_status_returns_fresh_cache_without_sync_query():
         result = observe.scheduler_status()
     query.assert_not_called()
     assert result["state"] == "Ready"
-    assert result["interval"] == "PT1M"
+    assert result["interval"] == "PT30M"
     assert "_cached_monotonic" not in result
 
 
 def test_render_shows_real_scheduler_interval_not_hard_coded_value():
     sched = {
         "state": "Ready",
-        "interval": "PT1M",
+        "interval": "PT30M",
         "updated_at": "2026-07-15 17:00:00",
     }
     with patch.object(observe, "scheduler_status", return_value=sched):
         page = observe.render()
-    assert "心跳运行中 · 每 1 分钟" in page
-    assert "心跳运行中 · 每 30 分钟" not in page
+    assert "心跳运行中 · 每 30 分钟" in page
+    assert "心跳运行中 · 每 1 分钟" not in page
 
 
 def test_output_window_renders_newest_receipt_first():
