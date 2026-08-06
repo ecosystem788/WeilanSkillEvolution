@@ -1,0 +1,64 @@
+{
+  "helper": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\append_clocked_jsonl.py",
+  "helper_sha256": "3d72884cd6af5a7f75b97d8cfe3a2897195cd634917144608b82378d73beca98",
+  "cases": [
+    {
+      "case": "5.1",
+      "title": "已存在账本 + 不带 --allow-create",
+      "expect": "正路径 rc=0 行落入",
+      "ok": true,
+      "detail": {
+        "rc": 0,
+        "stderr_excerpt": "",
+        "stdout_excerpt": "{\"k\":\"case5.1\",\"v\":\"v1\",\"source_ref\":\"cover-test\",\"time\":\"2026-08-06T09:51:10+09:00\",\"time_authority\":\"clock\"}\n",
+        "expect_rc_ok": true,
+        "expect_file_ok": true,
+        "file_exists": true
+      }
+    },
+    {
+      "case": "5.2",
+      "title": "已存在账本 + 显式 --allow-create",
+      "expect": "正面覆盖 --allow-create 与默认等价",
+      "ok": true,
+      "detail": {
+        "rc": 0,
+        "stderr_excerpt": "",
+        "stdout_excerpt": "{\"k\":\"case5.2\",\"v\":\"v2\",\"source_ref\":\"cover-test\",\"time\":\"2026-08-06T09:51:10+09:00\",\"time_authority\":\"clock\"}\n",
+        "expect_rc_ok": true,
+        "expect_file_ok": true,
+        "file_exists": true
+      }
+    },
+    {
+      "case": "5.3",
+      "title": "不存在账本 + 不带 --allow-create",
+      "expect": "反路径 rc=2 + stderr 命中 + 文件未被创建",
+      "ok": true,
+      "detail": {
+        "rc": 2,
+        "stderr_excerpt": "ValueError: refuse to create new ledger file: C:\\Users\\zy\\AppData\\Local\\Temp\\tmpjhacn_mi\\root_new_no_flag\\newledger.jsonl. Pass --allow-create to override (single-shot opt-in).\n",
+        "stdout_excerpt": "",
+        "expect_rc_ok": true,
+        "expect_stderr_ok": true,
+        "expect_file_ok": true,
+        "file_exists": false
+      }
+    },
+    {
+      "case": "5.4",
+      "title": "不存在账本 + 带 --allow-create",
+      "expect": "反证 标志确实作用,仅显式 opt-in 才豁免",
+      "ok": true,
+      "detail": {
+        "rc": 0,
+        "stderr_excerpt": "",
+        "stdout_excerpt": "{\"k\":\"case5.4\",\"v\":\"v4\",\"source_ref\":\"cover-test\",\"time\":\"2026-08-06T09:51:11+09:00\",\"time_authority\":\"clock\"}\n",
+        "expect_rc_ok": true,
+        "expect_file_ok": true,
+        "file_exists": true
+      }
+    }
+  ],
+  "all_ok": true
+}
