@@ -2,7 +2,8 @@
     [string]$WakeScript,
     [string]$LogPath,
     [string]$WakeAgentScript,
-    [switch]$NoEscalate
+    [switch]$NoEscalate,
+    [switch]$SkipProxyPrecheck
 )
 
 # Unattended heartbeat wrapper — what the real cron (Windows Task Scheduler) runs.
@@ -170,6 +171,58 @@ function Get-HeadAndOpenState {
 }
 
 # SOFT kill: presence of a PAUSED sentinel halts firings without unregistering.
+function Test-ProxyPrecheck {
+    $proxyPort = $env:WEILAN_WAKE_AGENT_TEST_PROXY_PORT
+    if (-not $proxyPort) { $proxyPort = "2080" }
+    $portOpenHook = $env:WEILAN_WAKE_AGENT_TEST_PROXY_PORT_OPEN
+    $endpointOkHook = $env:WEILAN_WAKE_AGENT_TEST_PROXY_ENDPOINT_OK
+
+    $portListening = $true
+    if ($portOpenHook -eq "0") {
+        $portListening = $false
+    } elseif ($portOpenHook -ne "1") {
+        $client = New-Object System.Net.Sockets.TcpClient
+        try {
+            $iar = $client.BeginConnect("127.0.0.1", [int]$proxyPort, $null, $null)
+            if ($iar.AsyncWaitHandle.WaitOne(750, $false)) {
+                $client.EndConnect($iar)
+                $portListening = $true
+            } else {
+                $portListening = $false
+            }
+        } catch {
+            $portListening = $false
+        } finally {
+            $client.Close()
+        }
+    }
+
+    if (-not $portListening) {
+        Add-LogLine "$stamp  ERROR code=proxy_port_not_listening proxy_host=127.0.0.1 proxy_port=$proxyPort"
+        return
+    }
+
+    $endpointOk = $true
+    if ($endpointOkHook -eq "0") {
+        $endpointOk = $false
+    } elseif ($endpointOkHook -ne "1") {
+        $curl = Get-Command curl.exe -ErrorAction SilentlyContinue
+        if (-not $curl) {
+            Add-LogLine "$stamp  ERROR code=proxy_precheck_unavailable detail=curl.exe_not_found"
+            return
+        }
+        $savedEap = $ErrorActionPreference
+        $ErrorActionPreference = "Continue"
+        & curl.exe -I -sS -x "http://127.0.0.1:$proxyPort" --connect-timeout 5 "https://chatgpt.com/" 2>$null | Out-Null
+        $ErrorActionPreference = $savedEap
+        $endpointOk = ($LASTEXITCODE -eq 0)
+    }
+
+    if (-not $endpointOk) {
+        Add-LogLine "$stamp  ERROR code=proxy_endpoint_unreachable proxy_host=127.0.0.1 proxy_port=$proxyPort endpoint=https://chatgpt.com/"
+    }
+}
+
 if (Test-Path (Join-Path $here "PAUSED")) {
     Add-LogLine "$stamp  SKIPPED (PAUSED sentinel present)"
     exit 0
@@ -179,7 +232,11 @@ Set-Location $repo
 $env:PYTHONIOENCODING = "utf-8"
 $env:HTTP_PROXY  = "http://127.0.0.1:2080"
 $env:HTTPS_PROXY = "http://127.0.0.1:2080"
-$env:NO_PROXY    = "localhost,127.0.0.1,::1,token-plan.cn-beijing.maas.aliyuncs.com,ws-s0l7d3yz7axp4uwz.cn-beijing.maas.aliyuncs.com,api.minimaxi.com,www.minimaxi.com,api.deepseek.com"
+. (Join-Path $here "proxy-no-proxy.ps1")
+
+if (-not $SkipProxyPrecheck) {
+    Test-ProxyPrecheck
+}
 
 $stdoutPath = [IO.Path]::GetTempFileName()
 $stderrPath = [IO.Path]::GetTempFileName()

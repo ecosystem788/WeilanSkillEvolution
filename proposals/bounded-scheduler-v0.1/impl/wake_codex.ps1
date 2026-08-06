@@ -87,7 +87,7 @@ $env:PYTHONIOENCODING = "utf-8"
 if (-not $env:HTTPS_PROXY) {
     $env:HTTP_PROXY  = "http://127.0.0.1:2080"
     $env:HTTPS_PROXY = "http://127.0.0.1:2080"
-    $env:NO_PROXY    = "localhost,127.0.0.1,::1,token-plan.cn-beijing.maas.aliyuncs.com,ws-s0l7d3yz7axp4uwz.cn-beijing.maas.aliyuncs.com,api.minimaxi.com,www.minimaxi.com,api.deepseek.com"
+    . (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "proxy-no-proxy.ps1")
 }
 
 function Get-Head {
