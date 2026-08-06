@@ -241,7 +241,7 @@ $env:PYTHONIOENCODING = "utf-8"
 if (-not $env:HTTPS_PROXY) {
     $env:HTTP_PROXY = "http://127.0.0.1:2080"
     $env:HTTPS_PROXY = "http://127.0.0.1:2080"
-    $env:NO_PROXY = "localhost,127.0.0.1,::1"
+    $env:NO_PROXY = "localhost,127.0.0.1,::1,token-plan.cn-beijing.maas.aliyuncs.com,ws-s0l7d3yz7axp4uwz.cn-beijing.maas.aliyuncs.com,api.minimaxi.com,www.minimaxi.com,api.deepseek.com"
 }
 
 function Get-Head {
@@ -314,7 +314,7 @@ try {
     } else {
         $wakeText = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String(
             "546w5Zyo6YaS5p2l77yM5omn6KGM6L+Z5LiA5Zue5ZCI55qE6Ieq5Li75bel5L2c44CC54Wn57O757uf5o+Q56S655qE57qq5b6L5p2l44CC"))
-        'claude -p "{0}" --append-system-prompt-file "{1}" --model claude-opus-5 --effort high --dangerously-skip-permissions --output-format json' -f $wakeText, $prompt
+        'claude -p "{0}" --append-system-prompt-file "{1}" --effort high --dangerously-skip-permissions --output-format json' -f $wakeText, $prompt
     }
     # cmd owns byte redirection; PowerShell 5.1 never decodes native output.
     $commandLine = ('"{0}" /d /s /c "{1} 1>"{2}" 2>"{3}""' -f

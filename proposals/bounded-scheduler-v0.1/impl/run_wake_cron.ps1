@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$WakeScript,
     [string]$LogPath,
     [string]$WakeAgentScript,
@@ -42,6 +42,7 @@ if (-not $WakeScript) { $WakeScript = Join-Path $here "wake.py" }
 if (-not $LogPath) { $LogPath = Join-Path $here "wake-cron.log" }
 if (-not $WakeAgentScript) { $WakeAgentScript = Join-Path $here "wake_agent.ps1" }
 $stamp = Get-Date -Format "yyyy-MM-ddTHH:mm:ss"
+$trace = if ($env:WEILAN_WAKE_AGENT_TEST_TRACE) { $env:WEILAN_WAKE_AGENT_TEST_TRACE } else { "C:/Users/zy/.claude/skills/solve-with-weilan/scripts/weilan_trace.py" }
 
 function Add-LogLine([string]$Value) {
     Add-Content -Path $LogPath -Value $Value -Encoding utf8
@@ -131,6 +132,43 @@ function Register-Failure([string]$Stage, [int]$NativeRc, [string]$Stderr, [stri
     }
 }
 
+# Resolve lineage head and whether it is still open (for pre-flight).
+# Mirrors wake_agent.ps1:139; honors test env vars for regression tests.
+function Get-HeadAndOpenState {
+    if ($env:WEILAN_WAKE_AGENT_TEST_ROOT -and $env:WEILAN_WAKE_AGENT_TEST_HEAD) {
+        return [pscustomobject]@{
+            head = $env:WEILAN_WAKE_AGENT_TEST_HEAD
+            is_open = ($env:WEILAN_WAKE_AGENT_TEST_HEAD_OPEN -eq "1")
+        }
+    }
+    $entryEap = $ErrorActionPreference
+    try {
+        # Local EAP=Continue keeps a chatty pre-flight probe from aborting the
+        # wrapper (F3, 2026-08-04): under EAP=Stop a child stderr line turns
+        # `& python ... 2>$null` into NativeCommandError.  Restore immediately;
+        # the catch restores the entry value so Continue cannot leak onward.
+        $ErrorActionPreference = "Continue"
+        $raw = & python $trace lineage-show --workspace $repo --scope skill-evolution 2>$null | Out-String
+        $ErrorActionPreference = $entryEap
+        if ($LASTEXITCODE -ne 0) { return $null }
+        $lineage = $raw | ConvertFrom-Json -ErrorAction Stop
+        $head = [string]$lineage.branches.main.head_frame_id
+        if ([string]::IsNullOrWhiteSpace($head)) { return $null }
+        $ErrorActionPreference = "Continue"
+        $validateRaw = & python $trace validate --frame-id $head --require-closed 2>$null | Out-String
+        $ErrorActionPreference = $entryEap
+        $validateRc = $LASTEXITCODE
+        if ($validateRc -eq 0) { return [pscustomobject]@{ head=$head; is_open=$false } }
+        $validate = $validateRaw | ConvertFrom-Json -ErrorAction Stop
+        $isOpen = @($validate.errors) -contains "frame must be terminal"
+        return [pscustomobject]@{ head=$head; is_open=$isOpen }
+    } catch {
+        $ErrorActionPreference = $entryEap
+        Add-LogLine "$stamp  preflight: head/open-state probe unavailable; wake proceeds without pre-flight"
+        return $null
+    }
+}
+
 # SOFT kill: presence of a PAUSED sentinel halts firings without unregistering.
 if (Test-Path (Join-Path $here "PAUSED")) {
     Add-LogLine "$stamp  SKIPPED (PAUSED sentinel present)"
@@ -141,7 +179,7 @@ Set-Location $repo
 $env:PYTHONIOENCODING = "utf-8"
 $env:HTTP_PROXY  = "http://127.0.0.1:2080"
 $env:HTTPS_PROXY = "http://127.0.0.1:2080"
-$env:NO_PROXY    = "localhost,127.0.0.1,::1"
+$env:NO_PROXY    = "localhost,127.0.0.1,::1,token-plan.cn-beijing.maas.aliyuncs.com,ws-s0l7d3yz7axp4uwz.cn-beijing.maas.aliyuncs.com,api.minimaxi.com,www.minimaxi.com,api.deepseek.com"
 
 $stdoutPath = [IO.Path]::GetTempFileName()
 $stderrPath = [IO.Path]::GetTempFileName()
@@ -153,6 +191,35 @@ try {
     # (live incident 2026-07-14T14:00:58 json_parse on a healthy rc=0 wake).
     # cmd-level redirection is byte-faithful, keeps native stderr away from
     # NativeCommandError under EAP=Stop, and propagates the child's exit code.
+    # --- pre-flight: abandon a stale open lineage head before wake (§9.4) ---
+    # An open head blocks frame_open (§8.2 deadlock). frame-abandon's own gate
+    # enforces silence >= 7200s and >= 3600s floor; pre-flight does not re-derive.
+    $streak = Get-FailureStreak
+    $headState = Get-HeadAndOpenState
+    if ($headState -and $headState.is_open) {
+        $ev = @{ alert_id = "preflight"; consecutive_count = [int]$streak.count;
+                 source_ref = "run_wake_cron:preflight" } | ConvertTo-Json -Compress
+        # Windows PowerShell 5.1 re-quotes native arguments on the command
+        # line.  Escape the JSON quotes with backslashes so the argv parser
+        # turns \" back into " (FORM C, verified by the 2026-08-03 review
+        # probe): the delivered --evidence then parses with json.loads.
+        $evArg = $ev -replace '"','\"'
+        $savedEap = $ErrorActionPreference
+        $ErrorActionPreference = "Continue"
+        & python $trace frame-abandon --frame-id $headState.head `
+            --silence-threshold-seconds 7200 --evidence $evArg `
+            --reason "pre-flight: cron abandoning a stale open lineage head before wake" 2>$null
+        $ErrorActionPreference = $savedEap
+        if ($LASTEXITCODE -ne 0) {
+            # Abandon refused: live round holds head, or raced. Skip this tick
+            # (exit 0 so the failure-streak counter does not advance).
+            Add-LogLine "$stamp  preflight: open head $($headState.head), abandon refused (live or raced); skip wake"
+            exit 0
+        }
+        Add-LogLine "$stamp  preflight: abandoned stale open head $($headState.head) (silence >= 7200s)"
+    }
+    # --- end pre-flight ---
+
     & cmd /c "python `"$WakeScript`" --commit 1>`"$stdoutPath`" 2>`"$stderrPath`""
     $nativeRc = $LASTEXITCODE
     $stdout = Get-Content -Raw -Encoding utf8 $stdoutPath
