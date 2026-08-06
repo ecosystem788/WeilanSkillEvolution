@@ -42,18 +42,23 @@ def test_field_file_preserves_exact_text_and_mixes_with_field(tmp_path: Path) ->
     ledger = "ledger.jsonl"
     for index, intended in enumerate(HAZARDS):
         source = write_field_file(tmp_path, f"field-{index}.txt", intended.encode("utf-8"))
-        rc = HELPER.main(
+        argv = [
+            "--root",
+            str(tmp_path),
+            "--file",
+            ledger,
+        ]
+        if index == 0:
+            argv.append("--allow-create")
+        argv.extend(
             [
-                "--root",
-                str(tmp_path),
-                "--file",
-                ledger,
                 "--field",
                 f"from=test-{index}",
                 "--field-file",
                 f"text={source}",
             ]
         )
+        rc = HELPER.main(argv)
         assert rc == 0
 
     rows = read_rows(tmp_path / ledger)
@@ -96,6 +101,7 @@ def test_field_file_consumption_happens_only_after_success(tmp_path: Path) -> No
                 str(tmp_path),
                 "--file",
                 "ledger.jsonl",
+                "--allow-create",
                 "--field-file",
                 f"text={source}",
                 "--consume-field-file",
@@ -115,6 +121,7 @@ def test_old_field_path_still_works(tmp_path: Path) -> None:
                 str(tmp_path),
                 "--file",
                 "ledger.jsonl",
+                "--allow-create",
                 "--field",
                 "text=old path",
             ]

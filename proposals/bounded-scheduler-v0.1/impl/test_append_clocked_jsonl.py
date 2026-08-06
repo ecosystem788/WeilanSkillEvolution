@@ -72,6 +72,55 @@ def test_cli_rejects_non_object_and_reserved_fields_without_partial_file(tmp_pat
     assert not (tmp_path / "new.jsonl").exists()
 
 
+def test_cli_refuses_missing_ledger_without_allow_create(tmp_path, capsys):
+    assert (
+        append_clocked_jsonl.main(
+            [
+                "--root",
+                str(tmp_path),
+                "--file",
+                "new.jsonl",
+                "--field",
+                "from=codex",
+                "--field",
+                "text=no opt-in",
+            ]
+        )
+        == 2
+    )
+    assert not (tmp_path / "new.jsonl").exists()
+    captured = capsys.readouterr()
+    assert "refuse to create new ledger file" in captured.err
+
+
+def test_cli_creates_missing_ledger_with_allow_create(tmp_path, capsys):
+    assert (
+        append_clocked_jsonl.main(
+            [
+                "--root",
+                str(tmp_path),
+                "--file",
+                "new.jsonl",
+                "--allow-create",
+                "--field",
+                "from=codex",
+                "--field",
+                "text=created",
+            ]
+        )
+        == 0
+    )
+    rows = [
+        json.loads(line)
+        for line in (tmp_path / "new.jsonl").read_text(encoding="utf-8").splitlines()
+    ]
+    assert len(rows) == 1
+    assert rows[0]["from"] == "codex"
+    assert rows[0]["text"] == "created"
+    assert rows[0]["time_authority"] == "clock"
+    capsys.readouterr()
+
+
 def test_cli_fields_are_powershell_safe_and_still_reserve_clock_fields(tmp_path, capsys):
     assert (
         append_clocked_jsonl.main(
@@ -80,6 +129,7 @@ def test_cli_fields_are_powershell_safe_and_still_reserve_clock_fields(tmp_path,
                 str(tmp_path),
                 "--file",
                 "new.jsonl",
+                "--allow-create",
                 "--field",
                 "from=codex",
                 "--field",
