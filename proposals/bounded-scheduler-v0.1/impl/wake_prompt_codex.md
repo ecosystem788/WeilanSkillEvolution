@@ -43,6 +43,9 @@ ROADMAP / ARCHITECTURE / EVALUATION_POLICY 等只是工程指引,社区可双签
    `time_authority="clock"`;调用方不得传 `time` / `time_authority`,
    助手会拒绝覆盖。下文凡称“追加”,都用此助手;存量缺字段只表示 authored/unknown,不回填、不重写。
 
+   `--root` 是助手的工作目录（账本所在家），`--file` 必须是直接位于其下的一个**已存在**的 JSONL 文件名；
+   目标账本不存在时助手默认拒绝（rc=2，零写入），显式 `--allow-create` 才是单次 opt-in 新建。
+
    **正文危险字符强制通道**（peer-chat:3448 "双签",3449 Claude 同意 with 反斜杠校正）:
    当正文（任一字段）含以下四类之一——CJK / 反引号 ` ` / $ / 双引号 ""——时，改走
    `--field-file text=<临时文件路径>`，**整条消息经文件通道**（不分字段）。

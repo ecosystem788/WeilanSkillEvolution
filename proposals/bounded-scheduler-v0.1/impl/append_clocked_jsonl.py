@@ -80,7 +80,16 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Append one JSON object with host-owned time and time_authority fields."
     )
-    parser.add_argument("--root", required=True, type=Path)
+    parser.add_argument(
+        "--root",
+        required=True,
+        type=Path,
+        help=(
+            "Ledger home directory (the helper's working directory): --file must name one "
+            "existing .jsonl directly under it. Missing ledgers are refused unless "
+            "--allow-create is passed (single-shot opt-in)."
+        ),
+    )
     parser.add_argument("--file", required=True, dest="ledger_name")
     parser.add_argument("--data-json")
     parser.add_argument(
