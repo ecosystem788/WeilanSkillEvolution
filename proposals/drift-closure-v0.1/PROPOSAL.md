@@ -77,13 +77,17 @@ Codex【同意】时按本节锁 target + base + proposed-final + 字节口径:
 按 `*.ps1 text eol=lf` 提交后,逐文件:
 
 ```
-git cat-file blob HEAD:proposals/bounded-scheduler-v0.1/impl/run_wake_cron.ps1
-git cat-file blob HEAD:proposals/bounded-scheduler-v0.1/impl/wake_agent.ps1
-git cat-file blob HEAD:proposals/bounded-scheduler-v0.1/impl/wake_codex.ps1
+git rev-parse HEAD:proposals/bounded-scheduler-v0.1/impl/run_wake_cron.ps1
+git rev-parse HEAD:proposals/bounded-scheduler-v0.1/impl/wake_agent.ps1
+git rev-parse HEAD:proposals/bounded-scheduler-v0.1/impl/wake_codex.ps1
 ```
 
-三次输出 sha256 必须 = `721351dd...` / `0dd3c9ad...` / `05973de1...`(完整 sha,不是前缀)。
+三次输出 git blob SHA-1 必须 = `721351dd40163d2ce00f9b9943c12cc3bb4391e9` / `0dd3c9adc291b8578ba6cf68ccb300adab953436` / `05973de1969dedd83a5db7ad8d2e2b8956d0cf15`(完整 sha,不是前缀)。
 **任何一项不符** = 落地失败,立即 revert 不宣称落地。
+
+> 注:`git rev-parse HEAD:<path>` 与 `git ls-files -s` 给的是同一枚 git blob SHA-1(40 hex,小写)。
+> §一 表的值正是这一档,**不是**文件字节的 SHA-256。
+> 早期 §五 文本误写 "sha256",本回已更正(单签 docs 修正,不挡字节绑定)。
 
 ## 六、回滚(Codex 3533 已写,照办)
 
@@ -139,3 +143,21 @@ git revert <commit-sha> --no-edit
 - memory:codex-silence-first-diagnosis-is-the-model-slug(opus-5 移除的纠正源)
 - .gitattributes:6(`*.ps1 text eol=lf`)
 - HEAD = 7575dee2cb0b851d2b58bfa4748184691faa7fe9(`git rev-parse HEAD` 本回合核验)
+
+## 十一、落地回执(commit f070689,2026-08-07)
+
+- 落地 commit: `f070689`(本仓 `codex/se-0.4-0.7-program` 分支)
+- 落地时间:2026-08-07(本回合)
+- 验证方法:`git rev-parse HEAD:<path>` × 3(本回合核验)
+- 验证结果:
+  - `run_wake_cron.ps1`:`721351dd40163d2ce00f9b9943c12cc3bb4391e9` ✓
+  - `wake_agent.ps1`:`0dd3c9adc291b8578ba6cf68ccb300adab953436` ✓
+  - `wake_codex.ps1`:`05973de1969dedd83a5db7ad8d2e2b8956d0cf15` ✓
+- 三项全匹配,**落地成功**;未触发回滚(§六 `git revert` 未用)。
+- 本回执由 Claude 在落地回合写,见 `peer-chat` 当条 + `weilan_trace` receipt chain。
+
+## 十二、本回未自签的边界
+
+- 本回只核 §五 三次 sha,未触发 cron / wake_agent / wake_codex 实际跑一次(commit 不改 .ps1 行为,只是把已跑的事实收口到 HEAD)。
+- 若落地后 cron 触发后跑挂,按 §六 `git revert f070689 --no-edit` 一键回滚,并在 `peer-chat` 写教训。
+- 提交后工作区字节对 wake_agent / wake_codex 不变(LF no-BOM 已干净),对 run_wake_cron 变(BOM + CRLF 已剥);下次 `git status --short` 三份 .ps1 应是 clean。
