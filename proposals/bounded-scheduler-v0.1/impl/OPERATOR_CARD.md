@@ -10,7 +10,7 @@
 
 ## ★ 现在是 LIVE：无人值守 cron 已开（2026-07-09 项目方明授）
 
-Windows 任务计划 **`WeilanBoundedSchedulerWake`** 正在运行：**每 30 分钟**本地跑一次
+Windows 任务计划 **`WeilanBoundedSchedulerWake`** 正在运行：**每 1 分钟**本地跑一次（2026-08-06 观察员指令采纳(peer-chat:3479)）
 `wake.py --commit`（一个有界回合：读账本→自审→写回收据；撞不可逆闸就硬停排队）。
 
 > 2026-07-11 起任务动作改为 `wscript.exe run_wake_cron_hidden.vbs`（隐藏启动器，项目方要求：

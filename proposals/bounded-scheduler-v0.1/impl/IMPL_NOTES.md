@@ -80,10 +80,11 @@ of mixed queues where the kernel never crosses a gate.
   being shown the safer bounded-watched alternative. This is the DESIGN §8 bootstrap
   button; the owner pressed it.
 - Mechanism: Windows Task Scheduler task **`WeilanBoundedSchedulerWake`**, interval
-  `PT30M`, duration `P3650D`, single-instance (`IgnoreNew`), 10-min execution limit,
+  `PT1M`（2026-08-06 观察员指令采纳(peer-chat:3479)：PT1M/PT1H 为设计节奏）, duration
+  `P3650D`, single-instance (`IgnoreNew`), PT1H execution limit,
   runs when logged on (no stored creds/admin). Fires `run_wake_cron.ps1` →
   `wake.py --commit`. Verified: first fire `LastTaskResult=0`, committed real frames,
-  next run steady at +30 min. Autonomy-open event on ledger frame `wf-20260709-013032-1de36d`.
+  next run steady at +1 min. Autonomy-open event on ledger frame `wf-20260709-013032-1de36d`.
 - Kill switches: HARD `Unregister-ScheduledTask -TaskName WeilanBoundedSchedulerWake
   -Confirm:$false`; SOFT `impl/PAUSED` sentinel file. Structural kill still holds
   (agent can't self-persist; each fire exits). Observability: `impl/wake-cron.log`,
