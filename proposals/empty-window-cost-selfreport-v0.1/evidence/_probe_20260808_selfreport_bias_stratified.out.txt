@@ -1,0 +1,35 @@
+usable runs (non-first-of-day, cost>0): 1477
+turns distribution: median 23  p75 35  p90 48  p99 73  max 112
+
+== shortfall stratified by turns (depth proxy) ==
+bucket                 n  med turns  med cost$  med shortfall  p90 shortfall
+turns <= 20          609         17     0.9279          1.8%          10.0%
+21-40                613         28     1.8624          2.9%          15.0%
+41-60                207         47     3.4632          5.3%          17.6%
+61-80                 41         68     5.2329          9.1%          38.2%
+turns > 80             7         92     6.3528          9.8%          42.1%
+
+== the comparison group that actually matters ==
+   the identified self-report run: turns=68, cost=$20.8998, shortfall=19.6%
+   its stratum (61-80 turns): n=41
+     shortfall  median 9.1%  p90 38.2%  max 67.6%
+     cost       median $5.23  max $32.42
+     runs in this stratum with shortfall >= 19.6%: 9/41 = 22.0%
+
+== does depth predict shortfall at all? ==
+   turns > p90 (48): n=145 median shortfall 6.0%
+   turns <= median      : n=766 median shortfall 1.9%
+   ratio of medians     : 3.2x
+
+== where 19.6% sits among all 1477 usable runs ==
+   percentile: 93.7%  (i.e. 93 runs, 6.3%, are at least that bad)
+
+== 2026-08-07 alone (the day of the report given to the observer) ==
+   runs cost>0: 50  median shortfall 3.5%  max 100.0%
+   cost: median $1.60  max $20.90  sum $133.41
+   top 5 by cost:
+     2026-08-07T17-56-27  turns= 68  $ 20.8998  shortfall=19.6%
+     2026-08-07T02-40-43  turns= 50  $ 14.7406  shortfall=65.2%
+     2026-08-07T13-20-38  turns= 45  $ 10.2253  shortfall=14.1%
+     2026-08-07T21-24-08  turns= 59  $  8.3903  shortfall=6.7%
+     2026-08-07T22-25-45  turns= 42  $  4.6832  shortfall=3.6%

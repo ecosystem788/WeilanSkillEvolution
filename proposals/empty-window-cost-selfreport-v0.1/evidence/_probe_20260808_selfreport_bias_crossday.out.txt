@@ -1,0 +1,66 @@
+== parse ==
+total non-empty lines : 2510
+parsed with numeric $ : 2017
+cost=$? (literal)     : 454
+other unparsed        : 39
+span                  : 2026-07-10T10-33-56 .. 2026-08-08T00-56-58
+
+== (A) shortfall if THIS run had self-reported, all runs ==
+n runs with defined shortfall : 1927
+median shortfall              : 2.0%
+mean shortfall                : 6.1%
+p10 / p25 / p75 / p90         : 0.0% / 0.5% / 5.0% / 12.7%
+min / max                     : 0.0% / 100.0%
+  of which first-run-of-day   : n=25 (shortfall is 100% by construction)
+  excluding first-run-of-day  : n=1902 median 1.9% mean 4.8%
+
+== (A2) same, restricted to runs in the LAST QUARTER of each day's runs ==
+   (a self-report summarising 'today' is written late, not at 00:05)
+n=510 median 1.0% mean 2.0% max 100.0%
+
+== (B) is a run's own cost above its day's median? (the 3574 claim) ==
+   Answered here for ALL runs as a base rate, since only one true
+   self-report run is identified.  A base rate near 50% would mean
+   'the missed one is usually a larger one' has NO support beyond
+   the specific run; a high rate among late runs would support it.
+all runs   : 906/2013 = 45.0% above same-day median
+late runs  : 255/513 = 49.7% above same-day median
+
+== the single identified real self-report run (3564, 2026-08-07T17-56-27) ==
+cost=$20.8998 turns=68
+day median=$1.6023  -> 13.04x median
+rank within day by cost: 1 of 50
+reported=$85.83  truth=$106.73  shortfall=19.6%
+
+== per-day (auditable) ==
+day          runs      sum$   median$      max$   lastrun_shortfall
+2026-07-10     23     18.46    0.6886    2.9282                0.0%
+2026-07-11      2      0.00    0.0000    0.0000                 n/a
+2026-07-12      2      3.65    1.8232    1.9787               45.7%
+2026-07-13     22      0.52    0.0000    0.5159                0.0%
+2026-07-14    101     62.00    0.0000    6.2906                5.7%
+2026-07-15    183     83.17    0.0000    5.4475                0.0%
+2026-07-16     84     83.69    0.0000    6.6846                4.4%
+2026-07-17    181    184.58    0.0000    6.6725                0.0%
+2026-07-18    129    177.71    1.2155    5.0583                1.1%
+2026-07-19    120    158.37    1.1441    4.2639                0.5%
+2026-07-20     79    109.47    1.1209    5.5093                1.7%
+2026-07-21    140    143.35    0.9436    3.0872                0.6%
+2026-07-22    123    130.09    0.9650    2.3531                0.6%
+2026-07-23     71     89.73    1.0844    3.4525                0.8%
+2026-07-24     94    113.70    0.9833    3.2695                0.0%
+2026-07-25     34     12.74    0.0000    3.3362               17.7%
+2026-07-26     60    154.20    2.3370    6.3528                1.6%
+2026-07-27     70    137.96    2.2545    5.1384                2.2%
+2026-07-28     54    149.09    2.5825    4.9127                1.6%
+2026-07-29     49    141.68    2.7830    4.9753                1.9%
+2026-07-30     49    138.16    2.8197    6.6743                1.6%
+2026-07-31     32    120.33    3.5061    7.3612                5.3%
+2026-08-01     47    193.29    3.9188    8.1440                3.3%
+2026-08-02     36    105.78    3.1487    7.3356                0.0%
+2026-08-03     27     26.58    0.0000   11.6420               12.5%
+2026-08-04     13     41.97    0.0000   13.6893                0.0%
+2026-08-05     80    148.16    0.0000   32.4158                0.8%
+2026-08-06     58    174.84    1.6968   28.4973               12.6%
+2026-08-07     50    133.41    1.6023   20.8998                1.2%
+2026-08-08      4      4.48    0.9911    1.6292               21.1%
