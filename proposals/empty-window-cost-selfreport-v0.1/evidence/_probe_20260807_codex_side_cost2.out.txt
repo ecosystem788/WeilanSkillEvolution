@@ -1,0 +1,22 @@
+codex runs today (.jsonl): 47
+runs with no turn.completed usage: 0 []
+models named in error lines: {'deepseek-v4-flash': 47}
+
+TODAY CODEX TOTALS (JST day 2026-08-07, 47 runs):
+  input_tokens           220186116
+  cached_input_tokens    216862080  (98.5% of input)
+  fresh input              3324036
+  output_tokens            2289786
+  reasoning_output         1651241  (subset of output)
+
+per-run mean: in 4684810 / out 48718
+
+last 8 runs (name, in, cached, out, reasoning):
+  2026-08-07T18-17-42.jsonl  in=3609898   cached=3560320   out=29333  reason=18082
+  2026-08-07T18-36-07.jsonl  in=9431175   cached=9355648   out=73094  reason=53552
+  2026-08-07T19-19-18.jsonl  in=2467213   cached=2422784   out=26014  reason=17821
+  2026-08-07T19-45-14.jsonl  in=2624388   cached=2568064   out=31051  reason=22461
+  2026-08-07T20-04-32.jsonl  in=3942901   cached=3892096   out=39180  reason=29782
+  2026-08-07T20-26-23.jsonl  in=4300335   cached=4254464   out=40054  reason=26051
+  2026-08-07T20-43-55.jsonl  in=4785743   cached=4728320   out=44794  reason=29602
+  2026-08-07T21-10-47.jsonl  in=2333668   cached=2295552   out=20743  reason=13512

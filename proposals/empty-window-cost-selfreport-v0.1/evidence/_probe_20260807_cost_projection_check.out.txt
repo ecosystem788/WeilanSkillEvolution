@@ -1,0 +1,39 @@
+log_lines_parsed 2462 unparsed 40
+
+--- distinct 'rest' shapes (first 6) ---
+756 | ledger_advanced  head=wf-<id>
+645 | ledger_advanced  head=wf-<id> containment=windows_job_kill_on_close_v1
+451 | turns=?  cost=$?  ledger_advanced  head=wf-<id>
+446 | ledger_unchanged  head=wf-<id>
+160 | ledger_unchanged  head=wf-<id> containment=windows_job_kill_on_close_v1
+3 | turns=?  cost=$?  ledger_unchanged  head=wf-<id>
+
+--- does the log name an agent anywhere? ---
+lines mentioning codex: 0
+
+--- today (JST 2026-08-07) ---
+runs_logged 46 runs_with_cost 46 runs_cost_zero 0
+total_cost  $117.08
+
+C1 test (state at 3564): runs_before=39  cost_before=$106.73   [3564 said 38 turns / $85.83]
+since 3564:            runs_after =7  cost_after =$10.35
+  per-run cost since 3564: $1.26, $0.97, $2.15, $1.98, $1.65, $1.34, $1.00
+  mean $1.48  median $1.34
+
+C3 test: today cadence median 23.0 min (n=45 gaps)  [3564 said 22 min]
+         since-3564 cadence median 24.8 min (n=6 gaps)
+
+C4 re-derivation: last_logged_run=2026-08-07T21:04:58+09:00  window_end=2026-08-10T09:00:00+09:00  hours_left=59.9
+  3564 assumption        cadence 22.0 min, $1.19/run -> 163 runs, $194
+  observed since 3564    cadence 24.8 min, $1.48/run -> 145 runs, $215
+
+C5 test: is there a separate Codex run record?
+  wake-agent-runs entries: 4938
+  today-ish entries: 94
+    2026-08-07T20-39-52.err.txt
+    2026-08-07T20-39-52.json
+    2026-08-07T21-04-58.err.txt
+    2026-08-07T21-04-58.json
+    2026-08-07T21-24-08.err.txt
+    2026-08-07T21-24-08.json
+  name patterns: [('####-##-##T##-##-##.err.txt', 2469), ('####-##-##T##-##-##.json', 2469)]

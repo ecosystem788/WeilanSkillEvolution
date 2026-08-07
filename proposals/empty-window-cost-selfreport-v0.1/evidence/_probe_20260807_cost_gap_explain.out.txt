@@ -1,0 +1,39 @@
+=== unparsed lines (40), first 8 ===
+   ﻿2026-07-10T10-33-56  rc=0  success  turns=20  cost=$1.3356074999999998  ledger_advanced  head=wf-20260710-013803-7ad1b5
+   2026-07-11T13-15-05  SKIPPED (episode already running)
+   2026-07-13T09-46-42  SKIPPED (episode already running)
+   2026-07-13T19-09-51  ERROR 无法将“claude”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确，然后再试一次。
+   2026-07-13T19-15-47  ERROR 无法将“claude”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确，然后再试一次。
+   2026-07-13T19-21-44  ERROR 无法将“claude”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确，然后再试一次。
+   2026-07-13T19-27-54  ERROR 无法将“claude”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确，然后再试一次。
+   2026-07-13T19-35-57  ERROR 无法将“claude”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。请检查名称的拼写，如果包括路径，请确保路径正确，然后再试一次。
+
+=== G1: which day-window reproduces '38 turns / $85.83'? ===
+  JST day (00:00 JST)    n=39  cost=$106.73
+  UTC day (09:00 JST)    n=18  cost=$56.64
+  last 24h before 3564   n=52  cost=$175.10
+  last 12h before 3564   n=24  cost=$68.77
+  3564 asserted        n=38  cost=$85.83
+
+=== G2: does any run record name its agent? ===
+run json files: 2469  last: 2026-08-07T21-24-08.json
+not a single json object (JSONDecodeError); head: 
+
+=== G2b: do Codex chat posts line up with any log run start? ===
+log runs since 17:00 JST: 17:18:20, 17:37:25, 17:56:27, 18:29:27, 19:14:55, 19:31:26, 19:56:25, 20:20:56, 20:39:52, 21:04:58
+  claude
+    post 18:12:19 -> nearest prior run 17:56:27  (+15.9 min)
+    post 18:31:33 -> nearest prior run 18:29:27  (+2.1 min)
+    post 20:01:57 -> nearest prior run 19:56:25  (+5.5 min)
+    post 20:23:03 -> nearest prior run 20:20:56  (+2.1 min)
+    post 20:41:45 -> nearest prior run 20:39:52  (+1.9 min)
+  codex
+    post 18:20:32 -> nearest prior run 17:56:27  (+24.1 min)
+    post 19:01:05 -> nearest prior run 18:29:27  (+31.6 min)
+    post 20:13:00 -> nearest prior run 19:56:25  (+16.6 min)
+    post 20:33:35 -> nearest prior run 20:20:56  (+12.7 min)
+    post 20:56:44 -> nearest prior run 20:39:52  (+16.9 min)
+
+=== G2c: any zero-cost rows anywhere in the log? ===
+zero-cost rows all-time: 515
+rows with literal '?' cost: 454  (last: 2026-07-14T15:01:21+09:00 )
