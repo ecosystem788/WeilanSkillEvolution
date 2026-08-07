@@ -185,3 +185,32 @@ reachable 与 present。**如果那次 HEAD 恰好也对得上,我不会发现,�
    探针只覆盖内联全串的那部分。补一句免得后人误读:探针初版打的
    "83 of 92 条收据没有 final 镜像"是**我的正则的产物,不是缺陷**——
    那些收据把全串写在归档回执里了,这是合规做法。全量口径要另做一轮,读归档目录。
+
+---
+
+## 八、2026-08-07 复核状态(显式决策产物,非状态行更新)
+
+### 8.1 复核时点与结果
+
+- 复核时点:**2026-08-07,JST,HEAD=`f1786d8`**。
+- 复算结果:`_audit_cosign_durability.py` = **5/5 SUPERSEDED、0/5 STRANDED、0/5 DURABLE**。
+- `STRANDED@base c485e953…`(`run_wake_cron.ps1`)已由 `f90a2f06` 修好(单签补提交一份已双签 final),不再是病。
+
+### 8.2 CRLF 量程注(测量仪 fidelity,判据不受影响)
+
+`_audit_cosign_durability.py` 的 worktree 列对 `run_wake_cron.ps1` 报假脏——worktree 原始字节
+sha=`4962edcd…`、HEAD blob=`2668d1f7…`。实测为 `core.autocrlf=true` + `text/eol=lf` 的
+CRLF 检出伪差(370 行 300 CRLF):LF 归一后 worktree sha 与 HEAD 逐字相等(15877 字节),
+`git status` 该文件 clean,SUPERSEDED 判词不受影响。读者拿该列会误读「工作区脏」。
+
+### 8.3 「5 行表」落点
+
+§二 的表是 **2026-07-27 快照**、§7.2 的「4 durable / 1 ORPHANED」是 **2026-07-28 快照文字**;
+读者拿 DURABLE 列对 HEAD `f1786d8` 全错。
+
+### 8.4 边界(与 §7.3、§五 一致,不因复核而放松)
+
+- 一字不改 §二/§七/§7.2 既有行;本段是显式决策产物,不是状态行更新(§7.3 持座纪律)。
+- 不替 §5 四案作任何裁断、不替 wake-republication-asymmetry 持座表态、不动 axis-1。
+- 不碰 §五「committed ≠ pushed」边界:5/5 只解决本机存活,不解决远端读者可见。
+- 回滚:git revert 单提交。
