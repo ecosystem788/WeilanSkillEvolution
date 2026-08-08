@@ -8,10 +8,17 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 import uuid
 from datetime import datetime
 from pathlib import Path
 from typing import Iterable
+
+
+IMPL_DIR = Path(__file__).resolve().parents[1] / "bounded-scheduler-v0.1" / "impl"
+if str(IMPL_DIR) not in sys.path:
+    sys.path.insert(0, str(IMPL_DIR))
+from append_clocked_jsonl import append_clocked_row
 
 
 OPEN_EVENTS = {"raised", "reopened"}
@@ -86,11 +93,15 @@ def check_peer_liveness(
             _append_jsonl(alerts_path, event)
             appended.append(event)
 
-    if not pending or silence_hours <= threshold_hours:
+    if silence_hours <= threshold_hours:
         return appended
 
-    assert current_sig is not None
-    key = f"{peer}:{current_sig}"
+    if not pending:
+        key = f"{peer}:silence"
+        current_sig = None
+    else:
+        assert current_sig is not None
+        key = f"{peer}:{current_sig}"
     previous = latest.get(key)
     if previous and previous.get("event") in OPEN_EVENTS:
         return appended
@@ -111,6 +122,7 @@ def check_peer_liveness(
                 "signature": current_sig,
                 "source_ref": backlog_source_ref,
             },
+            "authority": "none",
             "note": "Peer may be stuck; this is a heuristic suspicion requiring owner verification.",
         }
     )
@@ -152,3 +164,61 @@ def append_hold(
     }
     _append_jsonl(hold_path, row)
     return row
+
+
+def export_sentinel_alerts(
+    *,
+    appended_alerts,
+    alerts_path,
+    impl_dir,
+    now,
+):
+    to_export = []
+    if appended_alerts:
+        to_export = [
+            a for a in appended_alerts
+            if a.get("event") in OPEN_EVENTS and not a.get("exported", False)
+        ]
+    peer_chat_path = impl_dir / "peer-chat.jsonl"
+    md_path = impl_dir / "wake-deadlock-alert.md"
+    exported_records = []
+    peer_chat_path.parent.mkdir(parents=True, exist_ok=True)
+    for alert in to_export:
+        ik = alert.get("incident_key", "")
+        si = alert.get("silence", {})
+        sh = si.get("silence_hours", "?")
+        bc = alert.get("backlog", {}).get("count", 0)
+        ev = alert.get("event", "?")
+        text = "[sentinel] {} {}: silence={}h backlog={} see wake-deadlock-alert.md + peer-health-alerts.jsonl".format(
+            ev, ik, sh, bc
+        )
+        entry = {
+            "from": "sentinel",
+            "text": text,
+            "authority": "none",
+        }
+        stamped = append_clocked_row(
+            root=impl_dir,
+            ledger_name="peer-chat.jsonl",
+            payload=entry,
+            now=now,
+        )
+        exported_records.append(stamped)
+        alert["exported"] = True
+    all_rows = _read_jsonl(alerts_path)
+    active = [r for r in all_rows if r.get("event") in OPEN_EVENTS]
+    lines = ["# Active Sentinel Alerts", ""]
+    if active:
+        for a in active:
+            key = a.get("incident_key", "?")
+            evt = a.get("event", "?")
+            sh = a.get("silence", {}).get("silence_hours", "?")
+            aid = a.get("id", "?")
+            lines.append("- **{}** ({}): silence={}h, id={}".format(key, evt, sh, aid))
+            lines.append("  source: peer-health-alerts.jsonl")
+    else:
+        lines.append("No active liveness alerts.")
+    lines.append("")
+    md_path.parent.mkdir(parents=True, exist_ok=True)
+    md_path.write_text("\n".join(lines), encoding="utf-8")
+    return exported_records

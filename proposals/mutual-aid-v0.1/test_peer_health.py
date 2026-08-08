@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from peer_health import append_hold, backlog_signature, check_peer_liveness
+from peer_health import append_hold, backlog_signature, check_peer_liveness, export_sentinel_alerts
 
 
 NOW = datetime(2026, 7, 12, 9, tzinfo=timezone.utc)
@@ -53,11 +53,18 @@ def test_original_raiser_resolves_then_reopens_same_signature(tmp_path):
     assert [e["event"] for e in rows(path)] == ["raised", "resolved", "reopened"]
 
 
-def test_fresh_peer_or_empty_backlog_does_not_raise(tmp_path):
+def test_fresh_peer_does_not_raise(tmp_path):
     fresh = tmp_path / "fresh.jsonl"
-    empty = tmp_path / "empty.jsonl"
     assert check(fresh, old_hours=1) == [] and not fresh.exists()
-    assert check(empty, pending=()) == [] and not empty.exists()
+
+
+def test_empty_backlog_with_silence_raises_idle_period_alert(tmp_path):
+    empty = tmp_path / "empty.jsonl"
+    result = check(empty, pending=())
+    assert len(result) == 1
+    assert result[0]["incident_key"] == "codex:silence"
+    assert result[0]["backlog"]["count"] == 0
+    assert result[0]["authority"] == "none"
 
 
 def test_small_future_skew_is_fresh_and_resolves_open_incident(tmp_path):
@@ -125,3 +132,35 @@ def test_hold_changes_only_hold_sidecar(tmp_path):
     row = append_hold(hold_path=hold, actor="claude", peer="codex", item_ref="job-a", now=NOW)
     assert row["authority"] == "none" and hold.exists()
     assert {path: path.read_bytes() for path in protected} == before
+
+def test_export_sentinel_alerts_writes_clocked_iso_row(tmp_path):
+    alerts_path = tmp_path / "peer-health-alerts.jsonl"
+    appended = [
+        {
+            "id": "alert-1",
+            "time": "2026-07-12 08:00:00",
+            "event": "raised",
+            "raised_by": "claude",
+            "peer": "codex",
+            "status": "suspected",
+            "incident_key": "codex:test",
+            "silence": {"silence_hours": 10},
+            "backlog": {"count": 0},
+        }
+    ]
+    records = export_sentinel_alerts(
+        appended_alerts=appended,
+        alerts_path=alerts_path,
+        impl_dir=tmp_path,
+        now=NOW,
+    )
+    assert len(records) == 1
+    stamped = records[0]
+    assert stamped["from"] == "sentinel"
+    assert stamped["authority"] == "none"
+    assert stamped["time_authority"] == "clock"
+    parsed = datetime.fromisoformat(stamped["time"])
+    assert parsed.tzinfo is not None  # ISO with explicit offset, not naive "%Y-%m-%d %H:%M:%S"
+    assert " " not in stamped["time"]
+    assert rows(tmp_path / "peer-chat.jsonl") == [stamped]
+
