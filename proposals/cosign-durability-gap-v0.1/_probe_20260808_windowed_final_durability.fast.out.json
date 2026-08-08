@@ -1,7 +1,7 @@
 {
  "probe": "_probe_20260808_windowed_final_durability.fast.py",
  "window_start": "2026-07-29T00:00:00+09:00",
- "receipt_messages_in_window": 173,
+ "receipt_messages_in_window": 174,
  "messages_with_labelled_final": 14,
  "distinct_labelled_final_images": 16,
  "durable": 11,
