@@ -50,7 +50,7 @@ EXTENSIONS = (
     ".yml",
 )
 PATH_RE = re.compile(
-    r"(?<![A-Za-z0-9_./\\-])(?<![A-Za-z0-9]:)(?:"
+    r"(?<![A-Za-z0-9_./\\-])(?<![A-Za-z0-9^}~]:)(?:"
     r"(?:" + "|".join(re.escape(item) for item in DIRECTORIES) + r")/"
     r"[A-Za-z0-9_./+\-]+|"
     + "|".join(re.escape(item) for item in ROOT_FILES)
@@ -134,7 +134,7 @@ def _classify(
     pure_path = PurePosixPath(path)
     if pure_path.is_absolute() or any(part in ("", ".", "..") for part in pure_path.parts):
         raise CheckError("invalid_path", f"path escapes root: {path}")
-    if any(part == "..." for part in pure_path.parts):
+    if any(set(part) == {chr(46)} and len(part) >= 3 for part in pure_path.parts):
         return "unresolvable_component"
     if path in tracked:
         return "tracked_head"
@@ -175,6 +175,9 @@ def _ledger_rows(ledger: Path) -> tuple[list[tuple[int, bytes, dict[str, object]
             continue
         rows.append((line_number, raw, record))
     return rows, parse_errors
+
+
+CLEAN_STATUSES = ("tracked_head", "history_only")
 
 
 def check_bucket(*, root: Path, author: str, timestamp: str) -> dict[str, object]:
@@ -239,8 +242,8 @@ def check_bucket(*, root: Path, author: str, timestamp: str) -> dict[str, object
             }
         )
 
-    warning_statuses = ["disk_only", "ignored", "missing", "unresolvable_component"]
-    warning_count = sum(counts[status] for status in warning_statuses)
+    warning_statuses = sorted(status for status in counts if status not in CLEAN_STATUSES)
+    warning_count = sum(counts.values()) - sum(counts[status] for status in CLEAN_STATUSES)
     return {
         "check": "cited_artifact_receipt_visibility",
         "authority": "report_only",

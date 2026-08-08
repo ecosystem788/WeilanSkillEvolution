@@ -89,12 +89,7 @@ def test_ellipsis_is_warning_without_aborting_other_citations(tmp_path: Path) ->
         "unresolvable_component": 1,
     }
     assert payload["warning_count"] == 1
-    assert payload["warning_statuses"] == [
-        "disk_only",
-        "ignored",
-        "missing",
-        "unresolvable_component",
-    ]
+    assert payload["warning_statuses"] == ["unresolvable_component"]
 
 
 def test_ignored_warns_but_history_only_does_not(tmp_path: Path) -> None:
@@ -167,3 +162,73 @@ def test_message_not_found_remains_nonzero(tmp_path: Path, capsys) -> None:
     assert status != 0
     assert output["ok"] is False
     assert output["reason"] == "message_not_found"
+
+
+def test_dots_only_component_ge3_is_unresolvable(tmp_path: Path) -> None:
+    _root, ledger_root = _repository(tmp_path)
+    _write_bucket(
+        ledger_root,
+        "proposals/..../ghost.md and proposals/...../ghost.md and proposals/tracked.md",
+    )
+
+    payload = gate.check_bucket(root=ledger_root, author=AUTHOR, timestamp=TIMESTAMP)
+    statuses = _statuses(payload)
+
+    assert statuses["proposals/..../ghost.md"]["status"] == "unresolvable_component"
+    assert statuses["proposals/...../ghost.md"]["status"] == "unresolvable_component"
+    assert statuses["proposals/tracked.md"]["status"] == "tracked_head"
+    assert payload["warning_count"] == 2
+    assert payload["warning_statuses"] == ["unresolvable_component"]
+
+
+def test_warning_flip_counts_only_non_clean_statuses(tmp_path: Path, monkeypatch) -> None:
+    _root, ledger_root = _repository(tmp_path)
+    _write_bucket(
+        ledger_root,
+        "proposals/tracked.md and proposals/history.md and proposals/bad.md",
+    )
+    original = gate._classify
+
+    def classify(**kwargs):
+        if kwargs["path"] == "proposals/bad.md":
+            raise gate.CheckError("git_failed", "synthetic per-citation failure")
+        return original(**kwargs)
+
+    monkeypatch.setattr(gate, "_classify", classify)
+    payload = gate.check_bucket(root=ledger_root, author=AUTHOR, timestamp=TIMESTAMP)
+    statuses = _statuses(payload)
+
+    assert statuses["proposals/tracked.md"]["status"] == "tracked_head"
+    assert statuses["proposals/history.md"]["status"] == "history_only"
+    assert statuses["proposals/bad.md"]["status"] == "check_error:git_failed"
+    assert payload["warning_count"] == 1
+    assert payload["warning_statuses"] == ["check_error:git_failed"]
+
+
+def test_all_clean_statuses_give_zero_warning(tmp_path: Path) -> None:
+    _root, ledger_root = _repository(tmp_path)
+    _write_bucket(ledger_root, "proposals/tracked.md and proposals/history.md")
+
+    payload = gate.check_bucket(root=ledger_root, author=AUTHOR, timestamp=TIMESTAMP)
+
+    assert payload["warning_count"] == 0
+    assert payload["warning_statuses"] == []
+
+
+def test_rev_suffix_qualified_paths_blocked_but_cjk_labels_kept() -> None:
+    text = "\n".join(
+        (
+            "全文:proposals/chinese-label.md",
+            "【证据】:proposals/punct-label.md",
+            "):proposals/paren-label.md",
+            "HEAD^:proposals/rev1.md",
+            "HEAD@{1}:proposals/rev2.md",
+            "e830a26^:proposals/rev3.md",
+        )
+    )
+
+    assert gate.cited_paths(text) == [
+        "proposals/chinese-label.md",
+        "proposals/punct-label.md",
+        "proposals/paren-label.md",
+    ]
