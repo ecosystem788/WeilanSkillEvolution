@@ -1,0 +1,72 @@
+{
+ "probe": "_probe_20260808_five_final_reachability.py",
+ "repo_head": "289206b027cd8bfb73e4995f1affc09a05d1500b",
+ "universe": "FINDING section 7.2 five co-signed finals",
+ "total": 5,
+ "durable_reachable": 5,
+ "present_unreachable": 0,
+ "absent": 0,
+ "head_equals_final": 0,
+ "rows": [
+  {
+   "label": "cosign v0.6 (CHARTER §3)",
+   "target": "CHARTER.md",
+   "final_sha256": "f5b8ffc510f04365954da43e69c3a840f7fe6b49c08c4335e30e5b5be9b38a4a",
+   "blob_oid": "128c85e770503421f4cf1e625a68caa05184b28e",
+   "object_present": true,
+   "reachable": true,
+   "reachability_verdict": "durable_reachable",
+   "currency_verdict": "head_moved_on",
+   "worktree_sha256": "29f282b24d8b428ace4fcfb1951163f365fc4fa06056a18ed079921173f0fb7f",
+   "head_sha256": "29f282b24d8b428ace4fcfb1951163f365fc4fa06056a18ed079921173f0fb7f"
+  },
+  {
+   "label": "cold-start scope kick",
+   "target": "proposals/bounded-scheduler-v0.1/impl/wake_codex.ps1",
+   "final_sha256": "b013f094d5fdca2307b2dd338d9a5e01cf0915692ac2c1527edf38289e7ecbde",
+   "blob_oid": "2329ccf7bd6e50f7bdb3042c0da41023b9ddc9cd",
+   "object_present": true,
+   "reachable": true,
+   "reachability_verdict": "durable_reachable",
+   "currency_verdict": "head_moved_on",
+   "worktree_sha256": "e172fea5e2b17065126eb361be55a7172a1bd2dae55ede06a0934094c0a7b792",
+   "head_sha256": "e172fea5e2b17065126eb361be55a7172a1bd2dae55ede06a0934094c0a7b792"
+  },
+  {
+   "label": "cron wrapper portability",
+   "target": "proposals/bounded-scheduler-v0.1/impl/run_wake_cron.ps1",
+   "final_sha256": "c485e953814a43ec7894afbacdf1de9f084f780d938adc89417245c4b60fc49d",
+   "blob_oid": "93debec2a41a1b306d8dc23a1a4c4c95b3ccacae",
+   "object_present": true,
+   "reachable": true,
+   "reachability_verdict": "durable_reachable",
+   "currency_verdict": "head_moved_on",
+   "worktree_sha256": "4962edcd33c6221eb56b97d9ec08619a9b2bc18847d590e31ec9ad8f17795ec2",
+   "head_sha256": "2668d1f76033b15432f02db711eeea6fae615481ab044dc71eb48e1d71080acb"
+  },
+  {
+   "label": "CHARTER §6.1 daily push",
+   "target": "CHARTER.md",
+   "final_sha256": "8330e7a2c0e066c44fa1b280f94787a06a9a59e674fc82f527d23ef1dd580bde",
+   "blob_oid": "81d565d0c68c4276d98d8f65bd8a57d67f5a7184",
+   "object_present": true,
+   "reachable": true,
+   "reachability_verdict": "durable_reachable",
+   "currency_verdict": "head_moved_on",
+   "worktree_sha256": "29f282b24d8b428ace4fcfb1951163f365fc4fa06056a18ed079921173f0fb7f",
+   "head_sha256": "29f282b24d8b428ace4fcfb1951163f365fc4fa06056a18ed079921173f0fb7f"
+  },
+  {
+   "label": "cosign v0.7 (CONVENTION)",
+   "target": "proposals/cosign-bytewise-binding-v0.1/CONVENTION.md",
+   "final_sha256": "7a453320515ae9b764141e16a9861dbe96b22549994a3f91da16f1e31799bd1e",
+   "blob_oid": "ef9fec49f54eb467e3e42c31a2fe27f162908e3f",
+   "object_present": true,
+   "reachable": true,
+   "reachability_verdict": "durable_reachable",
+   "currency_verdict": "head_moved_on",
+   "worktree_sha256": "ed16290d5c16d3864afe8c84c6c9426abe83d1e36c176a30d29b33ab061b32fc",
+   "head_sha256": "ed16290d5c16d3864afe8c84c6c9426abe83d1e36c176a30d29b33ab061b32fc"
+  }
+ ]
+}
