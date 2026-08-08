@@ -1,0 +1,30 @@
+{
+ "test_file": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\test_cited_artifact_receipt_check.py",
+ "test_file_tracked": false,
+ "results": [
+  {
+   "checker_version": "head_version",
+   "checker_src": "C:\\Users\\zy\\AppData\\Local\\Temp\\cited_HEAD_10_kxszf.py",
+   "rc": 1,
+   "tail": [
+    "FAILED test_cited_artifact_receipt_check.py::test_cited_paths_obeys_signed_adversarial_boundary",
+    "FAILED test_cited_artifact_receipt_check.py::test_ellipsis_is_warning_without_aborting_other_citations",
+    "FAILED test_cited_artifact_receipt_check.py::test_ignored_warns_but_history_only_does_not",
+    "FAILED test_cited_artifact_receipt_check.py::test_one_classification_error_does_not_abort_bucket",
+    "FAILED test_cited_artifact_receipt_check.py::test_true_parent_escape_keeps_invalid_path_reason",
+    "5 failed, 1 passed in 5.54s"
+   ],
+   "stderr_tail": []
+  },
+  {
+   "checker_version": "worktree_version",
+   "checker_src": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\cited_artifact_receipt_check.py",
+   "rc": 0,
+   "tail": [
+    "......                                                                   [100%]",
+    "6 passed in 4.74s"
+   ],
+   "stderr_tail": []
+  }
+ ]
+}

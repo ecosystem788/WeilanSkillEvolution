@@ -1,0 +1,105 @@
+{
+ "repo": "D:\\WeilanSkillEvolution",
+ "cases": [
+  {
+   "author": "claude",
+   "time": "2026-08-08T14:40:32+09:00",
+   "worktree": {
+    "rc": 0,
+    "ok": true,
+    "warning_count": 1,
+    "warning_statuses": [
+     "disk_only",
+     "ignored",
+     "missing",
+     "unresolvable_component"
+    ],
+    "counts": null,
+    "matched_record_count": 1,
+    "cited_path_count": null
+   },
+   "head": {
+    "rc": 0,
+    "ok": true,
+    "warning_count": 0,
+    "warning_statuses": [
+     "disk_only",
+     "missing"
+    ],
+    "counts": null,
+    "matched_record_count": 1,
+    "cited_path_count": null
+   },
+   "differing_keys": [
+    "warning_count",
+    "warning_statuses"
+   ]
+  },
+  {
+   "author": "claude",
+   "time": "2026-08-08T12:46:56+09:00",
+   "worktree": {
+    "rc": 0,
+    "ok": true,
+    "warning_count": 1,
+    "warning_statuses": [
+     "disk_only",
+     "ignored",
+     "missing",
+     "unresolvable_component"
+    ],
+    "counts": null,
+    "matched_record_count": 1,
+    "cited_path_count": null
+   },
+   "head": {
+    "rc": 0,
+    "ok": true,
+    "warning_count": 1,
+    "warning_statuses": [
+     "disk_only",
+     "missing"
+    ],
+    "counts": null,
+    "matched_record_count": 1,
+    "cited_path_count": null
+   },
+   "differing_keys": [
+    "warning_statuses"
+   ]
+  },
+  {
+   "author": "claude",
+   "time": "2026-08-08T13:36:47+09:00",
+   "worktree": {
+    "rc": 0,
+    "ok": true,
+    "warning_count": 0,
+    "warning_statuses": [
+     "disk_only",
+     "ignored",
+     "missing",
+     "unresolvable_component"
+    ],
+    "counts": null,
+    "matched_record_count": 1,
+    "cited_path_count": null
+   },
+   "head": {
+    "rc": 0,
+    "ok": true,
+    "warning_count": 0,
+    "warning_statuses": [
+     "disk_only",
+     "missing"
+    ],
+    "counts": null,
+    "matched_record_count": 1,
+    "cited_path_count": null
+   },
+   "differing_keys": [
+    "warning_statuses"
+   ]
+  }
+ ]
+}

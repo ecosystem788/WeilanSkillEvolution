@@ -1,0 +1,169 @@
+{
+ "ledger_lines": 3612,
+ "ledger_unparsed": 3,
+ "drifted_non_ledger_count": 13,
+ "files": [
+  {
+   "path": "README.md",
+   "added": "1",
+   "removed": "1",
+   "cited_records": 47,
+   "cited_by_claude": 27,
+   "cited_by_codex": 18,
+   "most_recent_citation": {
+    "line": 3611,
+    "from": "codex",
+    "time": "2026-08-08T14:53:38+09:00"
+   },
+   "head_last_touch": "a6d3fda|2026-07-22|docs: add bilingual reader guidance"
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/cited_artifact_receipt_check.py",
+   "added": "32",
+   "removed": "17",
+   "cited_records": 9,
+   "cited_by_claude": 2,
+   "cited_by_codex": 7,
+   "most_recent_citation": {
+    "line": 3239,
+    "from": "claude",
+    "time": "2026-08-01T09:09:30+09:00"
+   },
+   "head_last_touch": "c25a0e6|2026-08-01|cosign: add receipt-time citation visibility check"
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/test_wake_sentinel.py",
+   "added": "23",
+   "removed": "3",
+   "cited_records": 8,
+   "cited_by_claude": 4,
+   "cited_by_codex": 4,
+   "most_recent_citation": {
+    "line": 3582,
+    "from": "claude",
+    "time": "2026-08-08T02:19:37+09:00"
+   },
+   "head_last_touch": "88e02c0|2026-07-27|test: make wake-capture stand-in emit UTF-8 bytes explicitly"
+  },
+  {
+   "path": "proposals/frame-deadlock-recovery-v0.1/FINDING.md",
+   "added": "162",
+   "removed": "0",
+   "cited_records": 6,
+   "cited_by_claude": 4,
+   "cited_by_codex": 2,
+   "most_recent_citation": {
+    "line": 3577,
+    "from": "codex",
+    "time": "2026-08-07T23:03:05+09:00"
+   },
+   "head_last_touch": "4384a5c|2026-08-02|Diagnose why the co-signed frame-abandon escape hatch missed the 08-02 recurrence"
+  },
+  {
+   "path": "proposals/redaction-gate-tree-subject-v0.1/test_scan_only_gate.py",
+   "added": "83",
+   "removed": "0",
+   "cited_records": 4,
+   "cited_by_claude": 1,
+   "cited_by_codex": 3,
+   "most_recent_citation": {
+    "line": 3435,
+    "from": "codex",
+    "time": "2026-08-05T20:09:03+09:00"
+   },
+   "head_last_touch": "07309aa|2026-08-02|Add commit gate input identity receipt fields"
+  },
+  {
+   "path": "proposals/concurrent-receipt-frame-loss-v0.1/test_concurrent_receipts.py",
+   "added": "29",
+   "removed": "4",
+   "cited_records": 2,
+   "cited_by_claude": 0,
+   "cited_by_codex": 2,
+   "most_recent_citation": {
+    "line": 2666,
+    "from": "codex",
+    "time": "2026-07-26T21:08:57+09:00"
+   },
+   "head_last_touch": "3c196d6|2026-07-14|Publish community work-in-progress: proposals, evals, deployments, discussion logs"
+  },
+  {
+   "path": "proposals/capture-contract-source-authenticity-v0.1/FINDING.md",
+   "added": "14",
+   "removed": "0",
+   "cited_records": 1,
+   "cited_by_claude": 1,
+   "cited_by_codex": 0,
+   "most_recent_citation": {
+    "line": 635,
+    "from": "claude",
+    "time": "2026-07-13 00:12:05"
+   },
+   "head_last_touch": "320e2e2|2026-07-12|Persist capture-contract / source-authenticity FINDING (draft, unwired)"
+  },
+  {
+   "path": "proposals/projection-recall-staleness-v0.1/FINDING.md",
+   "added": "25",
+   "removed": "4",
+   "cited_records": 1,
+   "cited_by_claude": 1,
+   "cited_by_codex": 0,
+   "most_recent_citation": {
+    "line": 622,
+    "from": "claude",
+    "time": "2026-07-12 20:05:30"
+   },
+   "head_last_touch": "090d094|2026-07-20|docs(finding): make axis-1 the read-path hub for the parked-findings family (zero-authority)"
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/test_wake_recovery.py",
+   "added": "6",
+   "removed": "1",
+   "cited_records": 0,
+   "cited_by_claude": 0,
+   "cited_by_codex": 0,
+   "most_recent_citation": null,
+   "head_last_touch": "a3fb301|2026-07-16|fix(wake): recover stale projections and preserve UTF-8 receipts"
+  },
+  {
+   "path": "proposals/public-release-consolidation-v0.1/INCLUSION_RECEIPT.json",
+   "added": "36",
+   "removed": "6",
+   "cited_records": 0,
+   "cited_by_claude": 0,
+   "cited_by_codex": 0,
+   "most_recent_citation": null,
+   "head_last_touch": "b9d93c2|2026-07-15|Land public-release payload into repo (commit-only, dual-signed)"
+  },
+  {
+   "path": "proposals/public-release-consolidation-v0.1/LIVE_SKILL_SHA256.tsv",
+   "added": "5",
+   "removed": "3",
+   "cited_records": 0,
+   "cited_by_claude": 0,
+   "cited_by_codex": 0,
+   "most_recent_citation": null,
+   "head_last_touch": "b9d93c2|2026-07-15|Land public-release payload into repo (commit-only, dual-signed)"
+  },
+  {
+   "path": "proposals/public-release-consolidation-v0.1/PUBLIC_BLOB_ACCOUNTING.tsv",
+   "added": "5",
+   "removed": "5",
+   "cited_records": 0,
+   "cited_by_claude": 0,
+   "cited_by_codex": 0,
+   "most_recent_citation": null,
+   "head_last_touch": "b9d93c2|2026-07-15|Land public-release payload into repo (commit-only, dual-signed)"
+  },
+  {
+   "path": "proposals/public-release-consolidation-v0.1/verify_inclusion.py",
+   "added": "46",
+   "removed": "9",
+   "cited_records": 0,
+   "cited_by_claude": 0,
+   "cited_by_codex": 0,
+   "most_recent_citation": null,
+   "head_last_touch": "b9d93c2|2026-07-15|Land public-release payload into repo (commit-only, dual-signed)"
+  }
+ ]
+}
