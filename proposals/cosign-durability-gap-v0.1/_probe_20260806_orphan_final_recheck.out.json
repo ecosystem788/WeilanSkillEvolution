@@ -1,0 +1,19 @@
+{
+ "signed_final_sha256": "ce41975991c77c930cbf85fef7953b31860c7b7f297346e3613f9ef88613daec",
+ "loose_oid": "ff3d72e4486e88e697d7de76e7fd0388740ec076",
+ "path": "proposals/bounded-scheduler-v0.1/impl/wake_prompt_codex.md",
+ "P1_object_exists": true,
+ "P1_bytes_match_signed_final": true,
+ "P1_size": 7761,
+ "P1_still_loose_on_disk": true,
+ "P2_reachable_from_ref_or_reflog": true,
+ "P2_scan_rc": 0,
+ "P3_commits_touching_path": 9,
+ "P3_commits_with_exact_signed_final": [
+  "f7e5e168129d7e3d6b40318c0bd791fa76047c4d"
+ ],
+ "P3_signed_final_ever_in_history": true,
+ "gc_pruneExpire": "(unset -> git default: 2.weeks.ago)",
+ "verdict": "DURABLE_reached_history",
+ "limitation": "P3 covers committed versions of THIS path only. If the same bytes were committed under a different path they would not be counted here. P2 is a point-in-time answer: an unreachable object can be pruned at any later gc."
+}

@@ -1,0 +1,3167 @@
+{
+ "_note": "untracked[] per-file listing (33806 entries, ~6.5MB) intentionally dropped for size; re-run _probe_20260806_uncommitted_census.py to regenerate it in full. Aggregates below are unmodified.",
+ "totals": {
+  "tracked_modified_count": 31,
+  "tracked_added_lines_all": 835,
+  "tracked_added_lines_excluding_jsonl_ledgers": 740,
+  "untracked_count": 33806,
+  "untracked_bytes": 326320657
+ },
+ "untracked_by_top_level": [
+  {
+   "top": "proposals",
+   "count": 26823,
+   "bytes": 233140530
+  },
+  {
+   "top": "_tmp_ledger_0802_scaling",
+   "count": 3914,
+   "bytes": 45195927
+  },
+  {
+   "top": "_tmp_ledger_0802_scaling_held",
+   "count": 2487,
+   "bytes": 6091624
+  },
+  {
+   "top": ".scratch-red",
+   "count": 3,
+   "bytes": 8842
+  },
+  {
+   "top": "deployments",
+   "count": 3,
+   "bytes": 3875
+  },
+  {
+   "top": ".scratch-2026-08-06-1632-reply-to-tz-correction.txt",
+   "count": 1,
+   "bytes": 670
+  },
+  {
+   "top": "_agenda_audit_0801n.py",
+   "count": 1,
+   "bytes": 549
+  },
+  {
+   "top": "_agenda_audit_0801n.txt",
+   "count": 1,
+   "bytes": 7368
+  },
+  {
+   "top": "_alias_review_0801.txt",
+   "count": 1,
+   "bytes": 4199
+  },
+  {
+   "top": "_alias_review_0801b.txt",
+   "count": 1,
+   "bytes": 5209
+  },
+  {
+   "top": "_append_0801z.py",
+   "count": 1,
+   "bytes": 6638
+  },
+  {
+   "top": "_append_0802lane.py",
+   "count": 1,
+   "bytes": 3780
+  },
+  {
+   "top": "_append_0802prop.out.txt",
+   "count": 1,
+   "bytes": 6101
+  },
+  {
+   "top": "_append_0802prop.py",
+   "count": 1,
+   "bytes": 6970
+  },
+  {
+   "top": "_append_0802prop_v2.out.txt",
+   "count": 1,
+   "bytes": 7097
+  },
+  {
+   "top": "_append_0802prop_v2.py",
+   "count": 1,
+   "bytes": 8049
+  },
+  {
+   "top": "_append_0802push.err.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_append_0802push.out.txt",
+   "count": 1,
+   "bytes": 6314
+  },
+  {
+   "top": "_append_0802rev.err.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_append_0802rev.out.txt",
+   "count": 1,
+   "bytes": 4642
+  },
+  {
+   "top": "_append_0802review.py",
+   "count": 1,
+   "bytes": 9658
+  },
+  {
+   "top": "_append_0802ruling.py",
+   "count": 1,
+   "bytes": 2876
+  },
+  {
+   "top": "_append_addendum_0802.out.txt",
+   "count": 1,
+   "bytes": 1629
+  },
+  {
+   "top": "_append_order_0801L.out.txt",
+   "count": 1,
+   "bytes": 262
+  },
+  {
+   "top": "_append_order_0801L.py",
+   "count": 1,
+   "bytes": 569
+  },
+  {
+   "top": "_append_out_0801B.txt",
+   "count": 1,
+   "bytes": 84
+  },
+  {
+   "top": "_append_out_0801f.txt",
+   "count": 1,
+   "bytes": 4001
+  },
+  {
+   "top": "_append_owner_0802perf.out.txt",
+   "count": 1,
+   "bytes": 1665
+  },
+  {
+   "top": "_append_prop_0802perf.out.txt",
+   "count": 1,
+   "bytes": 5822
+  },
+  {
+   "top": "_audit2_0801FINAL.txt",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0801.json",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0801FINAL.txt",
+   "count": 1,
+   "bytes": 811
+  },
+  {
+   "top": "_audit_0801r2.json",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0801w.json",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0801wake.txt",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0802A.json",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0802b.txt",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0802g.txt",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0802p.json",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0802prop.txt",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0802rev.txt",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0802v2.txt",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0802w.json",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_0802w.py",
+   "count": 1,
+   "bytes": 992
+  },
+  {
+   "top": "_audit_0802w.txt",
+   "count": 1,
+   "bytes": 821
+  },
+  {
+   "top": "_audit_b.json",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_audit_wake.json",
+   "count": 1,
+   "bytes": 363
+  },
+  {
+   "top": "_boundary_0801.txt",
+   "count": 1,
+   "bytes": 1053
+  },
+  {
+   "top": "_brief_0801B2.txt",
+   "count": 1,
+   "bytes": 49913
+  },
+  {
+   "top": "_brief_0801FINAL.txt",
+   "count": 1,
+   "bytes": 52437
+  },
+  {
+   "top": "_brief_0801L.txt",
+   "count": 1,
+   "bytes": 50943
+  },
+  {
+   "top": "_brief_0801NEW.txt",
+   "count": 1,
+   "bytes": 52802
+  },
+  {
+   "top": "_brief_0801NN.txt",
+   "count": 1,
+   "bytes": 51966
+  },
+  {
+   "top": "_brief_0801W2.txt",
+   "count": 1,
+   "bytes": 48433
+  },
+  {
+   "top": "_brief_0801Y.txt",
+   "count": 1,
+   "bytes": 54655
+  },
+  {
+   "top": "_brief_0801auto.txt",
+   "count": 1,
+   "bytes": 50592
+  },
+  {
+   "top": "_brief_0801auto2.txt",
+   "count": 1,
+   "bytes": 51786
+  },
+  {
+   "top": "_brief_0801c.txt",
+   "count": 1,
+   "bytes": 51745
+  },
+  {
+   "top": "_brief_0801f.txt",
+   "count": 1,
+   "bytes": 51984
+  },
+  {
+   "top": "_brief_0801n.txt",
+   "count": 1,
+   "bytes": 69394
+  },
+  {
+   "top": "_brief_0801r.txt",
+   "count": 1,
+   "bytes": 47978
+  },
+  {
+   "top": "_brief_0801r2.txt",
+   "count": 1,
+   "bytes": 52277
+  },
+  {
+   "top": "_brief_0801wake.txt",
+   "count": 1,
+   "bytes": 50087
+  },
+  {
+   "top": "_brief_0801x.txt",
+   "count": 1,
+   "bytes": 72036
+  },
+  {
+   "top": "_brief_0801z.txt",
+   "count": 1,
+   "bytes": 72020
+  },
+  {
+   "top": "_brief_0802.txt",
+   "count": 1,
+   "bytes": 52655
+  },
+  {
+   "top": "_brief_0802B.txt",
+   "count": 1,
+   "bytes": 48996
+  },
+  {
+   "top": "_brief_0802W3.txt",
+   "count": 1,
+   "bytes": 50443
+  },
+  {
+   "top": "_brief_0802a.txt",
+   "count": 1,
+   "bytes": 48475
+  },
+  {
+   "top": "_brief_0802c.txt",
+   "count": 1,
+   "bytes": 48158
+  },
+  {
+   "top": "_brief_0802turn.txt",
+   "count": 1,
+   "bytes": 48085
+  },
+  {
+   "top": "_brief_0802w.json",
+   "count": 1,
+   "bytes": 49243
+  },
+  {
+   "top": "_brief_0802w.txt",
+   "count": 1,
+   "bytes": 51375
+  },
+  {
+   "top": "_brief_0802wake.json",
+   "count": 1,
+   "bytes": 58234
+  },
+  {
+   "top": "_brief_0802wake.txt",
+   "count": 1,
+   "bytes": 48091
+  },
+  {
+   "top": "_brief_0802ww.txt",
+   "count": 1,
+   "bytes": 49909
+  },
+  {
+   "top": "_brief_read2_0802w.py",
+   "count": 1,
+   "bytes": 618
+  },
+  {
+   "top": "_brief_read2_0802w.txt",
+   "count": 1,
+   "bytes": 4696
+  },
+  {
+   "top": "_brief_read_0802w.py",
+   "count": 1,
+   "bytes": 881
+  },
+  {
+   "top": "_brief_read_0802w.txt",
+   "count": 1,
+   "bytes": 4040
+  },
+  {
+   "top": "_brief_slice2_0801.py",
+   "count": 1,
+   "bytes": 686
+  },
+  {
+   "top": "_brief_slice2_0801.txt",
+   "count": 1,
+   "bytes": 2172
+  },
+  {
+   "top": "_brief_slice2_0801f.py",
+   "count": 1,
+   "bytes": 854
+  },
+  {
+   "top": "_brief_slice2_0801f.txt",
+   "count": 1,
+   "bytes": 5077
+  },
+  {
+   "top": "_brief_slice2_0801z.py",
+   "count": 1,
+   "bytes": 219
+  },
+  {
+   "top": "_brief_slice_0801.py",
+   "count": 1,
+   "bytes": 959
+  },
+  {
+   "top": "_brief_slice_0801.txt",
+   "count": 1,
+   "bytes": 15199
+  },
+  {
+   "top": "_brief_slice_0801a.py",
+   "count": 1,
+   "bytes": 910
+  },
+  {
+   "top": "_brief_slice_0801a.txt",
+   "count": 1,
+   "bytes": 10500
+  },
+  {
+   "top": "_brief_slice_0801b.py",
+   "count": 1,
+   "bytes": 598
+  },
+  {
+   "top": "_brief_slice_0801b.txt",
+   "count": 1,
+   "bytes": 2457
+  },
+  {
+   "top": "_brief_slice_0801f.py",
+   "count": 1,
+   "bytes": 1054
+  },
+  {
+   "top": "_brief_slice_0801f.txt",
+   "count": 1,
+   "bytes": 15735
+  },
+  {
+   "top": "_brief_slice_0801n.py",
+   "count": 1,
+   "bytes": 642
+  },
+  {
+   "top": "_brief_slice_0801z.py",
+   "count": 1,
+   "bytes": 647
+  },
+  {
+   "top": "_caret_ctx_0801.py",
+   "count": 1,
+   "bytes": 378
+  },
+  {
+   "top": "_census_0801wake.json",
+   "count": 1,
+   "bytes": 388
+  },
+  {
+   "top": "_chat_range_0801auto.py",
+   "count": 1,
+   "bytes": 642
+  },
+  {
+   "top": "_chat_tail_0801a.py",
+   "count": 1,
+   "bytes": 617
+  },
+  {
+   "top": "_chat_tail_0801a.txt",
+   "count": 1,
+   "bytes": 31716
+  },
+  {
+   "top": "_chat_tail_0801auto.py",
+   "count": 1,
+   "bytes": 689
+  },
+  {
+   "top": "_chat_tail_0801f.py",
+   "count": 1,
+   "bytes": 726
+  },
+  {
+   "top": "_chat_tail_0801f.txt",
+   "count": 1,
+   "bytes": 26576
+  },
+  {
+   "top": "_chat_tail_0801n.py",
+   "count": 1,
+   "bytes": 434
+  },
+  {
+   "top": "_chat_tail_0801n.txt",
+   "count": 1,
+   "bytes": 28626
+  },
+  {
+   "top": "_chat_tail_0801w.py",
+   "count": 1,
+   "bytes": 489
+  },
+  {
+   "top": "_chat_tail_0801w.txt",
+   "count": 1,
+   "bytes": 8806
+  },
+  {
+   "top": "_chat_tail_0801wake.py",
+   "count": 1,
+   "bytes": 717
+  },
+  {
+   "top": "_chat_tail_0801wake.txt",
+   "count": 1,
+   "bytes": 23876
+  },
+  {
+   "top": "_chattail_0802w.py",
+   "count": 1,
+   "bytes": 450
+  },
+  {
+   "top": "_chattail_0802w.txt",
+   "count": 1,
+   "bytes": 28987
+  },
+  {
+   "top": "_chattail_0805.py",
+   "count": 1,
+   "bytes": 686
+  },
+  {
+   "top": "_check_dup_0801.py",
+   "count": 1,
+   "bytes": 487
+  },
+  {
+   "top": "_cite_0801B.json",
+   "count": 1,
+   "bytes": 2072
+  },
+  {
+   "top": "_cite_0801_2007.json",
+   "count": 1,
+   "bytes": 1877
+  },
+  {
+   "top": "_cite_detail_0801.py",
+   "count": 1,
+   "bytes": 484
+  },
+  {
+   "top": "_cite_detail_0801.txt",
+   "count": 1,
+   "bytes": 6020
+  },
+  {
+   "top": "_cited_0801_after.json",
+   "count": 1,
+   "bytes": 1626
+  },
+  {
+   "top": "_cited_0801r2.txt",
+   "count": 1,
+   "bytes": 1583
+  },
+  {
+   "top": "_cited_0802.out.txt",
+   "count": 1,
+   "bytes": 1609
+  },
+  {
+   "top": "_cited_0802.txt",
+   "count": 1,
+   "bytes": 1617
+  },
+  {
+   "top": "_cited_0802add.txt",
+   "count": 1,
+   "bytes": 1416
+  },
+  {
+   "top": "_cited_0802push.err.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_cited_0802push.out.json",
+   "count": 1,
+   "bytes": 2066
+  },
+  {
+   "top": "_cited_0802v2.txt",
+   "count": 1,
+   "bytes": 1618
+  },
+  {
+   "top": "_clhelp.txt",
+   "count": 1,
+   "bytes": 338
+  },
+  {
+   "top": "_clhelp_0801L.txt",
+   "count": 1,
+   "bytes": 338
+  },
+  {
+   "top": "_close2_0802c.py",
+   "count": 1,
+   "bytes": 5181
+  },
+  {
+   "top": "_close_0801.py",
+   "count": 1,
+   "bytes": 2734
+  },
+  {
+   "top": "_close_0801FINAL.txt",
+   "count": 1,
+   "bytes": 62
+  },
+  {
+   "top": "_close_0801L.out.txt",
+   "count": 1,
+   "bytes": 507
+  },
+  {
+   "top": "_close_0801L.py",
+   "count": 1,
+   "bytes": 4048
+  },
+  {
+   "top": "_close_0801_a921d9.out.txt",
+   "count": 1,
+   "bytes": 84
+  },
+  {
+   "top": "_close_0801_a921d9.py",
+   "count": 1,
+   "bytes": 3905
+  },
+  {
+   "top": "_close_0801b.py",
+   "count": 1,
+   "bytes": 3415
+  },
+  {
+   "top": "_close_0801c.py",
+   "count": 1,
+   "bytes": 2000
+  },
+  {
+   "top": "_close_0801d.py",
+   "count": 1,
+   "bytes": 3026
+  },
+  {
+   "top": "_close_0801f.py",
+   "count": 1,
+   "bytes": 3293
+  },
+  {
+   "top": "_close_0801n.py",
+   "count": 1,
+   "bytes": 3349
+  },
+  {
+   "top": "_close_0801new.py",
+   "count": 1,
+   "bytes": 5237
+  },
+  {
+   "top": "_close_0801r2.py",
+   "count": 1,
+   "bytes": 2738
+  },
+  {
+   "top": "_close_0801rev.py",
+   "count": 1,
+   "bytes": 4434
+  },
+  {
+   "top": "_close_0801w.py",
+   "count": 1,
+   "bytes": 1688
+  },
+  {
+   "top": "_close_0801wake.py",
+   "count": 1,
+   "bytes": 3674
+  },
+  {
+   "top": "_close_0801y.py",
+   "count": 1,
+   "bytes": 3649
+  },
+  {
+   "top": "_close_0801z.py",
+   "count": 1,
+   "bytes": 5395
+  },
+  {
+   "top": "_close_0802.py",
+   "count": 1,
+   "bytes": 3812
+  },
+  {
+   "top": "_close_0802A.json",
+   "count": 1,
+   "bytes": 3366
+  },
+  {
+   "top": "_close_0802A.py",
+   "count": 1,
+   "bytes": 531
+  },
+  {
+   "top": "_close_0802A_verdict.txt",
+   "count": 1,
+   "bytes": 2407
+  },
+  {
+   "top": "_close_0802alias.py",
+   "count": 1,
+   "bytes": 2852
+  },
+  {
+   "top": "_close_0802b.py",
+   "count": 1,
+   "bytes": 4679
+  },
+  {
+   "top": "_close_0802c.py",
+   "count": 1,
+   "bytes": 4348
+  },
+  {
+   "top": "_close_0802g.txt",
+   "count": 1,
+   "bytes": 62
+  },
+  {
+   "top": "_close_0802lane.py",
+   "count": 1,
+   "bytes": 3079
+  },
+  {
+   "top": "_close_0802p.json",
+   "count": 1,
+   "bytes": 62
+  },
+  {
+   "top": "_close_0802prop.txt",
+   "count": 1,
+   "bytes": 62
+  },
+  {
+   "top": "_close_0802rev.py",
+   "count": 1,
+   "bytes": 3392
+  },
+  {
+   "top": "_close_0802t.py",
+   "count": 1,
+   "bytes": 4050
+  },
+  {
+   "top": "_close_0802t2.py",
+   "count": 1,
+   "bytes": 3364
+  },
+  {
+   "top": "_close_0802v2.py",
+   "count": 1,
+   "bytes": 3367
+  },
+  {
+   "top": "_close_0802v2.txt",
+   "count": 1,
+   "bytes": 2011
+  },
+  {
+   "top": "_close_0802w.py",
+   "count": 1,
+   "bytes": 4946
+  },
+  {
+   "top": "_close_0802wake.py",
+   "count": 1,
+   "bytes": 2935
+  },
+  {
+   "top": "_close_0805proxy.py",
+   "count": 1,
+   "bytes": 3629
+  },
+  {
+   "top": "_close_20260801_round2.py",
+   "count": 1,
+   "bytes": 3959
+  },
+  {
+   "top": "_close_b.py",
+   "count": 1,
+   "bytes": 2272
+  },
+  {
+   "top": "_close_c.py",
+   "count": 1,
+   "bytes": 3170
+  },
+  {
+   "top": "_close_discharged_goals_0731f.out.json",
+   "count": 1,
+   "bytes": 3555
+  },
+  {
+   "top": "_close_discharged_goals_0731f.py",
+   "count": 1,
+   "bytes": 9679
+  },
+  {
+   "top": "_close_out_20260801_round2.txt",
+   "count": 1,
+   "bytes": 447
+  },
+  {
+   "top": "_close_wake.py",
+   "count": 1,
+   "bytes": 5031
+  },
+  {
+   "top": "_closehelp.txt",
+   "count": 1,
+   "bytes": 338
+  },
+  {
+   "top": "_codexrun_0802d.py",
+   "count": 1,
+   "bytes": 1202
+  },
+  {
+   "top": "_codexstat_0802c.py",
+   "count": 1,
+   "bytes": 487
+  },
+  {
+   "top": "_commitmsg2_0801.txt",
+   "count": 1,
+   "bytes": 848
+  },
+  {
+   "top": "_commitmsg_0801.txt",
+   "count": 1,
+   "bytes": 920
+  },
+  {
+   "top": "_commitmsg_0802alias.txt",
+   "count": 1,
+   "bytes": 357
+  },
+  {
+   "top": "_cr_check_0801.py",
+   "count": 1,
+   "bytes": 1081
+  },
+  {
+   "top": "_cr_check_0801.txt",
+   "count": 1,
+   "bytes": 224
+  },
+  {
+   "top": "_ctx_0801.txt",
+   "count": 1,
+   "bytes": 15905
+  },
+  {
+   "top": "_ctx_0802d.py",
+   "count": 1,
+   "bytes": 489
+  },
+  {
+   "top": "_diff_0801wake.txt",
+   "count": 1,
+   "bytes": 4170
+  },
+  {
+   "top": "_do_append_0802perf2.py",
+   "count": 1,
+   "bytes": 906
+  },
+  {
+   "top": "_doctor_0802.txt",
+   "count": 1,
+   "bytes": 9978
+  },
+  {
+   "top": "_eol_check_0801.py",
+   "count": 1,
+   "bytes": 1123
+  },
+  {
+   "top": "_eol_check_0801.txt",
+   "count": 1,
+   "bytes": 387
+  },
+  {
+   "top": "_episode_receipt_test_src.py",
+   "count": 1,
+   "bytes": 11962
+  },
+  {
+   "top": "_evhelp.txt",
+   "count": 1,
+   "bytes": 712
+  },
+  {
+   "top": "_falsifier_0801.py",
+   "count": 1,
+   "bytes": 2487
+  },
+  {
+   "top": "_falsifier_0801.txt",
+   "count": 1,
+   "bytes": 3593
+  },
+  {
+   "top": "_ffi_0802d.py",
+   "count": 1,
+   "bytes": 481
+  },
+  {
+   "top": "_find_head_0801.py",
+   "count": 1,
+   "bytes": 524
+  },
+  {
+   "top": "_frame_0801adj.py",
+   "count": 1,
+   "bytes": 1443
+  },
+  {
+   "top": "_frame_0801auto.txt",
+   "count": 1,
+   "bytes": 25
+  },
+  {
+   "top": "_frameclose_0801adj.py",
+   "count": 1,
+   "bytes": 5757
+  },
+  {
+   "top": "_frames_0802.txt",
+   "count": 1,
+   "bytes": 2716
+  },
+  {
+   "top": "_frameshow_0801w.json",
+   "count": 1,
+   "bytes": 2726
+  },
+  {
+   "top": "_fs_0801n.json",
+   "count": 1,
+   "bytes": 2726
+  },
+  {
+   "top": "_fs_0801r.json",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_fs_0801z.json",
+   "count": 1,
+   "bytes": 2726
+  },
+  {
+   "top": "_g1.err",
+   "count": 1,
+   "bytes": 41
+  },
+  {
+   "top": "_g1.out",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_gate_0801adj.json",
+   "count": 1,
+   "bytes": 2569
+  },
+  {
+   "top": "_gate_0801n.json",
+   "count": 1,
+   "bytes": 1341
+  },
+  {
+   "top": "_gate_0801wake.json",
+   "count": 1,
+   "bytes": 2558
+  },
+  {
+   "top": "_gate_0802.err",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_gate_0802.json",
+   "count": 1,
+   "bytes": 1371
+  },
+  {
+   "top": "_gate_0802_head.err.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_gate_0802_head.out.json",
+   "count": 1,
+   "bytes": 1371
+  },
+  {
+   "top": "_gate_all_0801.py",
+   "count": 1,
+   "bytes": 1136
+  },
+  {
+   "top": "_goal_b.json",
+   "count": 1,
+   "bytes": 1704
+  },
+  {
+   "top": "_goal_c.py",
+   "count": 1,
+   "bytes": 2638
+  },
+  {
+   "top": "_grep_0726_0801.py",
+   "count": 1,
+   "bytes": 794
+  },
+  {
+   "top": "_grep_0726_0801.txt",
+   "count": 1,
+   "bytes": 26904
+  },
+  {
+   "top": "_grep_axis1_0801.py",
+   "count": 1,
+   "bytes": 863
+  },
+  {
+   "top": "_grep_axis1_0801.txt",
+   "count": 1,
+   "bytes": 179152
+  },
+  {
+   "top": "_grep_axis1_0801b.py",
+   "count": 1,
+   "bytes": 673
+  },
+  {
+   "top": "_grep_axis1_0801b.txt",
+   "count": 1,
+   "bytes": 118892
+  },
+  {
+   "top": "_grep_axis1_0801c.py",
+   "count": 1,
+   "bytes": 669
+  },
+  {
+   "top": "_grep_fifth_0801.py",
+   "count": 1,
+   "bytes": 776
+  },
+  {
+   "top": "_head2_0801FINAL.txt",
+   "count": 1,
+   "bytes": 5978
+  },
+  {
+   "top": "_head2_0801auto.txt",
+   "count": 1,
+   "bytes": 5486
+  },
+  {
+   "top": "_head2_0802.json",
+   "count": 1,
+   "bytes": 1554
+  },
+  {
+   "top": "_head3_0801FINAL.txt",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_head3_0801auto.txt",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_head_0801.txt",
+   "count": 1,
+   "bytes": 2720
+  },
+  {
+   "top": "_head_0801FINAL.txt",
+   "count": 1,
+   "bytes": 1556
+  },
+  {
+   "top": "_head_0801auto.txt",
+   "count": 1,
+   "bytes": 2720
+  },
+  {
+   "top": "_head_0801d.json",
+   "count": 1,
+   "bytes": 1195
+  },
+  {
+   "top": "_head_0801e.json",
+   "count": 1,
+   "bytes": 1554
+  },
+  {
+   "top": "_head_0801f.json",
+   "count": 1,
+   "bytes": 2726
+  },
+  {
+   "top": "_head_0801new.json",
+   "count": 1,
+   "bytes": 2725
+  },
+  {
+   "top": "_head_0801r.json",
+   "count": 1,
+   "bytes": 2726
+  },
+  {
+   "top": "_head_0801r.txt",
+   "count": 1,
+   "bytes": 2726
+  },
+  {
+   "top": "_head_0802.txt",
+   "count": 1,
+   "bytes": 3363
+  },
+  {
+   "top": "_head_0802W.txt",
+   "count": 1,
+   "bytes": 2720
+  },
+  {
+   "top": "_head_0802b.txt",
+   "count": 1,
+   "bytes": 1438413
+  },
+  {
+   "top": "_head_0802p.json",
+   "count": 1,
+   "bytes": 2720
+  },
+  {
+   "top": "_head_0802t.json",
+   "count": 1,
+   "bytes": 2345
+  },
+  {
+   "top": "_head_0802w2.json",
+   "count": 1,
+   "bytes": 1510
+  },
+  {
+   "top": "_head_0802w3.json",
+   "count": 1,
+   "bytes": 1436754
+  },
+  {
+   "top": "_head_b.json",
+   "count": 1,
+   "bytes": 1390302
+  },
+  {
+   "top": "_head_c.json",
+   "count": 1,
+   "bytes": 2713
+  },
+  {
+   "top": "_head_scan_0801n.py",
+   "count": 1,
+   "bytes": 1037
+  },
+  {
+   "top": "_head_show_0801r2.err",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_head_show_0801r2.json",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_head_wake.json",
+   "count": 1,
+   "bytes": 3199
+  },
+  {
+   "top": "_heads_0802w.json",
+   "count": 1,
+   "bytes": 2729
+  },
+  {
+   "top": "_heads_read_0802w.py",
+   "count": 1,
+   "bytes": 381
+  },
+  {
+   "top": "_help_0801.txt",
+   "count": 1,
+   "bytes": 8888
+  },
+  {
+   "top": "_help_0801L.txt",
+   "count": 1,
+   "bytes": 8888
+  },
+  {
+   "top": "_inspect_noreceipt.py",
+   "count": 1,
+   "bytes": 1275
+  },
+  {
+   "top": "_inspect_out.py",
+   "count": 1,
+   "bytes": 1615
+  },
+  {
+   "top": "_inspect_repeat.py",
+   "count": 1,
+   "bytes": 1593
+  },
+  {
+   "top": "_lin2_0801auto.txt",
+   "count": 1,
+   "bytes": 1418979
+  },
+  {
+   "top": "_lin_0801auto.txt",
+   "count": 1,
+   "bytes": 1506
+  },
+  {
+   "top": "_lin_0801new.json",
+   "count": 1,
+   "bytes": 1403574
+  },
+  {
+   "top": "_lin_0802W.json",
+   "count": 1,
+   "bytes": 1431540
+  },
+  {
+   "top": "_lin_0802e.py",
+   "count": 1,
+   "bytes": 481
+  },
+  {
+   "top": "_lin_0802h.json",
+   "count": 1,
+   "bytes": 1441968
+  },
+  {
+   "top": "_lin_0802p.json",
+   "count": 1,
+   "bytes": 1430118
+  },
+  {
+   "top": "_lineage_0801.json",
+   "count": 1,
+   "bytes": 1393620
+  },
+  {
+   "top": "_lineage_0801.txt",
+   "count": 1,
+   "bytes": 1405707
+  },
+  {
+   "top": "_lineage_0801B.json",
+   "count": 1,
+   "bytes": 1404285
+  },
+  {
+   "top": "_lineage_0801L.txt",
+   "count": 1,
+   "bytes": 1404996
+  },
+  {
+   "top": "_lineage_0801adj.txt",
+   "count": 1,
+   "bytes": 1406181
+  },
+  {
+   "top": "_lineage_0801d.json",
+   "count": 1,
+   "bytes": 1402149
+  },
+  {
+   "top": "_lineage_0801n.txt",
+   "count": 1,
+   "bytes": 1419690
+  },
+  {
+   "top": "_lineage_0801r.json",
+   "count": 1,
+   "bytes": 1401441
+  },
+  {
+   "top": "_lineage_0801y.json",
+   "count": 1,
+   "bytes": 1395513
+  },
+  {
+   "top": "_lineage_0802.json",
+   "count": 1,
+   "bytes": 1430829
+  },
+  {
+   "top": "_lineage_0802.txt",
+   "count": 1,
+   "bytes": 1427985
+  },
+  {
+   "top": "_lineage_0802A.json",
+   "count": 1,
+   "bytes": 1428696
+  },
+  {
+   "top": "_lineage_0802a.txt",
+   "count": 1,
+   "bytes": 1424904
+  },
+  {
+   "top": "_lineage_0802b.json",
+   "count": 1,
+   "bytes": 1436043
+  },
+  {
+   "top": "_lineage_0802b.txt",
+   "count": 1,
+   "bytes": 515
+  },
+  {
+   "top": "_lineage_0802c.txt",
+   "count": 1,
+   "bytes": 1432251
+  },
+  {
+   "top": "_lineage_0802d.txt",
+   "count": 1,
+   "bytes": 1506
+  },
+  {
+   "top": "_lineage_0802e.txt",
+   "count": 1,
+   "bytes": 1426089
+  },
+  {
+   "top": "_lineage_0802v2.txt",
+   "count": 1,
+   "bytes": 1432962
+  },
+  {
+   "top": "_memoprobe_0802.err.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_memoread_0802.py",
+   "count": 1,
+   "bytes": 769
+  },
+  {
+   "top": "_msg2_0801wake.txt",
+   "count": 1,
+   "bytes": 1423
+  },
+  {
+   "top": "_msg3_0801wake.txt",
+   "count": 1,
+   "bytes": 705
+  },
+  {
+   "top": "_msg_0801_deploy_proposal.txt",
+   "count": 1,
+   "bytes": 6828
+  },
+  {
+   "top": "_msg_0801d.txt",
+   "count": 1,
+   "bytes": 3670
+  },
+  {
+   "top": "_msg_0801wake.txt",
+   "count": 1,
+   "bytes": 6366
+  },
+  {
+   "top": "_msg_0802_push_proposal.txt",
+   "count": 1,
+   "bytes": 6150
+  },
+  {
+   "top": "_msg_0802alias.txt",
+   "count": 1,
+   "bytes": 5450
+  },
+  {
+   "top": "_msg_0805_codex_correction.txt",
+   "count": 1,
+   "bytes": 1733
+  },
+  {
+   "top": "_msg_0805_codex_proxy.txt",
+   "count": 1,
+   "bytes": 3344
+  },
+  {
+   "top": "_msg_0805_owner_proxy.txt",
+   "count": 1,
+   "bytes": 2316
+  },
+  {
+   "top": "_msg_addendum_0802perf.txt",
+   "count": 1,
+   "bytes": 1527
+  },
+  {
+   "top": "_msg_codex_0802perf.txt",
+   "count": 1,
+   "bytes": 3740
+  },
+  {
+   "top": "_msg_owner_0802perf.txt",
+   "count": 1,
+   "bytes": 1535
+  },
+  {
+   "top": "_msg_owner_0802perf2.txt",
+   "count": 1,
+   "bytes": 1955
+  },
+  {
+   "top": "_msg_prop_0802perf.txt",
+   "count": 1,
+   "bytes": 5681
+  },
+  {
+   "top": "_narrow_fix_add_0801.py",
+   "count": 1,
+   "bytes": 1615
+  },
+  {
+   "top": "_narrow_fix_add_0801.txt",
+   "count": 1,
+   "bytes": 2541
+  },
+  {
+   "top": "_open2_0801FINAL.txt",
+   "count": 1,
+   "bytes": 442
+  },
+  {
+   "top": "_open2_0801auto.txt",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open3_0801FINAL.txt",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0801.json",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0801.txt",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0801B.py",
+   "count": 1,
+   "bytes": 1112
+  },
+  {
+   "top": "_open_0801FINAL.txt",
+   "count": 1,
+   "bytes": 763
+  },
+  {
+   "top": "_open_0801L.out.txt",
+   "count": 1,
+   "bytes": 1748
+  },
+  {
+   "top": "_open_0801L.py",
+   "count": 1,
+   "bytes": 1348
+  },
+  {
+   "top": "_open_0801auto.txt",
+   "count": 1,
+   "bytes": 452
+  },
+  {
+   "top": "_open_0801d.py",
+   "count": 1,
+   "bytes": 954
+  },
+  {
+   "top": "_open_0801f.py",
+   "count": 1,
+   "bytes": 1132
+  },
+  {
+   "top": "_open_0801n.json",
+   "count": 1,
+   "bytes": 773
+  },
+  {
+   "top": "_open_0801n.out.json",
+   "count": 1,
+   "bytes": 1734
+  },
+  {
+   "top": "_open_0801n.py",
+   "count": 1,
+   "bytes": 1349
+  },
+  {
+   "top": "_open_0801n.txt",
+   "count": 1,
+   "bytes": 3118
+  },
+  {
+   "top": "_open_0801new.py",
+   "count": 1,
+   "bytes": 904
+  },
+  {
+   "top": "_open_0801r.json",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0801rev.txt",
+   "count": 1,
+   "bytes": 422
+  },
+  {
+   "top": "_open_0801rev2.txt",
+   "count": 1,
+   "bytes": 101
+  },
+  {
+   "top": "_open_0801rev4.txt",
+   "count": 1,
+   "bytes": 1681
+  },
+  {
+   "top": "_open_0801w.json",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0801y.json",
+   "count": 1,
+   "bytes": 1681
+  },
+  {
+   "top": "_open_0801z.py",
+   "count": 1,
+   "bytes": 1240
+  },
+  {
+   "top": "_open_0802.py",
+   "count": 1,
+   "bytes": 982
+  },
+  {
+   "top": "_open_0802.txt",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0802A.json",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0802b.txt",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0802c.out.txt",
+   "count": 1,
+   "bytes": 108
+  },
+  {
+   "top": "_open_0802c.py",
+   "count": 1,
+   "bytes": 1032
+  },
+  {
+   "top": "_open_0802g.txt",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0802lane.txt",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0802p.json",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0802rev.err.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_open_0802rev.out.json",
+   "count": 1,
+   "bytes": 1681
+  },
+  {
+   "top": "_open_0802review.json",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0802t.json",
+   "count": 1,
+   "bytes": 1681
+  },
+  {
+   "top": "_open_0802t.py",
+   "count": 1,
+   "bytes": 1372
+  },
+  {
+   "top": "_open_0802v2.txt",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0802w.json",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_0802w.py",
+   "count": 1,
+   "bytes": 1053
+  },
+  {
+   "top": "_open_0805proxy.py",
+   "count": 1,
+   "bytes": 1129
+  },
+  {
+   "top": "_open_b.json",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_c.py",
+   "count": 1,
+   "bytes": 1104
+  },
+  {
+   "top": "_open_err_0801r2.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_open_out_0801B.txt",
+   "count": 1,
+   "bytes": 1790
+  },
+  {
+   "top": "_open_out_0801f.json",
+   "count": 1,
+   "bytes": 1790
+  },
+  {
+   "top": "_open_out_0801r2.json",
+   "count": 1,
+   "bytes": 1684
+  },
+  {
+   "top": "_open_wake.json",
+   "count": 1,
+   "bytes": 1681
+  },
+  {
+   "top": "_open_with_probe_0801.ps1",
+   "count": 1,
+   "bytes": 1433
+  },
+  {
+   "top": "_openhelp.txt",
+   "count": 1,
+   "bytes": 724
+  },
+  {
+   "top": "_openhelp_0801.txt",
+   "count": 1,
+   "bytes": 724
+  },
+  {
+   "top": "_openhelp_0801L.txt",
+   "count": 1,
+   "bytes": 724
+  },
+  {
+   "top": "_order_0801L.txt",
+   "count": 1,
+   "bytes": 6659
+  },
+  {
+   "top": "_ownerscan_0802w.py",
+   "count": 1,
+   "bytes": 550
+  },
+  {
+   "top": "_ownerscan_0802w.txt",
+   "count": 1,
+   "bytes": 2619
+  },
+  {
+   "top": "_pahelp.txt",
+   "count": 1,
+   "bytes": 602
+  },
+  {
+   "top": "_pahelp_0801L.txt",
+   "count": 1,
+   "bytes": 602
+  },
+  {
+   "top": "_paired_lat_0801.txt",
+   "count": 1,
+   "bytes": 28
+  },
+  {
+   "top": "_paudit_0801n.txt",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_paudit_0801rev.txt",
+   "count": 1,
+   "bytes": 470
+  },
+  {
+   "top": "_paudit_0801rev2.txt",
+   "count": 1,
+   "bytes": 363
+  },
+  {
+   "top": "_paudit_0802.json",
+   "count": 1,
+   "bytes": 363
+  },
+  {
+   "top": "_paudit_0802.txt",
+   "count": 1,
+   "bytes": 366
+  },
+  {
+   "top": "_peek_diff_0801r.py",
+   "count": 1,
+   "bytes": 218
+  },
+  {
+   "top": "_peek_out_0801r.py",
+   "count": 1,
+   "bytes": 742
+  },
+  {
+   "top": "_peek_sham_0801r.py",
+   "count": 1,
+   "bytes": 271
+  },
+  {
+   "top": "_peer_0801L.txt",
+   "count": 1,
+   "bytes": 1856
+  },
+  {
+   "top": "_peer_health_0801.txt",
+   "count": 1,
+   "bytes": 1855
+  },
+  {
+   "top": "_peer_health_0801FINAL.txt",
+   "count": 1,
+   "bytes": 1856
+  },
+  {
+   "top": "_peer_health_0801b.txt",
+   "count": 1,
+   "bytes": 1856
+  },
+  {
+   "top": "_peerhealth_0801n.txt",
+   "count": 1,
+   "bytes": 1855
+  },
+  {
+   "top": "_peerhealth_0801r2.txt",
+   "count": 1,
+   "bytes": 1856
+  },
+  {
+   "top": "_peerhealth_0801w.txt",
+   "count": 1,
+   "bytes": 1855
+  },
+  {
+   "top": "_peerhealth_0802.txt",
+   "count": 1,
+   "bytes": 1856
+  },
+  {
+   "top": "_peerhealth_0802A.txt",
+   "count": 1,
+   "bytes": 1856
+  },
+  {
+   "top": "_peerhealth_0802B.txt",
+   "count": 1,
+   "bytes": 1856
+  },
+  {
+   "top": "_peerhealth_0802c.txt",
+   "count": 1,
+   "bytes": 1855
+  },
+  {
+   "top": "_peerhealth_0802turn.txt",
+   "count": 1,
+   "bytes": 1852
+  },
+  {
+   "top": "_peerhealth_0802w.txt",
+   "count": 1,
+   "bytes": 1855
+  },
+  {
+   "top": "_post2_0801wake.out.txt",
+   "count": 1,
+   "bytes": 1577
+  },
+  {
+   "top": "_post2_0801wake.py",
+   "count": 1,
+   "bytes": 659
+  },
+  {
+   "top": "_post3_0801wake.out.txt",
+   "count": 1,
+   "bytes": 835
+  },
+  {
+   "top": "_post3_0801wake.py",
+   "count": 1,
+   "bytes": 659
+  },
+  {
+   "top": "_post_0801FINAL.py",
+   "count": 1,
+   "bytes": 4903
+  },
+  {
+   "top": "_post_0801_deploy_proposal.py",
+   "count": 1,
+   "bytes": 656
+  },
+  {
+   "top": "_post_0801_out.txt",
+   "count": 1,
+   "bytes": 7023
+  },
+  {
+   "top": "_post_0801adj.py",
+   "count": 1,
+   "bytes": 6133
+  },
+  {
+   "top": "_post_0801d.py",
+   "count": 1,
+   "bytes": 645
+  },
+  {
+   "top": "_post_0801wake.out.txt",
+   "count": 1,
+   "bytes": 6577
+  },
+  {
+   "top": "_post_0801wake.py",
+   "count": 1,
+   "bytes": 639
+  },
+  {
+   "top": "_post_0802d.py",
+   "count": 1,
+   "bytes": 1662
+  },
+  {
+   "top": "_post_0803b.py",
+   "count": 1,
+   "bytes": 4550
+  },
+  {
+   "top": "_post_chat_0731f.py",
+   "count": 1,
+   "bytes": 4374
+  },
+  {
+   "top": "_post_chat_0801.py",
+   "count": 1,
+   "bytes": 5613
+  },
+  {
+   "top": "_post_chat_0801.txt",
+   "count": 1,
+   "bytes": 5198
+  },
+  {
+   "top": "_post_chat_0801a.py",
+   "count": 1,
+   "bytes": 9685
+  },
+  {
+   "top": "_post_chat_0801b.py",
+   "count": 1,
+   "bytes": 2291
+  },
+  {
+   "top": "_post_chat_0801n.py",
+   "count": 1,
+   "bytes": 5652
+  },
+  {
+   "top": "_post_chat_0801r2.py",
+   "count": 1,
+   "bytes": 7224
+  },
+  {
+   "top": "_post_chat_0801w.py",
+   "count": 1,
+   "bytes": 2526
+  },
+  {
+   "top": "_post_chat_0801y.py",
+   "count": 1,
+   "bytes": 5090
+  },
+  {
+   "top": "_post_chat_20260731d.py",
+   "count": 1,
+   "bytes": 4747
+  },
+  {
+   "top": "_post_chat_20260731e.py",
+   "count": 1,
+   "bytes": 6794
+  },
+  {
+   "top": "_post_cosign_0801.py",
+   "count": 1,
+   "bytes": 6040
+  },
+  {
+   "top": "_post_inbox_0801n.py",
+   "count": 1,
+   "bytes": 3307
+  },
+  {
+   "top": "_post_review2_0801.py",
+   "count": 1,
+   "bytes": 657
+  },
+  {
+   "top": "_post_review_0801.py",
+   "count": 1,
+   "bytes": 650
+  },
+  {
+   "top": "_post_review_0801b.py",
+   "count": 1,
+   "bytes": 5516
+  },
+  {
+   "top": "_probe_0801_codex_wake_latency.py",
+   "count": 1,
+   "bytes": 3801
+  },
+  {
+   "top": "_probe_0801_peer_silence.py",
+   "count": 1,
+   "bytes": 1475
+  },
+  {
+   "top": "_probe_0802_push_precedent.out.json",
+   "count": 1,
+   "bytes": 6640
+  },
+  {
+   "top": "_probe_0802_push_precedent.py",
+   "count": 1,
+   "bytes": 1231
+  },
+  {
+   "top": "_probe_0802_redaction_followup.out.json",
+   "count": 1,
+   "bytes": 50126
+  },
+  {
+   "top": "_probe_0802_redaction_followup.py",
+   "count": 1,
+   "bytes": 968
+  },
+  {
+   "top": "_probe_0802_redaction_status.err.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_probe_0802_redaction_status.out.json",
+   "count": 1,
+   "bytes": 38784
+  },
+  {
+   "top": "_probe_0802_redaction_status.py",
+   "count": 1,
+   "bytes": 3210
+  },
+  {
+   "top": "_probe_0802gib.err.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_probe_0802rerun.err.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_probe_0802rerun.json",
+   "count": 1,
+   "bytes": 15798
+  },
+  {
+   "top": "_probe_alias.out.txt",
+   "count": 1,
+   "bytes": 3407
+  },
+  {
+   "top": "_probe_canon_0802.out.txt",
+   "count": 1,
+   "bytes": 3083
+  },
+  {
+   "top": "_probe_canon_0802b.out.txt",
+   "count": 1,
+   "bytes": 3483
+  },
+  {
+   "top": "_probe_reg_0802.txt",
+   "count": 1,
+   "bytes": 2317
+  },
+  {
+   "top": "_probe_rerun_0801d.err",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_probe_rerun_0801d.json",
+   "count": 1,
+   "bytes": 136961
+  },
+  {
+   "top": "_probe_schema_peek.py",
+   "count": 1,
+   "bytes": 1015
+  },
+  {
+   "top": "_prosp_0801n.json",
+   "count": 1,
+   "bytes": 202496
+  },
+  {
+   "top": "_prosp_c.json",
+   "count": 1,
+   "bytes": 193554
+  },
+  {
+   "top": "_pushscan_0802.err.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_pushscan_0802.out.json",
+   "count": 1,
+   "bytes": 270595
+  },
+  {
+   "top": "_pytest_0802ff.txt",
+   "count": 1,
+   "bytes": 932
+  },
+  {
+   "top": "_read_0730_prop.py",
+   "count": 1,
+   "bytes": 411
+  },
+  {
+   "top": "_read_0730_prop.txt",
+   "count": 1,
+   "bytes": 13755
+  },
+  {
+   "top": "_read_brief2_0801r.py",
+   "count": 1,
+   "bytes": 299
+  },
+  {
+   "top": "_read_brief3_0801r.py",
+   "count": 1,
+   "bytes": 318
+  },
+  {
+   "top": "_read_brief_0801a.py",
+   "count": 1,
+   "bytes": 1208
+  },
+  {
+   "top": "_read_brief_0801r.py",
+   "count": 1,
+   "bytes": 533
+  },
+  {
+   "top": "_read_brief_b.py",
+   "count": 1,
+   "bytes": 423
+  },
+  {
+   "top": "_read_brief_wake.py",
+   "count": 1,
+   "bytes": 531
+  },
+  {
+   "top": "_read_census_0801.py",
+   "count": 1,
+   "bytes": 1191
+  },
+  {
+   "top": "_read_chat_0801a.py",
+   "count": 1,
+   "bytes": 554
+  },
+  {
+   "top": "_read_chat_0801b.py",
+   "count": 1,
+   "bytes": 457
+  },
+  {
+   "top": "_read_goal_r5.py",
+   "count": 1,
+   "bytes": 389
+  },
+  {
+   "top": "_read_head_0802.py",
+   "count": 1,
+   "bytes": 610
+  },
+  {
+   "top": "_read_lineage_0801.py",
+   "count": 1,
+   "bytes": 797
+  },
+  {
+   "top": "_read_lineage_0802.py",
+   "count": 1,
+   "bytes": 555
+  },
+  {
+   "top": "_read_prosp_0801a.py",
+   "count": 1,
+   "bytes": 737
+  },
+  {
+   "top": "_read_prosp_0801b.py",
+   "count": 1,
+   "bytes": 1058
+  },
+  {
+   "top": "_read_shadow_0801.py",
+   "count": 1,
+   "bytes": 549
+  },
+  {
+   "top": "_read_show_0802.py",
+   "count": 1,
+   "bytes": 456
+  },
+  {
+   "top": "_read_showhead_0802.py",
+   "count": 1,
+   "bytes": 517
+  },
+  {
+   "top": "_read_stops_0801.py",
+   "count": 1,
+   "bytes": 486
+  },
+  {
+   "top": "_readbrief2_0802c.py",
+   "count": 1,
+   "bytes": 665
+  },
+  {
+   "top": "_readbrief_0802c.py",
+   "count": 1,
+   "bytes": 995
+  },
+  {
+   "top": "_readprop_0801L.py",
+   "count": 1,
+   "bytes": 430
+  },
+  {
+   "top": "_readprop_0801L.txt",
+   "count": 1,
+   "bytes": 5365
+  },
+  {
+   "top": "_rebuild_0802a.txt",
+   "count": 1,
+   "bytes": 380
+  },
+  {
+   "top": "_recall_0801L.txt",
+   "count": 1,
+   "bytes": 40775
+  },
+  {
+   "top": "_recall_0801_new.txt",
+   "count": 1,
+   "bytes": 40791
+  },
+  {
+   "top": "_recall_0801b.json",
+   "count": 1,
+   "bytes": 40800
+  },
+  {
+   "top": "_recall_0801f.json",
+   "count": 1,
+   "bytes": 40844
+  },
+  {
+   "top": "_recall_0801final.txt",
+   "count": 1,
+   "bytes": 40943
+  },
+  {
+   "top": "_recall_0801n.json",
+   "count": 1,
+   "bytes": 61545
+  },
+  {
+   "top": "_recall_0801new.json",
+   "count": 1,
+   "bytes": 40755
+  },
+  {
+   "top": "_recall_0801r.txt",
+   "count": 1,
+   "bytes": 40794
+  },
+  {
+   "top": "_recall_0801r2.txt",
+   "count": 1,
+   "bytes": 40815
+  },
+  {
+   "top": "_recall_0801w.json",
+   "count": 1,
+   "bytes": 61436
+  },
+  {
+   "top": "_recall_0801wake.txt",
+   "count": 1,
+   "bytes": 40841
+  },
+  {
+   "top": "_recall_0801x.json",
+   "count": 1,
+   "bytes": 61456
+  },
+  {
+   "top": "_recall_0801y.txt",
+   "count": 1,
+   "bytes": 40871
+  },
+  {
+   "top": "_recall_0801z.json",
+   "count": 1,
+   "bytes": 61428
+  },
+  {
+   "top": "_recall_0802.json",
+   "count": 1,
+   "bytes": 40951
+  },
+  {
+   "top": "_recall_0802.txt",
+   "count": 1,
+   "bytes": 40815
+  },
+  {
+   "top": "_recall_0802a.txt",
+   "count": 1,
+   "bytes": 41015
+  },
+  {
+   "top": "_recall_0802b.txt",
+   "count": 1,
+   "bytes": 40989
+  },
+  {
+   "top": "_recall_0802c.json",
+   "count": 1,
+   "bytes": 40812
+  },
+  {
+   "top": "_recall_0802w.json",
+   "count": 1,
+   "bytes": 41061
+  },
+  {
+   "top": "_recall_0802wake.json",
+   "count": 1,
+   "bytes": 41061
+  },
+  {
+   "top": "_recall_0802wake.txt",
+   "count": 1,
+   "bytes": 41039
+  },
+  {
+   "top": "_recall_20260731_wake.json",
+   "count": 1,
+   "bytes": 86401
+  },
+  {
+   "top": "_recall_20260731b.json",
+   "count": 1,
+   "bytes": 86331
+  },
+  {
+   "top": "_recall_20260731c.json",
+   "count": 1,
+   "bytes": 87309
+  },
+  {
+   "top": "_recall_20260801a.json",
+   "count": 1,
+   "bytes": 61408
+  },
+  {
+   "top": "_recall_timing_0801.json",
+   "count": 1,
+   "bytes": 61408
+  },
+  {
+   "top": "_recall_wake_0731f.json",
+   "count": 1,
+   "bytes": 86404
+  },
+  {
+   "top": "_receipt2_0801auto.py",
+   "count": 1,
+   "bytes": 4091
+  },
+  {
+   "top": "_receipt_0731f.py",
+   "count": 1,
+   "bytes": 3474
+  },
+  {
+   "top": "_receipt_0801auto.py",
+   "count": 1,
+   "bytes": 1805
+  },
+  {
+   "top": "_regex_extra_0801.py",
+   "count": 1,
+   "bytes": 615
+  },
+  {
+   "top": "_register_0805proxy.py",
+   "count": 1,
+   "bytes": 4202
+  },
+  {
+   "top": "_rev_a.json",
+   "count": 1,
+   "bytes": 2580
+  },
+  {
+   "top": "_rev_authviz_0801.py",
+   "count": 1,
+   "bytes": 2698
+  },
+  {
+   "top": "_rev_self.json",
+   "count": 1,
+   "bytes": 1584
+  },
+  {
+   "top": "_rev_self2.json",
+   "count": 1,
+   "bytes": 1587
+  },
+  {
+   "top": "_review_0802.err.txt",
+   "count": 1,
+   "bytes": 1036
+  },
+  {
+   "top": "_review_0802b.err.txt",
+   "count": 1,
+   "bytes": 1036
+  },
+  {
+   "top": "_review_0802c.err.txt",
+   "count": 1,
+   "bytes": 1036
+  },
+  {
+   "top": "_reviewmsg2_0801.txt",
+   "count": 1,
+   "bytes": 2923
+  },
+  {
+   "top": "_reviewmsg_0801.txt",
+   "count": 1,
+   "bytes": 5304
+  },
+  {
+   "top": "_revlat_0801r.txt",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "_show2_0801auto.txt",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_show2_0801f.json",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_show2_0801w.json",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_show_0801.txt",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_show_0801adj.txt",
+   "count": 1,
+   "bytes": 5983
+  },
+  {
+   "top": "_show_0801auto.txt",
+   "count": 1,
+   "bytes": 1556
+  },
+  {
+   "top": "_show_0801f.json",
+   "count": 1,
+   "bytes": 6772
+  },
+  {
+   "top": "_show_0801n.json",
+   "count": 1,
+   "bytes": 484
+  },
+  {
+   "top": "_show_0801new.json",
+   "count": 1,
+   "bytes": 1556
+  },
+  {
+   "top": "_show_0801rev.txt",
+   "count": 1,
+   "bytes": 1195
+  },
+  {
+   "top": "_show_0801rev3.txt",
+   "count": 1,
+   "bytes": 1554
+  },
+  {
+   "top": "_show_0801w.json",
+   "count": 1,
+   "bytes": 2150
+  },
+  {
+   "top": "_show_0802.txt",
+   "count": 1,
+   "bytes": 474
+  },
+  {
+   "top": "_show_0802b.txt",
+   "count": 1,
+   "bytes": 1556
+  },
+  {
+   "top": "_show_0802c.json",
+   "count": 1,
+   "bytes": 1376
+  },
+  {
+   "top": "_show_0802c.txt",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_show_0802e.txt",
+   "count": 1,
+   "bytes": 1532
+  },
+  {
+   "top": "_show_0802f.txt",
+   "count": 1,
+   "bytes": 5199
+  },
+  {
+   "top": "_show_0802p.json",
+   "count": 1,
+   "bytes": 1556
+  },
+  {
+   "top": "_show_0802q.json",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_show_0802t.json",
+   "count": 1,
+   "bytes": 1554
+  },
+  {
+   "top": "_show_ctx_0801.py",
+   "count": 1,
+   "bytes": 382
+  },
+  {
+   "top": "_show_dead_0802.txt",
+   "count": 1,
+   "bytes": 4327
+  },
+  {
+   "top": "_show_head_0801.json",
+   "count": 1,
+   "bytes": 1556
+  },
+  {
+   "top": "_show_head_0802.txt",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_show_head_0802b.json",
+   "count": 1,
+   "bytes": 1556
+  },
+  {
+   "top": "_show_head_0802c.json",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_show_head_0802v2.txt",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_showhead2_0802W.json",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_showhead_0801y.json",
+   "count": 1,
+   "bytes": 1554
+  },
+  {
+   "top": "_showhead_0802.txt",
+   "count": 1,
+   "bytes": 1557
+  },
+  {
+   "top": "_showhead_0802W.json",
+   "count": 1,
+   "bytes": 1556
+  },
+  {
+   "top": "_showsumm2_0801f.py",
+   "count": 1,
+   "bytes": 223
+  },
+  {
+   "top": "_showsumm_0801f.py",
+   "count": 1,
+   "bytes": 358
+  },
+  {
+   "top": "_slice2_0801FINAL.py",
+   "count": 1,
+   "bytes": 981
+  },
+  {
+   "top": "_slice2_0801FINAL.txt",
+   "count": 1,
+   "bytes": 6333
+  },
+  {
+   "top": "_slice2_0801L.py",
+   "count": 1,
+   "bytes": 716
+  },
+  {
+   "top": "_slice2_0801L.txt",
+   "count": 1,
+   "bytes": 2904
+  },
+  {
+   "top": "_slice2_0801NEW.py",
+   "count": 1,
+   "bytes": 692
+  },
+  {
+   "top": "_slice2_0801NEW.txt",
+   "count": 1,
+   "bytes": 4714
+  },
+  {
+   "top": "_slice_0801FINAL.py",
+   "count": 1,
+   "bytes": 1198
+  },
+  {
+   "top": "_slice_0801FINAL.txt",
+   "count": 1,
+   "bytes": 14192
+  },
+  {
+   "top": "_slice_0801L.py",
+   "count": 1,
+   "bytes": 915
+  },
+  {
+   "top": "_slice_0801L.txt",
+   "count": 1,
+   "bytes": 10518
+  },
+  {
+   "top": "_slice_0801NEW.py",
+   "count": 1,
+   "bytes": 1089
+  },
+  {
+   "top": "_slice_0801NEW.txt",
+   "count": 1,
+   "bytes": 15727
+  },
+  {
+   "top": "_summ_0801f.py",
+   "count": 1,
+   "bytes": 961
+  },
+  {
+   "top": "_summ_0801f.txt",
+   "count": 1,
+   "bytes": 6466
+  },
+  {
+   "top": "_tail2_0801r.py",
+   "count": 1,
+   "bytes": 206
+  },
+  {
+   "top": "_tail_0801FINAL.py",
+   "count": 1,
+   "bytes": 614
+  },
+  {
+   "top": "_tail_0801FINAL.txt",
+   "count": 1,
+   "bytes": 86236
+  },
+  {
+   "top": "_tail_0802W.py",
+   "count": 1,
+   "bytes": 473
+  },
+  {
+   "top": "_tail_0802c.py",
+   "count": 1,
+   "bytes": 484
+  },
+  {
+   "top": "_tail_pc_0801r.py",
+   "count": 1,
+   "bytes": 447
+  },
+  {
+   "top": "_tmp_3115.txt",
+   "count": 1,
+   "bytes": 5827
+  },
+  {
+   "top": "_tmp_3118.txt",
+   "count": 1,
+   "bytes": 5024
+  },
+  {
+   "top": "_untracked_census_0801.py",
+   "count": 1,
+   "bytes": 1017
+  },
+  {
+   "top": "_untracked_census_0801.txt",
+   "count": 1,
+   "bytes": 1144
+  },
+  {
+   "top": "_v4_pair_0801.txt",
+   "count": 1,
+   "bytes": 7926
+  },
+  {
+   "top": "_verify_append_0801f.py",
+   "count": 1,
+   "bytes": 537
+  },
+  {
+   "top": "_verify_order_0801L.py",
+   "count": 1,
+   "bytes": 1068
+  },
+  {
+   "top": "_verify_order_0801L.txt",
+   "count": 1,
+   "bytes": 412
+  },
+  {
+   "top": "_wake_0801_brief.txt",
+   "count": 1,
+   "bytes": 48117
+  },
+  {
+   "top": "_wake_0801_recall.json",
+   "count": 1,
+   "bytes": 40802
+  },
+  {
+   "top": "_wake_0802b.json",
+   "count": 1,
+   "bytes": 54746
+  },
+  {
+   "top": "_wake_brief_0731f.json",
+   "count": 1,
+   "bytes": 95175
+  },
+  {
+   "top": "_wake_brief_0801.txt",
+   "count": 1,
+   "bytes": 69568
+  },
+  {
+   "top": "_wake_brief_20260731.json",
+   "count": 1,
+   "bytes": 96503
+  },
+  {
+   "top": "_wake_brief_20260731_wake.json",
+   "count": 1,
+   "bytes": 98173
+  },
+  {
+   "top": "_wake_brief_20260731b.json",
+   "count": 1,
+   "bytes": 99151
+  },
+  {
+   "top": "_wake_brief_20260731c.json",
+   "count": 1,
+   "bytes": 95909
+  },
+  {
+   "top": "_wake_brief_20260801a.json",
+   "count": 1,
+   "bytes": 69394
+  },
+  {
+   "top": "_wake_recall_0801.json",
+   "count": 1,
+   "bytes": 61408
+  },
+  {
+   "top": "_wakebrief_0801.txt",
+   "count": 1,
+   "bytes": 69394
+  },
+  {
+   "top": "_wakebrief_0802.txt",
+   "count": 1,
+   "bytes": 48818
+  },
+  {
+   "top": "wf-20260724-054559-fadf1d",
+   "count": 1,
+   "bytes": 24
+  },
+  {
+   "top": "wl_show.err",
+   "count": 1,
+   "bytes": 0
+  },
+  {
+   "top": "wl_show.json",
+   "count": 1,
+   "bytes": 7370
+  },
+  {
+   "top": "wl_show2.json",
+   "count": 1,
+   "bytes": 1554
+  }
+ ],
+ "tracked_modified": [
+  {
+   "path": "README.md",
+   "added": 1,
+   "deleted": 1,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-05 19:31",
+   "size": 7387
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/_probe_20260731_live_artifact_recoverability.out.json",
+   "added": 4,
+   "deleted": 12,
+   "is_append_only_ledger": false,
+   "mtime": "2026-07-31 00:58",
+   "size": 16877
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/blocker-quarantine.jsonl",
+   "added": 2,
+   "deleted": 0,
+   "is_append_only_ledger": true,
+   "mtime": "2026-08-02 15:37",
+   "size": 47070
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/cited_artifact_receipt_check.py",
+   "added": 32,
+   "deleted": 17,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-01 08:22",
+   "size": 9914
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/codex-inbox-processed.jsonl",
+   "added": 15,
+   "deleted": 0,
+   "is_append_only_ledger": true,
+   "mtime": "2026-08-06 06:06",
+   "size": 6807
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/codex-inbox-replies.jsonl",
+   "added": 15,
+   "deleted": 0,
+   "is_append_only_ledger": true,
+   "mtime": "2026-08-06 06:05",
+   "size": 117188
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/codex-inbox.jsonl",
+   "added": 9,
+   "deleted": 0,
+   "is_append_only_ledger": true,
+   "mtime": "2026-08-06 05:53",
+   "size": 247920
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/concurrent-receipts.jsonl",
+   "added": 16,
+   "deleted": 0,
+   "is_append_only_ledger": true,
+   "mtime": "2026-08-06 21:15",
+   "size": 75050
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/peer-chat.corrections.jsonl",
+   "added": 1,
+   "deleted": 0,
+   "is_append_only_ledger": true,
+   "mtime": "2026-08-05 19:18",
+   "size": 24292
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl",
+   "added": 31,
+   "deleted": 0,
+   "is_append_only_ledger": true,
+   "mtime": "2026-08-06 21:32",
+   "size": 5057436
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/peer-health-alerts.jsonl",
+   "added": 6,
+   "deleted": 0,
+   "is_append_only_ledger": true,
+   "mtime": "2026-08-05 09:35",
+   "size": 4619
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/run_wake_cron.ps1",
+   "added": 69,
+   "deleted": 2,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-05 08:51",
+   "size": 14364
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/test_wake_recovery.py",
+   "added": 6,
+   "deleted": 1,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-04 21:29",
+   "size": 2815
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/test_wake_sentinel.py",
+   "added": 23,
+   "deleted": 3,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-04 21:29",
+   "size": 44005
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake_agent.ps1",
+   "added": 2,
+   "deleted": 2,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-04 20:34",
+   "size": 18367
+  },
+  {
+   "path": "proposals/bounded-scheduler-v0.1/impl/wake_codex.ps1",
+   "added": 1,
+   "deleted": 1,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-04 20:34",
+   "size": 6778
+  },
+  {
+   "path": "proposals/capture-contract-source-authenticity-v0.1/FINDING.md",
+   "added": 14,
+   "deleted": 0,
+   "is_append_only_ledger": false,
+   "mtime": "2026-07-27 02:38",
+   "size": 8396
+  },
+  {
+   "path": "proposals/cited-artifact-clone-reachability-v0.1/_probe_20260801_status_class_census.out.json",
+   "added": 15,
+   "deleted": 10,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-01 08:36",
+   "size": 2713
+  },
+  {
+   "path": "proposals/concurrent-receipt-frame-loss-v0.1/test_concurrent_receipts.py",
+   "added": 29,
+   "deleted": 4,
+   "is_append_only_ledger": false,
+   "mtime": "2026-07-27 02:38",
+   "size": 4964
+  },
+  {
+   "path": "proposals/frame-deadlock-recovery-v0.1/FINDING.md",
+   "added": 162,
+   "deleted": 0,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-03 16:23",
+   "size": 37640
+  },
+  {
+   "path": "proposals/mutual-aid-v0.1/peer_health.py",
+   "added": 65,
+   "deleted": 3,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-03 14:28",
+   "size": 7663
+  },
+  {
+   "path": "proposals/mutual-aid-v0.1/peer_health_wake.py",
+   "added": 92,
+   "deleted": 37,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-03 14:24",
+   "size": 29197
+  },
+  {
+   "path": "proposals/mutual-aid-v0.1/test_peer_health.py",
+   "added": 10,
+   "deleted": 3,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-03 14:26",
+   "size": 5216
+  },
+  {
+   "path": "proposals/mutual-aid-v0.1/test_peer_health_wake.py",
+   "added": 2,
+   "deleted": 1,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-03 14:26",
+   "size": 34546
+  },
+  {
+   "path": "proposals/projection-recall-staleness-v0.1/FINDING.md",
+   "added": 20,
+   "deleted": 4,
+   "is_append_only_ledger": false,
+   "mtime": "2026-07-27 02:38",
+   "size": 8490
+  },
+  {
+   "path": "proposals/public-release-consolidation-v0.1/INCLUSION_RECEIPT.json",
+   "added": 36,
+   "deleted": 6,
+   "is_append_only_ledger": false,
+   "mtime": "2026-07-27 03:46",
+   "size": 2110
+  },
+  {
+   "path": "proposals/public-release-consolidation-v0.1/LIVE_SKILL_SHA256.tsv",
+   "added": 5,
+   "deleted": 3,
+   "is_append_only_ledger": false,
+   "mtime": "2026-07-27 03:46",
+   "size": 4555
+  },
+  {
+   "path": "proposals/public-release-consolidation-v0.1/PUBLIC_BLOB_ACCOUNTING.tsv",
+   "added": 5,
+   "deleted": 5,
+   "is_append_only_ledger": false,
+   "mtime": "2026-07-27 03:46",
+   "size": 14174
+  },
+  {
+   "path": "proposals/public-release-consolidation-v0.1/verify_inclusion.py",
+   "added": 46,
+   "deleted": 9,
+   "is_append_only_ledger": false,
+   "mtime": "2026-07-27 02:38",
+   "size": 7869
+  },
+  {
+   "path": "proposals/redaction-gate-tree-subject-v0.1/_probe_20260802_review_canonical_mutation.out.json",
+   "added": 18,
+   "deleted": 12,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-02 15:58",
+   "size": 2048
+  },
+  {
+   "path": "proposals/redaction-gate-tree-subject-v0.1/test_scan_only_gate.py",
+   "added": 83,
+   "deleted": 0,
+   "is_append_only_ledger": false,
+   "mtime": "2026-08-02 15:35",
+   "size": 18150
+  }
+ ]
+}

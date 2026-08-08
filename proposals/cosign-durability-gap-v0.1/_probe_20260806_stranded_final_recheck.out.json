@@ -1,0 +1,26 @@
+{
+ "target": "proposals/bounded-scheduler-v0.1/impl/run_wake_cron.ps1",
+ "signed_final": "c485e953814a43ec7894afbacdf1de9f084f780d938adc89417245c4b60fc49d",
+ "worktree": {
+  "sha256": "65b5e1443ad90e1daf364fbe3eafd30ba7282c3e8d45b62948ffcaf07e7e693c",
+  "bytes": 14364,
+  "equals_signed_final": false
+ },
+ "head_blob": {
+  "rc": 0,
+  "sha256": "c485e953814a43ec7894afbacdf1de9f084f780d938adc89417245c4b60fc49d",
+  "bytes": 10107,
+  "equals_signed_final": true,
+  "stderr": null
+ },
+ "history_scan": {
+  "commits_touching_path": 8,
+  "distinct_blob_sha256_count": 8,
+  "commits_whose_blob_equals_signed_final": [
+   "f90a2f06ce828b8ef15e7c7551d2d21bd3671509"
+  ],
+  "signed_final_ever_committed_on_this_path": true
+ },
+ "limitation": "git object ids are sha1(header+content); the signed final is a sha256 of raw content, so no direct object-db lookup is possible. history_scan covers every committed version of THIS path only -- the bytes could in principle exist under a different path.",
+ "verdict": "REPAIRED_signed_final_reached_git"
+}
