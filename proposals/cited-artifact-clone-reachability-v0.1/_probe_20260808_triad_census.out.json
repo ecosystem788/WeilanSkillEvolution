@@ -1,0 +1,16 @@
+{
+  "authority": "read_only_measurement",
+  "boundary": "extraction and classification only; not evidentiary verifiability",
+  "ledger_rows": 3614,
+  "parse_errors": 3,
+  "probe": "post_fix_live_census_triad_wrapup_20260808",
+  "status_counts": {
+    "disk_only": 74,
+    "history_only": 3,
+    "ignored": 12,
+    "missing": 79,
+    "tracked_head": 829,
+    "unresolvable_component": 6
+  },
+  "total_citations": 1003
+}
