@@ -1,0 +1,94 @@
+{
+  "analytic_note": "cited_artifact_receipt_check._classify orders tracked_head -> history_only -> ignored -> disk_only -> missing, and reaches disk_only only for a path that exists on the filesystem while being absent from git. In a clean clone every on-disk path is tracked or ignored, so disk_only is identically zero there for any ledger. That bucket is not made reproducible by committing anything.",
+  "authority": "read_only_measurement",
+  "boundary": "one repository, one pinned commit, one platform; no repeats. Cell C holds the tree constant and varies only ledger content, so it attributes the tree effect; it does not model a third party who also lacks the live ledger. Says nothing about whether the reviewed fix (887ec7b) is correct -- only about whether its live_ledger_check evidence is third-party recomputable.",
+  "cells": {
+    "A_committed_snapshot": {
+      "ledger_rows": 3614,
+      "reproducible": "pinned (committed file)",
+      "status_counts": {
+        "disk_only": 74,
+        "history_only": 3,
+        "ignored": 12,
+        "missing": 79,
+        "tracked_head": 829,
+        "unresolvable_component": 6
+      },
+      "total_citations": 1003
+    },
+    "B_clean_clone": {
+      "ledger_rows": 3480,
+      "reproducible": "pinned (clean clone at pinned commit)",
+      "status_counts": {
+        "history_only": 1,
+        "ignored": 2,
+        "missing": 132,
+        "tracked_head": 768,
+        "unresolvable_component": 6
+      },
+      "total_citations": 909
+    },
+    "C_clean_clone_live_ledger": {
+      "ledger_rows": 3617,
+      "reproducible": "shape only -- digits drift as the live ledger grows",
+      "status_counts": {
+        "history_only": 3,
+        "ignored": 12,
+        "missing": 154,
+        "tracked_head": 831,
+        "unresolvable_component": 8
+      },
+      "total_citations": 1008
+    }
+  },
+  "clone": {
+    "dirty_entries_after_checkout": 0,
+    "head": "08a28823f8291e85221b83ccdf414a9e43eb24e6",
+    "reused_existing": true,
+    "work_dir": "D:\\wse-probe-clone-08a2882"
+  },
+  "comparison": {
+    "disk_only": {
+      "A_committed_snapshot": 74,
+      "B_clean_clone": 0,
+      "C_clean_clone_live_ledger": 0
+    },
+    "history_only": {
+      "A_committed_snapshot": 3,
+      "B_clean_clone": 1,
+      "C_clean_clone_live_ledger": 3
+    },
+    "ignored": {
+      "A_committed_snapshot": 12,
+      "B_clean_clone": 2,
+      "C_clean_clone_live_ledger": 12
+    },
+    "missing": {
+      "A_committed_snapshot": 79,
+      "B_clean_clone": 132,
+      "C_clean_clone_live_ledger": 154
+    },
+    "tracked_head": {
+      "A_committed_snapshot": 829,
+      "B_clean_clone": 768,
+      "C_clean_clone_live_ledger": 831
+    },
+    "unresolvable_component": {
+      "A_committed_snapshot": 6,
+      "B_clean_clone": 6,
+      "C_clean_clone_live_ledger": 8
+    }
+  },
+  "generated_at_utc": "2026-08-08T09:23:39.576875+00:00",
+  "ledger_provenance": {
+    "last_commit_touching_ledger": "97d112967f4622a8cddb0d82ec7c0b42d9cb720a 2026-08-06 10:14:44 +0900 @Land wake-cadence-pt1m-cosign-v0.1: 签认 PT1M/PT1H 为设计节奏 (双签:提案 2026-08-06T09:10:55+09:00 + 同意 2026-08-06T09:19:15+09:00; peer-chat 账本轨迹 3478-3483)",
+    "note": "physical line counts include the three unparseable rows that the generator's ledger_rows excludes.",
+    "physical_lines_at_pinned_commit": 3483,
+    "physical_lines_in_worktree": 3620,
+    "relpath": "proposals/bounded-scheduler-v0.1/impl/peer-chat.jsonl"
+  },
+  "pinned_commit": "08a28823f8291e85221b83ccdf414a9e43eb24e6",
+  "probe": "clone_recompute_vs_readability_20260808",
+  "question": "Does committing an evidence snapshot make the measurement it records recomputable from a clean clone, or only readable?",
+  "time_authority": "process_clock"
+}
