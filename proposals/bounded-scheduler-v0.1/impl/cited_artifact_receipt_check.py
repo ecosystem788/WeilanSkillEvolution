@@ -50,7 +50,7 @@ EXTENSIONS = (
     ".yml",
 )
 PATH_RE = re.compile(
-    r"(?<![A-Za-z0-9_./:\\-])(?:"
+    r"(?<![A-Za-z0-9_./\\-])(?<![A-Za-z0-9]:)(?:"
     r"(?:" + "|".join(re.escape(item) for item in DIRECTORIES) + r")/"
     r"[A-Za-z0-9_./+\-]+|"
     + "|".join(re.escape(item) for item in ROOT_FILES)
@@ -131,13 +131,18 @@ def _is_ignored(root: Path, path: str) -> bool:
 def _classify(
     *, root: Path, path: str, tracked: set[str], historical: set[str]
 ) -> str:
+    pure_path = PurePosixPath(path)
+    if pure_path.is_absolute() or any(part in ("", ".", "..") for part in pure_path.parts):
+        raise CheckError("invalid_path", f"path escapes root: {path}")
+    if any(part == "..." for part in pure_path.parts):
+        return "unresolvable_component"
     if path in tracked:
         return "tracked_head"
     if path in historical:
         return "history_only"
     if _is_ignored(root, path):
         return "ignored"
-    disk_path = (root / Path(*PurePosixPath(path).parts)).resolve()
+    disk_path = (root / Path(*pure_path.parts)).resolve()
     try:
         disk_path.relative_to(root)
     except ValueError as exc:
@@ -200,20 +205,29 @@ def check_bucket(*, root: Path, author: str, timestamp: str) -> dict[str, object
     for line_number, raw, record in matches:
         citations = []
         for path in cited_paths(record.get("text")):
-            status = _classify(
-                root=repository_root,
-                path=path,
-                tracked=tracked,
-                historical=historical,
-            )
-            counts[status] += 1
-            citations.append(
-                {
-                    "path": path,
-                    "status": status,
-                    "source_ref": f"{LEDGER_NAME}:{line_number}@{timestamp}",
+            classification_error = None
+            try:
+                status = _classify(
+                    root=repository_root,
+                    path=path,
+                    tracked=tracked,
+                    historical=historical,
+                )
+            except CheckError as exc:
+                status = f"check_error:{exc.reason}"
+                classification_error = {
+                    "reason": exc.reason,
+                    "detail": exc.detail,
                 }
-            )
+            counts[status] += 1
+            citation = {
+                "path": path,
+                "status": status,
+                "source_ref": f"{LEDGER_NAME}:{line_number}@{timestamp}",
+            }
+            if classification_error is not None:
+                citation["classification_error"] = classification_error
+            citations.append(citation)
         records.append(
             {
                 "physical_line": line_number,
@@ -225,7 +239,8 @@ def check_bucket(*, root: Path, author: str, timestamp: str) -> dict[str, object
             }
         )
 
-    warning_count = counts["disk_only"] + counts["missing"]
+    warning_statuses = ["disk_only", "ignored", "missing", "unresolvable_component"]
+    warning_count = sum(counts[status] for status in warning_statuses)
     return {
         "check": "cited_artifact_receipt_visibility",
         "authority": "report_only",
@@ -237,7 +252,7 @@ def check_bucket(*, root: Path, author: str, timestamp: str) -> dict[str, object
         "records": records,
         "status_counts": dict(sorted(counts.items())),
         "warning_count": warning_count,
-        "warning_statuses": ["disk_only", "missing"],
+        "warning_statuses": warning_statuses,
         "parse_errors": parse_errors,
         "boundary": "cited reachability is not artifact completeness or evidentiary verifiability",
     }
