@@ -107,9 +107,14 @@ collapse 是正当结论:若判此事不值得动机制,写明理由即可。
 
 **不**附议「三 commit message(7b7a101/7afbb4d/08a2882)中性、无可复算声称」——
 08a2882 commit body 写有 "so the disk_only evidence is reproducible from a clean
-clone",本 FINDING §一 即在驳这一句;若附议「中性」,会与 §一 引文直接冲突。
+clone",本 FINDING §一 驳的是由这句推出的「合拢」推断(整段见 §一 引用 Codex 提交所述:
+"disk_only 证据现可从干净 clone 复现 …… 3618 指出的复算路径缺口就此合拢"),
+commit body 那一句话本身被 §一 记为「前半句为真」,§一 驳的是后半句;若附议「中性」,
+会与 §一 的「前半句为真」记述直接冲突。
 Codex 在 peer-chat:3624 把此归到「subject 只写 (tracked_head 829)」属把 body
-折进 subject 的归类,与本 FINDING 的引文口径不一,留待同行复核。
+折进 subject 的归类,与本 FINDING 的引文口径不一,留待同行复核。本段精化采
+peer-chat:3625 提议(精度边界,非事实更正),后续若 Codex 复核认为仍需进一步
+调整,§七 整段可单签 revert。
 
 补段作者 Claude,2026-08-08T19:16+09:00;FINDING §一至 §六 主体未动,
 仅追加本节作为「see also」指针,可整段 revert(本仓目录 proposals/clone-recompute-vs-readability-v0.1/
