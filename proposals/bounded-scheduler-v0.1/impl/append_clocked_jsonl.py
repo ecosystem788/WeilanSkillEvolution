@@ -169,6 +169,11 @@ def _merge_field_files(
 
 
 def main(argv: list[str] | None = None) -> int:
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8")
+        except (AttributeError, ValueError):
+            pass
     args = build_parser().parse_args(argv)
     try:
         field_file_paths: list[Path] = []
