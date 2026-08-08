@@ -11,7 +11,7 @@ import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from peer_health import check_peer_liveness
+from peer_health import check_peer_liveness, export_sentinel_alerts
 
 
 WAKE_BRIEF_IMPL = Path(__file__).resolve().parents[1] / "bounded-scheduler-v0.1" / "impl"
@@ -26,6 +26,8 @@ CLAUDE_ACTIVITY_RUNS = "wake-agent-runs"
 CODEX_HEARTBEAT_RUNS = "wake-codex-runs"
 ORPHAN_STREAK_MINIMUM = 10
 _STALE_HEAD = re.compile(r'(?:stage=|"stage"\s*:\s*")frame_open_stale_head')
+_FRAME_OPEN_FAMILY = re.compile(r'(?:stage=|"stage"\s*:\s*")frame_open(?:_stale_head)?')
+_CAUSAL_PARENT_TERMINAL = re.compile(r'causal parent must be terminal')
 _ATTEMPTED_PARENT = re.compile(r'(?:attempted_parent=|"attempted_parent"\s*:\s*")(?P<parent>wf-[0-9A-Za-z-]+)')
 _RAW_TIME = re.compile(r'"time"\s*:\s*"(?P<time>[^"\\]*(?:\\.[^"\\]*)*)"')
 _SHA256 = re.compile(r"[0-9a-f]{64}")
@@ -183,6 +185,18 @@ def _local_time_as_utc(value: object) -> datetime:
     return parsed.replace(tzinfo=LOCAL_TZ).astimezone(timezone.utc)
 
 
+def _row_is_clocked(row: Mapping[str, object]) -> bool:
+    if row.get("time_authority") != "clock":
+        return False
+    raw = row.get("time")
+    if not isinstance(raw, str):
+        return False
+    try:
+        parsed = datetime.fromisoformat(raw.strip())
+    except ValueError:
+        return False
+    return parsed.tzinfo is not None
+
 def _run_stamp_as_utc(path: Path) -> datetime:
     parsed = datetime.strptime(path.stem, "%Y-%m-%dT%H-%M-%S")
     return parsed.replace(tzinfo=LOCAL_TZ).astimezone(timezone.utc)
@@ -315,7 +329,7 @@ def _claude_activity_anchor(
     if peer_chat_head is not None:
         line_number, row = peer_chat_head
         stamp = _local_time_as_utc(row.get("time"))
-        if row.get("time_authority") == "clock" or stamp <= now_utc:
+        if _row_is_clocked(row) or stamp <= now_utc:
             activities.append(
                 (stamp, f"peer-chat.jsonl:{line_number}@{row['time']} (claude activity)")
             )
@@ -327,7 +341,7 @@ def _claude_activity_anchor(
     if receipt_head is not None:
         line_number, row = receipt_head
         stamp = _local_time_as_utc(row.get("time"))
-        if row.get("time_authority") == "clock" or stamp <= now_utc:
+        if _row_is_clocked(row) or stamp <= now_utc:
             activities.append(
                 (stamp, f"concurrent-receipts.jsonl:{line_number}@{row['time']} (claude wake)")
             )
@@ -454,55 +468,101 @@ def run_reverse_check(
 
 
 def _orphan_frame_alert(*, root: Path, now: datetime) -> list[dict]:
-    """Alert on only the terminal same-parent stale-head suffix; repair nothing."""
+    """Alert on terminal same-parent frame_open errors with semantic dual condition.
+
+    Matches lines where: (a) stage is in the frame_open family (covers both old
+    frame_open_stale_head and new frame_open), AND (b) line contains
+    'causal parent must be terminal'. Also reports unrecognized terminal
+    suffixes instead of silently returning empty.
+    """
     log_path = root / "wake-cron.log"
     if not log_path.exists():
         return []
 
     streak: list[tuple[str, str]] = []
     parent: str | None = None
+    unrecognized_count = 0
+    unrecognized_first: str | None = None
+    unrecognized_last: str | None = None
+
     for line in reversed(log_path.read_text(encoding="utf-8").splitlines()):
         match = _ATTEMPTED_PARENT.search(line)
-        if not _STALE_HEAD.search(line) or match is None:
+        if match is None:
             break
-        line_parent = match.group("parent")
-        if parent is None:
-            parent = line_parent
-        elif line_parent != parent:
-            break
-        stamp = line.split(maxsplit=1)[0]
-        streak.append((stamp, line_parent))
 
-    if parent is None or len(streak) < ORPHAN_STREAK_MINIMUM:
-        return []
+        has_frame_open = _FRAME_OPEN_FAMILY.search(line) is not None
+        has_causal = _CAUSAL_PARENT_TERMINAL.search(line) is not None
+
+        if has_frame_open and has_causal:
+            line_parent = match.group("parent")
+            if parent is None:
+                parent = line_parent
+            elif line_parent != parent:
+                break
+            stamp = line.split(maxsplit=1)[0]
+            streak.append((stamp, line_parent))
+            unrecognized_count = 0
+        else:
+            if "ERROR" in line:
+                unrecognized_count += 1
+                stamp = line.split(maxsplit=1)[0]
+                if unrecognized_last is None:
+                    unrecognized_last = stamp
+                unrecognized_first = stamp
+            else:
+                break
 
     alerts_path = root / "peer-health-alerts.jsonl"
-    previous = None
-    for _, row in _rows(alerts_path):
-        if row.get("kind") == "orphan_frame" and row.get("parent_frame_id") == parent:
-            previous = row
-    if previous and previous.get("event") in {"raised", "reopened"}:
-        return []
-
-    chronological = list(reversed(streak))
-    event = {
-        "id": uuid.uuid4().hex[:12],
-        "time": now.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
-        "event": "reopened" if previous and previous.get("event") == "resolved" else "raised",
-        "kind": "orphan_frame",
-        "status": "suspected",
-        "incident_key": f"orphan_frame:{parent}",
-        "parent_frame_id": parent,
-        "first_error_time": chronological[0][0],
-        "last_error_time": chronological[-1][0],
-        "consecutive_count": len(chronological),
-        "source_ref": "wake-cron.log terminal suffix",
-        "authority": "none",
-    }
     alerts_path.parent.mkdir(parents=True, exist_ok=True)
-    with alerts_path.open("a", encoding="utf-8", newline="\n") as stream:
-        stream.write(json.dumps(event, ensure_ascii=False, separators=(",", ":")) + "\n")
-    return [event]
+    appended: list[dict] = []
+    now_str = now.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+    # Report unrecognized terminal suffix (visible, not silent)
+    if unrecognized_count >= ORPHAN_STREAK_MINIMUM and parent is None:
+        event = {
+            "id": uuid.uuid4().hex[:12],
+            "time": now_str,
+            "event": "raised",
+            "kind": "unrecognized_terminal_suffix",
+            "status": "suspected",
+            "incident_key": "unrecognized_terminal_suffix",
+            "consecutive_count": unrecognized_count,
+            "first_error_time": unrecognized_first,
+            "last_error_time": unrecognized_last,
+            "source_ref": "wake-cron.log terminal suffix",
+            "authority": "none",
+            "note": "Sentinel scanned consecutive ERROR lines but could not match known frame_open + causal_parent pattern. Needs human review of wake-cron.log terminal suffix.",
+        }
+        with alerts_path.open("a", encoding="utf-8", newline="\n") as stream:
+            stream.write(json.dumps(event, ensure_ascii=False, separators=(",", ":")) + "\n")
+        appended.append(event)
+
+    if parent is not None and len(streak) >= ORPHAN_STREAK_MINIMUM:
+        previous = None
+        for _, row in _rows(alerts_path):
+            if row.get("kind") == "orphan_frame" and row.get("parent_frame_id") == parent:
+                previous = row
+        if not (previous and previous.get("event") in {"raised", "reopened"}):
+            chronological = list(reversed(streak))
+            event = {
+                "id": uuid.uuid4().hex[:12],
+                "time": now_str,
+                "event": "reopened" if previous and previous.get("event") == "resolved" else "raised",
+                "kind": "orphan_frame",
+                "status": "suspected",
+                "incident_key": "orphan_frame:" + parent,
+                "parent_frame_id": parent,
+                "first_error_time": chronological[0][0],
+                "last_error_time": chronological[-1][0],
+                "consecutive_count": len(chronological),
+                "source_ref": "wake-cron.log terminal suffix",
+                "authority": "none",
+            }
+            with alerts_path.open("a", encoding="utf-8", newline="\n") as stream:
+                stream.write(json.dumps(event, ensure_ascii=False, separators=(",", ":")) + "\n")
+            appended.append(event)
+
+    return appended
 
 
 def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float = 6) -> CheckResult:
@@ -538,7 +598,7 @@ def run_check(*, root: Path, now: datetime | None = None, threshold_hours: float
                 stamp = _local_time_as_utc(row.get("time"))
                 # An authored/unknown stamp claiming the future is a guess, not evidence:
                 # drop the candidate so a tool-generated anchor can still measure silence.
-                if row.get("time_authority") == "clock" or stamp <= now_utc:
+                if _row_is_clocked(row) or stamp <= now_utc:
                     activities.append(
                         (stamp, f"{name}:{line_number}@{row['time']} (codex activity)")
                     )
@@ -658,6 +718,13 @@ def main(argv: list[str] | None = None) -> int:
     except (OSError, ValueError) as exc:
         print(f"peer-health check skipped: {exc}", file=sys.stderr)
         return 1
+    # §1.3: Export sentinel alerts to peer-chat + wake-deadlock-alert.md
+    export_sentinel_alerts(
+        appended_alerts=list(appended),
+        alerts_path=args.root / "peer-health-alerts.jsonl",
+        impl_dir=args.root,
+        now=datetime.now(timezone.utc),
+    )
     print(
         json.dumps(
             {

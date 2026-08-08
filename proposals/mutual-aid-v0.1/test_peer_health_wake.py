@@ -65,7 +65,8 @@ def alerts(root):
 def cron_line(stamp: str, parent: str) -> str:
     return (
         f'{stamp} ERROR rc=3 stage=native_exit stderr={{"frame_commit_failure":'
-        f'{{"stage":"frame_open_stale_head","attempted_parent":"{parent}"}}}}'
+        f'{{"stage":"frame_open_stale_head","attempted_parent":"{parent}",'
+        f'"diagnostic":"causal parent must be terminal: {parent}"}}}}'
     )
 
 
@@ -857,3 +858,38 @@ def test_reverse_unresolved_same_anchor_is_reported_once(tmp_path):
     assert len(run_reverse_check(root=tmp_path, now=now)) == 1
     assert run_reverse_check(root=tmp_path, now=now) == []
     assert len(alerts(tmp_path)) == 1
+
+def test_naive_clock_past_claude_row_still_forms_activity_anchor(tmp_path):
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {
+            "from": "claude",
+            "time": "2026-07-16 10:00:00",
+            "time_authority": "clock",
+            "text": "legacy hand-written clock row",
+        },
+    )
+    result = run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc))
+    assert result == []
+    assert result.clock_anomaly is None
+    assert result.activity_anchor == {
+        "time_utc": "2026-07-16T01:00:00+00:00",
+        "source_ref": "peer-chat.jsonl:1@2026-07-16 10:00:00 (claude activity)",
+    }
+
+
+def test_naive_clock_future_claude_row_is_dropped_by_future_guard(tmp_path):
+    append(
+        tmp_path / "peer-chat.jsonl",
+        {
+            "from": "claude",
+            "time": "2026-07-16 23:30:00",
+            "time_authority": "clock",
+            "text": "legacy hand-written future clock row",
+        },
+    )
+    result = run_reverse_check(root=tmp_path, now=datetime(2026, 7, 16, 12, tzinfo=timezone.utc))
+    assert result == []
+    assert result.activity_anchor is None
+    assert result.clock_anomaly is None
+
