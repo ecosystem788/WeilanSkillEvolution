@@ -206,15 +206,31 @@ def export_sentinel_alerts(
         exported_records.append(stamped)
         alert["exported"] = True
     all_rows = _read_jsonl(alerts_path)
-    active = [r for r in all_rows if r.get("event") in OPEN_EVENTS]
+    # Fold each incident to its last event in physical order (later writes
+    # override earlier ones), then keep only rows whose current lifecycle is
+    # open.  The fold key is (incident_key, raised_by, peer): one raiser's
+    # resolved row must not suppress another raiser's raised row for the same
+    # incident_key.  Mirrors the authority path _latest_by_key semantics.
+    latest: dict[tuple, dict] = {}
+    for row in all_rows:
+        latest[(row.get("incident_key", "?"), row.get("raised_by"), row.get("peer"))] = row
+    active = [r for r in latest.values() if r.get("event") in OPEN_EVENTS]
     lines = ["# Active Sentinel Alerts", ""]
     if active:
         for a in active:
             key = a.get("incident_key", "?")
             evt = a.get("event", "?")
-            sh = a.get("silence", {}).get("silence_hours", "?")
             aid = a.get("id", "?")
-            lines.append("- **{}** ({}): silence={}h, id={}".format(key, evt, sh, aid))
+            if "silence" in a:
+                sh = a["silence"].get("silence_hours", "?")
+                signal = "silence={}h".format(sh)
+            elif "consecutive_count" in a:
+                signal = "count={}, last_error={}".format(
+                    a.get("consecutive_count"), a.get("last_error_time")
+                )
+            else:
+                signal = "silence=?h"
+            lines.append("- **{}** ({}): {}, id={}".format(key, evt, signal, aid))
             lines.append("  source: peer-health-alerts.jsonl")
     else:
         lines.append("No active liveness alerts.")
