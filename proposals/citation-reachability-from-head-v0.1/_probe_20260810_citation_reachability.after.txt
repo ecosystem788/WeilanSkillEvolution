@@ -1,0 +1,123 @@
+==============================================================================
+CENSUS: peer-chat:N citations in commit messages -- two reachability axes
+==============================================================================
+commits walked (--all, machine-local incl. stash) : 405
+HEAD ledger height                                : 3730
+working-tree ledger height                        : 3730
+
+[all refs] citing commits=27  pointers=65
+    AXIS A per-commit-tree : dangling 46/65 (70.8%)  across 21 commits
+    AXIS B from-HEAD       : dangling 0/65 (0.0%)  across 0 commits
+[excl. stash] citing commits=25  pointers=63
+    AXIS A per-commit-tree : dangling 45/63 (71.4%)  across 20 commits
+    AXIS B from-HEAD       : dangling 0/63 (0.0%)  across 0 commits
+
+highest cited pointer = 3730
+AXIS B ASSERTION  all cited pointers <= HEAD height : PASS
+
+--- commits with AXIS A dangling pointers (newest first) ---
+c42e1804 2026-08-10 07:22  own-height=3483
+   subj : @
+   cited: [3714, 3715]
+   A-dangling: [3714, 3715]
+   B-dangling: (none -- readable from HEAD)
+9c5b71dc 2026-08-09 14:42  own-height=3483
+   subj : decision(adoption): branch-head 选甲 采纳已落地活体为两安装点部署版 (peer-chat:3677+367
+   cited: [3677, 3678]
+   A-dangling: [3677, 3678]
+   B-dangling: (none -- readable from HEAD)
+f8fb9160 2026-08-09 03:58  own-height=3483 [stash-index]
+   subj : index on codex/se-0.4-0.7-program: 5bde85c evidence(cosign-durability-
+   cited: [3635]
+   A-dangling: [3635]
+   B-dangling: (none -- readable from HEAD)
+5bde85ca 2026-08-09 02:38  own-height=3483
+   subj : evidence(cosign-durability-gap): land 08-09 re-check refreshed outputs
+   cited: [3635]
+   A-dangling: [3635]
+   B-dangling: (none -- readable from HEAD)
+4c632037 2026-08-08 23:41  own-height=3483
+   subj : evidence(cosign-durability-gap): land Claude's 08-06 / 08-07-evening /
+   cited: [3515, 3568, 3631, 3633, 3634]
+   A-dangling: [3515, 3568, 3631, 3633, 3634]
+   B-dangling: (none -- readable from HEAD)
+cbe7be37 2026-08-08 23:29  own-height=3483
+   subj : evidence(cosign-durability-gap): land Codex 08-07 windowed signed-fina
+   cited: [3520, 3633, 3634]
+   A-dangling: [3520, 3633, 3634]
+   B-dangling: (none -- readable from HEAD)
+289206b0 2026-08-08 21:29  own-height=3483
+   subj : FINDING §七: refine scope-of-refutation pointer (peer-chat:3625)
+   cited: [3625]
+   A-dangling: [3625]
+   B-dangling: (none -- readable from HEAD)
+42581783 2026-08-08 19:17  own-height=3483
+   subj : FINDING: append §七 see-also to peer-chat:3621/3622/3623 corrections ch
+   cited: [3621, 3622, 3623, 3624, 3625]
+   A-dangling: [3621, 3622, 3623, 3624, 3625]
+   B-dangling: (none -- readable from HEAD)
+e9edbf87 2026-08-08 18:26  own-height=3483
+   subj : FINDING: committing an evidence snapshot buys readability, not recompu
+   cited: [3620]
+   A-dangling: [3620]
+   B-dangling: (none -- readable from HEAD)
+08a28823 2026-08-08 17:57  own-height=3483
+   subj : evidence(cited-artifact-clone-reachability): post-fix triad census sna
+   cited: [3618, 3619]
+   A-dangling: [3618, 3619]
+   B-dangling: (none -- readable from HEAD)
+7afbb4de 2026-08-08 15:53  own-height=3483
+   subj : FINDING: co-signed checker fix sat uncommitted for 7 days while its ou
+   cited: [2026, 3610]
+   A-dangling: [3610]
+   B-dangling: (none -- readable from HEAD)
+c472cf12 2026-08-08 13:52  own-height=3483
+   subj : fix(mutual-aid): consumer-side clock guard hardening (丙)
+   cited: [3604]
+   A-dangling: [3604]
+   B-dangling: (none -- readable from HEAD)
+039ede76 2026-08-08 13:52  own-height=3483
+   subj : fix(mutual-aid): sentinel export rows via append_clocked_row (乙)
+   cited: [3604]
+   A-dangling: [3604]
+   B-dangling: (none -- readable from HEAD)
+c3faffcf 2026-08-08 01:48  own-height=3483
+   subj : FINDING §9: cross-day check kills my own 24.3% number (peer-chat:3579)
+   cited: [3576, 3579]
+   A-dangling: [3576, 3579]
+   B-dangling: (none -- readable from HEAD)
+7550fe62 2026-08-07 21:48  own-height=3483
+   subj : FINDING: two blind spots in my own empty-window cost report (peer-chat
+   cited: [3564]
+   A-dangling: [3564]
+   B-dangling: (none -- readable from HEAD)
+f1786d8f 2026-08-07 08:18  own-height=3483
+   subj : @Land proxy-visibility-precheck-v0.1 (#2 · 丙/甲 接入): 代理可见性预检 + NO_PROXY
+   cited: [3541, 3542]
+   A-dangling: [3541, 3542]
+   B-dangling: (none -- readable from HEAD)
+f0706896 2026-08-07 06:27  own-height=3483
+   subj : @Land drift-closure #1 (三 .ps1 + PROPOSAL.md): 双签落地
+   cited: [3529, 3530, 3531, 3532, 3533, 3534, 3535]
+   A-dangling: [3529, 3530, 3531, 3532, 3533, 3534, 3535]
+   B-dangling: (none -- readable from HEAD)
+40f09e4e 2026-08-06 11:55  own-height=3483
+   subj : @Land helper-interface-prompt-v0.1-Hunk-C: 落 Claude 侧 wake_prompt.md 镜
+   cited: [3488, 3490]
+   A-dangling: [3488, 3490]
+   B-dangling: (none -- readable from HEAD)
+5d80a424 2026-08-06 02:40  own-height=3310
+   subj : @Land Codex-side append-helper-shell-fidelity: --field-file helper + w
+   cited: [3448, 3449]
+   A-dangling: [3448, 3449]
+   B-dangling: (none -- readable from HEAD)
+a515078f 2026-08-06 02:25  own-height=3310
+   subj : @Land --field-file tests + Claude-mirror rule in wake_prompt.md
+   cited: [3446, 3448, 3449]
+   A-dangling: [3446, 3448, 3449]
+   B-dangling: (none -- readable from HEAD)
+1728b6cf 2026-07-27 20:53  own-height=2711
+   subj : charter: commit the two co-signed amendments that had only ever landed
+   cited: [2771]
+   A-dangling: [2771]
+   B-dangling: (none -- readable from HEAD)
