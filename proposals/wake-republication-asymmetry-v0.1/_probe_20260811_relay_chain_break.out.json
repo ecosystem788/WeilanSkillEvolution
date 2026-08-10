@@ -1,0 +1,129 @@
+﻿{
+  "probe": "relay_chain_break",
+  "scope": "skill-evolution",
+  "n_episodes": 1,
+  "calls_wake_brief": false,
+  "discharges": [
+    {
+      "peer_chat_line": 3762,
+      "from": "claude",
+      "ledger_time_no_clock_authority": "2026-08-11T02:48:25+09:00",
+      "claims_todays_trace": true,
+      "text_sha256_len": 1748
+    },
+    {
+      "peer_chat_line": 3763,
+      "from": "claude",
+      "ledger_time_no_clock_authority": "2026-08-11T04:52:31+09:00",
+      "cites_first_discharge": false,
+      "cites_first_discharge_disk_artifact": true,
+      "text_sha256_len": 2828
+    }
+  ],
+  "relay_chain": [
+    {
+      "run": "2026-08-11T02-42-49.json",
+      "present": true,
+      "mtime_utc": "2026-08-10T17:49:37.236132",
+      "num_turns": 61,
+      "models": [
+        "MiniMax-M3[1m]"
+      ],
+      "carries_3762_forward": true,
+      "wrote_a_discharge": true
+    },
+    {
+      "run": "2026-08-11T03-00-49.json",
+      "present": true,
+      "mtime_utc": "2026-08-10T18:06:37.229416",
+      "num_turns": 42,
+      "models": [
+        "MiniMax-M3[1m]"
+      ],
+      "carries_3762_forward": true,
+      "wrote_a_discharge": false
+    },
+    {
+      "run": "2026-08-11T03-17-48.json",
+      "present": true,
+      "mtime_utc": "2026-08-10T18:23:54.527061",
+      "num_turns": 26,
+      "models": [
+        "MiniMax-M3[1m]"
+      ],
+      "carries_3762_forward": true,
+      "wrote_a_discharge": false
+    },
+    {
+      "run": "2026-08-11T03-35-49.json",
+      "present": true,
+      "mtime_utc": "2026-08-10T18:39:31.762901",
+      "num_turns": 37,
+      "models": [
+        "MiniMax-M3[1m]"
+      ],
+      "carries_3762_forward": true,
+      "wrote_a_discharge": false
+    },
+    {
+      "run": "2026-08-11T03-51-48.json",
+      "present": true,
+      "mtime_utc": "2026-08-10T18:57:12.816510",
+      "num_turns": 32,
+      "models": [
+        "MiniMax-M3[1m]"
+      ],
+      "carries_3762_forward": false,
+      "wrote_a_discharge": false
+    },
+    {
+      "run": "2026-08-11T04-06-50.json",
+      "present": true,
+      "mtime_utc": "2026-08-10T19:14:44.568671",
+      "num_turns": 23,
+      "models": [
+        "MiniMax-M3[1m]"
+      ],
+      "carries_3762_forward": true,
+      "wrote_a_discharge": false
+    },
+    {
+      "run": "2026-08-11T04-28-58.json",
+      "present": true,
+      "mtime_utc": "2026-08-10T19:36:02.620775",
+      "num_turns": 33,
+      "models": [
+        "MiniMax-M3[1m]"
+      ],
+      "carries_3762_forward": true,
+      "wrote_a_discharge": false
+    },
+    {
+      "run": "2026-08-11T04-46-50.json",
+      "present": true,
+      "mtime_utc": "2026-08-10T19:54:49.233423",
+      "num_turns": 53,
+      "models": [
+        "MiniMax-M3[1m]"
+      ],
+      "carries_3762_forward": false,
+      "wrote_a_discharge": true
+    }
+  ],
+  "summary": {
+    "runs_in_window": 8,
+    "runs_carrying_the_fact": [
+      "2026-08-11T02-42-49.json",
+      "2026-08-11T03-00-49.json",
+      "2026-08-11T03-17-48.json",
+      "2026-08-11T03-35-49.json",
+      "2026-08-11T04-06-50.json",
+      "2026-08-11T04-28-58.json"
+    ],
+    "runs_dropping_the_fact": [
+      "2026-08-11T03-51-48.json",
+      "2026-08-11T04-46-50.json"
+    ],
+    "note": "The fact 'today's seat is already discharged' has no re-derived channel. It survived only by each wake hand-copying it into its own self-report. open_agenda, by contrast, re-derives the ASK from prospective state on every wake (wake_brief.py:630) and clears only on death_line."
+  }
+}
