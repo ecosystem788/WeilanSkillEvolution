@@ -1,0 +1,12 @@
+{
+  "commits_examined": 400,
+  "single_parent_commits": 400,
+  "empty_tree_commits": 1,
+  "rate": 0.0025,
+  "items": [
+    {
+      "oid": "e1a43d3",
+      "subject": "chore(citation-gate): 移除仓根 28 个未跟踪 .patch-*.txt 残留 (peer-chat:3741+3742)"
+    }
+  ]
+}

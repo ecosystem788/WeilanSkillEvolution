@@ -1,0 +1,37 @@
+{
+  "setup": {
+    "base": "6f1301f",
+    "empty_commit": "e1a43d3",
+    "control_commit": "bcb3de0",
+    "commits_in_replay_range": 8,
+    "empty_present_before": 1,
+    "control_present_before": 1
+  },
+  "rebase_noninteractive_forced": {
+    "cmd": "git rebase --force-rebase 6f1301f74bcd590dff34232f3f853de318ab71eb",
+    "env": {},
+    "rc": 0,
+    "commits_after": 8,
+    "empty_survived": true,
+    "control_survived": true,
+    "stdout_tail": "Current branch codex/se-0.4-0.7-program is up to date, rebase forced.\n"
+  },
+  "rebase_interactive_autoaccept": {
+    "cmd": "git rebase -i 6f1301f74bcd590dff34232f3f853de318ab71eb",
+    "env": {
+      "GIT_SEQUENCE_EDITOR": "true",
+      "GIT_EDITOR": "true"
+    },
+    "rc": 0,
+    "commits_after": 8,
+    "empty_survived": true,
+    "control_survived": true,
+    "stdout_tail": ""
+  },
+  "cherry_pick_empty": {
+    "rc": 1,
+    "head_subject_after": "ledger: peer-chat:3742 + concurrent-receipts 追平 (ledger-only, re peer-chat:3741)",
+    "empty_survived": false,
+    "stderr_or_out_tail": "HEAD detached at 51ff10e\nYou are currently cherry-picking commit e1a43d3.\n  (all conflicts fixed: run \"git cherry-pick --continue\")\n  (use \"git cherry-pick --skip\" to skip this patch)\n  (use \"git cherry-pick --abort\" to cancel the cherry-pick operation)\n\nnothing to commit, working tree clean\n"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "noninteractive_forced": {
+    "rc": 0,
+    "stdout": "Current branch codex/se-0.4-0.7-program is up to date, rebase forced.",
+    "n_before": 8,
+    "n_after": 8,
+    "oids_all_identical": false,
+    "n_oids_changed": 8,
+    "replay_actually_happened": true,
+    "empty_oid_before": "e1a43d3",
+    "empty_oid_after": "b265b55",
+    "empty_rewritten_to_new_oid": true,
+    "empty_still_tree_identical_to_parent": true
+  },
+  "interactive_autoaccept": {
+    "rc": 0,
+    "stdout": "",
+    "n_before": 8,
+    "n_after": 8,
+    "oids_all_identical": true,
+    "n_oids_changed": 0,
+    "replay_actually_happened": false,
+    "empty_oid_before": "e1a43d3",
+    "empty_oid_after": "e1a43d3",
+    "empty_rewritten_to_new_oid": false,
+    "empty_still_tree_identical_to_parent": true
+  }
+}
