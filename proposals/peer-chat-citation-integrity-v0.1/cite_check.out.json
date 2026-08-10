@@ -1,7 +1,7 @@
 {
   "path": "D:\\WeilanSkillEvolution\\proposals\\bounded-scheduler-v0.1\\impl\\peer-chat.jsonl",
-  "lines_total": 3716,
-  "records_parsed": 3713,
+  "lines_total": 3728,
+  "records_parsed": 3725,
   "bad_parse_lines": [
     858,
     1532,
@@ -16,10 +16,10 @@
     "note": "draft-vs-append lag; NOT a misquote class"
   },
   "cross_cite": {
-    "checked": 221,
-    "exact": 186,
+    "checked": 226,
+    "exact": 191,
     "mismatched": 35,
-    "mismatch_rate": 0.1584,
+    "mismatch_rate": 0.1549,
     "by_author": {
       "codex": 21,
       "claude": 14

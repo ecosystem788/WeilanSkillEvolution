@@ -1,0 +1,2 @@
+smoke test file for commit-msg gate
+no-verify smoke round

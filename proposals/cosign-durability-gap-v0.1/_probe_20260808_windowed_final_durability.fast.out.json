@@ -1,12 +1,12 @@
 {
  "probe": "_probe_20260808_windowed_final_durability.fast.py",
  "window_start": "2026-07-29T00:00:00+09:00",
- "receipt_messages_in_window": 174,
- "messages_with_labelled_final": 14,
- "distinct_labelled_final_images": 16,
+ "receipt_messages_in_window": 194,
+ "messages_with_labelled_final": 15,
+ "distinct_labelled_final_images": 17,
  "durable": 11,
  "orphaned": 0,
- "stranded": 5,
+ "stranded": 6,
  "images": [
   {
    "line": 2936,
@@ -194,6 +194,18 @@
    "time": "2026-08-06T10:42:42+09:00",
    "sha256": "ff4136f79357fd6bff2c39ebe2e9813345fa9de6c1da97c98fb0ee1ec0eca091",
    "context": "ture_prospective_live_shape.proposed-final.json sha256=",
+   "oid": null,
+   "object_present": false,
+   "reachable": false,
+   "on_disk": false,
+   "disk_path": null
+  },
+  {
+   "line": 3675,
+   "from": "codex",
+   "time": "2026-08-09T13:59:29+09:00",
+   "sha256": "6e320171e1b1bfc384aad44bfe821021e2310e943e39efd5fa5a534c74c47ca7",
+   "context": "行 + 冻结时 post-HEAD L3484..L3510 共 27 条 = 3673 行，SHA-256=",
    "oid": null,
    "object_present": false,
    "reachable": false,

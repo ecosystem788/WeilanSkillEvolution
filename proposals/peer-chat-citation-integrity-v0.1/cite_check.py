@@ -32,8 +32,9 @@ import datetime
 import io
 import json
 import os
-import re
 import sys
+
+from peer_chat_locator import extract_with_iso
 
 DEFAULT_PATH = os.path.normpath(
     os.path.join(
@@ -44,11 +45,6 @@ DEFAULT_PATH = os.path.normpath(
         "peer-chat.jsonl",
     )
 )
-
-ISO_NEAR = re.compile(
-    r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{2}:\d{2})[^)）]{0,20}peer-chat:(\d{2,5})"
-)
-
 
 def _norm(t):
     return (t or "").replace(" ", "T").strip()
@@ -87,7 +83,7 @@ def scan(path):
     for c, o in sorted(recs.items()):
         txt = _text_of(o)
         who = o.get("from") or "?"
-        for iso, n in ISO_NEAR.findall(txt):
+        for iso, n in extract_with_iso(txt):
             n = int(n)
             tgt = recs.get(n)
             if n == c:

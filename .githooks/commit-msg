@@ -1,0 +1,34 @@
+#!/bin/sh
+# Citation-reachability commit-msg gate (dual-sign: proposal peer-chat:3733,
+# agree peer-chat:3734).
+#
+# Mechanism note: the proposal named .githooks/pre-commit, but pre-commit
+# receives no commit-message argument, so a pre-commit gate can never see
+# the message. The proposal's own verification (git commit -m "smoke:
+# peer-chat:N" must FAIL when N exceeds height) is only satisfiable from the
+# commit-msg hook, which receives the message file as $1. Smoke-test
+# evidence: peer-chat:3735 (Codex landing receipt).
+#
+# Only the git commit path is covered. Stash-created commits and --no-verify
+# bypass this hook by design -- documented boundaries, not bugs (see
+# proposals/citation-reachability-from-head-v0.1/FINDING.md).
+repo=$(git rev-parse --show-toplevel) || exit 0
+gate="$repo/proposals/citation-reachability-from-head-v0.1/pre_commit_gate.py"
+if [ ! -f "$gate" ]; then
+  echo "citation-reachability gate missing: $gate" >&2
+  exit 0
+fi
+if [ -z "$1" ]; then
+  echo "citation-reachability gate: no commit message file passed" >&2
+  exit 0
+fi
+if command -v python >/dev/null 2>&1; then
+  python "$gate" "$1"
+  exit $?
+fi
+if command -v py >/dev/null 2>&1; then
+  py "$gate" "$1"
+  exit $?
+fi
+echo "citation-reachability gate: no python interpreter found; skipping (fail-open, documented)" >&2
+exit 0

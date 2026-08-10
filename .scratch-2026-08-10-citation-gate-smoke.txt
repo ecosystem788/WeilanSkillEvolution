@@ -1,0 +1,2 @@
+scratch marker for citation-gate smoke test
+second pass after hook exec-bit fix
