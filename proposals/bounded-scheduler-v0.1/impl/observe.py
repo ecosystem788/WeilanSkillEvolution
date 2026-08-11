@@ -19,8 +19,10 @@ replies 文件,页面渲染成对话。心跳 cron 保持原速——空醒证�
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import json
+import mimetypes
 import re
 import socket
 import subprocess
@@ -57,6 +59,11 @@ PROJECTION = METHOD_STATE / "memory" / "projections" / "workspaces" / WORKSPACE_
 LINEAGE_HEADS = METHOD_STATE / "memory" / "lineage" / "heads" / WORKSPACE_KEY / f"{SCOPE_KEY}.json"
 FRAMES = METHOD_STATE / "frames"
 PROSPECTIVE = METHOD_STATE / "memory" / "prospective" / "workspaces" / WORKSPACE_KEY / SCOPE_KEY
+
+# UI-only attachment upload (observer peer-chat:3818 + :3821 "走ui-only"):
+# 文件只落盘到 attachments/inbox/,不入账本、不动 record schema。
+UPLOAD_DIR = HERE / "attachments" / "inbox"
+MAX_UPLOAD_BYTES = 100 * 1024 * 1024
 
 # Dual-signed contract: peer-chat lines 824 + 825 (2026-07-13).
 # proposal_id is the 1-based physical line number. Blank physical lines are
@@ -548,6 +555,75 @@ def esc(s) -> str:
     return html.escape(str(s if s is not None else ""))
 
 
+# --- UI-only attachment upload (observer peer-chat:3818 + :3821) -----------------
+
+def sanitize_filename(name: str) -> str:
+    name = Path(name).name
+    name = re.sub(r"[^0-9A-Za-z._\-\u4e00-\u9fff]+", "_", name).strip("._-") or "attachment"
+    return name[:120]
+
+
+def _parse_multipart(body: bytes, content_type: str) -> dict[str, bytes]:
+    m = re.search(r'boundary=(?:"([^"]+)"|([^;]+))', content_type or "")
+    boundary = (m.group(1) or m.group(2) or "").encode("utf-8") if m else b""
+    if not boundary:
+        return {}
+    fields: dict[str, bytes] = {}
+    for part in body.split(b"--" + boundary):
+        if not part or part in (b"\r\n", b"--\r\n", b"--"):
+            continue
+        header, _, payload = part.partition(b"\r\n\r\n")
+        name_m = re.search(rb'name="([^"]+)"', header)
+        if not name_m:
+            continue
+        key = name_m.group(1).decode("utf-8", errors="replace")
+        if key == "file":
+            fn_m = re.search(rb'filename="([^"]*)"', header)
+            if fn_m:
+                fields["_filename"] = fn_m.group(1)
+        if payload.endswith(b"\r\n"):
+            payload = payload[:-2]
+        fields[key] = payload
+    return fields
+
+
+def save_upload(raw: bytes, filename: str) -> dict:
+    """UI-only: 存盘 + sidecar 元数据;不写 peer-chat / 任何账本。"""
+    if len(raw) > MAX_UPLOAD_BYTES:
+        raise ValueError(f"upload too large: {len(raw)} bytes")
+    safe = sanitize_filename(filename)
+    stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    target = UPLOAD_DIR / f"{stamp}-{safe}"
+    if target.exists():
+        target = target.with_name(f"{stamp}-{uuid.uuid4().hex[:6]}-{safe}")
+    target.write_bytes(raw)
+    meta = {
+        "name": filename,
+        "stored": target.name,
+        "size": len(raw),
+        "sha256": hashlib.sha256(raw).hexdigest(),
+        "mime": mimetypes.guess_type(filename)[0] or "application/octet-stream",
+        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    }
+    target.with_suffix(target.suffix + ".meta.json").write_text(
+        json.dumps(meta, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    return meta
+
+
+def recent_uploads(limit: int = 10) -> list[dict]:
+    if not UPLOAD_DIR.is_dir():
+        return []
+    metas = []
+    for path in sorted(UPLOAD_DIR.glob("*.meta.json"), reverse=True)[:limit]:
+        try:
+            metas.append(json.loads(read_text_any(path)))
+        except (ValueError, OSError):
+            continue
+    return metas
+
+
 def render() -> str:
     hb = parse_heartbeat_log()
     ag = parse_agent_log()
@@ -613,6 +689,13 @@ def render() -> str:
 
     # 茶水间 card (peer chat: two bodies + owner; scrollable, live-refreshed)
     chat_html = build_chat_html()
+
+    upload_list_html = ""
+    for meta in recent_uploads():
+        upload_list_html += (f'<li>{esc(meta.get("time", ""))} · {esc(meta.get("name", ""))} ·'
+                            f' {esc(meta.get("mime", ""))} · {esc(str(meta.get("size", "")))} bytes</li>')
+    if not upload_list_html:
+        upload_list_html = '<li class="mono">尚无上传。用下面按钮把文件/图片传给 agent。</li>'
 
     output_html = ""
     for receipt in recent_receipts():
@@ -799,12 +882,18 @@ def render() -> str:
 
 <div class="card"><h2>🔴 等你拍板的闸(它自己绝不会做)</h2>{gates_html}</div>
 
+
 <div class="card"><h2>☕ 茶水间(Claude ↔ Codex ↔ 你,零权威闲聊)</h2>
 <div class="chatbox" id="chatbox">{chat_html}</div>
 <form method="post" action="/chat" class="micbox" style="margin-top:10px">
 <textarea name="text" data-draft="chat" placeholder="想搭话就说——闲聊,不驱动工作(要派活/提问/拍板请用上面的话筒)" required></textarea>
 <button type="submit">搭一句</button></form>
-<p class="mono">这是唯一的沟通通道,三方平等发言——但<b>你的话是最高权威</b>:闲聊就是闲聊;指令/拍板它们照办并留痕;带【提案】的消息会高亮,你否了就不做,不表态它们双签后动手,你随时可事后否决(全部可逆)。没人在岗时你说话会立刻唤一班来回你。</p></div>
+<form method="post" action="/upload" class="micbox" style="margin-top:10px" enctype="multipart/form-data">
+<input type="file" name="file" required style="flex:1;background:#0d1014;color:#e6e6e6;border:1px solid #2a313b;border-radius:8px;padding:8px">
+<button type="submit">上传附件</button></form>
+<div class="mono" style="font-size:12px;color:#8a929e;margin-top:8px">最近上传(UI-only,不入账本):</div>
+<ul class="mono" style="font-size:12px;color:#8a929e;margin:4px 0 8px;padding-left:18px">{upload_list_html}</ul>
+<p class="mono">这是唯一的沟通通道,三方平等发言——但<b>你的话是最高权威</b>:闲聊就是闲聊;指令/拍板它们照办并留痕;带【提案】的消息会高亮,你否了就不做,不表态它们双签后动手,你随时可事后否决(全部可逆)。没人在岗时你说话会立刻唤一班来回你。附件存进 impl/attachments/inbox/(观察员「走ui-only」),agent 醒来读该目录。</p></div>
 
 <div class="card"><h2>📤 产出窗口(最近已关闭的续帧收据)</h2>
 <div class="outputbox" id="outputbox">{output_html}</div>
@@ -858,6 +947,29 @@ class Handler(BaseHTTPRequestHandler):
             text = (parse_qs(body).get("text") or [""])[0]
             if text.strip():
                 chat_say(text)
+
+        elif self.path == "/upload":
+            # UI-only (observer peer-chat:3821 "走ui-only"): 存盘 + sidecar,不入账本、不动 record。
+            length = int(self.headers.get("Content-Length", 0) or 0)
+            if length > MAX_UPLOAD_BYTES + 65536:
+                self.send_response(413)
+                self.send_header("Content-Type", "text/plain; charset=utf-8")
+                self.end_headers()
+                self.wfile.write(b"upload too large")
+                return
+            body = self.rfile.read(length)
+            fields = _parse_multipart(body, self.headers.get("Content-Type", ""))
+            raw = fields.get("file", b"")
+            filename = fields.get("_filename", b"").decode("utf-8", errors="replace")
+            if raw:
+                try:
+                    save_upload(raw, filename or "attachment")
+                except ValueError:
+                    self.send_response(413)
+                    self.send_header("Content-Type", "text/plain; charset=utf-8")
+                    self.end_headers()
+                    self.wfile.write(b"upload too large")
+                    return
         self.send_response(303)
         self.send_header("Location", "/")
         self.end_headers()
