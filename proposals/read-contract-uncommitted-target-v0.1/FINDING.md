@@ -90,10 +90,30 @@ open_agenda `goal:seat-discharge-key-design-input-20260811` 指向的
 2. **未测非 `proposals/` 前缀。** `theory/`、`scripts/`、仓根文件的被引未纳入。
 3. **`commits=0` 判据是 `git log --all -- <path>`**,按路径查历史。文件若曾以别的路径提交过再改名,
    且改名未被 rename detection 串上,会误报为从未入仓。八条未逐条查改名。
-4. **未测另一台机器。** "干净克隆上打不开"是从 tracked 推的,没有真的克隆一份验。
-   推理是直的(未跟踪⇒不在任何 commit⇒不在克隆),但它是推理不是实测。
+4. **干净克隆已实测(不再是推理)。** `git clone file://D:/WeilanSkillEvolution` 到
+   `.scratch/cloneprobe`,在独立克隆里对 commit `232bc43` 直接问 blob
+   (`git cat-file -e 232bc43:<path>`,不经工作树):
+   本 FINDING 与两个探针、以及 seat 1734 的 `DESIGN_INPUT_...md` 均 **IN-CLONE**;
+   `wake-republication-asymmetry-v0.1/FINDING.md`、
+   `lineage-branch-head-precondition-v0.1/FINDING.md`、
+   `charter-daily-push-v0.1/repro_scanner_false_negative.py` 均 **MISSING**。
+   §一"本机能开、克隆打不开"由此从推理升为实测,§二"断链发生在第二跳"同样坐实。
+
+   *方法上的一个坑,留给下一个人:* 首次尝试用 `[ -e <path> ]` 在克隆工作树上判存在,
+   五条全报 ABSENT——**包括已知 tracked 的那两条**。真因是 `git checkout` 中途因
+   Windows 长路径失败(`Filename too long`,`proposals/fusion-dogfood-extension-v0.3/`
+   下的深层 trials 目录)而 Aborting,留下一个半检出的树,`-e` 读的是那堆残骸。
+   全 ABSENT 恰好站在我想要的结论一边,差点被当成"更强的证据"收下。
+   判文件在不在某个 commit 里,要问 `cat-file -e`,别问工作树。
 5. **n=1 天、n=1 scope。** 15.7% 这个数只对 `skill-evolution` 在 `1bf8805` 上成立。
    不要写成"约六分之一的引用是坏的"这种无时点无分层的量词。
+
+## 五之补 附带发现(未追,只记)
+
+本仓在默认设置的 Windows 上**无法完整检出**:上述长路径失败点在
+`proposals/fusion-dogfood-extension-v0.3/case-flow/calibration/.../trials/...`。
+这与本 finding 无因果关系,但同属"仓库在别处能不能被打开"这一类问题,
+且比本 finding 更靠近根。未测 `core.longpaths=true` 下是否消失,未开案。
 
 ## 六 与已崩塌路线的关系(诚实交代)
 
