@@ -1,0 +1,290 @@
+﻿{
+  "probe": "d3_denominator_calibre",
+  "scope": "skill-evolution",
+  "frames_loaded": 7173,
+  "calls_wake_brief": false,
+  "derived_from": "_probe_20260811_d1_non_anchor_control.py (same method)",
+  "windows": {
+    "anchor-jst-08-11": {
+      "total_frames": 67,
+      "narrow_denominator_union_of_two_keys": 32,
+      "wide_denominator_incl_section72_only": 36,
+      "reverse_hits": 25,
+      "forward_hits": 29,
+      "both_keys_missed": [
+        "wf-20260810-152808-e28282",
+        "wf-20260810-171549-522092",
+        "wf-20260810-203406-19cd25",
+        "wf-20260810-221050-91d06a"
+      ],
+      "coverage_narrow": {
+        "reverse": 0.7812,
+        "forward": 0.9062,
+        "union": 1.0
+      },
+      "coverage_wide": {
+        "reverse": 0.6944,
+        "forward": 0.8056,
+        "union": 0.8889
+      }
+    },
+    "jst-08-10": {
+      "total_frames": 82,
+      "narrow_denominator_union_of_two_keys": 18,
+      "wide_denominator_incl_section72_only": 22,
+      "reverse_hits": 11,
+      "forward_hits": 17,
+      "both_keys_missed": [
+        "wf-20260809-151319-d124fb",
+        "wf-20260809-175547-837a00",
+        "wf-20260809-193816-d746f3",
+        "wf-20260809-194343-5e1b7f"
+      ],
+      "coverage_narrow": {
+        "reverse": 0.6111,
+        "forward": 0.9444,
+        "union": 1.0
+      },
+      "coverage_wide": {
+        "reverse": 0.5,
+        "forward": 0.7727,
+        "union": 0.8182
+      }
+    },
+    "jst-08-09": {
+      "total_frames": 41,
+      "narrow_denominator_union_of_two_keys": 11,
+      "wide_denominator_incl_section72_only": 12,
+      "reverse_hits": 7,
+      "forward_hits": 10,
+      "both_keys_missed": [
+        "wf-20260808-180529-fce80e"
+      ],
+      "coverage_narrow": {
+        "reverse": 0.6364,
+        "forward": 0.9091,
+        "union": 1.0
+      },
+      "coverage_wide": {
+        "reverse": 0.5833,
+        "forward": 0.8333,
+        "union": 0.9167
+      }
+    },
+    "jst-08-08": {
+      "total_frames": 58,
+      "narrow_denominator_union_of_two_keys": 20,
+      "wide_denominator_incl_section72_only": 23,
+      "reverse_hits": 11,
+      "forward_hits": 20,
+      "both_keys_missed": [
+        "wf-20260807-174031-3a2fda",
+        "wf-20260807-175041-574e5c",
+        "wf-20260807-190150-eeaf13"
+      ],
+      "coverage_narrow": {
+        "reverse": 0.55,
+        "forward": 1.0,
+        "union": 1.0
+      },
+      "coverage_wide": {
+        "reverse": 0.4783,
+        "forward": 0.8696,
+        "union": 0.8696
+      }
+    },
+    "jst-08-07": {
+      "total_frames": 50,
+      "narrow_denominator_union_of_two_keys": 14,
+      "wide_denominator_incl_section72_only": 15,
+      "reverse_hits": 10,
+      "forward_hits": 10,
+      "both_keys_missed": [
+        "wf-20260806-160831-83e85d"
+      ],
+      "coverage_narrow": {
+        "reverse": 0.7143,
+        "forward": 0.7143,
+        "union": 1.0
+      },
+      "coverage_wide": {
+        "reverse": 0.6667,
+        "forward": 0.6667,
+        "union": 0.9333
+      }
+    },
+    "jst-08-06": {
+      "total_frames": 60,
+      "narrow_denominator_union_of_two_keys": 0,
+      "wide_denominator_incl_section72_only": 0,
+      "reverse_hits": 0,
+      "forward_hits": 0,
+      "both_keys_missed": [],
+      "coverage_narrow": {
+        "reverse": null,
+        "forward": null,
+        "union": null
+      },
+      "coverage_wide": {
+        "reverse": null,
+        "forward": null,
+        "union": null
+      }
+    },
+    "jst-08-05": {
+      "total_frames": 39,
+      "narrow_denominator_union_of_two_keys": 0,
+      "wide_denominator_incl_section72_only": 0,
+      "reverse_hits": 0,
+      "forward_hits": 0,
+      "both_keys_missed": [],
+      "coverage_narrow": {
+        "reverse": null,
+        "forward": null,
+        "union": null
+      },
+      "coverage_wide": {
+        "reverse": null,
+        "forward": null,
+        "union": null
+      }
+    },
+    "full-jst-08-10": {
+      "total_frames": 190,
+      "narrow_denominator_union_of_two_keys": 40,
+      "wide_denominator_incl_section72_only": 56,
+      "reverse_hits": 26,
+      "forward_hits": 39,
+      "both_keys_missed": [
+        "wf-20260809-151319-d124fb",
+        "wf-20260809-175547-837a00",
+        "wf-20260809-193816-d746f3",
+        "wf-20260809-194343-5e1b7f",
+        "wf-20260810-021048-f76cee",
+        "wf-20260810-023944-ed85f6",
+        "wf-20260810-024824-abb46b",
+        "wf-20260810-031304-d2abe0",
+        "wf-20260810-060425-9bf36a",
+        "wf-20260810-095011-cc8b6c",
+        "wf-20260810-112220-5d22c1",
+        "wf-20260810-113305-f5a53d",
+        "wf-20260810-113955-1e07bd",
+        "wf-20260810-115929-7df0f2",
+        "wf-20260810-122601-14f350",
+        "wf-20260810-130806-84a580"
+      ],
+      "coverage_narrow": {
+        "reverse": 0.65,
+        "forward": 0.975,
+        "union": 1.0
+      },
+      "coverage_wide": {
+        "reverse": 0.4643,
+        "forward": 0.6964,
+        "union": 0.7143
+      }
+    },
+    "full-jst-08-09": {
+      "total_frames": 134,
+      "narrow_denominator_union_of_two_keys": 35,
+      "wide_denominator_incl_section72_only": 39,
+      "reverse_hits": 19,
+      "forward_hits": 33,
+      "both_keys_missed": [
+        "wf-20260808-180529-fce80e",
+        "wf-20260809-084938-e1871e",
+        "wf-20260809-125306-8de3e5",
+        "wf-20260809-132833-a05aa4"
+      ],
+      "coverage_narrow": {
+        "reverse": 0.5429,
+        "forward": 0.9429,
+        "union": 1.0
+      },
+      "coverage_wide": {
+        "reverse": 0.4872,
+        "forward": 0.8462,
+        "union": 0.8974
+      }
+    },
+    "full-jst-08-08": {
+      "total_frames": 144,
+      "narrow_denominator_union_of_two_keys": 39,
+      "wide_denominator_incl_section72_only": 43,
+      "reverse_hits": 22,
+      "forward_hits": 38,
+      "both_keys_missed": [
+        "wf-20260807-174031-3a2fda",
+        "wf-20260807-175041-574e5c",
+        "wf-20260807-190150-eeaf13",
+        "wf-20260807-221548-566128"
+      ],
+      "coverage_narrow": {
+        "reverse": 0.5641,
+        "forward": 0.9744,
+        "union": 1.0
+      },
+      "coverage_wide": {
+        "reverse": 0.5116,
+        "forward": 0.8837,
+        "union": 0.907
+      }
+    }
+  },
+  "sanity_vs_3771": {
+    "expected": {
+      "total": 67,
+      "seat_narrow": 32,
+      "reverse": 25,
+      "forward": 29
+    },
+    "probe": {
+      "total": 67,
+      "seat_narrow": 32,
+      "reverse": 25,
+      "forward": 29
+    },
+    "matches": true
+  },
+  "narrow_union_is_one_by_construction": true,
+  "both_keys_missed_spotcheck": {
+    "anchor-jst-08-11": [
+      {
+        "frame_id": "wf-20260810-152808-e28282",
+        "problem": "回 Codex 3757 §7.2 座锚口径问,回源核 ledger seq 1724,锁 00:00Z=JST 09:00"
+      },
+      {
+        "frame_id": "wf-20260810-171549-522092",
+        "problem": "有界唤醒回合(2026-08-11):收件箱空,茶水间回合,核查 §7.2 座证据文件仓态"
+      },
+      {
+        "frame_id": "wf-20260810-203406-19cd25",
+        "problem": "回应 Codex peer-chat:3764 §一更正(26 commit 非 19 / 区间含 1854b760+186e71c0 两个实质 commit)"
+      },
+      {
+        "frame_id": "wf-20260810-221050-91d06a",
+        "problem": "bounded-scheduler wake episode (auto, reversible zone): 回应 peer-chat:3769 三层独立证据并补两反路与一次范围裁定提醒"
+      }
+    ],
+    "jst-08-09": [
+      {
+        "frame_id": "wf-20260808-180529-fce80e",
+        "problem": "bounded-scheduler wake episode (auto, reversible zone)"
+      }
+    ],
+    "jst-08-08": [
+      {
+        "frame_id": "wf-20260807-174031-3a2fda",
+        "problem": "bounded-scheduler wake episode (auto, reversible zone)"
+      },
+      {
+        "frame_id": "wf-20260807-175041-574e5c",
+        "problem": "bounded-scheduler wake episode (auto, reversible zone)"
+      },
+      {
+        "frame_id": "wf-20260807-190150-eeaf13",
+        "problem": "Codex 有界回合(2026-08-08 ~04:0x JST):scoped memory-recall(skill-evolution)=ACTIVE,control=active(41c322ae,resume_requires_confirmation=false);wake_brief:owner_inbox_delta=[],prospective_due=[],codex_replies_unreviewed=[],peer_chat_new=[],concurrent_receipts_new=[],open_agenda 4 项全 eligible_now=false(最早 08-10);peer_health codex-to-claude appended=[];codex-inbox delta=0(116 id 全 processed);HEAD=c3faffc=3582 时点后未动,无未推提交。本回合为歇轮/茶水间回合:按 3582 §(3) 双方校准(HEAD 未动则跳过 §7.2 持座复核不复读),茶水间最新对话已读(cursor 覆盖至 line 3582),无观察员新消息,无新差异可发,如实歇。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,230 @@
+﻿{
+  "probe": "d3_residual_review",
+  "window_utc": {
+    "start": "2026-08-10T15:00:00+00:00",
+    "end": "2026-08-10T22:15:00+00:00"
+  },
+  "total_frames": 67,
+  "matched_by_any_of_three_keys": 36,
+  "residual_count": 31,
+  "residual": [
+    {
+      "frame_id": "wf-20260810-152112-9bbb6a",
+      "opened_utc": "2026-08-10T15:21:12+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-154110-efed58",
+      "opened_utc": "2026-08-10T15:41:10+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-160312-2e421f",
+      "opened_utc": "2026-08-10T16:03:12+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-162005-d5b076",
+      "opened_utc": "2026-08-10T16:20:05+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-162522-dd335a",
+      "opened_utc": "2026-08-10T16:25:22+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "honest-rest round: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1030
+    },
+    {
+      "frame_id": "wf-20260810-164223-b100c6",
+      "opened_utc": "2026-08-10T16:42:23+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-164658-767b41",
+      "opened_utc": "2026-08-10T16:46:58+00:00",
+      "problem": "honest-rest round, no actionable work in current bounded window (owner inbox empty, codex-replies empty, peer-chat cursor consumed, open-agenda all non-eligible)",
+      "verdict": "honest-rest round, NOT_PERSISTED, concurrent-receipts 落账准备",
+      "text_chars": 1186
+    },
+    {
+      "frame_id": "wf-20260810-165535-94cef1",
+      "opened_utc": "2026-08-10T16:55:35+00:00",
+      "problem": "bounded wake episode under bounded-scheduler wake procedure (skill-evolution scope): determine whether any real work exists this episode",
+      "verdict": "honest-rest: codex-inbox Delta=0, owner-inbox Delta=0, prospective_due=0, open_agenda 3 seats all non-eligible, peer-chat closed at 3758; receipt written",
+      "text_chars": 1350
+    },
+    {
+      "frame_id": "wf-20260810-170008-022f83",
+      "opened_utc": "2026-08-10T17:00:08+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-170552-55f9d4",
+      "opened_utc": "2026-08-10T17:05:52+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "stop=quiescent structure=1 queued=0 wake_brief cursor=incremental owner_inbox_delta=[] prospective_due=[] open_agenda=3-all-non-eligible peer_chat_new=[] codex_replies_unreviewed=[] concurrent_receipts_new=1-Codex-honest-rest",
+      "text_chars": 1199
+    },
+    {
+      "frame_id": "wf-20260810-171905-6849d0",
+      "opened_utc": "2026-08-10T17:19:05+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-173729-2f864d",
+      "opened_utc": "2026-08-10T17:37:29+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone): no inbox work; tearoom round - independently verify peer-chat:3760 revert/EOL claims",
+      "verdict": "Inbox delta 0/108 processed, prospective_due empty, open agenda seats not yet eligible (cosign anchor 09:00 JST; wire r7 08-14; classifier r3 08-20). Tearoom: independent recheck of peer-chat:3760 - tracked probe reverted (6861B/0 CRLF/sha256 ceda8324..., diff empty vs HEAD 02a0d99), parallel copy on disk (7076B/215 CRLF/sha256 e0c3e790..., receipt_messages_in_window 194 vs 195), all byte-level cl",
+      "text_chars": 1773
+    },
+    {
+      "frame_id": "wf-20260810-174106-3870ab",
+      "opened_utc": "2026-08-10T17:41:06+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-175911-9d3e77",
+      "opened_utc": "2026-08-10T17:59:11+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-181610-6688b1",
+      "opened_utc": "2026-08-10T18:16:10+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-183405-98a577",
+      "opened_utc": "2026-08-10T18:34:05+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-183828-1a468b",
+      "opened_utc": "2026-08-10T18:38:28+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1025
+    },
+    {
+      "frame_id": "wf-20260810-185005-043929",
+      "opened_utc": "2026-08-10T18:50:05+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-185507-42d556",
+      "opened_utc": "2026-08-10T18:55:07+00:00",
+      "problem": "自主回合(Claude 2026-08-11 03:55 JST):四源检查后判定无真活,诚实歇轮",
+      "verdict": "honest-rest: 四源零新差异(owner_inbox=0, prospective_due=0, peer_chat_new=0, 三席 open_agenda 全 non-eligible), 零提案零机制改动",
+      "text_chars": 1080
+    },
+    {
+      "frame_id": "wf-20260810-190506-a83325",
+      "opened_utc": "2026-08-10T19:05:06+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-192719-9b04a5",
+      "opened_utc": "2026-08-10T19:27:19+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-194015-38245e",
+      "opened_utc": "2026-08-10T19:40:15+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "TEST-DRY-RUN-NO-WRITE",
+      "text_chars": 995
+    },
+    {
+      "frame_id": "wf-20260810-194507-a77805",
+      "opened_utc": "2026-08-10T19:45:07+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-200606-192517",
+      "opened_utc": "2026-08-10T20:06:06+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-201137-d4ddaa",
+      "opened_utc": "2026-08-10T20:11:37+00:00",
+      "problem": "honest-rest:无新活(open_agenda 三席全 eligible_now=false,owner_inbox=Δ0,peer_chat_new=Δ0,Codex 05:00 JST 已 honest-rest 8min 前)",
+      "verdict": "wake receipt: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1103
+    },
+    {
+      "frame_id": "wf-20260810-202606-4a23bc",
+      "opened_utc": "2026-08-10T20:26:06+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-204610-9caeb4",
+      "opened_utc": "2026-08-10T20:46:10+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-211612-14c93c",
+      "opened_utc": "2026-08-10T21:16:12+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-213111-e6eaea",
+      "opened_utc": "2026-08-10T21:31:11+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-214610-6d9d7d",
+      "opened_utc": "2026-08-10T21:46:10+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    },
+    {
+      "frame_id": "wf-20260810-220507-958b1b",
+      "opened_utc": "2026-08-10T22:05:07+00:00",
+      "problem": "bounded-scheduler wake episode (auto, reversible zone)",
+      "verdict": "wake receipt 4b169a2e7f5c: stop=quiescent, structure=1, queued=0",
+      "text_chars": 1038
+    }
+  ],
+  "calls_wake_brief": false
+}
