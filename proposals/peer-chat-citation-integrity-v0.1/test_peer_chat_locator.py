@@ -73,6 +73,23 @@ def test_extract_any_year_false_positive_kept():
     assert loc.extract_any("peer-chat:2026") == [2026]
 
 
+def test_extract_any_frame_id_in_receipt_body():
+    # 3788 original example 1: receipt body mixing a real citation with an
+    # 8-digit frame-id/date. P2's new boundary guards keep phantoms out.
+    assert loc.extract_any("- peer-chat:3786 Codex 续帧收据 wf-20260811-031705-a8559e") == [3786]
+
+
+def test_extract_any_date_without_reference_not_captured():
+    # 8-digit date inside the 24-char "peer-chat" window carries no
+    # citation; P2's boundary guards reject the mid-string sub-match.
+    assert loc.extract_any("peer-chat 处理 20260811-031705") == []
+
+
+def test_extract_any_frame_id_in_window_keeps_only_real_citation():
+    # Frame id in the window next to a real citation: only 3786 survives.
+    assert loc.extract_any("peer-chat:3786 wf-20260811-031705-a8559e") == [3786]
+
+
 if __name__ == "__main__":
     failed = []
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_") and callable(v)]

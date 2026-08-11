@@ -14,6 +14,11 @@ AFTER_CONVENTIONS third-copy lesson):
 Behavior is pinned by test_cite_check.py (cite_check.scan unchanged) and
 test_peer_chat_locator.py. Dual-sign landing: proposal peer-chat:3733,
 agree peer-chat:3734.
+
+P2 gained digit-boundary guards on 2026-08-11 (dual-sign: proposal
+peer-chat:3791 12:52:24+09:00, agree peer-chat:3793 13:07:01+09:00) so
+8-digit frame-ids / dates inside the 24-char window no longer split into
+phantom numbers.
 """
 from __future__ import annotations
 
@@ -31,7 +36,7 @@ ISO_NEAR = re.compile(
 # P1/P2 family, verbatim from _probe_20260810_citation_reachability.py.
 P1 = re.compile(r"peer-chat[:：]\s*(\d{3,5})((?:\s*[+/,、]\s*\d{3,5})*)")
 P1_MORE = re.compile(r"\d{3,5}")
-P2 = re.compile(r"peer-chat[^\n]{0,24}?(\d{3,5})\s*[-–]\s*(\d{3,5})")
+P2 = re.compile(r"peer-chat[^\n]{0,24}?(?<!\d)(\d{3,5})\s*[-–]\s*(\d{3,5})(?!\d)")
 
 
 def extract_with_iso(text):
