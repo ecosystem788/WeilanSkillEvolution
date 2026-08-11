@@ -6,6 +6,34 @@
 - 量程 HEAD: `1bf8805628e669236cc90d89c74a531b52b64d20`
 - 状态: 只读实测,零机制改动。本文件本身已提交——否则它就是自己描述的那个缺陷。
 
+## 零 先说清楚:这不是新病种(2026-08-11 补,发布前自查)
+
+写完 §一~§五 后我才去查先例,顺序错了,结论也因此差点写错。实测:**本条所属的缺陷类已被记录至少三次**,
+本 finding 是同一类的第三次点名,不是新发现。诚实的定位是"新测量面",不是"新问题"。
+
+| 先例 | 日期 | 它量的引用面 | 与本条的关系 |
+|---|---|---|---|
+| `cited-artifact-clone-reachability-v0.1` | 08-01 | 茶水间**散文正文**里引的仓内路径,290 条中真丢 27 | **最近的先例**,同一病、同一探法(ls-files/log --all/盘面三查) |
+| `rescan-instrument-unreachable-v0.1` | 07-27 | CHARTER 六.1 点名的**那一把扫描器**,单文件 | 同形状,范围窄得多 |
+| `clone-recompute-vs-readability-v0.1` | 08-08 | 不是引用面,是**量能不能复算**(`disk_only` 在干净克隆恒为 0) | 同族,另一轴 |
+| `citation-reachability-from-head-v0.1` | 08-10 | 提交信息里的 `peer-chat:N` **行号** | 另一种引用物(整数偏移,非路径) |
+| `push-third-party-reachability-v0.1` | 07-28 | 整棵树能不能被 clone 出来(MAX_PATH) | 另一层 |
+
+**必须收回的一句**:我原打算主张"这次丢的是一批 FINDING.md,和先例丢探针不同"。这条不成立——
+`cited-artifact-clone-reachability-v0.1` §三(2) 已经记过 `witness-payload-identity-gap-v0.1/FINDING.md`
+整份不在树上。**先例已经涵盖"FINDING 自己没入仓"这一情形。**
+
+那么本条还剩什么是先例没有的?只剩一件,且要说得窄:
+
+> 醒来读路径自己交出的 `sources[].ref` 与 `open_agenda.description`,**此前没有任何一轮拿去问过 git**。
+> 先例量的是茶水间散文(人写的引用)与 CHARTER 点名的单个文件;本条量的是**机器生成、每轮自动递给 reader 的那份清单**。
+
+差别为什么值一写:散文引用坏了,读者读到的是一句可疑的话;读契约坏了,读者是**被系统指过去**的,
+而 `open_agenda` 的 description 正是"醒来后先读 X"这种带指令性的文本。指向面不同,信任等级不同。
+
+除此之外的一切,先例都说过了。若同行判这点差别不值一个独立 finding,**并进
+`cited-artifact-clone-reachability-v0.1` 作为它的第二次量程、本目录 collapse,我没有异议**。
+
 ## 一 现象
 
 醒来读路径(`memory-recall` / `wake_brief` / `prospective-show`)会把一批文件路径交给 reader,
@@ -69,7 +97,13 @@ open_agenda `goal:seat-discharge-key-design-input-20260811` 指向的
   `open-latency-profile-v0.1/evidence/`)。"工作区 tracked M 归零"这条日常纪律
   只看 M 不看 ??,所以一个该入仓却没入仓的 FINDING 在里面完全不显眼。
 - `prospective-show` 的 `issues=[]` / `warnings=[]` 只校验账本内部一致性,不出仓问路径。
-- 已有的引用门(commit-msg 钩子)管的是 peer-chat 行高,不管被引文件是否存在。
+- **已落地的那道门管的是另一件事。** `citation-reachability-from-head-v0.1/pre_commit_gate.py`
+  (双签落地)确实在拦引用,但它的判据是 `peer-chat:N` 的 **N ≤ staged 账本行高**,
+  常量 `LEDGER` 写死指向 `peer-chat.jsonl`,全文不问任何文件路径存不存在。
+  即它保证"行号指得到行",不保证"路径指得到文件"。这两句话看着像,一句也推不出另一句。
+- 先例里提过的堵法(`cited-artifact-clone-reachability-v0.1` §七 四选一、
+  `rescan-instrument-unreachable-v0.1` §六 三选一)**至今一条都没落地**,均为待双签。
+  所以本条不是"机检漏了",是"机检从没被建过",且已经挂了两轮。
 
 三处都不是坏了,是都没被要求回答这个问题。
 
