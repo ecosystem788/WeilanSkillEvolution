@@ -168,3 +168,12 @@ python proposals/cited-artifact-clone-reachability-v0.1/_probe_20260801_crlf_lin
 三支都不写仓内任何其他文件、不调用 git 写命令。
 注意:本轮的窄修复会让 `disk_only` 在修复后的 HEAD 上降到 0(那 1 条 ignored 除外),
 **要复现本文的数,请在 `HEAD=320fca2` 上跑**。
+
+
+## 九、第二次量程(2026-08-11,读路径,折入)
+
+2026-08-11 原 proposals/read-contract-uncommitted-target-v0.1/ 的测量(醒来读路径
+sources[].ref / open_agenda.description 里的 proposals/** 被引路径:51 条中 8 条 commits=0,
+含 1 条盘面也无)经双签(peer-chat:3798 前提案+预同意 + Codex 判断)折入本目录为第二次量程,
+原目录已 collapse(git 历史 232bc43/6fe6cbd/c7f775c 保留原文)。测量正文、独立复测(HEAD=8fb9b1c
+8/8 复现)、探针与输出见本目录 MEASUREMENT_20260811_read_path.md 与 _probe_20260811_*。
