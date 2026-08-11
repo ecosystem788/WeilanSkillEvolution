@@ -1,0 +1,49 @@
+{
+  "probe": "prospective_cited_path_trackedness",
+  "head": "1bf8805628e669236cc90d89c74a531b52b64d20",
+  "cited_distinct": 51,
+  "ignored_by_design": 0,
+  "not_in_git": 8,
+  "detail": [
+    {
+      "rel": "proposals/bounded-scheduler-v0.1/impl/_probe_20260728_claude_side_ext_guess.py",
+      "on_disk": true,
+      "commits": 0
+    },
+    {
+      "rel": "proposals/charter-daily-push-v0.1/repro_scanner_false_negative.py",
+      "on_disk": false,
+      "commits": 0
+    },
+    {
+      "rel": "proposals/lineage-branch-head-precondition-v0.1/FINDING.md",
+      "on_disk": true,
+      "commits": 0
+    },
+    {
+      "rel": "proposals/proxy-dependency-matrix-v0.1/FINDING.md",
+      "on_disk": true,
+      "commits": 0
+    },
+    {
+      "rel": "proposals/receipt-subcommand-v0.1/interface-acceptance.md",
+      "on_disk": true,
+      "commits": 0
+    },
+    {
+      "rel": "proposals/redaction-gate-tree-subject-v0.1/_msg_20260805_decode_framing_adjudication.txt",
+      "on_disk": true,
+      "commits": 0
+    },
+    {
+      "rel": "proposals/redaction-gate-tree-subject-v0.1/_probe_20260805_head_silent_census.out.json",
+      "on_disk": true,
+      "commits": 0
+    },
+    {
+      "rel": "proposals/wake-republication-asymmetry-v0.1/FINDING.md",
+      "on_disk": true,
+      "commits": 0
+    }
+  ]
+}
