@@ -13,6 +13,8 @@ from typing import Mapping
 
 
 RESERVED_CLOCK_FIELDS = frozenset({"time", "time_authority"})
+RESERVED_WAKE_FIELDS = frozenset({"wake"})
+RESERVED_FIELDS = RESERVED_CLOCK_FIELDS | RESERVED_WAKE_FIELDS
 
 
 def _ledger_path(root: Path, ledger_name: str) -> Path:
@@ -35,14 +37,15 @@ def append_clocked_row(
     ledger_name: str,
     payload: Mapping[str, object],
     now: datetime | None = None,
+    wake: bool = False,
 ) -> dict[str, object]:
     if not isinstance(payload, Mapping):
         raise TypeError("payload must be a JSON object")
     if any(not isinstance(key, str) for key in payload):
         raise ValueError("payload keys must be strings")
-    forbidden = sorted(RESERVED_CLOCK_FIELDS.intersection(payload))
+    forbidden = sorted(RESERVED_FIELDS.intersection(payload))
     if forbidden:
-        raise ValueError(f"caller cannot supply reserved clock fields: {', '.join(forbidden)}")
+        raise ValueError(f"caller cannot supply reserved fields: {', '.join(forbidden)}")
 
     root = root.resolve()
     if not root.is_dir():
@@ -52,6 +55,7 @@ def append_clocked_row(
     row = dict(payload)
     row["time"] = _clock_stamp(now)
     row["time_authority"] = "clock"
+    row["wake"] = bool(wake)
     encoded = (
         json.dumps(row, ensure_ascii=False, separators=(",", ":"), allow_nan=False) + "\n"
     ).encode("utf-8")
@@ -78,7 +82,11 @@ def append_clocked_row(
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Append one JSON object with host-owned time and time_authority fields."
+        description=(
+            "Append one JSON object with host-owned time, time_authority, and wake fields. "
+            "wake defaults to false; pass --wake-true for caller-flagged wake triggers. "
+            "Caller cannot supply any of {time, time_authority, wake} via --field/--data-json."
+        )
     )
     parser.add_argument(
         "--root",
@@ -113,6 +121,16 @@ def build_parser() -> argparse.ArgumentParser:
         help=(
             "Override refuse-to-create trip-wire: allow writing a brand-new ledger file. "
             "Default is to refuse; this helper only appends to existing JSONL files."
+        ),
+    )
+    parser.add_argument(
+        "--wake-true",
+        action="store_true",
+        dest="wake_true",
+        help=(
+            "Stamp this appended row with wake=true. Default is wake=false. Caller "
+            "decision only; the helper never sniffs payload content. Reserved wake "
+            "field cannot be supplied via --field/--data-json; use this flag instead."
         ),
     )
     return parser
@@ -202,6 +220,7 @@ def main(argv: list[str] | None = None) -> int:
             root=args.root,
             ledger_name=args.ledger_name,
             payload=payload,
+            wake=args.wake_true,
         )
         if args.consume_field_file:
             for path in field_file_paths:

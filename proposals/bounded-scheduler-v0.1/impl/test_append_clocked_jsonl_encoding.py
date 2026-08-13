@@ -110,5 +110,5 @@ def test_reserved_clock_field_still_returns_rc2_with_stderr(tmp_path, monkeypatc
         ]
     )
     assert rc == 2
-    assert "reserved clock fields" in captured_stderr.getvalue()
+    assert "reserved fields" in captured_stderr.getvalue()
     assert ledger.read_text(encoding="utf-8").splitlines() == ['{"from":"seed"}']
