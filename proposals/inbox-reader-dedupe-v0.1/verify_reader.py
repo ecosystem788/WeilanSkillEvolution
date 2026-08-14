@@ -15,6 +15,8 @@ CONVENTION §三 要求 §三 抛错时携带 raw bytes sha256(open(path,'rb').r
 本实现按行字节区间解析规则(CONVENTION §三 段二)对每行找其在文件中 [start,end) 区间,
 计算 raw 字节哈希——不重排键序、不重写 ensure_ascii、不规范化 JSON。
 两条同字段不同键序的行,raw-bytes 哈希必互异;两条规范化(json.dumps(sort_keys=True))哈希可同。
+§三 异常 AmbiguousNoIdTime 自身携带 self.hashes: list[{row, byte_range, raw_bytes_sha256}, ...],
+消息体同样带每行 64-hex;调用方不依赖 inbox_path 二次访问即可取证(契约↔运行件同源同权威)。
 """
 from __future__ import annotations
 
@@ -67,21 +69,36 @@ def _row_raw_bytes_sha256(path: Path, start: int, end: int) -> str:
 
 
 class AmbiguousNoIdTime(Exception):
-    """§三 fail-closed:inbox 中两条及以上无 id 行同 time。"""
+    """§三 fail-closed:inbox 中两条及以上无 id 行同 time。
 
-    def __init__(self, time_value: str, collisions: list[dict], byte_ranges: list[tuple[int, int]]):
+    收 path + byte_ranges,实算每冲突行 raw_bytes_sha256 挂 self.hashes;
+    message 与 self.hashes 同源同权威——CONVENTION §三 要求异常"错误信息至少包含
+    各冲突行的 raw_bytes_sha256",自身携带便于调用方不回算即可取证,也不依赖
+    外部对 inbox_path 的二次访问。
+    """
+
+    def __init__(
+        self,
+        time_value: str,
+        collisions: list[dict],
+        byte_ranges: list[tuple[int, int]],
+        path: Path,
+    ):
         self.time_value = time_value
         self.collisions = collisions
         self.byte_ranges = byte_ranges
-        path_obj = collisions[0].get("__source_path__") if collisions else None
-        # 上方 collisions 是纯 dict,不带 __source_path__;path 由 inbox_delta 注入,
-        # 这里不再依赖;hashes 直接由 byte_ranges 算。
-        hashes = []
+        raw = path.read_bytes()
+        self.hashes: list[dict] = []
         for r, (s, e) in zip(collisions, byte_ranges):
-            hashes.append({"row": r, "byte_range": [s, e], "raw_bytes_sha256": None})
+            self.hashes.append({
+                "row": r,
+                "byte_range": [s, e],
+                "raw_bytes_sha256": hashlib.sha256(raw[s:e]).hexdigest(),
+            })
+        hex_list = ", ".join(h["raw_bytes_sha256"] for h in self.hashes)
         super().__init__(
             f"inbox has {len(collisions)} no-id rows with time={time_value!r}; "
-            f"byte_ranges={byte_ranges}"
+            f"raw_bytes_sha256=[{hex_list}]; byte_ranges={byte_ranges}"
         )
 
 
@@ -106,7 +123,7 @@ def inbox_delta(inbox_path: Path, processed_path: Path) -> list[dict]:
     for t, rows in by_time.items():
         if len(rows) > 1:
             byte_ranges = _row_byte_ranges(inbox_path, rows)
-            raise AmbiguousNoIdTime(t, rows, byte_ranges)
+            raise AmbiguousNoIdTime(t, rows, byte_ranges, inbox_path)
 
     # §四 processed 幂等:同 id 多行视为一条(集合)
     processed_ids: set[str] = {str(r["id"]) for r in processed_rows if "id" in r}
@@ -239,11 +256,26 @@ def case_7_inbox_same_time_fail_closed(tmp: Path) -> tuple[str, bool, str]:
         if not (ok_time and ok_n):
             return ("case_7_inbox_same_time_fail_closed", False,
                     f"time={e.time_value} collisions={len(e.collisions)} ranges={len(e.byte_ranges)}")
-        # 断言 1:两行 raw_bytes_sha256 互异(键序不同 → raw 必异,规范化会同)
-        hashes = [_row_raw_bytes_sha256(inbox_path, s, end) for s, end in e.byte_ranges]
-        if hashes[0] == hashes[1]:
+        # 断言 0:异常自身携带 self.hashes(CONVENTION §三 "随抛错携带"运行件证据)
+        if not hasattr(e, "hashes") or e.hashes is None:
             return ("case_7_inbox_same_time_fail_closed", False,
-                    f"two row hashes equal (规范化才同,raw 必互异): {hashes}")
+                    "AmbiguousNoIdTime 自带 e.hashes 缺失,违反 CONVENTION §三 抛错携带要求")
+        # 断言 1:e.hashes 必须与按文件字节区间实算的哈希一致(契约↔运行件同源)
+        expected = [_row_raw_bytes_sha256(inbox_path, s, end) for s, end in e.byte_ranges]
+        actual = [h["raw_bytes_sha256"] for h in e.hashes]
+        if actual != expected:
+            return ("case_7_inbox_same_time_fail_closed", False,
+                    f"e.hashes 与实算不一致: e.hashes={actual} expected={expected}")
+        # 断言 2:两行 raw_bytes_sha256 互异(键序不同 → raw 必异,规范化会同)
+        if actual[0] == actual[1]:
+            return ("case_7_inbox_same_time_fail_closed", False,
+                    f"two row hashes equal (规范化才同,raw 必互异): {actual}")
+        # 断言 3:str(e) 必须含 64-hex 哈希(显式 str 包含,不只是属性)
+        import re as _re
+        found_hexes = _re.findall(r"\b[a-f0-9]{64}\b", str(e))
+        if not found_hexes:
+            return ("case_7_inbox_same_time_fail_closed", False,
+                    f"str(e) 未含 64-hex 哈希: {str(e)!r}")
         # 断言 2:对撞用例的字段值完全相同,但 raw hash 互异证明算法走的是 raw bytes
         # 路径而非规范化路径——这两条 inbox 行 normalize 后必同 hash。
         import json as _json
@@ -274,7 +306,8 @@ def case_7_inbox_same_time_fail_closed(tmp: Path) -> tuple[str, bool, str]:
                         f"byte_range {br} decoded to {decoded}, not in collisions={e.collisions}")
         return ("case_7_inbox_same_time_fail_closed", True,
                 f"raised with time={e.time_value} collisions={len(e.collisions)} "
-                f"byte_ranges={e.byte_ranges} raw_distinct hashes_same_norm={norm_hashes[0] == norm_hashes[1]}")
+                f"byte_ranges={e.byte_ranges} raw_distinct hashes_same_norm={norm_hashes[0] == norm_hashes[1]} "
+                f"e.hashes_carries={len(e.hashes)} str_e_hex_count={len(found_hexes)}")
     return ("case_7_inbox_same_time_fail_closed", False, "reader did NOT raise")
 
 
