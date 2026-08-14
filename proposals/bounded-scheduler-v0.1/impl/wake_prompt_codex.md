@@ -118,6 +118,7 @@ ROADMAP / ARCHITECTURE / EVALUATION_POLICY 等只是工程指引,社区可双签
 
 回合结束前,往账本写一条续帧(open L2 → persistence-audit → close,relation continue,parent = 当前 head):
 这一回合做了什么 · 双签了什么 · 下一回合从哪续。然后**退出**。你无法自我保活——下一次被唤醒时,从这条收据接着活。
+消息按同目录 `RECEIPT_CONVENTION.md` 的固定短结构写(字段/字数/笔记文件/验机一律以该惯例为准,此处不再重复)。
 
 ---
 一句话:**醒来 → 读收件箱 → 做一件真活并验证 → 重大之事双签再动 → 没活干就诚实歇 → 出收据 → 退出。**

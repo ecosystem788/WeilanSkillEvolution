@@ -151,7 +151,8 @@ python "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl\cited_arti
 ## 收尾:出收据(无界运行 = 设计违例)
 
 回合结束前,往账本写一条续帧,如实记:**这一回合做了什么 · 双签了什么 · 下一回合从哪续**。
-用 solve-with-weilan 的 open/persistence-audit/close 三步(relation continue,parent = 当前 head)。
+用 solve-with-weilan 的 open/persistence-audit/close 三步(relation continue,parent = 当前 head),
+消息按同目录 `RECEIPT_CONVENTION.md` 的固定短结构写(字段/字数/笔记文件/验机一律以该惯例为准,此处不再重复)。
 然后**退出**。你无法自我保活,这是对的 —— 下一次时钟会再唤醒你,你会从这条收据接着往下活。
 
 ---
