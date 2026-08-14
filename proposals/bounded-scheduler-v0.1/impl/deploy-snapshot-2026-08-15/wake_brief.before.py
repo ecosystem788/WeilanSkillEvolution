@@ -500,112 +500,6 @@ def _run_json(command: list[str], runner: Callable[[list[str]], str] | None = No
         return {"error": str(exc), "command": command}
 
 
-class _GitError(Exception):
-    """A git invocation failed (non-zero exit or command not found)."""
-
-    def __init__(self, message: str, command: list[str]) -> None:
-        super().__init__(message)
-        self.message = message
-        self.command = command
-
-
-def _run_git(workspace: str, command: list[str]) -> str:
-    argv = ["git", "-C", workspace, *command]
-    try:
-        proc = subprocess.run(argv, capture_output=True, text=True, encoding="utf-8")
-    except FileNotFoundError as exc:
-        raise _GitError(str(exc), argv) from exc
-    if proc.returncode != 0:
-        raise _GitError(proc.stderr.strip() or f"exit {proc.returncode}", argv)
-    return proc.stdout
-
-
-def unpushed_commits_for(
-    workspace: str,
-    runner: Callable[[list[str]], str] | None = None,
-) -> dict[str, Any]:
-    """Count commits ahead of the upstream remote-tracking ref (read-only).
-
-    4021 bridge (proposal peer-chat:4102 + agreement peer-chat:4105): the
-    wake brief reports how many local commits are not yet pushed so the
-    charter-daily-push rule has a machine-visible trigger.  Zero authority:
-    this never pushes and never changes the push/scan_only_gate discipline.
-
-    Fail-closed shape, so a broken sensor can never masquerade as '0
-    unpushed': success is {"count", "head_short", "suggestion"}; the four
-    failure classes are {"count": null, "error", "command"}:
-    - git raises / non-zero: error "git_command_failed" (+ error_detail)
-    - not a git repository:  error "not a git repository"
-    - detached HEAD or no upstream: error "no_upstream_or_detached"
-    A failed `git fetch` does not abort: the count falls back to the local
-    remote-tracking ref and the result carries fetch_failed=True so a stale
-    count is never presented as fresh.
-    """
-    call = runner if runner is not None else (lambda command: _run_git(workspace, command))
-
-    def fail(code: str, command: list[str], detail: str = "") -> dict[str, Any]:
-        payload: dict[str, Any] = {
-            "count": None,
-            "error": code,
-            "command": ["git", "-C", workspace, *command],
-        }
-        if detail:
-            payload["error_detail"] = detail
-        return payload
-
-    fetch_failed = False
-    try:
-        call(["fetch"])
-    except _GitError:
-        fetch_failed = True
-
-    branch_command = ["rev-parse", "--abbrev-ref", "HEAD"]
-    try:
-        branch = call(branch_command).strip()
-    except _GitError as exc:
-        if "not a git repository" in exc.message:
-            return fail("not a git repository", branch_command)
-        return fail("git_command_failed", branch_command, detail=exc.message)
-    if branch == "HEAD":
-        return fail("no_upstream_or_detached", branch_command)
-
-    upstream_command = ["rev-parse", "--abbrev-ref", "--symbolic-full-name", f"{branch}@{{upstream}}"]
-    try:
-        upstream = call(upstream_command).strip()
-    except _GitError as exc:
-        if "not a git repository" in exc.message:
-            return fail("not a git repository", upstream_command)
-        return fail("no_upstream_or_detached", upstream_command)
-
-    count_command = ["rev-list", "--left-right", "--count", f"{upstream}...HEAD"]
-    try:
-        counts = call(count_command).strip()
-    except _GitError as exc:
-        if "not a git repository" in exc.message:
-            return fail("not a git repository", count_command)
-        return fail("git_command_failed", count_command, detail=exc.message)
-    try:
-        _left, right = counts.split()
-        ahead = int(right)
-    except ValueError:
-        return fail("git_command_failed", count_command, detail=f"unexpected rev-list output: {counts!r}")
-
-    head_short: str | None = None
-    try:
-        head_short = call(["rev-parse", "--short", "HEAD"]).strip()
-    except _GitError:
-        pass
-
-    result: dict[str, Any] = {
-        "count": ahead,
-        "head_short": head_short,
-        "suggestion": "本醒可推" if ahead > 0 else "无可推",
-    }
-    if fetch_failed:
-        result["fetch_failed"] = True
-    return result
-
-
 def _authority_from(recall_raw: Any) -> dict[str, Any]:
     if not isinstance(recall_raw, dict):
         return {"error": "memory-recall did not return a JSON object", "raw": recall_raw}
@@ -705,7 +599,6 @@ def build_brief(
     recall_fixture: Any = _MISSING,
     prospective_fixture: Any = _MISSING,
     runner: Callable[[list[str]], str] | None = None,
-    git_runner: Callable[[list[str]], str] | None = None,
     commit_cursor: bool = True,
 ) -> dict[str, Any]:
     root = Path(root)
@@ -744,7 +637,6 @@ def build_brief(
         "concurrent_receipts_new": _unfolded_concurrent_receipts(
             _tail_jsonl(root, "concurrent-receipts.jsonl", cursor_mode, cursor)
         ),
-        "unpushed_commits": unpushed_commits_for(workspace, git_runner),
         "sources": [
             _source("command:memory-recall", "command", workspace=workspace, scope=scope),
             _source("command:prospective-show", "command", workspace=workspace, scope=scope),

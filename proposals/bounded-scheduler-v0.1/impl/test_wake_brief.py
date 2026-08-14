@@ -15,6 +15,32 @@ SEAM_VALID_ROW = b'{"tail":"ok"}\n'
 SEAM_TAIL = SEAM_BAD_JSON + SEAM_NON_OBJECT + SEAM_VALID_ROW
 
 
+class FakeGit:
+    # Canned git runner: each call pops the next response (stdout text or an
+    # exception to raise).  Keeps unit tests off the real repository/network.
+
+    def __init__(self, *responses: object) -> None:
+        self._responses = list(responses)
+        self.commands: list[list[str]] = []
+
+    def __call__(self, command: list[str]) -> str:
+        self.commands.append(command)
+        response = self._responses.pop(0)
+        if isinstance(response, Exception):
+            raise response
+        return response
+
+
+def fake_git_ok() -> FakeGit:
+    return FakeGit(
+        "",  # git fetch
+        "codex/se-0.4-0.7-program",  # rev-parse --abbrev-ref HEAD
+        "origin/codex/se-0.4-0.7-program",  # rev-parse <branch>@{upstream}
+        "0\t5\n",  # rev-list --left-right --count <upstream>...HEAD
+        "b86d857\n",  # rev-parse --short HEAD
+    )
+
+
 def write_jsonl(path: Path, rows: list[dict]) -> None:
     path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows), encoding="utf-8")
 
@@ -30,24 +56,46 @@ def fixture_recall() -> dict:
 def fixture_prospective() -> dict:
     return {
         "sources": ["prospective:ledger-1"],
-        "goals": [
-            {
+        # Real prospective-show shape (measured 2026-08-04): goals is a dict
+        # keyed by goal_ref; due-ness comes from condition.not_before_utc and
+        # matched observed events join through condition.event_name.
+        "goals": {
+            "goal:due": {
                 "goal_ref": "goal:due",
                 "state": "ACTIVE",
-                "not_before": "2026-07-10T09:00:00+00:00",
-                "causal_events": [
-                    {"event_id": "ready-1", "state": "READY"},
-                    {"event_id": "done-1", "state": "OBSERVED"},
-                ],
+                "condition": {
+                    "event_kind": "clock",
+                    "event_name": "tick-due",
+                    "not_before_utc": "2026-07-10T09:00:00+00:00",
+                },
             },
-            {
+            "goal:future": {
                 "goal_ref": "goal:future",
                 "state": "ACTIVE",
-                "not_before": "2026-07-10T10:00:00+00:00",
-                "causal_events": [{"event_id": "ready-2", "state": "READY"}],
+                "condition": {
+                    "event_kind": "clock",
+                    "event_name": "tick-future",
+                    "not_before_utc": "2026-07-10T10:00:00+00:00",
+                },
             },
-            {"goal_ref": "goal:closed", "state": "CLOSED", "causal_events": [{"event_id": "ready-3", "state": "READY"}]},
-        ],
+            "goal:closed": {
+                "goal_ref": "goal:closed",
+                "state": "CLOSED",
+                "condition": {"event_kind": "clock", "event_name": "tick-closed"},
+            },
+        },
+        "causal_events": {
+            "evt-due": {
+                "event_id": "evt-due",
+                "event_name": "tick-due",
+                "observed_at_utc": "2026-07-10T08:00:00+00:00",
+            },
+            "evt-closed": {
+                "event_id": "evt-closed",
+                "event_name": "tick-closed",
+                "observed_at_utc": "2026-07-10T08:30:00+00:00",
+            },
+        },
     }
 
 
@@ -73,6 +121,7 @@ def build(root: Path, **kwargs):
         now_utc=STAMP,
         recall_fixture=fixture_recall(),
         prospective_fixture=fixture_prospective(),
+        git_runner=fake_git_ok(),
         **kwargs,
     )
 
@@ -99,7 +148,9 @@ def test_lossless_aggregation_keeps_delta_text_and_sources(tmp_path: Path) -> No
     assert [row["reply_to"] for row in brief["codex_replies_unreviewed"]] == ["a", "b"]
     assert [row["text"] for row in brief["peer_chat_new"]] == ["chat A", "chat B"]
     assert [goal["goal_ref"] for goal in brief["prospective_due"]] == ["goal:due"]
-    assert brief["prospective_due"][0]["causal_events"] == [{"event_id": "ready-1", "state": "READY"}]
+    assert brief["prospective_due"][0]["causal_events"] == [
+        {"event_id": "evt-due", "event_name": "tick-due", "observed_at_utc": "2026-07-10T08:00:00+00:00"}
+    ]
     refs = {source["ref"] for source in brief["sources"]}
     assert (tmp_path / "owner-inbox.jsonl").as_posix() in refs
     assert (tmp_path / "codex-inbox-replies.jsonl").as_posix() in refs

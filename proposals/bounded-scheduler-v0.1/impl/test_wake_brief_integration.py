@@ -10,6 +10,32 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import wake as wake_mod  # noqa: E402
 
 
+class FakeGit:
+    # Canned git runner: each call pops the next response (stdout text or an
+    # exception to raise).  Keeps unit tests off the real repository/network.
+
+    def __init__(self, *responses: object) -> None:
+        self._responses = list(responses)
+        self.commands: list[list[str]] = []
+
+    def __call__(self, command: list[str]) -> str:
+        self.commands.append(command)
+        response = self._responses.pop(0)
+        if isinstance(response, Exception):
+            raise response
+        return response
+
+
+def fake_git_ok() -> FakeGit:
+    return FakeGit(
+        "",  # git fetch
+        "codex/se-0.4-0.7-program",  # rev-parse --abbrev-ref HEAD
+        "origin/codex/se-0.4-0.7-program",  # rev-parse <branch>@{upstream}
+        "0\t5\n",  # rev-list --left-right --count <upstream>...HEAD
+        "b86d857\n",  # rev-parse --short HEAD
+    )
+
+
 def _recall() -> dict:
     return {
         "activation": {"state": "ACTIVE", "continuation_allowed": True},
@@ -97,6 +123,7 @@ def test_trigger_detection_does_not_consume_consumer_cursor(monkeypatch, tmp_pat
         updated_at_utc="2026-07-13T13:15:00+00:00",
         recall_fixture=_recall(),
         prospective_fixture={"goals": []},
+        git_runner=fake_git_ok(),
     )
 
     assert consumer_brief["peer_chat_new"] == [chat]

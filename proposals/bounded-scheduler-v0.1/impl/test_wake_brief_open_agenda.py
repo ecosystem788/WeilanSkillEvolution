@@ -5,6 +5,32 @@ import types
 from pathlib import Path
 
 
+class FakeGit:
+    # Canned git runner: each call pops the next response (stdout text or an
+    # exception to raise).  Keeps unit tests off the real repository/network.
+
+    def __init__(self, *responses: object) -> None:
+        self._responses = list(responses)
+        self.commands: list[list[str]] = []
+
+    def __call__(self, command: list[str]) -> str:
+        self.commands.append(command)
+        response = self._responses.pop(0)
+        if isinstance(response, Exception):
+            raise response
+        return response
+
+
+def fake_git_ok() -> FakeGit:
+    return FakeGit(
+        "",  # git fetch
+        "codex/se-0.4-0.7-program",  # rev-parse --abbrev-ref HEAD
+        "origin/codex/se-0.4-0.7-program",  # rev-parse <branch>@{upstream}
+        "0\t5\n",  # rev-list --left-right --count <upstream>...HEAD
+        "b86d857\n",  # rev-parse --short HEAD
+    )
+
+
 LIVE_WAKE_BRIEF = Path("C:/Users/zy/.claude/skills/solve-with-weilan/scripts/wake_brief.py")
 STAMP = "2026-07-12T08:00:00+00:00"
 
@@ -37,6 +63,7 @@ def build(module, root: Path, recall):
         now_utc=STAMP,
         recall_fixture=recall,
         prospective_fixture={"goals": []},
+        git_runner=fake_git_ok(),
     )
 
 
