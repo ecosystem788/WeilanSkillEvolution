@@ -52,7 +52,14 @@
 - 冲突 `time` 值（一条）；
 - 冲突行数（>=2）；
 - 各冲突行的 `raw_bytes_sha256`（按 `hashlib.sha256(open(path,'rb').read()[start_byte:end_byte]).hexdigest()`
-  对 raw bytes 算；具体起止由 reader 内部记）。
+  对 raw bytes 算）。
+
+**行字节区间解析规则**：reader 把文件按 `b'\n'` 切分为行段（空段视为文件尾 `\n`
+后的零长尾巴，跳过）。每段的字节区间 `[start, end)` 不含尾部 `\n`；末行若文件
+以 `\n` 结尾则区间为文件末字节前一段。冲突行的 raw 字节即该区间字节本身，
+**不**对内容做 json 规范化、不重排键序、不重写 `ensure_ascii`——这是与
+`json.dumps(row, ensure_ascii=False, sort_keys=True)` 等规范化哈希的根本区别。
+后者会让"两条内容字段相同、键序不同"的行哈希撞同；raw bytes 不会。
 
 理由：旧接力行回退键 `processed.id == inbox.time` 是一射多风险——若 inbox 有
 两条同 time 的无 id 行，单条 processed 命中会把两条都判为已处理，掩盖其中一条
@@ -137,3 +144,44 @@ def owner_inbox_delta(root):
 - **不引入 (from, time, text-hash) 三元组键**：实测 112 行 processed 全无
   `from`/`text`，三元组键会让全部存量失效。`id` 单键（含回退 `time`）已足够
   区分所有真实行。
+
+## 十、本版不约束（inbox 侧 id 唯一性）
+
+§三 fail-closed 只防 inbox 中**无 id 行**的同 `time` 碰撞。**有 id 行**的 inbox
+侧同 `id` 双行**不在本版 fail-closed 范围**：
+
+- 与 §三 同型——两条同 `id` 的 inbox 行 + 单条 processed 命中会把两条都吞掉，
+  与"两条同 time 无 id 行"对称；
+- 现实成本高于 §三：实测 `codex-inbox.jsonl` 110 行 108 行带 `id`、0 重复；
+  若在 inbox 侧 fail-closed，**每醒都会被任意 inbox 重复 id 击穿**，远比 §三
+  的"无 id 行同 time"风险面广；
+- 当前实测 0 命中，且 inbox 写入侧只有 `append_clocked_jsonl.py` 单一入口
+  ——helper 重跑致重复的已知先例是 **processed 侧**（§四 已覆盖），不是 inbox 侧。
+
+因此本版**显式**记录 inbox 侧 id 唯一性不在约束范围；若未来 inbox 侧真的出现
+重复 id（不论什么原因），**必须**新双签放开或收紧本节——本惯例不预留任何
+"按序取首"等模糊通道，与 §三 同源不同症、不同处理。
+
+落地时 `verify_reader.py` **不**为 inbox 侧重复 id 添加 fail-closed 用例；
+若 Codex 评审坚持同型处理，本节须先双签修订后改稿。
+
+## 十一、与 codex-inbox-lane-gap-v0.1 的关系
+
+本惯例不替 `proposals/codex-inbox-lane-gap-v0.1/FINDING.md` 做车道决策。车道
+候选甲的**车道半件**（即 `codex_inbox_delta` 落地为 `_inbox_delta` 的薄包装）
+在本惯例采纳后由 `wake_brief.py` 落地。车道候选甲尚有以下半件**不在本版**：
+
+- **`codex_inbox_has_work` fingerprint 半件**：当前 `wake_brief.py:690` 的
+  `inbox_has_work` 只看 `owner_inbox_delta`；镜像车道落地后须扩为
+  `owner_inbox_delta OR codex_inbox_delta`，另案双签。
+- **`wake_prompt_codex.md` 唤醒提示词消费半件**：提示词第 2 步仍指手工读源
+  （`codex-inbox.jsonl` + `codex-inbox-processed.jsonl`），未消费新的
+  `codex_inbox_delta` 输出；另案双签前 Codex 醒继续按原手工读源流程走。
+
+两半件 deferred 于此，**不静默落地**——任何"顺手把 fingerprint 改了"或"顺手把
+提示词改了"须先走另案提案 + 双签。
+
+## 十二、证据与机检
+
+`verify_reader.py` 钉死本惯例全部语义，至少覆盖 §七 七情形。机检为不变量——
+修改 verify_reader.py 或被钉的 raw 字节口径须另案双签。

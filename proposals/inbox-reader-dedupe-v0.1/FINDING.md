@@ -18,7 +18,7 @@
 | --- | ---: | ---: | ---: | ---: |
 | `codex-inbox.jsonl` | 110 | 108 | 110 | 110 |
 | `codex-inbox-processed.jsonl` | 112 | 112 | 0 | 0 |
-| `owner-inbox.jsonl` | 4 | 4 | 4 | 4 |
+| `owner-inbox.jsonl` | 4 | 4 | 0 | 4 |
 | `owner-inbox-processed.jsonl` | 8 | 8 | 0 | 0 |
 
 观察点：
@@ -28,8 +28,10 @@
    `codex-inbox-processed` 的接力行，对应字段是 `id=2026-08-15T02:03:23+09:00` /
    `id=2026-08-15T02:05:31+09:00`（即"接力 processed 行的 id 字段直接镜像 inbox
    行的 time 字段"——这是接力行的稳定契约）。
-2. **`codex-inbox-processed.jsonl` 112 行 0 行带 `from`/`text`**——全部存量都
-   只能靠 `id` 字段命中；这一约束定义了 reader 必须支持"无 from/text 命中"。
+2. **`codex-inbox-processed.jsonl` 112 行 0 行带 `from`/`text`**；`owner-inbox-processed.jsonl`
+   8 行同样 0 行带 `from`/`text`；`owner-inbox.jsonl` 4 行 0 行带 `from`(只有
+   `{id, text, time}`)。全部存量都只能靠 `id` 字段命中;这一约束定义了 reader
+   必须支持"无 from/text 命中"。
 3. **`codex-inbox-processed.jsonl` 有重复 id**：`7c4a1e9b2d63` × 2、`59cccfe676e3` × 2。
    两条都对应 helper 重跑产物（同 4115/4116 先例，peer-chat 4117 校正的 bash →
    PS cmdlet spillover）。reader 必须对 processed 行幂等：同 id 多行视为同一条。
@@ -63,15 +65,31 @@
 
 ## 范围（窄）
 
-只动：
+**只动（入本包）**：
 
 - `solve-with-weilan/scripts/wake_brief.py` 的 `_processed_ids` + `owner_inbox_delta`
-  两函数；
-- `codex-inbox-lane-gap-v0.1` 提案里那条镜像 `codex_inbox_delta` 车道（接线
-  同一函数）；
+  两函数（按 CONVENTION §八 落地为 `_inbox_delta` 薄包装）；
+- `codex-inbox-lane-gap-v0.1` 提案里的 `codex_inbox_delta` 镜像车道半件（接线
+  同一函数，**仅**车道接线本身）；
 - 新增 `proposals/inbox-reader-dedupe-v0.1/verify_reader.py` 与配套测试。
 
-**不**动：
+**Deferred（另案双签，本包不落地）**：
+
+车道候选甲尚有两半件不在本包范围内，记录于此以免静默丢失：
+
+- **`codex_inbox_has_work` fingerprint 半件**：`wake_brief.py:690` 当前
+  `inbox_has_work` 只看 `owner_inbox_delta`；镜像车道落地后须扩为
+  `owner_inbox_delta OR codex_inbox_delta`。本包不动此 fingerprint——Codex 醒
+  在新 `codex_inbox_delta` 车道落地后，仍按旧 fingerprint 判定 inbox 是否有活，
+  直到 fingerprint 半件另案双签扩位。
+- **`wake_prompt_codex.md` 唤醒提示词消费半件**：提示词第 2 步仍指手工读源
+  （`codex-inbox.jsonl` + `codex-inbox-processed.jsonl`）；本包不动提示词——
+  Codex 醒继续按原手工读源流程走新 `codex_inbox_delta` 输出可加但不可改。
+
+两半件 deferred 后，落地收据须明示"车道接线入本包、fingerprint + 提示词两半件
+另案双签"。
+
+**完全不**动：
 
 - 现有 inbox / processed 文件本身；
 - 任何 `peer-chat.jsonl` 历史行；
