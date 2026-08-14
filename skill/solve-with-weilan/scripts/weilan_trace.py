@@ -7189,11 +7189,22 @@ def command_memory_update(args):
     )
 
 
+def freshness_bool(fresh):
+    """Explicit three-state to bool mapping for backward-compatible gates.
+
+    The dual-signed axis-1 v1 contract pins fresh=True / stale=False /
+    contested=True. Truthiness is never used: every three-state value is a
+    non-empty string, so a naive bool() would let stale slip through the gate.
+    Unknown states fail closed.
+    """
+    return {"fresh": True, "stale": False, "contested": True}.get(fresh, False)
+
+
 def projection_freshness(projection, controls):
     if not projection:
-        return {"fresh": False, "reason_codes": ["projection_missing"]}
+        return {"fresh": "stale", "reason_codes": ["projection_missing"]}
     if projection.get("schema_version") != PROJECTION_SCHEMA_VERSION:
-        return {"fresh": False, "reason_codes": ["legacy_projection_schema"]}
+        return {"fresh": "stale", "reason_codes": ["legacy_projection_schema"]}
     workspace = projection["workspace"]
     scope = projection["scope"]
     workspace_control = latest_control(controls, workspace, "workspace")
@@ -7208,8 +7219,17 @@ def projection_freshness(projection, controls):
     current_sources = source_snapshots(projection.get("sources", []), workspace)
     if projection.get("source_snapshots") != current_sources:
         reasons.append("source_changed")
+    contested_entries = projection.get("contested_semantic_entries") or []
+    if contested_entries:
+        reasons.append("contested_present")
+    if any(code in reasons for code in ("source_changed", "control_head_changed")):
+        fresh = "stale"
+    elif contested_entries:
+        fresh = "contested"
+    else:
+        fresh = "fresh"
     return {
-        "fresh": not reasons,
+        "fresh": fresh,
         "reason_codes": reasons,
         "current_control_heads": current_heads,
     }
@@ -7240,7 +7260,7 @@ def evaluate_activation(workspace, scope, projection, controls):
     elif effective_control.get("resume_requires_confirmation"):
         state = "CONFIRM_REQUIRED"
         reasons.insert(0, "resume_requires_confirmation")
-    elif not freshness["fresh"]:
+    elif not freshness_bool(freshness["fresh"]):
         state = "STALE"
     else:
         state = "ACTIVE"
