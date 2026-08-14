@@ -20,7 +20,7 @@
 1. **同步的改动必须在 commit message 里如实标注**（基线 sha、实际改动幅度、是否触及 promotion gate 等敏感路径），
    不许用"receipt-only drift"这类含糊词把 912 行的真改动埋成"小修"。
 2. **同步的字节一致性必须可机检**——口头说"mirror 已 == 活体"不可核，
-   须由 `scripts/sync_mirror_check.py` 在每次同步提交后跑一次并把结果印进 commit message。
+   须由 `proposals/skill-sync-discipline-v0.1/sync_mirror_check.py` 在每次同步提交后跑一次并把结果印进 commit message。
 
 ## 二、适用域
 
