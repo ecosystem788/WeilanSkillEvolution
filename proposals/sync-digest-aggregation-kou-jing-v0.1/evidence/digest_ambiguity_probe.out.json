@@ -1,0 +1,44 @@
+{
+  "commit": "c2ad677",
+  "parent": "6337964",
+  "n_paths": 9,
+  "paths": [
+    "skill/solve-with-weilan/scripts/runtime_core.py",
+    "skill/solve-with-weilan/scripts/test_canonical_workspace_cache.py",
+    "skill/solve-with-weilan/scripts/test_conversation_evidence.py",
+    "skill/solve-with-weilan/scripts/test_episode_receipt.py",
+    "skill/solve-with-weilan/scripts/test_frame_abandon.py",
+    "skill/solve-with-weilan/scripts/test_frame_lineage.py",
+    "skill/solve-with-weilan/scripts/test_semantic_memory.py",
+    "skill/solve-with-weilan/scripts/test_source_authenticity_marker.py",
+    "skill/solve-with-weilan/scripts/wake_brief.py"
+  ],
+  "recorded_pre": "a2faf20ad8330c79d053cad8b951ff1e381650191536ff2d22a06e0462dece97",
+  "recorded_post": "ef405e0917233056a4d3fe5517af35a089eeae14a2ea6d67b558b844e49c65e9",
+  "pre_readings": {
+    "A_concat_raw_bytes_absent_empty": "a2faf20ad8330c79d053cad8b951ff1e381650191536ff2d22a06e0462dece97",
+    "B_concat_hexdigests_absent_empty": "b3c0650052578abc3e8a7fa62d27b84b53378ee9dff68b3ab5e2e452c1b48718",
+    "C_concat_rawdigests_absent_empty": "c3096bcd46e11a969b75af81621b49a32f464c409dc2f5a9d98c4278593438b0",
+    "D_path_bound_manifest": "d41fb9292616ceb9e6ef6a8a7ddd7096266b19b1b9722a0970e8a1f4021b01a0",
+    "E_concat_hexdigests_absent_skipped": "045fc50df23de46fa9ead0bf3fc241488295405c06e47580b8056abc6b7f262d",
+    "F_concat_raw_bytes_absent_skipped": "a2faf20ad8330c79d053cad8b951ff1e381650191536ff2d22a06e0462dece97"
+  },
+  "post_readings": {
+    "A_concat_raw_bytes_absent_empty": "ef405e0917233056a4d3fe5517af35a089eeae14a2ea6d67b558b844e49c65e9",
+    "B_concat_hexdigests_absent_empty": "bb03244bc7ab5d998db712626a1e2c91d74d87e9377bd6b341840ee59c035ac3",
+    "C_concat_rawdigests_absent_empty": "db454871239ee9014fcfd61e3dadfd8cf4bb133eca2d691179dc9525f5f8c1f6",
+    "D_path_bound_manifest": "e95c45b81878f631bfd14b43f4eccd5b9291057a02e14705db79602cdfed2c93",
+    "E_concat_hexdigests_absent_skipped": "bb03244bc7ab5d998db712626a1e2c91d74d87e9377bd6b341840ee59c035ac3",
+    "F_concat_raw_bytes_absent_skipped": "ef405e0917233056a4d3fe5517af35a089eeae14a2ea6d67b558b844e49c65e9"
+  },
+  "pre_matches": [
+    "A_concat_raw_bytes_absent_empty",
+    "F_concat_raw_bytes_absent_skipped"
+  ],
+  "post_matches": [
+    "A_concat_raw_bytes_absent_empty",
+    "F_concat_raw_bytes_absent_skipped"
+  ],
+  "distinct_pre_values": 5,
+  "distinct_post_values": 4
+}
