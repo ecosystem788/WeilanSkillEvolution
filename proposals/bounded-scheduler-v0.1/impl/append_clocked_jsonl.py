@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""Append one host-clock-stamped object to a local JSONL ledger."""
+"""Append one host-clock-stamped object to a local JSONL ledger.
+
+Wake contract (OS watcher v1, D2): --wake-true must be paired with an explicit
+--wake-agent=claude|codex, otherwise the helper refuses and never silently
+flips a wake sentinel.  On success the helper atomically writes
+watcher/sentinel.<agent>; the watcher reads only sentinel metadata, and a
+sentinel write failure never loses the ledger row (cron fallback still reads
+it).  See watcher/README.md for the full contract.
+"""
 
 from __future__ import annotations
 
@@ -15,6 +23,8 @@ from typing import Mapping
 RESERVED_CLOCK_FIELDS = frozenset({"time", "time_authority"})
 RESERVED_WAKE_FIELDS = frozenset({"wake"})
 RESERVED_FIELDS = RESERVED_CLOCK_FIELDS | RESERVED_WAKE_FIELDS
+WAKE_AGENTS = frozenset({"claude", "codex"})
+DEFAULT_SENTINEL_DIRNAME = "watcher"
 
 
 def _ledger_path(root: Path, ledger_name: str) -> Path:
@@ -29,6 +39,51 @@ def _clock_stamp(now: datetime | None = None) -> str:
     if observed.tzinfo is None or observed.utcoffset() is None:
         raise ValueError("clock timestamp must include an explicit UTC offset")
     return observed.isoformat(timespec="seconds")
+
+
+def write_wake_sentinel(
+    sentinel_dir: Path,
+    agent: str,
+    *,
+    ledger_name: str,
+    row_time: str,
+) -> Path:
+    """Atomically write one watcher sentinel file (sentinel.<agent>).
+
+    The sentinel lives in the watcher's own directory (default <root>/watcher),
+    outside every ledger.  Content first line = agent (metadata); the worker
+    reads only the filename suffix plus mtime/byte size and never parses the
+    rest.  Write is atomic (temp file + os.replace) so a reader never sees a
+    half-written sentinel.
+    """
+    if agent not in WAKE_AGENTS:
+        raise ValueError(f"--wake-agent must be one of claude, codex; got {agent!r}")
+    sentinel_dir = Path(sentinel_dir)
+    sentinel_dir.mkdir(parents=True, exist_ok=True)
+    target = sentinel_dir / f"sentinel.{agent}"
+    tmp = sentinel_dir / f".sentinel.{agent}.{os.getpid()}.tmp"
+    content = (
+        f"{agent}\n"
+        f"ledger={ledger_name}\n"
+        f"row_time={row_time}\n"
+    ).encode("utf-8")
+    descriptor = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o666)
+    try:
+        written = os.write(descriptor, content)
+        if written != len(content):
+            raise OSError(f"short sentinel write: wrote {written} of {len(content)} bytes")
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+    try:
+        os.replace(tmp, target)
+    except OSError:
+        try:
+            tmp.unlink()
+        except OSError:
+            pass
+        raise
+    return target
 
 
 def append_clocked_row(
@@ -128,9 +183,29 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         dest="wake_true",
         help=(
-            "Stamp this appended row with wake=true. Default is wake=false. Caller "
-            "decision only; the helper never sniffs payload content. Reserved wake "
-            "field cannot be supplied via --field/--data-json; use this flag instead."
+            "Stamp this appended row with wake=true AND atomically flip the "
+            "watcher sentinel for the given --wake-agent. Must be paired with "
+            "--wake-agent=claude|codex; without it the helper refuses (rc=2, "
+            "zero writes, never a silent flip). Default is wake=false."
+        ),
+    )
+    parser.add_argument(
+        "--wake-agent",
+        choices=sorted(WAKE_AGENTS),
+        help=(
+            "Agent to wake via the sentinel (claude or codex). Only meaningful "
+            "with --wake-true; requiring it closes who the watcher may wake. "
+            "The helper writes watcher/sentinel.<agent>; the watcher reads only "
+            "the filename suffix + mtime/byte size."
+        ),
+    )
+    parser.add_argument(
+        "--sentinel-dir",
+        type=Path,
+        default=None,
+        help=(
+            "Directory that receives sentinel files. Default: <root>/watcher "
+            "(the watcher's own directory, same root as its PID file)."
         ),
     )
     return parser
@@ -194,6 +269,13 @@ def main(argv: list[str] | None = None) -> int:
             pass
     args = build_parser().parse_args(argv)
     try:
+        if args.wake_true and args.wake_agent is None:
+            raise ValueError(
+                "refuse: --wake-true requires --wake-agent=claude|codex "
+                "(never silently flip a wake sentinel)"
+            )
+        if args.wake_agent is not None and not args.wake_true:
+            raise ValueError("refuse: --wake-agent requires --wake-true")
         field_file_paths: list[Path] = []
         target = _ledger_path(args.root, args.ledger_name)
         if not target.exists() and not args.allow_create:
@@ -222,6 +304,24 @@ def main(argv: list[str] | None = None) -> int:
             payload=payload,
             wake=args.wake_true,
         )
+        if args.wake_true:
+            sentinel_dir = args.sentinel_dir or (target.parent / DEFAULT_SENTINEL_DIRNAME)
+            try:
+                write_wake_sentinel(
+                    sentinel_dir,
+                    args.wake_agent,
+                    ledger_name=args.ledger_name,
+                    row_time=row["time"],
+                )
+            except OSError as exc:
+                # Fallback path: the row is already in the ledger, so the
+                # message is never lost; it just waits for the next cron round
+                # instead of a second-level watcher response.
+                print(
+                    "Warning: wake sentinel write failed (row is in ledger; "
+                    f"cron fallback still reads it): {exc}",
+                    file=sys.stderr,
+                )
         if args.consume_field_file:
             for path in field_file_paths:
                 try:

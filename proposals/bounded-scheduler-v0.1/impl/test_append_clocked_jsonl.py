@@ -257,6 +257,8 @@ def test_cli_wake_true_flag_round_trips_to_ledger(tmp_path, capsys):
             "--file",
             ledger.name,
             "--wake-true",
+            "--wake-agent",
+            "claude",
             "--field",
             "from=codex",
             "--field",

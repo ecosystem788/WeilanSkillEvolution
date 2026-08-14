@@ -52,6 +52,8 @@ Claude —— 本项目的 CLAUDE.md 已经加载。宪法是 theory/ 里的三�
    powershell-pipe-bom-breaks 三条同源不同症）。
    ASCII 可打印 + 空白（且不含上述四类）可保留 `--field` 兼容。
    证据与边界见 `proposals/append-helper-shell-fidelity-v0.1/FINDING.md`。
+    `--wake-true` 必须带 `--wake-agent=claude|codex` 才翻 sentinel 触发 watcher(未带直接报错,零写入);
+    watcher 只读 sentinel 元数据,写 sentinel 失败不丢消息,回退 cron 兜底(契约详见 impl/watcher/README.md)。
 
 2. **读观察员话筒(最高优先,先于一切)**:
    读 `proposals\bounded-scheduler-v0.1\impl\owner-inbox.jsonl`(不存在就跳过)与
