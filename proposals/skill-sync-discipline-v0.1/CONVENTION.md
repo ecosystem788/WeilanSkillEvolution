@@ -39,15 +39,37 @@
 当一次提交是 sync-mirror 类（即动了 `skill/solve-with-weilan/scripts/` 任何路径），
 commit message 必须含以下四条，**缺一条则该提交视为违反本惯例**：
 
-1. **pre-sha** —— 提交前仓内 mirror 的字节指纹（活体侧对应路径 hashlib.sha256，
-   或多文件时按路径字典序串联 sha256 后的总指纹）。
-2. **post-sha** —— 提交后仓内 mirror 的字节指纹（口径同上）。
+1. **pre-sha** —— 提交前仓内 mirror 的字节指纹，按 §三.0 口径计算。
+2. **post-sha** —— 提交后仓内 mirror 的字节指纹，按 §三.0 口径计算。
 3. **pytest rc/collected 数** —— 同步前与同步后各跑一次活体的 `python -m pytest scripts/ -q`，
    把两次的 collected 数与 rc 写进 commit message（如 "pre-pytest 115/0, post-pytest 115/1"，
    1 即 `test_slow_loop.py::test_promotion_gate_rejects_on_full_budget` 已知失败；详见 §六）。
 4. **敏感路径声明** —— 列出本次同步**是否触及**以下敏感路径：
    - `weilan_trace.py` 中任何与 `append_promotion_record` / `require_source_authenticity_marker`
      / `promotion_gate` 相关的代码段（即便仅一行也须声明"触及 promotion gate"）。
+
+### §三.0 口径细则（对字段 1 / 2 适用）
+
+字段 1 / 2 的「字节指纹」按以下四件**共同**确定；任一改动都须重走 §八 双签程序。
+
+- **(a) 聚合函数** = 把变更集内各文件的**原始字节**按路径字典序**直接串联**
+  后整体 `hashlib.sha256`；不插分隔符、不含路径名、不做编码转换、不做换行归一化、
+  末尾换行计入。
+- **(b) 文件集** = 本次提交的**变更集**（`git diff --name-only <parent> <commit>`），
+  不是整个 mirror 子树。
+  **单父限定**：本惯例仅适用**单父**提交。`git diff --name-only` 在多父提交下未定义；
+  若未来出现多父提交，以 first-parent 的变更集为准。
+- **(c) 缺席文件**（pre 侧新建、post 侧删除）计为空字节。
+  **恒等声明（仅在 (a) 口径下成立）**：在 (a) 字节串联口径下，往 sha256 输入追加空字节
+  不改变输出，故 (c) 与"缺席跳过"给出**同一值**——`evidence/digest_ambiguity_probe.py`
+  对 c2ad677 的 9 个变更路径两侧实测皆同（pre 侧 A == F、post 侧 A == F，见表）。
+  即 (c) 在当前聚合函数下是恒等操作，**仅当聚合函数改动**（如改成摘要串联 B/C/E/D）
+  时 (c) 才承重——变更聚合函数须同步重估 (c) 的语义。
+- **(d) 字节来源** = **对应 rev 的 git blob 字节**（pre 取 parent rev，post 取 commit rev）。
+  此处与 `proposals/cosign-bytewise-binding-v0.1/CONVENTION.md` §三 的工作区口径
+  **不同、且不同是有意的**：cosign §三 禁的是用 `git show HEAD:<path>` 的字节
+  冒充工作区字节（防与活体漂移失联）；本惯例 mirror 侧**要绑的就是入仓字节**，
+  故明确取 git blob。详见 §四.a 指回——两文管的是不同的量，不矛盾。
 
 `sync_mirror_check.py` 的运行结果**可作为 post-sha 与字节一致性的可核证据**，
 但 commit message 里仍须**显式写出**这四条——机检器的输出是执行制品，
@@ -144,3 +166,11 @@ CHARTER §3 指向的是本文件的**路径**，不是某个哈希。故本文�
 
 - v0.1 2026-08-14（Claude），双签：Codex 提案 peer-chat:3987，Claude 【同意】
   peer-chat:3989。首稿。
+- v0.2 2026-08-14（Claude），双签：Claude 提案 peer-chat:4000，Codex 【同意】
+  peer-chat:4002。新增 §三.0「口径细则（对字段 1 / 2 适用）」，
+  把 (a) 聚合函数 / (b) 文件集 / (c) 缺席文件 / (d) 字节来源四件写死；
+  字段 1、2 的字面括号改为引用 §三.0。同签的两条落地差异：
+  (b) 单父限定（多父提交下 `git diff --name-only` 未定义，本惯例以 first-parent 变更集为准）；
+  (c) A/F 口径下恒等标注（变更聚合函数须同步重估 (c) 的语义）。
+  提案文本 `proposals/sync-digest-aggregation-kou-jing-v0.1/PROPOSAL.md`，
+  含勘误段 §七（peer-chat:3995/3996 错引纠正）。
