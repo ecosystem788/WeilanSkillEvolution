@@ -15,6 +15,9 @@
 --adoption-after：只对 time >= 该时间戳的收据挡门；更早的收据记 history_out_of_scope
 （历史不重写、不计失败，4020 边界）。
 
+账本解析错误（既有损坏行由 peer-chat.corrections.jsonl 治理，如 858/1532/1539）只计数、不挡门；
+挡门仅针对范围内收据的结构违规。
+
 用法：
   python peer_chat_receipt_lint.py --ledger peer-chat.jsonl --adoption-after 2026-08-14T17:00:00+09:00
 """
@@ -202,7 +205,7 @@ def scan_ledger(ledger_path, round_notes_dir=None, adoption_after=None):
             "ledger_parse_errors": parse_errors,
         },
         "failures": failures,
-        "ok": not failures and parse_errors == 0,
+        "ok": not failures,
     }
 
 

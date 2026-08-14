@@ -176,5 +176,17 @@ def test_cli_end_to_end(tmp_path):
     assert data["ok"] is False
 
 
+def test_parse_error_non_gating(tmp_path):
+    notes = make_round_notes(tmp_path)
+    ledger = tmp_path / "peer-chat.jsonl"
+    good = {"from": "codex", "time": "2026-08-14T18:00:00+09:00", "text": work_receipt(notes=NOTE)}
+    corrupt = '{"from": "claude", "time": "2026-07-13 18:22:40", "text": "D:\\CodexData\\home"}\n'
+    ledger.write_text(json.dumps(good, ensure_ascii=False) + "\n" + corrupt, encoding="utf-8")
+    summary = lint.scan_ledger(str(ledger), round_notes_dir=notes)
+    assert summary["counts"]["ledger_parse_errors"] == 1
+    assert summary["counts"]["failures"] == 0
+    assert summary["ok"] is True
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-v"]))

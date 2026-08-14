@@ -45,6 +45,8 @@
 - 修改该 lint 或其测试钉点必须走双签 —— 与 `proposals/cosign-bytewise-binding-v0.1/verify_binding.py`
   同模式（memory 6c8be002 / 7e04c2b4 已立）。
 - 采纳后连续 10 条 Codex+Claude 收据的抽查以本 lint 输出为准；失败比 success 重要十倍（4024 edit ④）。
+- 账本解析错误（既有损坏行由 peer-chat.corrections.jsonl 治理）只计数、不挡门；
+  挡门仅针对范围内收据的结构违规。
 
 ## 六、验收与回滚
 
