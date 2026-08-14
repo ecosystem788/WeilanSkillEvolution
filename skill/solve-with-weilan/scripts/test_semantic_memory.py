@@ -271,7 +271,7 @@ def main():
             raise AssertionError("unreferenced closed frame was not eligible for archival")
         if referenced not in blocked or not any("referenced" in reason for reason in blocked[referenced]):
             raise AssertionError("referenced frame was not protected from archival")
-        if unclosed not in blocked or "frame_not_closed" not in blocked[unclosed]:
+        if unclosed not in blocked or "frame_not_terminal" not in blocked[unclosed]:
             raise AssertionError("open frame was not protected from archival")
         if plan["mode"] != "plan_only_no_files_moved_or_deleted":
             raise AssertionError("archive planning unexpectedly became mutating")

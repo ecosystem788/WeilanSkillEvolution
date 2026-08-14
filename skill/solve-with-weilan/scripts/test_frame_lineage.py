@@ -125,7 +125,7 @@ def main():
             ],
             environment,
         )
-        if open_parent.returncode == 0 or "must be closed" not in open_parent.stderr:
+        if open_parent.returncode == 0 or "must be terminal" not in open_parent.stderr:
             raise AssertionError("an open frame was accepted as a causal parent")
         close_frame(base["frame_id"], environment)
 

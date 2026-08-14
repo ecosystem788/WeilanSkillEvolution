@@ -6,6 +6,7 @@ import os
 import uuid
 from contextlib import contextmanager
 from datetime import datetime, timezone
+from functools import lru_cache
 from pathlib import Path
 
 
@@ -23,9 +24,30 @@ def state_root():
     return Path.home() / ".weilan-method"
 
 
-def canonical_workspace(value):
-    expanded = os.path.expandvars(os.path.expanduser(value))
+CANONICAL_WORKSPACE_CACHE_CONTRACT = (
+    "Within one process, the first resolution of an expanded workspace path is fixed "
+    "for later calls with that same expanded path. A new process resolves it again. "
+    "A long-lived caller that changes workspace path existence, links, or on-disk "
+    "spelling must call clear_canonical_workspace_cache before resolving again."
+)
+
+
+@lru_cache(maxsize=None)
+def _canonical_workspace_from_expanded(expanded):
     return str(Path(expanded).resolve())
+
+
+def canonical_workspace(value):
+    """Resolve a workspace under the process-local cache contract above."""
+
+    expanded = os.path.expandvars(os.path.expanduser(value))
+    return _canonical_workspace_from_expanded(expanded)
+
+
+def clear_canonical_workspace_cache():
+    """Explicitly end the process-local stability interval for workspace paths."""
+
+    _canonical_workspace_from_expanded.cache_clear()
 
 
 def normalized_workspace(value):

@@ -378,41 +378,118 @@ def _parse_time(value: Any) -> datetime | None:
     return parsed.astimezone(timezone.utc)
 
 
+PROSPECTIVE_ERROR_UNRECOGNIZED_SHAPE = "unrecognized_goal_shape"
+PROSPECTIVE_ERROR_COMMAND_FAILED = "prospective_show_command_failed"
+
+
 def _prospective_goals(raw: Any) -> list[dict[str, Any]]:
-    if isinstance(raw, list):
-        return [item for item in raw if isinstance(item, dict)]
+    """Extract goals from the real prospective-show shape.
+
+    Real shape (weilan_trace.py command_prospective_show, measured 2026-08-04
+    on scope skill-evolution): raw is a dict whose "goals" entry is a dict
+    keyed by goal_ref; each goal carries condition.not_before_utc.  A list of
+    goal dicts is also accepted as the goals container.  Anything else is not
+    a recognized goal source and yields no goals; prospective_shape_error()
+    says why, so an empty result is never silent.
+    """
     if not isinstance(raw, dict):
         return []
-    for key in ("goals", "prospective_goals", "items", "entries"):
-        value = raw.get(key)
-        if isinstance(value, list):
-            return [item for item in value if isinstance(item, dict)]
+    goals = raw.get("goals")
+    if isinstance(goals, dict):
+        return [item for item in goals.values() if isinstance(item, dict)]
+    if isinstance(goals, list):
+        return [item for item in goals if isinstance(item, dict)]
     return []
 
 
+def prospective_shape_error(raw: Any) -> str | None:
+    """Fail-closed shape guard for the prospective-show payload.
+
+    Returns an error code when raw is not a recognized goal source, else
+    None.  The brief must never present 'I could not read the goals' as
+    'there are no due goals' (the zero-hits-read-as-zero-input family).
+    The code is reported in-band in the brief; nothing here raises, writes
+    method-state, or touches activation -- zero authority, same exit
+    discipline as the liveness sentinel.
+    """
+    if isinstance(raw, dict) and "error" in raw and "goals" not in raw:
+        return PROSPECTIVE_ERROR_COMMAND_FAILED
+    if not isinstance(raw, dict):
+        return PROSPECTIVE_ERROR_UNRECOGNIZED_SHAPE
+    goals = raw.get("goals")
+    if goals is None or not isinstance(goals, (dict, list)):
+        return PROSPECTIVE_ERROR_UNRECOGNIZED_SHAPE
+    entries = list(goals.values()) if isinstance(goals, dict) else list(goals)
+    if entries and not any(isinstance(item, dict) for item in entries):
+        return PROSPECTIVE_ERROR_UNRECOGNIZED_SHAPE
+    return None
+
+
+def _observed_events_by_name(raw: Any) -> dict[str, list[dict[str, Any]]]:
+    """Index observed causal events by event_name.
+
+    Real shape: raw["causal_events"] is a dict keyed by causal_event_id; each
+    observed event carries observed_at_utc and has NO state/status field.
+    Goals join to events through condition.event_name == event.event_name.
+    Joining on goal.causal_event_id instead is unreliable: that id only
+    appears while the event is inside the display window (measured 3/49 on
+    2026-08-04; the window holds the newest 20 of 1059 events by default).
+    """
+    if not isinstance(raw, dict):
+        return {}
+    causal = raw.get("causal_events")
+    if isinstance(causal, dict):
+        events = causal.values()
+    elif isinstance(causal, list):
+        events = causal
+    else:
+        return {}
+    by_name: dict[str, list[dict[str, Any]]] = {}
+    for event in events:
+        if isinstance(event, dict) and event.get("event_name") is not None:
+            by_name.setdefault(str(event["event_name"]), []).append(event)
+    return by_name
+
+
 def prospective_due(raw: Any, now_utc: str) -> list[dict[str, Any]]:
+    """Select ACTIVE goals whose not_before has passed.
+
+    Each due goal is annotated with the observed causal events whose
+    event_name matches condition.event_name, copied verbatim from the ledger
+    (observed_at_utc IS the observation fact; weilan_trace has no READY state
+    vocabulary, so no state is stamped onto ledger data).  Note the display
+    window is truncated by default (prospective-show --limit 20): a due goal
+    with an empty causal_events list may still have an observed event outside
+    the window -- prospective_due_meta carries the truncation flag.
+
+    Prospective state is never activation or action authority: due means the
+    time condition is met, not that the goal is the work to do.
+    """
     now = _parse_time(now_utc)
+    observed = _observed_events_by_name(raw)
     due: list[dict[str, Any]] = []
     for goal in _prospective_goals(raw):
         state = str(goal.get("state", goal.get("status", ""))).upper()
         if state != "ACTIVE":
             continue
-        not_before = _parse_time(goal.get("not_before") or goal.get("not_before_utc"))
+        condition = goal.get("condition")
+        condition = condition if isinstance(condition, dict) else {}
+        not_before = _parse_time(condition.get("not_before_utc"))
         if now is not None and not_before is not None and not_before > now:
             continue
-        ready_events = [
-            event
-            for event in goal.get("causal_events", [])
-            if isinstance(event, dict) and str(event.get("state", event.get("status", ""))).upper() == "READY"
-        ]
+        event_name = condition.get("event_name")
+        matched = observed.get(str(event_name), []) if event_name is not None else []
         item = dict(goal)
-        item["causal_events"] = ready_events
+        item["causal_events"] = [dict(event) for event in matched]
         due.append(item)
     return due
 
 
 def _trace_script() -> str:
-    return os.environ.get("WEILAN_TRACE_SCRIPT", str(Path(__file__).with_name("weilan_trace.py")))
+    return os.environ.get(
+        "WEILAN_TRACE_SCRIPT",
+        r"D:\CodexData\skills\solve-with-weilan\scripts\weilan_trace.py",
+    )
 
 
 def _run_json(command: list[str], runner: Callable[[list[str]], str] | None = None) -> Any:
@@ -448,13 +525,56 @@ def _stable_hash(value: Any) -> str:
     return _sha256(payload)
 
 
+_CLOCK_DISPLAY_FIELDS = frozenset({"eligible_after_utc", "remaining_seconds", "eligible_now"})
+
+
+def _clock_annotated_open_agenda(items: list[Any], now_utc: str) -> list[Any]:
+    now = _parse_time(now_utc)
+    annotated: list[Any] = []
+    for item in items:
+        if not isinstance(item, dict):
+            annotated.append(item)
+            continue
+        condition = item.get("condition")
+        event_kind = str(condition.get("event_kind", "")).lower() if isinstance(condition, dict) else ""
+        eligible_after = condition.get("not_before_utc") if isinstance(condition, dict) else None
+        not_before = _parse_time(eligible_after)
+        if event_kind != "clock" or now is None or not_before is None:
+            annotated.append(item)
+            continue
+        remaining_seconds = (not_before - now).total_seconds()
+        annotated.append(
+            {
+                **item,
+                "eligible_after_utc": eligible_after,
+                "remaining_seconds": remaining_seconds,
+                "eligible_now": remaining_seconds <= 0,
+            }
+        )
+    return annotated
+
+
+def _fingerprint_open_agenda(items: Any) -> Any:
+    if not isinstance(items, list):
+        return items
+    return [
+        {key: value for key, value in item.items() if key not in _CLOCK_DISPLAY_FIELDS}
+        if isinstance(item, dict)
+        else item
+        for item in items
+    ]
+
+
 def site_fingerprint_for(brief: dict[str, Any]) -> dict[str, Any]:
     source_refs = _source_refs(brief.get("sources", []))
     fingerprint_subset = {
         "authority": brief.get("authority"),
         "owner_inbox_delta": brief.get("owner_inbox_delta", []),
         "prospective_due": brief.get("prospective_due", []),
-        "open_agenda": brief.get("open_agenda", []),
+        # The shape-guard error is part of the situation: 'no due goals' and
+        # 'could not read the goals' must never hash to the same fingerprint.
+        "prospective_due_error": brief.get("prospective_due_error"),
+        "open_agenda": _fingerprint_open_agenda(brief.get("open_agenda", [])),
         "peer_chat_new": brief.get("peer_chat_new", []),
         "cursor_status": brief.get("cursor_status"),
         "source_refs": source_refs,
@@ -500,14 +620,17 @@ def build_brief(
     cursor, cursor_reason = load_cursor(cursor_path)
     cursor_mode, reason, mismatch_details = validate_cursor(root, cursor, cursor_reason)
 
+    shape_error = prospective_shape_error(prospective_raw)
+
     brief = {
         "authority": _authority_from(recall_raw),
         "owner_inbox_delta": owner_inbox_delta(root),
-        "prospective_due": prospective_due(prospective_raw, now),
-        "open_agenda": (
+        "prospective_due": [] if shape_error is not None else prospective_due(prospective_raw, now),
+        "open_agenda": _clock_annotated_open_agenda(
             recall_raw.get("open_agenda", [])
             if isinstance(recall_raw, dict) and isinstance(recall_raw.get("open_agenda", []), list)
-            else []
+            else [],
+            now,
         ),
         "codex_replies_unreviewed": _tail_jsonl(root, "codex-inbox-replies.jsonl", cursor_mode, cursor),
         "peer_chat_new": _tail_jsonl(root, "peer-chat.jsonl", cursor_mode, cursor),
@@ -530,6 +653,24 @@ def build_brief(
         brief["cursor_status"]["reason"] = reason
     if mismatch_details is not None:
         brief["cursor_status"]["details"] = mismatch_details
+
+    if shape_error is not None:
+        # Fail-closed visibility: the brief says WHY the due list is empty
+        # instead of letting 'unreadable' masquerade as 'nothing due'.
+        brief["prospective_due_error"] = shape_error
+        if shape_error == PROSPECTIVE_ERROR_COMMAND_FAILED and isinstance(prospective_raw, dict):
+            brief["prospective_due_error_detail"] = str(prospective_raw.get("error"))
+    elif isinstance(prospective_raw, dict):
+        # Display-only epistemic qualifier (deliberately NOT in the
+        # fingerprint subset): the attached-event window is the newest
+        # --limit entries, so a due goal with no attached events may still
+        # have an observed event outside the window.
+        causal = prospective_raw.get("causal_events")
+        brief["prospective_due_meta"] = {
+            "causal_event_count": prospective_raw.get("causal_event_count"),
+            "causal_events_shown": len(causal) if isinstance(causal, (dict, list)) else 0,
+            "causal_events_truncated": bool(prospective_raw.get("causal_events_truncated")),
+        }
 
     missing_sources = [name for name in REQUIRED_SOURCE_FILES if not (root / name).exists()]
     if missing_sources:
