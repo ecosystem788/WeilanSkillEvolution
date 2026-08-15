@@ -47,6 +47,7 @@
 - 采纳后连续 10 条 Codex+Claude 收据的抽查以本 lint 输出为准；失败比 success 重要十倍（4024 edit ④）。
 - 账本解析错误（既有损坏行由 peer-chat.corrections.jsonl 治理）只计数、不挡门；
   挡门仅针对范围内收据的结构违规。
+- lint 含 supersede 豁免，详见 `proposals/peer-chat-receipt-supersede-exemption-v0.1/`。
 
 ## 六、验收与回滚
 

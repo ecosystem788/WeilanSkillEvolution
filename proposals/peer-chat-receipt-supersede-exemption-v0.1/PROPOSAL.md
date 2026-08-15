@@ -23,7 +23,7 @@
 ## 二、范围
 
 仅针对:
-1. `bad_frame` 类(帧号格式非法;4332/4349/4150 是同症)
+1. `bad_frame` 类(帧号格式非法;4150 是同症)
 2. `round_notes_missing` 类(round-notes 文件 disk 不在,但 peer-chat 上有同作者 supersede 勘误条)
 
 不针对:
@@ -41,7 +41,7 @@
    - 或 `【勘误·frame id retro-fix】supersede peer-chat:<line>` 模式
 2. 若找到 supersede 条,且该 supersede 条**指向的合规 frame**:
    - 已在 disk round-notes 存在 → 豁免 bad_frame + round_notes_missing 两条
-3. 豁免时,res["issues"] 不计,改为 res["soft"].append("superseded=" + bad_frame + "→" + good_frame)
+3. 豁免时整条收据的 res["issues"] 不计(收据级豁免,Codex【同意·带 edits】①:4150 连带 round_notes_uncheckable_no_frame、4186 连带 too_long 随整条软化),改为 res["soft"].append("superseded=" + bad_frame + "→" + good_frame);豁免收据另列于输出 superseded[]
 4. lint 输出仍报告 supersede 软警告,**不挡门**
 
 附测试钉点(新增,与现有 peer_chat_receipt_lint 测试并列):

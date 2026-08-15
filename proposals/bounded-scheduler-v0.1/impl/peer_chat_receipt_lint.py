@@ -33,6 +33,11 @@ from datetime import datetime, timezone
 
 PREFIX = "【续帧收据】"
 FRAME_RE = re.compile(r"wf-\d{8}-\d{6}-[0-9a-f]{6}")
+# Retro-fix supersede exemption (双签: peer-chat-receipt-supersede-exemption-v0.1,
+# 2026-08-15 提案 + Codex【同意·带 edits】)。
+SUPERSEDE_MARK = "【勘误·frame id retro-fix】"
+SUPERSEDE_PATTERN_FRAME = re.compile(r"supersede 续帧收据 帧=([^\s|()。；;]+)")
+SUPERSEDE_PATTERN_LINE = re.compile(r"supersede peer-chat:(\d+)")
 
 REQUIRED_WORK = ("帧", "父", "结果", "做了什么", "续点")
 REQUIRED_REST = ("帧", "父", "结果")
@@ -155,12 +160,88 @@ def read_ledger_rows(ledger_path):
     return rows, parse_errors
 
 
+def _collect_supersedes(rows):
+    """Collect same-ledger retro-fix supersede entries from 勘误 lines.
+
+    Each entry: {line, author, bad_frame, good_frame}. Two shapes are
+    recognized (peer-chat-receipt-supersede-exemption-v0.1 §三.1):
+      - "supersede 续帧收据 帧=<bad_frame>" (frame-shaped supersede)
+      - "supersede peer-chat:<line>" (line-shaped supersede; bad_frame is
+        resolved from the referenced receipt row's 帧 field)
+    The good frame is the first regex-valid frame in the 勘误 line that is
+    not the bad frame. Lines that do not resolve are skipped (fail-safe).
+    """
+    by_line = {entry["line"]: entry for entry in rows}
+    out = []
+    for entry in rows:
+        row = entry["row"]
+        if not isinstance(row, dict) or not isinstance(row.get("text"), str):
+            continue
+        text = row["text"]
+        if SUPERSEDE_MARK not in text or "supersede" not in text:
+            continue
+        bad_frame = None
+        m = SUPERSEDE_PATTERN_FRAME.search(text)
+        if m:
+            bad_frame = m.group(1)
+        else:
+            m2 = SUPERSEDE_PATTERN_LINE.search(text)
+            if m2:
+                target = by_line.get(int(m2.group(1)))
+                if target is not None:
+                    parsed = parse_receipt(target["row"].get("text", ""))
+                    if parsed is not None:
+                        bad_frame = parsed["fields"].get("帧")
+        if not bad_frame:
+            continue
+        good_frame = None
+        for fm in FRAME_RE.finditer(text):
+            if fm.group(0) != bad_frame:
+                good_frame = fm.group(0)
+                break
+        if not good_frame:
+            continue
+        out.append({
+            "line": entry["line"],
+            "author": row.get("from"),
+            "bad_frame": bad_frame,
+            "good_frame": good_frame,
+        })
+    return out
+
+
+def _find_exemption(res, supersedes, round_notes_dir):
+    """Return the supersede entry that exempts this receipt, or None.
+
+    Receipt-level exemption (【同意·带 edits】①): same author, later ledger
+    line, bad_frame equals the receipt's 帧, the good frame is regex-valid,
+    and for work receipts the good frame's round-notes file must exist on
+    disk (mirrors the normal round-notes check for the corrected frame).
+    """
+    for sp in supersedes:
+        if sp["author"] != res["from"]:
+            continue
+        if sp["line"] <= res["line"]:
+            continue
+        if sp["bad_frame"] != res["frame"]:
+            continue
+        if FRAME_RE.fullmatch(sp["good_frame"]) is None:
+            continue
+        if res["kind"] == "work":
+            note_path = os.path.join(round_notes_dir, sp["good_frame"] + ".md")
+            if not os.path.isfile(note_path):
+                continue
+        return sp
+    return None
+
+
 def scan_ledger(ledger_path, round_notes_dir=None, adoption_after=None):
     """Scan a ledger file; returns the lint summary dict."""
     adoption_dt = parse_time(adoption_after) if adoption_after else None
     rows, parse_errors = read_ledger_rows(ledger_path)
     receipts = []
     failures = []
+    superseded = []
     soft_violations = 0
     history_out_of_scope = 0
     ignored = 0
@@ -189,6 +270,23 @@ def scan_ledger(ledger_path, round_notes_dir=None, adoption_after=None):
             failures.append(res)
         soft_violations += len(res["soft"])
 
+    if round_notes_dir:
+        supersede_index = _collect_supersedes(rows)
+        kept_failures = []
+        for res in failures:
+            exempt = _find_exemption(res, supersede_index, round_notes_dir)
+            if exempt is None:
+                kept_failures.append(res)
+                continue
+            res["issues"] = []
+            res["ok"] = True
+            res["soft"].append(
+                "superseded=%s→%s" % (exempt["bad_frame"], exempt["good_frame"])
+            )
+            soft_violations += 1
+            superseded.append(res)
+        failures = kept_failures
+
     return {
         "schema": "peer_chat_receipt_lint_v0.1",
         "ledger": ledger_path,
@@ -199,12 +297,14 @@ def scan_ledger(ledger_path, round_notes_dir=None, adoption_after=None):
             "work": sum(1 for r in receipts if r["kind"] == "work"),
             "rest": sum(1 for r in receipts if r["kind"] == "rest"),
             "failures": len(failures),
+            "superseded": len(superseded),
             "soft_violations": soft_violations,
             "history_out_of_scope": history_out_of_scope,
             "ignored_non_receipt": ignored,
             "ledger_parse_errors": parse_errors,
         },
         "failures": failures,
+        "superseded": superseded,
         "ok": not failures,
     }
 
