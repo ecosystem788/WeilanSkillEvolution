@@ -314,122 +314,13 @@ def write_cursor(
     return cursor
 
 
-class AmbiguousNoIdTime(Exception):
-    """CONVENTION §三 fail-closed:inbox 中两条及以上无 id 行同 time。
-
-    收 path + byte_ranges,实算每冲突行 raw_bytes_sha256 挂 self.hashes;
-    message 与 self.hashes 同源同权威——CONVENTION §三 要求异常"错误信息至少包含
-    各冲突行的 raw_bytes_sha256",自身携带便于调用方不回算即可取证,也不依赖
-    外部对 inbox_path 的二次访问。
-
-    Reference implementation in proposals/inbox-reader-dedupe-v0.1/verify_reader.py
-    (机检钉死的同源件);本类为 wake_brief.py 部署版,语义与 reference 完全一致。
-    """
-
-    def __init__(
-        self,
-        time_value: str,
-        collisions: list[dict],
-        byte_ranges: list[tuple[int, int]],
-        path: Path,
-    ):
-        self.time_value = time_value
-        self.collisions = collisions
-        self.byte_ranges = byte_ranges
-        raw = path.read_bytes()
-        self.hashes: list[dict] = []
-        for r, (s, e) in zip(collisions, byte_ranges):
-            self.hashes.append({
-                "row": r,
-                "byte_range": [s, e],
-                "raw_bytes_sha256": hashlib.sha256(raw[s:e]).hexdigest(),
-            })
-        hex_list = ", ".join(h["raw_bytes_sha256"] for h in self.hashes)
-        super().__init__(
-            f"inbox has {len(collisions)} no-id rows with time={time_value!r}; "
-            f"raw_bytes_sha256=[{hex_list}]; byte_ranges={byte_ranges}"
-        )
-
-
-def _inbox_row_byte_ranges(inbox_path: Path, rows: list[dict]) -> list[tuple[int, int]]:
-    """CONVENTION §三 行字节区间解析:按 b'\\n' 切分,空段视为文件尾 LF 后零长尾巴跳过;
-    每段 [start,end) 不含尾部 LF。解析失败(json/utf-8)的段跳过。
-
-    返回与 rows 一一对应(按值匹配,行序按文件中出现序)的字节区间列表。
-    """
-    raw = inbox_path.read_bytes()
-    out: list[tuple[int, int]] = []
-    pos = 0
-    for seg in raw.split(b"\n"):
-        if not seg:
-            # 空段 = 文件尾部 '\\n' 后的零长尾巴
-            pos += 1  # '\\n' 字节
-            continue
-        seg_start = pos
-        seg_end = pos + len(seg)
-        pos = seg_end + 1  # +1 为 '\\n'
-        try:
-            parsed = json.loads(seg.decode("utf-8"))
-        except (json.JSONDecodeError, UnicodeDecodeError):
-            continue
-        if parsed in rows:
-            out.append((seg_start, seg_end))
-    return out
-
-
-def _inbox_delta(inbox_path: Path, processed_path: Path) -> list[dict[str, Any]]:
-    """CONVENTION §二/§三/§四 双键 inbox reader 单点(私有部署版)。
-
-    §五 要求:本函数是 inbox reader 唯一实现入口;owner_inbox_delta 与
-    codex_inbox_delta 必须通过包装本函数实现,禁止另写差集逻辑。
-
-    Reference implementation 在 proposals/inbox-reader-dedupe-v0.1/verify_reader.py:inbox_delta,
-    机检 7/7 PASS,本函数与之同形同语义。
-    """
-    inbox_rows = read_jsonl(inbox_path)
-    processed_rows = read_jsonl(processed_path)
-
-    # §三 fail-closed:inbox 中无 id 行按 time 分桶,>1 即抛
-    by_time: dict[str, list[dict]] = {}
-    for r in inbox_rows:
-        if "id" not in r:
-            t = str(r.get("time", ""))
-            by_time.setdefault(t, []).append(r)
-    for t, rows in by_time.items():
-        if len(rows) > 1:
-            byte_ranges = _inbox_row_byte_ranges(inbox_path, rows)
-            raise AmbiguousNoIdTime(t, rows, byte_ranges, inbox_path)
-
-    # §四 processed 幂等:同 id 多行视为一条(集合)
-    processed_ids: set[str] = {str(r["id"]) for r in processed_rows if "id" in r}
-
-    # §二 双键命中
-    out: list[dict[str, Any]] = []
-    for r in inbox_rows:
-        if "id" in r:
-            key = str(r["id"])
-        else:
-            # §二条件 2:无 id 行必有 time,空 time 让 key="" 不命中(防御)
-            key = str(r.get("time", ""))
-        if key in processed_ids:
-            continue
-        out.append(r)
-    return out
+def _processed_ids(path: Path) -> set[str]:
+    return {str(row["id"]) for row in read_jsonl(path) if "id" in row}
 
 
 def owner_inbox_delta(root: Path) -> list[dict[str, Any]]:
-    """CONVENTION §五 薄包装:owner 车道差集 reader。"""
-    return _inbox_delta(root / "owner-inbox.jsonl", root / "owner-inbox-processed.jsonl")
-
-
-def codex_inbox_delta(root: Path) -> list[dict[str, Any]]:
-    """CONVENTION §十一 车道半件:codex 车道差集 reader(薄包装)。
-
-    镜像 owner_inbox_delta,落地 codex-inbox-lane-gap-v0.1/FINDING.md 候选甲的车道半件。
-    fingerprint 半件(inbox_has_work 扩为 owner OR codex)与唤醒提示词消费半件另案双签,
-    本函数仅定义、不接 build_brief——CONVENTION §十一 显式要求"不静默落地"。
-    """
-    return _inbox_delta(root / "codex-inbox.jsonl", root / "codex-inbox-processed.jsonl")
+    processed = _processed_ids(root / "owner-inbox-processed.jsonl")
+    return [row for row in read_jsonl(root / "owner-inbox.jsonl") if str(row.get("id", "")) not in processed]
 
 
 def _tail_jsonl(root: Path, name: str, mode: str, cursor: dict[str, Any] | None) -> list[dict[str, Any]]:
@@ -785,7 +676,6 @@ def site_fingerprint_for(brief: dict[str, Any]) -> dict[str, Any]:
     fingerprint_subset = {
         "authority": brief.get("authority"),
         "owner_inbox_delta": brief.get("owner_inbox_delta", []),
-        "codex_inbox_delta": brief.get("codex_inbox_delta", []),
         "prospective_due": brief.get("prospective_due", []),
         # The shape-guard error is part of the situation: 'no due goals' and
         # 'could not read the goals' must never hash to the same fingerprint.
@@ -797,7 +687,7 @@ def site_fingerprint_for(brief: dict[str, Any]) -> dict[str, Any]:
     }
     return {
         "hash": _stable_hash(fingerprint_subset),
-        "inbox_has_work": bool(brief.get("owner_inbox_delta") or brief.get("codex_inbox_delta")),
+        "inbox_has_work": bool(brief.get("owner_inbox_delta")),
         "prospective_has_due": bool(brief.get("prospective_due")),
         "open_agenda_present": bool(brief.get("open_agenda")),
         "peer_chat_has_route_change": bool(brief.get("peer_chat_new")),
@@ -842,7 +732,6 @@ def build_brief(
     brief = {
         "authority": _authority_from(recall_raw),
         "owner_inbox_delta": owner_inbox_delta(root),
-        "codex_inbox_delta": codex_inbox_delta(root),
         "prospective_due": [] if shape_error is not None else prospective_due(prospective_raw, now),
         "open_agenda": _clock_annotated_open_agenda(
             recall_raw.get("open_agenda", [])
@@ -861,8 +750,6 @@ def build_brief(
             _source("command:prospective-show", "command", workspace=workspace, scope=scope),
             _source((root / "owner-inbox.jsonl").as_posix(), "file"),
             _source((root / "owner-inbox-processed.jsonl").as_posix(), "file"),
-            _source((root / "codex-inbox.jsonl").as_posix(), "file"),
-            _source((root / "codex-inbox-processed.jsonl").as_posix(), "file"),
             _source((root / "codex-inbox-replies.jsonl").as_posix(), "file"),
             _source((root / "peer-chat.jsonl").as_posix(), "file"),
             _source((root / "concurrent-receipts.jsonl").as_posix(), "file"),

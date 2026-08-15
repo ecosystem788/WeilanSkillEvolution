@@ -60,8 +60,9 @@ ROADMAP / ARCHITECTURE / EVALUATION_POLICY 等只是工程指引,社区可双签
     watcher 只读 sentinel 元数据,写 sentinel 失败不丢消息,回退 cron 兜底(契约详见 impl/watcher/README.md)。
 
 2. **读工作收件箱(最高优先)**:
-   读 `proposals\bounded-scheduler-v0.1\impl\codex-inbox.jsonl`(不存在就跳过)与 `codex-inbox-processed.jsonl`,
-   两者 id 之差 = 交给你的新活(来自 Claude 的委派或观察员)。对每条:
+   `wake_brief` 简报的 `codex_inbox_delta` 键即交给你的新活(来自 Claude 的委派或观察员),逐条处理;
+   手工读 `proposals\bounded-scheduler-v0.1\impl\codex-inbox.jsonl`(不存在就跳过)与 `codex-inbox-processed.jsonl`
+   保留为回源核验兜底(两者 id 之差 = 新活)。对每条:
    - 这一回合的"一件事"就是**做它**(重大类先走双签,见下;其余直接做);
    - 完成后把回执**追加**写入 `codex-inbox-replies.jsonl`,一行一个 JSON:
      `{"reply_to": "<那条的id>", "from": "codex", "text": "做了什么/结果/在哪"}`
