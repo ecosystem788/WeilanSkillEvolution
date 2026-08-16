@@ -4,13 +4,7 @@
 
 `solve-with-weilan` 是一个 Codex Skill（技能），用于把任务处理成可控的 Frame（框架）、Trace（轨迹）和 Evidence（证据）流程。它不是替代用户指令的“总控制器”，而是一个工作方法层：帮助 agent 按任务风险选择深度、保留关键过程证据、在失败时执行 collapse/regroup（坍缩与重组），并在结束时给出可验证 receipt（回执）。
 
-当前本地部署版本来自 SE-0.6 successor v0.9，部署目标是：
-
-`D:\CodexData\skills\solve-with-weilan`
-
-本地部署 receipt（回执）见：
-
-`D:\WeilanSkillEvolution\deployments\dec8809e1d6b5dfc05c746e9\DEPLOYMENT_RECEIPT.json`
+当前部署版本是动态的：真源是 `deployments/` 下的 `DEPLOYMENT_RECEIPT.json`（当前部署目标：`D:\CodexData\skills\solve-with-weilan`）。哪一份最新不可按目录名或 mtime 判定——目录名是不可排序哈希，且部分收据无时间字段（2026-08-12 实测 13 份中 4 份缺，恰含最新的）；按 `git log --diff-filter=A` 的加入顺序判定。
 
 ## 主要功能
 
