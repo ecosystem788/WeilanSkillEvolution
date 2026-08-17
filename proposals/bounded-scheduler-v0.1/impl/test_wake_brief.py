@@ -612,3 +612,168 @@ def test_two_wake_fixture_consumes_chat_then_becomes_quiescent(tmp_path: Path) -
     assert second["peer_chat_new"] == []
     assert second["quiescence"]["state"] == wake_brief.QUIESCENT
     assert second["quiescence"]["reason_codes"] == ["no_actionable_events"]
+
+
+REST_RECEIPT = (
+    "【续帧收据】帧=wf-20260817-120000-abcdef | "
+    "父=wf-20260817-110000-123abc | 结果=success | 如实歇着"
+)
+WORK_FRAME = "wf-20260817-120100-fedcba"
+WORK_RECEIPT = (
+    f"【续帧收据】帧={WORK_FRAME} | 父=wf-20260817-120000-abcdef | "
+    "结果=success | 做了什么=完成一项有界工作 | 续点=无"
+)
+
+
+def receipt_quiescence(rows: list[object], *, round_notes_dir: Path | None = None) -> dict:
+    brief = quiet_quiescence_input()
+    brief["peer_chat_new"] = rows
+    return wake_brief.quiescence_for(brief, "codex", round_notes_dir)
+
+
+def test_single_claude_rest_receipt_is_quiescent() -> None:
+    observed = receipt_quiescence([{"from": "claude", "text": REST_RECEIPT}])
+
+    assert observed["state"] == wake_brief.QUIESCENT
+    assert observed["reason_codes"] == ["peer_chat_receipt_only"]
+
+
+def test_single_codex_work_receipt_with_reachable_note_is_quiescent(tmp_path: Path) -> None:
+    round_notes = tmp_path / "round-notes"
+    round_notes.mkdir()
+    (round_notes / f"{WORK_FRAME}.md").write_text("# fixture\n", encoding="utf-8")
+
+    observed = receipt_quiescence(
+        [{"from": "codex", "text": WORK_RECEIPT}], round_notes_dir=round_notes
+    )
+
+    assert observed["state"] == wake_brief.QUIESCENT
+    assert observed["reason_codes"] == ["peer_chat_receipt_only"]
+
+
+def test_receipt_mixed_with_plain_chat_fails_closed() -> None:
+    observed = receipt_quiescence(
+        [
+            {"from": "claude", "text": REST_RECEIPT},
+            {"from": "codex", "text": "ordinary chat"},
+        ]
+    )
+
+    assert observed["state"] == wake_brief.NON_QUIESCENT
+    assert observed["reason_codes"] == ["peer_chat_new"]
+
+
+@pytest.mark.parametrize(
+    "row",
+    [
+        {"from": "claude", "text": "【续帧收据】帧=bad | 父=x | 结果=success | malformed"},
+        {"from": "claude", "text": WORK_RECEIPT},
+        {"from": "claude"},
+        {"from": "claude", "text": 42},
+        "not-a-dict",
+    ],
+)
+def test_malformed_receipt_shapes_fail_closed(row: object, tmp_path: Path) -> None:
+    observed = receipt_quiescence([row], round_notes_dir=tmp_path / "round-notes")
+
+    assert observed["state"] == wake_brief.NON_QUIESCENT
+    assert observed["reason_codes"] == ["peer_chat_new"]
+
+
+@pytest.mark.parametrize("author", ["owner", "unknown", None])
+def test_non_member_receipt_authors_fail_closed(author: object) -> None:
+    row = {"from": author, "text": REST_RECEIPT} if author is not None else {"text": REST_RECEIPT}
+    observed = receipt_quiescence([row])
+
+    assert observed["state"] == wake_brief.NON_QUIESCENT
+    assert observed["reason_codes"] == ["peer_chat_new"]
+
+
+def test_receipt_only_with_unpushed_commit_keeps_exact_actionable_reason() -> None:
+    brief = quiet_quiescence_input()
+    brief["peer_chat_new"] = [{"from": "claude", "text": REST_RECEIPT}]
+    brief["unpushed_commits"]["count"] = 1
+
+    observed = wake_brief.quiescence_for(brief, "codex")
+
+    assert observed["state"] == wake_brief.NON_QUIESCENT
+    assert observed["reason_codes"] == ["unpushed_commits"]
+
+
+def test_build_preserves_receipt_row_dicts_bit_exact(tmp_path: Path) -> None:
+    write_jsonl(tmp_path / "codex-inbox-replies.jsonl", [])
+    write_jsonl(tmp_path / "peer-chat.jsonl", [])
+    wake_brief.write_cursor(tmp_path, tmp_path / "wake-cursor.json", "skill-evolution", STAMP)
+    rows = [
+        {
+            "from": "claude",
+            "text": REST_RECEIPT,
+            "time": "2026-08-17T12:00:00+09:00",
+            "time_authority": "clock",
+            "wake": False,
+            "extra": {"kept": [1, 2, 3]},
+        },
+        {
+            "from": "codex",
+            "text": REST_RECEIPT,
+            "time": "2026-08-17T12:01:00+09:00",
+            "wake": True,
+        },
+    ]
+    write_jsonl(tmp_path / "peer-chat.jsonl", rows)
+
+    brief = wake_brief.build_brief(
+        root=tmp_path,
+        workspace="D:\\WeilanSkillEvolution",
+        scope="skill-evolution",
+        updated_at_utc=STAMP,
+        now_utc=STAMP,
+        recall_fixture=fixture_recall(),
+        prospective_fixture={"goals": {}, "causal_events": {}},
+        git_runner=FakeGit("", "main", "origin/main", "0\t0\n", "abc123\n"),
+        agent="codex",
+    )
+
+    assert brief["peer_chat_new"] == rows
+    assert [list(row.items()) for row in brief["peer_chat_new"]] == [list(row.items()) for row in rows]
+    assert brief["quiescence"]["state"] == wake_brief.QUIESCENT
+    assert brief["quiescence"]["reason_codes"] == ["peer_chat_receipt_only"]
+
+
+def test_receipt_only_two_wake_fixture_is_quiescent_both_times_and_visible_first(tmp_path: Path) -> None:
+    write_jsonl(tmp_path / "codex-inbox-replies.jsonl", [])
+    write_jsonl(tmp_path / "peer-chat.jsonl", [])
+    wake_brief.write_cursor(tmp_path, tmp_path / "wake-cursor.json", "skill-evolution", STAMP)
+    row = {
+        "from": "claude",
+        "text": REST_RECEIPT,
+        "time": "2026-08-17T12:00:00+09:00",
+        "wake": False,
+    }
+    write_jsonl(tmp_path / "peer-chat.jsonl", [row])
+    kwargs = {
+        "root": tmp_path,
+        "workspace": "D:\\WeilanSkillEvolution",
+        "scope": "skill-evolution",
+        "updated_at_utc": STAMP,
+        "now_utc": STAMP,
+        "recall_fixture": fixture_recall(),
+        "prospective_fixture": {"goals": {}, "causal_events": {}},
+        "agent": "codex",
+    }
+
+    first = wake_brief.build_brief(
+        **kwargs,
+        git_runner=FakeGit("", "main", "origin/main", "0\t0\n", "abc123\n"),
+    )
+    second = wake_brief.build_brief(
+        **kwargs,
+        git_runner=FakeGit("", "main", "origin/main", "0\t0\n", "abc123\n"),
+    )
+
+    assert first["peer_chat_new"] == [row]
+    assert first["quiescence"]["state"] == wake_brief.QUIESCENT
+    assert first["quiescence"]["reason_codes"] == ["peer_chat_receipt_only"]
+    assert second["peer_chat_new"] == []
+    assert second["quiescence"]["state"] == wake_brief.QUIESCENT
+    assert second["quiescence"]["reason_codes"] == ["no_actionable_events"]

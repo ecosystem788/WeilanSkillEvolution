@@ -16,6 +16,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
+import peer_chat_receipt_lint
+
 
 CURSOR_SCHEMA = "wake_cursor_v0.1"
 TRACKED_CURSOR_FILES = ("peer-chat.jsonl", "codex-inbox-replies.jsonl", "concurrent-receipts.jsonl")
@@ -820,7 +822,24 @@ _AGENT_LANES = {
 }
 
 
-def quiescence_for(brief: dict[str, Any], agent: str) -> dict[str, Any]:
+def _peer_chat_is_receipt_only(rows: Any, round_notes_dir: Path | None) -> bool:
+    if not rows:
+        return False
+    for row in rows:
+        if not isinstance(row, dict) or row.get("from") not in {"claude", "codex"}:
+            return False
+        message = row.get("text")
+        if not isinstance(message, str) or not message.startswith(peer_chat_receipt_lint.PREFIX):
+            return False
+        checked = peer_chat_receipt_lint.check_message(message, round_notes_dir=round_notes_dir)
+        if checked is None or checked.get("ok") is not True:
+            return False
+    return True
+
+
+def quiescence_for(
+    brief: dict[str, Any], agent: str, round_notes_dir: Path | None = None
+) -> dict[str, Any]:
     """Classify whether one agent wake has any observable work to retain.
 
     This is a zero-authority read of the already assembled brief.  UNKNOWN
@@ -878,7 +897,9 @@ def quiescence_for(brief: dict[str, Any], agent: str) -> dict[str, Any]:
         actionable_reasons.append("prospective_due")
     if any(isinstance(item, dict) and item.get("eligible_now") is True for item in brief.get("open_agenda", [])):
         actionable_reasons.append("eligible_open_agenda")
-    if brief.get("peer_chat_new"):
+    peer_chat_new = brief.get("peer_chat_new")
+    receipt_only = _peer_chat_is_receipt_only(peer_chat_new, round_notes_dir)
+    if peer_chat_new and not receipt_only:
         actionable_reasons.append("peer_chat_new")
     if lane["replies"] is not None and brief.get(lane["replies"]):
         actionable_reasons.append("agent_visible_replies")
@@ -890,7 +911,7 @@ def quiescence_for(brief: dict[str, Any], agent: str) -> dict[str, Any]:
     return {
         "agent": normalized_agent,
         "state": NON_QUIESCENT if actionable_reasons else QUIESCENT,
-        "reason_codes": actionable_reasons or ["no_actionable_events"],
+        "reason_codes": actionable_reasons or ["peer_chat_receipt_only" if receipt_only else "no_actionable_events"],
         "source_refs": source_refs,
     }
 
@@ -1001,7 +1022,7 @@ def build_brief(
     for ref in _collect_source_refs(prospective_raw):
         brief["sources"].append(_source(str(ref), "prospective_source_ref"))
 
-    brief["quiescence"] = quiescence_for(brief, agent)
+    brief["quiescence"] = quiescence_for(brief, agent, root / "round-notes")
     brief["site_fingerprint"] = site_fingerprint_for(brief)
 
     if commit_cursor:
