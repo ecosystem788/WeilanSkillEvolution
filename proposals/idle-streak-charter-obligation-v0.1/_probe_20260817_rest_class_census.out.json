@@ -1,0 +1,61 @@
+{
+  "window_days": [
+    "2026-08-14",
+    "2026-08-15",
+    "2026-08-16",
+    "2026-08-17"
+  ],
+  "total_frames": 279,
+  "per_day": {
+    "2026-08-14": {
+      "auto_heartbeat": 42,
+      "agent_work": 76,
+      "agent_rest": 9,
+      "unclosed": 2,
+      "agent_push_only": 2
+    },
+    "2026-08-15": {
+      "auto_heartbeat": 18,
+      "agent_work": 19,
+      "agent_rest": 20
+    },
+    "2026-08-16": {
+      "auto_heartbeat": 29,
+      "agent_work": 22,
+      "agent_push_only": 6,
+      "agent_rest": 32
+    },
+    "2026-08-17": {
+      "auto_heartbeat": 1,
+      "unclosed": 1
+    }
+  },
+  "totals": {
+    "auto_heartbeat": 90,
+    "agent_work": 117,
+    "agent_rest": 61,
+    "unclosed": 3,
+    "agent_push_only": 8
+  },
+  "agent_frames_only": {
+    "total": 186,
+    "rest": 61,
+    "push_only": 8,
+    "work": 117,
+    "no_new_structure_pct": 37.1
+  },
+  "longest_no_structure_streak": {
+    "frames": 14,
+    "span_hours": 3.01,
+    "first": "2026-08-15T02:49:05+00:00",
+    "last": "2026-08-15T05:49:47+00:00"
+  },
+  "boundaries": [
+    "REVISED predicate: rest vocabulary was derived from auditing this window's verdicts after a first pass misclassified 4+ phrasings as work. It is fitted to this window and will undercount any newly invented phrasing.",
+    "agent_push_only means the verdict shows a push/commit of already-authored ledger commits and no structure keyword. It is charter-mandated work (CHARTER 6.1), NOT idling; it is separated only because it authors no new structure.",
+    "auto_heartbeat is matched on the fixed wake_brief verdict shape; a change to that string would silently reclassify it as agent_work.",
+    "counts frames, not tokens or wall-clock; a rest frame and a work frame cost the same here.",
+    "classification reads the close verdict only. A frame whose verdict undersells its work is misclassified downward.",
+    "2026-08-17 is a partial day (window ends at probe run time)."
+  ]
+}
