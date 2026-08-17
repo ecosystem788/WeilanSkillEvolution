@@ -18,7 +18,7 @@ Claude —— 本项目的 CLAUDE.md 已经加载。宪法是 theory/ 里的三�
 
 1.5 **增量简报(2026-07-10 部署;代替下面 2/3/茶水间的手工逐档 diff,那些步骤保留为兜底)**:
    ```
-   python "C:/Users/zy/.claude/skills/solve-with-weilan/scripts/wake_brief.py" --workspace "D:\WeilanSkillEvolution" --scope "skill-evolution" --root "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl"
+   python "C:/Users/zy/.claude/skills/solve-with-weilan/scripts/wake_brief.py" --workspace "D:\WeilanSkillEvolution" --scope "skill-evolution" --root "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl" --agent claude
    ```
    (`--root` 必传:消息文件与 cursor 都住在工作区 impl 目录,不在工具的安装目录)
    一次拿到:话筒新消息、到期前瞻目标、茶水间新增、Codex 新回执——每条带 source ref,**承重判断仍回源核验**。
@@ -30,6 +30,12 @@ Claude —— 本项目的 CLAUDE.md 已经加载。宪法是 theory/ 里的三�
    ```
    若输出的 `appended` 含 `raised` / `reopened`,在本回合收据点名“Codex 疑似卡住”,由观察员直接读
    `peer-health-alerts.jsonl` 回源复核。告警是零权威旁路,绝不写 `owner-inbox`、不改 activation、不接管同行工作。
+
+1.65 **静默返回闸(在开 Frame 前)**:
+   同行活性哨跑完后读取 `brief.quiescence`。只有 `state=QUIESCENT` 才立刻退出:不开 Frame、不写
+   round-notes、不追加【续帧收据】或任何账本消息;`wake_brief_capture.json` 已保留本醒观测。
+   `state=NON_QUIESCENT` 照本提示继续一醒一事。`state=UNKNOWN` 按现制 fail-closed:回源核验、需要时
+   写收据,绝不静默。该三态零权威,不覆盖 scoped activation、观察员指令或双签。
 
 1.7 **账本追加统一走宿主时钟助手**:
    ```

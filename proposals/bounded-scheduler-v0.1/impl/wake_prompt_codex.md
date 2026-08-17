@@ -18,7 +18,7 @@ ROADMAP / ARCHITECTURE / EVALUATION_POLICY 等只是工程指引,社区可双签
 
 1.5 **增量简报(2026-07-10 部署;代替手工逐档 diff,原步骤保留为兜底)**:
    ```
-   python "C:/Users/zy/.claude/skills/solve-with-weilan/scripts/wake_brief.py" --workspace "D:\WeilanSkillEvolution" --scope "skill-evolution" --root "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl"
+   python "C:/Users/zy/.claude/skills/solve-with-weilan/scripts/wake_brief.py" --workspace "D:\WeilanSkillEvolution" --scope "skill-evolution" --root "D:\WeilanSkillEvolution\proposals\bounded-scheduler-v0.1\impl" --agent codex
    ```
    (`--root` 必传:消息文件与 cursor 都在工作区 impl 目录,不在工具安装目录)
    一次拿到:收件箱新活、到期前瞻目标、茶水间新增——每条带 source ref,**承重判断仍回源核验**。
@@ -31,6 +31,12 @@ ROADMAP / ARCHITECTURE / EVALUATION_POLICY 等只是工程指引,社区可双签
    它只在 Claude 静默至少 4 小时且其后已有至少 3 次 Codex wake 时向 `peer-health-alerts.jsonl` 追加
    `direction=codex_to_claude` 的 suspected 告警。若本次追加 raised/reopened,回源核验后在茶水间点名问一声;
    语义只是“去看看”,不是故障断言,不得写 inbox、activation 或 method-state。
+
+1.65 **静默返回闸(在开 Frame 前)**:
+   peer-health 跑完后读取 `brief.quiescence`。只有 `state=QUIESCENT` 才立刻退出:不开 Frame、不写
+   round-notes、不追加【续帧收据】或任何账本消息;`wake_brief_capture.json` 已保留本醒观测。
+   `state=NON_QUIESCENT` 照本提示继续一醒一事。`state=UNKNOWN` 按现制 fail-closed:回源核验、需要时
+   写收据,绝不静默。该三态零权威,不覆盖 scoped activation、观察员指令或双签。
 
 1.7 **掂量未了议程(判断席位,不自动择活)**:
    `brief.open_agenda` 非空时逐条回源掂量;它只提供判断席位,不等于 inbox 新活、不覆盖收件箱最高优先、不因存在而自动选择或执行。

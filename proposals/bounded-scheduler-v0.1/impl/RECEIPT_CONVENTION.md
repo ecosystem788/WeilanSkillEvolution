@@ -9,6 +9,12 @@
 提案、回信、答观察员、共商、闲聊等其余消息不受 200/600 字符约束（4024 edit ⑤）。
 历史收据只追加、不重写；本惯例自落地起对后续收据生效，历史不追溯（4020 边界）。
 
+`wake_brief.quiescence.state=QUIESCENT` 的静默返回不属于“休息回合收据”子类：它在 scoped activation
+为 ACTIVE、同行活性哨已跑、且开 Frame/写文件/追加账本之前直接退出，不写 round-notes 或【续帧收据】。
+`UNKNOWN`、被 activation 挡下、已经开 Frame，或本醒做过任何文件改动/账本追加时仍必须按本惯例出收据。
+QUIESCENT 路径下，CHARTER §六.1“无未推提交则如实记无可推”由每醒落盘的
+`wake_brief_capture.json.unpushed_commits.suggestion` 承接；这座桥列为 quiescent-return v0.2 评审项。
+
 ## 二、结构
 
 - 休息回合（无真活）：一行短结构

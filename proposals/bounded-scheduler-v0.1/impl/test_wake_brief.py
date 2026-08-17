@@ -402,8 +402,9 @@ def test_owner_inbox_absence_alone_is_not_missing_sources(tmp_path: Path) -> Non
 def test_main_derives_root_from_workspace_when_root_absent(monkeypatch, tmp_path: Path) -> None:
     captured: dict = {}
 
-    def fake_build_brief(*, root, workspace, scope, updated_at_utc):
+    def fake_build_brief(*, root, workspace, scope, updated_at_utc, agent):
         captured["root"] = root
+        captured["agent"] = agent
         return {"ok": True}
 
     monkeypatch.setattr(wake_brief, "build_brief", fake_build_brief)
@@ -411,23 +412,37 @@ def test_main_derives_root_from_workspace_when_root_absent(monkeypatch, tmp_path
 
     assert rc == 0
     assert captured["root"] == tmp_path / "proposals" / "bounded-scheduler-v0.1" / "impl"
+    assert captured["agent"] == "codex"
 
 
 def test_main_uses_explicit_root_when_passed(monkeypatch, tmp_path: Path) -> None:
     captured: dict = {}
 
-    def fake_build_brief(*, root, workspace, scope, updated_at_utc):
+    def fake_build_brief(*, root, workspace, scope, updated_at_utc, agent):
         captured["root"] = root
+        captured["agent"] = agent
         return {"ok": True}
 
     monkeypatch.setattr(wake_brief, "build_brief", fake_build_brief)
     explicit = tmp_path / "elsewhere" / "impl"
     rc = wake_brief.main(
-        ["--workspace", str(tmp_path), "--scope", "s", "--root", str(explicit), "--updated-at-utc", STAMP]
+        [
+            "--workspace",
+            str(tmp_path),
+            "--scope",
+            "s",
+            "--root",
+            str(explicit),
+            "--agent",
+            "claude",
+            "--updated-at-utc",
+            STAMP,
+        ]
     )
 
     assert rc == 0
     assert captured["root"] == explicit
+    assert captured["agent"] == "claude"
 
 
 def test_cursor_advances_and_second_call_is_empty_incremental(tmp_path: Path) -> None:
@@ -443,3 +458,157 @@ def test_cursor_advances_and_second_call_is_empty_incremental(tmp_path: Path) ->
     cursor, reason = wake_brief.load_cursor(tmp_path / "wake-cursor.json")
     assert reason is None
     assert wake_brief.validate_cursor(tmp_path, cursor, None) == ("incremental", None, None)
+
+
+def quiet_quiescence_input() -> dict:
+    return {
+        "authority": {"activation": {"state": "ACTIVE", "continuation_allowed": True}},
+        "owner_inbox_delta": [],
+        "codex_inbox_delta": [],
+        "prospective_due": [],
+        "open_agenda": [],
+        "codex_replies_unreviewed": [],
+        "peer_chat_new": [],
+        "concurrent_receipts_new": [],
+        "unpushed_commits": {"count": 0, "suggestion": "无可推"},
+        "sources": [{"ref": "fixture:quiescence", "kind": "fixture"}],
+        "cursor_status": {"status": "incremental"},
+    }
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected_state", "expected_reason"),
+    [
+        (lambda brief: None, wake_brief.QUIESCENT, "no_actionable_events"),
+        (
+            lambda brief: brief.update(cursor_status={"status": "representation_drift"}),
+            wake_brief.UNKNOWN,
+            "cursor_not_incremental:representation_drift",
+        ),
+        (
+            lambda brief: brief.update(cursor_status={"status": "full_rescan"}),
+            wake_brief.UNKNOWN,
+            "cursor_not_incremental:full_rescan",
+        ),
+        (
+            lambda brief: brief.update(cursor_status={"status": "missing_sources"}),
+            wake_brief.UNKNOWN,
+            "cursor_not_incremental:missing_sources",
+        ),
+        (
+            lambda brief: brief.update(prospective_due_error="unrecognized_goal_shape"),
+            wake_brief.UNKNOWN,
+            "prospective_due_error",
+        ),
+        (
+            lambda brief: brief["unpushed_commits"].update(fetch_failed=True),
+            wake_brief.UNKNOWN,
+            "unpushed_commits_fetch_failed",
+        ),
+        (
+            lambda brief: brief["unpushed_commits"].update(count=None),
+            wake_brief.UNKNOWN,
+            "unpushed_commits_unreadable",
+        ),
+        (
+            lambda brief: brief["authority"]["activation"].update(state="PAUSED"),
+            wake_brief.UNKNOWN,
+            "activation_not_active",
+        ),
+        (
+            lambda brief: brief["authority"]["activation"].update(continuation_allowed=False),
+            wake_brief.UNKNOWN,
+            "continuation_not_allowed",
+        ),
+        (
+            lambda brief: brief["unpushed_commits"].update(count=1),
+            wake_brief.NON_QUIESCENT,
+            "unpushed_commits",
+        ),
+        (
+            lambda brief: brief.update(prospective_due=[{"goal_ref": "goal:due"}]),
+            wake_brief.NON_QUIESCENT,
+            "prospective_due",
+        ),
+        (
+            lambda brief: brief.update(open_agenda=[{"goal_ref": "goal:eligible", "eligible_now": True}]),
+            wake_brief.NON_QUIESCENT,
+            "eligible_open_agenda",
+        ),
+        (
+            lambda brief: brief.update(open_agenda=[{"goal_ref": "goal:future", "eligible_now": False}]),
+            wake_brief.QUIESCENT,
+            "no_actionable_events",
+        ),
+        (
+            lambda brief: brief.update(peer_chat_new=[{"from": "claude", "text": "new"}]),
+            wake_brief.NON_QUIESCENT,
+            "peer_chat_new",
+        ),
+        (
+            lambda brief: brief.update(concurrent_receipts_new=[{"from": "claude"}]),
+            wake_brief.NON_QUIESCENT,
+            "concurrent_receipts_new",
+        ),
+    ],
+)
+def test_quiescence_decision_table(mutation, expected_state: str, expected_reason: str) -> None:
+    brief = quiet_quiescence_input()
+    mutation(brief)
+
+    observed = wake_brief.quiescence_for(brief, "codex")
+
+    assert observed["state"] == expected_state
+    assert expected_reason in observed["reason_codes"]
+    assert observed["source_refs"] == ["fixture:quiescence", "command:git-unpushed-commits"]
+
+
+def test_quiescence_agent_lanes_are_mirrored() -> None:
+    owner_work = quiet_quiescence_input()
+    owner_work["owner_inbox_delta"] = [{"id": "owner-work"}]
+    assert wake_brief.quiescence_for(owner_work, "claude")["state"] == wake_brief.NON_QUIESCENT
+    assert wake_brief.quiescence_for(owner_work, "codex")["state"] == wake_brief.QUIESCENT
+
+    codex_work = quiet_quiescence_input()
+    codex_work["codex_inbox_delta"] = [{"id": "codex-work"}]
+    assert wake_brief.quiescence_for(codex_work, "codex")["state"] == wake_brief.NON_QUIESCENT
+    assert wake_brief.quiescence_for(codex_work, "claude")["state"] == wake_brief.QUIESCENT
+
+    codex_reply = quiet_quiescence_input()
+    codex_reply["codex_replies_unreviewed"] = [{"reply_to": "owner-work"}]
+    assert wake_brief.quiescence_for(codex_reply, "claude")["state"] == wake_brief.NON_QUIESCENT
+    assert wake_brief.quiescence_for(codex_reply, "codex")["state"] == wake_brief.QUIESCENT
+
+
+def test_two_wake_fixture_consumes_chat_then_becomes_quiescent(tmp_path: Path) -> None:
+    write_jsonl(tmp_path / "codex-inbox-replies.jsonl", [])
+    write_jsonl(tmp_path / "peer-chat.jsonl", [])
+    wake_brief.write_cursor(tmp_path, tmp_path / "wake-cursor.json", "skill-evolution", STAMP)
+    write_jsonl(tmp_path / "peer-chat.jsonl", [{"from": "claude", "text": "one unread message"}])
+
+    kwargs = {
+        "root": tmp_path,
+        "workspace": "D:\\WeilanSkillEvolution",
+        "scope": "skill-evolution",
+        "updated_at_utc": STAMP,
+        "now_utc": STAMP,
+        "recall_fixture": fixture_recall(),
+        "prospective_fixture": {"goals": {}, "causal_events": {}},
+        "agent": "codex",
+    }
+    first = wake_brief.build_brief(
+        **kwargs,
+        git_runner=FakeGit("", "main", "origin/main", "0\t0\n", "abc123\n"),
+    )
+    second = wake_brief.build_brief(
+        **kwargs,
+        git_runner=FakeGit("", "main", "origin/main", "0\t0\n", "abc123\n"),
+    )
+
+    assert first["cursor_status"] == {"status": "incremental"}
+    assert first["quiescence"]["state"] == wake_brief.NON_QUIESCENT
+    assert first["quiescence"]["reason_codes"] == ["peer_chat_new"]
+    assert second["cursor_status"] == {"status": "incremental"}
+    assert second["peer_chat_new"] == []
+    assert second["quiescence"]["state"] == wake_brief.QUIESCENT
+    assert second["quiescence"]["reason_codes"] == ["no_actionable_events"]

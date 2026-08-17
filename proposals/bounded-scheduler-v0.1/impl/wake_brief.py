@@ -805,6 +805,96 @@ def site_fingerprint_for(brief: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+QUIESCENT = "QUIESCENT"
+NON_QUIESCENT = "NON_QUIESCENT"
+UNKNOWN = "UNKNOWN"
+_AGENT_LANES = {
+    "claude": {
+        "inbox": "owner_inbox_delta",
+        "replies": "codex_replies_unreviewed",
+    },
+    "codex": {
+        "inbox": "codex_inbox_delta",
+        "replies": None,
+    },
+}
+
+
+def quiescence_for(brief: dict[str, Any], agent: str) -> dict[str, Any]:
+    """Classify whether one agent wake has any observable work to retain.
+
+    This is a zero-authority read of the already assembled brief.  UNKNOWN
+    dominates actionable signals because an unreadable authority/source must
+    never be mistaken for a complete observation.  NON_QUIESCENT means only
+    that at least one conservative wake signal is present; it does not choose
+    or authorize the work.
+    """
+    normalized_agent = str(agent).lower()
+    source_refs = list(dict.fromkeys([*_source_refs(brief.get("sources", [])), "command:git-unpushed-commits"]))
+    unknown_reasons: list[str] = []
+
+    lane = _AGENT_LANES.get(normalized_agent)
+    if lane is None:
+        unknown_reasons.append("unsupported_agent")
+
+    authority = brief.get("authority")
+    activation = authority.get("activation") if isinstance(authority, dict) else None
+    if not isinstance(activation, dict):
+        unknown_reasons.append("activation_unreadable")
+    else:
+        if activation.get("state") != "ACTIVE":
+            unknown_reasons.append("activation_not_active")
+        if activation.get("continuation_allowed") is not True:
+            unknown_reasons.append("continuation_not_allowed")
+
+    cursor_status = brief.get("cursor_status")
+    cursor_mode = cursor_status.get("status") if isinstance(cursor_status, dict) else None
+    if cursor_mode != "incremental":
+        unknown_reasons.append(f"cursor_not_incremental:{cursor_mode or 'unreadable'}")
+
+    if brief.get("prospective_due_error"):
+        unknown_reasons.append("prospective_due_error")
+
+    unpushed = brief.get("unpushed_commits")
+    count = unpushed.get("count") if isinstance(unpushed, dict) else None
+    if not isinstance(count, int) or isinstance(count, bool) or count < 0:
+        unknown_reasons.append("unpushed_commits_unreadable")
+    if isinstance(unpushed, dict) and unpushed.get("fetch_failed") is True:
+        unknown_reasons.append("unpushed_commits_fetch_failed")
+
+    if unknown_reasons:
+        return {
+            "agent": normalized_agent,
+            "state": UNKNOWN,
+            "reason_codes": unknown_reasons,
+            "source_refs": source_refs,
+        }
+
+    actionable_reasons: list[str] = []
+    assert lane is not None
+    if brief.get(lane["inbox"]):
+        actionable_reasons.append("agent_inbox_delta")
+    if brief.get("prospective_due"):
+        actionable_reasons.append("prospective_due")
+    if any(isinstance(item, dict) and item.get("eligible_now") is True for item in brief.get("open_agenda", [])):
+        actionable_reasons.append("eligible_open_agenda")
+    if brief.get("peer_chat_new"):
+        actionable_reasons.append("peer_chat_new")
+    if lane["replies"] is not None and brief.get(lane["replies"]):
+        actionable_reasons.append("agent_visible_replies")
+    if brief.get("concurrent_receipts_new"):
+        actionable_reasons.append("concurrent_receipts_new")
+    if count > 0:
+        actionable_reasons.append("unpushed_commits")
+
+    return {
+        "agent": normalized_agent,
+        "state": NON_QUIESCENT if actionable_reasons else QUIESCENT,
+        "reason_codes": actionable_reasons or ["no_actionable_events"],
+        "source_refs": source_refs,
+    }
+
+
 def build_brief(
     *,
     root: Path,
@@ -817,6 +907,7 @@ def build_brief(
     runner: Callable[[list[str]], str] | None = None,
     git_runner: Callable[[list[str]], str] | None = None,
     commit_cursor: bool = True,
+    agent: str = "codex",
 ) -> dict[str, Any]:
     root = Path(root)
     now = now_utc or updated_at_utc
@@ -910,6 +1001,7 @@ def build_brief(
     for ref in _collect_source_refs(prospective_raw):
         brief["sources"].append(_source(str(ref), "prospective_source_ref"))
 
+    brief["quiescence"] = quiescence_for(brief, agent)
     brief["site_fingerprint"] = site_fingerprint_for(brief)
 
     if commit_cursor:
@@ -945,6 +1037,7 @@ def main(argv: list[str] | None = None) -> int:
     # NOT from __file__.  Deriving from __file__ points a deployed copy at its own
     # scripts dir, which holds none of the inbox/chat files -> silent false-zero.
     parser.add_argument("--root", default=None)
+    parser.add_argument("--agent", choices=tuple(_AGENT_LANES), default="codex")
     parser.add_argument("--updated-at-utc")
     args = parser.parse_args(argv)
 
@@ -959,6 +1052,7 @@ def main(argv: list[str] | None = None) -> int:
         workspace=args.workspace,
         scope=args.scope,
         updated_at_utc=stamp,
+        agent=args.agent,
     )
     json.dump(brief, sys.stdout, ensure_ascii=False, indent=2)
     sys.stdout.write("\n")
