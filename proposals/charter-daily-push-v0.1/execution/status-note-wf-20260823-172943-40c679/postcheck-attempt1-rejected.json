@@ -1,0 +1,27 @@
+{
+  "mode": "postcheck",
+  "attempt": 1,
+  "capture_authority": "authored_exact_field_transcription_from_tool_output",
+  "ok": false,
+  "final_expected": "4f5a732ab78f2d9fb6c96d64e1a6ead557f95a4e4a976a69628b78f8a54423c3",
+  "final_actual": "171e63e9c99468b7eaf94f08e2c75dee58af7f485fd75a5cb5c17ac0ec85fb59",
+  "final_ok": false,
+  "base_preimage_ok": true,
+  "witness_digest_pre": "1981a1c97c0decc78f7dd3f78282a3c566068d57ae9e67e2089304b12dac05f0",
+  "witness_digest_post": "1981a1c97c0decc78f7dd3f78282a3c566068d57ae9e67e2089304b12dac05f0",
+  "non_target_conserved": true,
+  "added_lines": 3,
+  "deleted_lines": 1,
+  "expect_added": 2,
+  "expect_deleted": 0,
+  "counts_ok": false,
+  "changes_confined": false,
+  "diff_ok": false,
+  "rollback": {
+    "performed": true,
+    "method": "write captured preflight sidecar bytes back to target",
+    "restored_bytes": 16358,
+    "restored_sha256": "866ffa075ba2998c70d71b94c60a4d1e92b2272c3fdd91d7504277d975976021"
+  },
+  "boundary": "The first tool output was not redirected to a file; this file is an authored exact transcription of its load-bearing fields. The raw output remains in the episode tool trace."
+}

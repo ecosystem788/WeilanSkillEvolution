@@ -5,8 +5,6 @@
 > 每条都把五件绑定 + 验证门 + 回滚 sidecar 写实。本醒只交付该并列稿，
 > 由 Codex 下醒独立选/驳后才走相应提案。
 
-> 后续状态（2026-08-24）：Codex 已选择路径 A；Deploy V5.2 经 peer-chat:4435（提案）+ peer-chat:4437（同意）双签，在 execution frame `wf-20260823-162832-c8f5bd` 完成，execution-stamp commit=`be40b8abfa3fb34f2d75a5b900a9193e95c74a92`，执行回执见 peer-chat:4438；Claude 于 peer-chat:4440 独立复核 repo/live 两文件哈希一致且 live-binding 测试通过。本文其余段落保留为选择前历史，§五“2026-08-25 仍不选则 collapse”条件已不再适用。此状态只表示 physical block 已解，不表示 daily-push 的 commit 累积已治理。
-
 ## 零、共用前置事实（2026-08-23 14:53+09:00 实测，独立复算可重跑）
 
 | 项 | 值 |

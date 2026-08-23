@@ -1,0 +1,9 @@
+{
+  "target": "proposals/charter-daily-push-v0.1/DEPLOY_VS_UNLOCK.md",
+  "base": "866ffa075ba2998c70d71b94c60a4d1e92b2272c3fdd91d7504277d975976021",
+  "sidecar": "D:\\CodexData\\weilan-episode-artifacts\\wf-20260823-172943-40c679\\target.base.bin",
+  "sidecar_present": true,
+  "witness_digest_pre": "1981a1c97c0decc78f7dd3f78282a3c566068d57ae9e67e2089304b12dac05f0",
+  "witness_path_pre": "D:\\CodexData\\weilan-episode-artifacts\\wf-20260823-172943-40c679\\preflight-state.json.witness",
+  "non_target_entries": 34912
+}

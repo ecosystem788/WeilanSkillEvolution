@@ -1,0 +1,55 @@
+{
+  "mode": "postcheck",
+  "final_expected": "4f5a732ab78f2d9fb6c96d64e1a6ead557f95a4e4a976a69628b78f8a54423c3",
+  "final_actual": "4f5a732ab78f2d9fb6c96d64e1a6ead557f95a4e4a976a69628b78f8a54423c3",
+  "final_ok": true,
+  "witness_digest_pre": "1981a1c97c0decc78f7dd3f78282a3c566068d57ae9e67e2089304b12dac05f0",
+  "witness_digest_post": "1981a1c97c0decc78f7dd3f78282a3c566068d57ae9e67e2089304b12dac05f0",
+  "non_target_conserved": true,
+  "witness_path_pre": "D:\\CodexData\\weilan-episode-artifacts\\wf-20260823-172943-40c679\\preflight-state.attempt2.json.witness",
+  "witness_path_post": "D:\\CodexData\\weilan-episode-artifacts\\wf-20260823-172943-40c679\\preflight-state.attempt2.json.witness.post",
+  "witness_coverage": {
+    "covered": [
+      "status(-z -uall) 列出的每条非 target 路径：XY 两位状态字母",
+      "同上每条路径的工作区原始字节 sha256（不存在记 ABSENT）",
+      "同上每条路径的 index 条目：各 stage 的 mode,oid,stage（不在 index 记 ABSENT）",
+      "for-each-ref **列出的**每条引用（refname → objectname）",
+      "同上每条引用的符号目标（symbolic ref 记目标 refname，direct ref 记哨兵 DIRECT）",
+      "HEAD 的符号名与 oid（游离/未出生有哨兵值）"
+    ],
+    "not_covered": [
+      "被 .gitignore 命中的路径（不进 -uall；无界且高频抖动，见 CONVENTION §5.3.f）",
+      "refs/ 之外的伪引用（ORIG_HEAD/FETCH_HEAD/MERGE_HEAD 等；HEAD 除外，它由 H 腿单钉）——实测 for-each-ref 不列出它们",
+      "reflog（.git/logs/），以及 for-each-ref 不列出的悬空 symbolic ref——实测：symbolic ref 指向不存在的 ref 时该条整行不出现",
+      "object database 内部：gc/repack/prune、不可达对象",
+      ".git/ 下的配置与 hooks（config、hooks、worktrees 注册）",
+      "文件系统元数据：mtime、权限/ACL、扩展属性（index mode 位之外）",
+      "仓库根之外的一切（执行期制品按 §5.3.d 恰恰住在那里）",
+      "子模块内部状态（只见 gitlink oid）"
+    ]
+  },
+  "base_preimage_ok": true,
+  "base_preimage_expected": "866ffa075ba2998c70d71b94c60a4d1e92b2272c3fdd91d7504277d975976021",
+  "base_preimage_actual": "866ffa075ba2998c70d71b94c60a4d1e92b2272c3fdd91d7504277d975976021",
+  "sidecar": "D:\\CodexData\\weilan-episode-artifacts\\wf-20260823-172943-40c679\\target.base.attempt2.bin",
+  "base_line_count": 175,
+  "final_line_count": 177,
+  "added_lines": 2,
+  "deleted_lines": 0,
+  "lcs_length": 175,
+  "attribution_ambiguous": true,
+  "possibly_added_lines": 3,
+  "possibly_deleted_lines": 0,
+  "sections_touched": [
+    "# 两条路径并列(deploy vs unlock)供 Codex 选/驳"
+  ],
+  "expect_added": 2,
+  "expect_deleted": 0,
+  "changes_confined_to": [
+    "# 两条路径并列(deploy vs unlock)供 Codex 选/驳"
+  ],
+  "counts_ok": true,
+  "changes_confined": true,
+  "diff_ok": true,
+  "ok": true
+}
