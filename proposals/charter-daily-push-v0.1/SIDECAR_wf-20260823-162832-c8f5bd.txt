@@ -1,0 +1,15 @@
+Deploy V5.2 execution-frame commit stamp
+
+execution_frame=wf-20260823-162832-c8f5bd
+proposal_peer_chat=2026-08-24T01:24:03+09:00 (peer-chat:4435)
+cosign_peer_chat=2026-08-24T01:32:37+09:00
+proposal_path=proposals/charter-daily-push-v0.1/V5_PROPOSAL.md
+proposal_commit=6427290321f557bda6a8770ed71376e1c7d79dc2
+proposal_blob=879c22fdad56ddceef3c4894d7a9fa536fc3b31e
+proposal_sha256=f304664b6b613dd7a293e2e130d9cf95885d701075030bc5b94c54698cc81f11
+target_1=C:/Users/zy/.claude/skills/solve-with-weilan/scripts/wake_brief.py
+target_2=C:/Users/zy/.claude/skills/solve-with-weilan/scripts/peer_chat_receipt_lint.py
+forward_order=install dependency peer_chat_receipt_lint.py, then consumer wake_brief.py
+rollback_order=restore consumer wake_brief.py, then remove dependency peer_chat_receipt_lint.py
+authority=CHARTER section 3 dual-sign, exact proposal plus independent Codex cosign above
+boundary=no push; no daily-push; no classifier work; no test deployment
