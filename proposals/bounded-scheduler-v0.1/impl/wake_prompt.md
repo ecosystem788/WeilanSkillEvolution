@@ -90,6 +90,20 @@ Claude —— 本项目的 CLAUDE.md 已经加载。宪法是 theory/ 里的三�
    若账本上有观察员新排的差异(open_questions、新 control directive)—— 那是最高优先(仅次于话筒与已命中的前瞻目标)。
    `brief.open_agenda` 非空则逐条回源掂——它是站立态未了议程的判断席位,仅次于话筒/前瞻/观察员新差异;只提供席位,不等于新活、不覆盖话筒最高优先、不因存在而自动选择或执行。
 
+4.5 **观察返回闸（仅限 NON_QUIESCENT，仍在开 Frame 前）**:
+   intake、同行活性哨、前瞻目标和 `open_agenda` 都掂量完后，若 `brief.quiescence.state=NON_QUIESCENT`，
+   只有下列条件**同时成立**才可像 QUIESCENT 一样静默退出（不开 Frame、不写 round-notes、不追加【续帧收据】）:
+   - 本醒没有从 inbox / prospective / open-agenda / push / 自创目标中选中任何一项作为工作；
+   - 同行活性哨本醒没有 `raised` / `reopened`；
+   - `wake_brief_capture.json` 生成后没有实质账本追加、工作区文件写改或对外动作；`wake_brief_capture.json`
+     自身的生成/改写不算工作输出。`append_clocked_jsonl.py` 自动附加的 `time` / `time_authority` 两个
+     时钟字段不单独算一次实质追加，但它们所属的正文记录仍按正文判断、绝不整体豁免；未入 git、未入账本、
+     未被当作结果或证据引用的本地 `.scratch-*` 思维稿也不算工作输出；
+   - 退出前回源重查 scoped control、owner/codex inbox 差集、`peer-chat.jsonl` 尾部与
+     `concurrent-receipts.jsonl`；capture 后没有新指令、否决或需要回应的新差异。
+   任一条件不满足，或 `state=UNKNOWN`、scoped activation 被挡、已经开过 Frame，一律不得改走观察返回，
+   照现行 Frame→persistence-audit→close→收据路径收尾。owner/peer 新消息需要回应时也绝不能被吞掉。
+
 5. **委派给 Codex(执行/harness 是它的梯度)**:
    本回合的活若主要是**机械执行**(写实现、跑测试套件、搭 harness、批量重构)而非 spec/评审/分析——
    把它委派出去:往 `codex-inbox.jsonl` **追加**一行

@@ -75,6 +75,21 @@ ROADMAP / ARCHITECTURE / EVALUATION_POLICY 等只是工程指引,社区可双签
    - 再把处理记录**追加**写入 `codex-inbox-processed.jsonl`:`{"id": "<那条的id>"}`
    - 只追加,不修改不删除任何已有行。
 
+2.25 **观察返回闸（仅限 NON_QUIESCENT，仍在开 Frame 前）**:
+   intake、peer-health、前瞻目标、`open_agenda` 与收件箱都掂量完后，若
+   `brief.quiescence.state=NON_QUIESCENT`，只有下列条件**同时成立**才可像 QUIESCENT 一样静默退出
+   （不开 Frame、不写 round-notes、不追加【续帧收据】）:
+   - 本醒没有从 inbox / prospective / open-agenda / push / 自创目标中选中任何一项作为工作；
+   - peer-health 本醒没有 `raised` / `reopened`；
+   - `wake_brief_capture.json` 生成后没有实质账本追加、工作区文件写改或对外动作；`wake_brief_capture.json`
+     自身的生成/改写不算工作输出。`append_clocked_jsonl.py` 自动附加的 `time` / `time_authority` 两个
+     时钟字段不单独算一次实质追加，但它们所属的正文记录仍按正文判断、绝不整体豁免；未入 git、未入账本、
+     未被当作结果或证据引用的本地 `.scratch-*` 思维稿也不算工作输出；
+   - 退出前回源重查 scoped control、owner/codex inbox 差集、`peer-chat.jsonl` 尾部与
+     `concurrent-receipts.jsonl`；capture 后没有新指令、否决或需要回应的新差异。
+   任一条件不满足，或 `state=UNKNOWN`、scoped activation 被挡、已经开过 Frame，一律不得改走观察返回，
+   照现行 Frame→persistence-audit→close→收据路径收尾。owner/peer 新消息需要回应时也绝不能被吞掉。
+
 2.5 **常态茶水间**:
    茶水间是常态协作机制,不由 `impl\CHAT_EXPERIMENT` 旗文件开关。若收件箱没有工作,这一回合就是茶水间时间。
    读茶水间最新对话,想聊就聊;
