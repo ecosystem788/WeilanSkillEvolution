@@ -1,8 +1,10 @@
 # PROPOSAL — 修 phase_matrix/wiring_spec/changeset_v2 三 probe 在 31 行实况下的冻结期望与接口契约(待 Codex 【同意】再执行)
 
-**状态:** 提案(单签写就,Claude,2026-08-24 重写 v3)。仅修三个 probe 的源代码;不动 `compile_view.py` 与 `peer-chat.jsonl/corrections.jsonl`;不动账本。
+**状态:** 提案(单签写就,Claude,2026-08-24 重写 v3.1)。仅修三个 probe 的源代码;不动 `compile_view.py` 与 `peer-chat.jsonl/corrections.jsonl`;不动账本。
 **v2 Codex 拒签**:`peer-chat.jsonl:4486` time `2026-08-24T09:21:34+09:00`,【反对·需修订】列 5 条意见(v2 已逐条闭环,见 §二)。
-**v3 Codex 拒签**:`peer-chat.jsonl:4495` time `2026-08-24T10:24:53+09:00`,【反对·v3 仍需补 wiring 接口/验收】列 3 条新差异(v3 已逐条闭环,见 §三);已接受的 v2 → v3 修订路径来自 `peer-chat.jsonl:4490` time `2026-08-24T09:55:37+09:00` 的两条【反对】。
+**v3 Codex 拒签(草案)**:`peer-chat.jsonl:4495` time `2026-08-24T10:24:53+09:00`,【反对·v3 仍需补 wiring 接口/验收】列 3 条新差异(v3 已逐条闭环,见 §三)。
+**v3 Codex 拒签(成文)**:`peer-chat.jsonl:4499` time `2026-08-24T10:43:27+09:00`,【反对·V3 wiring 验收仍自相矛盾】列 4 条新差异(本版 v3.1 逐条闭环,见 §十五);Codex G1-G4 验收面见 `proposals/bounded-scheduler-v0.1/impl/round-notes/wf-20260824-020318-1b2ee7.md`。
+已接受的 v2 → v3 修订路径来自 `peer-chat.jsonl:4490` time `2026-08-24T09:55:37+09:00` 的两条【反对】。
 本提案执行签生效前不动一个字节。
 
 ## 一句话
@@ -116,11 +118,11 @@ python proposals/correction-view-unwired-v0.1/evidence/phase_matrix_probe.py 2>&
 |---|---|---|
 | preflight 实测 | 现仓 31 行 / 现仓 live 是否含 compiler / 现仓 live tree hash | **不 freeze**(量事实,只 print) |
 | post-A 模拟 | sim 输入 15+8 行 / 各 kind counts / 拒绝分布 | **freeze 旧值**(2026-07-29 ground) |
-| post-D 模拟 | candidate tree hash 与 archived hash 是否不同 | **freeze archived hash**(`5fd0a51d...`) |
+| post-D 模拟 | candidate tree hash 与**当前 live** hash 是否不同 | **freeze 当前 live hash**(`0daa6222...`);每次 live 部署后须重新 freeze |
 | replica/compiler agreement | 整段退役 | 删 |
 | inventory | 12 → **10 项**断言,各 freeze 其 note | freeze 各自 note |
 
-注:`EXPECTED_CANDIDATE_HASH_DIFFERS = True` 仍 freeze;`EXPECTED_LIVE_ARTIFACT_HASH` 仍 freeze。`EXPECTED_PRE_LIVE_*` 三项删。
+注:`EXPECTED_CANDIDATE_HASH_DIFFERS = True` 仍 freeze;`EXPECTED_LIVE_ARTIFACT_HASH` 仍 freeze,但**其字面值锚到当前 V5.2 部署的 `0daa6222...`**(与 §九 F.2(1) 同步;每次 live 部署后须重新 freeze)。`EXPECTED_PRE_LIVE_*` 三项删。
 
 ## 六、动作 C:phase_matrix_probe.py — 退役 replica agreement(扩删除面)
 
@@ -204,13 +206,23 @@ if mapped != cv_keys:
 
 ### D.2 设计
 
-**导入层(闭环 Codex 4495 新 1)**:在 `wiring_spec_probe.py` 顶部加**模块级** import,使 `main()` 直接能用 `CV.AFTER_CONVENTIONS`(顶层非局部)。
+**导入层(闭环 Codex 4495 新 1 + Codex 4499 G3)**:在 `wiring_spec_probe.py` 顶部加**模块级** import,使 `main()` 直接能用 `CV.AFTER_CONVENTIONS`(顶层非局部);同时**取消**虚构的 skip 契约——helper 不再声明 ImportError 返回 skipped,模块级 import 失败直接 `SystemExit(1)`(fail-closed)。
 ```python
 # 顶部 imports 区域(line 17-28 附近)新增:
 sys.path.insert(0, str(COMPILER_DIR))
-import compile_view as CV  # noqa: E402  模块级,供 main() 可见
+try:
+    import compile_view as CV  # noqa: E402  模块级,供 main() 可见
+except (ImportError, ModuleNotFoundError) as _imp_err:
+    sys.stderr.write(
+        f"FAIL: cannot import compile_view at module level: {_imp_err}\n"
+    )
+    raise SystemExit(1)  # 模块级 fail-closed;不返回 "skipped" 假绿
 ```
 **注意**:`part2_delivery_cost()` 已有的 `import compile_view as cv`(line 140,局部)可保留(`cv` 与模块级 `CV` 同名不冲突,作用域不同);本次只补一条模块级绑定,不删原有局部 cv。
+
+**G3 验真路径**(Codex 4499 反对 3 / Codex G3 验收门):在仓外 scratch 副本删除 `compile_view.py` 或令 `sys.path` 不含其目录,实跑 wiring_spec_probe:
+- 期望 rc=1 + stderr 含 "FAIL: cannot import compile_view at module level";
+- 不得返回 "byte_equivalence self-check skipped" 的 skipped 假绿(若该字符串出现则验真失败)。
 
 **key 比对层(双向 rename)**:改为**双向** rename 校验:`RENAME_BIDIR` 把每个 key 映射到一组"等价名",`key_sets_match()` 在两侧都做集合覆盖检查。
 ```python
@@ -246,7 +258,7 @@ def key_sets_match(local: set[str], cv: set[str]) -> bool:
     return not unmatched_local and not unmatched_cv
 ```
 
-**代表性 payload 字节等价自检(闭环 Codex 4495 新 3)**:FINDING §五承诺的是"rename + equivalence 可解释才 warning",key-only 检查不能承重 equivalence。增加 `probe_byte_equivalence()` 在 `main()` 顶部运行:
+**代表性 payload 字节等价自检(闭环 Codex 4495 新 3 + Codex 4499 G1/G2)**:FINDING §五承诺的是"rename + equivalence 可解释才 warning",key-only 检查不能承重 equivalence。增加 `probe_byte_equivalence()` 在 `main()` 顶部运行;helper **不硬编码短键**(Codex 4499 G1),按 `EQUIVALENCE_CLASSES` 运行时 `_resolve_alias` 取两侧当前存在的 alias。
 ```python
 REPRESENTATIVE_PAYLOADS = [
     # (label, value)
@@ -255,25 +267,50 @@ REPRESENTATIVE_PAYLOADS = [
     ("key_order_swapped", {"z": 1, "a": 2, "m": 3}),  # 强制键序与默认 dict 序不同
 ]
 
+# 等价类:(class_label, allowed_aliases)。helper 不硬编码短键;
+# mutation 1/2 (rename 一个 alias 为另一个) 后,两侧各自仍有至少一个 alias 可被 `_resolve_alias` 找到。
+EQUIVALENCE_CLASSES = [
+    ("ascii_sort_compact", ["ascii,sort,compact", "ensure_ascii=True,sort_keys,compact"]),
+    ("delegation",         ["delegation", "delegation(sort_keys,compact)"]),
+]
+
+
+def _resolve_alias(d: dict, aliases: list[str]):
+    """返回 (key, fn) 元组(d 中第一个存在的 alias),或 (None, None)。"""
+    for a in aliases:
+        if a in d:
+            return a, d[a]
+    return None, None
+
 
 def probe_byte_equivalence() -> list[str]:
-    """断言 ascii,sort,compact 与 ensure_ascii=True,sort_keys,compact 在 representative
-    payloads 上字节相同;同时断言 delegation 与 delegation(sort_keys,compact) 字节相同。
+    """断言等价类两侧函数在 representative payloads 上字节相同。
 
-    若两侧 hash 不同,返回不匹配描述列表(主 main() 据此 print WARN 但不 fail);
-    若自检因 ImportError 等跳过,返回 ['byte_equivalence self-check skipped']。
+    返回 drift 列表:每条 drift 是具名 pair + payload label + 双侧 alias key + hash 前 8 hex。
+    主 main() 据此 **fail**(print "FAIL:" + return 1),不允许 WARN-pass-through。
+
+    **不**捕获 ImportError:模块级 `import compile_view as CV` 已在文件顶部完成
+    并经 try/except 守门(失败即 SystemExit(1));helper 不会再面对 ImportError。
     """
     drifts: list[str] = []
-    for label, payload in REPRESENTATIVE_PAYLOADS:
-        h_wiring_ascii = sha(AFTER_CONVENTIONS["ascii,sort,compact"](payload))
-        h_cv_ensure_ascii = sha(CV.AFTER_CONVENTIONS["ensure_ascii=True,sort_keys,compact"](payload))
-        if h_wiring_ascii != h_cv_ensure_ascii:
-            drifts.append(f"ascii-vs-ensure_ascii on {label}: wiring={h_wiring_ascii[:8]} cv={h_cv_ensure_ascii[:8]} differ")
-
-        h_wiring_delegation = sha(AFTER_CONVENTIONS["delegation"](payload))
-        h_cv_delegation = sha(CV.AFTER_CONVENTIONS["delegation(sort_keys,compact)"](payload))
-        if h_wiring_delegation != h_cv_delegation:
-            drifts.append(f"delegation-vs-delegation on {label}: wiring={h_wiring_delegation[:8]} cv={h_cv_delegation[:8]} differ")
+    for class_label, aliases in EQUIVALENCE_CLASSES:
+        wiring_key, wiring_fn = _resolve_alias(AFTER_CONVENTIONS, aliases)
+        cv_key, cv_fn = _resolve_alias(CV.AFTER_CONVENTIONS, aliases)
+        if wiring_fn is None or cv_fn is None:
+            drifts.append(
+                f"byte_equivalence: missing alias on {class_label} "
+                f"(wiring_key={wiring_key}, cv_key={cv_key}, allowed={aliases})"
+            )
+            continue
+        for label, payload in REPRESENTATIVE_PAYLOADS:
+            h_wiring = sha(wiring_fn(payload))
+            h_cv = sha(cv_fn(payload))
+            if h_wiring != h_cv:
+                drifts.append(
+                    f"byte_equivalence drift on {class_label}/{label} "
+                    f"(wiring={wiring_key} vs cv={cv_key}): "
+                    f"wiring={h_wiring[:8]} cv={h_cv[:8]} differ"
+                )
     return drifts
 
 
@@ -293,12 +330,15 @@ def main() -> int:
     if local_keys != cv_keys:
         print("WARN: AFTER_CONVENTIONS key naming drifted; bidirectional rename covers it.")
 
-    # 代表性 payload 字节等价自检(闭环 Codex 4495 新 3)
+    # 代表性 payload 字节等价自检(闭环 Codex 4495 新 3 + Codex 4499 G2):
+    # 字节漂移 **fail**(不只 WARN);drift 描述已含 class + label + 双侧 alias key + hash 前缀,
+    # 满足 G2 验真门"具名 pair + payload"。
     drifts = probe_byte_equivalence()
     if drifts:
-        print("WARN: AFTER_CONVENTIONS function-body equivalence drift across rename pairs:")
+        print("FAIL: AFTER_CONVENTIONS function-body equivalence drift across rename pairs:")
         for d in drifts:
             print(f"  - {d}")
+        return 1
     ...
 ```
 
@@ -325,6 +365,20 @@ python proposals/correction-view-unwired-v0.1/evidence/wiring_spec_probe.py
 #      "delegation" -> "delegation(sort_keys,compact)"
 #    跑 wiring_spec_probe,期望 rc=0 + 双向 rename cover + 0 byte drift
 #    跑完 git checkout HEAD 复原
+
+# 3a. 仓外 scratch 演练 mutation 项 3 — wiring 端 ascii,sort,compact 函数体漂移
+#     (key 集合不变;只有一侧 callable 改了 body),期望 rc=1 + 具名 pair + payload label(Codex 4499 G2):
+#     编辑 wiring_spec_probe.py 内 AFTER_CONVENTIONS["ascii,sort,compact"]:
+#       lambda x: json.dumps(x, sort_keys=True, separators=(",", ":")).encode("utf-8")
+#       ↓ 改为
+#       lambda x: json.dumps(x, separators=(",", ":")).encode("utf-8")  # 去掉 sort_keys=True
+#     跑 wiring_spec_probe,期望:
+#       - rc=1
+#       - stderr/stdout 含 "FAIL: AFTER_CONVENTIONS function-body equivalence drift"
+#       - 至少一条 drift 形如
+#         "byte_equivalence drift on ascii_sort_compact/ascii_only: ..."
+#         (含 wiring_key + cv_key + 双侧 hash 前 8 hex)
+#     跑完 git checkout HEAD 复原
 
 # 4. 加一项真不兼容(自检以外的 fail 面演练),仓外 scratch 跑:
 #    compile_view.py:99 后插 'unrelated_key': lambda x: b'',
@@ -496,8 +550,12 @@ git checkout HEAD -- \
 | peer-chat:4495 (新 1) | wiring_spec_probe.py main() 缺模块级 CV import | 顶部 sys.path.insert + 模块级 `import compile_view as CV` | §七 D.2(导入) |
 | peer-chat:4495 (新 2) | D.3 项 4 mutation 与 len gate 矛盾 | 删除原 mutation;改为 mutation 项 1/2(等价 rename reverse) | §七 D.3 项 1/2 |
 | peer-chat:4495 (新 3) | D.2 key-only 不承重 equivalence | 加 `probe_byte_equivalence()` 在 3 个代表性 payload 上自检 | §七 D.2(字节等价自检) |
+| peer-chat:4499 (1) | `probe_byte_equivalence()` 硬编码短键 → mutation 1/2 KeyError | helper 改用 `EQUIVALENCE_CLASSES` + `_resolve_alias()` 运行时取键,mutation 1/2 后两侧仍各有至少一个 alias 可被找到 | §七 D.2(字节等价自检 v3.1) |
+| peer-chat:4499 (2) | drifts 仅 WARN → 函数体漂移可绿 | `probe_byte_equivalence()` 返回值在 main() 中改 WARN 为 **FAIL + return 1**;drift 描述含 class + label + 双侧 alias key + hash 前缀;并新增 mutation 项 3(wiring 单侧 callable body 漂移,期望 rc=1) | §七 D.2(字节等价自检 v3.1) + §七 D.3 mutation 项 3 |
+| peer-chat:4499 (3) | helper docstring 虚构 ImportError skip,模块级 import 失败先于 helper 终止 | 模块级 `import compile_view as CV` 包 try/except,失败 `SystemExit(1)`(不返回 skipped);helper docstring 删 "byte_equivalence self-check skipped" 字样 | §七 D.2(导入层 v3.1) |
+| peer-chat:4499 (4) | §五 5fd0a51d 与 §九 0daa6222 freeze 冲突 | §五 表注 "freeze archived hash" 行改写为 freeze **当前 live** `0daa6222...`;§五 注 同步引用 §九 F.2(1);落地后(probe 源码 patch)两边 5fd0a51d 零命中 | §五 + §九 F.2(1) |
 
-注:peer-chat:4495 是 Codex 对 v3 草案(尚未成文)的预防性【反对】,v3 PROPOSAL.md 本身已按上述闭环表逐条吸收;4490 是 Codex 对 v2 的【反对】,已被 Claude 在 peer-chat:4493【接受】并由 v3 落实。
+注:peer-chat:4495 是 Codex 对 v3 草案(尚未成文)的预防性【反对】,v3 PROPOSAL.md 本身已按上述闭环表逐条吸收;4490 是 Codex 对 v2 的【反对】,已被 Claude 在 peer-chat:4493【接受】并由 v3 落实;peer-chat:4499 是 Codex 对 v3 成文稿的【反对·V3 wiring 验收仍自相矛盾】,本 v3.1 PROPOSAL.md 已按上述闭环表逐条吸收(详见 §十五)。
 
 ## 十三、本提案不动的事(边界)
 
@@ -515,5 +573,68 @@ git checkout HEAD -- \
 - FINDING(已写):`proposals/classifier-source-31-row-boundary-v0.1/FINDING.md`
 - register 帧:`frame:wf-20260823-135809-39990f`;event `0a9433bb-b445-4503-bfab-e509aeebc3d5`
 - v2 Codex 拒签:`peer-chat.jsonl:4486` time `2026-08-24T09:21:34+09:00`(`frame:wf-20260824-001413-1ca23d`)
-- v3 Codex 拒签:`peer-chat.jsonl:4495` time `2026-08-24T10:24:53+09:00`(`frame:wf-20260824-012007-7def6c`)
+- v3 Codex 拒签(草案):`peer-chat.jsonl:4495` time `2026-08-24T10:24:53+09:00`(`frame:wf-20260824-012007-7def6c`)
+- v3 Codex 拒签(成文):`peer-chat.jsonl:4499` time `2026-08-24T10:43:27+09:00`(`frame:wf-20260824-013742-dea998`)
+- Codex G1-G4 验收面:`proposals/bounded-scheduler-v0.1/impl/round-notes/wf-20260824-020318-1b2ee7.md`(`frame:wf-20260824-020318-1b2ee7`)
 - Codex v2 → v3 修订路径:`peer-chat.jsonl:4490` time `2026-08-24T09:55:37+09:00`(`frame:wf-20260824-005103-47ade4`)+ Claude【接受】`peer-chat.jsonl:4493` time `2026-08-24T10:12:09+09:00`(`frame:wf-20260824-011107-63ce8e`)
+- Claude V3 reject 收据:`peer-chat.jsonl:4501` time `2026-08-24T10:56:39+09:00`(`frame:wf-20260824-015512-0021b4`)
+- Codex G1-G4 公告:`peer-chat.jsonl:4502` time `2026-08-24T11:06:55+09:00`(`frame:wf-20260824-020318-1b2ee7`)
+
+## 十五、v3.1 闭环 Codex peer-chat:4499 四反对(本版核心变更)
+
+Codex 在 `peer-chat.jsonl:4499` time `2026-08-24T10:43:27+09:00` 给 v3 提的 4 条反对,逐条 v3.1 处置如下;Codex G1-G4 验收面见 `proposals/bounded-scheduler-v0.1/impl/round-notes/wf-20260824-020318-1b2ee7.md`。
+
+### 15.1 G1 — `probe_byte_equivalence()` 不硬编码短键(对 4499 反对 1)
+
+V3 §七 D.2 的 helper 体硬编码 `AFTER_CONVENTIONS["ascii,sort,compact"]` 与 `AFTER_CONVENTIONS["delegation"]`;
+v3 §七 D.3 mutation 1/2 把这两个短键 rename 为长键,导致 helper 内 `KeyError`。
+V3.1 helper 改为 `EQUIVALENCE_CLASSES` + `_resolve_alias()`:对每个等价类
+(`ascii_sort_compact` / `delegation`),先在两侧 AFTER_CONVENTIONS 字典里**运行时**找现存 alias,
+再算两侧 hash。这样 mutation 1/2 (rename 一个 alias 为另一个) 后,两侧仍各有至少一个 alias 可被 helper 找到。
+
+mutation 1 演练(仓外 scratch):把 wiring 的 `ascii,sort,compact` 改名为 `ensure_ascii=True,sort_keys,compact`;
+helper 找到 wiring 端 key=`ensure_ascii=True,sort_keys,compact`、CV 端 key=`ensure_ascii=True,sort_keys,compact`;
+两侧函数体相同 → 0 drift → rc=0。
+mutation 2 同理(对称改 `delegation`)。
+
+### 15.2 G2 — drifts 非空必须 fail(对 4499 反对 2)
+
+V3 §七 D.2 main() 对 `probe_byte_equivalence()` 返回的 drifts 仅 `print("WARN: ...")` 然后继续,
+rc 由 key_sets_match 决定;"命名不同 + 函数体已漂移"仍可 rc=0,违反 FINDING §五的承重条件。
+V3.1 main() 收到 drifts 时改为 print "FAIL:" 并 `return 1`(等价于 fail-closed + rc=1);
+drift 描述含 `class_label + payload label + 双侧 alias key + hash 前 8 hex`(具名,符合 G2 验真门)。
+
+mutation 项 3(本版新增,仓外 scratch 演练):wiring 端 `ascii,sort,compact` 函数体去掉 `sort_keys=True`,
+CV 端不变。期望:
+- rc=1;
+- stderr/stdout 含 "FAIL: AFTER_CONVENTIONS function-body equivalence drift";
+- 至少一条 drift 形如
+  `byte_equivalence drift on ascii_sort_compact/ascii_only: wiring=... cv=... differ`。
+跑完 `git checkout HEAD -- ...` 复原。
+
+### 15.3 G3 — 删虚构的 skip 契约,模块级 import 失败 fail-closed(对 4499 反对 3)
+
+V3 §七 D.2 helper docstring 声称 ImportError 等异常返回 `['byte_equivalence self-check skipped']`,
+但 helper 体与模块级 import 层均无 try/except;模块级 `import compile_view as CV` 失败会先于 helper 终止,
+`skipped` 字面契约无从落地。
+V3.1 删 helper docstring 的 skip 字样,改为模块级 import 包 try/except:
+- 成功 → 正常;
+- 失败 → `sys.stderr.write("FAIL: cannot import compile_view at module level: ...")` + `raise SystemExit(1)`
+(模块级 fail-closed,rc=1,**不**返回 "skipped" 假绿)。
+
+G3 验真路径:在仓外 scratch 副本删除 `compile_view.py` 或令 `sys.path` 不含其目录,实跑 wiring_spec_probe,
+期望 rc=1 + stderr 含 "FAIL: cannot import compile_view at module level"。若结果出现 "byte_equivalence
+self-check skipped" 字样,验真失败。
+
+### 15.4 G4 — §五/§九 freeze hash 统一为 `0daa6222...`(对 4499 反对 4)
+
+V3 §五 表注 line 119 写"freeze archived hash(`5fd0a51d...`)",§九 F.2(1) line 416 把
+`EXPECTED_LIVE_ARTIFACT_HASH` 改为 `0daa6222...`,§五 §九 freeze 语义冲突。
+V3.1 §五 表注 line 119 改写为 "freeze **当前 live** hash(`0daa6222...`);每次 live 部署后须重新 freeze";
+§五 注 同步引用 §九 F.2(1)。
+落地后(probe 源码 patch 时):
+- `changeset_v2_probe.py:261` 的 `EXPECTED_LIVE_ARTIFACT_HASH` 改为 `0daa6222...`;
+- `phase_matrix_probe.py:115` 的 `INVENTORY` 那行 `"live tree_hash == 5fd0a51d..."` 改为
+  `"live tree_hash == 0daa6222..."`;
+- 实跑 `rg -n "5fd0a51d" phase_matrix_probe.py changeset_v2_probe.py` = **0 命中**;
+- 两边都按 `0daa6222...` 报告,且 rc=0、`failures=[]`。
