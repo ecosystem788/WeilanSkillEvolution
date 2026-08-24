@@ -58,17 +58,21 @@ COMPILER = Path("proposals/lineage-log-append-only-correction-v0.1/compile_view.
 # Frozen expectations.  Hand-entered literals; drift exits non-zero.
 # ---------------------------------------------------------------------------
 
-# Phase 0 (preflight) -- the state every probe was frozen against.
-EXPECTED_PRE_ENTRY_COUNT = 15
+# V3.1 §四 A.2(1) (inherited by V3.1.x): preflight is measured, not frozen.
+# EXPECTED_PRE_ENTRY_COUNT removed; preflight drift no longer fails the probe.
 
 # Phase A -- measured by running the REAL compiler over 15 real + 8 constructed
 # entries.  This is the post-A counting surface Codex asked to be made explicit.
+# V3.1.x (path B = meta_visible): canonical-migration entries are kind="canonical-migration"
+# (not kind="overlay"), so per compile_view.py:244-247 they enter meta_visible and skip
+# applied.  applied=0 / meta_visible=13 / rejected=10(1/8/1) is the live ground truth.
 EXPECTED_POST_A_ENTRY_COUNT = 23
-EXPECTED_POST_A_APPLIED = 8
+EXPECTED_POST_A_APPLIED = 0
+EXPECTED_POST_A_META_VISIBLE = 13
 EXPECTED_POST_A_REJECTIONS = {
-    "before_hash_not_found": 6,
+    "preimage_unresolvable_and_entry_self_inconsistent": 1,
     "after_hash_mismatch": 8,
-    "corrected_json_not_object": 1,
+    "preimage_only_under_eol_variant": 1,
 }
 # G1 counts recomputed over the 23-entry set with changeset_v2_probe's own function.
 EXPECTED_POST_A_LEGACY_COUNTS = {"overlay": 10, "batch-redaction": 1}
@@ -89,8 +93,11 @@ EXPECTED_PRE_LIVE_HAS_COMPILE_VIEW = False
 EXPECTED_PRE_LIVE_TREE_HASH = C2.EXPECTED_LIVE_ARTIFACT_HASH
 EXPECTED_CANDIDATE_HASH_DIFFERS = True
 
-# The replica/compiler agreement that triage_probe's green currently rests on.
-EXPECTED_REPLICA_AGREES_TODAY = True
+# V3.1.x §六 C.2 + 4490 反对 1 扩展:replica/compiler agreement field is retired entirely
+# (T.replicate_compile_view_reason was never defined in triage_probe.py; rg -n returns 0
+# hits; "hand replica vs real compiler" equality check reduces to identity when both
+# call the same compiler, so the field never carried an independent observation).
+# The assertion_inventory shrinks from 13 to 11 items accordingly.
 
 # The assertion inventory.  survives_A / survives_D are the CLAIM; the measurements
 # below either confirm or contradict each one that can be measured.
@@ -112,16 +119,9 @@ INVENTORY = [
      "deployment convention copies a tree; it does not create a worktree"),
     ("changeset_v2_probe", "live has no compile_view", True, False,
      "D exists precisely to put the compiler in the live artifact"),
-    ("changeset_v2_probe", "live tree_hash == 5fd0a51d...", True, False,
-     "any content change to the deployed tree changes its tree hash"),
-    ("triage_probe", "replicated reject distribution == archived 6/8/1", True, True,
-     "MEASURED post-A below; migration entries are accepted, and accepted rows are "
-     "excluded from the compared distribution"),
-    ("triage_probe", "replica still describes the real compiler", True, False,
-     "NOT named by Codex, and not a D-phase break either: it breaks at B. The replica "
-     "is a hand copy (triage_probe.py:79-89), not an import, so it cannot notice that "
-     "B changed the compiler's branch order. Its green survives and stops meaning what "
-     "it means today."),
+    ("changeset_v2_probe", "live tree_hash == 0daa6222...", True, False,
+     "any content change to the deployed tree changes its tree hash; current "
+     "V5.2-deployed hash is 0daa6222..., which must be re-frozen after each live deploy"),
     ("wiring_spec_probe", "per-entry migration cost table (8 rows)", True, True,
      "indexed by physical line 1..15, which append-only growth does not move"),
     ("wiring_spec_probe", "raw untouched + 1:1 line mapping", True, True,
@@ -226,11 +226,8 @@ def measure_post_a(records):
         if got is not None:
             codes[rec["before_hash"]] = got[0]
 
-    # triage_probe's compared distribution excludes accepted rows
-    replicated: dict[str, int] = {}
-    for rec in combined:
-        reason = T.replicate_compile_view_reason(rec, live_hashes)
-        replicated[reason] = replicated.get(reason, 0) + 1
+    # V3.1.x §六 C.2 + 4490 反对 1 扩展:replicated distribution block retired;
+    # T.replicate_compile_view_reason was never defined in triage_probe.py.
 
     return {
         "entry_count": len(combined),
@@ -240,7 +237,6 @@ def measure_post_a(records):
         "g1_explicit": explicit,
         "g1_unmatched": unmatched,
         "g2_invalid_historical": codes,
-        "triage_replicated_nonaccepted": {k: v for k, v in replicated.items() if k != "accepted"},
         "tmp": str(tmp),
     }
 
@@ -266,39 +262,24 @@ def measure_post_d():
     }
 
 
-def measure_replica_agreement(records):
-    """Does triage_probe's hand replica still describe the real compiler, today?"""
-    live_hashes, _ = T.load_raw()
-    accepted, rejected = CV._load_corrections(CORR, set(live_hashes))
-    real = [item["reason"] for item in rejected]
-    replica = [
-        T.replicate_compile_view_reason(rec, live_hashes)
-        for rec in records
-        if T.replicate_compile_view_reason(rec, live_hashes) != "accepted"
-    ]
-    return {
-        "real_compiler_rejections": real,
-        "replica_rejections": replica,
-        "agree": real == replica,
-        "real_accepted": len(accepted),
-    }
-
-
 def main() -> int:
     failures = []
     raw_pre, corr_pre = sha(RAW.read_bytes()), sha(CORR.read_bytes())
     records = load_records(CORR.read_bytes())
-    if len(records) != EXPECTED_PRE_ENTRY_COUNT:
-        failures.append(f"preflight entry count drifted: {len(records)}")
+    # V3.1 §四 A.2(1) (inherited by V3.1.x): preflight entry count is measured, not frozen;
+    # printed only for visibility, no failure on drift.
 
-    post_a = measure_post_a(records)
+    # V3.1 §四 A.2(2) (inherited by V3.1.x): post-A simulation still freezes the 15+8=23 ground
+    # truth; pass records[:15] explicitly so the sim never reads the post-2026-07-29 ledger rows.
+    post_a = measure_post_a(records[:15])
     post_d = measure_post_d()
-    replica = measure_replica_agreement(records)
 
     if post_a["entry_count"] != EXPECTED_POST_A_ENTRY_COUNT:
         failures.append(f"post-A entry count: {post_a['entry_count']}")
     if post_a["compiler_result"].get("applied") != EXPECTED_POST_A_APPLIED:
         failures.append(f"post-A applied: {post_a['compiler_result']}")
+    if post_a["compiler_result"].get("meta_visible") != EXPECTED_POST_A_META_VISIBLE:
+        failures.append(f"post-A meta_visible: {post_a['compiler_result']}")
     if post_a["compiler_rejections"] != EXPECTED_POST_A_REJECTIONS:
         failures.append(f"post-A compiler rejections: {post_a['compiler_rejections']}")
     if post_a["g1_legacy"] != EXPECTED_POST_A_LEGACY_COUNTS:
@@ -309,10 +290,6 @@ def main() -> int:
         failures.append(f"post-A unmatched legacy: {post_a['g1_unmatched']}")
     if post_a["g2_invalid_historical"] != EXPECTED_POST_A_INVALID_HISTORICAL:
         failures.append(f"post-A invalid-historical: {post_a['g2_invalid_historical']}")
-    if post_a["triage_replicated_nonaccepted"] != EXPECTED_POST_A_REJECTIONS:
-        failures.append(
-            f"post-A triage distribution: {post_a['triage_replicated_nonaccepted']}"
-        )
 
     if post_d["live_has_compile_view"] != EXPECTED_PRE_LIVE_HAS_COMPILE_VIEW:
         failures.append("live skill already ships the compiler -- D's premise changed")
@@ -323,9 +300,6 @@ def main() -> int:
                         "the post-D measurement below would be meaningless")
     if post_d["candidate_differs_from_frozen"] != EXPECTED_CANDIDATE_HASH_DIFFERS:
         failures.append("adding the compiler did NOT change the tree hash")
-
-    if replica["agree"] != EXPECTED_REPLICA_AGREES_TODAY:
-        failures.append(f"replica/compiler agreement: {replica['agree']}")
 
     raw_post, corr_post = sha(RAW.read_bytes()), sha(CORR.read_bytes())
     if (raw_pre, corr_pre) != (raw_post, corr_post):
@@ -339,7 +313,6 @@ def main() -> int:
             "phase_0_entries": len(records),
             "phase_A_measured": post_a,
             "phase_D_measured": post_d,
-            "replica_agreement_today": replica,
             "assertion_inventory": [
                 {
                     "probe": p,

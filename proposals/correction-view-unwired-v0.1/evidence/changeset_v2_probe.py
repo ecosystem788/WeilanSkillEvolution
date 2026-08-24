@@ -103,11 +103,22 @@ LEGACY_SIGNATURES = {
     ): "batch-redaction",
 }
 
-# 10 legacy overlays (four distinct signatures: 2 + 1 + 3 + 4) + #3 = 11 legacy
-# entries; the remaining 4 carry an explicit kind.
-EXPECTED_LEGACY_COUNTS = {"overlay": 10, "batch-redaction": 1}
-EXPECTED_EXPLICIT_KINDS = {"re-pin": 1, "line-pointer-rebase": 2, "line-pointer-measured": 1}
-EXPECTED_UNKNOWN_LEGACY = 0
+# 31-row baseline (anchored 2026-08-24 via proposals/classifier-source-31-row-boundary-v0.1/
+# FINDING.md §三.5): 12 legacy overlays (overlays whose structural signature matches
+# LEGACY_SIGNATURES, including #17 and #24 which carry kind=None but match by key set) +
+# 1 batch-redaction = 13 legacy entries. The remaining 18 carry an explicit kind:
+# void-only=11, line-pointer-measured=2, line-pointer-rebase=2, re-pin=1, withdrawal-link=1.
+# One entry (#26, kind=None, 4-field signature ('text','time','time_authority','wake')) is
+# genuinely unmatched: it has neither an explicit kind nor a legacy-matching key set.
+EXPECTED_LEGACY_COUNTS = {"overlay": 12, "batch-redaction": 1}
+EXPECTED_EXPLICIT_KINDS = {
+    "void-only": 11,
+    "line-pointer-measured": 2,
+    "line-pointer-rebase": 2,
+    "re-pin": 1,
+    "withdrawal-link": 1,
+}
+EXPECTED_UNKNOWN_LEGACY = 1
 # Digest over the frozen table itself, so a silent edit to it also trips.
 EXPECTED_TABLE_DIGEST = "b261880abc2a95931db652e35cef177948d7c34aba48b398e2733854271c9856"
 
@@ -258,7 +269,7 @@ def main() -> int:
 
 
 EXPECTED_LIVE_ARTIFACT_HASH = (
-    "5fd0a51dc7f539e2b3f1c45f5a505d9ddea80c721de8d94fe04d7e9de52ad0ad"
+    "0daa6222d561840164f546c30971799047bcaf1b307b09348063b9057591fa18"
 )
 
 

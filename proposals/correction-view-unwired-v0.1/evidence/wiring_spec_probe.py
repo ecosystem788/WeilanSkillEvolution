@@ -27,6 +27,20 @@ RAW = IMPL / "peer-chat.jsonl"
 CORR = IMPL / "peer-chat.corrections.jsonl"
 COMPILER_DIR = Path("proposals/lineage-log-append-only-correction-v0.1")
 
+# V3.1 §七 D.2 (闭环 Codex 4495 新 1 + Codex 4499 G3): module-level import so main()
+# can directly read CV.AFTER_CONVENTIONS without going through a function-local alias.
+# Module-level import failure is fail-closed (SystemExit(1)) -- this is the only place
+# "skipped" is allowed to be replaced by an honest failure. The helper docstring no
+# longer promises a "byte_equivalence self-check skipped" string.
+sys.path.insert(0, str(COMPILER_DIR))
+try:
+    import compile_view as CV  # noqa: E402  module-level, visible to main()
+except (ImportError, ModuleNotFoundError) as _imp_err:
+    sys.stderr.write(
+        f"FAIL: cannot import compile_view at module level: {_imp_err}\n"
+    )
+    raise SystemExit(1)
+
 # Frozen at 2026-07-29 by this probe's own first run. These are hand-carried literals,
 # not values recomputed by the code under test -- same discipline as
 # test_canonical_contract.py (FINDING section 4). A drift here is a real change, not noise.
@@ -40,13 +54,13 @@ EXPECTED_MIGRATION = {
         "7e4ba76d14a05661881d17ea2a272e455a23805cb469184cd68c19845217c077"),
     7: ("no_sort,default_sep", 1539, "MALFORMED",
         "641ba1148ea60b43d5d8d2d784c0b5a3333e367f587d2dca57c9c83c333d2404"),
-    9: ("no_sort,default_sep", 2786, "parses",
+    9: ("no_sort,default_sep", 2785, "parses",
         "0c0e9147a6eb9d9079710179245ce7af3f5f56346cd1e4aac203a3ac0522bbe1"),
-    10: ("no_sort,default_sep", 2788, "parses",
+    10: ("no_sort,default_sep", 2787, "parses",
          "bd82e5eefb3ad4d6ce52d446937b59958ffc54cf1ddcc72205d681c5e05f23d9"),
-    11: ("no_sort,default_sep", 2789, "parses",
+    11: ("no_sort,default_sep", 2788, "parses",
          "da4f3073ccf545dbd27a757836e3840948eb97b564b8d26a94afe050396d0dad"),
-    12: ("no_sort,default_sep", 2865, "parses",
+    12: ("no_sort,default_sep", 2864, "parses",
          "b1055343e0e39bf9e66c3ed9ff8b769984f4e71643ee44312d5993c473a5fc2b"),
 }
 
@@ -74,6 +88,94 @@ AFTER_CONVENTIONS = {
         json.dumps(x, ensure_ascii=False, separators=(",", ":")) + "\n"
     ).encode("utf-8"),
 }
+
+
+# V3.1 §七 D.2 (闭环 Codex 4499 反对 4): bidirectional rename table covers the case
+# where CV picks the long alias ("delegation(sort_keys,compact)" / "ensure_ascii=...")
+# instead of the short one. key_sets_match below uses both sides' RENAME_BIDIR coverage.
+RENAME_BIDIR = {
+    "delegation": {"delegation", "delegation(sort_keys,compact)"},
+    "delegation(sort_keys,compact)": {"delegation", "delegation(sort_keys,compact)"},
+    "no_sort,default_sep": {"no_sort,default_sep"},
+    "no_sort,compact": {"no_sort,compact"},
+    "ascii,sort,compact": {"ascii,sort,compact", "ensure_ascii=True,sort_keys,compact"},
+    "ensure_ascii=True,sort_keys,compact": {"ascii,sort,compact", "ensure_ascii=True,sort_keys,compact"},
+    "no_sort,compact+LF": {"no_sort,compact+LF"},
+}
+
+
+def key_sets_match(local: set, cv: set) -> bool:
+    """Two key sets match iff there's a bijection whose every edge is in RENAME_BIDIR.
+
+    Greedy bipartite matching is sufficient here: each key has at most 2 equivalent names,
+    so no greedy-vs-optimal mismatch can occur for sets of size <= 7.
+    """
+    if len(local) != len(cv):
+        return False
+    unmatched_local = set(local)
+    unmatched_cv = set(cv)
+    for lk in list(unmatched_local):
+        allowed = RENAME_BIDIR.get(lk, {lk})
+        for ck in list(unmatched_cv):
+            if ck in allowed:
+                unmatched_local.discard(lk)
+                unmatched_cv.discard(ck)
+                break
+    return not unmatched_local and not unmatched_cv
+
+
+# V3.1 §七 D.2 (闭环 Codex 4495 新 3 + Codex 4499 G1/G2): representative payload
+# byte-equivalence self-check.  Helper does NOT hardcode short aliases; uses
+# EQUIVALENCE_CLASSES + _resolve_alias() so mutation 1/2 (rename one alias to its peer)
+# still finds an alias on each side and can detect function-body drift.
+REPRESENTATIVE_PAYLOADS = [
+    # (label, value)
+    ("ascii_only", {"b": 1, "a": 2, "c": [3, 4]}),
+    ("with_cjk", {"键": "值", "列表": [1, "二", 3]}),
+    ("key_order_swapped", {"z": 1, "a": 2, "m": 3}),
+]
+
+# Each equivalence class lists the allowed aliases. Mutation 1/2 (rename one alias to
+# its peer) keeps at least one alias reachable on each side from _resolve_alias.
+EQUIVALENCE_CLASSES = [
+    ("ascii_sort_compact", ["ascii,sort,compact", "ensure_ascii=True,sort_keys,compact"]),
+    ("delegation", ["delegation", "delegation(sort_keys,compact)"]),
+]
+
+
+def _resolve_alias(d: dict, aliases: list):
+    """Return (key, fn) for the first alias that exists in d, or (None, None)."""
+    for a in aliases:
+        if a in d:
+            return a, d[a]
+    return None, None
+
+
+def probe_byte_equivalence() -> list:
+    """Assert that the two equivalence classes produce byte-identical output on every
+    representative payload.  Returns a list of drift strings (one per failed pair).
+    Each drift names the class + payload label + both alias keys + 8-hex hash prefix.
+    """
+    drifts: list = []
+    for class_label, aliases in EQUIVALENCE_CLASSES:
+        wiring_key, wiring_fn = _resolve_alias(AFTER_CONVENTIONS, aliases)
+        cv_key, cv_fn = _resolve_alias(CV.AFTER_CONVENTIONS, aliases)
+        if wiring_fn is None or cv_fn is None:
+            drifts.append(
+                f"byte_equivalence: missing alias on {class_label} "
+                f"(wiring_key={wiring_key}, cv_key={cv_key}, allowed={aliases})"
+            )
+            continue
+        for label, payload_value in REPRESENTATIVE_PAYLOADS:
+            h_wiring = sha(wiring_fn(payload_value))
+            h_cv = sha(cv_fn(payload_value))
+            if h_wiring != h_cv:
+                drifts.append(
+                    f"byte_equivalence drift on {class_label}/{label} "
+                    f"(wiring={wiring_key} vs cv={cv_key}): "
+                    f"wiring={h_wiring[:8]} cv={h_cv[:8]} differ"
+                )
+    return drifts
 
 
 def payload(line: bytes) -> bytes:
@@ -167,6 +269,31 @@ def part2_delivery_cost() -> bool:
 def main() -> int:
     print(f"raw   {RAW}  sha256={sha(RAW.read_bytes())}")
     print(f"corr  {CORR}  sha256={sha(CORR.read_bytes())}\n")
+
+    # V3.1 §七 D.2 (闭环 Codex 4499 反对 4): bidirectional key-set match.
+    cv_keys = set(CV.AFTER_CONVENTIONS.keys())
+    local_keys = set(AFTER_CONVENTIONS.keys())
+    if not key_sets_match(local_keys, cv_keys):
+        sys.stderr.write(
+            f"AFTER_CONVENTIONS key set drifted:\n"
+            f"  wiring_spec_probe.py local: {sorted(local_keys)}\n"
+            f"  CV.AFTER_CONVENTIONS:       {sorted(cv_keys)}\n"
+            f"  RENAME_BIDIR table covers:  {sorted(RENAME_BIDIR.keys())}\n"
+        )
+        return 1
+    if local_keys != cv_keys:
+        print("WARN: AFTER_CONVENTIONS key naming drifted; bidirectional rename covers it.")
+
+    # V3.1 §七 D.2 (闭环 Codex 4495 新 3 + Codex 4499 G2): byte-equivalence drift
+    # fails the probe (does NOT just WARN). Drift entries already include class +
+    # label + dual alias keys + 8-hex hash prefix.
+    drifts = probe_byte_equivalence()
+    if drifts:
+        print("FAIL: AFTER_CONVENTIONS function-body equivalence drift across rename pairs:")
+        for d in drifts:
+            print(f"  - {d}")
+        return 1
+
     ok1 = part1_migration_cost()
     ok2 = part2_delivery_cost()
     return 0 if (ok1 and ok2) else 1
